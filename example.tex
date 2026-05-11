@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
+
+\begin{document}
+
+\section*{Correlator Diagram Examples}
+
+Default 2-point correlator:
+\[
+  \TwoPointCorr
+\]
+
+2-point correlator with \(q_i\) labels and Lorentz indices:
+\[
+  \TwoPointCorr[
+    mode=q,
+    field=\phi,
+    indices={\mu,\nu},
+    central=G^{(2)}
+  ]
+\]
+
+4-point correlator with \(k_i\) labels:
+\[
+  \FourPointCorr[
+    mode=k,
+    field=\phi,
+    indices={a,b,c,d},
+    central=G^{(4)}
+  ]
+\]
+
+4-point correlator with fermion lines and custom external labels:
+\[
+  \FourPointCorr[
+    line=fer,
+    momentum-labels={p_1,p_2,p_3,p_4},
+    leg-labels={\psi_i,\bar\psi_j,\psi_k,\bar\psi_l},
+    central=\Gamma^{(4)}
+  ]
+\]
+
+4-point correlator with a visible center vertex, emphasized arrows, and scalar-polarized legs:
+\[
+  \FourPointCorr[
+    blob=false,
+    center-vertex-style=ringdot,
+    leg-styles={scalarpolarized,scalarpolarized,plain,plain},
+    momentum-arrow-size=6pt,
+    momentum-arrow-sizes={11pt,8pt,5pt,5pt},
+    propagator-arrow-size=8pt,
+    propagator-arrow-sizes={12pt,9pt,8pt,8pt},
+    field=\varphi,
+    indices={1,2,3,4},
+    central=\Gamma_{\mathrm{mix}}^{(4)}
+  ]
+\]
+
+Vertex-style 4-point object with upper indices and no blob:
+\[
+  \FourPointCorr[
+    mode=p,
+    blob=false,
+    field=\mathcal{O},
+    indices={\alpha,\beta,\gamma,\delta},
+    index-placement=sup,
+    central=\mathcal{V}^{(4)}
+  ]
+\]
+
+Sunset self-energy diagram:
+\[
+  \SunsetDiagram[
+    field=\phi,
+    central=\Sigma(p)
+  ]
+\]
+
+\end{document}

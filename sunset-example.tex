@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[]{geometry}
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
+
+\begin{document}
+
+\section*{Sunset Diagram Example}
+
+Scalar sunset self-energy with external momentum \(p\):
+\[
+  \SunsetDiagram[
+    scale=1.2,
+    field=\phi,
+    central=\Sigma(p),
+    sunset-external-momentum=p,
+    sunset-top-momentum=k,
+    sunset-middle-momentum=p-k-q,
+    sunset-bottom-momentum=q,
+  ]
+\]
+
+The same macro also supports different line styles and labels, for example:
+\[
+  \SunsetDiagram[
+    scale=1.2,
+    line=fer,
+    field=\psi,
+    sunset-external-momentum=p,
+    sunset-top-momentum=\ell,
+    sunset-middle-momentum=p-\ell-r,
+    sunset-bottom-momentum=r
+  ]
+\]
+
+\end{document}

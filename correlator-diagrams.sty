@@ -1,0 +1,1255 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{correlator-diagrams}[2026/05/08 Reusable correlator diagram macros]
+
+\RequirePackage{xparse}
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+\RequirePackage[compat=1.1.0]{tikz-feynhand}
+\RequirePackage{listofitems}
+\usetikzlibrary{calc}
+\setsepchar{,}
+
+\makeatletter
+
+\tikzfeynhandset{
+  with open arrow/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \node[
+          transform shape,
+          xshift=-0.166666\feynhandarrowsize,
+          fill opacity=0,
+          draw,
+          line width=0.7\feynhandlinesize,
+          inner sep=0mm,
+          minimum width=\tikzfeynhand@arrow@size,
+          isosceles triangle
+        ] { };
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  with reversed open arrow/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \node[
+          transform shape,
+          xshift=0.166666\feynhandarrowsize,
+          rotate=180,
+          fill opacity=0,
+          draw,
+          line width=0.7\feynhandlinesize,
+          inner sep=0mm,
+          minimum width=\tikzfeynhand@arrow@size,
+          isosceles triangle
+        ] { };
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  every scalar polarized base@@/.style={
+    /tikz/draw=none,
+    /tikz/decoration={name=none},
+  },
+}
+
+\newif\ifcorr@blob
+\newif\ifcorr@showmomenta
+\newif\ifcorr@centervertex
+\newif\ifcorr@externalvertices
+\newif\ifcorr@sunsetinternalvertices
+\newif\ifcorr@sunsetindexawaremomenta
+
+\def\corr@line{plain}
+\def\corr@legstyles{}
+\def\corr@mode{q}
+\def\corr@momentumstart{1}
+\def\corr@momentumlabels{}
+\def\corr@momentumarrowsize{6pt}
+\def\corr@momentumarrowsizes{}
+\def\corr@propagatorarrowsize{}
+\def\corr@propagatorarrowsizes{}
+\def\corr@field{\phi}
+\def\corr@indices{}
+\def\corr@leglabels{}
+\def\corr@central{}
+\def\corr@scalararrowposition{0.08}
+\def\corr@scalararrowdirection{in}
+\def\corr@antiscalararrowposition{0.08}
+\def\corr@antiscalararrowdirection{out}
+\def\corr@sunsetleftmomentum{p}
+\def\corr@sunsetrightmomentum{}
+\def\corr@sunsettopmomentum{k}
+\def\corr@sunsetmiddlemomentum{p-k-q}
+\def\corr@sunsetbottommomentum{q}
+\def\corr@sunsetleftline{sca}
+\def\corr@sunsetmiddleline{}
+\def\corr@sunsetrightline{sca}
+\def\corr@sunsettopline{}
+\def\corr@sunsetbottomline{}
+\def\corr@sunsetinnerspan{1}
+\def\corr@sunsetouterspan{1.6}
+\def\corr@sunsetlooplooseness{1.35}
+\def\corr@sunsetcentrallabel{\hspace{1mm}}
+\def\corr@sunsetcentrallabelyshift{-24pt}
+\def\corr@sunsetexternalarrowstart{0.22}
+\def\corr@sunsetexternalarrowend{0.78}
+\def\corr@sunsetexternalarrowyshift{10pt}
+\def\corr@sunsetlooparrowstart{0.16}
+\def\corr@sunsetlooparrowend{0.84}
+\def\corr@sunsettoparrowyshift{22pt}
+\def\corr@sunsetbottomarrowyshift{-15pt}
+\def\corr@sunsetmiddlearrowstart{0.24}
+\def\corr@sunsetmiddlearrowend{0.76}
+\def\corr@sunsetmiddlearrowyshift{12pt}
+\def\corr@sunsettoparrowbend{18}
+\def\corr@sunsetbottomarrowbend{18}
+\def\corr@sunsetleftlabelposition{above}
+\def\corr@sunsetleftlabelxshift{0pt}
+\def\corr@sunsetleftlabelyshift{0pt}
+\def\corr@sunsetrightlabelposition{above}
+\def\corr@sunsetrightlabelxshift{0pt}
+\def\corr@sunsetrightlabelyshift{0pt}
+\def\corr@sunsettoplabelposition{above}
+\def\corr@sunsettoplabelxshift{0pt}
+\def\corr@sunsettoplabelyshift{27pt}
+\def\corr@sunsetmiddlelabelposition{below}
+\def\corr@sunsetmiddlelabelxshift{0pt}
+\def\corr@sunsetmiddlelabelyshift{-1pt}
+\def\corr@sunsetbottomlabelposition{below}
+\def\corr@sunsetbottomlabelxshift{0pt}
+\def\corr@sunsetbottomlabelyshift{-12pt}
+\def\corr@sunsettoplabelyshiftresolved{27pt}
+\def\corr@sunsetmiddlelabelyshiftresolved{-1pt}
+\def\corr@sunsetbottomlabelyshiftresolved{-12pt}
+\def\corr@sunsettoplabelindexclearance{7pt}
+\def\corr@sunsetmiddlelabelindexclearance{6pt}
+\def\corr@sunsetbottomlabelindexclearance{4pt}
+\def\corr@sunsettopleftindex{}
+\def\corr@sunsettoppropindex{}
+\def\corr@sunsettoprightindex{}
+\def\corr@sunsetmiddleleftindex{}
+\def\corr@sunsetmiddlepropindex{}
+\def\corr@sunsetmiddlerightindex{}
+\def\corr@sunsetbottomleftindex{}
+\def\corr@sunsetbottompropindex{}
+\def\corr@sunsetbottomrightindex{}
+\def\corr@sunsetinternalleftslotpos{0.16}
+\def\corr@sunsetinternalpropslotpos{0.50}
+\def\corr@sunsetinternalrightslotpos{0.84}
+\def\corr@sunsettopendindexposition{below}
+\def\corr@sunsettopleftindexxshift{-2pt}
+\def\corr@sunsettoprightindexxshift{2pt}
+\def\corr@sunsettopendindexyshift{-1pt}
+\def\corr@sunsettopinternalindexposition{below}
+\def\corr@sunsettopinternalindexxshift{0pt}
+\def\corr@sunsettopinternalindexyshift{-2pt}
+\def\corr@sunsetmiddleendindexposition{below}
+\def\corr@sunsetmiddleleftindexxshift{-2pt}
+\def\corr@sunsetmiddlerightindexxshift{2pt}
+\def\corr@sunsetmiddleendindexyshift{-4pt}
+\def\corr@sunsetmiddleinternalindexposition{below}
+\def\corr@sunsetmiddleinternalindexxshift{0pt}
+\def\corr@sunsetmiddleinternalindexyshift{-6pt}
+\def\corr@sunsetbottomendindexposition{above}
+\def\corr@sunsetbottomleftindexxshift{-2pt}
+\def\corr@sunsetbottomrightindexxshift{2pt}
+\def\corr@sunsetbottomendindexyshift{1pt}
+\def\corr@sunsetbottominternalindexposition{above}
+\def\corr@sunsetbottominternalindexxshift{0pt}
+\def\corr@sunsetbottominternalindexyshift{2pt}
+\def\corr@sunsetinternalindexstyle{}
+\def\corr@sunsetinternalindexmathstyle{\scriptstyle}
+\def\corr@sunsetvertexindexmathstyle{\scriptscriptstyle}
+\def\corr@sunsetpropagatorindexmathstyle{\scriptstyle}
+\def\corr@sunsetinternalindexfill{white}
+\def\corr@sunsetinternalindexinnersep{0.6pt}
+\corr@blobtrue
+\def\corr@blobstyle{blob}
+\corr@showmomentatrue
+\corr@centervertextrue
+\corr@externalverticesfalse
+\corr@sunsetinternalverticestrue
+\corr@sunsetindexawaremomentatrue
+\def\corr@centervertexstyle{dot}
+\def\corr@externalvertexstyle{dot}
+\def\corr@sunsetinternalvertexstyle{dot}
+\def\corr@scale{1}
+\def\corr@indexplacement{sub}
+\def\corr@sunsetmomentumlayout{balanced}
+\def\corr@sunsetindexlayout{balanced}
+
+\newcommand{\corr@sunsetmomentumlayoutlegacy}{%
+  \def\corr@sunsettoparrowyshift{16pt}%
+  \def\corr@sunsetbottomarrowyshift{-16pt}%
+  \def\corr@sunsetmiddlearrowyshift{-12pt}%
+  \def\corr@sunsettoplabelyshift{1pt}%
+  \def\corr@sunsetmiddlelabelyshift{-2pt}%
+  \def\corr@sunsetbottomlabelyshift{-1pt}%
+}
+
+\newcommand{\corr@sunsetmomentumlayoutcompact}{%
+  \def\corr@sunsettoparrowyshift{18pt}%
+  \def\corr@sunsetbottomarrowyshift{-12pt}%
+  \def\corr@sunsetmiddlearrowyshift{8pt}%
+  \def\corr@sunsettoplabelyshift{18pt}%
+  \def\corr@sunsetmiddlelabelyshift{0pt}%
+  \def\corr@sunsetbottomlabelyshift{-8pt}%
+}
+
+\newcommand{\corr@sunsetmomentumlayoutbalanced}{%
+  \def\corr@sunsettoparrowyshift{22pt}%
+  \def\corr@sunsetbottomarrowyshift{-15pt}%
+  \def\corr@sunsetmiddlearrowyshift{12pt}%
+  \def\corr@sunsettoplabelyshift{27pt}%
+  \def\corr@sunsetmiddlelabelyshift{-1pt}%
+  \def\corr@sunsetbottomlabelyshift{-12pt}%
+}
+
+\newcommand{\corr@sunsetmomentumlayoutwide}{%
+  \def\corr@sunsettoparrowyshift{27pt}%
+  \def\corr@sunsetbottomarrowyshift{-20pt}%
+  \def\corr@sunsetmiddlearrowyshift{15pt}%
+  \def\corr@sunsettoplabelyshift{33pt}%
+  \def\corr@sunsetmiddlelabelyshift{1pt}%
+  \def\corr@sunsetbottomlabelyshift{-16pt}%
+}
+
+\newcommand{\corr@sunsetindexlayouttight}{%
+  \def\corr@sunsetinternalleftslotpos{0.13}%
+  \def\corr@sunsetinternalpropslotpos{0.50}%
+  \def\corr@sunsetinternalrightslotpos{0.87}%
+  \def\corr@sunsettopendindexyshift{-1.5pt}%
+  \def\corr@sunsettopinternalindexyshift{-2.5pt}%
+  \def\corr@sunsetmiddleendindexyshift{-3pt}%
+  \def\corr@sunsetmiddleinternalindexyshift{-5pt}%
+  \def\corr@sunsetbottomendindexyshift{1.5pt}%
+  \def\corr@sunsetbottominternalindexyshift{2.5pt}%
+}
+
+\newcommand{\corr@sunsetindexlayoutbalanced}{%
+  \def\corr@sunsetinternalleftslotpos{0.16}%
+  \def\corr@sunsetinternalpropslotpos{0.50}%
+  \def\corr@sunsetinternalrightslotpos{0.84}%
+  \def\corr@sunsettopendindexyshift{-1pt}%
+  \def\corr@sunsettopinternalindexyshift{-2pt}%
+  \def\corr@sunsetmiddleendindexyshift{-4pt}%
+  \def\corr@sunsetmiddleinternalindexyshift{-6pt}%
+  \def\corr@sunsetbottomendindexyshift{1pt}%
+  \def\corr@sunsetbottominternalindexyshift{2pt}%
+}
+
+\newcommand{\corr@sunsetindexlayoutwide}{%
+  \def\corr@sunsetinternalleftslotpos{0.19}%
+  \def\corr@sunsetinternalpropslotpos{0.50}%
+  \def\corr@sunsetinternalrightslotpos{0.81}%
+  \def\corr@sunsettopendindexyshift{-2pt}%
+  \def\corr@sunsettopinternalindexyshift{-3pt}%
+  \def\corr@sunsetmiddleendindexyshift{-5pt}%
+  \def\corr@sunsetmiddleinternalindexyshift{-7pt}%
+  \def\corr@sunsetbottomendindexyshift{2pt}%
+  \def\corr@sunsetbottominternalindexyshift{3pt}%
+}
+
+\newcommand{\corr@setsunsettriplet}[2]{%
+  \expandafter\def\csname corr@sunset#1leftindex\endcsname{}%
+  \expandafter\def\csname corr@sunset#1propindex\endcsname{}%
+  \expandafter\def\csname corr@sunset#1rightindex\endcsname{}%
+  \readlist*\corr@sunsettriplettmp{#2}%
+  \ifnum\corr@sunsettriplettmplen>0
+    \expandafter\def\csname corr@sunset#1leftindex\endcsname{\corr@sunsettriplettmp[1]}%
+  \fi
+  \ifnum\corr@sunsettriplettmplen>1
+    \expandafter\def\csname corr@sunset#1propindex\endcsname{\corr@sunsettriplettmp[2]}%
+  \fi
+  \ifnum\corr@sunsettriplettmplen>2
+    \expandafter\def\csname corr@sunset#1rightindex\endcsname{\corr@sunsettriplettmp[3]}%
+  \fi
+}
+
+\newcommand{\corr@setsunsetslotlist}[2]{%
+  \expandafter\def\csname corr@sunsettop#1index\endcsname{}%
+  \expandafter\def\csname corr@sunsetmiddle#1index\endcsname{}%
+  \expandafter\def\csname corr@sunsetbottom#1index\endcsname{}%
+  \readlist*\corr@sunsetslottmp{#2}%
+  \ifnum\corr@sunsetslottmplen>0
+    \expandafter\def\csname corr@sunsettop#1index\endcsname{\corr@sunsetslottmp[1]}%
+  \fi
+  \ifnum\corr@sunsetslottmplen>1
+    \expandafter\def\csname corr@sunsetmiddle#1index\endcsname{\corr@sunsetslottmp[2]}%
+  \fi
+  \ifnum\corr@sunsetslottmplen>2
+    \expandafter\def\csname corr@sunsetbottom#1index\endcsname{\corr@sunsetslottmp[3]}%
+  \fi
+}
+
+\newcommand{\corr@setsunsetcontractedindex}[2]{%
+  \expandafter\def\csname corr@sunset#1leftindex\endcsname{#2}%
+  \expandafter\def\csname corr@sunset#1propindex\endcsname{#2}%
+  \expandafter\def\csname corr@sunset#1rightindex\endcsname{#2}%
+}
+
+\newcommand{\corr@setsunsetcontractedlist}[1]{%
+  \readlist*\corr@sunsetcontracttmp{#1}%
+  \ifnum\corr@sunsetcontracttmplen>0
+    \corr@setsunsetcontractedindex{top}{\corr@sunsetcontracttmp[1]}%
+  \fi
+  \ifnum\corr@sunsetcontracttmplen>1
+    \corr@setsunsetcontractedindex{middle}{\corr@sunsetcontracttmp[2]}%
+  \fi
+  \ifnum\corr@sunsetcontracttmplen>2
+    \corr@setsunsetcontractedindex{bottom}{\corr@sunsetcontracttmp[3]}%
+  \fi
+}
+
+\newcommand{\corr@sunsetmarklinehasindices}[4]{%
+  \def#4{0}%
+  \def\corr@sunsetinternalindextmp{#1}%
+  \ifdefempty{\corr@sunsetinternalindextmp}{}{\def#4{1}}%
+  \def\corr@sunsetinternalindextmp{#2}%
+  \ifdefempty{\corr@sunsetinternalindextmp}{}{\def#4{1}}%
+  \def\corr@sunsetinternalindextmp{#3}%
+  \ifdefempty{\corr@sunsetinternalindextmp}{}{\def#4{1}}%
+}
+
+\newcommand{\corr@resolvesunsetlabelshifts}{%
+  \pgfmathsetlengthmacro{\corr@sunsettoplabelyshiftresolved}{\corr@sunsettoplabelyshift}%
+  \pgfmathsetlengthmacro{\corr@sunsetmiddlelabelyshiftresolved}{\corr@sunsetmiddlelabelyshift}%
+  \pgfmathsetlengthmacro{\corr@sunsetbottomlabelyshiftresolved}{\corr@sunsetbottomlabelyshift}%
+  \corr@sunsetmarklinehasindices{\corr@sunsettopleftindex}{\corr@sunsettoppropindex}{\corr@sunsettoprightindex}{\corr@sunsettophasindices}%
+  \corr@sunsetmarklinehasindices{\corr@sunsetmiddleleftindex}{\corr@sunsetmiddlepropindex}{\corr@sunsetmiddlerightindex}{\corr@sunsetmiddlehasindices}%
+  \corr@sunsetmarklinehasindices{\corr@sunsetbottomleftindex}{\corr@sunsetbottompropindex}{\corr@sunsetbottomrightindex}{\corr@sunsetbottomhasindices}%
+  \ifcorr@sunsetindexawaremomenta
+    \ifnum\corr@sunsettophasindices=1\relax
+      \pgfmathsetlengthmacro{\corr@sunsettoplabelyshiftresolved}{\corr@sunsettoplabelyshift + \corr@sunsettoplabelindexclearance}%
+    \fi
+    \ifnum\corr@sunsettophasindices=1\relax
+      \ifdim\corr@sunsetmiddlearrowyshift<0pt
+        \pgfmathsetlengthmacro{\corr@sunsetmiddlelabelyshiftresolved}{\corr@sunsetmiddlelabelyshift - \corr@sunsetmiddlelabelindexclearance}%
+      \else
+        \pgfmathsetlengthmacro{\corr@sunsetmiddlelabelyshiftresolved}{\corr@sunsetmiddlelabelyshift + \corr@sunsetmiddlelabelindexclearance}%
+      \fi
+    \else
+      \ifnum\corr@sunsetmiddlehasindices=1\relax
+        \ifdim\corr@sunsetmiddlearrowyshift<0pt
+          \pgfmathsetlengthmacro{\corr@sunsetmiddlelabelyshiftresolved}{\corr@sunsetmiddlelabelyshift - \corr@sunsetmiddlelabelindexclearance}%
+        \else
+          \pgfmathsetlengthmacro{\corr@sunsetmiddlelabelyshiftresolved}{\corr@sunsetmiddlelabelyshift + \corr@sunsetmiddlelabelindexclearance}%
+        \fi
+      \fi
+    \fi
+    \ifnum\corr@sunsetbottomhasindices=1\relax
+      \pgfmathsetlengthmacro{\corr@sunsetbottomlabelyshiftresolved}{\corr@sunsetbottomlabelyshift - \corr@sunsetbottomlabelindexclearance}%
+    \fi
+  \fi
+}
+
+\newcommand{\corr@resetsunsetdefaults}{%
+  \def\corr@field{}%
+  \def\corr@central{}%
+  \def\corr@indices{}%
+  \def\corr@leglabels{}%
+  \def\corr@momentumlabels{}%
+  \def\corr@scale{1.2}%
+  \def\corr@sunsetleftmomentum{p}%
+  \def\corr@sunsetrightmomentum{}%
+  \def\corr@sunsettopmomentum{k}%
+  \def\corr@sunsetmiddlemomentum{p-k-q}%
+  \def\corr@sunsetbottommomentum{q}%
+  \def\corr@sunsetleftline{sca}%
+  \def\corr@sunsetrightline{sca}%
+  \def\corr@sunsetmiddleline{}%
+  \def\corr@sunsettopline{}%
+  \def\corr@sunsetbottomline{}%
+  \def\corr@sunsetinnerspan{1}%
+  \def\corr@sunsetouterspan{1.6}%
+  \def\corr@sunsetcentrallabel{\hspace{1mm}}%
+  \def\corr@sunsetcentrallabelyshift{-24pt}%
+  \def\corr@sunsetexternalarrowstart{0.22}%
+  \def\corr@sunsetexternalarrowend{0.78}%
+  \def\corr@sunsetexternalarrowyshift{10pt}%
+  \def\corr@sunsetlooparrowstart{0.16}%
+  \def\corr@sunsetlooparrowend{0.84}%
+  \def\corr@sunsetmiddlearrowstart{0.24}%
+  \def\corr@sunsetmiddlearrowend{0.76}%
+  \def\corr@sunsettoparrowbend{18}%
+  \def\corr@sunsetbottomarrowbend{18}%
+  \def\corr@sunsetleftlabelposition{above}%
+  \def\corr@sunsetleftlabelxshift{0pt}%
+  \def\corr@sunsetleftlabelyshift{0pt}%
+  \def\corr@sunsetrightlabelposition{above}%
+  \def\corr@sunsetrightlabelxshift{0pt}%
+  \def\corr@sunsetrightlabelyshift{0pt}%
+  \def\corr@sunsettoplabelposition{above}%
+  \def\corr@sunsettoplabelxshift{0pt}%
+  \def\corr@sunsetmiddlelabelposition{below}%
+  \def\corr@sunsetmiddlelabelxshift{0pt}%
+  \def\corr@sunsetbottomlabelposition{below}%
+  \def\corr@sunsetbottomlabelxshift{0pt}%
+  \def\corr@sunsettoplabelyshiftresolved{27pt}%
+  \def\corr@sunsetmiddlelabelyshiftresolved{-1pt}%
+  \def\corr@sunsetbottomlabelyshiftresolved{-12pt}%
+  \def\corr@sunsettoplabelindexclearance{7pt}%
+  \def\corr@sunsetmiddlelabelindexclearance{6pt}%
+  \def\corr@sunsetbottomlabelindexclearance{4pt}%
+  \def\corr@sunsettopleftindex{}%
+  \def\corr@sunsettoppropindex{}%
+  \def\corr@sunsettoprightindex{}%
+  \def\corr@sunsetmiddleleftindex{}%
+  \def\corr@sunsetmiddlepropindex{}%
+  \def\corr@sunsetmiddlerightindex{}%
+  \def\corr@sunsetbottomleftindex{}%
+  \def\corr@sunsetbottompropindex{}%
+  \def\corr@sunsetbottomrightindex{}%
+  \def\corr@sunsetinternalleftslotpos{0.16}%
+  \def\corr@sunsetinternalpropslotpos{0.50}%
+  \def\corr@sunsetinternalrightslotpos{0.84}%
+  \def\corr@sunsettopendindexposition{below}%
+  \def\corr@sunsettopleftindexxshift{-2pt}%
+  \def\corr@sunsettoprightindexxshift{2pt}%
+  \def\corr@sunsettopendindexyshift{-1pt}%
+  \def\corr@sunsettopinternalindexposition{below}%
+  \def\corr@sunsettopinternalindexxshift{0pt}%
+  \def\corr@sunsettopinternalindexyshift{-2pt}%
+  \def\corr@sunsetmiddleendindexposition{below}%
+  \def\corr@sunsetmiddleleftindexxshift{-2pt}%
+  \def\corr@sunsetmiddlerightindexxshift{2pt}%
+  \def\corr@sunsetmiddleendindexyshift{-4pt}%
+  \def\corr@sunsetmiddleinternalindexposition{below}%
+  \def\corr@sunsetmiddleinternalindexxshift{0pt}%
+  \def\corr@sunsetmiddleinternalindexyshift{-8pt}%
+  \def\corr@sunsetbottomendindexposition{above}%
+  \def\corr@sunsetbottomleftindexxshift{-2pt}%
+  \def\corr@sunsetbottomrightindexxshift{2pt}%
+  \def\corr@sunsetbottomendindexyshift{1pt}%
+  \def\corr@sunsetbottominternalindexposition{above}%
+  \def\corr@sunsetbottominternalindexxshift{0pt}%
+  \def\corr@sunsetbottominternalindexyshift{2pt}%
+  \def\corr@sunsetinternalindexstyle{}%
+  \def\corr@sunsetinternalindexmathstyle{\scriptstyle}%
+  \def\corr@sunsetvertexindexmathstyle{\scriptscriptstyle}%
+  \def\corr@sunsetpropagatorindexmathstyle{\scriptstyle}%
+  \def\corr@sunsetinternalindexfill{white}%
+  \def\corr@sunsetinternalindexinnersep{0.6pt}%
+  \def\corr@sunsetmomentumlayout{balanced}%
+  \def\corr@sunsetindexlayout{balanced}%
+  \corr@sunsetindexawaremomentatrue
+  \corr@sunsetmomentumlayoutbalanced
+  \corr@sunsetindexlayoutbalanced
+}
+
+\newcommand{\corr@configurestyles}{%
+  \ifstrequal{\corr@scalararrowdirection}{out}{%
+    \tikzfeynhandset{
+      every scalar polarized@@/.style={
+        /tikzfeynhand/every scalar polarized base@@,
+        /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@scalararrowposition},
+      },
+    }%
+  }{%
+    \ifstrequal{\corr@scalararrowdirection}{none}{%
+      \tikzfeynhandset{
+        every scalar polarized@@/.style={
+          /tikzfeynhand/every scalar polarized base@@,
+        },
+      }%
+    }{%
+      \tikzfeynhandset{
+        every scalar polarized@@/.style={
+          /tikzfeynhand/every scalar polarized base@@,
+          /tikz/postaction={/tikzfeynhand/with open arrow=\corr@scalararrowposition},
+        },
+      }%
+    }%
+  }%
+  \ifstrequal{\corr@antiscalararrowdirection}{out}{%
+    \tikzfeynhandset{
+      every anti scalar polarized@@/.style={
+        /tikzfeynhand/every scalar polarized base@@,
+        /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@antiscalararrowposition},
+      },
+    }%
+  }{%
+    \ifstrequal{\corr@antiscalararrowdirection}{none}{%
+      \tikzfeynhandset{
+        every anti scalar polarized@@/.style={
+          /tikzfeynhand/every scalar polarized base@@,
+        },
+      }%
+    }{%
+      \tikzfeynhandset{
+        every anti scalar polarized@@/.style={
+          /tikzfeynhand/every scalar polarized base@@,
+          /tikz/postaction={/tikzfeynhand/with open arrow=\corr@antiscalararrowposition},
+        },
+      }%
+    }%
+  }%
+  \tikzfeynhandset{
+    every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
+    scalar polarized/.style={
+      /tikzfeynhand/scalar,
+      /tikzfeynhand/every scalar polarized@@,
+    },
+    scalarpolarized/.style={/tikzfeynhand/scalar polarized},
+    scalar polarized inward/.style={
+      /tikzfeynhand/scalar,
+      /tikzfeynhand/every scalar polarized base@@,
+      /tikz/postaction={/tikzfeynhand/with open arrow=\corr@scalararrowposition},
+    },
+    scalar polarized outward/.style={
+      /tikzfeynhand/scalar,
+      /tikzfeynhand/every scalar polarized base@@,
+      /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@scalararrowposition},
+    },
+    scalarpolarizedin/.style={/tikzfeynhand/scalar polarized inward},
+    scalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
+    spolin/.style={/tikzfeynhand/scalar polarized inward},
+    spolout/.style={/tikzfeynhand/scalar polarized outward},
+    every anti scalar polarized/.style={/tikzfeynhand/every anti scalar polarized@@/.append style={##1}},
+    anti scalar polarized/.style={
+      /tikzfeynhand/scalar,
+      /tikzfeynhand/every anti scalar polarized@@,
+    },
+    antiscalarpolarized/.style={/tikzfeynhand/anti scalar polarized},
+    anti scalar polarized inward/.style={
+      /tikzfeynhand/scalar,
+      /tikzfeynhand/every scalar polarized base@@,
+      /tikz/postaction={/tikzfeynhand/with open arrow=\corr@antiscalararrowposition},
+    },
+    anti scalar polarized outward/.style={
+      /tikzfeynhand/scalar,
+      /tikzfeynhand/every scalar polarized base@@,
+      /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@antiscalararrowposition},
+    },
+    antiscalarpolarizedin/.style={/tikzfeynhand/anti scalar polarized inward},
+    antiscalarpolarizedout/.style={/tikzfeynhand/anti scalar polarized outward},
+    spol/.style={/tikzfeynhand/scalar polarized},
+    antspol/.style={/tikzfeynhand/anti scalar polarized},
+    antspolin/.style={/tikzfeynhand/anti scalar polarized inward},
+    antspolout/.style={/tikzfeynhand/anti scalar polarized outward},
+  }%
+}
+
+\pgfkeys{
+  /corrdiag/.is family,
+  /corrdiag,
+  line/.store in=\corr@line,
+  leg-styles/.store in=\corr@legstyles,
+  mode/.store in=\corr@mode,
+  momentum/.style={mode={#1}},
+  momentum-symbol/.store in=\corr@mode,
+  momentum-start/.store in=\corr@momentumstart,
+  momentum-labels/.store in=\corr@momentumlabels,
+  momentum-arrow-size/.store in=\corr@momentumarrowsize,
+  momentum-arrow-sizes/.store in=\corr@momentumarrowsizes,
+  propagator-arrow-size/.store in=\corr@propagatorarrowsize,
+  propagator-arrow-sizes/.store in=\corr@propagatorarrowsizes,
+  scalar-arrow-position/.store in=\corr@scalararrowposition,
+  scalar-arrow-direction/.store in=\corr@scalararrowdirection,
+  scalarpolarized-arrow-position/.style={scalar-arrow-position={#1}},
+  scalarpolarized-arrow-direction/.style={scalar-arrow-direction={#1}},
+  spol-arrow-position/.style={scalar-arrow-position={#1}},
+  spol-arrow-direction/.style={scalar-arrow-direction={#1}},
+  anti-scalar-arrow-position/.store in=\corr@antiscalararrowposition,
+  anti-scalar-arrow-direction/.store in=\corr@antiscalararrowdirection,
+  antiscalar-arrow-position/.style={anti-scalar-arrow-position={#1}},
+  antiscalar-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
+  antiscalarpolarized-arrow-position/.style={anti-scalar-arrow-position={#1}},
+  antiscalarpolarized-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
+  antspol-arrow-position/.style={anti-scalar-arrow-position={#1}},
+  antspol-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
+  sunset-external-momentum/.style={
+    sunset-left-momentum={#1},
+    sunset-right-momentum={#1}
+  },
+  sunset-left-momentum/.store in=\corr@sunsetleftmomentum,
+  sunset-right-momentum/.store in=\corr@sunsetrightmomentum,
+  sunset-top-momentum/.store in=\corr@sunsettopmomentum,
+  sunset-middle-momentum/.store in=\corr@sunsetmiddlemomentum,
+  sunset-bottom-momentum/.store in=\corr@sunsetbottommomentum,
+  sunset-left-line/.store in=\corr@sunsetleftline,
+  sunset-middle-line/.store in=\corr@sunsetmiddleline,
+  sunset-right-line/.store in=\corr@sunsetrightline,
+  sunset-top-line/.store in=\corr@sunsettopline,
+  sunset-bottom-line/.store in=\corr@sunsetbottomline,
+  sunset-inner-span/.store in=\corr@sunsetinnerspan,
+  sunset-outer-span/.store in=\corr@sunsetouterspan,
+  sunset-loop-looseness/.store in=\corr@sunsetlooplooseness,
+  sunset-central-label/.store in=\corr@sunsetcentrallabel,
+  sunset-central-label-yshift/.store in=\corr@sunsetcentrallabelyshift,
+  sunset-internal-vertices/.is if=corr@sunsetinternalvertices,
+  sunset-internal-vertex-style/.store in=\corr@sunsetinternalvertexstyle,
+  sunset-external-arrow-start/.store in=\corr@sunsetexternalarrowstart,
+  sunset-external-arrow-end/.store in=\corr@sunsetexternalarrowend,
+  sunset-external-arrow-yshift/.store in=\corr@sunsetexternalarrowyshift,
+  sunset-loop-arrow-start/.store in=\corr@sunsetlooparrowstart,
+  sunset-loop-arrow-end/.store in=\corr@sunsetlooparrowend,
+  sunset-top-arrow-yshift/.store in=\corr@sunsettoparrowyshift,
+  sunset-bottom-arrow-yshift/.store in=\corr@sunsetbottomarrowyshift,
+  sunset-middle-arrow-start/.store in=\corr@sunsetmiddlearrowstart,
+  sunset-middle-arrow-end/.store in=\corr@sunsetmiddlearrowend,
+  sunset-middle-arrow-yshift/.store in=\corr@sunsetmiddlearrowyshift,
+  sunset-top-arrow-bend/.store in=\corr@sunsettoparrowbend,
+  sunset-bottom-arrow-bend/.store in=\corr@sunsetbottomarrowbend,
+  sunset-left-label-position/.store in=\corr@sunsetleftlabelposition,
+  sunset-left-label-xshift/.store in=\corr@sunsetleftlabelxshift,
+  sunset-left-label-yshift/.store in=\corr@sunsetleftlabelyshift,
+  sunset-right-label-position/.store in=\corr@sunsetrightlabelposition,
+  sunset-right-label-xshift/.store in=\corr@sunsetrightlabelxshift,
+  sunset-right-label-yshift/.store in=\corr@sunsetrightlabelyshift,
+  sunset-top-label-position/.store in=\corr@sunsettoplabelposition,
+  sunset-top-label-xshift/.store in=\corr@sunsettoplabelxshift,
+  sunset-top-label-yshift/.store in=\corr@sunsettoplabelyshift,
+  sunset-middle-label-position/.store in=\corr@sunsetmiddlelabelposition,
+  sunset-middle-label-xshift/.store in=\corr@sunsetmiddlelabelxshift,
+  sunset-middle-label-yshift/.store in=\corr@sunsetmiddlelabelyshift,
+  sunset-bottom-label-position/.store in=\corr@sunsetbottomlabelposition,
+  sunset-bottom-label-xshift/.store in=\corr@sunsetbottomlabelxshift,
+  sunset-bottom-label-yshift/.store in=\corr@sunsetbottomlabelyshift,
+  sunset-index-aware-momenta/.is if=corr@sunsetindexawaremomenta,
+  sunset-index-aware-momentum/.style={sunset-index-aware-momenta=#1},
+  sunset-top-label-index-clearance/.store in=\corr@sunsettoplabelindexclearance,
+  sunset-middle-label-index-clearance/.store in=\corr@sunsetmiddlelabelindexclearance,
+  sunset-bottom-label-index-clearance/.store in=\corr@sunsetbottomlabelindexclearance,
+  sunset-label-index-clearance/.style={
+    sunset-top-label-index-clearance={#1},
+    sunset-middle-label-index-clearance={#1},
+    sunset-bottom-label-index-clearance={#1}
+  },
+  sunset-internal-indices/.code={\corr@setsunsetslotlist{prop}{#1}},
+  sunset-propagator-indices/.style={sunset-internal-indices={#1}},
+  sunset-left-vertex-indices/.code={\corr@setsunsetslotlist{left}{#1}},
+  sunset-right-vertex-indices/.code={\corr@setsunsetslotlist{right}{#1}},
+  sunset-contracted-indices/.code={\corr@setsunsetcontractedlist{#1}},
+  sunset-top-indices/.code={\corr@setsunsettriplet{top}{#1}},
+  sunset-middle-indices/.code={\corr@setsunsettriplet{middle}{#1}},
+  sunset-bottom-indices/.code={\corr@setsunsettriplet{bottom}{#1}},
+  sunset-top-internal-indices/.style={sunset-top-indices={#1}},
+  sunset-middle-internal-indices/.style={sunset-middle-indices={#1}},
+  sunset-bottom-internal-indices/.style={sunset-bottom-indices={#1}},
+  sunset-top-left-index/.store in=\corr@sunsettopleftindex,
+  sunset-top-propagator-index/.store in=\corr@sunsettoppropindex,
+  sunset-top-right-index/.store in=\corr@sunsettoprightindex,
+  sunset-middle-left-index/.store in=\corr@sunsetmiddleleftindex,
+  sunset-middle-propagator-index/.store in=\corr@sunsetmiddlepropindex,
+  sunset-middle-right-index/.store in=\corr@sunsetmiddlerightindex,
+  sunset-bottom-left-index/.store in=\corr@sunsetbottomleftindex,
+  sunset-bottom-propagator-index/.store in=\corr@sunsetbottompropindex,
+  sunset-bottom-right-index/.store in=\corr@sunsetbottomrightindex,
+  sunset-top-contracted-index/.code={\corr@setsunsetcontractedindex{top}{#1}},
+  sunset-middle-contracted-index/.code={\corr@setsunsetcontractedindex{middle}{#1}},
+  sunset-bottom-contracted-index/.code={\corr@setsunsetcontractedindex{bottom}{#1}},
+  sunset-internal-left-slot-position/.store in=\corr@sunsetinternalleftslotpos,
+  sunset-internal-propagator-slot-position/.store in=\corr@sunsetinternalpropslotpos,
+  sunset-internal-right-slot-position/.store in=\corr@sunsetinternalrightslotpos,
+  sunset-top-end-index-position/.store in=\corr@sunsettopendindexposition,
+  sunset-top-left-index-xshift/.store in=\corr@sunsettopleftindexxshift,
+  sunset-top-right-index-xshift/.store in=\corr@sunsettoprightindexxshift,
+  sunset-top-end-index-yshift/.store in=\corr@sunsettopendindexyshift,
+  sunset-top-internal-index-position/.store in=\corr@sunsettopinternalindexposition,
+  sunset-top-internal-index-xshift/.store in=\corr@sunsettopinternalindexxshift,
+  sunset-top-internal-index-yshift/.store in=\corr@sunsettopinternalindexyshift,
+  sunset-middle-end-index-position/.store in=\corr@sunsetmiddleendindexposition,
+  sunset-middle-left-index-xshift/.store in=\corr@sunsetmiddleleftindexxshift,
+  sunset-middle-right-index-xshift/.store in=\corr@sunsetmiddlerightindexxshift,
+  sunset-middle-end-index-yshift/.store in=\corr@sunsetmiddleendindexyshift,
+  sunset-middle-internal-index-position/.store in=\corr@sunsetmiddleinternalindexposition,
+  sunset-middle-internal-index-xshift/.store in=\corr@sunsetmiddleinternalindexxshift,
+  sunset-middle-internal-index-yshift/.store in=\corr@sunsetmiddleinternalindexyshift,
+  sunset-bottom-end-index-position/.store in=\corr@sunsetbottomendindexposition,
+  sunset-bottom-left-index-xshift/.store in=\corr@sunsetbottomleftindexxshift,
+  sunset-bottom-right-index-xshift/.store in=\corr@sunsetbottomrightindexxshift,
+  sunset-bottom-end-index-yshift/.store in=\corr@sunsetbottomendindexyshift,
+  sunset-bottom-internal-index-position/.store in=\corr@sunsetbottominternalindexposition,
+  sunset-bottom-internal-index-xshift/.store in=\corr@sunsetbottominternalindexxshift,
+  sunset-bottom-internal-index-yshift/.store in=\corr@sunsetbottominternalindexyshift,
+  sunset-internal-index-style/.store in=\corr@sunsetinternalindexstyle,
+  sunset-internal-index-math-style/.code={
+    \def\corr@sunsetinternalindexmathstyle{#1}%
+    \def\corr@sunsetvertexindexmathstyle{#1}%
+    \def\corr@sunsetpropagatorindexmathstyle{#1}%
+  },
+  sunset-vertex-index-math-style/.store in=\corr@sunsetvertexindexmathstyle,
+  sunset-propagator-index-math-style/.store in=\corr@sunsetpropagatorindexmathstyle,
+  sunset-internal-index-fill/.store in=\corr@sunsetinternalindexfill,
+  sunset-internal-index-inner-sep/.store in=\corr@sunsetinternalindexinnersep,
+  sunset-internal-index-size/.is choice,
+  sunset-internal-index-size/normal/.code={
+    \def\corr@sunsetinternalindexmathstyle{}%
+    \def\corr@sunsetvertexindexmathstyle{}%
+    \def\corr@sunsetpropagatorindexmathstyle{}%
+  },
+  sunset-internal-index-size/script/.code={
+    \def\corr@sunsetinternalindexmathstyle{\scriptstyle}%
+    \def\corr@sunsetvertexindexmathstyle{\scriptstyle}%
+    \def\corr@sunsetpropagatorindexmathstyle{\scriptstyle}%
+  },
+  sunset-internal-index-size/scriptscript/.code={
+    \def\corr@sunsetinternalindexmathstyle{\scriptscriptstyle}%
+    \def\corr@sunsetvertexindexmathstyle{\scriptscriptstyle}%
+    \def\corr@sunsetpropagatorindexmathstyle{\scriptscriptstyle}%
+  },
+  sunset-internal-index-size/default/.style={sunset-internal-index-size=script},
+  sunset-vertex-index-size/.is choice,
+  sunset-vertex-index-size/normal/.code={\def\corr@sunsetvertexindexmathstyle{}},
+  sunset-vertex-index-size/script/.code={\def\corr@sunsetvertexindexmathstyle{\scriptstyle}},
+  sunset-vertex-index-size/scriptscript/.code={\def\corr@sunsetvertexindexmathstyle{\scriptscriptstyle}},
+  sunset-vertex-index-size/default/.style={sunset-vertex-index-size=scriptscript},
+  sunset-propagator-index-size/.is choice,
+  sunset-propagator-index-size/normal/.code={\def\corr@sunsetpropagatorindexmathstyle{}},
+  sunset-propagator-index-size/script/.code={\def\corr@sunsetpropagatorindexmathstyle{\scriptstyle}},
+  sunset-propagator-index-size/scriptscript/.code={\def\corr@sunsetpropagatorindexmathstyle{\scriptscriptstyle}},
+  sunset-propagator-index-size/default/.style={sunset-propagator-index-size=script},
+  sunset-index-layout/.is choice,
+  sunset-index-layout/tight/.code={
+    \def\corr@sunsetindexlayout{tight}%
+    \corr@sunsetindexlayouttight
+  },
+  sunset-index-layout/balanced/.code={
+    \def\corr@sunsetindexlayout{balanced}%
+    \corr@sunsetindexlayoutbalanced
+  },
+  sunset-index-layout/wide/.code={
+    \def\corr@sunsetindexlayout{wide}%
+    \corr@sunsetindexlayoutwide
+  },
+  sunset-index-layout/default/.style={sunset-index-layout=balanced},
+  sunset-internal-index-layout/.style={sunset-index-layout={#1}},
+  sunset-momentum-layout/.is choice,
+  sunset-momentum-layout/legacy/.code={
+    \def\corr@sunsetmomentumlayout{legacy}%
+    \corr@sunsetmomentumlayoutlegacy
+  },
+  sunset-momentum-layout/compact/.code={
+    \def\corr@sunsetmomentumlayout{compact}%
+    \corr@sunsetmomentumlayoutcompact
+  },
+  sunset-momentum-layout/balanced/.code={
+    \def\corr@sunsetmomentumlayout{balanced}%
+    \corr@sunsetmomentumlayoutbalanced
+  },
+  sunset-momentum-layout/wide/.code={
+    \def\corr@sunsetmomentumlayout{wide}%
+    \corr@sunsetmomentumlayoutwide
+  },
+  sunset-momentum-layout/default/.style={sunset-momentum-layout=balanced},
+  sunset-label-layout/.style={sunset-momentum-layout={#1}},
+  field/.store in=\corr@field,
+  indices/.store in=\corr@indices,
+  leg-labels/.store in=\corr@leglabels,
+  labels/.style={leg-labels={#1}},
+  central/.store in=\corr@central,
+  blob/.is if=corr@blob,
+  blob-style/.store in=\corr@blobstyle,
+  show-momenta/.is if=corr@showmomenta,
+  center-vertex/.is if=corr@centervertex,
+  central-vertex/.style={center-vertex=#1},
+  center-vertex-style/.store in=\corr@centervertexstyle,
+  central-vertex-style/.style={center-vertex-style={#1}},
+  external-vertices/.is if=corr@externalvertices,
+  external-vertex-style/.store in=\corr@externalvertexstyle,
+  vertices/.style={center-vertex=#1,external-vertices=#1},
+  vertex-style/.style={
+    center-vertex-style={#1},
+    external-vertex-style={#1}
+  },
+  scale/.store in=\corr@scale,
+  index-placement/.store in=\corr@indexplacement,
+}
+
+\newcommand{\corrset}[1]{%
+  \pgfqkeys{/corrdiag}{#1}%
+  \corr@configurestyles
+}
+
+\corr@configurestyles
+
+\newcommand{\corr@preparelists}{%
+  \def\corr@legstyleitemslen{0}%
+  \def\corr@momitemslen{0}%
+  \def\corr@momarrowsizeitemslen{0}%
+  \def\corr@proparrowsizeitemslen{0}%
+  \def\corr@indexitemslen{0}%
+  \def\corr@legitemslen{0}%
+  \ifdefempty{\corr@legstyles}{}{%
+    \readlist*\corr@legstyleitems{\corr@legstyles}%
+  }%
+  \ifdefempty{\corr@momentumlabels}{}{%
+    \readlist*\corr@momitems{\corr@momentumlabels}%
+  }%
+  \ifdefempty{\corr@momentumarrowsizes}{}{%
+    \readlist*\corr@momarrowsizeitems{\corr@momentumarrowsizes}%
+  }%
+  \ifdefempty{\corr@propagatorarrowsizes}{}{%
+    \readlist*\corr@proparrowsizeitems{\corr@propagatorarrowsizes}%
+  }%
+  \ifdefempty{\corr@indices}{}{%
+    \readlist*\corr@indexitems{\corr@indices}%
+  }%
+  \ifdefempty{\corr@leglabels}{}{%
+    \readlist*\corr@legitems{\corr@leglabels}%
+  }%
+}
+
+\newcommand{\corr@indexsuffix}[1]{%
+  \ifstrequal{\corr@indexplacement}{sup}{^{#1}}{%
+    \ifstrequal{\corr@indexplacement}{none}{#1}{_{#1}}%
+  }%
+}
+
+\newcommand{\corr@fieldwithindex}[1]{%
+  \ifnum\corr@indexitemslen<#1
+    \corr@field
+  \else
+    \ifdefempty{\corr@field}{%
+      \corr@indexitems[#1]%
+    }{%
+      \corr@field\corr@indexsuffix{\corr@indexitems[#1]}%
+    }%
+  \fi
+}
+
+\newcommand{\corr@leglabel}[1]{%
+  \ifnum\corr@legitemslen<#1
+    \corr@fieldwithindex{#1}%
+  \else
+    \corr@legitems[#1]%
+  \fi
+}
+
+\newcommand{\corr@momentumlabel}[1]{%
+  \ifnum\corr@momitemslen<#1
+    \corr@mode_{\number\numexpr\corr@momentumstart+#1-1\relax}%
+  \else
+    \corr@momitems[#1]%
+  \fi
+}
+
+\newcommand{\corr@legstylefor}[1]{%
+  \ifnum\corr@legstyleitemslen<#1
+    \corr@line
+  \else
+    \corr@legstyleitems[#1]%
+  \fi
+}
+
+\newcommand{\corr@appendproparrowsize}[1]{%
+  \ifnum\corr@proparrowsizeitemslen<#1
+    \ifdefempty{\corr@propagatorarrowsize}{}{%
+      \edef\corr@propoptions{\corr@propoptions,arrow size=\corr@propagatorarrowsize}%
+    }%
+  \else
+    \edef\corr@thisproparrowsize{\corr@proparrowsizeitems[#1]}%
+    \edef\corr@propoptions{\corr@propoptions,arrow size=\corr@thisproparrowsize}%
+  \fi
+}
+
+\newcommand{\corr@momentumarrowsizefor}[1]{%
+  \ifnum\corr@momarrowsizeitemslen<#1
+    \corr@momentumarrowsize
+  \else
+    \corr@momarrowsizeitems[#1]%
+  \fi
+}
+
+\newcommand{\corr@drawprop}[4]{%
+  \edef\corr@propoptions{\corr@legstylefor{#2}}%
+  \corr@appendproparrowsize{#2}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+}
+
+\newcommand{\corr@drawmomentum}[4]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+    ($(#2)!0.22!(#3)!6pt!#4:(#3)$) --
+    ($(#2)!0.78!(#3)!6pt!#4:(#3)$)
+    node[midway,fill=white,inner sep=1pt] {$\corr@momentumlabel{#1}$};
+}
+
+\newcommand{\corr@putlabel}[3]{%
+  \node at ([#2]#1) {$\corr@leglabel{#3}$};
+}
+
+\newcommand{\corr@vertex@dot}[1]{%
+  \filldraw[draw=black,fill=black] (#1) circle[radius=2.15pt];
+}
+
+\newcommand{\corr@vertex@ringdot}[1]{%
+  \draw[line width=0.6pt,fill=white] (#1) circle[radius=2.5pt];
+  \filldraw[draw=black,fill=black] (#1) circle[radius=1.05pt];
+}
+
+\newcommand{\corr@putvertex}[2]{%
+  \edef\corr@vertexstyle{#2}%
+  \ifcsdef{corr@vertex@\corr@vertexstyle}{%
+    \csname corr@vertex@\corr@vertexstyle\endcsname{#1}%
+  }{%
+    \begin{feynhand}
+      \vertex[\corr@vertexstyle] at (#1);
+    \end{feynhand}
+  }%
+}
+
+\newcommand{\corr@putblob}[2]{%
+  \vertex[#2] at (#1);
+}
+
+\newcommand{\corr@putcentral}[1]{%
+  \ifdefempty{\corr@central}{}{%
+    \node[anchor=north] at ([yshift=-9pt]#1) {$\corr@central$};
+  }%
+}
+
+\newcommand{\corr@putsunsetcentral}[1]{%
+  \ifdefempty{\corr@central}{}{%
+    \node[anchor=north] at ([yshift=\corr@sunsetcentrallabelyshift]#1) {$\corr@central$};
+  }%
+}
+
+\newcommand{\corr@sunsetrightmomentumresolved}{%
+  \ifdefempty{\corr@sunsetrightmomentum}{%
+    \corr@sunsetleftmomentum
+  }{%
+    \corr@sunsetrightmomentum
+  }%
+}
+
+\newcommand{\corr@sunsetmomentumlabel}[1]{%
+  \ifnum\corr@momitemslen<#1
+    \ifcase#1\relax
+    \or \corr@sunsetleftmomentum
+    \or \corr@sunsetrightmomentumresolved
+    \or \corr@sunsettopmomentum
+    \or \corr@sunsetmiddlemomentum
+    \or \corr@sunsetbottommomentum
+    \fi
+  \else
+    \corr@momitems[#1]%
+  \fi
+}
+
+\newcommand{\corr@setsunsetpropoptions}[2]{%
+  \edef\corr@sunsetsegmentstyle{#2}%
+  \ifdefempty{\corr@sunsetsegmentstyle}{%
+    \edef\corr@propoptions{\corr@line}%
+  }{%
+    \edef\corr@propoptions{\corr@sunsetsegmentstyle}%
+  }%
+  \corr@appendproparrowsize{#1}%
+}
+
+\newcommand{\corr@drawsunsetprop}[5]{%
+  \corr@setsunsetpropoptions{#1}{#2}%
+  \edef\corr@sunsetextraoptions{#5}%
+  \ifdefempty{\corr@sunsetextraoptions}{}{%
+    \edef\corr@propoptions{\corr@propoptions,\corr@sunsetextraoptions}%
+  }%
+  \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+}
+
+\newcommand{\corr@drawsunsetmomentumline}[7]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+    #2 -- #3
+    node[midway,#4,xshift=#5,yshift=#6,fill=white,inner sep=1pt] {$#7$};
+}
+
+\newcommand{\corr@drawsunsetmomentumcurve}[8]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+    #2 to[#3=#4] #5
+    node[midway,#6,xshift=#7,yshift=#8,fill=white,inner sep=1pt] {$\corr@sunsetmomentumlabel{#1}$};
+}
+
+\newcommand{\corr@putsunsetinternalindexline}[8]{%
+  \def\corr@sunsetinternalindextmp{#7}%
+  \ifdefempty{\corr@sunsetinternalindextmp}{}{%
+    \path #1 -- #2
+      node[
+        pos=#3,
+        #4,
+        xshift=#5,
+        yshift=#6,
+        fill=\corr@sunsetinternalindexfill,
+        inner sep=\corr@sunsetinternalindexinnersep,
+        outer sep=0pt,
+        \corr@sunsetinternalindexstyle
+      ] {$#8 #7$};
+  }%
+}
+
+\newcommand{\corr@putsunsetinternalindexcurve}[9]{%
+  \def\corr@sunsetinternalindextmp{#8}%
+  \ifdefempty{\corr@sunsetinternalindextmp}{}{%
+    \path #1 to[#2] #3
+      node[
+        pos=#4,
+        #5,
+        xshift=#6,
+        yshift=#7,
+        fill=\corr@sunsetinternalindexfill,
+        inner sep=\corr@sunsetinternalindexinnersep,
+        outer sep=0pt,
+        \corr@sunsetinternalindexstyle
+      ] {$#9 #8$};
+  }%
+}
+
+\NewDocumentCommand{\TwoPointCorr}{O{}}{%
+  \begingroup
+  \pgfqkeys{/corrdiag}{#1}%
+  \corr@preparelists
+  \corr@configurestyles
+  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+    \begin{feynhand}
+      \vertex (corrC) at (0,0);
+      \vertex (corrL) at (-1.85,0);
+      \vertex (corrR) at (1.85,0);
+      \corr@drawprop{mom}{1}{corrL}{corrC}
+      \corr@drawprop{mom'}{2}{corrR}{corrC}
+      \ifcorr@blob
+        \corr@putblob{corrC}{\corr@blobstyle}
+      \fi
+    \end{feynhand}
+    \ifcorr@centervertex
+      \corr@putvertex{corrC}{\corr@centervertexstyle}
+    \fi
+    \ifcorr@externalvertices
+      \corr@putvertex{corrL}{\corr@externalvertexstyle}
+      \corr@putvertex{corrR}{\corr@externalvertexstyle}
+    \fi
+    \ifcorr@showmomenta
+      \corr@drawmomentum{1}{corrL}{corrC}{90}
+      \corr@drawmomentum{2}{corrR}{corrC}{-90}
+    \fi
+    \corr@putlabel{corrL}{xshift=-10pt}{1}
+    \corr@putlabel{corrR}{xshift=10pt}{2}
+    \corr@putcentral{corrC}
+  \end{tikzpicture}%
+  \endgroup
+}
+
+\NewDocumentCommand{\FourPointCorr}{O{}}{%
+  \begingroup
+  \pgfqkeys{/corrdiag}{#1}%
+  \corr@preparelists
+  \corr@configurestyles
+  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+    \begin{feynhand}
+      \vertex (corrC) at (0,0);
+      \vertex (corrUL) at (-1.95,1.35);
+      \vertex (corrLL) at (-1.95,-1.35);
+      \vertex (corrUR) at (1.95,1.35);
+      \vertex (corrLR) at (1.95,-1.35);
+      \corr@drawprop{mom}{1}{corrUL}{corrC}
+      \corr@drawprop{mom'}{2}{corrLL}{corrC}
+      \corr@drawprop{mom'}{3}{corrUR}{corrC}
+      \corr@drawprop{mom}{4}{corrLR}{corrC}
+      \ifcorr@blob
+        \corr@putblob{corrC}{\corr@blobstyle}
+      \fi
+    \end{feynhand}
+    \ifcorr@centervertex
+      \corr@putvertex{corrC}{\corr@centervertexstyle}
+    \fi
+    \ifcorr@externalvertices
+      \corr@putvertex{corrUL}{\corr@externalvertexstyle}
+      \corr@putvertex{corrLL}{\corr@externalvertexstyle}
+      \corr@putvertex{corrUR}{\corr@externalvertexstyle}
+      \corr@putvertex{corrLR}{\corr@externalvertexstyle}
+    \fi
+    \ifcorr@showmomenta
+      \corr@drawmomentum{1}{corrUL}{corrC}{90}
+      \corr@drawmomentum{2}{corrLL}{corrC}{-90}
+      \corr@drawmomentum{3}{corrUR}{corrC}{-90}
+      \corr@drawmomentum{4}{corrLR}{corrC}{90}
+    \fi
+    \corr@putlabel{corrUL}{xshift=-11pt,yshift=8pt}{1}
+    \corr@putlabel{corrLL}{xshift=-11pt,yshift=-8pt}{2}
+    \corr@putlabel{corrUR}{xshift=11pt,yshift=8pt}{3}
+    \corr@putlabel{corrLR}{xshift=11pt,yshift=-8pt}{4}
+    \corr@putcentral{corrC}
+  \end{tikzpicture}%
+  \endgroup
+}
+
+\NewDocumentCommand{\SunsetDiagram}{O{}}{%
+  \begingroup
+  \corr@resetsunsetdefaults
+  \pgfqkeys{/corrdiag}{#1}%
+  \corr@preparelists
+  \corr@configurestyles
+  \corr@resolvesunsetlabelshifts
+  \ifdefempty{\corr@central}{%
+    \edef\corr@central{\corr@sunsetcentrallabel}%
+  }{}%
+  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+    \pgfmathsetmacro{\corr@sunsetleftvertexx}{-\corr@sunsetinnerspan}
+    \pgfmathsetmacro{\corr@sunsetrightvertexx}{\corr@sunsetinnerspan}
+    \pgfmathsetmacro{\corr@sunsetleftextx}{-(\corr@sunsetinnerspan+\corr@sunsetouterspan)}
+    \pgfmathsetmacro{\corr@sunsetrightextx}{\corr@sunsetinnerspan+\corr@sunsetouterspan}
+    \begin{feynhand}
+      \vertex (sunLext) at (\corr@sunsetleftextx,0);
+      \vertex (sunLv) at (\corr@sunsetleftvertexx,0);
+      \vertex (sunC) at (0,0);
+      \vertex (sunRv) at (\corr@sunsetrightvertexx,0);
+      \vertex (sunRext) at (\corr@sunsetrightextx,0);
+      \corr@drawsunsetprop{1}{\corr@sunsetleftline}{sunLext}{sunLv}{}
+      \corr@drawsunsetprop{2}{\corr@sunsetmiddleline}{sunLv}{sunRv}{}
+      \corr@drawsunsetprop{3}{\corr@sunsetrightline}{sunRv}{sunRext}{}
+      \corr@drawsunsetprop{4}{\corr@sunsettopline}{sunLv}{sunRv}{half left,looseness=\corr@sunsetlooplooseness}
+      \corr@drawsunsetprop{5}{\corr@sunsetbottomline}{sunLv}{sunRv}{half right,looseness=\corr@sunsetlooplooseness}
+    \end{feynhand}
+    \ifcorr@sunsetinternalvertices
+      \corr@putvertex{sunLv}{\corr@sunsetinternalvertexstyle}
+      \corr@putvertex{sunRv}{\corr@sunsetinternalvertexstyle}
+    \fi
+    \ifcorr@externalvertices
+      \corr@putvertex{sunLext}{\corr@externalvertexstyle}
+      \corr@putvertex{sunRext}{\corr@externalvertexstyle}
+    \fi
+    \ifcorr@showmomenta
+      \corr@drawsunsetmomentumline{1}
+        {($(sunLext)!\corr@sunsetexternalarrowstart!(sunLv)+(0,\corr@sunsetexternalarrowyshift)$)}
+        {($(sunLext)!\corr@sunsetexternalarrowend!(sunLv)+(0,\corr@sunsetexternalarrowyshift)$)}
+        {\corr@sunsetleftlabelposition}
+        {\corr@sunsetleftlabelxshift}
+        {\corr@sunsetleftlabelyshift}
+        {\corr@sunsetmomentumlabel{1}}
+      \corr@drawsunsetmomentumline{2}
+        {($(sunRv)!\corr@sunsetexternalarrowstart!(sunRext)+(0,\corr@sunsetexternalarrowyshift)$)}
+        {($(sunRv)!\corr@sunsetexternalarrowend!(sunRext)+(0,\corr@sunsetexternalarrowyshift)$)}
+        {\corr@sunsetrightlabelposition}
+        {\corr@sunsetrightlabelxshift}
+        {\corr@sunsetrightlabelyshift}
+        {\corr@sunsetmomentumlabel{2}}
+      \corr@drawsunsetmomentumcurve{3}
+        {($(sunLv)!\corr@sunsetlooparrowstart!(sunRv)+(0,\corr@sunsettoparrowyshift)$)}
+        {bend left}
+        {\corr@sunsettoparrowbend}
+        {($(sunLv)!\corr@sunsetlooparrowend!(sunRv)+(0,\corr@sunsettoparrowyshift)$)}
+        {\corr@sunsettoplabelposition}
+        {\corr@sunsettoplabelxshift}
+        {\corr@sunsettoplabelyshiftresolved}
+      \corr@drawsunsetmomentumline{4}
+        {($(sunLv)!\corr@sunsetmiddlearrowstart!(sunRv)+(0,\corr@sunsetmiddlearrowyshift)$)}
+        {($(sunLv)!\corr@sunsetmiddlearrowend!(sunRv)+(0,\corr@sunsetmiddlearrowyshift)$)}
+        {\corr@sunsetmiddlelabelposition}
+        {\corr@sunsetmiddlelabelxshift}
+        {\corr@sunsetmiddlelabelyshiftresolved}
+        {\corr@sunsetmomentumlabel{4}}
+      \corr@drawsunsetmomentumcurve{5}
+        {($(sunLv)!\corr@sunsetlooparrowstart!(sunRv)+(0,\corr@sunsetbottomarrowyshift)$)}
+        {bend right}
+        {\corr@sunsetbottomarrowbend}
+        {($(sunLv)!\corr@sunsetlooparrowend!(sunRv)+(0,\corr@sunsetbottomarrowyshift)$)}
+        {\corr@sunsetbottomlabelposition}
+        {\corr@sunsetbottomlabelxshift}
+        {\corr@sunsetbottomlabelyshiftresolved}
+    \fi
+    \corr@putsunsetinternalindexcurve
+      {(sunLv)}
+      {out=90,in=90,looseness=\corr@sunsetlooplooseness}
+      {(sunRv)}
+      {\corr@sunsetinternalleftslotpos}
+      {\corr@sunsettopendindexposition}
+      {\corr@sunsettopleftindexxshift}
+      {\corr@sunsettopendindexyshift}
+      {\corr@sunsettopleftindex}
+      {\corr@sunsetvertexindexmathstyle}
+    \corr@putsunsetinternalindexcurve
+      {(sunLv)}
+      {out=90,in=90,looseness=\corr@sunsetlooplooseness}
+      {(sunRv)}
+      {\corr@sunsetinternalpropslotpos}
+      {\corr@sunsettopinternalindexposition}
+      {\corr@sunsettopinternalindexxshift}
+      {\corr@sunsettopinternalindexyshift}
+      {\corr@sunsettoppropindex}
+      {\corr@sunsetpropagatorindexmathstyle}
+    \corr@putsunsetinternalindexcurve
+      {(sunLv)}
+      {out=90,in=90,looseness=\corr@sunsetlooplooseness}
+      {(sunRv)}
+      {\corr@sunsetinternalrightslotpos}
+      {\corr@sunsettopendindexposition}
+      {\corr@sunsettoprightindexxshift}
+      {\corr@sunsettopendindexyshift}
+      {\corr@sunsettoprightindex}
+      {\corr@sunsetvertexindexmathstyle}
+    \corr@putsunsetinternalindexline
+      {(sunLv)}
+      {(sunRv)}
+      {\corr@sunsetinternalleftslotpos}
+      {\corr@sunsetmiddleendindexposition}
+      {\corr@sunsetmiddleleftindexxshift}
+      {\corr@sunsetmiddleendindexyshift}
+      {\corr@sunsetmiddleleftindex}
+      {\corr@sunsetvertexindexmathstyle}
+    \corr@putsunsetinternalindexline
+      {(sunLv)}
+      {(sunRv)}
+      {\corr@sunsetinternalpropslotpos}
+      {\corr@sunsetmiddleinternalindexposition}
+      {\corr@sunsetmiddleinternalindexxshift}
+      {\corr@sunsetmiddleinternalindexyshift}
+      {\corr@sunsetmiddlepropindex}
+      {\corr@sunsetpropagatorindexmathstyle}
+    \corr@putsunsetinternalindexline
+      {(sunLv)}
+      {(sunRv)}
+      {\corr@sunsetinternalrightslotpos}
+      {\corr@sunsetmiddleendindexposition}
+      {\corr@sunsetmiddlerightindexxshift}
+      {\corr@sunsetmiddleendindexyshift}
+      {\corr@sunsetmiddlerightindex}
+      {\corr@sunsetvertexindexmathstyle}
+    \corr@putsunsetinternalindexcurve
+      {(sunLv)}
+      {out=-90,in=-90,looseness=\corr@sunsetlooplooseness}
+      {(sunRv)}
+      {\corr@sunsetinternalleftslotpos}
+      {\corr@sunsetbottomendindexposition}
+      {\corr@sunsetbottomleftindexxshift}
+      {\corr@sunsetbottomendindexyshift}
+      {\corr@sunsetbottomleftindex}
+      {\corr@sunsetvertexindexmathstyle}
+    \corr@putsunsetinternalindexcurve
+      {(sunLv)}
+      {out=-90,in=-90,looseness=\corr@sunsetlooplooseness}
+      {(sunRv)}
+      {\corr@sunsetinternalpropslotpos}
+      {\corr@sunsetbottominternalindexposition}
+      {\corr@sunsetbottominternalindexxshift}
+      {\corr@sunsetbottominternalindexyshift}
+      {\corr@sunsetbottompropindex}
+      {\corr@sunsetpropagatorindexmathstyle}
+    \corr@putsunsetinternalindexcurve
+      {(sunLv)}
+      {out=-90,in=-90,looseness=\corr@sunsetlooplooseness}
+      {(sunRv)}
+      {\corr@sunsetinternalrightslotpos}
+      {\corr@sunsetbottomendindexposition}
+      {\corr@sunsetbottomrightindexxshift}
+      {\corr@sunsetbottomendindexyshift}
+      {\corr@sunsetbottomrightindex}
+      {\corr@sunsetvertexindexmathstyle}
+    \corr@putlabel{sunLext}{xshift=-10pt}{1}
+    \corr@putlabel{sunRext}{xshift=10pt}{2}
+    \corr@putsunsetcentral{sunC}
+  \end{tikzpicture}%
+  \endgroup
+}
+
+\NewDocumentCommand{\TwoPtCorr}{O{}}{\TwoPointCorr[#1]}
+\NewDocumentCommand{\FourPtCorr}{O{}}{\FourPointCorr[#1]}
+\NewDocumentCommand{\SunsetDiag}{O{}}{\SunsetDiagram[#1]}
+
+\makeatother

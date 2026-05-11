@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
+
+\begin{document}
+
+\section*{Sunset Index Regression}
+
+Contracted internal indices:
+\[
+  \SunsetDiagram[
+    scale=1.55,
+    field=\phi,
+    central=\Sigma(p),
+    sunset-internal-indices={\alpha,\beta,\gamma}
+  ]
+\]
+
+Uncontracted default layout:
+\[
+  \SunsetDiagram[
+    scale=1.55,
+    field=\phi,
+    central=\Sigma_{ab}(p),
+    sunset-momentum-layout=wide,
+    sunset-top-momentum=\ell,
+    sunset-middle-momentum=p-\ell-r,
+    sunset-bottom-momentum=r,
+    sunset-left-vertex-indices={a,c,e},
+    sunset-internal-indices={\alpha,\beta,\gamma},
+    sunset-right-vertex-indices={b,d,f}
+  ]
+\]
+
+Uncontracted tight layout:
+\[
+  \SunsetDiagram[
+    scale=1.55,
+    field=\phi,
+    central=\Sigma_{ab}(p),
+    sunset-momentum-layout=wide,
+    sunset-index-layout=tight,
+    sunset-top-momentum=\ell,
+    sunset-middle-momentum=p-\ell-r,
+    sunset-bottom-momentum=r,
+    sunset-left-vertex-indices={a,c,e},
+    sunset-internal-indices={\alpha,\beta,\gamma},
+    sunset-right-vertex-indices={b,d,f}
+  ]
+\]
+
+Manual slot control stress test:
+\[
+  \SunsetDiagram[
+    scale=1.55,
+    field=\phi,
+    central=\Sigma_{ij}(p),
+    sunset-momentum-layout=wide,
+    sunset-index-layout=wide,
+    sunset-top-momentum=\ell_1,
+    sunset-middle-momentum=p-\ell_1-r_2,
+    sunset-bottom-momentum=r_2,
+    sunset-top-indices={a_1,\alpha_1,b_1},
+    sunset-middle-indices={c_2,\beta_2,d_2},
+    sunset-bottom-indices={e_3,\gamma_3,f_3}
+  ]
+\]
+
+\end{document}
