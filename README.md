@@ -1,112 +1,170 @@
 # Correlator Diagram Macros
 
-This package provides small reusable LaTeX macros for drawing standard 2-point and 4-point correlator / Feynman-diagram skeletons with:
+Reusable LaTeX macros for a small set of QFT diagram topologies:
 
-- automatic momentum labels such as `q_1,q_2,...`, `k_1,k_2,...`, or `p_1,p_2,...`
-- visible center and external vertex controls
-- external leg labels generated from a field symbol plus indices
-- optional full manual override of leg labels and momentum labels
-- global and per-leg arrow-size control
-- per-leg propagator style overrides
-- configurable `scalarpolarized` / `antiscalarpolarized` dashed leg styles with open arrowheads
-- a central blob or vertex label for objects such as `G^{(2)}`, `G^{(4)}`, or `\Gamma^{(4)}`
-- line styles from `tikz-feynhand`
+- 2-point correlators
+- 4-point contact correlators
+- one-loop `s`, `t`, and `u` channel bubbles for `\phi^4` theory
+- explicit tree-level `s`, `t`, and `u` exchange topologies
+- sunset self-energy diagrams
 
-The package is implemented in [correlator-diagrams.sty](/Users/aeaconnelly/Documents/LatexCode/correlator-diagrams.sty). A working demo is in [example.tex](/Users/aeaconnelly/Documents/LatexCode/example.tex).
+Main package:
 
-## What You Get
+- `correlator-diagrams.sty`
 
-Two macros are provided:
+Main demos:
 
-```tex
-\TwoPointCorr[<options>]
-\FourPointCorr[<options>]
-\SunsetDiagram[<options>]
-```
+- `example.tex`
+- `channel-topology-regression.tex`
+- `sunset-example.tex`
+- `simple-sunset.tex`
 
-Short aliases are also available:
+## Start Here
+
+Add the package to your document:
 
 ```tex
-\TwoPtCorr[<options>]
-\FourPtCorr[<options>]
-\SunsetDiag[<options>]
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
 ```
 
-These are meant for quick, consistent correlator diagrams rather than arbitrary hand-built topologies.
+The three main entry points are:
 
-## Requirements
+```tex
+\TwoPointCorr[...]
+\FourPointCorr[...]
+\SunsetDiagram[...]
+```
 
-The package depends on:
+Short aliases:
 
-- `tikz`
-- `tikz-feynhand`
-- `etoolbox`
-- `listofitems`
-- `xparse`
+```tex
+\TwoPtCorr[...]
+\FourPtCorr[...]
+\SChannelCorr[...]
+\TChannelCorr[...]
+\UChannelCorr[...]
+\SLoopChannelCorr[...]
+\TLoopChannelCorr[...]
+\ULoopChannelCorr[...]
+\STreeChannelCorr[...]
+\TTreeChannelCorr[...]
+\UTreeChannelCorr[...]
+\SunsetDiag[...]
+```
 
-In this workspace, the example compiles with:
+Compile locally with:
 
 ```sh
 pdflatex -interaction=nonstopmode -halt-on-error example.tex
 ```
 
-## Minimal Use
+## The Basic Workflow
 
-Load the package in your document:
+Most diagrams are easiest if you think in this order:
 
-```tex
-\usepackage{correlator-diagrams}
-```
+1. Pick the topology.
+2. Label the external fields.
+3. Label the momenta.
+4. Adjust line styles, arrows, and vertices.
+5. Add internal indices if the topology has internal propagators.
 
-Default 2-point diagram:
+That is the logic used by this package.
 
-```tex
-\[
-  \TwoPointCorr
-\]
-```
+## What Each Macro Draws
 
-Default 4-point diagram:
+| Macro | Purpose | Default shape |
+| --- | --- | --- |
+| `\TwoPointCorr` | 2-point function | left leg, right leg, central blob/vertex |
+| `\FourPointCorr` | 4-point object | contact topology by default |
+| `\SunsetDiagram` | self-energy sunset | two external legs plus top/middle/bottom internal lines |
 
-```tex
-\[
-  \FourPointCorr
-\]
-```
+The convenience channel wrappers are just `\FourPointCorr` with a fixed topology:
 
-Default sunset diagram:
+- `\SChannelCorr`, `\TChannelCorr`, `\UChannelCorr` for the one-loop `\phi^4` bubbles
+- `\STreeChannelCorr`, `\TTreeChannelCorr`, `\UTreeChannelCorr` for the explicit tree-level exchange graphs
 
-```tex
-\[
-  \SunsetDiagram
-\]
-```
+## Leg Order And Slot Order
 
-This default is intentionally minimal: blank external field labels, scalar external legs, no visible central label, and the `balanced` sunset momentum-layout preset.
+### `\TwoPointCorr`
 
-## Quick Examples
+- slot 1 = left leg
+- slot 2 = right leg
 
-### 2-point function with Lorentz indices
+### `\FourPointCorr`
 
-```tex
-\[
-  \TwoPointCorr[
-    mode=q,
-    field=\phi,
-    indices={\mu,\nu},
-    central=G^{(2)}
-  ]
-\]
-```
+External leg order is always:
 
-This gives leg labels `\phi_\mu` and `\phi_\nu`, with momentum labels `q_1` and `q_2`.
+- slot 1 = upper left
+- slot 2 = lower left
+- slot 3 = upper right
+- slot 4 = lower right
 
-### 4-point function with `k_i` momenta
+For one-loop channel bubbles there are two extra internal propagator slots:
+
+- slot 5 = internal line A
+- slot 6 = internal line B
+
+Interpretation of A/B depends on the topology:
+
+- `topology=s`: A = top arc, B = bottom arc
+- `topology=t`: A = left arc, B = right arc
+- `topology=u`: A = left arc, B = right arc
+
+That slot order matters for:
+
+- `leg-styles={...}`
+- `momentum-labels={...}`
+- `momentum-arrow-sizes={...}`
+- `propagator-arrow-sizes={...}`
+
+### `\SunsetDiagram`
+
+External legs:
+
+- slot 1 = left external segment
+- slot 2 = right external segment
+
+Internal segments:
+
+- slot 3 = top arc
+- slot 4 = middle bridge
+- slot 5 = bottom arc
+
+## Quick Start Examples
+
+### Automatic `q_i`, `k_i`, or `p_i` labels
 
 ```tex
 \[
   \FourPointCorr[
-    mode=k,
+    mode=q
+  ]
+\]
+```
+
+Supported built-in momentum letters:
+
+- `mode=q`
+- `mode=k`
+- `mode=p`
+
+You can also shift the numbering:
+
+```tex
+\[
+  \FourPointCorr[
+    mode=q,
+    momentum-start=3
+  ]
+\]
+```
+
+### External labels from `field` plus `indices`
+
+```tex
+\[
+  \FourPointCorr[
     field=\phi,
     indices={a,b,c,d},
     central=G^{(4)}
@@ -114,67 +172,1086 @@ This gives leg labels `\phi_\mu` and `\phi_\nu`, with momentum labels `q_1` and 
 \]
 ```
 
-### 4-point function with fully custom external fields
+This gives `\phi_a`, `\phi_b`, `\phi_c`, `\phi_d`.
+
+### Fully manual external labels
 
 ```tex
 \[
   \FourPointCorr[
-    line=fer,
-    momentum-labels={p_1,p_2,p_3,p_4},
     leg-labels={\psi_i,\bar\psi_j,\psi_k,\bar\psi_l},
+    momentum-labels={p_1,p_2,p_3,p_4},
     central=\Gamma^{(4)}
   ]
 \]
 ```
 
-### Visible center vertex and emphasized arrows on selected legs
+### Visible vertex, no blob
 
 ```tex
 \[
   \FourPointCorr[
     blob=false,
-    center-vertex-style=ringdot,
-    leg-styles={scalarpolarized,scalarpolarized,plain,plain},
-    momentum-arrow-size=6pt,
-    momentum-arrow-sizes={11pt,8pt,5pt,5pt},
-    propagator-arrow-size=8pt,
-    propagator-arrow-sizes={12pt,9pt,8pt,8pt},
-    field=\varphi,
-    indices={1,2,3,4},
-    central=\Gamma_{\mathrm{mix}}^{(4)}
+    center-vertex-style=ringdot
   ]
 \]
 ```
 
-### No blob, operator labels as superscripts
+## External Field Labels
+
+The standard pattern is:
+
+- `field=\phi`
+- `indices={...}`
+
+Index placement:
+
+- `index-placement=sub`
+- `index-placement=sup`
+- `index-placement=none`
+
+If you need complete manual control, use:
+
+- `leg-labels={...}`
+
+`leg-labels` overrides `field` and `indices` for the legs you specify.
+
+## Momentum Labels And Arrows
+
+### First: what kind of key moves what?
+
+For momentum annotations, the naming pattern matters:
+
+- `loop-channel-top-momentum=\ell` changes the text itself
+- `loop-channel-top-arrow-yshift=14pt` changes the arrow only
+- `loop-channel-top-label-yshift=14pt` changes the label only
+- `loop-channel-top-label-distance=12pt` changes the separation between label and arrow
+- `loop-channel-top-label-fraction=0.50` slides the label along the same line or curve
+- `loop-channel-top-arrow-start=0.24` and `loop-channel-top-arrow-end=0.76` shorten or lengthen the arrow along its line or curve
+
+That is the quickest way to read the API.
+
+### Global momentum text style
+
+For simple diagrams you can rely on:
+
+- `mode=q|k|p`
+- `momentum-start=<integer>`
+- `momentum-labels={...}`
+
+Momentum labels are plain text by default. There is no white box behind them unless you add one yourself with:
+
+- `momentum-label-fill=...`
+- `momentum-label-inner-sep=...`
+- `momentum-label-style=...`
+
+### One-loop `s/t/u` bubbles: the internal loop momenta
+
+This is the part of the package where the label and arrow are most clearly treated as one annotation attached to one loop line.
+
+If you do not want to mentally decode key families, skip straight to the paste-ready blocks below and edit one number at a time.
+
+Use these names for the momentum text:
+
+- `loop-channel-top-momentum=...`
+- `loop-channel-bottom-momentum=...`
+- `loop-channel-left-momentum=...`
+- `loop-channel-right-momentum=...`
+- `loop-channel-momenta={..., ...}`
+
+You can also use the equivalent `a/b` names:
+
+- `loop-channel-a-momentum=...`
+- `loop-channel-b-momentum=...`
+
+Direction:
+
+- `loop-channel-top-momentum-direction=forward|reverse|none`
+- `loop-channel-bottom-momentum-direction=forward|reverse|none`
+- `loop-channel-left-momentum-direction=forward|reverse|none`
+- `loop-channel-right-momentum-direction=forward|reverse|none`
+
+#### Loop-channel motion cheat sheet
+
+If you want to do this | Use this key family | What it changes
+--- | --- | ---
+Change the label text | `loop-channel-top-momentum=...` | text only
+Move the label farther from the arrow | `loop-channel-top-label-distance=...` | label-arrow separation only
+Slide the label along the same curve | `loop-channel-top-label-fraction=...` | label position along the curve
+Change the side the label sits on | `loop-channel-top-label-position=above|below|left|right` | anchor side for the label
+Nudge only the label | `loop-channel-top-label-xshift=...`, `loop-channel-top-label-yshift=...` | label only
+Shorten or lengthen the arrow | `loop-channel-top-arrow-start=...`, `loop-channel-top-arrow-end=...` | arrow span only
+Move the arrow guide away from the loop | `loop-channel-top-arrow-yshift=...` or `loop-channel-left-arrow-xshift=...` | arrow only
+Change how curved the arrow guide feels | `loop-channel-top-arrow-looseness=...` | arrow curvature only
+
+Replace `top` with `bottom`, `left`, or `right` as needed.
+
+#### The two-step tuning workflow for loop-channel momenta
+
+If a label is overlapping its arrow:
+
+1. Increase `loop-channel-top-label-distance` or `loop-channel-left-label-distance`.
+2. If the label should also slide along the curve, change `loop-channel-top-label-fraction` or `loop-channel-left-label-fraction`.
+
+If the label and arrow look fine relative to each other, but the whole thing is too close to the loop or to the page edge:
+
+1. Keep your chosen `loop-channel-top-label-distance` or `loop-channel-left-label-distance`.
+2. Move the arrow with `loop-channel-top-arrow-yshift` or `loop-channel-left-arrow-xshift`.
+3. Move the label by the same amount with `loop-channel-top-label-yshift` or `loop-channel-left-label-xshift`.
+
+Example: separate first, then move together:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-momentum=\ell,
+    loop-channel-left-label-distance=10pt,
+    loop-channel-left-arrow-xshift=-6pt,
+    loop-channel-left-label-xshift=-6pt
+  ]
+\]
+```
+
+Here the logic is:
+
+- `label-distance` opens space between text and arrow
+- matching `arrow-xshift` and `label-xshift` move the whole annotation left together
+
+Example: vertical version for the `s` channel:
+
+```tex
+\[
+  \SChannelCorr[
+    loop-channel-top-label-distance=12pt,
+    loop-channel-top-arrow-yshift=14pt,
+    loop-channel-top-label-yshift=14pt
+  ]
+\]
+```
+
+Here the top momentum label is first pushed away from the arrow, and then the arrow+label pair is lifted upward together.
+
+#### Paste-ready default blocks
+
+Use these as real starting points.
+
+Default `s`-channel internal loop momenta:
+
+```tex
+\[
+  \SChannelCorr[
+    loop-channel-top-momentum=\ell,
+    loop-channel-top-momentum-direction=forward,
+    loop-channel-top-arrow-start=0.24,
+    loop-channel-top-arrow-end=0.76,
+    loop-channel-top-arrow-xshift=0pt,
+    loop-channel-top-arrow-yshift=13pt,
+    loop-channel-top-arrow-looseness=1.02,
+    loop-channel-top-label-position=above,
+    loop-channel-top-label-distance=10pt,
+    loop-channel-top-label-fraction=0.50,
+    loop-channel-top-label-xshift=0pt,
+    loop-channel-top-label-yshift=0pt,
+    loop-channel-bottom-momentum=p_1+p_2-\ell,
+    loop-channel-bottom-momentum-direction=forward,
+    loop-channel-bottom-arrow-start=0.24,
+    loop-channel-bottom-arrow-end=0.76,
+    loop-channel-bottom-arrow-xshift=0pt,
+    loop-channel-bottom-arrow-yshift=-13pt,
+    loop-channel-bottom-arrow-looseness=1.02,
+    loop-channel-bottom-label-position=below,
+    loop-channel-bottom-label-distance=10pt,
+    loop-channel-bottom-label-fraction=0.50,
+    loop-channel-bottom-label-xshift=0pt,
+    loop-channel-bottom-label-yshift=0pt
+  ]
+\]
+```
+
+Default `t`-channel internal loop momenta:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-momentum=\ell,
+    loop-channel-left-momentum-direction=forward,
+    loop-channel-left-arrow-start=0.24,
+    loop-channel-left-arrow-end=0.76,
+    loop-channel-left-arrow-xshift=-18pt,
+    loop-channel-left-arrow-yshift=0pt,
+    loop-channel-left-arrow-looseness=1.02,
+    loop-channel-left-label-position=left,
+    loop-channel-left-label-distance=9pt,
+    loop-channel-left-label-fraction=0.50,
+    loop-channel-left-label-xshift=0pt,
+    loop-channel-left-label-yshift=0pt,
+    loop-channel-right-momentum=q-\ell,
+    loop-channel-right-momentum-direction=forward,
+    loop-channel-right-arrow-start=0.24,
+    loop-channel-right-arrow-end=0.76,
+    loop-channel-right-arrow-xshift=18pt,
+    loop-channel-right-arrow-yshift=0pt,
+    loop-channel-right-arrow-looseness=1.02,
+    loop-channel-right-label-position=right,
+    loop-channel-right-label-distance=9pt,
+    loop-channel-right-label-fraction=0.50,
+    loop-channel-right-label-xshift=0pt,
+    loop-channel-right-label-yshift=0pt
+  ]
+\]
+```
+
+Default `u`-channel internal loop momenta and crossed right-side external momenta:
+
+```tex
+\[
+  \UChannelCorr[
+    loop-channel-left-momentum=\ell,
+    loop-channel-left-momentum-direction=forward,
+    loop-channel-left-arrow-start=0.24,
+    loop-channel-left-arrow-end=0.76,
+    loop-channel-left-arrow-xshift=-18pt,
+    loop-channel-left-arrow-yshift=0pt,
+    loop-channel-left-arrow-looseness=1.02,
+    loop-channel-left-label-position=left,
+    loop-channel-left-label-distance=9pt,
+    loop-channel-left-label-fraction=0.50,
+    loop-channel-left-label-xshift=0pt,
+    loop-channel-left-label-yshift=0pt,
+    loop-channel-right-momentum=r-\ell,
+    loop-channel-right-momentum-direction=forward,
+    loop-channel-right-arrow-start=0.24,
+    loop-channel-right-arrow-end=0.76,
+    loop-channel-right-arrow-xshift=18pt,
+    loop-channel-right-arrow-yshift=0pt,
+    loop-channel-right-arrow-looseness=1.02,
+    loop-channel-right-label-position=right,
+    loop-channel-right-label-distance=11pt,
+    loop-channel-right-label-fraction=0.50,
+    loop-channel-right-label-xshift=4pt,
+    loop-channel-right-label-yshift=6pt,
+    loop-channel-crossed-external-momentum-start=0.00,
+    loop-channel-crossed-external-momentum-end=0.24,
+    loop-channel-crossed-external-momentum-label-fraction=0.08
+  ]
+\]
+```
+
+#### How to start guessing adjustments
+
+Use these as the first numbers to change:
+
+- `loop-channel-top-label-distance`, `loop-channel-bottom-label-distance`, `loop-channel-left-label-distance`, `loop-channel-right-label-distance`
+  Defaults: `10pt` for `s`, `9pt` for `t`, `11pt` for the crowded right side of `u`.
+  Bigger means more space between label and arrow.
+  Smaller means label sits closer to the arrow.
+
+- `loop-channel-top-arrow-looseness`, `loop-channel-bottom-arrow-looseness`, `loop-channel-left-arrow-looseness`, `loop-channel-right-arrow-looseness`
+  Default: `1.02`.
+  Bigger means the guide arrow bows farther and looks rounder.
+  Smaller means the guide arrow gets flatter and tighter.
+
+- `loop-channel-top-label-fraction`, `loop-channel-bottom-label-fraction`, `loop-channel-left-label-fraction`, `loop-channel-right-label-fraction`
+  Default: `0.50`.
+  Smaller means the label moves toward the first end of the arrow.
+  Bigger means the label moves toward the second end of the arrow.
+
+- `loop-channel-top-arrow-start`, `loop-channel-bottom-arrow-start`, `loop-channel-left-arrow-start`, `loop-channel-right-arrow-start`
+  Default: `0.24`.
+  Bigger means the arrow starts later, so the arrow gets shorter near its first end.
+  Smaller means the arrow reaches farther toward its first end.
+
+- `loop-channel-top-arrow-end`, `loop-channel-bottom-arrow-end`, `loop-channel-left-arrow-end`, `loop-channel-right-arrow-end`
+  Default: `0.76`.
+  Bigger means the arrow reaches farther toward its second end.
+  Smaller means the arrow stops earlier, so it gets shorter near its second end.
+
+- `loop-channel-top-arrow-yshift`, `loop-channel-bottom-arrow-yshift`, `loop-channel-left-arrow-xshift`, and `loop-channel-right-arrow-xshift`
+  Defaults: `0pt` / `13pt` / `-13pt` in `s`, `-18pt` and `18pt` in `t/u`.
+  Bigger absolute value means you push the arrow farther away from the loop in that direction.
+
+When something still looks bad, this is the recommended order:
+
+1. Change `label-distance`.
+2. Change `label-fraction`.
+3. Change `arrow-start` / `arrow-end`.
+4. Change `arrow-looseness`.
+5. Only then start moving the pair around with matching arrow and label shifts.
+
+#### Loop-channel fix-it recipes
+
+If the top `s`-channel label is sitting on top of its arrow:
+
+```tex
+\[
+  \SChannelCorr[
+    loop-channel-top-label-distance=14pt
+  ]
+\]
+```
+
+If that same top `s`-channel label is fine relative to the arrow, but the whole top annotation is still too low:
+
+```tex
+\[
+  \SChannelCorr[
+    loop-channel-top-label-distance=14pt,
+    loop-channel-top-arrow-yshift=18pt,
+    loop-channel-top-label-yshift=5pt
+  ]
+\]
+```
+
+Why this works:
+
+- `label-distance=14pt` opens the gap
+- arrow `13pt -> 18pt` moves the arrow up
+- label `0pt -> 5pt` moves the label up by the same extra `5pt`
+
+If the left `t`-channel label is sitting on the arrow:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-label-distance=12pt
+  ]
+\]
+```
+
+If the left `t`-channel annotation is too close to the loop and needs to move farther left as one unit:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-label-distance=12pt,
+    loop-channel-left-arrow-xshift=-24pt,
+    loop-channel-left-label-xshift=-6pt
+  ]
+\]
+```
+
+Why this works:
+
+- default left arrow shift is `-18pt`
+- changing it to `-24pt` moves the arrow `6pt` farther left
+- changing the label from `0pt` to `-6pt` moves the label left by the same extra amount
+
+If the loop arrow looks too flat and not curved enough:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-arrow-looseness=1.20,
+    loop-channel-right-arrow-looseness=1.20
+  ]
+\]
+```
+
+If the loop arrow looks too round and exaggerated:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-arrow-looseness=0.90,
+    loop-channel-right-arrow-looseness=0.90
+  ]
+\]
+```
+
+If the right side of the `u` channel is crowded:
+
+```tex
+\[
+  \UChannelCorr[
+    loop-channel-right-label-distance=13pt,
+    loop-channel-right-label-xshift=6pt,
+    loop-channel-right-label-yshift=8pt,
+    loop-channel-crossed-external-momentum-start=0.00,
+    loop-channel-crossed-external-momentum-end=0.20,
+    loop-channel-crossed-external-momentum-label-fraction=0.06
+  ]
+\]
+```
+
+Why this works:
+
+- the right loop label gets farther from its arrow
+- the right loop label is nudged farther out and slightly up
+- the crossed external momentum marks move closer to the outer leg ends, away from the crossing
+
+### One-loop `s/t/u` bubbles: external straight-leg momenta
+
+The straight external momentum arrows use a simpler system:
+
+- `loop-channel-external-momentum-start=...`
+- `loop-channel-external-momentum-end=...`
+- `loop-channel-external-momentum-label-fraction=...`
+
+For the crossed right side of the one-loop `u` channel:
+
+- `loop-channel-crossed-external-momentum-start=...`
+- `loop-channel-crossed-external-momentum-end=...`
+- `loop-channel-crossed-external-momentum-label-fraction=...`
+
+These do:
+
+- `start/end`: shorten or lengthen the arrow segment along the external leg
+- `label-fraction`: slide the label along that same segment
+
+They do not provide a separate `label-distance` control. Use them to keep the external momentum marking away from a crowded vertex or crossing.
+
+Paste-ready external momentum defaults for `t`:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-external-momentum-start=0.08,
+    loop-channel-external-momentum-end=0.52,
+    loop-channel-external-momentum-label-fraction=0.26
+  ]
+\]
+```
+
+Paste-ready crossed external momentum defaults for `u`:
+
+```tex
+\[
+  \UChannelCorr[
+    loop-channel-crossed-external-momentum-start=0.00,
+    loop-channel-crossed-external-momentum-end=0.24,
+    loop-channel-crossed-external-momentum-label-fraction=0.08
+  ]
+\]
+```
+
+Quick intuition:
+
+- smaller `...-start` moves the arrow closer to the outer end of the leg
+- bigger `...-end` extends the arrow farther toward the vertex
+- smaller `...-label-fraction` moves the label toward the outer end
+- bigger `...-label-fraction` moves the label toward the vertex
+
+Important:
+
+- `loop-channel-*` keys are for the one-loop `s/t/u` bubbles.
+- `channel-*` keys belong to the explicit tree-level exchange topologies.
+
+### Sunset diagrams: momentum tuning
+
+For sunsets, the momentum text keys are:
+
+- `sunset-external-momentum=...`
+- `sunset-top-momentum=...`
+- `sunset-middle-momentum=...`
+- `sunset-bottom-momentum=...`
+
+Sunset momentum control is slightly different from the loop-channel system:
+
+- there is no dedicated `sunset-top-label-distance` / `sunset-middle-label-distance` / `sunset-bottom-label-distance` key
+- instead, you usually start from `sunset-momentum-layout=compact|balanced|wide`
+- then you tune arrow and label shifts separately
+- there is not yet a one-key "move arrow and label together" command for sunsets, so matching shift edits are the way to do that
+
+#### Sunset motion cheat sheet
+
+If you want to do this | Use this key family | What it changes
+--- | --- | ---
+Use a broader default spacing preset | `sunset-momentum-layout=compact|balanced|wide` | whole momentum layout preset
+Move only the top arrow | `sunset-top-arrow-yshift=...` | top arrow only
+Move only the top label | `sunset-top-label-xshift=...`, `sunset-top-label-yshift=...` | top label only
+Move the top arrow and top label together | add the same amount to `sunset-top-arrow-yshift` and `sunset-top-label-yshift` | top pair together
+Move only the middle arrow | `sunset-middle-arrow-yshift=...` | middle arrow only
+Shorten or lengthen the middle arrow | `sunset-middle-arrow-start=...`, `sunset-middle-arrow-end=...` | middle arrow span only
+Move only the middle label | `sunset-middle-label-xshift=...`, `sunset-middle-label-yshift=...` | middle label only
+Move only the bottom arrow | `sunset-bottom-arrow-yshift=...` | bottom arrow only
+Move only the bottom label | `sunset-bottom-label-xshift=...`, `sunset-bottom-label-yshift=...` | bottom label only
+
+So for sunset diagrams the workflow is:
+
+1. Pick `sunset-momentum-layout=...`.
+2. If the label is too close to indices, increase `sunset-top-label-index-clearance`, `sunset-middle-label-index-clearance`, or `sunset-bottom-label-index-clearance`.
+3. If the label is too close to its own arrow, increase the difference between the arrow shift and the label shift.
+4. If the pair is clear internally but sitting in the wrong place, apply a matching extra shift to both the arrow and the label.
+
+Example:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-momentum=k,
+    sunset-top-arrow-yshift=18pt,
+    sunset-top-label-yshift=24pt
+  ]
+\]
+```
+
+This does two different things:
+
+- the arrow is raised to `18pt`
+- the label is raised even more, to `24pt`, so the label sits farther above the arrow
+
+If instead you wanted to move the existing top annotation upward together without changing its internal spacing, you would add the same amount to both values.
+
+#### Paste-ready sunset defaults
+
+Balanced sunset momentum layout, written out explicitly:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-momentum-layout=balanced,
+    sunset-top-momentum=k,
+    sunset-top-label-position=above,
+    sunset-top-label-xshift=0pt,
+    sunset-top-label-yshift=27pt,
+    sunset-top-arrow-yshift=22pt,
+    sunset-top-arrow-bend=12,
+    sunset-middle-momentum=p-k-q,
+    sunset-middle-label-position=below,
+    sunset-middle-label-xshift=0pt,
+    sunset-middle-label-yshift=-1pt,
+    sunset-middle-arrow-start=0.24,
+    sunset-middle-arrow-end=0.76,
+    sunset-middle-arrow-yshift=12pt,
+    sunset-bottom-momentum=q,
+    sunset-bottom-label-position=below,
+    sunset-bottom-label-xshift=0pt,
+    sunset-bottom-label-yshift=-12pt,
+    sunset-bottom-arrow-yshift=-15pt,
+    sunset-bottom-arrow-bend=12
+  ]
+\]
+```
+
+The preset values behind the three sunset momentum layouts are:
+
+- `compact`
+  Top arrow `18pt`, top label `18pt`, middle arrow `8pt`, middle label `0pt`, bottom arrow `-12pt`, bottom label `-8pt`
+
+- `balanced`
+  Top arrow `22pt`, top label `27pt`, middle arrow `12pt`, middle label `-1pt`, bottom arrow `-15pt`, bottom label `-12pt`
+
+- `wide`
+  Top arrow `27pt`, top label `33pt`, middle arrow `15pt`, middle label `1pt`, bottom arrow `-20pt`, bottom label `-16pt`
+
+Quick intuition for sunset guessing:
+
+- if everything is cramped, start by switching `compact -> balanced -> wide`
+- if the label is too close to the arrow, increase the difference between the label shift and the arrow shift
+- if the label is too close to an index, increase `sunset-top-label-index-clearance`, `sunset-middle-label-index-clearance`, or `sunset-bottom-label-index-clearance`
+- if the pair is fine internally but sitting too high/low, add the same extra amount to both the arrow shift and the label shift
+
+#### Sunset fix-it recipes
+
+If the top sunset label is sitting too close to the top arrow:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-arrow-yshift=22pt,
+    sunset-top-label-yshift=31pt
+  ]
+\]
+```
+
+Why this works:
+
+- default top arrow is `22pt`
+- default top label is `27pt`
+- raising the label to `31pt` increases the gap by `4pt`
+
+If the whole top sunset annotation needs to move upward together after that:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-arrow-yshift=26pt,
+    sunset-top-label-yshift=35pt
+  ]
+\]
+```
+
+Why this works:
+
+- the original gap is preserved
+- both parts are moved upward by `4pt`
+
+If the middle sunset label is too close to the middle arrow:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-middle-arrow-yshift=12pt,
+    sunset-middle-label-yshift=-5pt
+  ]
+\]
+```
+
+That increases the label/arrow separation because the arrow stays at `12pt` while the label is pushed farther downward.
+
+If the middle sunset label is hitting internal indices:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-middle-label-index-clearance=10pt
+  ]
+\]
+```
+
+If the bottom sunset label is too close to the bottom arrow:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-bottom-arrow-yshift=-15pt,
+    sunset-bottom-label-yshift=-16pt
+  ]
+\]
+```
+
+If the entire sunset momentum layout feels cramped and you do not want to tune line by line yet:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-momentum-layout=wide
+  ]
+\]
+```
+
+If you want the full current balanced default as a safe reset before making changes:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-momentum-layout=balanced,
+    sunset-top-arrow-yshift=22pt,
+    sunset-top-label-yshift=27pt,
+    sunset-middle-arrow-yshift=12pt,
+    sunset-middle-label-yshift=-1pt,
+    sunset-bottom-arrow-yshift=-15pt,
+    sunset-bottom-label-yshift=-12pt
+  ]
+\]
+```
+
+### Tree-level exchange channels
+
+The tree-level exchange topologies use the older `channel-*` family instead of `loop-channel-*`.
+
+The most important motion keys there are:
+
+- `channel-momentum-start=...`
+- `channel-momentum-end=...`
+- `channel-momentum-distance=...`
+- `channel-momentum-angle=...`
+- `channel-momentum-label-position=...`
+- `channel-momentum-label-xshift=...`
+- `channel-momentum-label-yshift=...`
+
+The logic is:
+
+- `distance` and `angle` place the internal momentum arrow line relative to the propagator
+- `label-xshift/yshift` then nudge the text
+
+## Line Styles, Arrows, And Vertices
+
+Global line style:
 
 ```tex
 \[
   \FourPointCorr[
-    mode=p,
-    blob=false,
-    field=\mathcal{O},
-    indices={\alpha,\beta,\gamma,\delta},
-    index-placement=sup,
-    central=\mathcal{V}^{(4)}
+    line=fer
   ]
 \]
 ```
 
-### Scalar-polarization direction and placement variants
+Per-leg overrides:
 
 ```tex
 \[
   \FourPointCorr[
-    blob=false,
-    leg-styles={scalarpolarizedin,scalarpolarizedout,antspolin,antspolout},
-    scalar-arrow-position=0.12,
-    anti-scalar-arrow-position=0.18
+    line=plain,
+    leg-styles={scalarpolarized,scalarpolarized,plain,plain}
   ]
 \]
 ```
 
-### Sunset self-energy example
+Arrow sizing:
+
+- `momentum-arrow-size=...`
+- `momentum-arrow-sizes={...}`
+- `propagator-arrow-size=...`
+- `propagator-arrow-sizes={...}`
+
+Visibility and vertex controls:
+
+- `blob=true|false`
+- `blob-style=...`
+- `center-vertex=true|false`
+- `center-vertex-style=dot|ringdot|...`
+- `external-vertices=true|false`
+- `external-vertex-style=dot|ringdot|...`
+- `vertices=true|false`
+- `vertex-style=...`
+- `scale=...`
+
+Default behavior:
+
+- 2-point and 4-point diagrams show the central blob
+- visible center vertices are on by default
+- external endpoint vertices are off by default
+- sunset diagrams show the two internal interaction vertices
+
+## Scalar-Polarized Legs
+
+Special dashed scalar styles with open arrowheads:
+
+- `scalarpolarized`
+- `antiscalarpolarized`
+- `spol`
+- `antspol`
+
+Directional aliases:
+
+- `scalarpolarizedin`
+- `scalarpolarizedout`
+- `antiscalarpolarizedin`
+- `antiscalarpolarizedout`
+- `spolin`
+- `spolout`
+- `antspolin`
+- `antspolout`
+
+Relevant controls:
+
+- `scalar-arrow-direction=in|out|none`
+- `scalar-arrow-position=<0..1>`
+- `anti-scalar-arrow-direction=in|out|none`
+- `anti-scalar-arrow-position=<0..1>`
+
+The open arrowhead size tracks the normal propagator arrow-size controls.
+
+## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
+
+These are the primary channel macros:
+
+```tex
+\SChannelCorr[...]
+\TChannelCorr[...]
+\UChannelCorr[...]
+```
+
+Equivalent explicit forms:
+
+```tex
+\FourPointCorr[topology=s,...]
+\FourPointCorr[topology=t,...]
+\FourPointCorr[topology=u,...]
+```
+
+### Minimal `s`-channel bubble
+
+```tex
+\[
+  \SChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_s,
+    momentum-labels={p_1,p_2,p_3,p_4},
+    loop-channel-top-momentum=\ell,
+    loop-channel-bottom-momentum=p_1+p_2-\ell
+  ]
+\]
+```
+
+### Contracted internal indices
+
+Use one label per internal line:
+
+```tex
+\[
+  \SChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    loop-channel-contracted-indices={\alpha,\beta}
+  ]
+\]
+```
+
+This means:
+
+- top/left internal line gets one repeated index
+- bottom/right internal line gets one repeated index
+
+You can also set them one at a time:
+
+- `loop-channel-top-contracted-index=...`
+- `loop-channel-bottom-contracted-index=...`
+- `loop-channel-left-contracted-index=...`
+- `loop-channel-right-contracted-index=...`
+
+### Uncontracted internal indices
+
+Each internal line has three index slots:
+
+- start-vertex slot
+- propagator slot
+- end-vertex slot
+
+Per-line triplet form:
+
+```tex
+\[
+  \TChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s}
+  ]
+\]
+```
+
+Pairwise list form:
+
+```tex
+\[
+  \UChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    loop-channel-start-vertex-indices={i,m},
+    loop-channel-internal-indices={\rho,\sigma},
+    loop-channel-end-vertex-indices={j,n}
+  ]
+\]
+```
+
+Direct per-slot keys are also available:
+
+- `loop-channel-a-start-index=...`
+- `loop-channel-a-propagator-index=...`
+- `loop-channel-a-end-index=...`
+- `loop-channel-b-start-index=...`
+- `loop-channel-b-propagator-index=...`
+- `loop-channel-b-end-index=...`
+
+Useful aliases:
+
+- `loop-channel-top-*`
+- `loop-channel-bottom-*`
+- `loop-channel-left-*`
+- `loop-channel-right-*`
+
+### One-loop channel geometry and layout
+
+Main geometry keys:
+
+- `fourpoint-xspan=...`
+- `fourpoint-yspan=...`
+- `loop-channel-vertex-xspan=...`
+- `loop-channel-vertex-yspan=...`
+- `loop-channel-loop-looseness=...`
+- `loop-channel-a-line=...`
+- `loop-channel-b-line=...`
+
+Loop-momentum arrow geometry keys:
+
+- `loop-channel-a-arrow-start=...`
+- `loop-channel-a-arrow-end=...`
+- `loop-channel-a-arrow-xshift=...`
+- `loop-channel-a-arrow-yshift=...`
+- `loop-channel-a-arrow-looseness=...`
+- `loop-channel-b-arrow-start=...`
+- `loop-channel-b-arrow-end=...`
+- `loop-channel-b-arrow-xshift=...`
+- `loop-channel-b-arrow-yshift=...`
+- `loop-channel-b-arrow-looseness=...`
+
+Useful aliases:
+
+- `loop-channel-top-arrow-*`
+- `loop-channel-bottom-arrow-*`
+- `loop-channel-left-arrow-*`
+- `loop-channel-right-arrow-*`
+
+High-level index layout:
+
+- `loop-channel-index-layout=tight|balanced|wide`
+
+Index styling:
+
+- `loop-channel-vertex-index-size=normal|script|scriptscript`
+- `loop-channel-propagator-index-size=normal|script|scriptscript`
+- `loop-channel-internal-index-style=...`
+- `loop-channel-internal-index-fill=...`
+- `loop-channel-internal-index-inner-sep=...`
+
+Low-level placement keys are available if you need them:
+
+- `loop-channel-a-start-slot-position=...`
+- `loop-channel-a-propagator-slot-position=...`
+- `loop-channel-a-end-slot-position=...`
+- `loop-channel-b-start-slot-position=...`
+- `loop-channel-b-propagator-slot-position=...`
+- `loop-channel-b-end-slot-position=...`
+- `loop-channel-a-start-index-xshift=...`
+- `loop-channel-a-end-index-xshift=...`
+- `loop-channel-a-end-index-yshift=...`
+- `loop-channel-a-propagator-index-position=...`
+- `loop-channel-a-propagator-index-xshift=...`
+- `loop-channel-a-propagator-index-yshift=...`
+- and the corresponding `b`, `top`, `bottom`, `left`, and `right` aliases
+
+#### Paste-ready loop-channel index defaults
+
+Safe reset for one-loop channel indices:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-index-layout=balanced,
+    loop-channel-vertex-index-size=scriptscript,
+    loop-channel-propagator-index-size=script
+  ]
+\]
+```
+
+Current defaults behind that reset:
+
+- `loop-channel-index-layout=balanced`
+- `loop-channel-vertex-index-size=scriptscript`
+- `loop-channel-propagator-index-size=script`
+
+What the loop-channel index presets actually do:
+
+- `tight`
+  Start/propagator/end slots are `0.18`, `0.50`, `0.82`
+  This pulls the endpoint indices inward toward the propagator index.
+
+- `balanced`
+  Start/propagator/end slots are `0.10`, `0.50`, `0.90`
+  This is the default.
+
+- `wide`
+  Start/propagator/end slots are `0.06`, `0.50`, `0.94`
+  This pushes the endpoint indices outward toward the vertices and opens the center.
+
+#### Loop-channel index fix-it recipes
+
+If the propagator index is colliding with the two vertex-side indices:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-index-layout=wide
+  ]
+\]
+```
+
+If the indices look too spread out and detached from the propagator:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-index-layout=tight
+  ]
+\]
+```
+
+If the propagator index is visually too large compared with the vertex indices:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-propagator-index-size=scriptscript
+  ]
+\]
+```
+
+If the vertex indices are too tiny and hard to read:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-vertex-index-size=script
+  ]
+\]
+```
+
+If the left vertex-side indices are colliding with the external legs or momentum arrows:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-left-start-index-xshift=-8pt,
+    loop-channel-left-end-index-xshift=-8pt
+  ]
+\]
+```
+
+Why this works:
+
+- the start and end indices on the left loop line are both pushed farther left
+- the propagator index stays where it is
+
+If only the left propagator index needs a local nudge:
+
+```tex
+\[
+  \TChannelCorr[
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-left-propagator-index-xshift=-2pt,
+    loop-channel-left-propagator-index-yshift=2pt
+  ]
+\]
+```
+
+If the right side of the `u` channel is crowded by the crossed legs:
+
+```tex
+\[
+  \UChannelCorr[
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-right-start-index-xshift=-1pt,
+    loop-channel-right-end-index-xshift=-1pt,
+    loop-channel-right-propagator-index-xshift=-2pt
+  ]
+\]
+```
+
+Why this works:
+
+- it pulls the right-side indices back toward the loop
+- that usually buys space from the crossed external legs
+
+If you want the current `u`-channel right-side defaults as a reset:
+
+```tex
+\[
+  \UChannelCorr[
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-right-start-index-xshift=1pt,
+    loop-channel-right-end-index-xshift=1pt,
+    loop-channel-right-propagator-index-xshift=0pt
+  ]
+\]
+```
+
+## Sunset Diagrams
+
+Minimal default sunset:
 
 ```tex
 \[
@@ -185,86 +1262,55 @@ This gives leg labels `\phi_\mu` and `\phi_\nu`, with momentum labels `q_1` and 
 \]
 ```
 
-### Sunset momentum-layout presets
+The packaged default layout is tuned for a simple scalar sunset:
 
 ```tex
 \[
   \SunsetDiagram[
-    field=\phi,
-    central=\Sigma(p),
-    sunset-momentum-layout=wide
+    sunset-left-line=sca,
+    sunset-right-line=sca,
+    scale=1.2,
+    field=,
+    central=\hspace{1mm},
+    sunset-external-momentum=p,
+    sunset-top-momentum=k,
+    sunset-top-label-yshift=27pt,
+    sunset-top-arrow-yshift=22pt,
+    sunset-middle-momentum=p-k-q,
+    sunset-middle-label-yshift=-1pt,
+    sunset-middle-arrow-yshift=12pt,
+    sunset-bottom-momentum=q,
+    sunset-bottom-label-yshift=-12pt,
+    sunset-bottom-arrow-yshift=-15pt,
+    sunset-outer-span=1.6,
+    sunset-inner-span=1
   ]
 \]
 ```
 
-## Labeling Rules
+### Sunset index model
 
-### Momentum labels
+Each internal sunset line has three slots:
 
-By default, momenta are generated automatically from:
+- left vertex index
+- propagator index
+- right vertex index
 
-- `mode=q` gives `q_1,q_2,...`
-- `mode=k` gives `k_1,k_2,...`
-- `mode=p` gives `p_1,p_2,...`
-
-Example:
-
-```tex
-\FourPointCorr[mode=k]
-```
-
-produces `k_1,k_2,k_3,k_4`.
-
-You can shift the numbering:
-
-```tex
-\FourPointCorr[mode=q,momentum-start=3]
-```
-
-which gives `q_3,q_4,q_5,q_6`.
-
-You can also override everything explicitly:
-
-```tex
-\FourPointCorr[
-  momentum-labels={p,p+q,r,r+q}
-]
-```
-
-### Sunset internal indices
-
-Preferred interface:
-
-- `sunset-internal-indices={...}` for one centered index on each internal line
-- `sunset-left-vertex-indices={...}` and `sunset-right-vertex-indices={...}` when you want the uncontracted vertex-side labels too
-
-These internal indices are intentionally treated differently from momentum labels:
-
-- they are smaller by default
-- the vertex-side slots are smaller by default than the centered propagator slots
-- the top and bottom slots follow the actual loop propagators
-- the vertex-side slots stay tied to the ends of each internal line
-- the sunset momentum labels can automatically back away from them
-
-One-index-per-internal-leg form:
+Contracted form:
 
 ```tex
 \[
   \SunsetDiagram[
-    field=\phi,
-    central=\Sigma(p),
-    sunset-internal-indices={a,b,c}
+    sunset-internal-indices={\alpha,\beta,\gamma}
   ]
 \]
 ```
 
-Three-slot uncontracted form:
+Uncontracted form:
 
 ```tex
 \[
   \SunsetDiagram[
-    field=\phi,
-    central=\Sigma_{ab}(p),
     sunset-left-vertex-indices={a,c,e},
     sunset-internal-indices={\alpha,\beta,\gamma},
     sunset-right-vertex-indices={b,d,f}
@@ -272,471 +1318,232 @@ Three-slot uncontracted form:
 \]
 ```
 
-### Momentum arrow sizes
-
-Momentum arrows are drawn by the package itself, so you can control them globally:
-
-```tex
-\FourPointCorr[
-  momentum-arrow-size=8pt
-]
-```
-
-or per leg:
-
-```tex
-\FourPointCorr[
-  momentum-arrow-sizes={12pt,8pt,5pt,5pt}
-]
-```
-
-This is useful if you want to emphasize some external momenta more strongly than others.
-
-### External leg labels
-
-If you set `field` and `indices`, the package constructs the labels automatically:
-
-```tex
-\FourPointCorr[
-  field=\phi,
-  indices={a,b,c,d}
-]
-```
-
-which gives:
-
-```tex
-\phi_a,\phi_b,\phi_c,\phi_d
-```
-
-You can change index placement:
-
-- `index-placement=sub` gives `\phi_a`
-- `index-placement=sup` gives `\phi^a`
-- `index-placement=none` gives `\phi a`
-
-If you want total control, use `leg-labels`:
-
-```tex
-\FourPointCorr[
-  leg-labels={A_i,B_j,C_k,D_l}
-]
-```
-
-When `leg-labels` is present, it overrides `field` and `indices` for the legs you specify.
-
-### Vertex visibility
-
-The package always defines the geometric vertices, and you can decide whether they are visibly marked.
-
-- `blob=true` draws the central blob
-- `blob=false` removes the blob
-- `center-vertex=true` draws a visible central vertex mark
-- `external-vertices=true` draws visible endpoint vertices
-
-By default:
-
-- the central blob is shown
-- the center vertex is visibly marked
-- the external attachment points are not visibly marked
-
-If you want a pure blob with no visible center dot on top of it, set `center-vertex=false`.
-If you want visible endpoint markers, set `external-vertices=true`.
-If you switch `blob=false`, the visible center vertex remains available, so you do not lose the central attachment point completely.
-
-## Diagram Conventions
-
-### 2-point ordering
-
-`\TwoPointCorr` uses:
-
-- leg 1 = left
-- leg 2 = right
-
-### 4-point ordering
-
-`\FourPointCorr` uses:
-
-- leg 1 = upper left
-- leg 2 = lower left
-- leg 3 = upper right
-- leg 4 = lower right
-
-Keys such as `leg-labels`, `leg-styles`, `momentum-labels`, `momentum-arrow-sizes`, and `propagator-arrow-sizes` follow this same leg ordering.
-
-The default momentum-arrow side placement matches the usual `mom` / `mom'` convention: the arrows stay on the outer side of each leg.
-
-### Sunset ordering
-
-`\SunsetDiagram` uses:
-
-- external leg 1 = left
-- external leg 2 = right
-- momentum / propagator index 1 = left external segment
-- momentum / propagator index 2 = middle bridge segment
-- momentum / propagator index 3 = right external segment
-- momentum / propagator index 4 = top arc
-- momentum / propagator index 5 = bottom arc
-
-This matters when you use `leg-labels`, `momentum-labels`, `momentum-arrow-sizes`, or `propagator-arrow-sizes` with the sunset macro.
-
-## Option Reference
-
-### Core keys
-
-- `mode=q`
-  selects the momentum letter used for automatic labels
-- `momentum-symbol={\ell}`
-  same idea as `mode`, but with an arbitrary symbol
-- `momentum-start=1`
-  starting index for automatic momentum numbering
-- `momentum-labels={...}`
-  explicit momentum labels, one per leg
-- `momentum-arrow-size=6pt`
-  global size for the momentum arrowheads
-- `momentum-arrow-sizes={...}`
-  per-leg momentum arrowhead sizes
-- `field=\phi`
-  base field or operator symbol used for automatic leg labels
-- `indices={...}`
-  comma-separated index list
-- `leg-labels={...}`
-  explicit external leg labels
-- `leg-styles={...}`
-  per-leg propagator style overrides
-- `central=...`
-  central text such as `G^{(2)}`, `G^{(4)}`, `\Gamma^{(4)}`
-
-### Appearance keys
-
-- `line=plain`
-  line style passed to `tikz-feynhand`
-- `propagator-arrow-size=8pt`
-  global size for propagator arrowheads on styles that carry arrows
-- `propagator-arrow-sizes={...}`
-  per-leg propagator arrowhead sizes
-- `scalar-arrow-direction=in`
-  default direction for `scalarpolarized` and `spol`
-- `scalar-arrow-position=0.08`
-  position of the open scalar arrowhead along the leg, measured from the external endpoint
-- `anti-scalar-arrow-direction=out`
-  default direction for `antiscalarpolarized` and `antspol`
-- `anti-scalar-arrow-position=0.08`
-  position of the anti-scalar open arrowhead along the leg
-- `blob=true` or `blob=false`
-  show or hide the central blob
-- `blob-style=blob`
-  blob style, such as `blob`, `blobring`, `blobgray`
-- `center-vertex=true` or `center-vertex=false`
-  show or hide a visible central vertex marker
-- `center-vertex-style=dot`
-  central vertex marker style
-- `external-vertices=true` or `external-vertices=false`
-  show or hide visible endpoint vertices
-- `external-vertex-style=dot`
-  external vertex marker style
-- `vertices=true` or `vertices=false`
-  convenience switch for both center and external visible vertices
-- `vertex-style=dot`
-  convenience style setter for both center and external visible vertices
-- `show-momenta=true` or `show-momenta=false`
-  show or hide momentum arrows and labels
-- `scale=1`
-  scale the whole diagram
-
-### Sunset-specific keys
-
-`SunsetDiagram` applies its own local defaults before reading your options. The main ones are:
-
-- `scale=1.2`
-- `field=`
-- `sunset-left-line=sca`
-- `sunset-right-line=sca`
-- `sunset-inner-span=1`
-- `sunset-outer-span=1.6`
-- `sunset-central-label=\hspace{1mm}`
-- `sunset-momentum-layout=balanced`
-- `sunset-index-layout=balanced`
-
-- `sunset-external-momentum=p`
-  sets both external momentum labels at once
-- `sunset-left-momentum=...`
-  left external momentum label
-- `sunset-right-momentum=...`
-  right external momentum label
-- `sunset-top-momentum=...`
-  momentum label on the top arc
-- `sunset-middle-momentum=...`
-  momentum label on the middle bridge line
-- `sunset-bottom-momentum=...`
-  momentum label on the bottom arc
-- `sunset-left-line=...`
-  line style for the left external segment
-- `sunset-middle-line=...`
-  line style for the central bridge segment
-- `sunset-right-line=...`
-  line style for the right external segment
-- `sunset-top-line=...`
-  line style for the top arc
-- `sunset-bottom-line=...`
-  line style for the bottom arc
-- `sunset-internal-vertices=true` or `sunset-internal-vertices=false`
-  show or hide the two interaction vertices
-- `sunset-internal-vertex-style=dot`
-  style for the two internal sunset vertices
-- `sunset-inner-span=1`
-  half-distance between the two internal vertices
-- `sunset-outer-span=1.6`
-  distance from each internal vertex to its external endpoint
-- `sunset-loop-looseness=1.35`
-  controls how large the top and bottom arcs are
-- `sunset-central-label=\hspace{1mm}`
-  default central label when `central=...` is not set explicitly
-- `sunset-central-label-yshift=-24pt`
-  moves the central sunset label vertically
-- `sunset-external-arrow-start=0.22`
-- `sunset-external-arrow-end=0.78`
-  choose how much of each external leg is covered by the momentum arrow
-- `sunset-external-arrow-yshift=10pt`
-  vertical offset for both external momentum arrows
-- `sunset-loop-arrow-start=0.16`
-- `sunset-loop-arrow-end=0.84`
-  choose how much of each loop arc is covered by the top and bottom momentum arrows
-- `sunset-top-arrow-yshift=22pt`
-- `sunset-bottom-arrow-yshift=-15pt`
-  vertical offsets for the loop momentum arrows
-  these are literal signed TikZ-style offsets: positive is up, negative is down
-- `sunset-middle-arrow-start=0.24`
-- `sunset-middle-arrow-end=0.76`
-  choose how much of the bridge line is covered by the middle momentum arrow
-- `sunset-middle-arrow-yshift=12pt`
-  vertical offset for the bridge momentum arrow
-- `sunset-top-arrow-bend=18`
-- `sunset-bottom-arrow-bend=18`
-  controls the curvature of the top and bottom momentum arrows
-- `sunset-left-label-position=above`
-- `sunset-right-label-position=above`
-- `sunset-top-label-position=above`
-- `sunset-middle-label-position=below`
-- `sunset-bottom-label-position=below`
-  standard TikZ node placement for each momentum label
-- `sunset-left-label-xshift=0pt`
-- `sunset-right-label-xshift=0pt`
-- `sunset-top-label-xshift=0pt`
-- `sunset-middle-label-xshift=0pt`
-- `sunset-bottom-label-xshift=0pt`
-  horizontal nudges for the five sunset momentum labels
-- `sunset-left-label-yshift=0pt`
-- `sunset-right-label-yshift=0pt`
-- `sunset-top-label-yshift=27pt`
-- `sunset-middle-label-yshift=-1pt`
-- `sunset-bottom-label-yshift=-12pt`
-  vertical nudges for the five sunset momentum labels
-- `sunset-momentum-layout=legacy|compact|balanced|wide`
-  applies a preset to the top, middle, and bottom sunset momentum arrow and label shifts
-- `sunset-label-layout=...`
-  alias for `sunset-momentum-layout`
-- `sunset-index-aware-momenta=true` or `sunset-index-aware-momenta=false`
-  automatically pushes the top, middle, and bottom momentum labels away from occupied internal-index regions
-- `sunset-index-aware-momentum=...`
-  alias for `sunset-index-aware-momenta`
-- `sunset-top-label-index-clearance=7pt`
-- `sunset-middle-label-index-clearance=6pt`
-- `sunset-bottom-label-index-clearance=4pt`
-  per-line extra label clearance used when index-aware momentum adjustment is active
-- `sunset-label-index-clearance=...`
-  sets all three momentum-label clearances at once
-- `sunset-internal-indices={a,b,c}`
-  one propagator / contracted index for the top, middle, and bottom internal lines
-- `sunset-propagator-indices={a,b,c}`
-  alias for `sunset-internal-indices`
-- `sunset-left-vertex-indices={a,b,c}`
-  left-end internal-line labels for the top, middle, and bottom lines
-- `sunset-right-vertex-indices={a,b,c}`
-  right-end internal-line labels for the top, middle, and bottom lines
-- `sunset-contracted-indices={a,b,c}`
-  fills all three slots on each internal line with the same symbol
-- `sunset-top-indices={a,\alpha,b}`
-- `sunset-middle-indices={c,\beta,d}`
-- `sunset-bottom-indices={e,\gamma,f}`
-  explicit three-slot labels for one internal line: left-end, propagator, right-end
-- `sunset-top-left-index=...`
-- `sunset-top-propagator-index=...`
-- `sunset-top-right-index=...`
-- `sunset-middle-left-index=...`
-- `sunset-middle-propagator-index=...`
-- `sunset-middle-right-index=...`
-- `sunset-bottom-left-index=...`
-- `sunset-bottom-propagator-index=...`
-- `sunset-bottom-right-index=...`
-  slot-by-slot control for individual internal-line labels
-- `sunset-top-contracted-index=...`
-- `sunset-middle-contracted-index=...`
-- `sunset-bottom-contracted-index=...`
-  fills all three slots for one internal line with the same symbol
-- `sunset-index-layout=tight|balanced|wide`
-  high-level preset for internal-index slot positions and default offsets
-- `sunset-internal-index-layout=...`
-  alias for `sunset-index-layout`
-- `sunset-internal-left-slot-position=0.16`
-- `sunset-internal-propagator-slot-position=0.50`
-- `sunset-internal-right-slot-position=0.84`
-  positions of the three internal-index slots along each internal line
-- `sunset-top-end-index-position=below`
-- `sunset-middle-end-index-position=below`
-- `sunset-bottom-end-index-position=above`
-  node placement for the vertex-side internal-index slots
-- `sunset-top-internal-index-position=below`
-- `sunset-middle-internal-index-position=below`
-- `sunset-bottom-internal-index-position=above`
-  node placement for the centered propagator-index slots
-- `sunset-top-left-index-xshift=-2pt`
-- `sunset-top-right-index-xshift=2pt`
-- `sunset-middle-left-index-xshift=-2pt`
-- `sunset-middle-right-index-xshift=2pt`
-- `sunset-bottom-left-index-xshift=-2pt`
-- `sunset-bottom-right-index-xshift=2pt`
-  separate horizontal nudges for the vertex-side internal-index slots
-- `sunset-top-end-index-yshift=-1pt`
-- `sunset-middle-end-index-yshift=-4pt`
-- `sunset-bottom-end-index-yshift=1pt`
-  shared vertical nudges for the vertex-side internal-index slots
-- `sunset-top-internal-index-xshift=0pt`
-- `sunset-middle-internal-index-xshift=0pt`
-- `sunset-bottom-internal-index-xshift=0pt`
-- `sunset-top-internal-index-yshift=-2pt`
-- `sunset-middle-internal-index-yshift=-6pt`
-- `sunset-bottom-internal-index-yshift=2pt`
-  x/y nudges for the centered propagator-index slots
-- `sunset-internal-index-style=...`
-  extra TikZ node styling for all internal indices, for example `scale=0.9`
-- `sunset-internal-index-size=normal|script|scriptscript`
-  high-level size selector for all internal indices at once
-- `sunset-vertex-index-size=normal|script|scriptscript`
-  high-level size selector for the vertex-side index slots; the default is `scriptscript`
-- `sunset-propagator-index-size=normal|script|scriptscript`
-  high-level size selector for the centered propagator-index slots; the default is `script`
-- `sunset-internal-index-math-style=\scriptstyle`
-  prepends the same math style to all internal-index labels
-- `sunset-vertex-index-math-style=\scriptscriptstyle`
-  prepends a math style only to the vertex-side index slots
-- `sunset-propagator-index-math-style=\scriptstyle`
-  prepends a math style only to the centered propagator-index slots
-- `sunset-internal-index-fill=white`
-- `sunset-internal-index-inner-sep=0.6pt`
-  background and padding controls for the internal-index nodes
-
-### Index formatting
-
-- `index-placement=sub`
-- `index-placement=sup`
-- `index-placement=none`
-
-## Using TikZ-FeynHand Styles
-
-The `line` key is passed directly to `tikz-feynhand`, so you can use its propagator styles, for example:
-
-- `plain`
-- `fer`
-- `antfer`
-- `sca`
-- `pho`
-- `glu`
-- `bos`
-- `scalarpolarized`
-- `antiscalarpolarized`
-- `scalarpolarizedin`
-- `scalarpolarizedout`
-- `antiscalarpolarizedin`
-- `antiscalarpolarizedout`
-
-Example:
-
-```tex
-\TwoPointCorr[
-  line=fer,
-  mode=p,
-  leg-labels={\psi_i,\bar\psi_j}
-]
-```
-
-`scalarpolarized` is defined in this package as:
-
-- dashed scalar line
-- transparent / open arrowhead
-- arrowhead placed at the outer end of the leg rather than at mid-leg
-- arrow tip points toward the central vertex
-- compatible with `propagator-arrow-size` and `propagator-arrow-sizes`
-
-The defaults are:
-
-- `scalarpolarized` / `spol`: tip points inward
-- `antiscalarpolarized` / `antspol`: tip points outward
-
-Additional fixed-direction aliases are available:
-
-- `spolin`, `spolout`
-- `antspolin`, `antspolout`
-- `scalarpolarizedin`, `scalarpolarizedout`
-- `antiscalarpolarizedin`, `antiscalarpolarizedout`
-
-You can also change the default behavior globally or per diagram:
-
-```tex
-\FourPointCorr[
-  scalar-arrow-direction=out,
-  scalar-arrow-position=0.15,
-  anti-scalar-arrow-direction=in,
-  anti-scalar-arrow-position=0.12
-]
-```
-
-Allowed values for the direction keys are:
-
-- `in`
-- `out`
-- `none`
-
-## Global Defaults
-
-If you want to set a default style once and reuse it, use:
-
-```tex
-\corrset{
-  mode=q,
-  field=\phi,
-  line=sca
-}
-```
-
-Then later:
+Per-line triplets:
 
 ```tex
 \[
-  \TwoPointCorr[indices={\mu,\nu},central=G^{(2)}]
+  \SunsetDiagram[
+    sunset-top-indices={a,\alpha,b},
+    sunset-middle-indices={c,\beta,d},
+    sunset-bottom-indices={e,\gamma,f}
+  ]
 \]
 ```
 
-The local options passed to `\TwoPointCorr[...]` or `\FourPointCorr[...]` override the defaults from `\corrset`.
+Helpful sunset layout controls:
 
-## Limitations
+- `sunset-momentum-layout=legacy|compact|balanced|wide`
+- `sunset-index-layout=tight|balanced|wide`
+- `sunset-index-aware-momenta=true|false`
+- `sunset-top-label-index-clearance=...`
+- `sunset-middle-label-index-clearance=...`
+- `sunset-bottom-label-index-clearance=...`
 
-This package currently draws one fixed 2-point layout and one fixed 4-point layout:
+#### Paste-ready sunset index defaults
 
-- the 2-point diagram is a left-right correlator through a central point
-- the 4-point diagram is a symmetric 4-leg object centered on one blob / vertex
+Safe reset for sunset indices:
 
-It does not yet provide:
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-indices={a,\alpha,b},
+    sunset-middle-indices={c,\beta,d},
+    sunset-bottom-indices={e,\gamma,f},
+    sunset-index-layout=balanced,
+    sunset-vertex-index-size=scriptscript,
+    sunset-propagator-index-size=script
+  ]
+\]
+```
 
-- distinct `s`, `t`, `u` channel templates
-- loop topologies
-- arbitrary manual graph construction
-- arbitrary per-leg momentum placement geometry beyond the built-in layouts
+Current defaults behind that reset:
 
-For those cases, it is better to drop down to raw `tikz-feynhand` or define additional macros on top of this package.
+- `sunset-index-layout=balanced`
+- `sunset-vertex-index-size=scriptscript`
+- `sunset-propagator-index-size=script`
 
-## Files
+What the sunset index presets actually do:
 
-- [correlator-diagrams.sty](/Users/aeaconnelly/Documents/LatexCode/correlator-diagrams.sty): the package
-- [example.tex](/Users/aeaconnelly/Documents/LatexCode/example.tex): demo source
-- [example.pdf](/Users/aeaconnelly/Documents/LatexCode/example.pdf): compiled demo
+- `tight`
+  Top and bottom slots are `0.18`, `0.50`, `0.82`
+  Middle slots are `0.22`, `0.50`, `0.78`
+  This pulls endpoint indices inward toward the propagator index.
+
+- `balanced`
+  Top and bottom slots are `0.10`, `0.50`, `0.90`
+  Middle slots are `0.12`, `0.50`, `0.88`
+  This is the default.
+
+- `wide`
+  Top and bottom slots are `0.06`, `0.50`, `0.94`
+  Middle slots are `0.08`, `0.50`, `0.92`
+  This spreads the endpoint indices outward and opens the middle.
+
+#### Sunset index fix-it recipes
+
+If the propagator index is colliding with the left and right vertex-side indices:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-indices={a,\alpha,b},
+    sunset-middle-indices={c,\beta,d},
+    sunset-bottom-indices={e,\gamma,f},
+    sunset-index-layout=wide
+  ]
+\]
+```
+
+If the indices look too spread out and you want them closer to the propagator:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-indices={a,\alpha,b},
+    sunset-middle-indices={c,\beta,d},
+    sunset-bottom-indices={e,\gamma,f},
+    sunset-index-layout=tight
+  ]
+\]
+```
+
+If the propagator indices are too big:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-indices={a,\alpha,b},
+    sunset-middle-indices={c,\beta,d},
+    sunset-bottom-indices={e,\gamma,f},
+    sunset-propagator-index-size=scriptscript
+  ]
+\]
+```
+
+If the vertex-side indices are too tiny:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-indices={a,\alpha,b},
+    sunset-middle-indices={c,\beta,d},
+    sunset-bottom-indices={e,\gamma,f},
+    sunset-vertex-index-size=script
+  ]
+\]
+```
+
+If the middle propagator index is too close to the middle line and you want to pull it farther away:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-middle-propagator-index=\beta,
+    sunset-middle-internal-index-yshift=-8pt
+  ]
+\]
+```
+
+Why this works:
+
+- the default balanced value is `-6pt`
+- changing it to `-8pt` pushes the middle propagator index farther downward, away from the line
+
+If the top endpoint indices need more room near the top arc:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-top-left-index=a,
+    sunset-top-propagator-index=\alpha,
+    sunset-top-right-index=b,
+    sunset-top-left-slot-position=0.06,
+    sunset-top-right-slot-position=0.94
+  ]
+\]
+```
+
+If you want to spread all left and right endpoint indices outward at once:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-internal-left-slot-position=0.06,
+    sunset-internal-right-slot-position=0.94
+  ]
+\]
+```
+
+If the bottom propagator index is colliding with the bottom label area:
+
+```tex
+\[
+  \SunsetDiagram[
+    sunset-bottom-propagator-index=\gamma,
+    sunset-bottom-internal-index-yshift=4pt,
+    sunset-bottom-label-index-clearance=8pt
+  ]
+\]
+```
+
+Why this works:
+
+- the propagator index is lifted farther away from the bottom line
+- the bottom momentum label is also told to keep more distance from indices
+
+## Explicit Tree-Level Channel Topologies
+
+The one-loop channel bubbles are the default `s/t/u` story.
+
+If you specifically want the tree-level exchange diagrams, use:
+
+```tex
+\STreeChannelCorr[...]
+\TTreeChannelCorr[...]
+\UTreeChannelCorr[...]
+```
+
+or:
+
+```tex
+\FourPointCorr[topology=s-tree,...]
+\FourPointCorr[topology=t-tree,...]
+\FourPointCorr[topology=u-tree,...]
+```
+
+Those use the legacy `channel-*` key family, for example:
+
+- `channel-momentum=...`
+- `channel-indices={start,prop,end}`
+- `channel-contracted-index=...`
+- `channel-index-layout=tight|balanced|wide`
+
+## Which Example File To Open
+
+- `example.tex`: broad package tour
+- `channel-topology-regression.tex`: one-loop `s/t/u` channel checks
+- `sunset-example.tex`: focused sunset examples
+- `simple-sunset.tex`: smallest standalone sunset PDF
+
+## Overleaf And Local Use
+
+For Overleaf:
+
+1. Upload your `.tex` file.
+2. Upload `correlator-diagrams.sty`.
+3. Compile with `pdfLaTeX`.
+
+For local use:
+
+1. Keep your `.tex` file in the same folder as `correlator-diagrams.sty`.
+2. Run:
+
+```sh
+pdflatex -interaction=nonstopmode -halt-on-error yourfile.tex
+```
+
+If you use `latexmk`:
+
+```sh
+latexmk -pdf yourfile.tex
+```

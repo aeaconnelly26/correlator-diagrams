@@ -70,6 +70,157 @@ Vertex-style 4-point object with upper indices and no blob:
   ]
 \]
 
+Amputated 4-point correlator with endpoint vertices:
+\[
+  \FourPointCorr[
+    external-legs=false,
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ]
+\]
+
+Amputated 4-point correlator with paired horizontal connectors:
+\[
+  \FourPointCorr[
+    external-legs=false,
+    center-vertex=false,
+    show-momenta=false,
+    contact-pairing=horizontal,
+    field=x,
+    indices={1,2,3,4},
+    central=\Gamma^{(4)}_{1122}
+  ]
+\]
+
+Amputated 4-point correlator with colored paired connectors:
+\[
+  \FourPointCorr[
+    external-legs=false,
+    center-vertex=false,
+    show-momenta=false,
+    contact-pairing=horizontal,
+    leg-styles={{fer,fieldA},{plain,fieldB},{fer,fieldA},{plain,fieldB}},
+    field=x,
+    indices={1,2,3,4},
+    central=\Gamma^{(4)}_{1122}
+  ]
+\]
+
+Amputated 4-point correlator with a global line color:
+\[
+  \FourPointCorr[
+    external-legs=false,
+    center-vertex=false,
+    show-momenta=false,
+    contact-pairing=horizontal,
+    line=fer,
+    color=fieldA,
+    field=x,
+    indices={1,2,3,4},
+    central=\Gamma^{(4)}_{1122}
+  ]
+\]
+
+Amputated 4-point correlator with crossed paired connectors:
+\[
+  \FourPointCorr[
+    external-legs=false,
+    center-vertex=false,
+    show-momenta=false,
+    contact-pairing=crossed,
+    line=fer,
+    color=fieldB,
+    field=x,
+    indices={1,2,3,4},
+    central=\Gamma^{(4)}_{1221}
+  ]
+\]
+
+Amputated \(s\)-channel loop correlator:
+\[
+  \SChannelCorr[
+    external-legs=false,
+    central=\Gamma^{(1)}_{s}
+  ]
+\]
+
+\(s\)-channel loop correlator with left-in/right-out external momenta:
+\[
+  \SChannelCorr[
+    external-momentum-flow=left-in-right-out,
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_{s}
+  ]
+\]
+
+\(t\)-channel loop correlator with left-in/right-out external momenta:
+\[
+  \TChannelCorr[
+    external-momentum-flow=left-in-right-out,
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_{t}
+  ]
+\]
+
+\(u\)-channel loop correlator with left-in/right-out external momenta:
+\[
+  \UChannelCorr[
+    external-momentum-flow=left-in-right-out,
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_{u}
+  ]
+\]
+
+\(\phi^4\) one-loop \(s\)-channel bubble with contracted internal indices:
+\[
+  \SChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_{s},
+    momentum-labels={p_1,p_2,p_3,p_4},
+    loop-channel-top-momentum=\ell,
+    loop-channel-bottom-momentum=p_1+p_2-\ell,
+    loop-channel-contracted-indices={\alpha,\beta}
+  ]
+\]
+
+\(\phi^4\) one-loop \(t\)-channel bubble with separate vertex and propagator indices:
+\[
+  \TChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_{t},
+    momentum-labels={p_1,p_2,p_3,p_4},
+    loop-channel-left-momentum=\ell,
+    loop-channel-right-momentum=q-\ell,
+    loop-channel-left-label-xshift=-8pt,
+    loop-channel-right-label-xshift=8pt,
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-index-layout=tight
+  ]
+\]
+
+\(\phi^4\) one-loop \(u\)-channel bubble with paired index lists:
+\[
+  \UChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_{u},
+    momentum-labels={p_1,p_2,p_3,p_4},
+    loop-channel-left-momentum=\ell,
+    loop-channel-right-momentum=r-\ell,
+    loop-channel-left-label-xshift=-8pt,
+    loop-channel-start-vertex-indices={i,m},
+    loop-channel-internal-indices={\rho,\sigma},
+    loop-channel-end-vertex-indices={j,n}
+  ]
+\]
+
 Sunset self-energy diagram:
 \[
   \SunsetDiagram[

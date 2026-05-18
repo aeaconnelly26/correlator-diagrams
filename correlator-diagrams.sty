@@ -9,6 +9,9 @@
 \usetikzlibrary{calc}
 \setsepchar{,}
 
+\definecolor{fieldA}{HTML}{2F5D8C} % deep muted blue
+\definecolor{fieldB}{HTML}{B85C5C} % muted rose/terracotta
+
 \makeatletter
 
 \tikzfeynhandset{
@@ -62,17 +65,24 @@
 \newif\ifcorr@blob
 \newif\ifcorr@showmomenta
 \newif\ifcorr@centervertex
+\newif\ifcorr@externallegs
 \newif\ifcorr@externalvertices
 \newif\ifcorr@sunsetinternalvertices
 \newif\ifcorr@sunsetindexawaremomenta
 
 \def\corr@line{plain}
+\def\corr@color{}
 \def\corr@legstyles{}
 \def\corr@mode{q}
 \def\corr@momentumstart{1}
 \def\corr@momentumlabels{}
 \def\corr@momentumarrowsize{6pt}
 \def\corr@momentumarrowsizes{}
+\def\corr@momentumlabelfill{none}
+\def\corr@momentumlabelinnersep{0.2pt}
+\def\corr@momentumlabelstyle{}
+\def\corr@externalleftmomentumdirection{in}
+\def\corr@externalrightmomentumdirection{in}
 \def\corr@propagatorarrowsize{}
 \def\corr@propagatorarrowsizes{}
 \def\corr@field{\phi}
@@ -140,40 +150,156 @@
 \def\corr@sunsetbottomleftindex{}
 \def\corr@sunsetbottompropindex{}
 \def\corr@sunsetbottomrightindex{}
-\def\corr@sunsetinternalleftslotpos{0.16}
-\def\corr@sunsetinternalpropslotpos{0.50}
-\def\corr@sunsetinternalrightslotpos{0.84}
-\def\corr@sunsettopendindexposition{below}
-\def\corr@sunsettopleftindexxshift{-2pt}
-\def\corr@sunsettoprightindexxshift{2pt}
-\def\corr@sunsettopendindexyshift{-1pt}
-\def\corr@sunsettopinternalindexposition{below}
+\def\corr@sunsettopleftslotpos{0.10}
+\def\corr@sunsettoppropslotpos{0.50}
+\def\corr@sunsettoprightslotpos{0.90}
+\def\corr@sunsetmiddleleftslotpos{0.12}
+\def\corr@sunsetmiddlepropslotpos{0.50}
+\def\corr@sunsetmiddlerightslotpos{0.88}
+\def\corr@sunsetbottomleftslotpos{0.10}
+\def\corr@sunsetbottompropslotpos{0.50}
+\def\corr@sunsetbottomrightslotpos{0.90}
+\def\corr@sunsettopendindexposition{south}
+\def\corr@sunsettopleftindexxshift{0pt}
+\def\corr@sunsettoprightindexxshift{0pt}
+\def\corr@sunsettopendindexyshift{2pt}
+\def\corr@sunsettopinternalindexposition{north}
 \def\corr@sunsettopinternalindexxshift{0pt}
 \def\corr@sunsettopinternalindexyshift{-2pt}
-\def\corr@sunsetmiddleendindexposition{below}
-\def\corr@sunsetmiddleleftindexxshift{-2pt}
-\def\corr@sunsetmiddlerightindexxshift{2pt}
-\def\corr@sunsetmiddleendindexyshift{-4pt}
-\def\corr@sunsetmiddleinternalindexposition{below}
+\def\corr@sunsetmiddleendindexposition{north}
+\def\corr@sunsetmiddleleftindexxshift{0pt}
+\def\corr@sunsetmiddlerightindexxshift{0pt}
+\def\corr@sunsetmiddleendindexyshift{-2pt}
+\def\corr@sunsetmiddleinternalindexposition{north}
 \def\corr@sunsetmiddleinternalindexxshift{0pt}
 \def\corr@sunsetmiddleinternalindexyshift{-6pt}
-\def\corr@sunsetbottomendindexposition{above}
-\def\corr@sunsetbottomleftindexxshift{-2pt}
-\def\corr@sunsetbottomrightindexxshift{2pt}
-\def\corr@sunsetbottomendindexyshift{1pt}
-\def\corr@sunsetbottominternalindexposition{above}
+\def\corr@sunsetbottomendindexposition{north}
+\def\corr@sunsetbottomleftindexxshift{0pt}
+\def\corr@sunsetbottomrightindexxshift{0pt}
+\def\corr@sunsetbottomendindexyshift{-2pt}
+\def\corr@sunsetbottominternalindexposition{south}
 \def\corr@sunsetbottominternalindexxshift{0pt}
 \def\corr@sunsetbottominternalindexyshift{2pt}
 \def\corr@sunsetinternalindexstyle{}
 \def\corr@sunsetinternalindexmathstyle{\scriptstyle}
 \def\corr@sunsetvertexindexmathstyle{\scriptscriptstyle}
 \def\corr@sunsetpropagatorindexmathstyle{\scriptstyle}
-\def\corr@sunsetinternalindexfill{white}
-\def\corr@sunsetinternalindexinnersep{0.6pt}
+\def\corr@sunsetinternalindexfill{none}
+\def\corr@sunsetinternalindexinnersep{0.4pt}
+\def\corr@fourpointtopology{contact}
+\def\corr@contactpairing{central}
+\def\corr@fourpointxspan{1.95}
+\def\corr@fourpointyspan{1.35}
+\def\corr@channelvertexxspan{0.78}
+\def\corr@channelvertexyspan{0.92}
+\def\corr@channelinternalline{}
+\def\corr@channelmomentum{}
+\def\corr@channelmomstart{0.24}
+\def\corr@channelmomend{0.76}
+\def\corr@channelmomdist{auto}
+\def\corr@channelmomangle{auto}
+\def\corr@channelmomlabelposition{auto}
+\def\corr@channelmomlabelxshift{0pt}
+\def\corr@channelmomlabelyshift{auto}
+\def\corr@channelcentrallabelyshift{auto}
+\def\corr@channelstartindex{}
+\def\corr@channelpropindex{}
+\def\corr@channelendindex{}
+\def\corr@channelstartslotpos{0.14}
+\def\corr@channelpropslotpos{0.50}
+\def\corr@channelendslotpos{0.86}
+\def\corr@channelstartindexposition{auto}
+\def\corr@channelendindexposition{auto}
+\def\corr@channelstartindexxshift{auto}
+\def\corr@channelstartindexyshift{auto}
+\def\corr@channelendindexxshift{auto}
+\def\corr@channelendindexyshift{auto}
+\def\corr@channelinternalindexposition{auto}
+\def\corr@channelinternalindexxshift{auto}
+\def\corr@channelinternalindexyshift{auto}
+\def\corr@channelinternalindexstyle{}
+\def\corr@channelvertexindexmathstyle{\scriptscriptstyle}
+\def\corr@channelpropagatorindexmathstyle{\scriptstyle}
+\def\corr@channelinternalindexfill{none}
+\def\corr@channelinternalindexinnersep{0.4pt}
+\def\corr@channelindexlayout{balanced}
+\def\corr@loopchannelvertexxspan{0.90}
+\def\corr@loopchannelvertexyspan{1.08}
+\def\corr@loopchannellooplooseness{1.24}
+\def\corr@loopchannelaline{sca}
+\def\corr@loopchannelbline{sca}
+\def\corr@loopchannelamomentum{}
+\def\corr@loopchannelbmomentum{}
+\def\corr@loopchanneladir{forward}
+\def\corr@loopchannelbdir{forward}
+\def\corr@loopchannelaarrowstart{0.28}
+\def\corr@loopchannelaarrowend{0.72}
+\def\corr@loopchannelaarrowxshift{auto}
+\def\corr@loopchannelaarrowyshift{auto}
+\def\corr@loopchannelaarrowlooseness{0.82}
+\def\corr@loopchannelbarrowstart{0.28}
+\def\corr@loopchannelbarrowend{0.72}
+\def\corr@loopchannelbarrowxshift{auto}
+\def\corr@loopchannelbarrowyshift{auto}
+\def\corr@loopchannelbarrowlooseness{0.82}
+\def\corr@loopchannelalabelposition{auto}
+\def\corr@loopchannelalabelxshift{0pt}
+\def\corr@loopchannelalabelyshift{auto}
+\def\corr@loopchannelalabeldistance{auto}
+\def\corr@loopchannelalabelfraction{0.50}
+\def\corr@loopchannelblabelposition{auto}
+\def\corr@loopchannelblabelxshift{0pt}
+\def\corr@loopchannelblabelyshift{auto}
+\def\corr@loopchannelblabeldistance{auto}
+\def\corr@loopchannelblabelfraction{0.50}
+\def\corr@loopchannelexternalmomstart{auto}
+\def\corr@loopchannelexternalmomend{auto}
+\def\corr@loopchannelexternalmomlabelfrac{auto}
+\def\corr@loopchannelcrossedexternalmomstart{auto}
+\def\corr@loopchannelcrossedexternalmomend{auto}
+\def\corr@loopchannelcrossedexternalmomlabelfrac{auto}
+\def\corr@loopchannelcentrallabelyshift{auto}
+\def\corr@loopchannelastartindex{}
+\def\corr@loopchannelapropindex{}
+\def\corr@loopchannelaendindex{}
+\def\corr@loopchannelbstartindex{}
+\def\corr@loopchannelbpropindex{}
+\def\corr@loopchannelbendindex{}
+\def\corr@loopchannelastartslotpos{0.10}
+\def\corr@loopchannelapropslotpos{0.50}
+\def\corr@loopchannelaendslotpos{0.90}
+\def\corr@loopchannelbstartslotpos{0.10}
+\def\corr@loopchannelbpropslotpos{0.50}
+\def\corr@loopchannelbendslotpos{0.90}
+\def\corr@loopchannelastartindexposition{auto}
+\def\corr@loopchannelaendindexposition{auto}
+\def\corr@loopchannelastartindexxshift{0pt}
+\def\corr@loopchannelastartindexyshift{auto}
+\def\corr@loopchannelaendindexxshift{0pt}
+\def\corr@loopchannelaendindexyshift{auto}
+\def\corr@loopchannelbstartindexposition{auto}
+\def\corr@loopchannelainternalindexposition{auto}
+\def\corr@loopchannelainternalindexxshift{0pt}
+\def\corr@loopchannelainternalindexyshift{auto}
+\def\corr@loopchannelbendindexposition{auto}
+\def\corr@loopchannelbstartindexxshift{0pt}
+\def\corr@loopchannelbstartindexyshift{auto}
+\def\corr@loopchannelbendindexxshift{0pt}
+\def\corr@loopchannelbendindexyshift{auto}
+\def\corr@loopchannelbinternalindexposition{auto}
+\def\corr@loopchannelbinternalindexxshift{0pt}
+\def\corr@loopchannelbinternalindexyshift{auto}
+\def\corr@loopchannelinternalindexstyle{}
+\def\corr@loopchannelvertexindexmathstyle{\scriptscriptstyle}
+\def\corr@loopchannelpropagatorindexmathstyle{\scriptstyle}
+\def\corr@loopchannelinternalindexfill{none}
+\def\corr@loopchannelinternalindexinnersep{0.4pt}
+\def\corr@loopchannelindexlayout{balanced}
 \corr@blobtrue
 \def\corr@blobstyle{blob}
 \corr@showmomentatrue
 \corr@centervertextrue
+\corr@externallegstrue
 \corr@externalverticesfalse
 \corr@sunsetinternalverticestrue
 \corr@sunsetindexawaremomentatrue
@@ -184,6 +310,33 @@
 \def\corr@indexplacement{sub}
 \def\corr@sunsetmomentumlayout{balanced}
 \def\corr@sunsetindexlayout{balanced}
+
+\newcommand{\corr@ifstringeq}[4]{%
+  \edef\corr@stringtmpa{#1}%
+  \def\corr@stringtmpb{#2}%
+  \ifx\corr@stringtmpa\corr@stringtmpb
+    #3%
+  \else
+    #4%
+  \fi
+}
+
+\newcommand{\corr@ifexternallegs}[1]{%
+  \ifcorr@externallegs
+    #1%
+  \fi
+}
+
+\newcommand{\corr@ifshowexternalvertices}[1]{%
+  \ifcorr@externalvertices
+    #1%
+  \else
+    \ifcorr@externallegs
+    \else
+      #1%
+    \fi
+  \fi
+}
 
 \newcommand{\corr@sunsetmomentumlayoutlegacy}{%
   \def\corr@sunsettoparrowyshift{16pt}%
@@ -222,90 +375,350 @@
 }
 
 \newcommand{\corr@sunsetindexlayouttight}{%
-  \def\corr@sunsetinternalleftslotpos{0.13}%
-  \def\corr@sunsetinternalpropslotpos{0.50}%
-  \def\corr@sunsetinternalrightslotpos{0.87}%
-  \def\corr@sunsettopendindexyshift{-1.5pt}%
-  \def\corr@sunsettopinternalindexyshift{-2.5pt}%
-  \def\corr@sunsetmiddleendindexyshift{-3pt}%
+  \def\corr@sunsettopleftslotpos{0.18}%
+  \def\corr@sunsettoppropslotpos{0.50}%
+  \def\corr@sunsettoprightslotpos{0.82}%
+  \def\corr@sunsetmiddleleftslotpos{0.22}%
+  \def\corr@sunsetmiddlepropslotpos{0.50}%
+  \def\corr@sunsetmiddlerightslotpos{0.78}%
+  \def\corr@sunsetbottomleftslotpos{0.18}%
+  \def\corr@sunsetbottompropslotpos{0.50}%
+  \def\corr@sunsetbottomrightslotpos{0.82}%
+  \def\corr@sunsettopendindexyshift{1.5pt}%
+  \def\corr@sunsettopinternalindexyshift{-1.5pt}%
+  \def\corr@sunsetmiddleendindexyshift{-1.5pt}%
   \def\corr@sunsetmiddleinternalindexyshift{-5pt}%
-  \def\corr@sunsetbottomendindexyshift{1.5pt}%
-  \def\corr@sunsetbottominternalindexyshift{2.5pt}%
+  \def\corr@sunsetbottomendindexyshift{-1.5pt}%
+  \def\corr@sunsetbottominternalindexyshift{1.5pt}%
 }
 
 \newcommand{\corr@sunsetindexlayoutbalanced}{%
-  \def\corr@sunsetinternalleftslotpos{0.16}%
-  \def\corr@sunsetinternalpropslotpos{0.50}%
-  \def\corr@sunsetinternalrightslotpos{0.84}%
-  \def\corr@sunsettopendindexyshift{-1pt}%
+  \def\corr@sunsettopleftslotpos{0.10}%
+  \def\corr@sunsettoppropslotpos{0.50}%
+  \def\corr@sunsettoprightslotpos{0.90}%
+  \def\corr@sunsetmiddleleftslotpos{0.12}%
+  \def\corr@sunsetmiddlepropslotpos{0.50}%
+  \def\corr@sunsetmiddlerightslotpos{0.88}%
+  \def\corr@sunsetbottomleftslotpos{0.10}%
+  \def\corr@sunsetbottompropslotpos{0.50}%
+  \def\corr@sunsetbottomrightslotpos{0.90}%
+  \def\corr@sunsettopendindexyshift{2pt}%
   \def\corr@sunsettopinternalindexyshift{-2pt}%
-  \def\corr@sunsetmiddleendindexyshift{-4pt}%
+  \def\corr@sunsetmiddleendindexyshift{-2pt}%
   \def\corr@sunsetmiddleinternalindexyshift{-6pt}%
-  \def\corr@sunsetbottomendindexyshift{1pt}%
+  \def\corr@sunsetbottomendindexyshift{-2pt}%
   \def\corr@sunsetbottominternalindexyshift{2pt}%
 }
 
 \newcommand{\corr@sunsetindexlayoutwide}{%
-  \def\corr@sunsetinternalleftslotpos{0.19}%
-  \def\corr@sunsetinternalpropslotpos{0.50}%
-  \def\corr@sunsetinternalrightslotpos{0.81}%
-  \def\corr@sunsettopendindexyshift{-2pt}%
-  \def\corr@sunsettopinternalindexyshift{-3pt}%
-  \def\corr@sunsetmiddleendindexyshift{-5pt}%
-  \def\corr@sunsetmiddleinternalindexyshift{-7pt}%
-  \def\corr@sunsetbottomendindexyshift{2pt}%
-  \def\corr@sunsetbottominternalindexyshift{3pt}%
+  \def\corr@sunsettopleftslotpos{0.06}%
+  \def\corr@sunsettoppropslotpos{0.50}%
+  \def\corr@sunsettoprightslotpos{0.94}%
+  \def\corr@sunsetmiddleleftslotpos{0.08}%
+  \def\corr@sunsetmiddlepropslotpos{0.50}%
+  \def\corr@sunsetmiddlerightslotpos{0.92}%
+  \def\corr@sunsetbottomleftslotpos{0.06}%
+  \def\corr@sunsetbottompropslotpos{0.50}%
+  \def\corr@sunsetbottomrightslotpos{0.94}%
+  \def\corr@sunsettopendindexyshift{2.5pt}%
+  \def\corr@sunsettopinternalindexyshift{-2.5pt}%
+  \def\corr@sunsetmiddleendindexyshift{-2.5pt}%
+  \def\corr@sunsetmiddleinternalindexyshift{-6.5pt}%
+  \def\corr@sunsetbottomendindexyshift{-2.5pt}%
+  \def\corr@sunsetbottominternalindexyshift{2.5pt}%
 }
 
+\newcommand{\corr@channelindexlayouttight}{%
+  \def\corr@channelstartslotpos{0.20}%
+  \def\corr@channelpropslotpos{0.50}%
+  \def\corr@channelendslotpos{0.80}%
+}
+
+\newcommand{\corr@channelindexlayoutbalanced}{%
+  \def\corr@channelstartslotpos{0.14}%
+  \def\corr@channelpropslotpos{0.50}%
+  \def\corr@channelendslotpos{0.86}%
+}
+
+\newcommand{\corr@channelindexlayoutwide}{%
+  \def\corr@channelstartslotpos{0.08}%
+  \def\corr@channelpropslotpos{0.50}%
+  \def\corr@channelendslotpos{0.92}%
+}
+
+\newcommand{\corr@loopchannelindexlayouttight}{%
+  \def\corr@loopchannelastartslotpos{0.18}%
+  \def\corr@loopchannelapropslotpos{0.50}%
+  \def\corr@loopchannelaendslotpos{0.82}%
+  \def\corr@loopchannelbstartslotpos{0.18}%
+  \def\corr@loopchannelbpropslotpos{0.50}%
+  \def\corr@loopchannelbendslotpos{0.82}%
+}
+
+\newcommand{\corr@loopchannelindexlayoutbalanced}{%
+  \def\corr@loopchannelastartslotpos{0.10}%
+  \def\corr@loopchannelapropslotpos{0.50}%
+  \def\corr@loopchannelaendslotpos{0.90}%
+  \def\corr@loopchannelbstartslotpos{0.10}%
+  \def\corr@loopchannelbpropslotpos{0.50}%
+  \def\corr@loopchannelbendslotpos{0.90}%
+}
+
+\newcommand{\corr@loopchannelindexlayoutwide}{%
+  \def\corr@loopchannelastartslotpos{0.06}%
+  \def\corr@loopchannelapropslotpos{0.50}%
+  \def\corr@loopchannelaendslotpos{0.94}%
+  \def\corr@loopchannelbstartslotpos{0.06}%
+  \def\corr@loopchannelbpropslotpos{0.50}%
+  \def\corr@loopchannelbendslotpos{0.94}%
+}
+
+\newcommand{\corr@resolveloopchannelauto}[3]{%
+  \corr@ifstringeq{#1}{auto}{#2}{#3}%
+}
+
+\newcommand{\corr@resolveloopchannellinestyle}[3]{%
+  \edef\corr@loopchanneltmpstyle{#2}%
+  \ifdefempty{\corr@loopchanneltmpstyle}{%
+    \ifnum\corr@legstyleitemslen<#1
+      \expandafter\def\csname #3\endcsname{sca}%
+    \else
+      \expandafter\edef\csname #3\endcsname{\corr@legstyleitems[#1]}%
+    \fi
+  }{}%
+}
+
+\newcommand{\corr@resolveloopchanneldefaults}{%
+  \corr@resolveloopchannellinestyle{5}{\corr@loopchannelaline}{corr@loopchannelaline}%
+  \corr@resolveloopchannellinestyle{6}{\corr@loopchannelbline}{corr@loopchannelbline}%
+  \corr@ifstringeq{\corr@fourpointtopology}{s}{%
+    \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaarrowyshift}{\def\corr@loopchannelaarrowyshift{7pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbarrowyshift}{\def\corr@loopchannelbarrowyshift{-7pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelalabelposition}{\def\corr@loopchannelalabelposition{above}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelalabelyshift}{\def\corr@loopchannelalabelyshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{8pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelblabelposition}{\def\corr@loopchannelblabelposition{below}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelblabelyshift}{\def\corr@loopchannelblabelyshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{6pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelexternalmomstart}{\def\corr@loopchannelexternalmomstart{0.33}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelexternalmomend}{\def\corr@loopchannelexternalmomend{0.67}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelexternalmomlabelfrac}{\def\corr@loopchannelexternalmomlabelfrac{0.60}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomstart}{\def\corr@loopchannelcrossedexternalmomstart{0.33}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomend}{\def\corr@loopchannelcrossedexternalmomend{0.67}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomlabelfrac}{\def\corr@loopchannelcrossedexternalmomlabelfrac{0.60}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelcentrallabelyshift}{\def\corr@loopchannelcentrallabelyshift{-40pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelastartindexposition}{\def\corr@loopchannelastartindexposition{south east}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaendindexposition}{\def\corr@loopchannelaendindexposition{south west}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelastartindexxshift}{\def\corr@loopchannelastartindexxshift{-1pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelastartindexyshift}{\def\corr@loopchannelastartindexyshift{4pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaendindexxshift}{\def\corr@loopchannelaendindexxshift{1pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaendindexyshift}{\def\corr@loopchannelaendindexyshift{4pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelainternalindexposition}{\def\corr@loopchannelainternalindexposition{north}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelainternalindexyshift}{\def\corr@loopchannelainternalindexyshift{-5pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbstartindexposition}{\def\corr@loopchannelbstartindexposition{north east}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbendindexposition}{\def\corr@loopchannelbendindexposition{north west}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbstartindexxshift}{\def\corr@loopchannelbstartindexxshift{-1pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbstartindexyshift}{\def\corr@loopchannelbstartindexyshift{-4pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbendindexxshift}{\def\corr@loopchannelbendindexxshift{1pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbendindexyshift}{\def\corr@loopchannelbendindexyshift{-4pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbinternalindexposition}{\def\corr@loopchannelbinternalindexposition{south}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbinternalindexyshift}{\def\corr@loopchannelbinternalindexyshift{5pt}}{}%
+  }{%
+    \corr@ifstringeq{\corr@fourpointtopology}{u}{%
+      \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{5pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{-5pt}}{}%
+    }{%
+      \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{-6pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{6pt}}{}%
+    }%
+    \corr@resolveloopchannelauto{\corr@loopchannelaarrowyshift}{\def\corr@loopchannelaarrowyshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbarrowyshift}{\def\corr@loopchannelbarrowyshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelalabelposition}{\def\corr@loopchannelalabelposition{left}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelalabelxshift}{\def\corr@loopchannelalabelxshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelalabelyshift}{\def\corr@loopchannelalabelyshift{0pt}}{}%
+    \corr@ifstringeq{\corr@fourpointtopology}{u}{%
+      \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{10pt}}{}%
+    }{%
+      \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{10pt}}{}%
+    }%
+    \corr@resolveloopchannelauto{\corr@loopchannelblabelposition}{\def\corr@loopchannelblabelposition{right}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelexternalmomstart}{\def\corr@loopchannelexternalmomstart{0.33}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelexternalmomend}{\def\corr@loopchannelexternalmomend{0.67}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelexternalmomlabelfrac}{\def\corr@loopchannelexternalmomlabelfrac{0.60}}{}%
+    \corr@ifstringeq{\corr@fourpointtopology}{u}{%
+      \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomstart}{\def\corr@loopchannelcrossedexternalmomstart{0.20}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomend}{\def\corr@loopchannelcrossedexternalmomend{0.78}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomlabelfrac}{\def\corr@loopchannelcrossedexternalmomlabelfrac{0.62}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabelxshift}{\def\corr@loopchannelblabelxshift{-14pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabelyshift}{\def\corr@loopchannelblabelyshift{0pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{8pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelcentrallabelyshift}{\def\corr@loopchannelcentrallabelyshift{-40pt}}{}%
+    }{%
+      \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomstart}{\def\corr@loopchannelcrossedexternalmomstart{0.33}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomend}{\def\corr@loopchannelcrossedexternalmomend{0.67}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomlabelfrac}{\def\corr@loopchannelcrossedexternalmomlabelfrac{0.60}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabelxshift}{\def\corr@loopchannelblabelxshift{0pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabelyshift}{\def\corr@loopchannelblabelyshift{0pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{10pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelcentrallabelyshift}{\def\corr@loopchannelcentrallabelyshift{-38pt}}{}%
+    }%
+    \corr@resolveloopchannelauto{\corr@loopchannelastartindexposition}{\def\corr@loopchannelastartindexposition{south east}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaendindexposition}{\def\corr@loopchannelaendindexposition{north east}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelastartindexyshift}{\def\corr@loopchannelastartindexyshift{2pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaendindexyshift}{\def\corr@loopchannelaendindexyshift{-2pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelainternalindexposition}{\def\corr@loopchannelainternalindexposition{west}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelainternalindexyshift}{\def\corr@loopchannelainternalindexyshift{0pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelastartindexxshift}{\def\corr@loopchannelastartindexxshift{-5pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaendindexxshift}{\def\corr@loopchannelaendindexxshift{-5pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelainternalindexxshift}{\def\corr@loopchannelainternalindexxshift{-3pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbstartindexposition}{\def\corr@loopchannelbstartindexposition{south west}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbendindexposition}{\def\corr@loopchannelbendindexposition{north west}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbstartindexyshift}{\def\corr@loopchannelbstartindexyshift{2pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbendindexyshift}{\def\corr@loopchannelbendindexyshift{-2pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbinternalindexposition}{\def\corr@loopchannelbinternalindexposition{east}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbinternalindexyshift}{\def\corr@loopchannelbinternalindexyshift{0pt}}{}%
+    \corr@ifstringeq{\corr@fourpointtopology}{u}{%
+      \corr@resolveloopchannelauto{\corr@loopchannelbstartindexxshift}{\def\corr@loopchannelbstartindexxshift{1pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbendindexxshift}{\def\corr@loopchannelbendindexxshift{1pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbinternalindexxshift}{\def\corr@loopchannelbinternalindexxshift{0pt}}{}%
+    }{%
+      \corr@resolveloopchannelauto{\corr@loopchannelbstartindexxshift}{\def\corr@loopchannelbstartindexxshift{5pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbendindexxshift}{\def\corr@loopchannelbendindexxshift{5pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbinternalindexxshift}{\def\corr@loopchannelbinternalindexxshift{3pt}}{}%
+    }%
+  }%
+}
+
+\newcommand{\corr@resolvechannelauto}[3]{%
+  \corr@ifstringeq{#1}{auto}{#2}{#3}%
+}
+
+\newcommand{\corr@resolvechanneldefaults}{%
+  \corr@ifstringeq{\corr@fourpointtopology}{s}{%
+    \corr@resolvechannelauto{\corr@channelmomdist}{\def\corr@channelmomdist{10pt}}{}%
+    \corr@resolvechannelauto{\corr@channelmomangle}{\def\corr@channelmomangle{90}}{}%
+    \corr@resolvechannelauto{\corr@channelmomlabelposition}{\def\corr@channelmomlabelposition{above}}{}%
+    \corr@resolvechannelauto{\corr@channelmomlabelyshift}{\def\corr@channelmomlabelyshift{7pt}}{}%
+    \corr@resolvechannelauto{\corr@channelcentrallabelyshift}{\def\corr@channelcentrallabelyshift{-15pt}}{}%
+    \corr@resolvechannelauto{\corr@channelstartindexposition}{\def\corr@channelstartindexposition{north}}{}%
+    \corr@resolvechannelauto{\corr@channelendindexposition}{\def\corr@channelendindexposition{north}}{}%
+    \corr@resolvechannelauto{\corr@channelstartindexyshift}{\def\corr@channelstartindexyshift{-2pt}}{}%
+    \corr@resolvechannelauto{\corr@channelendindexyshift}{\def\corr@channelendindexyshift{-2pt}}{}%
+    \corr@resolvechannelauto{\corr@channelinternalindexposition}{\def\corr@channelinternalindexposition{north}}{}%
+    \corr@resolvechannelauto{\corr@channelstartindexxshift}{\def\corr@channelstartindexxshift{0pt}}{}%
+    \corr@resolvechannelauto{\corr@channelendindexxshift}{\def\corr@channelendindexxshift{0pt}}{}%
+    \corr@resolvechannelauto{\corr@channelinternalindexxshift}{\def\corr@channelinternalindexxshift{0pt}}{}%
+    \corr@resolvechannelauto{\corr@channelinternalindexyshift}{\def\corr@channelinternalindexyshift{-5pt}}{}%
+  }{%
+    \corr@resolvechannelauto{\corr@channelmomdist}{\def\corr@channelmomdist{12pt}}{}%
+    \corr@resolvechannelauto{\corr@channelmomangle}{\def\corr@channelmomangle{0}}{}%
+    \corr@resolvechannelauto{\corr@channelmomlabelposition}{\def\corr@channelmomlabelposition{right}}{}%
+    \corr@resolvechannelauto{\corr@channelmomlabelyshift}{\def\corr@channelmomlabelyshift{0pt}}{}%
+    \corr@resolvechannelauto{\corr@channelcentrallabelyshift}{\def\corr@channelcentrallabelyshift{-17pt}}{}%
+    \corr@resolvechannelauto{\corr@channelstartindexposition}{\def\corr@channelstartindexposition{west}}{}%
+    \corr@resolvechannelauto{\corr@channelendindexposition}{\def\corr@channelendindexposition{west}}{}%
+    \corr@resolvechannelauto{\corr@channelstartindexyshift}{\def\corr@channelstartindexyshift{0pt}}{}%
+    \corr@resolvechannelauto{\corr@channelendindexyshift}{\def\corr@channelendindexyshift{0pt}}{}%
+    \corr@resolvechannelauto{\corr@channelinternalindexposition}{\def\corr@channelinternalindexposition{west}}{}%
+    \corr@resolvechannelauto{\corr@channelinternalindexyshift}{\def\corr@channelinternalindexyshift{0pt}}{}%
+    \corr@resolvechannelauto{\corr@channelstartindexxshift}{\def\corr@channelstartindexxshift{2pt}}{}%
+    \corr@resolvechannelauto{\corr@channelendindexxshift}{\def\corr@channelendindexxshift{2pt}}{}%
+    \corr@resolvechannelauto{\corr@channelinternalindexxshift}{\def\corr@channelinternalindexxshift{4pt}}{}%
+  }%
+}
+
+\def\corr@sunset@stop{\corr@sunset@stop}
+
 \newcommand{\corr@setsunsettriplet}[2]{%
-  \expandafter\def\csname corr@sunset#1leftindex\endcsname{}%
-  \expandafter\def\csname corr@sunset#1propindex\endcsname{}%
-  \expandafter\def\csname corr@sunset#1rightindex\endcsname{}%
-  \readlist*\corr@sunsettriplettmp{#2}%
-  \ifnum\corr@sunsettriplettmplen>0
-    \expandafter\def\csname corr@sunset#1leftindex\endcsname{\corr@sunsettriplettmp[1]}%
-  \fi
-  \ifnum\corr@sunsettriplettmplen>1
-    \expandafter\def\csname corr@sunset#1propindex\endcsname{\corr@sunsettriplettmp[2]}%
-  \fi
-  \ifnum\corr@sunsettriplettmplen>2
-    \expandafter\def\csname corr@sunset#1rightindex\endcsname{\corr@sunsettriplettmp[3]}%
-  \fi
+  \expandafter\corr@@setsunsettriplet\expandafter{#1}#2,,,\corr@sunset@stop
+}
+
+\def\corr@@setsunsettriplet#1#2,#3,#4,#5\corr@sunset@stop{%
+  \expandafter\def\csname corr@sunset#1leftindex\endcsname{#2}%
+  \expandafter\def\csname corr@sunset#1propindex\endcsname{#3}%
+  \expandafter\def\csname corr@sunset#1rightindex\endcsname{#4}%
 }
 
 \newcommand{\corr@setsunsetslotlist}[2]{%
-  \expandafter\def\csname corr@sunsettop#1index\endcsname{}%
-  \expandafter\def\csname corr@sunsetmiddle#1index\endcsname{}%
-  \expandafter\def\csname corr@sunsetbottom#1index\endcsname{}%
-  \readlist*\corr@sunsetslottmp{#2}%
-  \ifnum\corr@sunsetslottmplen>0
-    \expandafter\def\csname corr@sunsettop#1index\endcsname{\corr@sunsetslottmp[1]}%
-  \fi
-  \ifnum\corr@sunsetslottmplen>1
-    \expandafter\def\csname corr@sunsetmiddle#1index\endcsname{\corr@sunsetslottmp[2]}%
-  \fi
-  \ifnum\corr@sunsetslottmplen>2
-    \expandafter\def\csname corr@sunsetbottom#1index\endcsname{\corr@sunsetslottmp[3]}%
-  \fi
+  \expandafter\corr@@setsunsetslotlist\expandafter{#1}#2,,,\corr@sunset@stop
+}
+
+\def\corr@@setsunsetslotlist#1#2,#3,#4,#5\corr@sunset@stop{%
+  \expandafter\def\csname corr@sunsettop#1index\endcsname{#2}%
+  \expandafter\def\csname corr@sunsetmiddle#1index\endcsname{#3}%
+  \expandafter\def\csname corr@sunsetbottom#1index\endcsname{#4}%
 }
 
 \newcommand{\corr@setsunsetcontractedindex}[2]{%
-  \expandafter\def\csname corr@sunset#1leftindex\endcsname{#2}%
+  \expandafter\def\csname corr@sunset#1leftindex\endcsname{}%
   \expandafter\def\csname corr@sunset#1propindex\endcsname{#2}%
-  \expandafter\def\csname corr@sunset#1rightindex\endcsname{#2}%
+  \expandafter\def\csname corr@sunset#1rightindex\endcsname{}%
 }
 
 \newcommand{\corr@setsunsetcontractedlist}[1]{%
-  \readlist*\corr@sunsetcontracttmp{#1}%
-  \ifnum\corr@sunsetcontracttmplen>0
-    \corr@setsunsetcontractedindex{top}{\corr@sunsetcontracttmp[1]}%
-  \fi
-  \ifnum\corr@sunsetcontracttmplen>1
-    \corr@setsunsetcontractedindex{middle}{\corr@sunsetcontracttmp[2]}%
-  \fi
-  \ifnum\corr@sunsetcontracttmplen>2
-    \corr@setsunsetcontractedindex{bottom}{\corr@sunsetcontracttmp[3]}%
-  \fi
+  \corr@@setsunsetcontractedlist#1,,,\corr@sunset@stop
+}
+
+\def\corr@@setsunsetcontractedlist#1,#2,#3,#4\corr@sunset@stop{%
+  \corr@setsunsetcontractedindex{top}{#1}%
+  \corr@setsunsetcontractedindex{middle}{#2}%
+  \corr@setsunsetcontractedindex{bottom}{#3}%
+}
+
+\def\corr@channel@stop{\corr@channel@stop}
+
+\newcommand{\corr@setchanneltriplet}[1]{%
+  \expandafter\corr@@setchanneltriplet#1,,,\corr@channel@stop
+}
+
+\def\corr@@setchanneltriplet#1,#2,#3,#4\corr@channel@stop{%
+  \def\corr@channelstartindex{#1}%
+  \def\corr@channelpropindex{#2}%
+  \def\corr@channelendindex{#3}%
+}
+
+\newcommand{\corr@setchannelcontractedindex}[1]{%
+  \def\corr@channelstartindex{}%
+  \def\corr@channelpropindex{#1}%
+  \def\corr@channelendindex{}%
+}
+
+\def\corr@loopchannel@stop{\corr@loopchannel@stop}
+
+\newcommand{\corr@setloopchannelpair}[2]{%
+  \expandafter\corr@@setloopchannelpair\expandafter{#1}#2,,\corr@loopchannel@stop
+}
+
+\def\corr@@setloopchannelpair#1#2,#3,#4\corr@loopchannel@stop{%
+  \expandafter\def\csname corr@loopchannela#1\endcsname{#2}%
+  \expandafter\def\csname corr@loopchannelb#1\endcsname{#3}%
+}
+
+\newcommand{\corr@setloopchanneltriplet}[2]{%
+  \expandafter\corr@@setloopchanneltriplet\expandafter{#1}#2,,,\corr@loopchannel@stop
+}
+
+\def\corr@@setloopchanneltriplet#1#2,#3,#4,#5\corr@loopchannel@stop{%
+  \expandafter\def\csname corr@loopchannel#1startindex\endcsname{#2}%
+  \expandafter\def\csname corr@loopchannel#1propindex\endcsname{#3}%
+  \expandafter\def\csname corr@loopchannel#1endindex\endcsname{#4}%
+}
+
+\newcommand{\corr@setloopchannelcontractedindex}[2]{%
+  \expandafter\def\csname corr@loopchannel#1startindex\endcsname{}%
+  \expandafter\def\csname corr@loopchannel#1propindex\endcsname{#2}%
+  \expandafter\def\csname corr@loopchannel#1endindex\endcsname{}%
+}
+
+\newcommand{\corr@setloopchannelcontractedlist}[1]{%
+  \corr@@setloopchannelcontractedlist#1,,\corr@loopchannel@stop
+}
+
+\def\corr@@setloopchannelcontractedlist#1,#2,#3\corr@loopchannel@stop{%
+  \corr@setloopchannelcontractedindex{a}{#1}%
+  \corr@setloopchannelcontractedindex{b}{#2}%
 }
 
 \newcommand{\corr@sunsetmarklinehasindices}[4]{%
@@ -348,6 +761,123 @@
       \pgfmathsetlengthmacro{\corr@sunsetbottomlabelyshiftresolved}{\corr@sunsetbottomlabelyshift - \corr@sunsetbottomlabelindexclearance}%
     \fi
   \fi
+}
+
+\newcommand{\corr@resetchanneldefaults}{%
+  \def\corr@fourpointtopology{contact}%
+  \def\corr@contactpairing{central}%
+  \def\corr@fourpointxspan{1.95}%
+  \def\corr@fourpointyspan{1.35}%
+  \def\corr@channelvertexxspan{0.78}%
+  \def\corr@channelvertexyspan{0.92}%
+  \def\corr@channelinternalline{}%
+  \def\corr@channelmomentum{}%
+  \def\corr@channelmomstart{0.24}%
+  \def\corr@channelmomend{0.76}%
+  \def\corr@channelmomdist{auto}%
+  \def\corr@channelmomangle{auto}%
+  \def\corr@channelmomlabelposition{auto}%
+  \def\corr@channelmomlabelxshift{0pt}%
+  \def\corr@channelmomlabelyshift{auto}%
+  \def\corr@channelcentrallabelyshift{auto}%
+  \def\corr@channelstartindex{}%
+  \def\corr@channelpropindex{}%
+  \def\corr@channelendindex{}%
+  \def\corr@channelstartslotpos{0.14}%
+  \def\corr@channelpropslotpos{0.50}%
+  \def\corr@channelendslotpos{0.86}%
+  \def\corr@channelstartindexposition{auto}%
+  \def\corr@channelendindexposition{auto}%
+  \def\corr@channelstartindexxshift{auto}%
+  \def\corr@channelstartindexyshift{auto}%
+  \def\corr@channelendindexxshift{auto}%
+  \def\corr@channelendindexyshift{auto}%
+  \def\corr@channelinternalindexposition{auto}%
+  \def\corr@channelinternalindexxshift{auto}%
+  \def\corr@channelinternalindexyshift{auto}%
+  \def\corr@channelinternalindexstyle{}%
+  \def\corr@channelvertexindexmathstyle{\scriptscriptstyle}%
+  \def\corr@channelpropagatorindexmathstyle{\scriptstyle}%
+  \def\corr@channelinternalindexfill{none}%
+  \def\corr@channelinternalindexinnersep{0.4pt}%
+  \def\corr@channelindexlayout{balanced}%
+  \corr@channelindexlayoutbalanced
+}
+
+\newcommand{\corr@resetloopchanneldefaults}{%
+  \def\corr@loopchannelvertexxspan{0.90}%
+  \def\corr@loopchannelvertexyspan{1.08}%
+  \def\corr@loopchannellooplooseness{1.24}%
+  \def\corr@loopchannelaline{}%
+  \def\corr@loopchannelbline{}%
+  \def\corr@loopchannelamomentum{}%
+  \def\corr@loopchannelbmomentum{}%
+  \def\corr@loopchanneladir{forward}%
+  \def\corr@loopchannelbdir{forward}%
+  \def\corr@loopchannelaarrowstart{0.36}%
+  \def\corr@loopchannelaarrowend{0.64}%
+  \def\corr@loopchannelaarrowxshift{auto}%
+  \def\corr@loopchannelaarrowyshift{auto}%
+  \def\corr@loopchannelaarrowlooseness{1.02}%
+  \def\corr@loopchannelbarrowstart{0.36}%
+  \def\corr@loopchannelbarrowend{0.64}%
+  \def\corr@loopchannelbarrowxshift{auto}%
+  \def\corr@loopchannelbarrowyshift{auto}%
+  \def\corr@loopchannelbarrowlooseness{1.02}%
+  \def\corr@loopchannelalabelposition{auto}%
+  \def\corr@loopchannelalabelxshift{0pt}%
+  \def\corr@loopchannelalabelyshift{auto}%
+  \def\corr@loopchannelalabeldistance{auto}%
+  \def\corr@loopchannelalabelfraction{0.50}%
+  \def\corr@loopchannelblabelposition{auto}%
+  \def\corr@loopchannelblabelxshift{0pt}%
+  \def\corr@loopchannelblabelyshift{auto}%
+  \def\corr@loopchannelblabeldistance{auto}%
+  \def\corr@loopchannelblabelfraction{0.50}%
+  \def\corr@loopchannelexternalmomstart{auto}%
+  \def\corr@loopchannelexternalmomend{auto}%
+  \def\corr@loopchannelexternalmomlabelfrac{auto}%
+  \def\corr@loopchannelcrossedexternalmomstart{auto}%
+  \def\corr@loopchannelcrossedexternalmomend{auto}%
+  \def\corr@loopchannelcrossedexternalmomlabelfrac{auto}%
+  \def\corr@loopchannelcentrallabelyshift{auto}%
+  \def\corr@loopchannelastartindex{}%
+  \def\corr@loopchannelapropindex{}%
+  \def\corr@loopchannelaendindex{}%
+  \def\corr@loopchannelbstartindex{}%
+  \def\corr@loopchannelbpropindex{}%
+  \def\corr@loopchannelbendindex{}%
+  \def\corr@loopchannelastartslotpos{0.10}%
+  \def\corr@loopchannelapropslotpos{0.50}%
+  \def\corr@loopchannelaendslotpos{0.90}%
+  \def\corr@loopchannelbstartslotpos{0.10}%
+  \def\corr@loopchannelbpropslotpos{0.50}%
+  \def\corr@loopchannelbendslotpos{0.90}%
+  \def\corr@loopchannelastartindexposition{auto}%
+  \def\corr@loopchannelaendindexposition{auto}%
+  \def\corr@loopchannelastartindexxshift{0pt}%
+  \def\corr@loopchannelastartindexyshift{auto}%
+  \def\corr@loopchannelaendindexxshift{0pt}%
+  \def\corr@loopchannelaendindexyshift{auto}%
+  \def\corr@loopchannelbstartindexposition{auto}%
+  \def\corr@loopchannelainternalindexposition{auto}%
+  \def\corr@loopchannelainternalindexxshift{0pt}%
+  \def\corr@loopchannelainternalindexyshift{auto}%
+  \def\corr@loopchannelbendindexposition{auto}%
+  \def\corr@loopchannelbstartindexxshift{0pt}%
+  \def\corr@loopchannelbstartindexyshift{auto}%
+  \def\corr@loopchannelbendindexxshift{0pt}%
+  \def\corr@loopchannelbendindexyshift{auto}%
+  \def\corr@loopchannelbinternalindexposition{auto}%
+  \def\corr@loopchannelbinternalindexxshift{0pt}%
+  \def\corr@loopchannelbinternalindexyshift{auto}%
+  \def\corr@loopchannelinternalindexstyle{}%
+  \def\corr@loopchannelvertexindexmathstyle{\scriptscriptstyle}%
+  \def\corr@loopchannelpropagatorindexmathstyle{\scriptstyle}%
+  \def\corr@loopchannelinternalindexfill{none}%
+  \def\corr@loopchannelinternalindexinnersep{0.4pt}%
+  \def\corr@loopchannelindexlayout{balanced}%
+  \corr@loopchannelindexlayoutbalanced
 }
 
 \newcommand{\corr@resetsunsetdefaults}{%
@@ -407,36 +937,42 @@
   \def\corr@sunsetbottomleftindex{}%
   \def\corr@sunsetbottompropindex{}%
   \def\corr@sunsetbottomrightindex{}%
-  \def\corr@sunsetinternalleftslotpos{0.16}%
-  \def\corr@sunsetinternalpropslotpos{0.50}%
-  \def\corr@sunsetinternalrightslotpos{0.84}%
-  \def\corr@sunsettopendindexposition{below}%
-  \def\corr@sunsettopleftindexxshift{-2pt}%
-  \def\corr@sunsettoprightindexxshift{2pt}%
-  \def\corr@sunsettopendindexyshift{-1pt}%
-  \def\corr@sunsettopinternalindexposition{below}%
+  \def\corr@sunsettopleftslotpos{0.10}%
+  \def\corr@sunsettoppropslotpos{0.50}%
+  \def\corr@sunsettoprightslotpos{0.90}%
+  \def\corr@sunsetmiddleleftslotpos{0.12}%
+  \def\corr@sunsetmiddlepropslotpos{0.50}%
+  \def\corr@sunsetmiddlerightslotpos{0.88}%
+  \def\corr@sunsetbottomleftslotpos{0.10}%
+  \def\corr@sunsetbottompropslotpos{0.50}%
+  \def\corr@sunsetbottomrightslotpos{0.90}%
+  \def\corr@sunsettopendindexposition{south}%
+  \def\corr@sunsettopleftindexxshift{0pt}%
+  \def\corr@sunsettoprightindexxshift{0pt}%
+  \def\corr@sunsettopendindexyshift{2pt}%
+  \def\corr@sunsettopinternalindexposition{north}%
   \def\corr@sunsettopinternalindexxshift{0pt}%
   \def\corr@sunsettopinternalindexyshift{-2pt}%
-  \def\corr@sunsetmiddleendindexposition{below}%
-  \def\corr@sunsetmiddleleftindexxshift{-2pt}%
-  \def\corr@sunsetmiddlerightindexxshift{2pt}%
-  \def\corr@sunsetmiddleendindexyshift{-4pt}%
-  \def\corr@sunsetmiddleinternalindexposition{below}%
+  \def\corr@sunsetmiddleendindexposition{north}%
+  \def\corr@sunsetmiddleleftindexxshift{0pt}%
+  \def\corr@sunsetmiddlerightindexxshift{0pt}%
+  \def\corr@sunsetmiddleendindexyshift{-2pt}%
+  \def\corr@sunsetmiddleinternalindexposition{north}%
   \def\corr@sunsetmiddleinternalindexxshift{0pt}%
-  \def\corr@sunsetmiddleinternalindexyshift{-8pt}%
-  \def\corr@sunsetbottomendindexposition{above}%
-  \def\corr@sunsetbottomleftindexxshift{-2pt}%
-  \def\corr@sunsetbottomrightindexxshift{2pt}%
-  \def\corr@sunsetbottomendindexyshift{1pt}%
-  \def\corr@sunsetbottominternalindexposition{above}%
+  \def\corr@sunsetmiddleinternalindexyshift{-6pt}%
+  \def\corr@sunsetbottomendindexposition{north}%
+  \def\corr@sunsetbottomleftindexxshift{0pt}%
+  \def\corr@sunsetbottomrightindexxshift{0pt}%
+  \def\corr@sunsetbottomendindexyshift{-2pt}%
+  \def\corr@sunsetbottominternalindexposition{south}%
   \def\corr@sunsetbottominternalindexxshift{0pt}%
   \def\corr@sunsetbottominternalindexyshift{2pt}%
   \def\corr@sunsetinternalindexstyle{}%
   \def\corr@sunsetinternalindexmathstyle{\scriptstyle}%
   \def\corr@sunsetvertexindexmathstyle{\scriptscriptstyle}%
   \def\corr@sunsetpropagatorindexmathstyle{\scriptstyle}%
-  \def\corr@sunsetinternalindexfill{white}%
-  \def\corr@sunsetinternalindexinnersep{0.6pt}%
+  \def\corr@sunsetinternalindexfill{none}%
+  \def\corr@sunsetinternalindexinnersep{0.4pt}%
   \def\corr@sunsetmomentumlayout{balanced}%
   \def\corr@sunsetindexlayout{balanced}%
   \corr@sunsetindexawaremomentatrue
@@ -445,7 +981,7 @@
 }
 
 \newcommand{\corr@configurestyles}{%
-  \ifstrequal{\corr@scalararrowdirection}{out}{%
+  \corr@ifstringeq{\corr@scalararrowdirection}{out}{%
     \tikzfeynhandset{
       every scalar polarized@@/.style={
         /tikzfeynhand/every scalar polarized base@@,
@@ -453,7 +989,7 @@
       },
     }%
   }{%
-    \ifstrequal{\corr@scalararrowdirection}{none}{%
+    \corr@ifstringeq{\corr@scalararrowdirection}{none}{%
       \tikzfeynhandset{
         every scalar polarized@@/.style={
           /tikzfeynhand/every scalar polarized base@@,
@@ -468,7 +1004,7 @@
       }%
     }%
   }%
-  \ifstrequal{\corr@antiscalararrowdirection}{out}{%
+  \corr@ifstringeq{\corr@antiscalararrowdirection}{out}{%
     \tikzfeynhandset{
       every anti scalar polarized@@/.style={
         /tikzfeynhand/every scalar polarized base@@,
@@ -476,7 +1012,7 @@
       },
     }%
   }{%
-    \ifstrequal{\corr@antiscalararrowdirection}{none}{%
+    \corr@ifstringeq{\corr@antiscalararrowdirection}{none}{%
       \tikzfeynhandset{
         every anti scalar polarized@@/.style={
           /tikzfeynhand/every scalar polarized base@@,
@@ -541,6 +1077,8 @@
   /corrdiag/.is family,
   /corrdiag,
   line/.store in=\corr@line,
+  color/.store in=\corr@color,
+  line-color/.style={color={#1}},
   leg-styles/.store in=\corr@legstyles,
   mode/.store in=\corr@mode,
   momentum/.style={mode={#1}},
@@ -549,6 +1087,32 @@
   momentum-labels/.store in=\corr@momentumlabels,
   momentum-arrow-size/.store in=\corr@momentumarrowsize,
   momentum-arrow-sizes/.store in=\corr@momentumarrowsizes,
+  momentum-label-fill/.store in=\corr@momentumlabelfill,
+  momentum-label-inner-sep/.store in=\corr@momentumlabelinnersep,
+  momentum-label-style/.store in=\corr@momentumlabelstyle,
+  external-left-momentum-direction/.store in=\corr@externalleftmomentumdirection,
+  external-right-momentum-direction/.store in=\corr@externalrightmomentumdirection,
+  left-momentum-direction/.style={external-left-momentum-direction={#1}},
+  right-momentum-direction/.style={external-right-momentum-direction={#1}},
+  external-momentum-flow/.is choice,
+  external-momentum-flow/all-in/.code={
+    \def\corr@externalleftmomentumdirection{in}%
+    \def\corr@externalrightmomentumdirection{in}%
+  },
+  external-momentum-flow/left-in-right-out/.code={
+    \def\corr@externalleftmomentumdirection{in}%
+    \def\corr@externalrightmomentumdirection{out}%
+  },
+  external-momentum-flow/left-out-right-in/.code={
+    \def\corr@externalleftmomentumdirection{out}%
+    \def\corr@externalrightmomentumdirection{in}%
+  },
+  external-momentum-flow/all-out/.code={
+    \def\corr@externalleftmomentumdirection{out}%
+    \def\corr@externalrightmomentumdirection{out}%
+  },
+  external-momentum-flow/default/.style={external-momentum-flow=all-in},
+  momentum-flow/.style={external-momentum-flow={#1}},
   propagator-arrow-size/.store in=\corr@propagatorarrowsize,
   propagator-arrow-sizes/.store in=\corr@propagatorarrowsizes,
   scalar-arrow-position/.store in=\corr@scalararrowposition,
@@ -646,28 +1210,49 @@
   sunset-top-contracted-index/.code={\corr@setsunsetcontractedindex{top}{#1}},
   sunset-middle-contracted-index/.code={\corr@setsunsetcontractedindex{middle}{#1}},
   sunset-bottom-contracted-index/.code={\corr@setsunsetcontractedindex{bottom}{#1}},
-  sunset-internal-left-slot-position/.store in=\corr@sunsetinternalleftslotpos,
-  sunset-internal-propagator-slot-position/.store in=\corr@sunsetinternalpropslotpos,
-  sunset-internal-right-slot-position/.store in=\corr@sunsetinternalrightslotpos,
-  sunset-top-end-index-position/.store in=\corr@sunsettopendindexposition,
+  sunset-internal-left-slot-position/.style={
+    sunset-top-left-slot-position={#1},
+    sunset-middle-left-slot-position={#1},
+    sunset-bottom-left-slot-position={#1}
+  },
+  sunset-internal-propagator-slot-position/.style={
+    sunset-top-propagator-slot-position={#1},
+    sunset-middle-propagator-slot-position={#1},
+    sunset-bottom-propagator-slot-position={#1}
+  },
+  sunset-internal-right-slot-position/.style={
+    sunset-top-right-slot-position={#1},
+    sunset-middle-right-slot-position={#1},
+    sunset-bottom-right-slot-position={#1}
+  },
+  sunset-top-left-slot-position/.store in=\corr@sunsettopleftslotpos,
+  sunset-top-propagator-slot-position/.store in=\corr@sunsettoppropslotpos,
+  sunset-top-right-slot-position/.store in=\corr@sunsettoprightslotpos,
+  sunset-middle-left-slot-position/.store in=\corr@sunsetmiddleleftslotpos,
+  sunset-middle-propagator-slot-position/.store in=\corr@sunsetmiddlepropslotpos,
+  sunset-middle-right-slot-position/.store in=\corr@sunsetmiddlerightslotpos,
+  sunset-bottom-left-slot-position/.store in=\corr@sunsetbottomleftslotpos,
+  sunset-bottom-propagator-slot-position/.store in=\corr@sunsetbottompropslotpos,
+  sunset-bottom-right-slot-position/.store in=\corr@sunsetbottomrightslotpos,
+  sunset-top-end-index-position/.code={\corr@storesunsetanchor{corr@sunsettopendindexposition}{#1}},
   sunset-top-left-index-xshift/.store in=\corr@sunsettopleftindexxshift,
   sunset-top-right-index-xshift/.store in=\corr@sunsettoprightindexxshift,
   sunset-top-end-index-yshift/.store in=\corr@sunsettopendindexyshift,
-  sunset-top-internal-index-position/.store in=\corr@sunsettopinternalindexposition,
+  sunset-top-internal-index-position/.code={\corr@storesunsetanchor{corr@sunsettopinternalindexposition}{#1}},
   sunset-top-internal-index-xshift/.store in=\corr@sunsettopinternalindexxshift,
   sunset-top-internal-index-yshift/.store in=\corr@sunsettopinternalindexyshift,
-  sunset-middle-end-index-position/.store in=\corr@sunsetmiddleendindexposition,
+  sunset-middle-end-index-position/.code={\corr@storesunsetanchor{corr@sunsetmiddleendindexposition}{#1}},
   sunset-middle-left-index-xshift/.store in=\corr@sunsetmiddleleftindexxshift,
   sunset-middle-right-index-xshift/.store in=\corr@sunsetmiddlerightindexxshift,
   sunset-middle-end-index-yshift/.store in=\corr@sunsetmiddleendindexyshift,
-  sunset-middle-internal-index-position/.store in=\corr@sunsetmiddleinternalindexposition,
+  sunset-middle-internal-index-position/.code={\corr@storesunsetanchor{corr@sunsetmiddleinternalindexposition}{#1}},
   sunset-middle-internal-index-xshift/.store in=\corr@sunsetmiddleinternalindexxshift,
   sunset-middle-internal-index-yshift/.store in=\corr@sunsetmiddleinternalindexyshift,
-  sunset-bottom-end-index-position/.store in=\corr@sunsetbottomendindexposition,
+  sunset-bottom-end-index-position/.code={\corr@storesunsetanchor{corr@sunsetbottomendindexposition}{#1}},
   sunset-bottom-left-index-xshift/.store in=\corr@sunsetbottomleftindexxshift,
   sunset-bottom-right-index-xshift/.store in=\corr@sunsetbottomrightindexxshift,
   sunset-bottom-end-index-yshift/.store in=\corr@sunsetbottomendindexyshift,
-  sunset-bottom-internal-index-position/.store in=\corr@sunsetbottominternalindexposition,
+  sunset-bottom-internal-index-position/.code={\corr@storesunsetanchor{corr@sunsetbottominternalindexposition}{#1}},
   sunset-bottom-internal-index-xshift/.store in=\corr@sunsetbottominternalindexxshift,
   sunset-bottom-internal-index-yshift/.store in=\corr@sunsetbottominternalindexyshift,
   sunset-internal-index-style/.store in=\corr@sunsetinternalindexstyle,
@@ -701,7 +1286,7 @@
   sunset-vertex-index-size/normal/.code={\def\corr@sunsetvertexindexmathstyle{}},
   sunset-vertex-index-size/script/.code={\def\corr@sunsetvertexindexmathstyle{\scriptstyle}},
   sunset-vertex-index-size/scriptscript/.code={\def\corr@sunsetvertexindexmathstyle{\scriptscriptstyle}},
-  sunset-vertex-index-size/default/.style={sunset-vertex-index-size=scriptscript},
+  sunset-vertex-index-size/default/.style={sunset-vertex-index-size=script},
   sunset-propagator-index-size/.is choice,
   sunset-propagator-index-size/normal/.code={\def\corr@sunsetpropagatorindexmathstyle{}},
   sunset-propagator-index-size/script/.code={\def\corr@sunsetpropagatorindexmathstyle{\scriptstyle}},
@@ -741,6 +1326,352 @@
   },
   sunset-momentum-layout/default/.style={sunset-momentum-layout=balanced},
   sunset-label-layout/.style={sunset-momentum-layout={#1}},
+  topology/.is choice,
+  topology/contact/.code={\def\corr@fourpointtopology{contact}},
+  topology/blob/.code={\def\corr@fourpointtopology{contact}},
+  topology/s/.code={\def\corr@fourpointtopology{s}},
+  topology/t/.code={\def\corr@fourpointtopology{t}},
+  topology/u/.code={\def\corr@fourpointtopology{u}},
+  topology/s-tree/.code={\def\corr@fourpointtopology{s-tree}},
+  topology/t-tree/.code={\def\corr@fourpointtopology{t-tree}},
+  topology/u-tree/.code={\def\corr@fourpointtopology{u-tree}},
+  topology/default/.style={topology=contact},
+  channel-topology/.style={topology={#1}},
+  fourpoint-topology/.style={topology={#1}},
+  contact-pairing/.is choice,
+  contact-pairing/central/.code={\def\corr@contactpairing{central}},
+  contact-pairing/horizontal/.code={\def\corr@contactpairing{horizontal}},
+  contact-pairing/vertical/.code={\def\corr@contactpairing{vertical}},
+  contact-pairing/crossed/.code={\def\corr@contactpairing{crossed}},
+  contact-pairing/diagonal/.code={\def\corr@contactpairing{crossed}},
+  contact-pairing/x/.code={\def\corr@contactpairing{crossed}},
+  contact-pairing/default/.style={contact-pairing=central},
+  contact-connection/.style={contact-pairing={#1}},
+  fourpoint-xspan/.store in=\corr@fourpointxspan,
+  fourpoint-yspan/.store in=\corr@fourpointyspan,
+  channel-vertex-xspan/.store in=\corr@channelvertexxspan,
+  channel-vertex-yspan/.store in=\corr@channelvertexyspan,
+  channel-internal-line/.store in=\corr@channelinternalline,
+  channel-line/.style={channel-internal-line={#1}},
+  channel-momentum/.store in=\corr@channelmomentum,
+  channel-internal-momentum/.style={channel-momentum={#1}},
+  channel-momentum-start/.store in=\corr@channelmomstart,
+  channel-momentum-end/.store in=\corr@channelmomend,
+  channel-momentum-distance/.store in=\corr@channelmomdist,
+  channel-momentum-angle/.store in=\corr@channelmomangle,
+  channel-momentum-label-position/.store in=\corr@channelmomlabelposition,
+  channel-momentum-label-xshift/.store in=\corr@channelmomlabelxshift,
+  channel-momentum-label-yshift/.store in=\corr@channelmomlabelyshift,
+  channel-central-label-yshift/.store in=\corr@channelcentrallabelyshift,
+  channel-indices/.code={\corr@setchanneltriplet{#1}},
+  channel-contracted-index/.code={\corr@setchannelcontractedindex{#1}},
+  channel-contracted-indices/.style={channel-contracted-index={#1}},
+  channel-start-vertex-index/.store in=\corr@channelstartindex,
+  channel-propagator-index/.store in=\corr@channelpropindex,
+  channel-end-vertex-index/.store in=\corr@channelendindex,
+  channel-left-vertex-index/.style={channel-start-vertex-index={#1}},
+  channel-right-vertex-index/.style={channel-end-vertex-index={#1}},
+  channel-top-vertex-index/.style={channel-start-vertex-index={#1}},
+  channel-bottom-vertex-index/.style={channel-end-vertex-index={#1}},
+  channel-start-slot-position/.store in=\corr@channelstartslotpos,
+  channel-propagator-slot-position/.store in=\corr@channelpropslotpos,
+  channel-end-slot-position/.store in=\corr@channelendslotpos,
+  channel-start-index-position/.code={\corr@storesunsetanchor{corr@channelstartindexposition}{#1}},
+  channel-end-index-position/.code={\corr@storesunsetanchor{corr@channelendindexposition}{#1}},
+  channel-start-index-xshift/.store in=\corr@channelstartindexxshift,
+  channel-start-index-yshift/.store in=\corr@channelstartindexyshift,
+  channel-end-index-xshift/.store in=\corr@channelendindexxshift,
+  channel-end-index-yshift/.store in=\corr@channelendindexyshift,
+  channel-internal-index-position/.code={\corr@storesunsetanchor{corr@channelinternalindexposition}{#1}},
+  channel-internal-index-xshift/.store in=\corr@channelinternalindexxshift,
+  channel-internal-index-yshift/.store in=\corr@channelinternalindexyshift,
+  channel-propagator-index-position/.style={channel-internal-index-position={#1}},
+  channel-propagator-index-xshift/.style={channel-internal-index-xshift={#1}},
+  channel-propagator-index-yshift/.style={channel-internal-index-yshift={#1}},
+  channel-index-layout/.is choice,
+  channel-index-layout/tight/.code={
+    \def\corr@channelindexlayout{tight}%
+    \corr@channelindexlayouttight
+  },
+  channel-index-layout/balanced/.code={
+    \def\corr@channelindexlayout{balanced}%
+    \corr@channelindexlayoutbalanced
+  },
+  channel-index-layout/wide/.code={
+    \def\corr@channelindexlayout{wide}%
+    \corr@channelindexlayoutwide
+  },
+  channel-index-layout/default/.style={channel-index-layout=balanced},
+  channel-internal-index-layout/.style={channel-index-layout={#1}},
+  channel-internal-index-style/.store in=\corr@channelinternalindexstyle,
+  channel-internal-index-fill/.store in=\corr@channelinternalindexfill,
+  channel-internal-index-inner-sep/.store in=\corr@channelinternalindexinnersep,
+  channel-internal-index-math-style/.code={
+    \def\corr@channelvertexindexmathstyle{#1}%
+    \def\corr@channelpropagatorindexmathstyle{#1}%
+  },
+  channel-vertex-index-math-style/.store in=\corr@channelvertexindexmathstyle,
+  channel-propagator-index-math-style/.store in=\corr@channelpropagatorindexmathstyle,
+  channel-internal-index-size/.is choice,
+  channel-internal-index-size/normal/.code={
+    \def\corr@channelvertexindexmathstyle{}%
+    \def\corr@channelpropagatorindexmathstyle{}%
+  },
+  channel-internal-index-size/script/.code={
+    \def\corr@channelvertexindexmathstyle{\scriptstyle}%
+    \def\corr@channelpropagatorindexmathstyle{\scriptstyle}%
+  },
+  channel-internal-index-size/scriptscript/.code={
+    \def\corr@channelvertexindexmathstyle{\scriptscriptstyle}%
+    \def\corr@channelpropagatorindexmathstyle{\scriptscriptstyle}%
+  },
+  channel-internal-index-size/default/.style={channel-internal-index-size=script},
+  channel-vertex-index-size/.is choice,
+  channel-vertex-index-size/normal/.code={\def\corr@channelvertexindexmathstyle{}},
+  channel-vertex-index-size/script/.code={\def\corr@channelvertexindexmathstyle{\scriptstyle}},
+  channel-vertex-index-size/scriptscript/.code={\def\corr@channelvertexindexmathstyle{\scriptscriptstyle}},
+  channel-vertex-index-size/default/.style={channel-vertex-index-size=scriptscript},
+  channel-propagator-index-size/.is choice,
+  channel-propagator-index-size/normal/.code={\def\corr@channelpropagatorindexmathstyle{}},
+  channel-propagator-index-size/script/.code={\def\corr@channelpropagatorindexmathstyle{\scriptstyle}},
+  channel-propagator-index-size/scriptscript/.code={\def\corr@channelpropagatorindexmathstyle{\scriptscriptstyle}},
+  channel-propagator-index-size/default/.style={channel-propagator-index-size=script},
+  channel-vertices/.style={center-vertex=#1},
+  channel-vertex-style/.style={center-vertex-style={#1}},
+  loop-channel-vertex-xspan/.store in=\corr@loopchannelvertexxspan,
+  loop-channel-vertex-yspan/.store in=\corr@loopchannelvertexyspan,
+  loop-channel-loop-looseness/.store in=\corr@loopchannellooplooseness,
+  loop-channel-a-line/.store in=\corr@loopchannelaline,
+  loop-channel-b-line/.store in=\corr@loopchannelbline,
+  loop-channel-top-line/.style={loop-channel-a-line={#1}},
+  loop-channel-bottom-line/.style={loop-channel-b-line={#1}},
+  loop-channel-left-line/.style={loop-channel-a-line={#1}},
+  loop-channel-right-line/.style={loop-channel-b-line={#1}},
+  loop-channel-a-momentum/.store in=\corr@loopchannelamomentum,
+  loop-channel-b-momentum/.store in=\corr@loopchannelbmomentum,
+  loop-channel-top-momentum/.style={loop-channel-a-momentum={#1}},
+  loop-channel-bottom-momentum/.style={loop-channel-b-momentum={#1}},
+  loop-channel-left-momentum/.style={loop-channel-a-momentum={#1}},
+  loop-channel-right-momentum/.style={loop-channel-b-momentum={#1}},
+  loop-channel-momenta/.code={\corr@setloopchannelpair{momentum}{#1}},
+  loop-channel-a-momentum-direction/.store in=\corr@loopchanneladir,
+  loop-channel-b-momentum-direction/.store in=\corr@loopchannelbdir,
+  loop-channel-top-momentum-direction/.style={loop-channel-a-momentum-direction={#1}},
+  loop-channel-bottom-momentum-direction/.style={loop-channel-b-momentum-direction={#1}},
+  loop-channel-left-momentum-direction/.style={loop-channel-a-momentum-direction={#1}},
+  loop-channel-right-momentum-direction/.style={loop-channel-b-momentum-direction={#1}},
+  loop-channel-a-arrow-start/.store in=\corr@loopchannelaarrowstart,
+  loop-channel-a-arrow-end/.store in=\corr@loopchannelaarrowend,
+  loop-channel-a-arrow-xshift/.store in=\corr@loopchannelaarrowxshift,
+  loop-channel-a-arrow-yshift/.store in=\corr@loopchannelaarrowyshift,
+  loop-channel-a-arrow-looseness/.store in=\corr@loopchannelaarrowlooseness,
+  loop-channel-b-arrow-start/.store in=\corr@loopchannelbarrowstart,
+  loop-channel-b-arrow-end/.store in=\corr@loopchannelbarrowend,
+  loop-channel-b-arrow-xshift/.store in=\corr@loopchannelbarrowxshift,
+  loop-channel-b-arrow-yshift/.store in=\corr@loopchannelbarrowyshift,
+  loop-channel-b-arrow-looseness/.store in=\corr@loopchannelbarrowlooseness,
+  loop-channel-top-arrow-start/.style={loop-channel-a-arrow-start={#1}},
+  loop-channel-top-arrow-end/.style={loop-channel-a-arrow-end={#1}},
+  loop-channel-top-arrow-xshift/.style={loop-channel-a-arrow-xshift={#1}},
+  loop-channel-top-arrow-yshift/.style={loop-channel-a-arrow-yshift={#1}},
+  loop-channel-top-arrow-looseness/.style={loop-channel-a-arrow-looseness={#1}},
+  loop-channel-bottom-arrow-start/.style={loop-channel-b-arrow-start={#1}},
+  loop-channel-bottom-arrow-end/.style={loop-channel-b-arrow-end={#1}},
+  loop-channel-bottom-arrow-xshift/.style={loop-channel-b-arrow-xshift={#1}},
+  loop-channel-bottom-arrow-yshift/.style={loop-channel-b-arrow-yshift={#1}},
+  loop-channel-bottom-arrow-looseness/.style={loop-channel-b-arrow-looseness={#1}},
+  loop-channel-left-arrow-start/.style={loop-channel-a-arrow-start={#1}},
+  loop-channel-left-arrow-end/.style={loop-channel-a-arrow-end={#1}},
+  loop-channel-left-arrow-xshift/.style={loop-channel-a-arrow-xshift={#1}},
+  loop-channel-left-arrow-yshift/.style={loop-channel-a-arrow-yshift={#1}},
+  loop-channel-left-arrow-looseness/.style={loop-channel-a-arrow-looseness={#1}},
+  loop-channel-right-arrow-start/.style={loop-channel-b-arrow-start={#1}},
+  loop-channel-right-arrow-end/.style={loop-channel-b-arrow-end={#1}},
+  loop-channel-right-arrow-xshift/.style={loop-channel-b-arrow-xshift={#1}},
+  loop-channel-right-arrow-yshift/.style={loop-channel-b-arrow-yshift={#1}},
+  loop-channel-right-arrow-looseness/.style={loop-channel-b-arrow-looseness={#1}},
+  loop-channel-a-label-position/.store in=\corr@loopchannelalabelposition,
+  loop-channel-a-label-xshift/.store in=\corr@loopchannelalabelxshift,
+  loop-channel-a-label-yshift/.store in=\corr@loopchannelalabelyshift,
+  loop-channel-a-label-distance/.store in=\corr@loopchannelalabeldistance,
+  loop-channel-a-label-fraction/.store in=\corr@loopchannelalabelfraction,
+  loop-channel-b-label-position/.store in=\corr@loopchannelblabelposition,
+  loop-channel-b-label-xshift/.store in=\corr@loopchannelblabelxshift,
+  loop-channel-b-label-yshift/.store in=\corr@loopchannelblabelyshift,
+  loop-channel-b-label-distance/.store in=\corr@loopchannelblabeldistance,
+  loop-channel-b-label-fraction/.store in=\corr@loopchannelblabelfraction,
+  loop-channel-external-momentum-start/.store in=\corr@loopchannelexternalmomstart,
+  loop-channel-external-momentum-end/.store in=\corr@loopchannelexternalmomend,
+  loop-channel-external-momentum-label-fraction/.store in=\corr@loopchannelexternalmomlabelfrac,
+  loop-channel-crossed-external-momentum-start/.store in=\corr@loopchannelcrossedexternalmomstart,
+  loop-channel-crossed-external-momentum-end/.store in=\corr@loopchannelcrossedexternalmomend,
+  loop-channel-crossed-external-momentum-label-fraction/.store in=\corr@loopchannelcrossedexternalmomlabelfrac,
+  loop-channel-top-label-position/.style={loop-channel-a-label-position={#1}},
+  loop-channel-top-label-xshift/.style={loop-channel-a-label-xshift={#1}},
+  loop-channel-top-label-yshift/.style={loop-channel-a-label-yshift={#1}},
+  loop-channel-top-label-distance/.style={loop-channel-a-label-distance={#1}},
+  loop-channel-top-label-fraction/.style={loop-channel-a-label-fraction={#1}},
+  loop-channel-bottom-label-position/.style={loop-channel-b-label-position={#1}},
+  loop-channel-bottom-label-xshift/.style={loop-channel-b-label-xshift={#1}},
+  loop-channel-bottom-label-yshift/.style={loop-channel-b-label-yshift={#1}},
+  loop-channel-bottom-label-distance/.style={loop-channel-b-label-distance={#1}},
+  loop-channel-bottom-label-fraction/.style={loop-channel-b-label-fraction={#1}},
+  loop-channel-left-label-position/.style={loop-channel-a-label-position={#1}},
+  loop-channel-left-label-xshift/.style={loop-channel-a-label-xshift={#1}},
+  loop-channel-left-label-yshift/.style={loop-channel-a-label-yshift={#1}},
+  loop-channel-left-label-distance/.style={loop-channel-a-label-distance={#1}},
+  loop-channel-left-label-fraction/.style={loop-channel-a-label-fraction={#1}},
+  loop-channel-right-label-position/.style={loop-channel-b-label-position={#1}},
+  loop-channel-right-label-xshift/.style={loop-channel-b-label-xshift={#1}},
+  loop-channel-right-label-yshift/.style={loop-channel-b-label-yshift={#1}},
+  loop-channel-right-label-distance/.style={loop-channel-b-label-distance={#1}},
+  loop-channel-right-label-fraction/.style={loop-channel-b-label-fraction={#1}},
+  loop-channel-central-label-yshift/.store in=\corr@loopchannelcentrallabelyshift,
+  loop-channel-internal-indices/.code={\corr@setloopchannelpair{propindex}{#1}},
+  loop-channel-propagator-indices/.style={loop-channel-internal-indices={#1}},
+  loop-channel-start-vertex-indices/.code={\corr@setloopchannelpair{startindex}{#1}},
+  loop-channel-end-vertex-indices/.code={\corr@setloopchannelpair{endindex}{#1}},
+  loop-channel-contracted-indices/.code={\corr@setloopchannelcontractedlist{#1}},
+  loop-channel-a-indices/.code={\corr@setloopchanneltriplet{a}{#1}},
+  loop-channel-b-indices/.code={\corr@setloopchanneltriplet{b}{#1}},
+  loop-channel-top-indices/.style={loop-channel-a-indices={#1}},
+  loop-channel-bottom-indices/.style={loop-channel-b-indices={#1}},
+  loop-channel-left-indices/.style={loop-channel-a-indices={#1}},
+  loop-channel-right-indices/.style={loop-channel-b-indices={#1}},
+  loop-channel-a-start-index/.store in=\corr@loopchannelastartindex,
+  loop-channel-a-propagator-index/.store in=\corr@loopchannelapropindex,
+  loop-channel-a-end-index/.store in=\corr@loopchannelaendindex,
+  loop-channel-b-start-index/.store in=\corr@loopchannelbstartindex,
+  loop-channel-b-propagator-index/.store in=\corr@loopchannelbpropindex,
+  loop-channel-b-end-index/.store in=\corr@loopchannelbendindex,
+  loop-channel-top-start-index/.style={loop-channel-a-start-index={#1}},
+  loop-channel-top-propagator-index/.style={loop-channel-a-propagator-index={#1}},
+  loop-channel-top-end-index/.style={loop-channel-a-end-index={#1}},
+  loop-channel-bottom-start-index/.style={loop-channel-b-start-index={#1}},
+  loop-channel-bottom-propagator-index/.style={loop-channel-b-propagator-index={#1}},
+  loop-channel-bottom-end-index/.style={loop-channel-b-end-index={#1}},
+  loop-channel-left-start-index/.style={loop-channel-a-start-index={#1}},
+  loop-channel-left-propagator-index/.style={loop-channel-a-propagator-index={#1}},
+  loop-channel-left-end-index/.style={loop-channel-a-end-index={#1}},
+  loop-channel-right-start-index/.style={loop-channel-b-start-index={#1}},
+  loop-channel-right-propagator-index/.style={loop-channel-b-propagator-index={#1}},
+  loop-channel-right-end-index/.style={loop-channel-b-end-index={#1}},
+  loop-channel-a-contracted-index/.code={\corr@setloopchannelcontractedindex{a}{#1}},
+  loop-channel-b-contracted-index/.code={\corr@setloopchannelcontractedindex{b}{#1}},
+  loop-channel-top-contracted-index/.style={loop-channel-a-contracted-index={#1}},
+  loop-channel-bottom-contracted-index/.style={loop-channel-b-contracted-index={#1}},
+  loop-channel-left-contracted-index/.style={loop-channel-a-contracted-index={#1}},
+  loop-channel-right-contracted-index/.style={loop-channel-b-contracted-index={#1}},
+  loop-channel-a-start-slot-position/.store in=\corr@loopchannelastartslotpos,
+  loop-channel-a-propagator-slot-position/.store in=\corr@loopchannelapropslotpos,
+  loop-channel-a-end-slot-position/.store in=\corr@loopchannelaendslotpos,
+  loop-channel-b-start-slot-position/.store in=\corr@loopchannelbstartslotpos,
+  loop-channel-b-propagator-slot-position/.store in=\corr@loopchannelbpropslotpos,
+  loop-channel-b-end-slot-position/.store in=\corr@loopchannelbendslotpos,
+  loop-channel-top-start-slot-position/.style={loop-channel-a-start-slot-position={#1}},
+  loop-channel-top-propagator-slot-position/.style={loop-channel-a-propagator-slot-position={#1}},
+  loop-channel-top-end-slot-position/.style={loop-channel-a-end-slot-position={#1}},
+  loop-channel-bottom-start-slot-position/.style={loop-channel-b-start-slot-position={#1}},
+  loop-channel-bottom-propagator-slot-position/.style={loop-channel-b-propagator-slot-position={#1}},
+  loop-channel-bottom-end-slot-position/.style={loop-channel-b-end-slot-position={#1}},
+  loop-channel-left-start-slot-position/.style={loop-channel-a-start-slot-position={#1}},
+  loop-channel-left-propagator-slot-position/.style={loop-channel-a-propagator-slot-position={#1}},
+  loop-channel-left-end-slot-position/.style={loop-channel-a-end-slot-position={#1}},
+  loop-channel-right-start-slot-position/.style={loop-channel-b-start-slot-position={#1}},
+  loop-channel-right-propagator-slot-position/.style={loop-channel-b-propagator-slot-position={#1}},
+  loop-channel-right-end-slot-position/.style={loop-channel-b-end-slot-position={#1}},
+  loop-channel-index-layout/.is choice,
+  loop-channel-index-layout/tight/.code={\def\corr@loopchannelindexlayout{tight}\corr@loopchannelindexlayouttight},
+  loop-channel-index-layout/balanced/.code={\def\corr@loopchannelindexlayout{balanced}\corr@loopchannelindexlayoutbalanced},
+  loop-channel-index-layout/wide/.code={\def\corr@loopchannelindexlayout{wide}\corr@loopchannelindexlayoutwide},
+  loop-channel-index-layout/default/.style={loop-channel-index-layout=balanced},
+  loop-channel-a-start-index-position/.code={\corr@storesunsetanchor{corr@loopchannelastartindexposition}{#1}},
+  loop-channel-a-end-index-position/.code={\corr@storesunsetanchor{corr@loopchannelaendindexposition}{#1}},
+  loop-channel-a-start-index-xshift/.store in=\corr@loopchannelastartindexxshift,
+  loop-channel-a-start-index-yshift/.store in=\corr@loopchannelastartindexyshift,
+  loop-channel-a-end-index-xshift/.store in=\corr@loopchannelaendindexxshift,
+  loop-channel-a-end-index-yshift/.store in=\corr@loopchannelaendindexyshift,
+  loop-channel-a-propagator-index-position/.code={\corr@storesunsetanchor{corr@loopchannelainternalindexposition}{#1}},
+  loop-channel-a-propagator-index-xshift/.store in=\corr@loopchannelainternalindexxshift,
+  loop-channel-a-propagator-index-yshift/.store in=\corr@loopchannelainternalindexyshift,
+  loop-channel-b-start-index-position/.code={\corr@storesunsetanchor{corr@loopchannelbstartindexposition}{#1}},
+  loop-channel-b-end-index-position/.code={\corr@storesunsetanchor{corr@loopchannelbendindexposition}{#1}},
+  loop-channel-b-start-index-xshift/.store in=\corr@loopchannelbstartindexxshift,
+  loop-channel-b-start-index-yshift/.store in=\corr@loopchannelbstartindexyshift,
+  loop-channel-b-end-index-xshift/.store in=\corr@loopchannelbendindexxshift,
+  loop-channel-b-end-index-yshift/.store in=\corr@loopchannelbendindexyshift,
+  loop-channel-b-propagator-index-position/.code={\corr@storesunsetanchor{corr@loopchannelbinternalindexposition}{#1}},
+  loop-channel-b-propagator-index-xshift/.store in=\corr@loopchannelbinternalindexxshift,
+  loop-channel-b-propagator-index-yshift/.store in=\corr@loopchannelbinternalindexyshift,
+  loop-channel-top-start-index-position/.style={loop-channel-a-start-index-position={#1}},
+  loop-channel-top-end-index-position/.style={loop-channel-a-end-index-position={#1}},
+  loop-channel-top-start-index-xshift/.style={loop-channel-a-start-index-xshift={#1}},
+  loop-channel-top-start-index-yshift/.style={loop-channel-a-start-index-yshift={#1}},
+  loop-channel-top-end-index-xshift/.style={loop-channel-a-end-index-xshift={#1}},
+  loop-channel-top-end-index-yshift/.style={loop-channel-a-end-index-yshift={#1}},
+  loop-channel-top-propagator-index-position/.style={loop-channel-a-propagator-index-position={#1}},
+  loop-channel-top-propagator-index-xshift/.style={loop-channel-a-propagator-index-xshift={#1}},
+  loop-channel-top-propagator-index-yshift/.style={loop-channel-a-propagator-index-yshift={#1}},
+  loop-channel-bottom-start-index-position/.style={loop-channel-b-start-index-position={#1}},
+  loop-channel-bottom-end-index-position/.style={loop-channel-b-end-index-position={#1}},
+  loop-channel-bottom-start-index-xshift/.style={loop-channel-b-start-index-xshift={#1}},
+  loop-channel-bottom-start-index-yshift/.style={loop-channel-b-start-index-yshift={#1}},
+  loop-channel-bottom-end-index-xshift/.style={loop-channel-b-end-index-xshift={#1}},
+  loop-channel-bottom-end-index-yshift/.style={loop-channel-b-end-index-yshift={#1}},
+  loop-channel-bottom-propagator-index-position/.style={loop-channel-b-propagator-index-position={#1}},
+  loop-channel-bottom-propagator-index-xshift/.style={loop-channel-b-propagator-index-xshift={#1}},
+  loop-channel-bottom-propagator-index-yshift/.style={loop-channel-b-propagator-index-yshift={#1}},
+  loop-channel-left-start-index-position/.style={loop-channel-a-start-index-position={#1}},
+  loop-channel-left-end-index-position/.style={loop-channel-a-end-index-position={#1}},
+  loop-channel-left-start-index-xshift/.style={loop-channel-a-start-index-xshift={#1}},
+  loop-channel-left-start-index-yshift/.style={loop-channel-a-start-index-yshift={#1}},
+  loop-channel-left-end-index-xshift/.style={loop-channel-a-end-index-xshift={#1}},
+  loop-channel-left-end-index-yshift/.style={loop-channel-a-end-index-yshift={#1}},
+  loop-channel-left-propagator-index-position/.style={loop-channel-a-propagator-index-position={#1}},
+  loop-channel-left-propagator-index-xshift/.style={loop-channel-a-propagator-index-xshift={#1}},
+  loop-channel-left-propagator-index-yshift/.style={loop-channel-a-propagator-index-yshift={#1}},
+  loop-channel-right-start-index-position/.style={loop-channel-b-start-index-position={#1}},
+  loop-channel-right-end-index-position/.style={loop-channel-b-end-index-position={#1}},
+  loop-channel-right-start-index-xshift/.style={loop-channel-b-start-index-xshift={#1}},
+  loop-channel-right-start-index-yshift/.style={loop-channel-b-start-index-yshift={#1}},
+  loop-channel-right-end-index-xshift/.style={loop-channel-b-end-index-xshift={#1}},
+  loop-channel-right-end-index-yshift/.style={loop-channel-b-end-index-yshift={#1}},
+  loop-channel-right-propagator-index-position/.style={loop-channel-b-propagator-index-position={#1}},
+  loop-channel-right-propagator-index-xshift/.style={loop-channel-b-propagator-index-xshift={#1}},
+  loop-channel-right-propagator-index-yshift/.style={loop-channel-b-propagator-index-yshift={#1}},
+  loop-channel-internal-index-style/.store in=\corr@loopchannelinternalindexstyle,
+  loop-channel-internal-index-fill/.store in=\corr@loopchannelinternalindexfill,
+  loop-channel-internal-index-inner-sep/.store in=\corr@loopchannelinternalindexinnersep,
+  loop-channel-vertex-index-math-style/.store in=\corr@loopchannelvertexindexmathstyle,
+  loop-channel-propagator-index-math-style/.store in=\corr@loopchannelpropagatorindexmathstyle,
+  loop-channel-internal-index-math-style/.code={
+    \def\corr@loopchannelvertexindexmathstyle{#1}%
+    \def\corr@loopchannelpropagatorindexmathstyle{#1}%
+  },
+  loop-channel-vertex-index-size/.is choice,
+  loop-channel-vertex-index-size/normal/.code={\def\corr@loopchannelvertexindexmathstyle{}},
+  loop-channel-vertex-index-size/script/.code={\def\corr@loopchannelvertexindexmathstyle{\scriptstyle}},
+  loop-channel-vertex-index-size/scriptscript/.code={\def\corr@loopchannelvertexindexmathstyle{\scriptscriptstyle}},
+  loop-channel-vertex-index-size/default/.style={loop-channel-vertex-index-size=scriptscript},
+  loop-channel-propagator-index-size/.is choice,
+  loop-channel-propagator-index-size/normal/.code={\def\corr@loopchannelpropagatorindexmathstyle{}},
+  loop-channel-propagator-index-size/script/.code={\def\corr@loopchannelpropagatorindexmathstyle{\scriptstyle}},
+  loop-channel-propagator-index-size/scriptscript/.code={\def\corr@loopchannelpropagatorindexmathstyle{\scriptscriptstyle}},
+  loop-channel-propagator-index-size/default/.style={loop-channel-propagator-index-size=script},
+  loop-channel-internal-index-size/.is choice,
+  loop-channel-internal-index-size/normal/.code={
+    \def\corr@loopchannelvertexindexmathstyle{}%
+    \def\corr@loopchannelpropagatorindexmathstyle{}%
+  },
+  loop-channel-internal-index-size/script/.code={
+    \def\corr@loopchannelvertexindexmathstyle{\scriptstyle}%
+    \def\corr@loopchannelpropagatorindexmathstyle{\scriptstyle}%
+  },
+  loop-channel-internal-index-size/scriptscript/.code={
+    \def\corr@loopchannelvertexindexmathstyle{\scriptscriptstyle}%
+    \def\corr@loopchannelpropagatorindexmathstyle{\scriptscriptstyle}%
+  },
+  loop-channel-internal-index-size/default/.style={loop-channel-internal-index-size=script},
   field/.store in=\corr@field,
   indices/.store in=\corr@indices,
   leg-labels/.store in=\corr@leglabels,
@@ -753,7 +1684,9 @@
   central-vertex/.style={center-vertex=#1},
   center-vertex-style/.store in=\corr@centervertexstyle,
   central-vertex-style/.style={center-vertex-style={#1}},
+  external-legs/.is if=corr@externallegs,
   external-vertices/.is if=corr@externalvertices,
+  amputated/.style={external-legs=false,external-vertices=true},
   external-vertex-style/.store in=\corr@externalvertexstyle,
   vertices/.style={center-vertex=#1,external-vertices=#1},
   vertex-style/.style={
@@ -799,8 +1732,8 @@
 }
 
 \newcommand{\corr@indexsuffix}[1]{%
-  \ifstrequal{\corr@indexplacement}{sup}{^{#1}}{%
-    \ifstrequal{\corr@indexplacement}{none}{#1}{_{#1}}%
+  \corr@ifstringeq{\corr@indexplacement}{sup}{^{#1}}{%
+    \corr@ifstringeq{\corr@indexplacement}{none}{#1}{_{#1}}%
   }%
 }
 
@@ -851,6 +1784,12 @@
   \fi
 }
 
+\newcommand{\corr@appendpropcolor}{%
+  \ifdefempty{\corr@color}{}{%
+    \edef\corr@propoptions{\corr@propoptions,\corr@color}%
+  }%
+}
+
 \newcommand{\corr@momentumarrowsizefor}[1]{%
   \ifnum\corr@momarrowsizeitemslen<#1
     \corr@momentumarrowsize
@@ -862,15 +1801,158 @@
 \newcommand{\corr@drawprop}[4]{%
   \edef\corr@propoptions{\corr@legstylefor{#2}}%
   \corr@appendproparrowsize{#2}%
+  \corr@appendpropcolor
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
 }
 
-\newcommand{\corr@drawmomentum}[4]{%
+\newcommand{\corr@putmomentumlabelat}[5]{%
+  \corr@putmomentumlabelwithdistance{#1}{#2}{0pt}{#3}{#4}{#5}%
+}
+
+\def\corr@currentmomentumlabeldistance{0pt}
+\def\corr@currentmomentumshortenstart{0pt}
+\def\corr@currentmomentumshortenend{0pt}
+
+\newcommand{\corr@resolvemomentumlabelplacement}[4]{%
+  \corr@resolvesunsetindexanchor{#1}%
+  \edef\corr@momentumlabelanchor{\corr@sunsetresolvedanchor}%
+  \edef\corr@momentumlabelxshift{#3}%
+  \edef\corr@momentumlabelyshift{#4}%
+  \corr@ifstringeq{#1}{above}{%
+    \edef\corr@momentumlabelyshift{\the\dimexpr #4 + #2\relax}%
+  }{}%
+  \corr@ifstringeq{#1}{below}{%
+    \edef\corr@momentumlabelyshift{\the\dimexpr #4 - #2\relax}%
+  }{}%
+  \corr@ifstringeq{#1}{left}{%
+    \edef\corr@momentumlabelxshift{\the\dimexpr #3 - #2\relax}%
+  }{}%
+  \corr@ifstringeq{#1}{right}{%
+    \edef\corr@momentumlabelxshift{\the\dimexpr #3 + #2\relax}%
+  }{}%
+}
+
+\newcommand{\corr@putmomentumlabelwithdistance}[6]{%
+  \corr@resolvemomentumlabelplacement{#2}{#3}{#4}{#5}%
+  \node[
+    anchor=\corr@momentumlabelanchor,
+    xshift=\corr@momentumlabelxshift,
+    yshift=\corr@momentumlabelyshift,
+    fill=\corr@momentumlabelfill,
+    inner sep=\corr@momentumlabelinnersep,
+    outer sep=0pt,
+    \corr@momentumlabelstyle
+  ] at #1 {$#6$};
+}
+
+\newcommand{\corr@drawmomentumrangein}[7]{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \def\corr@currentmomentumshortenstart{0pt}%
+  \def\corr@currentmomentumshortenend{0pt}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \path
+    ($(#2)!#7!(#3)!6pt!#4:(#3)$)
+    coordinate (corrmomentumlabelcoord);
+  \draw[line width=0.8pt]
+    ($(#2)!#5!(#3)!6pt!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapstart!(#3)!6pt!#4:(#3)$);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
-    ($(#2)!0.22!(#3)!6pt!#4:(#3)$) --
-    ($(#2)!0.78!(#3)!6pt!#4:(#3)$)
-    node[midway,fill=white,inner sep=1pt] {$\corr@momentumlabel{#1}$};
+    ($(#2)!\corr@externalmomgapend!(#3)!6pt!#4:(#3)$) --
+    ($(#2)!#6!(#3)!6pt!#4:(#3)$);
+  \corr@putmomentumlabelat
+    {(corrmomentumlabelcoord)}
+    {center}
+    {0pt}
+    {0pt}
+    {\corr@momentumlabel{#1}}%
+}
+
+\newcommand{\corr@drawmomentumrangeout}[7]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \def\corr@currentmomentumshortenstart{0pt}%
+  \def\corr@currentmomentumshortenend{0pt}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \path
+    ($(#2)!#7!(#3)!6pt!#4:(#3)$)
+    coordinate (corrmomentumlabelcoord);
+  \draw[line width=0.8pt]
+    ($(#2)!#6!(#3)!6pt!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapend!(#3)!6pt!#4:(#3)$);
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+    ($(#2)!\corr@externalmomgapstart!(#3)!6pt!#4:(#3)$) --
+    ($(#2)!#5!(#3)!6pt!#4:(#3)$);
+  \corr@putmomentumlabelat
+    {(corrmomentumlabelcoord)}
+    {center}
+    {0pt}
+    {0pt}
+    {\corr@momentumlabel{#1}}%
+}
+
+\newcommand{\corr@drawmomentumrange}[8]{%
+  \corr@ifstringeq{#8}{out}{%
+    \corr@drawmomentumrangeout{#1}{#2}{#3}{#4}{#5}{#6}{#7}%
+  }{%
+    \corr@drawmomentumrangein{#1}{#2}{#3}{#4}{#5}{#6}{#7}%
+  }%
+}
+
+\def\corr@externalmomoffset{6pt}
+\newcommand{\corr@drawmomentumrangeoffset}[9]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \def\corr@currentmomentumshortenstart{0pt}%
+  \def\corr@currentmomentumshortenend{0pt}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \path
+    ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
+    coordinate (corrmomentumlabelcoord);
+  \draw[line width=0.8pt]
+    ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+    ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+    ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  \corr@putmomentumlabelat
+    {(corrmomentumlabelcoord)}
+    {center}
+    {#8}
+    {#9}
+    {\corr@momentumlabel{#1}}%
+}
+
+\newcommand{\corr@externalmomentumdirectionfor}[1]{%
+  \ifnum#1<3
+    \corr@externalleftmomentumdirection
+  \else
+    \corr@externalrightmomentumdirection
+  \fi
+}
+
+\newcommand{\corr@drawmomentum}[4]{%
+  \corr@drawmomentumrange{#1}{#2}{#3}{#4}{0.25}{0.75}{0.50}{\corr@externalmomentumdirectionfor{#1}}%
+}
+
+\newcommand{\corr@drawexternalmomentumul}[3]{%
+  \corr@drawmomentumrange{#1}{#2}{#3}{90}{0.25}{0.75}{0.50}{\corr@externalleftmomentumdirection}%
+}
+
+\newcommand{\corr@drawexternalmomentumll}[3]{%
+  \corr@drawmomentumrange{#1}{#2}{#3}{-90}{0.25}{0.75}{0.50}{\corr@externalleftmomentumdirection}%
+}
+
+\newcommand{\corr@drawexternalmomentumur}[3]{%
+  \corr@drawmomentumrange{#1}{#2}{#3}{-90}{0.25}{0.75}{0.50}{\corr@externalrightmomentumdirection}%
+}
+
+\newcommand{\corr@drawexternalmomentumlr}[3]{%
+  \corr@drawmomentumrange{#1}{#2}{#3}{90}{0.25}{0.75}{0.50}{\corr@externalrightmomentumdirection}%
+}
+
+\newcommand{\corr@drawexternalmomentumstd}[4]{%
+  \corr@drawmomentumrange{#1}{#2}{#3}{#4}{0.25}{0.75}{0.50}{\corr@externalmomentumdirectionfor{#1}}%
 }
 
 \newcommand{\corr@putlabel}[3]{%
@@ -913,6 +1995,26 @@
   }%
 }
 
+\newcommand{\corr@putchannelcentral}[1]{%
+  \ifdefempty{\corr@central}{}{%
+    \node[anchor=north] at ([yshift=\corr@channelcentrallabelyshift]#1) {$\corr@central$};
+  }%
+}
+
+\newcommand{\corr@putloopchannelcentral}[1]{%
+  \ifdefempty{\corr@central}{}{%
+    \node[anchor=north] at ([yshift=\corr@loopchannelcentrallabelyshift]#1) {$\corr@central$};
+  }%
+}
+
+\newcommand{\corr@channelmomentumlabel}{%
+  \ifdefempty{\corr@channelmomentum}{%
+    \corr@momentumlabel{5}%
+  }{%
+    \corr@channelmomentum
+  }%
+}
+
 \newcommand{\corr@sunsetrightmomentumresolved}{%
   \ifdefempty{\corr@sunsetrightmomentum}{%
     \corr@sunsetleftmomentum
@@ -943,6 +2045,7 @@
     \edef\corr@propoptions{\corr@sunsetsegmentstyle}%
   }%
   \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
 }
 
 \newcommand{\corr@drawsunsetprop}[5]{%
@@ -954,51 +2057,193 @@
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
 }
 
+\newcommand{\corr@drawchannelprop}[5]{%
+  \edef\corr@channelsegmentstyle{#2}%
+  \ifdefempty{\corr@channelsegmentstyle}{%
+    \edef\corr@propoptions{\corr@legstylefor{#1}}%
+  }{%
+    \edef\corr@propoptions{\corr@channelsegmentstyle}%
+  }%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
+  \edef\corr@channelextraoptions{#5}%
+  \ifdefempty{\corr@channelextraoptions}{}{%
+    \edef\corr@propoptions{\corr@propoptions,\corr@channelextraoptions}%
+  }%
+  \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+}
+
 \newcommand{\corr@drawsunsetmomentumline}[7]{%
+  \def\corr@currentmomentumlabeldistance{0pt}%
+  \def\corr@currentmomentumshortenstart{0pt}%
+  \def\corr@currentmomentumshortenend{0pt}%
+  \corr@drawannotatedmomentumline{#1}{#2}{#3}{0.50}{#4}{#5}{#6}{#7}%
+}
+
+\newcommand{\corr@drawannotatedmomentumline}[8]{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
-    #2 -- #3
-    node[midway,#4,xshift=#5,yshift=#6,fill=white,inner sep=1pt] {$#7$};
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt,shorten <= \corr@currentmomentumshortenstart,shorten >= \corr@currentmomentumshortenend]
+    #2 --
+    coordinate[pos=#4] (corrmomentumlabelcoord)
+    #3;
+  \corr@putmomentumlabelwithdistance{(corrmomentumlabelcoord)}{#5}{\corr@currentmomentumlabeldistance}{#6}{#7}{#8}%
 }
 
 \newcommand{\corr@drawsunsetmomentumcurve}[8]{%
+  \def\corr@currentmomentumlabeldistance{0pt}%
+  \def\corr@currentmomentumshortenstart{0pt}%
+  \def\corr@currentmomentumshortenend{0pt}%
+  \corr@drawannotatedmomentumcurve{#1}{#2}{#3=#4}{#5}{0.50}{#6}{#7}{#8}{\corr@sunsetmomentumlabel{#1}}%
+}
+
+\newcommand{\corr@drawannotatedmomentumcurve}[9]{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt,shorten <= \corr@currentmomentumshortenstart,shorten >= \corr@currentmomentumshortenend]
+    #2 to [#3]
+    coordinate[pos=#5] (corrmomentumlabelcoord)
+    #4;
+  \corr@putmomentumlabelwithdistance{(corrmomentumlabelcoord)}{#6}{\corr@currentmomentumlabeldistance}{#7}{#8}{#9}%
+}
+
+\newcommand{\corr@drawchannelmomentum}[2]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{5}}%
+  \path
+    ($(#1)!\corr@channelmomstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
+    coordinate[pos=0.5] (corrmomentumlabelcoord)
+    ($(#1)!\corr@channelmomend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
-    #2 to[#3=#4] #5
-    node[midway,#6,xshift=#7,yshift=#8,fill=white,inner sep=1pt] {$\corr@sunsetmomentumlabel{#1}$};
+    ($(#1)!\corr@channelmomstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
+    ($(#1)!\corr@channelmomend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
+  \corr@putmomentumlabelat
+    {(corrmomentumlabelcoord)}
+    {\corr@channelmomlabelposition}
+    {\corr@channelmomlabelxshift}
+    {\corr@channelmomlabelyshift}
+    {\corr@channelmomentumlabel}%
+}
+
+\newcommand{\corr@loopchannelmomentumlabel}[1]{%
+  \corr@ifstringeq{#1}{a}{%
+    \ifdefempty{\corr@loopchannelamomentum}{\corr@momentumlabel{5}}{\corr@loopchannelamomentum}%
+  }{%
+    \ifdefempty{\corr@loopchannelbmomentum}{\corr@momentumlabel{6}}{\corr@loopchannelbmomentum}%
+  }%
+}
+
+\newcommand{\corr@drawloopchannelmomentumcurve}[9]{%
+  \corr@drawannotatedmomentumcurve{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}%
+}
+
+\newcommand{\corr@drawellipticmomentumarc}[9]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \def\corr@loopchannelarclabel{\corr@momentumlabel{#1}}%
+  \ifnum#1=5\relax
+    \def\corr@loopchannelarclabel{\corr@loopchannelmomentumlabel{a}}%
+  \fi
+  \ifnum#1=6\relax
+    \def\corr@loopchannelarclabel{\corr@loopchannelmomentumlabel{b}}%
+  \fi
+  \pgfmathsetmacro{\corr@momentummidangle}{0.5*((#5)+(#6))}%
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+    ($#2+({#3*cos(#5)},{#4*sin(#5)})$)
+    arc[start angle=#5,end angle=#6,x radius=#3,y radius=#4];
+  \path
+    ($#2+({#3*cos(\corr@momentummidangle)},{#4*sin(\corr@momentummidangle)})$)
+    coordinate (corrmomentumlabelcoord);
+  \corr@putmomentumlabelwithdistance{(corrmomentumlabelcoord)}{#7}{\corr@currentmomentumlabeldistance}{#8}{#9}{\corr@loopchannelarclabel}%
+}
+
+\newcommand{\corr@setloopchanneltrimlengths}[3]{%
+  \pgfmathsetlengthmacro{\corr@currentmomentumshortenstart}{#1*(2*#3 cm)}%
+  \pgfmathsetlengthmacro{\corr@currentmomentumshortenend}{(1-#2)*(2*#3 cm)}%
+}
+
+\newcommand{\corr@resolvesunsetindexanchor}[1]{%
+  \edef\corr@sunsetresolvedanchor{#1}%
+  \def\corr@sunsetanchorprobe{above}%
+  \ifx\corr@sunsetresolvedanchor\corr@sunsetanchorprobe
+    \def\corr@sunsetresolvedanchor{south}%
+  \fi
+  \def\corr@sunsetanchorprobe{below}%
+  \ifx\corr@sunsetresolvedanchor\corr@sunsetanchorprobe
+    \def\corr@sunsetresolvedanchor{north}%
+  \fi
+  \def\corr@sunsetanchorprobe{left}%
+  \ifx\corr@sunsetresolvedanchor\corr@sunsetanchorprobe
+    \def\corr@sunsetresolvedanchor{east}%
+  \fi
+  \def\corr@sunsetanchorprobe{right}%
+  \ifx\corr@sunsetresolvedanchor\corr@sunsetanchorprobe
+    \def\corr@sunsetresolvedanchor{west}%
+  \fi
+}
+
+\newcommand{\corr@storesunsetanchor}[2]{%
+  \corr@resolvesunsetindexanchor{#2}%
+  \expandafter\edef\csname #1\endcsname{\corr@sunsetresolvedanchor}%
 }
 
 \newcommand{\corr@putsunsetinternalindexline}[8]{%
-  \def\corr@sunsetinternalindextmp{#7}%
+  \edef\corr@sunsetinternalindextmp{#7}%
   \ifdefempty{\corr@sunsetinternalindextmp}{}{%
-    \path #1 -- #2
-      node[
-        pos=#3,
-        #4,
-        xshift=#5,
-        yshift=#6,
-        fill=\corr@sunsetinternalindexfill,
-        inner sep=\corr@sunsetinternalindexinnersep,
-        outer sep=0pt,
-        \corr@sunsetinternalindexstyle
-      ] {$#8 #7$};
+    \path #1 -- coordinate[pos=#3] (corrsunsetidxcoord) #2;
+    \node[
+      anchor=#4,
+      xshift=#5,
+      yshift=#6,
+      fill=\corr@sunsetinternalindexfill,
+      inner sep=\corr@sunsetinternalindexinnersep,
+      outer sep=0pt,
+      \corr@sunsetinternalindexstyle
+    ] at (corrsunsetidxcoord) {$#8 #7$};
   }%
 }
 
 \newcommand{\corr@putsunsetinternalindexcurve}[9]{%
-  \def\corr@sunsetinternalindextmp{#8}%
+  \edef\corr@sunsetinternalindextmp{#8}%
   \ifdefempty{\corr@sunsetinternalindextmp}{}{%
-    \path #1 to[#2] #3
-      node[
-        pos=#4,
-        #5,
-        xshift=#6,
-        yshift=#7,
-        fill=\corr@sunsetinternalindexfill,
-        inner sep=\corr@sunsetinternalindexinnersep,
-        outer sep=0pt,
-        \corr@sunsetinternalindexstyle
-      ] {$#9 #8$};
+    \path #1 to[#2] coordinate[pos=#4] (corrsunsetidxcoord) #3;
+    \node[
+      anchor=#5,
+      xshift=#6,
+      yshift=#7,
+      fill=\corr@sunsetinternalindexfill,
+      inner sep=\corr@sunsetinternalindexinnersep,
+      outer sep=0pt,
+      \corr@sunsetinternalindexstyle
+    ] at (corrsunsetidxcoord) {$#9 #8$};
+  }%
+}
+
+\newcommand{\corr@putchannelinternalindexline}[8]{%
+  \edef\corr@channelinternalindextmp{#7}%
+  \ifdefempty{\corr@channelinternalindextmp}{}{%
+    \path #1 -- coordinate[pos=#3] (corrchannelidxcoord) #2;
+    \node[
+      anchor=#4,
+      xshift=#5,
+      yshift=#6,
+      fill=\corr@channelinternalindexfill,
+      inner sep=\corr@channelinternalindexinnersep,
+      outer sep=0pt,
+      \corr@channelinternalindexstyle
+    ] at (corrchannelidxcoord) {$#8 #7$};
+  }%
+}
+
+\newcommand{\corr@putloopchannelinternalindexcurve}[9]{%
+  \edef\corr@loopchannelinternalindextmp{#8}%
+  \ifdefempty{\corr@loopchannelinternalindextmp}{}{%
+    \path #1 to[#2] coordinate[pos=#4] (corrloopchannelidxcoord) #3;
+    \node[
+      anchor=#5,
+      xshift=#6,
+      yshift=#7,
+      fill=\corr@loopchannelinternalindexfill,
+      inner sep=\corr@loopchannelinternalindexinnersep,
+      outer sep=0pt,
+      \corr@loopchannelinternalindexstyle
+    ] at (corrloopchannelidxcoord) {$#9 #8$};
   }%
 }
 
@@ -1012,8 +2257,10 @@
       \vertex (corrC) at (0,0);
       \vertex (corrL) at (-1.85,0);
       \vertex (corrR) at (1.85,0);
-      \corr@drawprop{mom}{1}{corrL}{corrC}
-      \corr@drawprop{mom'}{2}{corrR}{corrC}
+      \corr@ifexternallegs{%
+        \corr@drawprop{mom}{1}{corrL}{corrC}%
+        \corr@drawprop{mom'}{2}{corrR}{corrC}%
+      }%
       \ifcorr@blob
         \corr@putblob{corrC}{\corr@blobstyle}
       \fi
@@ -1021,10 +2268,10 @@
     \ifcorr@centervertex
       \corr@putvertex{corrC}{\corr@centervertexstyle}
     \fi
-    \ifcorr@externalvertices
+    \corr@ifshowexternalvertices{%
       \corr@putvertex{corrL}{\corr@externalvertexstyle}
       \corr@putvertex{corrR}{\corr@externalvertexstyle}
-    \fi
+    }%
     \ifcorr@showmomenta
       \corr@drawmomentum{1}{corrL}{corrC}{90}
       \corr@drawmomentum{2}{corrR}{corrC}{-90}
@@ -1036,46 +2283,631 @@
   \endgroup
 }
 
+\newcommand{\corr@fourpointplaceexternallabels}{%
+  \corr@putlabel{corrUL}{xshift=-11pt,yshift=8pt}{1}%
+  \corr@putlabel{corrLL}{xshift=-11pt,yshift=-8pt}{2}%
+  \corr@putlabel{corrUR}{xshift=11pt,yshift=8pt}{3}%
+  \corr@putlabel{corrLR}{xshift=11pt,yshift=-8pt}{4}%
+}
+
+\newcommand{\corr@fourpointplaceexternalvertices}{%
+  \corr@ifshowexternalvertices{%
+    \corr@putvertex{corrUL}{\corr@externalvertexstyle}%
+    \corr@putvertex{corrLL}{\corr@externalvertexstyle}%
+    \corr@putvertex{corrUR}{\corr@externalvertexstyle}%
+    \corr@putvertex{corrLR}{\corr@externalvertexstyle}%
+  }%
+}
+
+\newcommand{\corr@fourpointchannelindices}[2]{%
+  \corr@putchannelinternalindexline
+    {(#1)}
+    {(#2)}
+    {\corr@channelstartslotpos}
+    {\corr@channelstartindexposition}
+    {\corr@channelstartindexxshift}
+    {\corr@channelstartindexyshift}
+    {\corr@channelstartindex}
+    {\corr@channelvertexindexmathstyle}
+  \corr@putchannelinternalindexline
+    {(#1)}
+    {(#2)}
+    {\corr@channelpropslotpos}
+    {\corr@channelinternalindexposition}
+    {\corr@channelinternalindexxshift}
+    {\corr@channelinternalindexyshift}
+    {\corr@channelpropindex}
+    {\corr@channelpropagatorindexmathstyle}
+  \corr@putchannelinternalindexline
+    {(#1)}
+    {(#2)}
+    {\corr@channelendslotpos}
+    {\corr@channelendindexposition}
+    {\corr@channelendindexxshift}
+    {\corr@channelendindexyshift}
+    {\corr@channelendindex}
+    {\corr@channelvertexindexmathstyle}
+}
+
+\newcommand{\corr@drawfourpointcontactcentral}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \corr@ifexternallegs{%
+      \corr@drawprop{mom}{1}{corrUL}{corrC}%
+      \corr@drawprop{mom'}{2}{corrLL}{corrC}%
+      \corr@drawprop{mom'}{3}{corrUR}{corrC}%
+      \corr@drawprop{mom}{4}{corrLR}{corrC}%
+    }%
+    \ifcorr@blob
+      \corr@putblob{corrC}{\corr@blobstyle}
+    \fi
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrC}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrC}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrC}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrC}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrC}
+  \fi
+  \corr@fourpointplaceexternallabels
+  \corr@putcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointcontacthorizontal}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrHT) at (0,\corr@fourpointyspan);
+    \vertex (corrHB) at (0,-\corr@fourpointyspan);
+    \corr@drawprop{mom}{1}{corrUL}{corrHT}
+    \corr@drawprop{mom'}{3}{corrUR}{corrHT}
+    \corr@drawprop{mom'}{2}{corrLL}{corrHB}
+    \corr@drawprop{mom}{4}{corrLR}{corrHB}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrHT}{\corr@centervertexstyle}
+    \corr@putvertex{corrHB}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrHT}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrHB}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrHT}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrHB}
+  \fi
+  \corr@fourpointplaceexternallabels
+  \corr@putcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointcontactvertical}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrVLPair) at (-\corr@fourpointxspan,0);
+    \vertex (corrVRPair) at (\corr@fourpointxspan,0);
+    \corr@drawprop{mom}{1}{corrUL}{corrVLPair}
+    \corr@drawprop{mom'}{2}{corrLL}{corrVLPair}
+    \corr@drawprop{mom'}{3}{corrUR}{corrVRPair}
+    \corr@drawprop{mom}{4}{corrLR}{corrVRPair}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrVLPair}{\corr@centervertexstyle}
+    \corr@putvertex{corrVRPair}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrVLPair}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrVLPair}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrVRPair}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrVRPair}
+  \fi
+  \corr@fourpointplaceexternallabels
+  \corr@putcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointcontactcrossed}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrX) at (0,0);
+    \corr@drawchannelprop{2}{}{corrLL}{corrX}{}%
+    \corr@drawchannelprop{3}{}{corrUR}{corrX}{}%
+    \corr@drawchannelprop{1}{}{corrUL}{corrX}{top}%
+    \corr@drawchannelprop{4}{}{corrLR}{corrX}{top}%
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrX}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrX}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrX}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrX}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrX}
+  \fi
+  \corr@fourpointplaceexternallabels
+  \corr@putcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointcontact}{%
+  \corr@ifstringeq{\corr@contactpairing}{horizontal}{%
+    \corr@drawfourpointcontacthorizontal
+  }{%
+    \corr@ifstringeq{\corr@contactpairing}{vertical}{%
+      \corr@drawfourpointcontactvertical
+    }{%
+      \corr@ifstringeq{\corr@contactpairing}{crossed}{%
+        \corr@drawfourpointcontactcrossed
+      }{%
+        \corr@drawfourpointcontactcentral
+      }%
+    }%
+  }%
+}
+
+\newcommand{\corr@drawfourpointstreeschannel}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrVL) at (-\corr@channelvertexxspan,0);
+    \vertex (corrVR) at (\corr@channelvertexxspan,0);
+    \corr@ifexternallegs{%
+      \corr@drawchannelprop{1}{}{corrUL}{corrVL}{}%
+      \corr@drawchannelprop{2}{}{corrLL}{corrVL}{}%
+      \corr@drawchannelprop{3}{}{corrUR}{corrVR}{}%
+      \corr@drawchannelprop{4}{}{corrLR}{corrVR}{}%
+    }%
+    \corr@drawchannelprop{5}{\corr@channelinternalline}{corrVL}{corrVR}{}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrVL}{\corr@centervertexstyle}
+    \corr@putvertex{corrVR}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrVL}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrVL}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrVR}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrVR}
+    \corr@drawchannelmomentum{corrVL}{corrVR}
+  \fi
+  \corr@fourpointchannelindices{corrVL}{corrVR}
+  \corr@fourpointplaceexternallabels
+  \corr@putchannelcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointtreetchannel}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrVT) at (0,\corr@channelvertexyspan);
+    \vertex (corrVB) at (0,-\corr@channelvertexyspan);
+    \corr@ifexternallegs{%
+      \corr@drawchannelprop{1}{}{corrUL}{corrVT}{}%
+      \corr@drawchannelprop{2}{}{corrLL}{corrVB}{}%
+      \corr@drawchannelprop{3}{}{corrUR}{corrVT}{}%
+      \corr@drawchannelprop{4}{}{corrLR}{corrVB}{}%
+    }%
+    \corr@drawchannelprop{5}{\corr@channelinternalline}{corrVT}{corrVB}{}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrVT}{\corr@centervertexstyle}
+    \corr@putvertex{corrVB}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrVT}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrVT}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrVB}
+    \corr@drawchannelmomentum{corrVT}{corrVB}
+  \fi
+  \corr@fourpointchannelindices{corrVT}{corrVB}
+  \corr@fourpointplaceexternallabels
+  \corr@putchannelcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointtreeuchannel}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrVT) at (0,\corr@channelvertexyspan);
+    \vertex (corrVB) at (0,-\corr@channelvertexyspan);
+    \corr@ifexternallegs{%
+      \corr@drawchannelprop{1}{}{corrUL}{corrVT}{}%
+      \corr@drawchannelprop{2}{}{corrLL}{corrVB}{}%
+      \corr@drawchannelprop{3}{}{corrUR}{corrVB}{}%
+      \corr@drawchannelprop{4}{}{corrLR}{corrVT}{top}%
+    }%
+    \corr@drawchannelprop{5}{\corr@channelinternalline}{corrVT}{corrVB}{}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrVT}{\corr@centervertexstyle}
+    \corr@putvertex{corrVB}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrVT}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrVB}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrVT}
+    \corr@drawchannelmomentum{corrVT}{corrVB}
+  \fi
+  \corr@fourpointchannelindices{corrVT}{corrVB}
+  \corr@fourpointplaceexternallabels
+  \corr@putchannelcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointsloopchannel}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrVL) at (-\corr@loopchannelvertexxspan,0);
+    \vertex (corrVR) at (\corr@loopchannelvertexxspan,0);
+    \corr@ifexternallegs{%
+      \corr@drawprop{mom}{1}{corrUL}{corrVL}%
+      \corr@drawprop{mom'}{2}{corrLL}{corrVL}%
+      \corr@drawprop{mom'}{3}{corrUR}{corrVR}%
+      \corr@drawprop{mom}{4}{corrLR}{corrVR}%
+    }%
+    \corr@drawsunsetprop{5}{\corr@loopchannelaline}{corrVL}{corrVR}{half left,looseness=\corr@loopchannellooplooseness}
+    \corr@drawsunsetprop{6}{\corr@loopchannelbline}{corrVL}{corrVR}{half right,looseness=\corr@loopchannellooplooseness}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrVL}{\corr@centervertexstyle}
+    \corr@putvertex{corrVR}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrVL}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrVL}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrVR}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrVR}
+    \pgfmathsetmacro{\corr@loopchannelsxrad}{\corr@loopchannelvertexxspan}%
+    \pgfmathsetmacro{\corr@loopchannelsyrad}{0.62*\corr@loopchannelvertexxspan}%
+    \def\corr@currentmomentumlabeldistance{\corr@loopchannelalabeldistance}%
+    \corr@ifstringeq{\corr@loopchanneladir}{none}{}{%
+      \corr@ifstringeq{\corr@loopchanneladir}{reverse}{%
+        \corr@drawellipticmomentumarc{5}
+          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
+          {\corr@loopchannelsxrad}
+          {\corr@loopchannelsyrad}
+          {60}{120}
+          {\corr@loopchannelalabelposition}
+          {\corr@loopchannelalabelxshift}
+          {\corr@loopchannelalabelyshift}%
+      }{%
+        \corr@drawellipticmomentumarc{5}
+          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
+          {\corr@loopchannelsxrad}
+          {\corr@loopchannelsyrad}
+          {120}{60}
+          {\corr@loopchannelalabelposition}
+          {\corr@loopchannelalabelxshift}
+          {\corr@loopchannelalabelyshift}%
+      }%
+    }%
+    \def\corr@currentmomentumlabeldistance{\corr@loopchannelblabeldistance}%
+    \corr@ifstringeq{\corr@loopchannelbdir}{none}{}{%
+      \corr@ifstringeq{\corr@loopchannelbdir}{reverse}{%
+        \corr@drawellipticmomentumarc{6}
+          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
+          {\corr@loopchannelsxrad}
+          {\corr@loopchannelsyrad}
+          {300}{240}
+          {\corr@loopchannelblabelposition}
+          {\corr@loopchannelblabelxshift}
+          {\corr@loopchannelblabelyshift}%
+      }{%
+        \corr@drawellipticmomentumarc{6}
+          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
+          {\corr@loopchannelsxrad}
+          {\corr@loopchannelsyrad}
+          {240}{300}
+          {\corr@loopchannelblabelposition}
+          {\corr@loopchannelblabelxshift}
+          {\corr@loopchannelblabelyshift}%
+      }%
+    }%
+  \fi
+  \corr@putloopchannelinternalindexcurve
+    {(corrVL)}{out=90,in=90,looseness=\corr@loopchannellooplooseness}{(corrVR)}
+    {\corr@loopchannelastartslotpos}{\corr@loopchannelastartindexposition}{\corr@loopchannelastartindexxshift}{\corr@loopchannelastartindexyshift}{\corr@loopchannelastartindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVL)}{out=90,in=90,looseness=\corr@loopchannellooplooseness}{(corrVR)}
+    {\corr@loopchannelapropslotpos}{\corr@loopchannelainternalindexposition}{\corr@loopchannelainternalindexxshift}{\corr@loopchannelainternalindexyshift}{\corr@loopchannelapropindex}{\corr@loopchannelpropagatorindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVL)}{out=90,in=90,looseness=\corr@loopchannellooplooseness}{(corrVR)}
+    {\corr@loopchannelaendslotpos}{\corr@loopchannelaendindexposition}{\corr@loopchannelaendindexxshift}{\corr@loopchannelaendindexyshift}{\corr@loopchannelaendindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVL)}{out=-90,in=-90,looseness=\corr@loopchannellooplooseness}{(corrVR)}
+    {\corr@loopchannelbstartslotpos}{\corr@loopchannelbstartindexposition}{\corr@loopchannelbstartindexxshift}{\corr@loopchannelbstartindexyshift}{\corr@loopchannelbstartindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVL)}{out=-90,in=-90,looseness=\corr@loopchannellooplooseness}{(corrVR)}
+    {\corr@loopchannelbpropslotpos}{\corr@loopchannelbinternalindexposition}{\corr@loopchannelbinternalindexxshift}{\corr@loopchannelbinternalindexyshift}{\corr@loopchannelbpropindex}{\corr@loopchannelpropagatorindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVL)}{out=-90,in=-90,looseness=\corr@loopchannellooplooseness}{(corrVR)}
+    {\corr@loopchannelbendslotpos}{\corr@loopchannelbendindexposition}{\corr@loopchannelbendindexxshift}{\corr@loopchannelbendindexyshift}{\corr@loopchannelbendindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@fourpointplaceexternallabels
+  \corr@putloopchannelcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointtloopchannel}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrVT) at (0,\corr@loopchannelvertexyspan);
+    \vertex (corrVB) at (0,-\corr@loopchannelvertexyspan);
+    \corr@ifexternallegs{%
+      \corr@drawprop{mom}{1}{corrUL}{corrVT}%
+      \corr@drawprop{mom'}{3}{corrUR}{corrVT}%
+      \corr@drawprop{mom'}{2}{corrLL}{corrVB}%
+      \corr@drawprop{mom}{4}{corrLR}{corrVB}%
+    }%
+    \corr@drawsunsetprop{5}{\corr@loopchannelaline}{corrVT}{corrVB}{half left,looseness=\corr@loopchannellooplooseness}
+    \corr@drawsunsetprop{6}{\corr@loopchannelbline}{corrVT}{corrVB}{half right,looseness=\corr@loopchannellooplooseness}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrVT}{\corr@centervertexstyle}
+    \corr@putvertex{corrVB}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrVT}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrVT}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrVB}
+    \pgfmathsetmacro{\corr@loopchannelvxrad}{0.46*\corr@loopchannelvertexyspan}%
+    \pgfmathsetmacro{\corr@loopchannelvyrad}{\corr@loopchannelvertexyspan}%
+    \def\corr@currentmomentumlabeldistance{\corr@loopchannelalabeldistance}%
+    \corr@ifstringeq{\corr@loopchanneladir}{none}{}{%
+      \corr@ifstringeq{\corr@loopchanneladir}{reverse}{%
+        \corr@drawellipticmomentumarc{5}
+          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {205}{155}
+          {\corr@loopchannelalabelposition}
+          {\corr@loopchannelalabelxshift}
+          {\corr@loopchannelalabelyshift}%
+      }{%
+        \corr@drawellipticmomentumarc{5}
+          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {155}{205}
+          {\corr@loopchannelalabelposition}
+          {\corr@loopchannelalabelxshift}
+          {\corr@loopchannelalabelyshift}%
+      }%
+    }%
+    \def\corr@currentmomentumlabeldistance{\corr@loopchannelblabeldistance}%
+    \corr@ifstringeq{\corr@loopchannelbdir}{none}{}{%
+      \corr@ifstringeq{\corr@loopchannelbdir}{reverse}{%
+        \corr@drawellipticmomentumarc{6}
+          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {-25}{25}
+          {\corr@loopchannelblabelposition}
+          {\corr@loopchannelblabelxshift}
+          {\corr@loopchannelblabelyshift}%
+      }{%
+        \corr@drawellipticmomentumarc{6}
+          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {25}{-25}
+          {\corr@loopchannelblabelposition}
+          {\corr@loopchannelblabelxshift}
+          {\corr@loopchannelblabelyshift}%
+      }%
+    }%
+  \fi
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelastartslotpos}{\corr@loopchannelastartindexposition}{\corr@loopchannelastartindexxshift}{\corr@loopchannelastartindexyshift}{\corr@loopchannelastartindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelapropslotpos}{\corr@loopchannelainternalindexposition}{\corr@loopchannelainternalindexxshift}{\corr@loopchannelainternalindexyshift}{\corr@loopchannelapropindex}{\corr@loopchannelpropagatorindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelaendslotpos}{\corr@loopchannelaendindexposition}{\corr@loopchannelaendindexxshift}{\corr@loopchannelaendindexyshift}{\corr@loopchannelaendindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=0,in=0,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelbstartslotpos}{\corr@loopchannelbstartindexposition}{\corr@loopchannelbstartindexxshift}{\corr@loopchannelbstartindexyshift}{\corr@loopchannelbstartindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=0,in=0,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelbpropslotpos}{\corr@loopchannelbinternalindexposition}{\corr@loopchannelbinternalindexxshift}{\corr@loopchannelbinternalindexyshift}{\corr@loopchannelbpropindex}{\corr@loopchannelpropagatorindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=0,in=0,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelbendslotpos}{\corr@loopchannelbendindexposition}{\corr@loopchannelbendindexxshift}{\corr@loopchannelbendindexyshift}{\corr@loopchannelbendindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@fourpointplaceexternallabels
+  \corr@putloopchannelcentral{corrC}
+}
+
+\newcommand{\corr@drawfourpointuloopchannel}{%
+  \pgfmathsetmacro{\corr@uloopcrossx}{0.74*\corr@fourpointxspan}%
+  \pgfmathsetmacro{\corr@uloopflatx}{0.46*\corr@uloopcrossx}%
+  \pgfmathsetmacro{\corr@uloopinnerctrlx}{0.84*\corr@uloopcrossx}%
+  \pgfmathsetmacro{\corr@ulooptangentback}{0.10}%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrVT) at (0,\corr@loopchannelvertexyspan);
+    \vertex (corrVB) at (0,-\corr@loopchannelvertexyspan);
+    \vertex (corrX) at (\corr@uloopcrossx,0);
+    \vertex (corrP4Flat) at (\corr@uloopflatx,\corr@loopchannelvertexyspan);
+    \vertex (corrP3Flat) at (\corr@uloopflatx,-\corr@loopchannelvertexyspan);
+    \vertex (corrP4CtrlA) at (\corr@uloopinnerctrlx,\corr@loopchannelvertexyspan);
+    \vertex (corrP3CtrlA) at (\corr@uloopinnerctrlx,-\corr@loopchannelvertexyspan);
+    \path ($(corrX)!-\corr@ulooptangentback!(corrLR)$) coordinate (corrP4CtrlB);
+    \path ($(corrX)!-\corr@ulooptangentback!(corrUR)$) coordinate (corrP3CtrlB);
+    \corr@ifexternallegs{%
+      \corr@drawprop{mom}{1}{corrUL}{corrVT}%
+      \corr@drawprop{mom'}{2}{corrLL}{corrVB}%
+      \edef\corr@propoptions{\corr@legstylefor{4}}%
+      \corr@appendproparrowsize{4}%
+      \corr@appendpropcolor
+      \expandafter\draw\expandafter[\corr@propoptions]
+        (corrVT) -- (corrP4Flat) .. controls (corrP4CtrlA) and (corrP4CtrlB) .. (corrX) -- (corrLR);%
+      \edef\corr@propoptions{\corr@legstylefor{3}}%
+      \corr@appendproparrowsize{3}%
+      \corr@appendpropcolor
+      \expandafter\draw\expandafter[\corr@propoptions]
+        (corrVB) -- (corrP3Flat) .. controls (corrP3CtrlA) and (corrP3CtrlB) .. (corrX) -- (corrUR);%
+    }%
+    \corr@drawsunsetprop{5}{\corr@loopchannelaline}{corrVT}{corrVB}{half left,looseness=\corr@loopchannellooplooseness}
+    \corr@drawsunsetprop{6}{\corr@loopchannelbline}{corrVT}{corrVB}{half right,looseness=\corr@loopchannellooplooseness}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrVT}{\corr@centervertexstyle}
+    \corr@putvertex{corrVB}{\corr@centervertexstyle}
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawexternalmomentumul{1}{corrUL}{corrVT}
+    \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
+    \corr@drawexternalmomentumur{3}{corrUR}{corrX}
+    \corr@drawexternalmomentumlr{4}{corrLR}{corrX}
+    \pgfmathsetmacro{\corr@loopchannelvxrad}{0.46*\corr@loopchannelvertexyspan}%
+    \pgfmathsetmacro{\corr@loopchannelvyrad}{\corr@loopchannelvertexyspan}%
+    \def\corr@currentmomentumlabeldistance{\corr@loopchannelalabeldistance}%
+    \corr@ifstringeq{\corr@loopchanneladir}{none}{}{%
+      \corr@ifstringeq{\corr@loopchanneladir}{reverse}{%
+        \corr@drawellipticmomentumarc{5}
+          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {205}{155}
+          {\corr@loopchannelalabelposition}
+          {\corr@loopchannelalabelxshift}
+          {\corr@loopchannelalabelyshift}%
+      }{%
+        \corr@drawellipticmomentumarc{5}
+          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {155}{205}
+          {\corr@loopchannelalabelposition}
+          {\corr@loopchannelalabelxshift}
+          {\corr@loopchannelalabelyshift}%
+      }%
+    }%
+    \def\corr@currentmomentumlabeldistance{\corr@loopchannelblabeldistance}%
+    \corr@ifstringeq{\corr@loopchannelbdir}{none}{}{%
+      \corr@ifstringeq{\corr@loopchannelbdir}{reverse}{%
+        \corr@drawellipticmomentumarc{6}
+          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {-25}{25}
+          {\corr@loopchannelblabelposition}
+          {\corr@loopchannelblabelxshift}
+          {\corr@loopchannelblabelyshift}%
+      }{%
+        \corr@drawellipticmomentumarc{6}
+          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
+          {\corr@loopchannelvxrad}
+          {\corr@loopchannelvyrad}
+          {25}{-25}
+          {\corr@loopchannelblabelposition}
+          {\corr@loopchannelblabelxshift}
+          {\corr@loopchannelblabelyshift}%
+      }%
+    }%
+  \fi
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelastartslotpos}{\corr@loopchannelastartindexposition}{\corr@loopchannelastartindexxshift}{\corr@loopchannelastartindexyshift}{\corr@loopchannelastartindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelapropslotpos}{\corr@loopchannelainternalindexposition}{\corr@loopchannelainternalindexxshift}{\corr@loopchannelainternalindexyshift}{\corr@loopchannelapropindex}{\corr@loopchannelpropagatorindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelaendslotpos}{\corr@loopchannelaendindexposition}{\corr@loopchannelaendindexxshift}{\corr@loopchannelaendindexyshift}{\corr@loopchannelaendindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=0,in=0,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelbstartslotpos}{\corr@loopchannelbstartindexposition}{\corr@loopchannelbstartindexxshift}{\corr@loopchannelbstartindexyshift}{\corr@loopchannelbstartindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=0,in=0,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelbpropslotpos}{\corr@loopchannelbinternalindexposition}{\corr@loopchannelbinternalindexxshift}{\corr@loopchannelbinternalindexyshift}{\corr@loopchannelbpropindex}{\corr@loopchannelpropagatorindexmathstyle}
+  \corr@putloopchannelinternalindexcurve
+    {(corrVT)}{out=0,in=0,looseness=\corr@loopchannellooplooseness}{(corrVB)}
+    {\corr@loopchannelbendslotpos}{\corr@loopchannelbendindexposition}{\corr@loopchannelbendindexxshift}{\corr@loopchannelbendindexyshift}{\corr@loopchannelbendindex}{\corr@loopchannelvertexindexmathstyle}
+  \corr@fourpointplaceexternallabels
+  \corr@putloopchannelcentral{corrC}
+}
+
 \NewDocumentCommand{\FourPointCorr}{O{}}{%
   \begingroup
+  \corr@resetchanneldefaults
+  \corr@resetloopchanneldefaults
   \pgfqkeys{/corrdiag}{#1}%
   \corr@preparelists
   \corr@configurestyles
+  \corr@resolvechanneldefaults
+  \corr@resolveloopchanneldefaults
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
-    \begin{feynhand}
-      \vertex (corrC) at (0,0);
-      \vertex (corrUL) at (-1.95,1.35);
-      \vertex (corrLL) at (-1.95,-1.35);
-      \vertex (corrUR) at (1.95,1.35);
-      \vertex (corrLR) at (1.95,-1.35);
-      \corr@drawprop{mom}{1}{corrUL}{corrC}
-      \corr@drawprop{mom'}{2}{corrLL}{corrC}
-      \corr@drawprop{mom'}{3}{corrUR}{corrC}
-      \corr@drawprop{mom}{4}{corrLR}{corrC}
-      \ifcorr@blob
-        \corr@putblob{corrC}{\corr@blobstyle}
-      \fi
-    \end{feynhand}
-    \ifcorr@centervertex
-      \corr@putvertex{corrC}{\corr@centervertexstyle}
-    \fi
-    \ifcorr@externalvertices
-      \corr@putvertex{corrUL}{\corr@externalvertexstyle}
-      \corr@putvertex{corrLL}{\corr@externalvertexstyle}
-      \corr@putvertex{corrUR}{\corr@externalvertexstyle}
-      \corr@putvertex{corrLR}{\corr@externalvertexstyle}
-    \fi
-    \ifcorr@showmomenta
-      \corr@drawmomentum{1}{corrUL}{corrC}{90}
-      \corr@drawmomentum{2}{corrLL}{corrC}{-90}
-      \corr@drawmomentum{3}{corrUR}{corrC}{-90}
-      \corr@drawmomentum{4}{corrLR}{corrC}{90}
-    \fi
-    \corr@putlabel{corrUL}{xshift=-11pt,yshift=8pt}{1}
-    \corr@putlabel{corrLL}{xshift=-11pt,yshift=-8pt}{2}
-    \corr@putlabel{corrUR}{xshift=11pt,yshift=8pt}{3}
-    \corr@putlabel{corrLR}{xshift=11pt,yshift=-8pt}{4}
-    \corr@putcentral{corrC}
+    \corr@ifstringeq{\corr@fourpointtopology}{contact}{%
+      \corr@drawfourpointcontact
+    }{%
+      \corr@ifstringeq{\corr@fourpointtopology}{s}{%
+        \corr@drawfourpointsloopchannel
+      }{%
+        \corr@ifstringeq{\corr@fourpointtopology}{t}{%
+          \corr@drawfourpointtloopchannel
+        }{%
+          \corr@ifstringeq{\corr@fourpointtopology}{u}{%
+            \corr@drawfourpointuloopchannel
+          }{%
+            \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+              \corr@drawfourpointstreeschannel
+            }{%
+              \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+                \corr@drawfourpointtreetchannel
+              }{%
+                \corr@drawfourpointtreeuchannel
+              }%
+            }%
+          }%
+        }%
+      }%
+    }%
   \end{tikzpicture}%
   \endgroup
 }
@@ -1088,7 +2920,7 @@
   \corr@configurestyles
   \corr@resolvesunsetlabelshifts
   \ifdefempty{\corr@central}{%
-    \edef\corr@central{\corr@sunsetcentrallabel}%
+    \def\corr@central{\corr@sunsetcentrallabel}%
   }{}%
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \pgfmathsetmacro{\corr@sunsetleftvertexx}{-\corr@sunsetinnerspan}
@@ -1101,9 +2933,13 @@
       \vertex (sunC) at (0,0);
       \vertex (sunRv) at (\corr@sunsetrightvertexx,0);
       \vertex (sunRext) at (\corr@sunsetrightextx,0);
-      \corr@drawsunsetprop{1}{\corr@sunsetleftline}{sunLext}{sunLv}{}
+      \corr@ifexternallegs{%
+        \corr@drawsunsetprop{1}{\corr@sunsetleftline}{sunLext}{sunLv}{}%
+      }%
       \corr@drawsunsetprop{2}{\corr@sunsetmiddleline}{sunLv}{sunRv}{}
-      \corr@drawsunsetprop{3}{\corr@sunsetrightline}{sunRv}{sunRext}{}
+      \corr@ifexternallegs{%
+        \corr@drawsunsetprop{3}{\corr@sunsetrightline}{sunRv}{sunRext}{}%
+      }%
       \corr@drawsunsetprop{4}{\corr@sunsettopline}{sunLv}{sunRv}{half left,looseness=\corr@sunsetlooplooseness}
       \corr@drawsunsetprop{5}{\corr@sunsetbottomline}{sunLv}{sunRv}{half right,looseness=\corr@sunsetlooplooseness}
     \end{feynhand}
@@ -1111,10 +2947,10 @@
       \corr@putvertex{sunLv}{\corr@sunsetinternalvertexstyle}
       \corr@putvertex{sunRv}{\corr@sunsetinternalvertexstyle}
     \fi
-    \ifcorr@externalvertices
+    \corr@ifshowexternalvertices{%
       \corr@putvertex{sunLext}{\corr@externalvertexstyle}
       \corr@putvertex{sunRext}{\corr@externalvertexstyle}
-    \fi
+    }%
     \ifcorr@showmomenta
       \corr@drawsunsetmomentumline{1}
         {($(sunLext)!\corr@sunsetexternalarrowstart!(sunLv)+(0,\corr@sunsetexternalarrowyshift)$)}
@@ -1158,7 +2994,7 @@
       {(sunLv)}
       {out=90,in=90,looseness=\corr@sunsetlooplooseness}
       {(sunRv)}
-      {\corr@sunsetinternalleftslotpos}
+      {\corr@sunsettopleftslotpos}
       {\corr@sunsettopendindexposition}
       {\corr@sunsettopleftindexxshift}
       {\corr@sunsettopendindexyshift}
@@ -1168,7 +3004,7 @@
       {(sunLv)}
       {out=90,in=90,looseness=\corr@sunsetlooplooseness}
       {(sunRv)}
-      {\corr@sunsetinternalpropslotpos}
+      {\corr@sunsettoppropslotpos}
       {\corr@sunsettopinternalindexposition}
       {\corr@sunsettopinternalindexxshift}
       {\corr@sunsettopinternalindexyshift}
@@ -1178,7 +3014,7 @@
       {(sunLv)}
       {out=90,in=90,looseness=\corr@sunsetlooplooseness}
       {(sunRv)}
-      {\corr@sunsetinternalrightslotpos}
+      {\corr@sunsettoprightslotpos}
       {\corr@sunsettopendindexposition}
       {\corr@sunsettoprightindexxshift}
       {\corr@sunsettopendindexyshift}
@@ -1187,7 +3023,7 @@
     \corr@putsunsetinternalindexline
       {(sunLv)}
       {(sunRv)}
-      {\corr@sunsetinternalleftslotpos}
+      {\corr@sunsetmiddleleftslotpos}
       {\corr@sunsetmiddleendindexposition}
       {\corr@sunsetmiddleleftindexxshift}
       {\corr@sunsetmiddleendindexyshift}
@@ -1196,7 +3032,7 @@
     \corr@putsunsetinternalindexline
       {(sunLv)}
       {(sunRv)}
-      {\corr@sunsetinternalpropslotpos}
+      {\corr@sunsetmiddlepropslotpos}
       {\corr@sunsetmiddleinternalindexposition}
       {\corr@sunsetmiddleinternalindexxshift}
       {\corr@sunsetmiddleinternalindexyshift}
@@ -1205,7 +3041,7 @@
     \corr@putsunsetinternalindexline
       {(sunLv)}
       {(sunRv)}
-      {\corr@sunsetinternalrightslotpos}
+      {\corr@sunsetmiddlerightslotpos}
       {\corr@sunsetmiddleendindexposition}
       {\corr@sunsetmiddlerightindexxshift}
       {\corr@sunsetmiddleendindexyshift}
@@ -1215,7 +3051,7 @@
       {(sunLv)}
       {out=-90,in=-90,looseness=\corr@sunsetlooplooseness}
       {(sunRv)}
-      {\corr@sunsetinternalleftslotpos}
+      {\corr@sunsetbottomleftslotpos}
       {\corr@sunsetbottomendindexposition}
       {\corr@sunsetbottomleftindexxshift}
       {\corr@sunsetbottomendindexyshift}
@@ -1225,7 +3061,7 @@
       {(sunLv)}
       {out=-90,in=-90,looseness=\corr@sunsetlooplooseness}
       {(sunRv)}
-      {\corr@sunsetinternalpropslotpos}
+      {\corr@sunsetbottompropslotpos}
       {\corr@sunsetbottominternalindexposition}
       {\corr@sunsetbottominternalindexxshift}
       {\corr@sunsetbottominternalindexyshift}
@@ -1235,7 +3071,7 @@
       {(sunLv)}
       {out=-90,in=-90,looseness=\corr@sunsetlooplooseness}
       {(sunRv)}
-      {\corr@sunsetinternalrightslotpos}
+      {\corr@sunsetbottomrightslotpos}
       {\corr@sunsetbottomendindexposition}
       {\corr@sunsetbottomrightindexxshift}
       {\corr@sunsetbottomendindexyshift}
@@ -1250,6 +3086,15 @@
 
 \NewDocumentCommand{\TwoPtCorr}{O{}}{\TwoPointCorr[#1]}
 \NewDocumentCommand{\FourPtCorr}{O{}}{\FourPointCorr[#1]}
+\NewDocumentCommand{\SLoopChannelCorr}{O{}}{\FourPointCorr[topology=s,#1]}
+\NewDocumentCommand{\TLoopChannelCorr}{O{}}{\FourPointCorr[topology=t,#1]}
+\NewDocumentCommand{\ULoopChannelCorr}{O{}}{\FourPointCorr[topology=u,#1]}
+\NewDocumentCommand{\SChannelCorr}{O{}}{\FourPointCorr[topology=s,#1]}
+\NewDocumentCommand{\TChannelCorr}{O{}}{\FourPointCorr[topology=t,#1]}
+\NewDocumentCommand{\UChannelCorr}{O{}}{\FourPointCorr[topology=u,#1]}
+\NewDocumentCommand{\STreeChannelCorr}{O{}}{\FourPointCorr[topology=s-tree,#1]}
+\NewDocumentCommand{\TTreeChannelCorr}{O{}}{\FourPointCorr[topology=t-tree,#1]}
+\NewDocumentCommand{\UTreeChannelCorr}{O{}}{\FourPointCorr[topology=u-tree,#1]}
 \NewDocumentCommand{\SunsetDiag}{O{}}{\SunsetDiagram[#1]}
 
 \makeatother
