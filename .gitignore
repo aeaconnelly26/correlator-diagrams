@@ -1,0 +1,14 @@
+*.aux
+*.log
+*.out
+*.fdb_latexmk
+*.fls
+texput.log
+sunset-min.pdf
+sunset-indices.pdf
+*-preview.png
+*-preview-hi.png
+*-crop.png
+sunset-index-debug-*.png
+sunset-index-regression-hires.png
+sunset-index-debug-hires.png

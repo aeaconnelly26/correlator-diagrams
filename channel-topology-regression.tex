@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
+
+\begin{document}
+
+\section*{Channel Topology Regression}
+
+Contact topology:
+\[
+  \FourPointCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ]
+\]
+
+\bigskip
+
+\(\phi^4\) one-loop \(s\)-channel with contracted internal indices:
+\[
+  \SChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_s,
+    momentum-labels={p_1,p_2,p_3,p_4},
+    loop-channel-top-momentum=\ell,
+    loop-channel-bottom-momentum=p_1+p_2-\ell,
+    loop-channel-contracted-indices={\alpha,\beta}
+  ]
+\]
+
+\bigskip
+
+\(\phi^4\) one-loop \(t\)-channel with uncontracted internal indices:
+\[
+  \TChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_t,
+    momentum-labels={p_1,p_2,p_3,p_4},
+    loop-channel-left-momentum=\ell,
+    loop-channel-right-momentum=q-\ell,
+    loop-channel-left-label-xshift=-8pt,
+    loop-channel-right-label-xshift=8pt,
+    loop-channel-left-indices={m,\mu,n},
+    loop-channel-right-indices={r,\nu,s},
+    loop-channel-index-layout=tight
+  ]
+\]
+
+\bigskip
+
+\(\phi^4\) one-loop \(u\)-channel with paired index lists:
+\[
+  \UChannelCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(1)}_u,
+    momentum-labels={p_1,p_2,p_3,p_4},
+    loop-channel-left-momentum=\ell,
+    loop-channel-right-momentum=r-\ell,
+    loop-channel-left-label-xshift=-8pt,
+    loop-channel-start-vertex-indices={i,m},
+    loop-channel-internal-indices={\rho,\sigma},
+    loop-channel-end-vertex-indices={j,n}
+  ]
+\]
+
+\end{document}
