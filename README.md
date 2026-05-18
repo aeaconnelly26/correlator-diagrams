@@ -1,22 +1,86 @@
 # Correlator Diagram Macros
 
-![Correlator channel showcase](assets/readme-hero.png)
+Reusable LaTeX macros for the QFT diagrams that actually show up in notes, assignments, and writeups: correlators, contraction classes, amputated vertices, loop bubbles, and exchange channels.
 
-Reusable LaTeX macros for QFT correlators, contraction classes, amputated vertices, loop bubbles, exchange channels, and sunset diagrams.
+Fast defaults when you just need the figure. One-option switches for common cleanup like hiding momenta. More detailed control when the geometry gets ugly.
 
-This package is built for real notes and assignments where you want clean, repeatable Feynman-style figures without rewriting raw TikZ every time.
+## In A Few Lines
+
+<table>
+  <tr>
+    <td valign="top" width="50%">
+      <strong>Default 4-point correlator</strong><br>
+      <sub>External labels and momenta from one readable macro call.</sub>
+      <pre lang="tex">\FourPointCorr[
+  field=\phi,
+  indices={a,b,c,d},
+  central=\Gamma^{(4)}
+]</pre>
+      <p align="center">
+        <img src="assets/readme-fourpoint-default.png" alt="Default four-point correlator" width="320">
+      </p>
+    </td>
+    <td valign="top" width="50%">
+      <strong>Change the flow convention</strong><br>
+      <sub>Use left-in/right-out momentum arrows without redrawing the figure.</sub>
+      <pre lang="tex">\TChannelCorr[
+  external-momentum-flow=left-in-right-out,
+  field=\phi,
+  indices={a,b,c,d},
+  central=\Gamma^{(1)}_{t}
+]</pre>
+      <p align="center">
+        <img src="assets/readme-tchannel-flow.png" alt="T-channel with left-in right-out momentum flow" width="320">
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <strong>Amputate and pair the fields</strong><br>
+      <sub>Switch from a central vertex to a direct contraction pattern.</sub>
+      <pre lang="tex">\FourPointCorr[
+  external-legs=false,
+  center-vertex=false,
+  show-momenta=false,
+  contact-pairing=horizontal,
+  field=x,
+  indices={1,2,3,4},
+  central=\Gamma^{(4)}_{1212}
+]</pre>
+      <p align="center">
+        <img src="assets/readme-contact-horizontal.png" alt="Amputated horizontal contact pairing" width="320">
+      </p>
+    </td>
+    <td valign="top" width="50%">
+      <strong>Color the whole topology</strong><br>
+      <sub>One option for a uniform diagram style.</sub>
+      <pre lang="tex">\SChannelCorr[
+  color=blue,
+  show-momenta=false,
+  field=\phi,
+  indices={a,b,c,d},
+  central=\Gamma^{(1)}_{s}
+]</pre>
+      <p align="center">
+        <img src="assets/readme-schannel-blue.png" alt="Blue s-channel with momenta hidden" width="320">
+      </p>
+    </td>
+  </tr>
+</table>
+
+The detailed geometry tuning is there when you need it, but the common cases above are meant to stay copy-pasteable.
 
 ## Highlights
 
-- `\TwoPointCorr`, `\FourPointCorr`, and `\SunsetDiagram` as the core entry points
+- `\TwoPointCorr` and `\FourPointCorr` as the main entry points
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
-- per-leg and per-internal-line styling, including global `color=...`
-- built-in palette colors `fieldA` and `fieldB`
+- quick cleanup switches like `show-momenta=false`
+- uniform propagator color via global `color=...`
+- deeper per-leg and per-internal-line styling when you need it
 - external momentum flow presets such as `left-in-right-out`
-
-![Contact pairing showcase](assets/readme-pairings.png)
+- sunset self-energies are supported too, with a dedicated `\SunsetDiagram` macro
 
 ## Quick Start
 
@@ -60,53 +124,6 @@ Common wrappers and aliases:
 \TTreeChannelCorr[...]
 \UTreeChannelCorr[...]
 \SunsetDiag[...]
-```
-
-## Examples
-
-Minimal 4-point correlator:
-
-```tex
-\[
-  \FourPointCorr[
-    field=\phi,
-    indices={a,b,c,d},
-    central=\Gamma^{(4)}
-  ]
-\]
-```
-
-Amputated contact pairing with colored contractions:
-
-```tex
-\[
-  \FourPointCorr[
-    external-legs=false,
-    center-vertex=false,
-    show-momenta=false,
-    contact-pairing=horizontal,
-    leg-styles={{plain,fieldA},{plain,fieldB},{plain,fieldA},{plain,fieldB}},
-    field=x,
-    indices={1,2,3,4},
-    central=\Gamma^{(4)}_{1212}
-  ]
-\]
-```
-
-One-loop `s` channel with left-in/right-out momentum flow:
-
-```tex
-\[
-  \SChannelCorr[
-    external-momentum-flow=left-in-right-out,
-    field=\phi,
-    indices={a,b,c,d},
-    color=fieldA,
-    loop-channel-top-line={plain,fieldB},
-    loop-channel-bottom-line={plain,fieldB},
-    central=\Gamma^{(1)}_{s}
-  ]
-\]
 ```
 
 ## Documentation

@@ -1,26 +1,25 @@
-# Correlator Diagram Macros Reference
+# Reference
 
-Back to the landing page: [README](../README.md)
+Full package reference for `correlator-diagrams.sty`.
 
-This file preserves the full package reference, API notes, and tuning recipes.
+For the short overview, visuals, and starter examples, see [README](../README.md).
 
-![Correlator channel showcase](../assets/readme-hero.png)
+## Sections
 
-Reusable LaTeX macros for QFT correlators, contraction classes, amputated vertices, and loop/tree channel topologies.
-
-This package was built for real notes, assignments, and writeups where the diagrams need to look intentional without hand-tuning raw TikZ every time. It is especially useful when you want:
-
-- 2-point and 4-point correlators with consistent slot ordering
-- contact pairings beyond the central vertex layout, including `vertical`, `horizontal`, and `crossed`
-- one-loop `s`, `t`, and `u` channel bubbles for `\phi^4`-style diagrams
-- explicit tree-level `s`, `t`, and `u` exchange topologies
-- sunset self-energy diagrams
-- color-coded multi-field figures like `\phi_1^2 \phi_2^2` contraction classes
-- per-leg, per-internal-line, and per-channel control over styles, labels, indices, and momentum arrows
-
-The visuals below are generated from the same kinds of contraction and channel diagrams used in actual QFT coursework notes:
-
-![Contact pairing showcase](../assets/readme-pairings.png)
+- [Quick Start](#quick-start)
+- [The Basic Workflow](#the-basic-workflow)
+- [What Each Macro Draws](#what-each-macro-draws)
+- [Leg Order And Slot Order](#leg-order-and-slot-order)
+- [Quick Start Examples](#quick-start-examples)
+- [External Field Labels](#external-field-labels)
+- [Momentum Labels And Arrows](#momentum-labels-and-arrows)
+- [Line Styles, Arrows, And Vertices](#line-styles-arrows-and-vertices)
+- [Scalar-Polarized Legs](#scalar-polarized-legs)
+- [One-Loop `s/t/u` Channel Bubbles For `\phi^4`](#one-loop-stu-channel-bubbles-for-phi4)
+- [Sunset Diagrams](#sunset-diagrams)
+- [Explicit Tree-Level Channel Topologies](#explicit-tree-level-channel-topologies)
+- [Which Example File To Open](#which-example-file-to-open)
+- [Overleaf And Local Use](#overleaf-and-local-use)
 
 ## Quick Start
 
