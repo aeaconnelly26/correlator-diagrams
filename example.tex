@@ -42,20 +42,31 @@ Default 2-point correlator:
   ]
 \]
 
-4-point correlator with a visible center vertex, emphasized arrows, and scalar-polarized legs:
+4-point correlators with one scalar-polarized leg and inward-pointing markers:
 \[
+\begin{array}{cc}
+  \text{Default scalar arrow} &
+  \text{Larger scalar arrow} \\
   \FourPointCorr[
     blob=false,
     center-vertex-style=ringdot,
-    leg-styles={scalarpolarized,scalarpolarized,plain,plain},
-    momentum-arrow-size=6pt,
-    momentum-arrow-sizes={11pt,8pt,5pt,5pt},
-    propagator-arrow-size=8pt,
-    propagator-arrow-sizes={12pt,9pt,8pt,8pt},
+    show-momenta=false,
+    leg-styles={scalarpolarized,plain,plain,plain},
+    field=\varphi,
+    indices={1,2,3,4},
+    central=\Gamma_{\mathrm{mix}}^{(4)}
+  ] &
+  \FourPointCorr[
+    blob=false,
+    center-vertex-style=ringdot,
+    show-momenta=false,
+    propagator-arrow-size=14pt,
+    leg-styles={plain,plain,scalarpolarized,plain},
     field=\varphi,
     indices={1,2,3,4},
     central=\Gamma_{\mathrm{mix}}^{(4)}
   ]
+\end{array}
 \]
 
 Vertex-style 4-point object with upper indices and no blob:
