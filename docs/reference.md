@@ -924,27 +924,25 @@ Default behavior:
 Special dashed scalar styles with open arrowheads:
 
 - `scalarpolarized`
-- `antiscalarpolarized`
 - `spol`
-- `antspol`
 
 Directional aliases:
 
 - `scalarpolarizedin`
 - `scalarpolarizedout`
-- `antiscalarpolarizedin`
-- `antiscalarpolarizedout`
 - `spolin`
 - `spolout`
-- `antspolin`
-- `antspolout`
 
 Relevant controls:
 
 - `scalar-arrow-direction=in|out|none`
 - `scalar-arrow-position=<0..1>`
-- `anti-scalar-arrow-direction=in|out|none`
-- `anti-scalar-arrow-position=<0..1>`
+
+The default `scalarpolarized` style places an inward-pointing marker near the vertex.
+
+`out` flips the marker so the triangle points outward while keeping it near the vertex end of the leg.
+
+Legacy `antiscalar...` and `antspol...` names still work as aliases of the same scalar-polarized style.
 
 The open arrowhead size tracks the normal propagator arrow-size controls.
 
@@ -1537,6 +1535,7 @@ Those use the legacy `channel-*` key family, for example:
 
 - `example.tex`: broad package tour
 - `channel-topology-regression.tex`: one-loop `s/t/u` channel checks
+- `scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
 - `sunset-example.tex`: focused sunset examples
 - `simple-sunset.tex`: smallest standalone sunset PDF
 

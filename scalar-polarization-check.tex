@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
+
+\begin{document}
+
+\section*{Scalar Polarization Check}
+
+Default inward placement with one scalar-polarized leg and the others plain:
+
+\[
+\begin{array}{cc}
+  \text{Upper-left leg only} &
+  \text{Lower-left leg only} \\
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    leg-styles={scalarpolarized,plain,plain,plain},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ] &
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    leg-styles={plain,scalarpolarized,plain,plain},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ] \\
+  \text{Upper-right leg only} &
+  \text{Lower-right leg only} \\
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    leg-styles={plain,plain,scalarpolarized,plain},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ] &
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    leg-styles={plain,plain,plain,scalarpolarized},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ]
+\end{array}
+\]
+
+\newpage
+
+Same single-leg cases with a larger scalar-polarized arrow size:
+
+\[
+\begin{array}{cc}
+  \text{Upper-left leg only} &
+  \text{Lower-left leg only} \\
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    propagator-arrow-size=14pt,
+    leg-styles={scalarpolarized,plain,plain,plain},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ] &
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    propagator-arrow-size=14pt,
+    leg-styles={plain,scalarpolarized,plain,plain},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ] \\
+  \text{Upper-right leg only} &
+  \text{Lower-right leg only} \\
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    propagator-arrow-size=14pt,
+    leg-styles={plain,plain,scalarpolarized,plain},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ] &
+  \FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    propagator-arrow-size=14pt,
+    leg-styles={plain,plain,plain,scalarpolarized},
+    field=\phi,
+    indices={a,b,c,d},
+    central=\Gamma^{(4)}
+  ]
+\end{array}
+\]
+
+\end{document}

@@ -89,10 +89,8 @@
 \def\corr@indices{}
 \def\corr@leglabels{}
 \def\corr@central{}
-\def\corr@scalararrowposition{0.08}
+\def\corr@scalararrowposition{0.84}
 \def\corr@scalararrowdirection{in}
-\def\corr@antiscalararrowposition{0.08}
-\def\corr@antiscalararrowdirection{out}
 \def\corr@sunsetleftmomentum{p}
 \def\corr@sunsetrightmomentum{}
 \def\corr@sunsettopmomentum{k}
@@ -1004,29 +1002,6 @@
       }%
     }%
   }%
-  \corr@ifstringeq{\corr@antiscalararrowdirection}{out}{%
-    \tikzfeynhandset{
-      every anti scalar polarized@@/.style={
-        /tikzfeynhand/every scalar polarized base@@,
-        /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@antiscalararrowposition},
-      },
-    }%
-  }{%
-    \corr@ifstringeq{\corr@antiscalararrowdirection}{none}{%
-      \tikzfeynhandset{
-        every anti scalar polarized@@/.style={
-          /tikzfeynhand/every scalar polarized base@@,
-        },
-      }%
-    }{%
-      \tikzfeynhandset{
-        every anti scalar polarized@@/.style={
-          /tikzfeynhand/every scalar polarized base@@,
-          /tikz/postaction={/tikzfeynhand/with open arrow=\corr@antiscalararrowposition},
-        },
-      }%
-    }%
-  }%
   \tikzfeynhandset{
     every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
     scalar polarized/.style={
@@ -1048,28 +1023,17 @@
     scalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
     spolin/.style={/tikzfeynhand/scalar polarized inward},
     spolout/.style={/tikzfeynhand/scalar polarized outward},
-    every anti scalar polarized/.style={/tikzfeynhand/every anti scalar polarized@@/.append style={##1}},
-    anti scalar polarized/.style={
-      /tikzfeynhand/scalar,
-      /tikzfeynhand/every anti scalar polarized@@,
-    },
-    antiscalarpolarized/.style={/tikzfeynhand/anti scalar polarized},
-    anti scalar polarized inward/.style={
-      /tikzfeynhand/scalar,
-      /tikzfeynhand/every scalar polarized base@@,
-      /tikz/postaction={/tikzfeynhand/with open arrow=\corr@antiscalararrowposition},
-    },
-    anti scalar polarized outward/.style={
-      /tikzfeynhand/scalar,
-      /tikzfeynhand/every scalar polarized base@@,
-      /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@antiscalararrowposition},
-    },
-    antiscalarpolarizedin/.style={/tikzfeynhand/anti scalar polarized inward},
-    antiscalarpolarizedout/.style={/tikzfeynhand/anti scalar polarized outward},
     spol/.style={/tikzfeynhand/scalar polarized},
-    antspol/.style={/tikzfeynhand/anti scalar polarized},
-    antspolin/.style={/tikzfeynhand/anti scalar polarized inward},
-    antspolout/.style={/tikzfeynhand/anti scalar polarized outward},
+    every anti scalar polarized/.style={/tikzfeynhand/every scalar polarized/.append style={##1}},
+    anti scalar polarized/.style={/tikzfeynhand/scalar polarized},
+    antiscalarpolarized/.style={/tikzfeynhand/scalar polarized},
+    anti scalar polarized inward/.style={/tikzfeynhand/scalar polarized inward},
+    anti scalar polarized outward/.style={/tikzfeynhand/scalar polarized outward},
+    antiscalarpolarizedin/.style={/tikzfeynhand/scalar polarized inward},
+    antiscalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
+    antspol/.style={/tikzfeynhand/scalar polarized},
+    antspolin/.style={/tikzfeynhand/scalar polarized inward},
+    antspolout/.style={/tikzfeynhand/scalar polarized outward},
   }%
 }
 
@@ -1121,14 +1085,14 @@
   scalarpolarized-arrow-direction/.style={scalar-arrow-direction={#1}},
   spol-arrow-position/.style={scalar-arrow-position={#1}},
   spol-arrow-direction/.style={scalar-arrow-direction={#1}},
-  anti-scalar-arrow-position/.store in=\corr@antiscalararrowposition,
-  anti-scalar-arrow-direction/.store in=\corr@antiscalararrowdirection,
-  antiscalar-arrow-position/.style={anti-scalar-arrow-position={#1}},
-  antiscalar-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
-  antiscalarpolarized-arrow-position/.style={anti-scalar-arrow-position={#1}},
-  antiscalarpolarized-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
-  antspol-arrow-position/.style={anti-scalar-arrow-position={#1}},
-  antspol-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
+  anti-scalar-arrow-position/.style={scalar-arrow-position={#1}},
+  anti-scalar-arrow-direction/.style={scalar-arrow-direction={#1}},
+  antiscalar-arrow-position/.style={scalar-arrow-position={#1}},
+  antiscalar-arrow-direction/.style={scalar-arrow-direction={#1}},
+  antiscalarpolarized-arrow-position/.style={scalar-arrow-position={#1}},
+  antiscalarpolarized-arrow-direction/.style={scalar-arrow-direction={#1}},
+  antspol-arrow-position/.style={scalar-arrow-position={#1}},
+  antspol-arrow-direction/.style={scalar-arrow-direction={#1}},
   sunset-external-momentum/.style={
     sunset-left-momentum={#1},
     sunset-right-momentum={#1}

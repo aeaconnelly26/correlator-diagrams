@@ -97,6 +97,7 @@ Main demo files in this repository:
 
 - [`example.tex`](example.tex)
 - [`channel-topology-regression.tex`](channel-topology-regression.tex)
+- [`scalar-polarization-check.tex`](scalar-polarization-check.tex)
 - [`sunset-example.tex`](sunset-example.tex)
 - [`simple-sunset.tex`](simple-sunset.tex)
 
@@ -131,6 +132,7 @@ Common wrappers and aliases:
 - Start with [`example.tex`](example.tex) if you want copy-paste examples.
 - Use [`docs/reference.md`](docs/reference.md) for the full macro and tuning reference.
 - Use [`channel-topology-regression.tex`](channel-topology-regression.tex) to inspect channel layouts in isolation.
+- Use [`scalar-polarization-check.tex`](scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.
 
 The full reference covers:
 
@@ -145,6 +147,7 @@ The full reference covers:
 - `correlator-diagrams.sty`: package source
 - `example.tex`: broad feature gallery
 - `channel-topology-regression.tex`: focused channel regression cases
+- `scalar-polarization-check.tex`: single-leg scalar-polarized regression cases
 - `sunset-example.tex`: sunset-specific examples
 - `assets/`: README graphics
 
