@@ -31,6 +31,8 @@ Main demos:
 
 - `example.tex`
 - `channel-topology-regression.tex`
+- `three-point-check.tex`
+- `scalar-polarization-check.tex`
 - `sunset-example.tex`
 - `simple-sunset.tex`
 
@@ -41,10 +43,11 @@ Add the package to your document:
 \usepackage{correlator-diagrams}
 ```
 
-The three main entry points are:
+The main entry points are:
 
 ```tex
 \TwoPointCorr[...]
+\ThreePointCorr[...]
 \FourPointCorr[...]
 \SunsetDiagram[...]
 ```
@@ -53,6 +56,7 @@ Common aliases:
 
 ```tex
 \TwoPtCorr[...]
+\ThreePtCorr[...]
 \FourPtCorr[...]
 \SChannelCorr[...]
 \TChannelCorr[...]
@@ -91,6 +95,7 @@ That is the logic used by this package.
 | Macro | Purpose | Default shape |
 | --- | --- | --- |
 | `\TwoPointCorr` | 2-point function | left leg, right leg, central blob/vertex |
+| `\ThreePointCorr` | 3-point vertex | upper-left, right, and bottom legs meeting at one vertex |
 | `\FourPointCorr` | 4-point object | contact topology by default |
 | `\SunsetDiagram` | self-energy sunset | two external legs plus top/middle/bottom internal lines |
 
@@ -105,6 +110,40 @@ The convenience channel wrappers are just `\FourPointCorr` with a fixed topology
 
 - slot 1 = left leg
 - slot 2 = right leg
+
+### `\ThreePointCorr`
+
+- slot 1 = upper-left leg
+- slot 2 = right leg
+- slot 3 = bottom leg
+
+That slot order matters for:
+
+- `leg-styles={...}`
+- `momentum-labels={...}`
+- `momentum-arrow-sizes={...}`
+- `propagator-arrow-sizes={...}`
+- `leg-labels={...}`
+
+The default 3-point momentum convention is:
+
+- upper-left leg incoming
+- right leg outgoing
+- bottom leg outgoing
+
+Use `three-point-momentum-flow=all-in|all-out|default` to set all three arrows at once.
+
+For per-leg overrides use:
+
+- `three-point-upper-left-momentum-direction=in|out`
+- `three-point-right-momentum-direction=in|out`
+- `three-point-bottom-momentum-direction=in|out`
+
+Shorter aliases also work:
+
+- `three-point-left-momentum-direction=...`
+- `three-point-ul-momentum-direction=...`
+- `three-point-lower-momentum-direction=...`
 
 ### `\FourPointCorr`
 
@@ -189,6 +228,24 @@ You can also shift the numbering:
 
 This gives `\phi_a`, `\phi_b`, `\phi_c`, `\phi_d`.
 
+### 3-point vertex
+
+```tex
+\[
+  \ThreePointCorr[
+    line=pho,
+    field=A,
+    indices={\mu,\nu,\rho},
+    central=\Gamma^{(3)},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=all-in
+  ]
+\]
+```
+
+The 3-point layout has one upper-left leg, one right leg, and one bottom leg.
+Use `leg-styles={...}` for per-leg propagator styles in that order.
+
 ### Fully manual external labels
 
 ```tex
@@ -256,6 +313,40 @@ For simple diagrams you can rely on:
 
 Momentum labels are plain text by default. There is no white box behind them unless you add one yourself with:
 
+- `momentum-label-fill=...`
+- `momentum-label-inner-sep=...`
+- `momentum-label-style=...`
+
+### 3-point momentum flow
+
+For `\ThreePointCorr`, the default momentum flow is useful for a vertex with one incoming leg and two outgoing legs:
+
+```tex
+\[
+  \ThreePointCorr[
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ]
+\]
+```
+
+The flow presets are:
+
+- `three-point-momentum-flow=default`: upper-left in, right out, bottom out
+- `three-point-momentum-flow=all-in`
+- `three-point-momentum-flow=all-out`
+
+Per-leg direction keys take `in` or `out`:
+
+- `three-point-upper-left-momentum-direction=...`
+- `three-point-right-momentum-direction=...`
+- `three-point-bottom-momentum-direction=...`
+
+The shared arrow and label controls still apply:
+
+- `momentum-labels={...}`
+- `momentum-arrow-size=...`
+- `momentum-arrow-sizes={...}`
 - `momentum-label-fill=...`
 - `momentum-label-inner-sep=...`
 - `momentum-label-style=...`
@@ -883,6 +974,32 @@ Global line style:
 ```
 
 Per-leg overrides:
+
+```tex
+\[
+  \ThreePointCorr[
+    line=pho,
+    leg-styles={scalarpolarized,pho,pho},
+    three-point-momentum-flow=all-in,
+    momentum-labels={q_1,q_2,q_3},
+    momentum-arrow-size=5pt,
+    propagator-arrow-sizes={14pt,,}
+  ]
+\]
+```
+
+3-point geometry controls:
+
+- `three-point-left-xspan=...`
+- `three-point-upper-yspan=...`
+- `three-point-right-xspan=...`
+- `three-point-bottom-yspan=...`
+- `three-point-central-label-yshift=...`
+
+Aliases for the upper-left leg geometry:
+
+- `three-point-upper-left-xspan=...`
+- `three-point-upper-left-yspan=...`
 
 ```tex
 \[
@@ -1535,6 +1652,7 @@ Those use the legacy `channel-*` key family, for example:
 
 - `example.tex`: broad package tour
 - `channel-topology-regression.tex`: one-loop `s/t/u` channel checks
+- `three-point-check.tex`: focused 3-point topology checks
 - `scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
 - `sunset-example.tex`: focused sunset examples
 - `simple-sunset.tex`: smallest standalone sunset PDF

@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
+
+\begin{document}
+
+\section*{Three-Point Correlator Check}
+
+Baseline 3-point vertices. The first panel uses the default flow
+\(q_1\) in, \(q_2,q_3\) out; the second uses the all-in preset with a
+scalar-polarized incoming leg.
+
+\[
+\begin{array}{cc}
+  \text{Default flow} &
+  \text{All in with styled leg} \\
+  \ThreePointCorr[
+    line=pho,
+    field=A,
+    indices={\mu,\nu,\rho},
+    central=\Gamma^{(3)},
+    momentum-labels={q_1,q_2,q_3}
+  ] &
+  \ThreePointCorr[
+    line=pho,
+    leg-styles={scalarpolarized,pho,pho},
+    three-point-momentum-flow=all-in,
+    momentum-labels={q_1,q_2,q_3},
+    momentum-arrow-size=5pt,
+    propagator-arrow-sizes={14pt,,},
+    leg-labels={A_1,A_2,A_3}
+  ]
+\end{array}
+\]
+
+\newpage
+
+Per-leg direction overrides and arrow sizing:
+
+\[
+\begin{array}{cc}
+  \text{Upper-left out only} &
+  \text{Larger first arrow} \\
+  \ThreePointCorr[
+    line=pho,
+    momentum-labels={p_1,p_2,p_3},
+    three-point-upper-left-momentum-direction=out,
+    three-point-right-momentum-direction=in,
+    three-point-bottom-momentum-direction=in,
+    leg-labels={A_1,A_2,A_3}
+  ] &
+  \ThreePointCorr[
+    line=pho,
+    leg-styles={scalarpolarized,pho,pho},
+    three-point-momentum-flow=all-in,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={A_1,A_2,A_3},
+    momentum-arrow-sizes={8pt,5pt,5pt},
+    propagator-arrow-sizes={16pt,,}
+  ]
+\end{array}
+\]
+
+\newpage
+
+Geometry, labels, and amputation controls:
+
+\[
+\begin{array}{cc}
+  \text{Stretched ring vertex} &
+  \text{Amputated endpoint vertices} \\
+  \ThreePointCorr[
+    blob=false,
+    center-vertex-style=ringdot,
+    three-point-upper-left-xspan=1.75,
+    three-point-upper-left-yspan=1.55,
+    three-point-right-xspan=2.25,
+    three-point-bottom-yspan=2.20,
+    three-point-central-label-yshift=-30pt,
+    momentum-labels={k_1,k_2,k_3},
+    three-point-momentum-flow=all-out,
+    field=\chi,
+    indices={a,b,c},
+    central=V^{(3)}
+  ] &
+  \ThreePointCorr[
+    external-legs=false,
+    external-vertices=true,
+    show-momenta=false,
+    field=\phi,
+    indices={1,2,3},
+    central=\Gamma_{\mathrm{amp}}^{(3)}
+  ]
+\end{array}
+\]
+
+\end{document}

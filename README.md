@@ -72,7 +72,8 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 
 ## Highlights
 
-- `\TwoPointCorr` and `\FourPointCorr` as the main entry points
+- `\TwoPointCorr`, `\ThreePointCorr`, and `\FourPointCorr` as the main correlator entry points
+- 3-point vertices via `\ThreePointCorr`, including per-leg styles, custom labels, and all-in/all-out momentum flow
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
@@ -97,6 +98,7 @@ Main demo files in this repository:
 
 - [`example.tex`](example.tex)
 - [`channel-topology-regression.tex`](channel-topology-regression.tex)
+- [`three-point-check.tex`](three-point-check.tex)
 - [`scalar-polarization-check.tex`](scalar-polarization-check.tex)
 - [`sunset-example.tex`](sunset-example.tex)
 - [`simple-sunset.tex`](simple-sunset.tex)
@@ -111,6 +113,7 @@ pdflatex -interaction=nonstopmode -halt-on-error example.tex
 
 ```tex
 \TwoPointCorr[...]
+\ThreePointCorr[...]
 \FourPointCorr[...]
 \SunsetDiagram[...]
 ```
@@ -118,6 +121,9 @@ pdflatex -interaction=nonstopmode -halt-on-error example.tex
 Common wrappers and aliases:
 
 ```tex
+\TwoPtCorr[...]
+\ThreePtCorr[...]
+\FourPtCorr[...]
 \SChannelCorr[...]
 \TChannelCorr[...]
 \UChannelCorr[...]
@@ -132,11 +138,13 @@ Common wrappers and aliases:
 - Start with [`example.tex`](example.tex) if you want copy-paste examples.
 - Use [`docs/reference.md`](docs/reference.md) for the full macro and tuning reference.
 - Use [`channel-topology-regression.tex`](channel-topology-regression.tex) to inspect channel layouts in isolation.
+- Use [`three-point-check.tex`](three-point-check.tex) to verify the new 3-point topology and momentum placement.
 - Use [`scalar-polarization-check.tex`](scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.
 
 The full reference covers:
 
 - slot order and leg ordering
+- the new 3-point vertex topology
 - momentum labels and arrow tuning
 - loop-channel and sunset layout controls
 - line styles, vertices, colors, and scalar-polarized legs
@@ -147,6 +155,7 @@ The full reference covers:
 - `correlator-diagrams.sty`: package source
 - `example.tex`: broad feature gallery
 - `channel-topology-regression.tex`: focused channel regression cases
+- `three-point-check.tex`: focused 3-point regression cases
 - `scalar-polarization-check.tex`: single-leg scalar-polarized regression cases
 - `sunset-example.tex`: sunset-specific examples
 - `assets/`: README graphics
