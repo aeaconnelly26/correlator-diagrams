@@ -308,6 +308,10 @@
 \def\corr@boxtopmomentum{q_1+k}
 \def\corr@boxrightmomentum{q_1+k-q_4}
 \def\corr@boxbottommomentum{q_2-k}
+\def\corr@boxleftedgelabel{}
+\def\corr@boxtopedgelabel{}
+\def\corr@boxrightedgelabel{}
+\def\corr@boxbottomedgelabel{}
 \def\corr@boxloopmomentum{k}
 \def\corr@boxleftarrowstart{0.24}
 \def\corr@boxleftarrowend{0.72}
@@ -984,6 +988,10 @@
   \corr@topologysetdefault\corr@boxtopmomentum{q_1+k}%
   \corr@topologysetdefault\corr@boxrightmomentum{q_1+k-q_4}%
   \corr@topologysetdefault\corr@boxbottommomentum{q_2-k}%
+  \corr@topologysetdefault\corr@boxleftedgelabel{}%
+  \corr@topologysetdefault\corr@boxtopedgelabel{}%
+  \corr@topologysetdefault\corr@boxrightedgelabel{}%
+  \corr@topologysetdefault\corr@boxbottomedgelabel{}%
   \corr@topologysetdefault\corr@boxloopmomentum{k}%
   \corr@topologysetdefault\corr@boxleftarrowstart{0.24}%
   \corr@topologysetdefault\corr@boxleftarrowend{0.72}%
@@ -1507,6 +1515,12 @@
   box-bottom-momentum/.store in=\corr@boxbottommomentum,
   box-edge-momenta/.code={\corr@setboxquad{momentum}{#1}},
   box-internal-momenta/.style={box-edge-momenta={#1}},
+  box-left-edge-label/.store in=\corr@boxleftedgelabel,
+  box-top-edge-label/.store in=\corr@boxtopedgelabel,
+  box-right-edge-label/.store in=\corr@boxrightedgelabel,
+  box-bottom-edge-label/.store in=\corr@boxbottomedgelabel,
+  box-edge-labels/.code={\corr@setboxquad{edgelabel}{#1}},
+  box-internal-labels/.style={box-edge-labels={#1}},
   box-loop-momentum/.store in=\corr@boxloopmomentum,
   box-left-arrow-start/.store in=\corr@boxleftarrowstart,
   box-left-arrow-end/.store in=\corr@boxleftarrowend,
@@ -2330,6 +2344,7 @@
     \def\corr@boxedgelabelyshift{\corr@boxleftlabelyshift}%
     \def\corr@boxedgelabelfraction{\corr@boxleftlabelfraction}%
     \def\corr@boxedgemomentum{\corr@boxleftmomentum}%
+    \def\corr@boxedgelabelonly{\corr@boxleftedgelabel}%
   }{%
     \corr@ifstringeq{#1}{top}{%
       \def\corr@boxedgearrowstart{\corr@boxtoparrowstart}%
@@ -2342,6 +2357,7 @@
       \def\corr@boxedgelabelyshift{\corr@boxtoplabelyshift}%
       \def\corr@boxedgelabelfraction{\corr@boxtoplabelfraction}%
       \def\corr@boxedgemomentum{\corr@boxtopmomentum}%
+      \def\corr@boxedgelabelonly{\corr@boxtopedgelabel}%
     }{%
       \corr@ifstringeq{#1}{right}{%
         \def\corr@boxedgearrowstart{\corr@boxrightarrowstart}%
@@ -2354,6 +2370,7 @@
         \def\corr@boxedgelabelyshift{\corr@boxrightlabelyshift}%
         \def\corr@boxedgelabelfraction{\corr@boxrightlabelfraction}%
         \def\corr@boxedgemomentum{\corr@boxrightmomentum}%
+        \def\corr@boxedgelabelonly{\corr@boxrightedgelabel}%
       }{%
         \def\corr@boxedgearrowstart{\corr@boxbottomarrowstart}%
         \def\corr@boxedgearrowend{\corr@boxbottomarrowend}%
@@ -2365,8 +2382,26 @@
         \def\corr@boxedgelabelyshift{\corr@boxbottomlabelyshift}%
         \def\corr@boxedgelabelfraction{\corr@boxbottomlabelfraction}%
         \def\corr@boxedgemomentum{\corr@boxbottommomentum}%
+        \def\corr@boxedgelabelonly{\corr@boxbottomedgelabel}%
       }%
     }%
+  }%
+}
+
+\newcommand{\corr@drawboxedgelabel}[3]{%
+  \corr@resolveboxmomentumedge{#1}%
+  \ifdefempty{\corr@boxedgelabelonly}{}{%
+    \path
+      (#2) --
+      coordinate[pos=\corr@boxedgelabelfraction] (corrboxedgelabelcoord)
+      (#3);
+    \corr@putmomentumlabelwithdistance
+      {(corrboxedgelabelcoord)}
+      {\corr@boxedgelabelposition}
+      {\corr@boxedgelabeldistance}
+      {\corr@boxedgelabelxshift}
+      {\corr@boxedgelabelyshift}
+      {\corr@boxedgelabelonly}%
   }%
 }
 
@@ -2925,6 +2960,10 @@
     \corr@drawboxmomentumedge{bottom}{8}{corrBoxBL}{corrBoxBR}
     \corr@drawboxloopmomentum
   \fi
+  \corr@drawboxedgelabel{left}{corrBoxBL}{corrBoxTL}
+  \corr@drawboxedgelabel{top}{corrBoxTL}{corrBoxTR}
+  \corr@drawboxedgelabel{right}{corrBoxTR}{corrBoxBR}
+  \corr@drawboxedgelabel{bottom}{corrBoxBL}{corrBoxBR}
   \corr@boxplaceexternallabels
   \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
 }
