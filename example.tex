@@ -7,12 +7,19 @@
 
 \section*{Correlator Diagram Examples}
 
+This file is the broad package tour. It starts with the shared controls, then
+moves through the available topologies. The focused regression files cover the
+edge cases in more detail.
+
+\subsection*{1. Basic Entry Points}
+
 Default 2-point correlator:
 \[
   \TwoPointCorr
 \]
 
-2-point correlator with \(q_i\) labels and Lorentz indices:
+2-point correlator with generated momentum labels, field labels, and a central
+label:
 \[
   \TwoPointCorr[
     mode=q,
@@ -22,7 +29,27 @@ Default 2-point correlator:
   ]
 \]
 
-4-point correlator with \(k_i\) labels:
+Default 3-point and 4-point correlators:
+\[
+\begin{array}{cc}
+  \text{3-point vertex} &
+  \text{4-point contact} \\
+  \ThreePointCorr[
+    field=A,
+    indices={\mu,\nu,\rho},
+    central=\Gamma^{(3)}
+  ] &
+  \FourPointCorr[
+    field=\phi,
+    indices={a,b,c,d},
+    central=G^{(4)}
+  ]
+\end{array}
+\]
+
+\subsection*{2. External Labels And Line Styles}
+
+Automatic \(k_i\) momentum labels with external field indices:
 \[
   \FourPointCorr[
     mode=k,
@@ -32,7 +59,7 @@ Default 2-point correlator:
   ]
 \]
 
-4-point correlator with fermion lines and custom external labels:
+Manual external labels and a global fermion line style:
 \[
   \FourPointCorr[
     line=fer,
@@ -42,23 +69,7 @@ Default 2-point correlator:
   ]
 \]
 
-4-point correlator with a visible center vertex, emphasized arrows, and scalar-polarized legs:
-\[
-  \FourPointCorr[
-    blob=false,
-    center-vertex-style=ringdot,
-    leg-styles={scalarpolarized,scalarpolarized,plain,plain},
-    momentum-arrow-size=6pt,
-    momentum-arrow-sizes={11pt,8pt,5pt,5pt},
-    propagator-arrow-size=8pt,
-    propagator-arrow-sizes={12pt,9pt,8pt,8pt},
-    field=\varphi,
-    indices={1,2,3,4},
-    central=\Gamma_{\mathrm{mix}}^{(4)}
-  ]
-\]
-
-Vertex-style 4-point object with upper indices and no blob:
+Upper-index labels with the central blob hidden:
 \[
   \FourPointCorr[
     mode=p,
@@ -70,7 +81,90 @@ Vertex-style 4-point object with upper indices and no blob:
   ]
 \]
 
-Amputated 4-point correlator with endpoint vertices:
+\subsection*{3. Three-Point Vertices}
+
+The 3-point slot order is upper-left, right, bottom. The default momentum flow
+is upper-left incoming and the other two outgoing.
+\[
+\begin{array}{cc}
+  \text{Default flow} &
+  \text{All incoming with styled leg} \\
+  \ThreePointCorr[
+    line=pho,
+    field=A,
+    indices={\mu,\nu,\rho},
+    central=\Gamma^{(3)},
+    momentum-labels={q_1,q_2,q_3}
+  ] &
+  \ThreePointCorr[
+    line=pho,
+    leg-styles={scalarpolarized,pho,pho},
+    three-point-momentum-flow=all-in,
+    momentum-labels={q_1,q_2,q_3},
+    momentum-arrow-size=5pt,
+    propagator-arrow-sizes={14pt,,},
+    leg-labels={W_\mu,A_\nu,A_\rho},
+    central=\Gamma_{WAA}^{(3)}
+  ] \\
+  \text{Amputated endpoint labels} &
+  \text{Stretched geometry} \\
+  \ThreePointCorr[
+    external-legs=false,
+    external-vertices=true,
+    show-momenta=false,
+    field=\phi,
+    indices={1,2,3},
+    central=\Gamma_{\mathrm{amp}}^{(3)}
+  ] &
+  \ThreePointCorr[
+    blob=false,
+    center-vertex-style=ringdot,
+    three-point-upper-left-xspan=1.75,
+    three-point-upper-left-yspan=1.55,
+    three-point-right-xspan=2.25,
+    three-point-bottom-yspan=2.20,
+    momentum-labels={p_1,p_2,p_3},
+    three-point-momentum-flow=all-out,
+    field=\chi,
+    indices={a,b,c},
+    central=V^{(3)}
+  ]
+\end{array}
+\]
+
+\subsection*{4. Scalar-Polarized Legs}
+
+Scalar-polarized legs are dashed scalar lines with an open marker. The marker
+size follows the propagator-arrow sizing controls.
+\[
+\begin{array}{cc}
+  \text{Default scalar arrow} &
+  \text{Larger scalar arrow} \\
+  \FourPointCorr[
+    blob=false,
+    center-vertex-style=ringdot,
+    show-momenta=false,
+    leg-styles={scalarpolarized,plain,plain,plain},
+    field=\varphi,
+    indices={1,2,3,4},
+    central=\Gamma_{\mathrm{mix}}^{(4)}
+  ] &
+  \FourPointCorr[
+    blob=false,
+    center-vertex-style=ringdot,
+    show-momenta=false,
+    propagator-arrow-size=14pt,
+    leg-styles={plain,plain,scalarpolarized,plain},
+    field=\varphi,
+    indices={1,2,3,4},
+    central=\Gamma_{\mathrm{mix}}^{(4)}
+  ]
+\end{array}
+\]
+
+\subsection*{5. Contact Pairings And Amputation}
+
+Amputated external legs with endpoint vertices:
 \[
   \FourPointCorr[
     external-legs=false,
@@ -80,8 +174,11 @@ Amputated 4-point correlator with endpoint vertices:
   ]
 \]
 
-Amputated 4-point correlator with paired horizontal connectors:
+Pairing controls for contact-style 4-point objects:
 \[
+\begin{array}{cc}
+  \text{Horizontal pairing} &
+  \text{Crossed pairing} \\
   \FourPointCorr[
     external-legs=false,
     center-vertex=false,
@@ -90,40 +187,7 @@ Amputated 4-point correlator with paired horizontal connectors:
     field=x,
     indices={1,2,3,4},
     central=\Gamma^{(4)}_{1122}
-  ]
-\]
-
-Amputated 4-point correlator with colored paired connectors:
-\[
-  \FourPointCorr[
-    external-legs=false,
-    center-vertex=false,
-    show-momenta=false,
-    contact-pairing=horizontal,
-    leg-styles={{fer,fieldA},{plain,fieldB},{fer,fieldA},{plain,fieldB}},
-    field=x,
-    indices={1,2,3,4},
-    central=\Gamma^{(4)}_{1122}
-  ]
-\]
-
-Amputated 4-point correlator with a global line color:
-\[
-  \FourPointCorr[
-    external-legs=false,
-    center-vertex=false,
-    show-momenta=false,
-    contact-pairing=horizontal,
-    line=fer,
-    color=fieldA,
-    field=x,
-    indices={1,2,3,4},
-    central=\Gamma^{(4)}_{1122}
-  ]
-\]
-
-Amputated 4-point correlator with crossed paired connectors:
-\[
+  ] &
   \FourPointCorr[
     external-legs=false,
     center-vertex=false,
@@ -135,47 +199,71 @@ Amputated 4-point correlator with crossed paired connectors:
     indices={1,2,3,4},
     central=\Gamma^{(4)}_{1221}
   ]
+\end{array}
 \]
 
-Amputated \(s\)-channel loop correlator:
+Per-leg color/style overrides versus a global line color:
 \[
-  \SChannelCorr[
+\begin{array}{cc}
+  \text{Per-leg styles} &
+  \text{Global style} \\
+  \FourPointCorr[
     external-legs=false,
-    central=\Gamma^{(1)}_{s}
+    center-vertex=false,
+    show-momenta=false,
+    contact-pairing=horizontal,
+    leg-styles={{fer,fieldA},{plain,fieldB},{fer,fieldA},{plain,fieldB}},
+    field=x,
+    indices={1,2,3,4},
+    central=\Gamma^{(4)}_{1122}
+  ] &
+  \FourPointCorr[
+    external-legs=false,
+    center-vertex=false,
+    show-momenta=false,
+    contact-pairing=horizontal,
+    line=fer,
+    color=fieldA,
+    field=x,
+    indices={1,2,3,4},
+    central=\Gamma^{(4)}_{1122}
   ]
+\end{array}
 \]
 
-\(s\)-channel loop correlator with left-in/right-out external momenta:
+\subsection*{6. One-Loop \(s/t/u\) Channels}
+
+The channel wrappers are fixed-topology versions of \verb|\FourPointCorr|.
 \[
+\begin{array}{ccc}
+  s\text{-channel} &
+  t\text{-channel} &
+  u\text{-channel} \\
   \SChannelCorr[
+    scale=0.80,
     external-momentum-flow=left-in-right-out,
     field=\phi,
     indices={a,b,c,d},
     central=\Gamma^{(1)}_{s}
-  ]
-\]
-
-\(t\)-channel loop correlator with left-in/right-out external momenta:
-\[
+  ] &
   \TChannelCorr[
+    scale=0.80,
     external-momentum-flow=left-in-right-out,
     field=\phi,
     indices={a,b,c,d},
     central=\Gamma^{(1)}_{t}
-  ]
-\]
-
-\(u\)-channel loop correlator with left-in/right-out external momenta:
-\[
+  ] &
   \UChannelCorr[
+    scale=0.80,
     external-momentum-flow=left-in-right-out,
     field=\phi,
     indices={a,b,c,d},
     central=\Gamma^{(1)}_{u}
   ]
+\end{array}
 \]
 
-\(\phi^4\) one-loop \(s\)-channel bubble with contracted internal indices:
+Loop-channel momentum and contracted internal indices:
 \[
   \SChannelCorr[
     field=\phi,
@@ -188,9 +276,13 @@ Amputated \(s\)-channel loop correlator:
   ]
 \]
 
-\(\phi^4\) one-loop \(t\)-channel bubble with separate vertex and propagator indices:
+Separate vertex and propagator indices on the two internal lines:
 \[
+\begin{array}{cc}
+  \text{\(t\)-channel} &
+  \text{\(u\)-channel} \\
   \TChannelCorr[
+    scale=0.88,
     field=\phi,
     indices={a,b,c,d},
     central=\Gamma^{(1)}_{t},
@@ -202,12 +294,9 @@ Amputated \(s\)-channel loop correlator:
     loop-channel-left-indices={m,\mu,n},
     loop-channel-right-indices={r,\nu,s},
     loop-channel-index-layout=tight
-  ]
-\]
-
-\(\phi^4\) one-loop \(u\)-channel bubble with paired index lists:
-\[
+  ] &
   \UChannelCorr[
+    scale=0.88,
     field=\phi,
     indices={a,b,c,d},
     central=\Gamma^{(1)}_{u},
@@ -219,13 +308,62 @@ Amputated \(s\)-channel loop correlator:
     loop-channel-internal-indices={\rho,\sigma},
     loop-channel-end-vertex-indices={j,n}
   ]
+\end{array}
 \]
 
-Sunset self-energy diagram:
+\subsection*{7. Tree-Level Exchange Channels}
+
+Tree-level exchange channels use the same external slots as the loop channels,
+but their internal propagator uses the older \verb|channel-*| key family.
+\[
+\begin{array}{ccc}
+  s\text{-tree} &
+  t\text{-tree} &
+  u\text{-tree} \\
+  \STreeChannelCorr[
+    scale=0.80,
+    field=\phi,
+    indices={a,b,c,d},
+    channel-momentum=\ell_s,
+    central=\Gamma^{(0)}_{s}
+  ] &
+  \TTreeChannelCorr[
+    scale=0.80,
+    field=\phi,
+    indices={a,b,c,d},
+    channel-momentum=\ell_t,
+    central=\Gamma^{(0)}_{t}
+  ] &
+  \UTreeChannelCorr[
+    scale=0.80,
+    field=\phi,
+    indices={a,b,c,d},
+    channel-momentum=\ell_u,
+    central=\Gamma^{(0)}_{u}
+  ]
+\end{array}
+\]
+
+\subsection*{8. Sunset Self-Energies}
+
+Minimal sunset diagram:
 \[
   \SunsetDiagram[
     field=\phi,
     central=\Sigma(p)
+  ]
+\]
+
+Sunset diagram with explicit loop labels and contracted internal indices:
+\[
+  \SunsetDiagram[
+    scale=1.35,
+    field=\phi,
+    central=\Sigma_{ab}(p),
+    sunset-top-momentum=\ell,
+    sunset-middle-momentum=p-\ell-r,
+    sunset-bottom-momentum=r,
+    sunset-internal-indices={\alpha,\beta,\gamma}
   ]
 \]
 

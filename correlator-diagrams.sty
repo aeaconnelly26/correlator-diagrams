@@ -89,10 +89,8 @@
 \def\corr@indices{}
 \def\corr@leglabels{}
 \def\corr@central{}
-\def\corr@scalararrowposition{0.08}
+\def\corr@scalararrowposition{0.84}
 \def\corr@scalararrowdirection{in}
-\def\corr@antiscalararrowposition{0.08}
-\def\corr@antiscalararrowdirection{out}
 \def\corr@sunsetleftmomentum{p}
 \def\corr@sunsetrightmomentum{}
 \def\corr@sunsettopmomentum{k}
@@ -880,6 +878,17 @@
   \corr@loopchannelindexlayoutbalanced
 }
 
+\newcommand{\corr@resetthreepointdefaults}{%
+  \def\corr@threepointleftxspan{1.55}%
+  \def\corr@threepointupperyspan{1.35}%
+  \def\corr@threepointrightxspan{1.95}%
+  \def\corr@threepointbottomyspan{1.95}%
+  \def\corr@threepointcentrallabelyshift{-24pt}%
+  \def\corr@threepointulmomentumdirection{in}%
+  \def\corr@threepointrmomentumdirection{out}%
+  \def\corr@threepointbmomentumdirection{out}%
+}
+
 \newcommand{\corr@resetsunsetdefaults}{%
   \def\corr@field{}%
   \def\corr@central{}%
@@ -1004,29 +1013,6 @@
       }%
     }%
   }%
-  \corr@ifstringeq{\corr@antiscalararrowdirection}{out}{%
-    \tikzfeynhandset{
-      every anti scalar polarized@@/.style={
-        /tikzfeynhand/every scalar polarized base@@,
-        /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@antiscalararrowposition},
-      },
-    }%
-  }{%
-    \corr@ifstringeq{\corr@antiscalararrowdirection}{none}{%
-      \tikzfeynhandset{
-        every anti scalar polarized@@/.style={
-          /tikzfeynhand/every scalar polarized base@@,
-        },
-      }%
-    }{%
-      \tikzfeynhandset{
-        every anti scalar polarized@@/.style={
-          /tikzfeynhand/every scalar polarized base@@,
-          /tikz/postaction={/tikzfeynhand/with open arrow=\corr@antiscalararrowposition},
-        },
-      }%
-    }%
-  }%
   \tikzfeynhandset{
     every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
     scalar polarized/.style={
@@ -1048,28 +1034,17 @@
     scalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
     spolin/.style={/tikzfeynhand/scalar polarized inward},
     spolout/.style={/tikzfeynhand/scalar polarized outward},
-    every anti scalar polarized/.style={/tikzfeynhand/every anti scalar polarized@@/.append style={##1}},
-    anti scalar polarized/.style={
-      /tikzfeynhand/scalar,
-      /tikzfeynhand/every anti scalar polarized@@,
-    },
-    antiscalarpolarized/.style={/tikzfeynhand/anti scalar polarized},
-    anti scalar polarized inward/.style={
-      /tikzfeynhand/scalar,
-      /tikzfeynhand/every scalar polarized base@@,
-      /tikz/postaction={/tikzfeynhand/with open arrow=\corr@antiscalararrowposition},
-    },
-    anti scalar polarized outward/.style={
-      /tikzfeynhand/scalar,
-      /tikzfeynhand/every scalar polarized base@@,
-      /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@antiscalararrowposition},
-    },
-    antiscalarpolarizedin/.style={/tikzfeynhand/anti scalar polarized inward},
-    antiscalarpolarizedout/.style={/tikzfeynhand/anti scalar polarized outward},
     spol/.style={/tikzfeynhand/scalar polarized},
-    antspol/.style={/tikzfeynhand/anti scalar polarized},
-    antspolin/.style={/tikzfeynhand/anti scalar polarized inward},
-    antspolout/.style={/tikzfeynhand/anti scalar polarized outward},
+    every anti scalar polarized/.style={/tikzfeynhand/every scalar polarized/.append style={##1}},
+    anti scalar polarized/.style={/tikzfeynhand/scalar polarized},
+    antiscalarpolarized/.style={/tikzfeynhand/scalar polarized},
+    anti scalar polarized inward/.style={/tikzfeynhand/scalar polarized inward},
+    anti scalar polarized outward/.style={/tikzfeynhand/scalar polarized outward},
+    antiscalarpolarizedin/.style={/tikzfeynhand/scalar polarized inward},
+    antiscalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
+    antspol/.style={/tikzfeynhand/scalar polarized},
+    antspolin/.style={/tikzfeynhand/scalar polarized inward},
+    antspolout/.style={/tikzfeynhand/scalar polarized outward},
   }%
 }
 
@@ -1121,14 +1096,14 @@
   scalarpolarized-arrow-direction/.style={scalar-arrow-direction={#1}},
   spol-arrow-position/.style={scalar-arrow-position={#1}},
   spol-arrow-direction/.style={scalar-arrow-direction={#1}},
-  anti-scalar-arrow-position/.store in=\corr@antiscalararrowposition,
-  anti-scalar-arrow-direction/.store in=\corr@antiscalararrowdirection,
-  antiscalar-arrow-position/.style={anti-scalar-arrow-position={#1}},
-  antiscalar-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
-  antiscalarpolarized-arrow-position/.style={anti-scalar-arrow-position={#1}},
-  antiscalarpolarized-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
-  antspol-arrow-position/.style={anti-scalar-arrow-position={#1}},
-  antspol-arrow-direction/.style={anti-scalar-arrow-direction={#1}},
+  anti-scalar-arrow-position/.style={scalar-arrow-position={#1}},
+  anti-scalar-arrow-direction/.style={scalar-arrow-direction={#1}},
+  antiscalar-arrow-position/.style={scalar-arrow-position={#1}},
+  antiscalar-arrow-direction/.style={scalar-arrow-direction={#1}},
+  antiscalarpolarized-arrow-position/.style={scalar-arrow-position={#1}},
+  antiscalarpolarized-arrow-direction/.style={scalar-arrow-direction={#1}},
+  antspol-arrow-position/.style={scalar-arrow-position={#1}},
+  antspol-arrow-direction/.style={scalar-arrow-direction={#1}},
   sunset-external-momentum/.style={
     sunset-left-momentum={#1},
     sunset-right-momentum={#1}
@@ -1693,6 +1668,37 @@
     center-vertex-style={#1},
     external-vertex-style={#1}
   },
+  three-point-left-xspan/.store in=\corr@threepointleftxspan,
+  three-point-upper-yspan/.store in=\corr@threepointupperyspan,
+  three-point-upper-left-xspan/.style={three-point-left-xspan={#1}},
+  three-point-upper-left-yspan/.style={three-point-upper-yspan={#1}},
+  three-point-right-xspan/.store in=\corr@threepointrightxspan,
+  three-point-bottom-yspan/.store in=\corr@threepointbottomyspan,
+  three-point-central-label-yshift/.store in=\corr@threepointcentrallabelyshift,
+  three-point-upper-left-momentum-direction/.store in=\corr@threepointulmomentumdirection,
+  three-point-left-momentum-direction/.style={three-point-upper-left-momentum-direction={#1}},
+  three-point-ul-momentum-direction/.style={three-point-upper-left-momentum-direction={#1}},
+  three-point-right-momentum-direction/.store in=\corr@threepointrmomentumdirection,
+  three-point-bottom-momentum-direction/.store in=\corr@threepointbmomentumdirection,
+  three-point-lower-momentum-direction/.style={three-point-bottom-momentum-direction={#1}},
+  three-point-momentum-flow/.is choice,
+  three-point-momentum-flow/all-in/.code={
+    \def\corr@threepointulmomentumdirection{in}%
+    \def\corr@threepointrmomentumdirection{in}%
+    \def\corr@threepointbmomentumdirection{in}%
+  },
+  three-point-momentum-flow/all-out/.code={
+    \def\corr@threepointulmomentumdirection{out}%
+    \def\corr@threepointrmomentumdirection{out}%
+    \def\corr@threepointbmomentumdirection{out}%
+  },
+  three-point-momentum-flow/default/.code={
+    \def\corr@threepointulmomentumdirection{in}%
+    \def\corr@threepointrmomentumdirection{out}%
+    \def\corr@threepointbmomentumdirection{out}%
+  },
+  three-point-momentum-directions/.style={three-point-momentum-flow={#1}},
+  three-point-flow/.style={three-point-momentum-flow={#1}},
   scale/.store in=\corr@scale,
   index-placement/.store in=\corr@indexplacement,
 }
@@ -1923,6 +1929,29 @@
     {\corr@momentumlabel{#1}}%
 }
 
+\newcommand{\corr@drawmomentumrangeoffsetout}[9]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \def\corr@currentmomentumshortenstart{0pt}%
+  \def\corr@currentmomentumshortenend{0pt}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \path
+    ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
+    coordinate (corrmomentumlabelcoord);
+  \draw[line width=0.8pt]
+    ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+    ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+    ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  \corr@putmomentumlabelat
+    {(corrmomentumlabelcoord)}
+    {center}
+    {#8}
+    {#9}
+    {\corr@momentumlabel{#1}}%
+}
+
 \newcommand{\corr@externalmomentumdirectionfor}[1]{%
   \ifnum#1<3
     \corr@externalleftmomentumdirection
@@ -1953,6 +1982,30 @@
 
 \newcommand{\corr@drawexternalmomentumstd}[4]{%
   \corr@drawmomentumrange{#1}{#2}{#3}{#4}{0.25}{0.75}{0.50}{\corr@externalmomentumdirectionfor{#1}}%
+}
+
+\newcommand{\corr@drawthreepointmomentumul}[3]{%
+  \corr@ifstringeq{\corr@threepointulmomentumdirection}{out}{%
+    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{-90}{0.18}{0.74}{0.46}{0pt}{0pt}%
+  }{%
+    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{-90}{0.18}{0.74}{0.46}{0pt}{0pt}%
+  }%
+}
+
+\newcommand{\corr@drawthreepointmomentumr}[3]{%
+  \corr@ifstringeq{\corr@threepointrmomentumdirection}{out}{%
+    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{90}{0.18}{0.74}{0.50}{0pt}{0pt}%
+  }{%
+    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{90}{0.18}{0.74}{0.50}{0pt}{0pt}%
+  }%
+}
+
+\newcommand{\corr@drawthreepointmomentumb}[3]{%
+  \corr@ifstringeq{\corr@threepointbmomentumdirection}{out}{%
+    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{90}{0.06}{0.56}{0.28}{0pt}{0pt}%
+  }{%
+    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{90}{0.06}{0.56}{0.28}{0pt}{0pt}%
+  }%
 }
 
 \newcommand{\corr@putlabel}[3]{%
@@ -2245,6 +2298,62 @@
       \corr@loopchannelinternalindexstyle
     ] at (corrloopchannelidxcoord) {$#9 #8$};
   }%
+}
+
+\newcommand{\corr@threepointplaceexternallabels}{%
+  \corr@putlabel{corrUL}{xshift=-11pt,yshift=8pt}{1}%
+  \corr@putlabel{corrR}{xshift=10pt,yshift=6pt}{2}%
+  \corr@putlabel{corrB}{yshift=-12pt}{3}%
+}
+
+\newcommand{\corr@threepointplaceexternalvertices}{%
+  \corr@ifshowexternalvertices{%
+    \corr@putvertex{corrUL}{\corr@externalvertexstyle}%
+    \corr@putvertex{corrR}{\corr@externalvertexstyle}%
+    \corr@putvertex{corrB}{\corr@externalvertexstyle}%
+  }%
+}
+
+\newcommand{\corr@putthreepointcentral}[1]{%
+  \ifdefempty{\corr@central}{}{%
+    \node[anchor=north] at ([yshift=\corr@threepointcentrallabelyshift]#1) {$\corr@central$};
+  }%
+}
+
+\NewDocumentCommand{\ThreePointCorr}{O{}}{%
+  \begingroup
+  \corr@resetthreepointdefaults
+  \pgfqkeys{/corrdiag}{#1}%
+  \corr@preparelists
+  \corr@configurestyles
+  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+    \begin{feynhand}
+      \vertex (corrC) at (0,0);
+      \vertex (corrUL) at (-\corr@threepointleftxspan,\corr@threepointupperyspan);
+      \vertex (corrR) at (\corr@threepointrightxspan,0);
+      \vertex (corrB) at (0,-\corr@threepointbottomyspan);
+      \corr@ifexternallegs{%
+        \corr@drawprop{mom}{1}{corrUL}{corrC}%
+        \corr@drawprop{mom'}{2}{corrR}{corrC}%
+        \corr@drawprop{mom'}{3}{corrB}{corrC}%
+      }%
+      \ifcorr@blob
+        \corr@putblob{corrC}{\corr@blobstyle}
+      \fi
+    \end{feynhand}
+    \ifcorr@centervertex
+      \corr@putvertex{corrC}{\corr@centervertexstyle}
+    \fi
+    \corr@threepointplaceexternalvertices
+    \ifcorr@showmomenta
+      \corr@drawthreepointmomentumul{1}{corrUL}{corrC}
+      \corr@drawthreepointmomentumr{2}{corrR}{corrC}
+      \corr@drawthreepointmomentumb{3}{corrB}{corrC}
+    \fi
+    \corr@threepointplaceexternallabels
+    \corr@putthreepointcentral{corrC}
+  \end{tikzpicture}%
+  \endgroup
 }
 
 \NewDocumentCommand{\TwoPointCorr}{O{}}{%
@@ -3085,6 +3194,7 @@
 }
 
 \NewDocumentCommand{\TwoPtCorr}{O{}}{\TwoPointCorr[#1]}
+\NewDocumentCommand{\ThreePtCorr}{O{}}{\ThreePointCorr[#1]}
 \NewDocumentCommand{\FourPtCorr}{O{}}{\FourPointCorr[#1]}
 \NewDocumentCommand{\SLoopChannelCorr}{O{}}{\FourPointCorr[topology=s,#1]}
 \NewDocumentCommand{\TLoopChannelCorr}{O{}}{\FourPointCorr[topology=t,#1]}
