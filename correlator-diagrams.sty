@@ -76,7 +76,8 @@
 \def\corr@mode{q}
 \def\corr@momentumstart{1}
 \def\corr@momentumlabels{}
-\def\corr@momentumarrowsize{6pt}
+\def\corr@momentumarrowsize{5pt}
+\def\corr@momentumlinewidth{0.65pt}
 \def\corr@momentumarrowsizes{}
 \def\corr@momentumlabelfill{none}
 \def\corr@momentumlabelinnersep{0.2pt}
@@ -230,16 +231,16 @@
 \def\corr@loopchannelbmomentum{}
 \def\corr@loopchanneladir{forward}
 \def\corr@loopchannelbdir{forward}
-\def\corr@loopchannelaarrowstart{0.28}
-\def\corr@loopchannelaarrowend{0.72}
+\def\corr@loopchannelaarrowstart{0.31}
+\def\corr@loopchannelaarrowend{0.69}
 \def\corr@loopchannelaarrowxshift{auto}
 \def\corr@loopchannelaarrowyshift{auto}
-\def\corr@loopchannelaarrowlooseness{0.82}
-\def\corr@loopchannelbarrowstart{0.28}
-\def\corr@loopchannelbarrowend{0.72}
+\def\corr@loopchannelaarrowlooseness{\corr@loopchannellooplooseness}
+\def\corr@loopchannelbarrowstart{0.31}
+\def\corr@loopchannelbarrowend{0.69}
 \def\corr@loopchannelbarrowxshift{auto}
 \def\corr@loopchannelbarrowyshift{auto}
-\def\corr@loopchannelbarrowlooseness{0.82}
+\def\corr@loopchannelbarrowlooseness{\corr@loopchannellooplooseness}
 \def\corr@loopchannelalabelposition{auto}
 \def\corr@loopchannelalabelxshift{0pt}
 \def\corr@loopchannelalabelyshift{auto}
@@ -491,15 +492,15 @@
   \corr@resolveloopchannellinestyle{6}{\corr@loopchannelbline}{corr@loopchannelbline}%
   \corr@ifstringeq{\corr@fourpointtopology}{s}{%
     \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{0pt}}{}%
-    \corr@resolveloopchannelauto{\corr@loopchannelaarrowyshift}{\def\corr@loopchannelaarrowyshift{7pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelaarrowyshift}{\def\corr@loopchannelaarrowyshift{5pt}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{0pt}}{}%
-    \corr@resolveloopchannelauto{\corr@loopchannelbarrowyshift}{\def\corr@loopchannelbarrowyshift{-7pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelbarrowyshift}{\def\corr@loopchannelbarrowyshift{-5pt}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelalabelposition}{\def\corr@loopchannelalabelposition{above}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelalabelyshift}{\def\corr@loopchannelalabelyshift{0pt}}{}%
-    \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{8pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{3pt}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelblabelposition}{\def\corr@loopchannelblabelposition{below}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelblabelyshift}{\def\corr@loopchannelblabelyshift{0pt}}{}%
-    \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{6pt}}{}%
+    \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{3pt}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelexternalmomstart}{\def\corr@loopchannelexternalmomstart{0.33}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelexternalmomend}{\def\corr@loopchannelexternalmomend{0.67}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelexternalmomlabelfrac}{\def\corr@loopchannelexternalmomlabelfrac{0.60}}{}%
@@ -525,11 +526,11 @@
     \corr@resolveloopchannelauto{\corr@loopchannelbinternalindexyshift}{\def\corr@loopchannelbinternalindexyshift{5pt}}{}%
   }{%
     \corr@ifstringeq{\corr@fourpointtopology}{u}{%
-      \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{5pt}}{}%
-      \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{-5pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{-5pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{5pt}}{}%
     }{%
-      \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{-6pt}}{}%
-      \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{6pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelaarrowxshift}{\def\corr@loopchannelaarrowxshift{-5pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelbarrowxshift}{\def\corr@loopchannelbarrowxshift{5pt}}{}%
     }%
     \corr@resolveloopchannelauto{\corr@loopchannelaarrowyshift}{\def\corr@loopchannelaarrowyshift{0pt}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelbarrowyshift}{\def\corr@loopchannelbarrowyshift{0pt}}{}%
@@ -537,9 +538,9 @@
     \corr@resolveloopchannelauto{\corr@loopchannelalabelxshift}{\def\corr@loopchannelalabelxshift{0pt}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelalabelyshift}{\def\corr@loopchannelalabelyshift{0pt}}{}%
     \corr@ifstringeq{\corr@fourpointtopology}{u}{%
-      \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{10pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{3pt}}{}%
     }{%
-      \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{10pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelalabeldistance}{\def\corr@loopchannelalabeldistance{3pt}}{}%
     }%
     \corr@resolveloopchannelauto{\corr@loopchannelblabelposition}{\def\corr@loopchannelblabelposition{right}}{}%
     \corr@resolveloopchannelauto{\corr@loopchannelexternalmomstart}{\def\corr@loopchannelexternalmomstart{0.33}}{}%
@@ -549,9 +550,9 @@
       \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomstart}{\def\corr@loopchannelcrossedexternalmomstart{0.20}}{}%
       \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomend}{\def\corr@loopchannelcrossedexternalmomend{0.78}}{}%
       \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomlabelfrac}{\def\corr@loopchannelcrossedexternalmomlabelfrac{0.62}}{}%
-      \corr@resolveloopchannelauto{\corr@loopchannelblabelxshift}{\def\corr@loopchannelblabelxshift{-14pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabelxshift}{\def\corr@loopchannelblabelxshift{-10pt}}{}%
       \corr@resolveloopchannelauto{\corr@loopchannelblabelyshift}{\def\corr@loopchannelblabelyshift{0pt}}{}%
-      \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{8pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{2pt}}{}%
       \corr@resolveloopchannelauto{\corr@loopchannelcentrallabelyshift}{\def\corr@loopchannelcentrallabelyshift{-40pt}}{}%
     }{%
       \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomstart}{\def\corr@loopchannelcrossedexternalmomstart{0.33}}{}%
@@ -559,7 +560,7 @@
       \corr@resolveloopchannelauto{\corr@loopchannelcrossedexternalmomlabelfrac}{\def\corr@loopchannelcrossedexternalmomlabelfrac{0.60}}{}%
       \corr@resolveloopchannelauto{\corr@loopchannelblabelxshift}{\def\corr@loopchannelblabelxshift{0pt}}{}%
       \corr@resolveloopchannelauto{\corr@loopchannelblabelyshift}{\def\corr@loopchannelblabelyshift{0pt}}{}%
-      \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{10pt}}{}%
+      \corr@resolveloopchannelauto{\corr@loopchannelblabeldistance}{\def\corr@loopchannelblabeldistance{3pt}}{}%
       \corr@resolveloopchannelauto{\corr@loopchannelcentrallabelyshift}{\def\corr@loopchannelcentrallabelyshift{-38pt}}{}%
     }%
     \corr@resolveloopchannelauto{\corr@loopchannelastartindexposition}{\def\corr@loopchannelastartindexposition{south east}}{}%
@@ -812,16 +813,16 @@
   \def\corr@loopchannelbmomentum{}%
   \def\corr@loopchanneladir{forward}%
   \def\corr@loopchannelbdir{forward}%
-  \def\corr@loopchannelaarrowstart{0.36}%
-  \def\corr@loopchannelaarrowend{0.64}%
+  \def\corr@loopchannelaarrowstart{0.31}%
+  \def\corr@loopchannelaarrowend{0.69}%
   \def\corr@loopchannelaarrowxshift{auto}%
   \def\corr@loopchannelaarrowyshift{auto}%
-  \def\corr@loopchannelaarrowlooseness{1.02}%
-  \def\corr@loopchannelbarrowstart{0.36}%
-  \def\corr@loopchannelbarrowend{0.64}%
+  \def\corr@loopchannelaarrowlooseness{\corr@loopchannellooplooseness}%
+  \def\corr@loopchannelbarrowstart{0.31}%
+  \def\corr@loopchannelbarrowend{0.69}%
   \def\corr@loopchannelbarrowxshift{auto}%
   \def\corr@loopchannelbarrowyshift{auto}%
-  \def\corr@loopchannelbarrowlooseness{1.02}%
+  \def\corr@loopchannelbarrowlooseness{\corr@loopchannellooplooseness}%
   \def\corr@loopchannelalabelposition{auto}%
   \def\corr@loopchannelalabelxshift{0pt}%
   \def\corr@loopchannelalabelyshift{auto}%
@@ -878,15 +879,19 @@
   \corr@loopchannelindexlayoutbalanced
 }
 
+\newcommand{\corr@topologysetdefault}[2]{%
+  \def#1{#2}%
+}
+
 \newcommand{\corr@resetthreepointdefaults}{%
-  \def\corr@threepointleftxspan{1.55}%
-  \def\corr@threepointupperyspan{1.35}%
-  \def\corr@threepointrightxspan{1.95}%
-  \def\corr@threepointbottomyspan{1.95}%
-  \def\corr@threepointcentrallabelyshift{-24pt}%
-  \def\corr@threepointulmomentumdirection{in}%
-  \def\corr@threepointrmomentumdirection{out}%
-  \def\corr@threepointbmomentumdirection{out}%
+  \corr@topologysetdefault\corr@threepointleftxspan{1.55}%
+  \corr@topologysetdefault\corr@threepointupperyspan{1.35}%
+  \corr@topologysetdefault\corr@threepointrightxspan{1.95}%
+  \corr@topologysetdefault\corr@threepointbottomyspan{1.95}%
+  \corr@topologysetdefault\corr@threepointcentrallabelyshift{-24pt}%
+  \corr@topologysetdefault\corr@threepointulmomentumdirection{in}%
+  \corr@topologysetdefault\corr@threepointrmomentumdirection{out}%
+  \corr@topologysetdefault\corr@threepointbmomentumdirection{out}%
 }
 
 \newcommand{\corr@resetsunsetdefaults}{%
@@ -1062,6 +1067,7 @@
   momentum-labels/.store in=\corr@momentumlabels,
   momentum-arrow-size/.store in=\corr@momentumarrowsize,
   momentum-arrow-sizes/.store in=\corr@momentumarrowsizes,
+  momentum-line-width/.store in=\corr@momentumlinewidth,
   momentum-label-fill/.store in=\corr@momentumlabelfill,
   momentum-label-inner-sep/.store in=\corr@momentumlabelinnersep,
   momentum-label-style/.store in=\corr@momentumlabelstyle,
@@ -1860,10 +1866,10 @@
   \path
     ($(#2)!#7!(#3)!6pt!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=0.8pt]
+  \draw[line width=\corr@momentumlinewidth]
     ($(#2)!#5!(#3)!6pt!#4:(#3)$) --
     ($(#2)!\corr@externalmomgapstart!(#3)!6pt!#4:(#3)$);
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
     ($(#2)!\corr@externalmomgapend!(#3)!6pt!#4:(#3)$) --
     ($(#2)!#6!(#3)!6pt!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -1883,10 +1889,10 @@
   \path
     ($(#2)!#7!(#3)!6pt!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=0.8pt]
+  \draw[line width=\corr@momentumlinewidth]
     ($(#2)!#6!(#3)!6pt!#4:(#3)$) --
     ($(#2)!\corr@externalmomgapend!(#3)!6pt!#4:(#3)$);
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
     ($(#2)!\corr@externalmomgapstart!(#3)!6pt!#4:(#3)$) --
     ($(#2)!#5!(#3)!6pt!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -1915,10 +1921,10 @@
   \path
     ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=0.8pt]
+  \draw[line width=\corr@momentumlinewidth]
     ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
     ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$);
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
     ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$) --
     ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -1938,10 +1944,10 @@
   \path
     ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=0.8pt]
+  \draw[line width=\corr@momentumlinewidth]
     ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
     ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$);
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
     ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$) --
     ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -1984,28 +1990,24 @@
   \corr@drawmomentumrange{#1}{#2}{#3}{#4}{0.25}{0.75}{0.50}{\corr@externalmomentumdirectionfor{#1}}%
 }
 
-\newcommand{\corr@drawthreepointmomentumul}[3]{%
-  \corr@ifstringeq{\corr@threepointulmomentumdirection}{out}{%
-    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{-90}{0.18}{0.74}{0.46}{0pt}{0pt}%
+\newcommand{\corr@topologydrawmomentum}[8]{%
+  \corr@ifstringeq{#8}{out}{%
+    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{#5}{#6}{#7}{0pt}{0pt}%
   }{%
-    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{-90}{0.18}{0.74}{0.46}{0pt}{0pt}%
+    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{#5}{#6}{#7}{0pt}{0pt}%
   }%
+}
+
+\newcommand{\corr@drawthreepointmomentumul}[3]{%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{-90}{0.18}{0.74}{0.46}{\corr@threepointulmomentumdirection}%
 }
 
 \newcommand{\corr@drawthreepointmomentumr}[3]{%
-  \corr@ifstringeq{\corr@threepointrmomentumdirection}{out}{%
-    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{90}{0.18}{0.74}{0.50}{0pt}{0pt}%
-  }{%
-    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{90}{0.18}{0.74}{0.50}{0pt}{0pt}%
-  }%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{0.18}{0.74}{0.50}{\corr@threepointrmomentumdirection}%
 }
 
 \newcommand{\corr@drawthreepointmomentumb}[3]{%
-  \corr@ifstringeq{\corr@threepointbmomentumdirection}{out}{%
-    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{90}{0.06}{0.56}{0.28}{0pt}{0pt}%
-  }{%
-    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{90}{0.06}{0.56}{0.28}{0pt}{0pt}%
-  }%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{0.06}{0.56}{0.28}{\corr@threepointbmomentumdirection}%
 }
 
 \newcommand{\corr@putlabel}[3]{%
@@ -2034,6 +2036,40 @@
 
 \newcommand{\corr@putblob}[2]{%
   \vertex[#2] at (#1);
+}
+
+% Internal topology framework.
+% To add a topology, first reset only that topology's private defaults, then
+% declare stable slot coordinates such as corrC, corrUL, or corrBoxTopLeft.
+% Draw propagators through \corr@topologydrawprop, place labels and vertices
+% through the topology helpers below, and keep public keys mapped to slots.
+% Future one-loop box target: four corner interaction vertices, four internal
+% propagators forming a box, four diagonal external legs carrying q_1, q_2,
+% q_3, q_4, edge momenta k, q_1+k, q_1+k-q_4, q_2-k, and a central loop
+% arrow labeled k. This should be built from the helpers here before exposing
+% any public rotatable sub-3-point primitive.
+\newcommand{\corr@topologydrawprop}[4]{%
+  \corr@drawprop{#1}{#2}{#3}{#4}%
+}
+
+\newcommand{\corr@topologyputexternallabel}[3]{%
+  \corr@putlabel{#1}{#2}{#3}%
+}
+
+\newcommand{\corr@topologyputexternalvertex}[1]{%
+  \corr@ifshowexternalvertices{%
+    \corr@putvertex{#1}{\corr@externalvertexstyle}%
+  }%
+}
+
+\newcommand{\corr@topologyputcentral}[2]{%
+  \ifdefempty{\corr@central}{}{%
+    \node[anchor=north] at ([yshift=#2]#1) {$\corr@central$};
+  }%
+}
+
+\newcommand{\corr@topologycoordinate}[3]{%
+  \vertex (#1) at (#2,#3);
 }
 
 \newcommand{\corr@putcentral}[1]{%
@@ -2135,7 +2171,7 @@
 
 \newcommand{\corr@drawannotatedmomentumline}[8]{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt,shorten <= \corr@currentmomentumshortenstart,shorten >= \corr@currentmomentumshortenend]
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,shorten <= \corr@currentmomentumshortenstart,shorten >= \corr@currentmomentumshortenend]
     #2 --
     coordinate[pos=#4] (corrmomentumlabelcoord)
     #3;
@@ -2151,7 +2187,7 @@
 
 \newcommand{\corr@drawannotatedmomentumcurve}[9]{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt,shorten <= \corr@currentmomentumshortenstart,shorten >= \corr@currentmomentumshortenend]
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,shorten <= \corr@currentmomentumshortenstart,shorten >= \corr@currentmomentumshortenend]
     #2 to [#3]
     coordinate[pos=#5] (corrmomentumlabelcoord)
     #4;
@@ -2164,7 +2200,7 @@
     ($(#1)!\corr@channelmomstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
     coordinate[pos=0.5] (corrmomentumlabelcoord)
     ($(#1)!\corr@channelmomend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
     ($(#1)!\corr@channelmomstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
     ($(#1)!\corr@channelmomend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
   \corr@putmomentumlabelat
@@ -2183,32 +2219,92 @@
   }%
 }
 
-\newcommand{\corr@drawloopchannelmomentumcurve}[9]{%
-  \corr@drawannotatedmomentumcurve{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}%
+\newcommand{\corr@resolveloopchannelmomentumslot}[1]{%
+  \corr@ifstringeq{#1}{a}{%
+    \def\corr@loopchannelmomdir{\corr@loopchanneladir}%
+    \def\corr@loopchannelmomstart{\corr@loopchannelaarrowstart}%
+    \def\corr@loopchannelmomend{\corr@loopchannelaarrowend}%
+    \def\corr@loopchannelmomxshift{\corr@loopchannelaarrowxshift}%
+    \def\corr@loopchannelmomyshift{\corr@loopchannelaarrowyshift}%
+    \def\corr@loopchannelmomlabelposition{\corr@loopchannelalabelposition}%
+    \def\corr@loopchannelmomlabelxshift{\corr@loopchannelalabelxshift}%
+    \def\corr@loopchannelmomlabelyshift{\corr@loopchannelalabelyshift}%
+    \def\corr@loopchannelmomlabeldistance{\corr@loopchannelalabeldistance}%
+    \def\corr@loopchannelmomlabelfraction{\corr@loopchannelalabelfraction}%
+    \def\corr@loopchannelmomlabel{\corr@loopchannelmomentumlabel{a}}%
+  }{%
+    \def\corr@loopchannelmomdir{\corr@loopchannelbdir}%
+    \def\corr@loopchannelmomstart{\corr@loopchannelbarrowstart}%
+    \def\corr@loopchannelmomend{\corr@loopchannelbarrowend}%
+    \def\corr@loopchannelmomxshift{\corr@loopchannelbarrowxshift}%
+    \def\corr@loopchannelmomyshift{\corr@loopchannelbarrowyshift}%
+    \def\corr@loopchannelmomlabelposition{\corr@loopchannelblabelposition}%
+    \def\corr@loopchannelmomlabelxshift{\corr@loopchannelblabelxshift}%
+    \def\corr@loopchannelmomlabelyshift{\corr@loopchannelblabelyshift}%
+    \def\corr@loopchannelmomlabeldistance{\corr@loopchannelblabeldistance}%
+    \def\corr@loopchannelmomlabelfraction{\corr@loopchannelblabelfraction}%
+    \def\corr@loopchannelmomlabel{\corr@loopchannelmomentumlabel{b}}%
+  }%
 }
 
-\newcommand{\corr@drawellipticmomentumarc}[9]{%
-  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
-  \def\corr@loopchannelarclabel{\corr@momentumlabel{#1}}%
-  \ifnum#1=5\relax
-    \def\corr@loopchannelarclabel{\corr@loopchannelmomentumlabel{a}}%
-  \fi
-  \ifnum#1=6\relax
-    \def\corr@loopchannelarclabel{\corr@loopchannelmomentumlabel{b}}%
-  \fi
-  \pgfmathsetmacro{\corr@momentummidangle}{0.5*((#5)+(#6))}%
-  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=0.8pt]
-    ($#2+({#3*cos(#5)},{#4*sin(#5)})$)
-    arc[start angle=#5,end angle=#6,x radius=#3,y radius=#4];
-  \path
-    ($#2+({#3*cos(\corr@momentummidangle)},{#4*sin(\corr@momentummidangle)})$)
-    coordinate (corrmomentumlabelcoord);
-  \corr@putmomentumlabelwithdistance{(corrmomentumlabelcoord)}{#7}{\corr@currentmomentumlabeldistance}{#8}{#9}{\corr@loopchannelarclabel}%
-}
-
-\newcommand{\corr@setloopchanneltrimlengths}[3]{%
-  \pgfmathsetlengthmacro{\corr@currentmomentumshortenstart}{#1*(2*#3 cm)}%
-  \pgfmathsetlengthmacro{\corr@currentmomentumshortenend}{(1-#2)*(2*#3 cm)}%
+% Loop-channel momentum arrows sample the same shifted curve as the propagator.
+\newcommand{\corr@drawloopchannelmomentumslot}[5]{%
+  \corr@resolveloopchannelmomentumslot{#1}%
+  \corr@ifstringeq{\corr@loopchannelmomdir}{none}{}{%
+    \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#2}}%
+    \pgfmathsetmacro{\corr@loopchannelmomstep}{(\corr@loopchannelmomend-\corr@loopchannelmomstart)/8}%
+    \pgfmathsetmacro{\corr@loopchannelmompone}{\corr@loopchannelmomstart+\corr@loopchannelmomstep}%
+    \pgfmathsetmacro{\corr@loopchannelmomptwo}{\corr@loopchannelmomstart+2*\corr@loopchannelmomstep}%
+    \pgfmathsetmacro{\corr@loopchannelmompthree}{\corr@loopchannelmomstart+3*\corr@loopchannelmomstep}%
+    \pgfmathsetmacro{\corr@loopchannelmompfour}{\corr@loopchannelmomstart+4*\corr@loopchannelmomstep}%
+    \pgfmathsetmacro{\corr@loopchannelmompfive}{\corr@loopchannelmomstart+5*\corr@loopchannelmomstep}%
+    \pgfmathsetmacro{\corr@loopchannelmompsix}{\corr@loopchannelmomstart+6*\corr@loopchannelmomstep}%
+    \pgfmathsetmacro{\corr@loopchannelmompseven}{\corr@loopchannelmomstart+7*\corr@loopchannelmomstep}%
+    \path
+      ([xshift=\corr@loopchannelmomxshift,yshift=\corr@loopchannelmomyshift]#3)
+      to [#5]
+      coordinate[pos=\corr@loopchannelmomstart] (corrloopmomstart)
+      coordinate[pos=\corr@loopchannelmompone] (corrloopmompone)
+      coordinate[pos=\corr@loopchannelmomptwo] (corrloopmomptwo)
+      coordinate[pos=\corr@loopchannelmompthree] (corrloopmompthree)
+      coordinate[pos=\corr@loopchannelmompfour] (corrloopmompfour)
+      coordinate[pos=\corr@loopchannelmompfive] (corrloopmompfive)
+      coordinate[pos=\corr@loopchannelmompsix] (corrloopmompsix)
+      coordinate[pos=\corr@loopchannelmompseven] (corrloopmompseven)
+      coordinate[pos=\corr@loopchannelmomlabelfraction] (corrmomentumlabelcoord)
+      coordinate[pos=\corr@loopchannelmomend] (corrloopmomend)
+      ([xshift=\corr@loopchannelmomxshift,yshift=\corr@loopchannelmomyshift]#4);
+    \corr@ifstringeq{\corr@loopchannelmomdir}{reverse}{%
+      \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
+        (corrloopmomend) --
+        (corrloopmompseven) --
+        (corrloopmompsix) --
+        (corrloopmompfive) --
+        (corrloopmompfour) --
+        (corrloopmompthree) --
+        (corrloopmomptwo) --
+        (corrloopmompone) --
+        (corrloopmomstart);%
+    }{%
+      \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
+        (corrloopmomstart) --
+        (corrloopmompone) --
+        (corrloopmomptwo) --
+        (corrloopmompthree) --
+        (corrloopmompfour) --
+        (corrloopmompfive) --
+        (corrloopmompsix) --
+        (corrloopmompseven) --
+        (corrloopmomend);%
+    }%
+    \corr@putmomentumlabelwithdistance
+      {(corrmomentumlabelcoord)}
+      {\corr@loopchannelmomlabelposition}
+      {\corr@loopchannelmomlabeldistance}
+      {\corr@loopchannelmomlabelxshift}
+      {\corr@loopchannelmomlabelyshift}
+      {\corr@loopchannelmomlabel}%
+  }%
 }
 
 \newcommand{\corr@resolvesunsetindexanchor}[1]{%
@@ -2301,23 +2397,19 @@
 }
 
 \newcommand{\corr@threepointplaceexternallabels}{%
-  \corr@putlabel{corrUL}{xshift=-11pt,yshift=8pt}{1}%
-  \corr@putlabel{corrR}{xshift=10pt,yshift=6pt}{2}%
-  \corr@putlabel{corrB}{yshift=-12pt}{3}%
+  \corr@topologyputexternallabel{corrUL}{xshift=-11pt,yshift=8pt}{1}%
+  \corr@topologyputexternallabel{corrR}{xshift=10pt,yshift=6pt}{2}%
+  \corr@topologyputexternallabel{corrB}{yshift=-12pt}{3}%
 }
 
 \newcommand{\corr@threepointplaceexternalvertices}{%
-  \corr@ifshowexternalvertices{%
-    \corr@putvertex{corrUL}{\corr@externalvertexstyle}%
-    \corr@putvertex{corrR}{\corr@externalvertexstyle}%
-    \corr@putvertex{corrB}{\corr@externalvertexstyle}%
-  }%
+  \corr@topologyputexternalvertex{corrUL}%
+  \corr@topologyputexternalvertex{corrR}%
+  \corr@topologyputexternalvertex{corrB}%
 }
 
 \newcommand{\corr@putthreepointcentral}[1]{%
-  \ifdefempty{\corr@central}{}{%
-    \node[anchor=north] at ([yshift=\corr@threepointcentrallabelyshift]#1) {$\corr@central$};
-  }%
+  \corr@topologyputcentral{#1}{\corr@threepointcentrallabelyshift}%
 }
 
 \NewDocumentCommand{\ThreePointCorr}{O{}}{%
@@ -2328,14 +2420,14 @@
   \corr@configurestyles
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \begin{feynhand}
-      \vertex (corrC) at (0,0);
-      \vertex (corrUL) at (-\corr@threepointleftxspan,\corr@threepointupperyspan);
-      \vertex (corrR) at (\corr@threepointrightxspan,0);
-      \vertex (corrB) at (0,-\corr@threepointbottomyspan);
+      \corr@topologycoordinate{corrC}{0}{0}%
+      \corr@topologycoordinate{corrUL}{-\corr@threepointleftxspan}{\corr@threepointupperyspan}%
+      \corr@topologycoordinate{corrR}{\corr@threepointrightxspan}{0}%
+      \corr@topologycoordinate{corrB}{0}{-\corr@threepointbottomyspan}%
       \corr@ifexternallegs{%
-        \corr@drawprop{mom}{1}{corrUL}{corrC}%
-        \corr@drawprop{mom'}{2}{corrR}{corrC}%
-        \corr@drawprop{mom'}{3}{corrB}{corrC}%
+        \corr@topologydrawprop{mom}{1}{corrUL}{corrC}%
+        \corr@topologydrawprop{mom'}{2}{corrR}{corrC}%
+        \corr@topologydrawprop{mom'}{3}{corrB}{corrC}%
       }%
       \ifcorr@blob
         \corr@putblob{corrC}{\corr@blobstyle}
@@ -2700,52 +2792,10 @@
     \corr@drawexternalmomentumll{2}{corrLL}{corrVL}
     \corr@drawexternalmomentumur{3}{corrUR}{corrVR}
     \corr@drawexternalmomentumlr{4}{corrLR}{corrVR}
-    \pgfmathsetmacro{\corr@loopchannelsxrad}{\corr@loopchannelvertexxspan}%
-    \pgfmathsetmacro{\corr@loopchannelsyrad}{0.62*\corr@loopchannelvertexxspan}%
-    \def\corr@currentmomentumlabeldistance{\corr@loopchannelalabeldistance}%
-    \corr@ifstringeq{\corr@loopchanneladir}{none}{}{%
-      \corr@ifstringeq{\corr@loopchanneladir}{reverse}{%
-        \corr@drawellipticmomentumarc{5}
-          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
-          {\corr@loopchannelsxrad}
-          {\corr@loopchannelsyrad}
-          {60}{120}
-          {\corr@loopchannelalabelposition}
-          {\corr@loopchannelalabelxshift}
-          {\corr@loopchannelalabelyshift}%
-      }{%
-        \corr@drawellipticmomentumarc{5}
-          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
-          {\corr@loopchannelsxrad}
-          {\corr@loopchannelsyrad}
-          {120}{60}
-          {\corr@loopchannelalabelposition}
-          {\corr@loopchannelalabelxshift}
-          {\corr@loopchannelalabelyshift}%
-      }%
-    }%
-    \def\corr@currentmomentumlabeldistance{\corr@loopchannelblabeldistance}%
-    \corr@ifstringeq{\corr@loopchannelbdir}{none}{}{%
-      \corr@ifstringeq{\corr@loopchannelbdir}{reverse}{%
-        \corr@drawellipticmomentumarc{6}
-          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
-          {\corr@loopchannelsxrad}
-          {\corr@loopchannelsyrad}
-          {300}{240}
-          {\corr@loopchannelblabelposition}
-          {\corr@loopchannelblabelxshift}
-          {\corr@loopchannelblabelyshift}%
-      }{%
-        \corr@drawellipticmomentumarc{6}
-          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
-          {\corr@loopchannelsxrad}
-          {\corr@loopchannelsyrad}
-          {240}{300}
-          {\corr@loopchannelblabelposition}
-          {\corr@loopchannelblabelxshift}
-          {\corr@loopchannelblabelyshift}%
-      }%
-    }%
+    \corr@drawloopchannelmomentumslot{a}{5}{corrVL}{corrVR}
+      {out=90,in=90,looseness=\corr@loopchannelaarrowlooseness}%
+    \corr@drawloopchannelmomentumslot{b}{6}{corrVL}{corrVR}
+      {out=-90,in=-90,looseness=\corr@loopchannelbarrowlooseness}%
   \fi
   \corr@putloopchannelinternalindexcurve
     {(corrVL)}{out=90,in=90,looseness=\corr@loopchannellooplooseness}{(corrVR)}
@@ -2797,52 +2847,10 @@
     \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
     \corr@drawexternalmomentumur{3}{corrUR}{corrVT}
     \corr@drawexternalmomentumlr{4}{corrLR}{corrVB}
-    \pgfmathsetmacro{\corr@loopchannelvxrad}{0.46*\corr@loopchannelvertexyspan}%
-    \pgfmathsetmacro{\corr@loopchannelvyrad}{\corr@loopchannelvertexyspan}%
-    \def\corr@currentmomentumlabeldistance{\corr@loopchannelalabeldistance}%
-    \corr@ifstringeq{\corr@loopchanneladir}{none}{}{%
-      \corr@ifstringeq{\corr@loopchanneladir}{reverse}{%
-        \corr@drawellipticmomentumarc{5}
-          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {205}{155}
-          {\corr@loopchannelalabelposition}
-          {\corr@loopchannelalabelxshift}
-          {\corr@loopchannelalabelyshift}%
-      }{%
-        \corr@drawellipticmomentumarc{5}
-          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {155}{205}
-          {\corr@loopchannelalabelposition}
-          {\corr@loopchannelalabelxshift}
-          {\corr@loopchannelalabelyshift}%
-      }%
-    }%
-    \def\corr@currentmomentumlabeldistance{\corr@loopchannelblabeldistance}%
-    \corr@ifstringeq{\corr@loopchannelbdir}{none}{}{%
-      \corr@ifstringeq{\corr@loopchannelbdir}{reverse}{%
-        \corr@drawellipticmomentumarc{6}
-          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {-25}{25}
-          {\corr@loopchannelblabelposition}
-          {\corr@loopchannelblabelxshift}
-          {\corr@loopchannelblabelyshift}%
-      }{%
-        \corr@drawellipticmomentumarc{6}
-          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {25}{-25}
-          {\corr@loopchannelblabelposition}
-          {\corr@loopchannelblabelxshift}
-          {\corr@loopchannelblabelyshift}%
-      }%
-    }%
+    \corr@drawloopchannelmomentumslot{a}{5}{corrVT}{corrVB}
+      {out=180,in=180,looseness=\corr@loopchannelaarrowlooseness}%
+    \corr@drawloopchannelmomentumslot{b}{6}{corrVT}{corrVB}
+      {out=0,in=0,looseness=\corr@loopchannelbarrowlooseness}%
   \fi
   \corr@putloopchannelinternalindexcurve
     {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
@@ -2913,52 +2921,10 @@
     \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
     \corr@drawexternalmomentumur{3}{corrUR}{corrX}
     \corr@drawexternalmomentumlr{4}{corrLR}{corrX}
-    \pgfmathsetmacro{\corr@loopchannelvxrad}{0.46*\corr@loopchannelvertexyspan}%
-    \pgfmathsetmacro{\corr@loopchannelvyrad}{\corr@loopchannelvertexyspan}%
-    \def\corr@currentmomentumlabeldistance{\corr@loopchannelalabeldistance}%
-    \corr@ifstringeq{\corr@loopchanneladir}{none}{}{%
-      \corr@ifstringeq{\corr@loopchanneladir}{reverse}{%
-        \corr@drawellipticmomentumarc{5}
-          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {205}{155}
-          {\corr@loopchannelalabelposition}
-          {\corr@loopchannelalabelxshift}
-          {\corr@loopchannelalabelyshift}%
-      }{%
-        \corr@drawellipticmomentumarc{5}
-          {($(corrC)+(\corr@loopchannelaarrowxshift,\corr@loopchannelaarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {155}{205}
-          {\corr@loopchannelalabelposition}
-          {\corr@loopchannelalabelxshift}
-          {\corr@loopchannelalabelyshift}%
-      }%
-    }%
-    \def\corr@currentmomentumlabeldistance{\corr@loopchannelblabeldistance}%
-    \corr@ifstringeq{\corr@loopchannelbdir}{none}{}{%
-      \corr@ifstringeq{\corr@loopchannelbdir}{reverse}{%
-        \corr@drawellipticmomentumarc{6}
-          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {-25}{25}
-          {\corr@loopchannelblabelposition}
-          {\corr@loopchannelblabelxshift}
-          {\corr@loopchannelblabelyshift}%
-      }{%
-        \corr@drawellipticmomentumarc{6}
-          {($(corrC)+(\corr@loopchannelbarrowxshift,\corr@loopchannelbarrowyshift)$)}
-          {\corr@loopchannelvxrad}
-          {\corr@loopchannelvyrad}
-          {25}{-25}
-          {\corr@loopchannelblabelposition}
-          {\corr@loopchannelblabelxshift}
-          {\corr@loopchannelblabelyshift}%
-      }%
-    }%
+    \corr@drawloopchannelmomentumslot{a}{5}{corrVT}{corrVB}
+      {out=180,in=180,looseness=\corr@loopchannelaarrowlooseness}%
+    \corr@drawloopchannelmomentumslot{b}{6}{corrVT}{corrVB}
+      {out=0,in=0,looseness=\corr@loopchannelbarrowlooseness}%
   \fi
   \corr@putloopchannelinternalindexcurve
     {(corrVT)}{out=180,in=180,looseness=\corr@loopchannellooplooseness}{(corrVB)}
