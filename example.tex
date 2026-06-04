@@ -36,12 +36,10 @@ Default 3-point and 4-point correlators:
   \text{4-point contact} \\
   \ThreePointCorr[
     field=A,
-    indices={\mu,\nu,\rho},
     central=\Gamma^{(3)}
   ] &
   \FourPointCorr[
     field=\phi,
-    indices={a,b,c,d},
     central=G^{(4)}
   ]
 \end{array}
@@ -49,12 +47,11 @@ Default 3-point and 4-point correlators:
 
 \subsection*{2. External Labels And Line Styles}
 
-Automatic \(k_i\) momentum labels with external field indices:
+Automatic \(k_i\) momentum labels:
 \[
   \FourPointCorr[
     mode=k,
     field=\phi,
-    indices={a,b,c,d},
     central=G^{(4)}
   ]
 \]
@@ -69,14 +66,12 @@ Manual external labels and a global fermion line style:
   ]
 \]
 
-Upper-index labels with the central blob hidden:
+Central blob hidden:
 \[
   \FourPointCorr[
     mode=p,
     blob=false,
     field=\mathcal{O},
-    indices={\alpha,\beta,\gamma,\delta},
-    index-placement=sup,
     central=\mathcal{V}^{(4)}
   ]
 \]
@@ -92,7 +87,6 @@ is upper-left incoming and the other two outgoing.
   \ThreePointCorr[
     line=pho,
     field=A,
-    indices={\mu,\nu,\rho},
     central=\Gamma^{(3)},
     momentum-labels={q_1,q_2,q_3}
   ] &
@@ -113,7 +107,6 @@ is upper-left incoming and the other two outgoing.
     external-vertices=true,
     show-momenta=false,
     field=\phi,
-    indices={1,2,3},
     central=\Gamma_{\mathrm{amp}}^{(3)}
   ] &
   \ThreePointCorr[
@@ -126,7 +119,6 @@ is upper-left incoming and the other two outgoing.
     momentum-labels={p_1,p_2,p_3},
     three-point-momentum-flow=all-out,
     field=\chi,
-    indices={a,b,c},
     central=V^{(3)}
   ]
 \end{array}
@@ -146,7 +138,6 @@ size follows the propagator-arrow sizing controls.
     show-momenta=false,
     leg-styles={scalarpolarized,plain,plain,plain},
     field=\varphi,
-    indices={1,2,3,4},
     central=\Gamma_{\mathrm{mix}}^{(4)}
   ] &
   \FourPointCorr[
@@ -156,7 +147,6 @@ size follows the propagator-arrow sizing controls.
     propagator-arrow-size=14pt,
     leg-styles={plain,plain,scalarpolarized,plain},
     field=\varphi,
-    indices={1,2,3,4},
     central=\Gamma_{\mathrm{mix}}^{(4)}
   ]
 \end{array}
@@ -168,8 +158,8 @@ Amputated external legs with endpoint vertices:
 \[
   \FourPointCorr[
     external-legs=false,
+    show-momenta=false,
     field=\phi,
-    indices={a,b,c,d},
     central=\Gamma^{(4)}
   ]
 \]
@@ -185,7 +175,6 @@ Pairing controls for contact-style 4-point objects:
     show-momenta=false,
     contact-pairing=horizontal,
     field=x,
-    indices={1,2,3,4},
     central=\Gamma^{(4)}_{1122}
   ] &
   \FourPointCorr[
@@ -196,7 +185,6 @@ Pairing controls for contact-style 4-point objects:
     line=fer,
     color=fieldB,
     field=x,
-    indices={1,2,3,4},
     central=\Gamma^{(4)}_{1221}
   ]
 \end{array}
@@ -214,7 +202,6 @@ Per-leg color/style overrides versus a global line color:
     contact-pairing=horizontal,
     leg-styles={{fer,fieldA},{plain,fieldB},{fer,fieldA},{plain,fieldB}},
     field=x,
-    indices={1,2,3,4},
     central=\Gamma^{(4)}_{1122}
   ] &
   \FourPointCorr[
@@ -225,7 +212,6 @@ Per-leg color/style overrides versus a global line color:
     line=fer,
     color=fieldA,
     field=x,
-    indices={1,2,3,4},
     central=\Gamma^{(4)}_{1122}
   ]
 \end{array}
@@ -235,29 +221,30 @@ Per-leg color/style overrides versus a global line color:
 
 The channel wrappers are fixed-topology versions of \verb|\FourPointCorr|.
 \[
+\setlength{\arraycolsep}{4pt}
 \begin{array}{ccc}
   s\text{-channel} &
   t\text{-channel} &
   u\text{-channel} \\
   \SChannelCorr[
     scale=0.80,
+    show-momenta=false,
     external-momentum-flow=left-in-right-out,
     field=\phi,
-    indices={a,b,c,d},
     central=\Gamma^{(1)}_{s}
   ] &
   \TChannelCorr[
     scale=0.80,
+    show-momenta=false,
     external-momentum-flow=left-in-right-out,
     field=\phi,
-    indices={a,b,c,d},
     central=\Gamma^{(1)}_{t}
   ] &
   \UChannelCorr[
     scale=0.80,
+    show-momenta=false,
     external-momentum-flow=left-in-right-out,
     field=\phi,
-    indices={a,b,c,d},
     central=\Gamma^{(1)}_{u}
   ]
 \end{array}
@@ -284,7 +271,6 @@ Separate vertex and propagator indices on the two internal lines:
   \TChannelCorr[
     scale=0.88,
     field=\phi,
-    indices={a,b,c,d},
     central=\Gamma^{(1)}_{t},
     momentum-labels={p_1,p_2,p_3,p_4},
     loop-channel-left-momentum=\ell,
@@ -298,11 +284,8 @@ Separate vertex and propagator indices on the two internal lines:
   \UChannelCorr[
     scale=0.88,
     field=\phi,
-    indices={a,b,c,d},
     central=\Gamma^{(1)}_{u},
     momentum-labels={p_1,p_2,p_3,p_4},
-    loop-channel-left-momentum=\ell,
-    loop-channel-right-momentum=r-\ell,
     loop-channel-left-label-xshift=-8pt,
     loop-channel-start-vertex-indices={i,m},
     loop-channel-internal-indices={\rho,\sigma},
@@ -311,7 +294,42 @@ Separate vertex and propagator indices on the two internal lines:
 \end{array}
 \]
 
-\subsection*{7. Tree-Level Exchange Channels}
+\subsection*{7. One-Loop Box Topology}
+
+The box topology is a four-point loop with clockwise edge momenta. For this
+topology the right-side external slots follow the box order: slot 3 is lower
+right and slot 4 is upper right.
+\[
+\begin{array}{ccc}
+  \text{Default wavy box} &
+  \text{No momentum labels} &
+  \text{Mixed external styles} \\
+  \BoxLoopCorr[
+    scale=0.72,
+    field=A,
+    central=\Gamma^{(1)}_{\mathrm{box}}
+  ] &
+  \BoxLoopCorr[
+    scale=0.72,
+    show-momenta=false,
+    box-external-line=plain,
+    box-line=plain,
+    field=A,
+    central=\Gamma^{(1)}_{\mathrm{box}}
+  ] &
+  \FourPointCorr[
+    topology=box,
+    scale=0.72,
+    box-external-line=plain,
+    box-line=plain,
+    field=A,
+    leg-labels={A_\mu,A_\nu,A_\rho,A_\sigma},
+    central=\Gamma^{(1)}_{WAAA}
+  ]
+\end{array}
+\]
+
+\subsection*{8. Tree-Level Exchange Channels}
 
 Tree-level exchange channels use the same external slots as the loop channels,
 but their internal propagator uses the older \verb|channel-*| key family.
@@ -322,33 +340,34 @@ but their internal propagator uses the older \verb|channel-*| key family.
   u\text{-tree} \\
   \STreeChannelCorr[
     scale=0.80,
+    show-momenta=false,
     field=\phi,
-    indices={a,b,c,d},
     channel-momentum=\ell_s,
     central=\Gamma^{(0)}_{s}
   ] &
   \TTreeChannelCorr[
     scale=0.80,
+    show-momenta=false,
     field=\phi,
-    indices={a,b,c,d},
     channel-momentum=\ell_t,
     central=\Gamma^{(0)}_{t}
   ] &
   \UTreeChannelCorr[
     scale=0.80,
+    show-momenta=false,
     field=\phi,
-    indices={a,b,c,d},
     channel-momentum=\ell_u,
     central=\Gamma^{(0)}_{u}
   ]
 \end{array}
 \]
 
-\subsection*{8. Sunset Self-Energies}
+\subsection*{9. Sunset Self-Energies}
 
 Minimal sunset diagram:
 \[
   \SunsetDiagram[
+    show-momenta=false,
     field=\phi,
     central=\Sigma(p)
   ]

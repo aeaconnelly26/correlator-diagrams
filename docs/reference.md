@@ -15,6 +15,7 @@ For the short overview, visuals, and starter examples, see [README](../README.md
 - [Momentum Labels And Arrows](#momentum-labels-and-arrows)
 - [Line Styles, Arrows, And Vertices](#line-styles-arrows-and-vertices)
 - [Scalar-Polarized Legs](#scalar-polarized-legs)
+- [One-Loop Box Topology](#one-loop-box-topology)
 - [One-Loop `s/t/u` Channel Bubbles For `\phi^4`](#one-loop-stu-channel-bubbles-for-phi4)
 - [Sunset Diagrams](#sunset-diagrams)
 - [Explicit Tree-Level Channel Topologies](#explicit-tree-level-channel-topologies)
@@ -30,6 +31,7 @@ Main package:
 Main demos:
 
 - `example.tex`
+- `box-topology-regression.tex`
 - `channel-topology-regression.tex`
 - `three-point-check.tex`
 - `scalar-polarization-check.tex`
@@ -49,6 +51,7 @@ The main entry points are:
 \TwoPointCorr[...]
 \ThreePointCorr[...]
 \FourPointCorr[...]
+\BoxLoopCorr[...]
 \SunsetDiagram[...]
 ```
 
@@ -64,6 +67,7 @@ Common aliases:
 \SLoopChannelCorr[...]
 \TLoopChannelCorr[...]
 \ULoopChannelCorr[...]
+\BoxLoopCorr[...]
 \STreeChannelCorr[...]
 \TTreeChannelCorr[...]
 \UTreeChannelCorr[...]
@@ -97,11 +101,13 @@ That is the logic used by this package.
 | `\TwoPointCorr` | 2-point function | left leg, right leg, central blob/vertex |
 | `\ThreePointCorr` | 3-point vertex | upper-left, right, and bottom legs meeting at one vertex |
 | `\FourPointCorr` | 4-point object | contact topology by default |
+| `\BoxLoopCorr` | one-loop box | four corner vertices, square internal loop, four diagonal external legs |
 | `\SunsetDiagram` | self-energy sunset | two external legs plus top/middle/bottom internal lines |
 
 The convenience channel wrappers are just `\FourPointCorr` with a fixed topology:
 
 - `\SChannelCorr`, `\TChannelCorr`, `\UChannelCorr` for the one-loop `\phi^4` bubbles
+- `\BoxLoopCorr` for the one-loop four-point box, equivalent to `\FourPointCorr[topology=box,...]`
 - `\STreeChannelCorr`, `\TTreeChannelCorr`, `\UTreeChannelCorr` for the explicit tree-level exchange graphs
 
 ## Leg Order And Slot Order
@@ -171,6 +177,23 @@ That slot order matters for:
 - `momentum-labels={...}`
 - `momentum-arrow-sizes={...}`
 - `propagator-arrow-sizes={...}`
+
+For `topology=box` and `\BoxLoopCorr`, the external order follows the box
+around the diagram:
+
+- slot 1 = upper left
+- slot 2 = lower left
+- slot 3 = lower right
+- slot 4 = upper right
+
+The box has four internal propagator slots:
+
+- slot 5 = left edge
+- slot 6 = top edge
+- slot 7 = right edge
+- slot 8 = bottom edge
+
+The central loop momentum arrow uses slot 9 for `momentum-arrow-sizes={...}`.
 
 ### `\SunsetDiagram`
 
@@ -512,7 +535,7 @@ Default `u`-channel internal loop momenta and crossed right-side external moment
 ```tex
 \[
   \UChannelCorr[
-    loop-channel-left-momentum=\ell,
+    loop-channel-left-momentum=r-\ell,
     loop-channel-left-momentum-direction=forward,
     loop-channel-left-arrow-start=0.24,
     loop-channel-left-arrow-end=0.76,
@@ -524,7 +547,7 @@ Default `u`-channel internal loop momenta and crossed right-side external moment
     loop-channel-left-label-fraction=0.50,
     loop-channel-left-label-xshift=0pt,
     loop-channel-left-label-yshift=0pt,
-    loop-channel-right-momentum=r-\ell,
+    loop-channel-right-momentum=\ell,
     loop-channel-right-momentum-direction=forward,
     loop-channel-right-arrow-start=0.24,
     loop-channel-right-arrow-end=0.76,
@@ -1062,6 +1085,123 @@ The default `scalarpolarized` style places an inward-pointing marker near the ve
 Legacy `antiscalar...` and `antspol...` names still work as aliases of the same scalar-polarized style.
 
 The open arrowhead size tracks the normal propagator arrow-size controls.
+
+## One-Loop Box Topology
+
+The public box entry points are:
+
+```tex
+\BoxLoopCorr[...]
+\FourPointCorr[topology=box,...]
+```
+
+The default box is a wavy four-point loop with four corner vertices, four
+diagonal external legs, edge momentum labels, and a central clockwise loop
+arrow.
+
+Default external momenta:
+
+- slot 1, upper left = `q_1`
+- slot 2, lower left = `q_2`
+- slot 3, lower right = `q_3`
+- slot 4, upper right = `q_4`
+
+Default internal momenta:
+
+- left edge = `k`, arrow upward
+- top edge = `q_1+k`, arrow rightward
+- right edge = `q_1+k-q_4`, arrow downward
+- bottom edge = `q_2-k`, arrow rightward
+- center loop arrow = `k`, clockwise
+
+Minimal box:
+
+```tex
+\[
+  \BoxLoopCorr[
+    field=A,
+    indices={\mu,\nu,\rho,\sigma},
+    central=\Gamma^{(1)}_{\mathrm{box}}
+  ]
+\]
+```
+
+The wrapper and explicit topology form are equivalent:
+
+```tex
+\[
+  \FourPointCorr[
+    topology=box,
+    field=A,
+    indices={\mu,\nu,\rho,\sigma}
+  ]
+\]
+```
+
+Mixed exterior line styles use the existing `leg-styles` slot order:
+
+```tex
+\[
+  \BoxLoopCorr[
+    leg-styles={spol,pho,pho,pho},
+    scalar-arrow-direction=out,
+    leg-labels={W_\mu,A_\nu,A_\rho,A_\sigma}
+  ]
+\]
+```
+
+Box line controls:
+
+- `box-external-line=...`
+- `box-line=...`
+- `box-internal-line=...`
+- `box-internal-lines={left-style,top-style,right-style,bottom-style}`
+- `box-left-line=...`
+- `box-top-line=...`
+- `box-right-line=...`
+- `box-bottom-line=...`
+
+Box momentum labels:
+
+- `box-left-momentum=...`
+- `box-top-momentum=...`
+- `box-right-momentum=...`
+- `box-bottom-momentum=...`
+- `box-edge-momenta={left-label,top-label,right-label,bottom-label}`
+- `box-loop-momentum=...`
+
+Box geometry:
+
+- `box-xspan=...`
+- `box-yspan=...`
+- `box-external-xspan=...`
+- `box-external-yspan=...`
+- `box-central-label-yshift=...`
+
+Box edge arrow placement follows the same predictable pattern for each edge:
+
+- `box-left-arrow-start=...`
+- `box-left-arrow-end=...`
+- `box-left-arrow-xshift=...`
+- `box-left-arrow-yshift=...`
+- `box-left-label-position=...`
+- `box-left-label-distance=...`
+- `box-left-label-xshift=...`
+- `box-left-label-yshift=...`
+- `box-left-label-fraction=...`
+
+Replace `left` with `top`, `right`, or `bottom` for the other edges.
+
+Central loop arrow controls:
+
+- `box-loop-arrow-radius=...`
+- `box-loop-arrow-start-angle=...`
+- `box-loop-arrow-end-angle=...`
+- `box-loop-label-angle=...`
+- `box-loop-label-distance=...`
+- `box-loop-label-position=...`
+- `box-loop-label-xshift=...`
+- `box-loop-label-yshift=...`
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 

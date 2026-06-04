@@ -74,6 +74,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 
 - `\TwoPointCorr`, `\ThreePointCorr`, and `\FourPointCorr` as the main correlator entry points
 - 3-point vertices via `\ThreePointCorr`, including per-leg styles, custom labels, and all-in/all-out momentum flow
+- one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
@@ -97,6 +98,7 @@ The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which a
 Main demo files in this repository:
 
 - [`example.tex`](example.tex)
+- [`box-topology-regression.tex`](box-topology-regression.tex)
 - [`channel-topology-regression.tex`](channel-topology-regression.tex)
 - [`three-point-check.tex`](three-point-check.tex)
 - [`scalar-polarization-check.tex`](scalar-polarization-check.tex)
@@ -124,6 +126,7 @@ Common wrappers and aliases:
 \TwoPtCorr[...]
 \ThreePtCorr[...]
 \FourPtCorr[...]
+\BoxLoopCorr[...]
 \SChannelCorr[...]
 \TChannelCorr[...]
 \UChannelCorr[...]
@@ -154,6 +157,7 @@ The full reference covers:
 
 - `correlator-diagrams.sty`: package source
 - `example.tex`: broad feature gallery
+- `box-topology-regression.tex`: focused one-loop box regression cases
 - `channel-topology-regression.tex`: focused channel regression cases
 - `three-point-check.tex`: focused 3-point regression cases
 - `scalar-polarization-check.tex`: single-leg scalar-polarized regression cases
