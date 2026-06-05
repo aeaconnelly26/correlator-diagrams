@@ -1,68 +1,45 @@
 # Correlator Diagram Macros
 
-Reusable LaTeX macros for the QFT diagrams that actually show up in notes, assignments, and writeups: correlators, contraction classes, amputated vertices, loop bubbles, and exchange channels.
+Reusable LaTeX macros for the QFT diagrams that actually show up in notes, assignments, and writeups: correlators, contraction classes, amputated vertices, loop bubbles, one-loop boxes, and exchange channels.
 
 Fast defaults when you just need the figure. One-option switches for common cleanup like hiding momenta. More detailed control when the geometry gets ugly.
 
-## In A Few Lines
+## Tiny Examples
 
 <table>
   <tr>
     <td valign="top" width="50%">
       <strong>Default 4-point correlator</strong><br>
-      <sub>External labels and momenta from one readable macro call.</sub>
-      <pre lang="tex">\FourPointCorr[
-  field=\phi,
-  indices={a,b,c,d},
-  central=\Gamma^{(4)}
-]</pre>
+      <sub>A readable starting point with field and momentum labels.</sub>
+      <pre lang="tex">\FourPointCorr</pre>
       <p align="center">
         <img src="assets/readme-fourpoint-default.png" alt="Default four-point correlator" width="320">
       </p>
     </td>
     <td valign="top" width="50%">
-      <strong>Change the flow convention</strong><br>
-      <sub>Use left-in/right-out momentum arrows without redrawing the figure.</sub>
-      <pre lang="tex">\TChannelCorr[
-  external-momentum-flow=left-in-right-out,
-  field=\phi,
-  indices={a,b,c,d},
-  central=\Gamma^{(1)}_{t}
-]</pre>
+      <strong>One-loop box</strong><br>
+      <sub>A quiet topology view when momentum labels would be noise.</sub>
+      <pre lang="tex">\BoxLoopCorr[field={}, show-momenta=false]</pre>
       <p align="center">
-        <img src="assets/readme-tchannel-flow.png" alt="T-channel with left-in right-out momentum flow" width="320">
+        <img src="assets/readme-box-plain.png" alt="One-loop box with momentum labels hidden" width="320">
       </p>
     </td>
   </tr>
   <tr>
     <td valign="top" width="50%">
-      <strong>Amputate and pair the fields</strong><br>
-      <sub>Switch from a central vertex to a direct contraction pattern.</sub>
-      <pre lang="tex">\FourPointCorr[
-  external-legs=false,
-  center-vertex=false,
-  show-momenta=false,
-  contact-pairing=horizontal,
-  field=x,
-  indices={1,2,3,4},
-  central=\Gamma^{(4)}_{1212}
-]</pre>
+      <strong>3-point vertex</strong><br>
+      <sub>Photon-like legs with the annotations hidden.</sub>
+      <pre lang="tex">\ThreePointCorr[line=pho, field={}, show-momenta=false]</pre>
       <p align="center">
-        <img src="assets/readme-contact-horizontal.png" alt="Amputated horizontal contact pairing" width="320">
+        <img src="assets/readme-threepoint-default.png" alt="Default three-point correlator" width="320">
       </p>
     </td>
     <td valign="top" width="50%">
-      <strong>Color the whole topology</strong><br>
-      <sub>One option for a uniform diagram style.</sub>
-      <pre lang="tex">\SChannelCorr[
-  color=blue,
-  show-momenta=false,
-  field=\phi,
-  indices={a,b,c,d},
-  central=\Gamma^{(1)}_{s}
-]</pre>
+      <strong>Loop channel</strong><br>
+      <sub>A clean channel diagram with momentum annotations hidden.</sub>
+      <pre lang="tex">\SChannelCorr[field={}, show-momenta=false]</pre>
       <p align="center">
-        <img src="assets/readme-schannel-blue.png" alt="Blue s-channel with momenta hidden" width="320">
+        <img src="assets/readme-schannel-blue.png" alt="S-channel with momenta hidden" width="320">
       </p>
     </td>
   </tr>
@@ -74,6 +51,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 
 - `\TwoPointCorr`, `\ThreePointCorr`, and `\FourPointCorr` as the main correlator entry points
 - 3-point vertices via `\ThreePointCorr`, including per-leg styles, custom labels, and all-in/all-out momentum flow
+- one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
@@ -97,6 +75,7 @@ The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which a
 Main demo files in this repository:
 
 - [`example.tex`](example.tex)
+- [`box-topology-regression.tex`](box-topology-regression.tex)
 - [`channel-topology-regression.tex`](channel-topology-regression.tex)
 - [`three-point-check.tex`](three-point-check.tex)
 - [`scalar-polarization-check.tex`](scalar-polarization-check.tex)
@@ -124,6 +103,7 @@ Common wrappers and aliases:
 \TwoPtCorr[...]
 \ThreePtCorr[...]
 \FourPtCorr[...]
+\BoxLoopCorr[...]
 \SChannelCorr[...]
 \TChannelCorr[...]
 \UChannelCorr[...]
@@ -138,14 +118,16 @@ Common wrappers and aliases:
 - Start with [`example.tex`](example.tex) if you want copy-paste examples.
 - Use [`docs/reference.md`](docs/reference.md) for the full macro and tuning reference.
 - Use [`channel-topology-regression.tex`](channel-topology-regression.tex) to inspect channel layouts in isolation.
-- Use [`three-point-check.tex`](three-point-check.tex) to verify the new 3-point topology and momentum placement.
+- Use [`box-topology-regression.tex`](box-topology-regression.tex) to inspect the one-loop box topology in isolation.
+- Use [`three-point-check.tex`](three-point-check.tex) to verify the 3-point topology and momentum placement.
 - Use [`scalar-polarization-check.tex`](scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.
 
 The full reference covers:
 
 - slot order and leg ordering
-- the new 3-point vertex topology
+- 3-point vertex and one-loop box topologies
 - momentum labels and arrow tuning
+- box edge labels and mixed external leg styles
 - loop-channel and sunset layout controls
 - line styles, vertices, colors, and scalar-polarized legs
 - one-loop `s/t/u` channels, tree channels, and sunset diagrams
@@ -154,6 +136,7 @@ The full reference covers:
 
 - `correlator-diagrams.sty`: package source
 - `example.tex`: broad feature gallery
+- `box-topology-regression.tex`: focused one-loop box regression cases
 - `channel-topology-regression.tex`: focused channel regression cases
 - `three-point-check.tex`: focused 3-point regression cases
 - `scalar-polarization-check.tex`: single-leg scalar-polarized regression cases

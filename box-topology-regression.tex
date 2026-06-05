@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{correlator-diagrams}
+
+\begin{document}
+
+\section*{One-Loop Box Topology Regression}
+
+\[
+\BoxLoopCorr[
+  field=\phi,
+]
+\]
+
+\[
+\FourPointCorr[
+  topology=box,
+  box-external-line=plain,
+  box-line=plain,
+  show-momenta=false,
+  field=\phi,
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-external-line=plain,
+  box-line=plain,
+  field=A,
+  leg-labels={A_\mu,A_\nu,A_\rho,A_\sigma},
+  box-edge-momenta={k,q_1+k,q_1+k-q_4,q_2-k},
+  box-loop-momentum=k,
+  box-internal-lines={plain,plain,plain,plain}
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-external-line=plain,
+  box-line=plain,
+  show-momenta=false,
+  leg-labels={W,W,W,W},
+  box-edge-labels={Z,W,Z,W},
+  box-internal-lines={plain,plain,plain,plain}
+]
+\]
+
+\end{document}
