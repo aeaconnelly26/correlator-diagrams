@@ -79,7 +79,7 @@
 \def\corr@momentumarrowsize{3.5pt}
 \def\corr@momentumlinewidth{0.45pt}
 \def\corr@momentumarrowsizes{}
-\def\corr@momentumlabelgap{0.14}
+\def\corr@momentumlabelgap{0.08}
 \def\corr@momentumlabelfill{none}
 \def\corr@momentumlabelinnersep{0.2pt}
 \def\corr@momentumlabelstyle{}
@@ -96,6 +96,7 @@
 \def\corr@threepointmomentumstart{0.22}
 \def\corr@threepointmomentumend{0.72}
 \def\corr@threepointmomentumlabelfraction{0.50}
+\def\corr@threepointmomentumlabelgap{0.08}
 \def\corr@threepointmomentumoffset{6pt}
 \def\corr@sunsetleftmomentum{p}
 \def\corr@sunsetrightmomentum{}
@@ -321,6 +322,7 @@
 \def\corr@boxexternalmomentumstart{0.18}
 \def\corr@boxexternalmomentumend{0.82}
 \def\corr@boxexternalmomentumlabelfraction{0.50}
+\def\corr@boxexternalmomentumlabelgap{0.14}
 \def\corr@boxexternalmomentumoffset{8pt}
 \def\corr@boxleftarrowstart{0.24}
 \def\corr@boxleftarrowend{0.72}
@@ -1542,6 +1544,7 @@
   box-external-momentum-start/.store in=\corr@boxexternalmomentumstart,
   box-external-momentum-end/.store in=\corr@boxexternalmomentumend,
   box-external-momentum-label-fraction/.store in=\corr@boxexternalmomentumlabelfraction,
+  box-external-momentum-label-gap/.store in=\corr@boxexternalmomentumlabelgap,
   box-external-momentum-offset/.store in=\corr@boxexternalmomentumoffset,
   box-left-arrow-start/.store in=\corr@boxleftarrowstart,
   box-left-arrow-end/.store in=\corr@boxleftarrowend,
@@ -1942,6 +1945,7 @@
   three-point-momentum-start/.store in=\corr@threepointmomentumstart,
   three-point-momentum-end/.store in=\corr@threepointmomentumend,
   three-point-momentum-label-fraction/.store in=\corr@threepointmomentumlabelfraction,
+  three-point-momentum-label-gap/.store in=\corr@threepointmomentumlabelgap,
   three-point-momentum-offset/.store in=\corr@threepointmomentumoffset,
   three-point-upper-left-momentum-direction/.store in=\corr@threepointulmomentumdirection,
   three-point-left-momentum-direction/.style={three-point-upper-left-momentum-direction={#1}},
@@ -2255,6 +2259,7 @@
 \newcommand{\corr@topologydrawmomentum}[8]{%
   \begingroup
   \def\corr@externalmomoffset{\corr@threepointmomentumoffset}%
+  \def\corr@momentumlabelgap{\corr@threepointmomentumlabelgap}%
   \corr@ifstringeq{#8}{out}{%
     \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{#5}{#6}{#7}{0pt}{0pt}%
   }{%
@@ -2278,6 +2283,7 @@
 \newcommand{\corr@drawboxexternalmomentum}[5]{%
   \begingroup
   \def\corr@externalmomoffset{\corr@boxexternalmomentumoffset}%
+  \def\corr@momentumlabelgap{\corr@boxexternalmomentumlabelgap}%
   \corr@ifstringeq{#5}{out}{%
     \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@boxexternalmomentumstart}{\corr@boxexternalmomentumend}{\corr@boxexternalmomentumlabelfraction}{0pt}{0pt}%
   }{%

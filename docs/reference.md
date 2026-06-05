@@ -386,6 +386,7 @@ The shared arrow and label controls still apply:
 - `three-point-momentum-start=...`
 - `three-point-momentum-end=...`
 - `three-point-momentum-label-fraction=...`
+- `three-point-momentum-label-gap=...`
 - `three-point-momentum-offset=...`
 
 ### One-loop `s/t/u` bubbles: the internal loop momenta
@@ -1037,6 +1038,7 @@ Per-leg overrides:
 - `three-point-momentum-start=...`
 - `three-point-momentum-end=...`
 - `three-point-momentum-label-fraction=...`
+- `three-point-momentum-label-gap=...`
 - `three-point-momentum-offset=...`
 
 Aliases for the upper-left leg geometry:
@@ -1212,6 +1214,7 @@ Box external momentum arrow placement:
 - `box-external-momentum-start=...`
 - `box-external-momentum-end=...`
 - `box-external-momentum-label-fraction=...`
+- `box-external-momentum-label-gap=...`
 - `box-external-momentum-offset=...`
 
 Box edge arrow placement follows the same predictable pattern for each edge:
