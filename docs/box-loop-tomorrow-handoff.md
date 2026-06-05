@@ -1,4 +1,4 @@
-# Box Loop Tomorrow Handoff
+# Box Loop Visual QA Handoff
 
 Branch: `codex/box-loop-topology`
 
@@ -7,26 +7,25 @@ Branch: `codex/box-loop-topology`
 - The one-loop box topology exists as `\BoxLoopCorr[...]`.
 - The same topology is available through `\FourPointCorr[topology=box,...]`.
 - The topology structure is in place: four corner vertices, four internal edges, four diagonal external legs, edge momentum labels, and a central clockwise loop arrow.
-- The examples now keep only one wavy/photon-style box specimen. The other box examples use plain lines so the topology can be inspected without the wavy-line issue getting in the way.
+- The photon style has been changed back to a single decorated wavy path instead of a charged-boson path plus a second wavy postaction.
+- Box external momentum arrows now have box-specific placement controls, so their arrows can be longer without changing the external leg geometry.
+- Three-point momentum arrows now share one default span and label fraction, so their label placement is consistent by default.
+- The examples keep wavy and plain specimens so topology structure and photon rendering can be inspected separately.
 
-## Known Issue To Investigate
+## Visual Items To Reinspect
 
-- Wavy/photon-style legs look suspicious. Do not merge yet.
-- Tomorrow's first task should be to isolate whether the problem is:
-  - the global photon override in `\corr@configurestyles`,
-  - the interaction between TikZ-FeynHand photon decoration and short diagonal legs,
-  - the box-specific defaults,
-  - or a broader wavy-line style regression.
+- Confirm the wavy/photon style now reads as a single clean wave in box, three-point, and channel diagrams.
+- Confirm the thinner momentum arrows feel informative but not too faint.
+- Confirm centered three-point momentum labels no longer create confusing collisions in examples.
+- Confirm the W/Z label-only box still has no momentum arrows.
 
-## Suggested Tomorrow Plan
+## Suggested QA Plan
 
-1. Recompile `box-topology-regression.tex` and inspect the three boxes.
-2. Compare the one wavy box against the two plain boxes.
-3. If the plain boxes look structurally good, keep the topology implementation and focus only on photon/wavy style.
-4. Try a small isolated TeX file with one diagonal photon leg, one horizontal photon edge, and one vertical photon edge.
-5. Decide whether to tune global photon style, make a box-specific wavy style, or revert the global looseness and defer wavy polish.
-6. After visual approval, rerun the full compile plan before opening/finishing the PR.
+1. Recompile `box-topology-regression.tex`, `three-point-check.tex`, and `example.tex`.
+2. Inspect the rendered box and three-point pages as PNGs.
+3. Inspect `channel-topology-regression.pdf`, since photon style is global.
+4. If the visuals are accepted, run the full compile plan and prepare the branch for review.
 
 ## Not Merge Ready Yet
 
-The topology is in a good checkpoint state, but this branch should stay open until the wavy-line rendering is understood and cleaned up.
+The topology is in a good checkpoint state, but this branch should stay open until the updated visuals have been inspected and accepted.

@@ -76,9 +76,10 @@
 \def\corr@mode{q}
 \def\corr@momentumstart{1}
 \def\corr@momentumlabels{}
-\def\corr@momentumarrowsize{5pt}
-\def\corr@momentumlinewidth{0.65pt}
+\def\corr@momentumarrowsize{3.5pt}
+\def\corr@momentumlinewidth{0.45pt}
 \def\corr@momentumarrowsizes{}
+\def\corr@momentumlabelgap{0.16}
 \def\corr@momentumlabelfill{none}
 \def\corr@momentumlabelinnersep{0.2pt}
 \def\corr@momentumlabelstyle{}
@@ -92,6 +93,10 @@
 \def\corr@central{}
 \def\corr@scalararrowposition{0.84}
 \def\corr@scalararrowdirection{in}
+\def\corr@threepointmomentumstart{0.22}
+\def\corr@threepointmomentumend{0.72}
+\def\corr@threepointmomentumlabelfraction{0.50}
+\def\corr@threepointmomentumoffset{6pt}
 \def\corr@sunsetleftmomentum{p}
 \def\corr@sunsetrightmomentum{}
 \def\corr@sunsettopmomentum{k}
@@ -105,7 +110,7 @@
 \def\corr@sunsetinnerspan{1}
 \def\corr@sunsetouterspan{1.6}
 \def\corr@sunsetlooplooseness{1.35}
-\def\corr@sunsetcentrallabel{\hspace{1mm}}
+\def\corr@sunsetcentrallabel{}
 \def\corr@sunsetcentrallabelyshift{-24pt}
 \def\corr@sunsetexternalarrowstart{0.22}
 \def\corr@sunsetexternalarrowend{0.78}
@@ -313,6 +318,10 @@
 \def\corr@boxrightedgelabel{}
 \def\corr@boxbottomedgelabel{}
 \def\corr@boxloopmomentum{k}
+\def\corr@boxexternalmomentumstart{0.18}
+\def\corr@boxexternalmomentumend{0.82}
+\def\corr@boxexternalmomentumlabelfraction{0.50}
+\def\corr@boxexternalmomentumoffset{8pt}
 \def\corr@boxleftarrowstart{0.24}
 \def\corr@boxleftarrowend{0.72}
 \def\corr@boxtoparrowstart{0.26}
@@ -333,10 +342,10 @@
 \def\corr@boxtoplabelposition{above}
 \def\corr@boxrightlabelposition{right}
 \def\corr@boxbottomlabelposition{below}
-\def\corr@boxleftlabeldistance{4pt}
-\def\corr@boxtoplabeldistance{4pt}
-\def\corr@boxrightlabeldistance{4pt}
-\def\corr@boxbottomlabeldistance{4pt}
+\def\corr@boxleftlabeldistance{5.5pt}
+\def\corr@boxtoplabeldistance{5.5pt}
+\def\corr@boxrightlabeldistance{5.5pt}
+\def\corr@boxbottomlabeldistance{5.5pt}
 \def\corr@boxleftlabelxshift{0pt}
 \def\corr@boxleftlabelyshift{0pt}
 \def\corr@boxtoplabelxshift{0pt}
@@ -971,6 +980,10 @@
   \corr@topologysetdefault\corr@threepointulmomentumdirection{in}%
   \corr@topologysetdefault\corr@threepointrmomentumdirection{out}%
   \corr@topologysetdefault\corr@threepointbmomentumdirection{out}%
+  \corr@topologysetdefault\corr@threepointmomentumstart{0.22}%
+  \corr@topologysetdefault\corr@threepointmomentumend{0.72}%
+  \corr@topologysetdefault\corr@threepointmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@threepointmomentumoffset{6pt}%
 }
 
 \newcommand{\corr@resetboxdefaults}{%
@@ -993,6 +1006,10 @@
   \corr@topologysetdefault\corr@boxrightedgelabel{}%
   \corr@topologysetdefault\corr@boxbottomedgelabel{}%
   \corr@topologysetdefault\corr@boxloopmomentum{k}%
+  \corr@topologysetdefault\corr@boxexternalmomentumstart{0.18}%
+  \corr@topologysetdefault\corr@boxexternalmomentumend{0.82}%
+  \corr@topologysetdefault\corr@boxexternalmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@boxexternalmomentumoffset{8pt}%
   \corr@topologysetdefault\corr@boxleftarrowstart{0.24}%
   \corr@topologysetdefault\corr@boxleftarrowend{0.72}%
   \corr@topologysetdefault\corr@boxtoparrowstart{0.26}%
@@ -1013,10 +1030,10 @@
   \corr@topologysetdefault\corr@boxtoplabelposition{above}%
   \corr@topologysetdefault\corr@boxrightlabelposition{right}%
   \corr@topologysetdefault\corr@boxbottomlabelposition{below}%
-  \corr@topologysetdefault\corr@boxleftlabeldistance{4pt}%
-  \corr@topologysetdefault\corr@boxtoplabeldistance{4pt}%
-  \corr@topologysetdefault\corr@boxrightlabeldistance{4pt}%
-  \corr@topologysetdefault\corr@boxbottomlabeldistance{4pt}%
+  \corr@topologysetdefault\corr@boxleftlabeldistance{5.5pt}%
+  \corr@topologysetdefault\corr@boxtoplabeldistance{5.5pt}%
+  \corr@topologysetdefault\corr@boxrightlabeldistance{5.5pt}%
+  \corr@topologysetdefault\corr@boxbottomlabeldistance{5.5pt}%
   \corr@topologysetdefault\corr@boxleftlabelxshift{0pt}%
   \corr@topologysetdefault\corr@boxleftlabelyshift{0pt}%
   \corr@topologysetdefault\corr@boxtoplabelxshift{0pt}%
@@ -1059,7 +1076,7 @@
   \def\corr@sunsetbottomline{}%
   \def\corr@sunsetinnerspan{1}%
   \def\corr@sunsetouterspan{1.6}%
-  \def\corr@sunsetcentrallabel{\hspace{1mm}}%
+  \def\corr@sunsetcentrallabel{}%
   \def\corr@sunsetcentrallabelyshift{-24pt}%
   \def\corr@sunsetexternalarrowstart{0.22}%
   \def\corr@sunsetexternalarrowend{0.78}%
@@ -1166,11 +1183,11 @@
   }%
   \tikzfeynhandset{
     every photon@@/.style={
-      /tikzfeynhand/every charged boson@@,
       /tikz/draw=none,
       /tikz/decoration={name=none},
       /tikz/postaction={
         /tikz/draw,
+        /tikz/line width=\feynhandlinesize,
         /tikz/decoration={
           complete sines,
           amplitude=2.6\feynhandlinesize,
@@ -1181,7 +1198,6 @@
     },
     every photon/.style={/tikzfeynhand/every photon@@/.append style={##1}},
     photon/.style={
-      /tikzfeynhand/charged boson,
       /tikzfeynhand/every photon@@,
     },
     pho/.style={/tikzfeynhand/photon},
@@ -1234,6 +1250,7 @@
   momentum-arrow-size/.store in=\corr@momentumarrowsize,
   momentum-arrow-sizes/.store in=\corr@momentumarrowsizes,
   momentum-line-width/.store in=\corr@momentumlinewidth,
+  momentum-label-gap/.store in=\corr@momentumlabelgap,
   momentum-label-fill/.store in=\corr@momentumlabelfill,
   momentum-label-inner-sep/.store in=\corr@momentumlabelinnersep,
   momentum-label-style/.store in=\corr@momentumlabelstyle,
@@ -1522,6 +1539,10 @@
   box-edge-labels/.code={\corr@setboxquad{edgelabel}{#1}},
   box-internal-labels/.style={box-edge-labels={#1}},
   box-loop-momentum/.store in=\corr@boxloopmomentum,
+  box-external-momentum-start/.store in=\corr@boxexternalmomentumstart,
+  box-external-momentum-end/.store in=\corr@boxexternalmomentumend,
+  box-external-momentum-label-fraction/.store in=\corr@boxexternalmomentumlabelfraction,
+  box-external-momentum-offset/.store in=\corr@boxexternalmomentumoffset,
   box-left-arrow-start/.store in=\corr@boxleftarrowstart,
   box-left-arrow-end/.store in=\corr@boxleftarrowend,
   box-left-arrow-xshift/.store in=\corr@boxleftarrowxshift,
@@ -1918,6 +1939,10 @@
   three-point-right-xspan/.store in=\corr@threepointrightxspan,
   three-point-bottom-yspan/.store in=\corr@threepointbottomyspan,
   three-point-central-label-yshift/.store in=\corr@threepointcentrallabelyshift,
+  three-point-momentum-start/.store in=\corr@threepointmomentumstart,
+  three-point-momentum-end/.store in=\corr@threepointmomentumend,
+  three-point-momentum-label-fraction/.store in=\corr@threepointmomentumlabelfraction,
+  three-point-momentum-offset/.store in=\corr@threepointmomentumoffset,
   three-point-upper-left-momentum-direction/.store in=\corr@threepointulmomentumdirection,
   three-point-left-momentum-direction/.style={three-point-upper-left-momentum-direction={#1}},
   three-point-ul-momentum-direction/.style={three-point-upper-left-momentum-direction={#1}},
@@ -2098,8 +2123,8 @@
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
-  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
-  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-\corr@momentumlabelgap)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+\corr@momentumlabelgap)}%
   \path
     ($(#2)!#7!(#3)!6pt!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
@@ -2121,8 +2146,8 @@
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
-  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
-  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-\corr@momentumlabelgap)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+\corr@momentumlabelgap)}%
   \path
     ($(#2)!#7!(#3)!6pt!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
@@ -2153,8 +2178,8 @@
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
-  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
-  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-\corr@momentumlabelgap)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+\corr@momentumlabelgap)}%
   \path
     ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
@@ -2176,8 +2201,8 @@
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
-  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-0.08)}%
-  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+0.08)}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-\corr@momentumlabelgap)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+\corr@momentumlabelgap)}%
   \path
     ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
@@ -2228,23 +2253,53 @@
 }
 
 \newcommand{\corr@topologydrawmomentum}[8]{%
+  \begingroup
+  \def\corr@externalmomoffset{\corr@threepointmomentumoffset}%
   \corr@ifstringeq{#8}{out}{%
     \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{#5}{#6}{#7}{0pt}{0pt}%
   }{%
     \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{#5}{#6}{#7}{0pt}{0pt}%
   }%
+  \endgroup
 }
 
 \newcommand{\corr@drawthreepointmomentumul}[3]{%
-  \corr@topologydrawmomentum{#1}{#2}{#3}{-90}{0.18}{0.74}{0.46}{\corr@threepointulmomentumdirection}%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{-90}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointulmomentumdirection}%
 }
 
 \newcommand{\corr@drawthreepointmomentumr}[3]{%
-  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{0.18}{0.74}{0.50}{\corr@threepointrmomentumdirection}%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointrmomentumdirection}%
 }
 
 \newcommand{\corr@drawthreepointmomentumb}[3]{%
-  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{0.06}{0.56}{0.28}{\corr@threepointbmomentumdirection}%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointbmomentumdirection}%
+}
+
+\newcommand{\corr@drawboxexternalmomentum}[5]{%
+  \begingroup
+  \def\corr@externalmomoffset{\corr@boxexternalmomentumoffset}%
+  \corr@ifstringeq{#5}{out}{%
+    \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@boxexternalmomentumstart}{\corr@boxexternalmomentumend}{\corr@boxexternalmomentumlabelfraction}{0pt}{0pt}%
+  }{%
+    \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@boxexternalmomentumstart}{\corr@boxexternalmomentumend}{\corr@boxexternalmomentumlabelfraction}{0pt}{0pt}%
+  }%
+  \endgroup
+}
+
+\newcommand{\corr@drawboxexternalmomentumul}[3]{%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{90}{\corr@externalleftmomentumdirection}%
+}
+
+\newcommand{\corr@drawboxexternalmomentumll}[3]{%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{-90}{\corr@externalleftmomentumdirection}%
+}
+
+\newcommand{\corr@drawboxexternalmomentumur}[3]{%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{-90}{\corr@externalrightmomentumdirection}%
+}
+
+\newcommand{\corr@drawboxexternalmomentumlr}[3]{%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{90}{\corr@externalrightmomentumdirection}%
 }
 
 \newcommand{\corr@putlabel}[3]{%
@@ -2950,10 +3005,10 @@
   \fi
   \corr@boxplaceexternalvertices
   \ifcorr@showmomenta
-    \corr@drawexternalmomentumul{1}{corrExtUL}{corrBoxTL}
-    \corr@drawexternalmomentumll{2}{corrExtLL}{corrBoxBL}
-    \corr@drawexternalmomentumlr{3}{corrExtLR}{corrBoxBR}
-    \corr@drawexternalmomentumur{4}{corrExtUR}{corrBoxTR}
+    \corr@drawboxexternalmomentumul{1}{corrExtUL}{corrBoxTL}
+    \corr@drawboxexternalmomentumll{2}{corrExtLL}{corrBoxBL}
+    \corr@drawboxexternalmomentumlr{3}{corrExtLR}{corrBoxBR}
+    \corr@drawboxexternalmomentumur{4}{corrExtUR}{corrBoxTR}
     \corr@drawboxmomentumedge{left}{5}{corrBoxBL}{corrBoxTL}
     \corr@drawboxmomentumedge{top}{6}{corrBoxTL}{corrBoxTR}
     \corr@drawboxmomentumedge{right}{7}{corrBoxTR}{corrBoxBR}

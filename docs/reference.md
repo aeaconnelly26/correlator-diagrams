@@ -244,7 +244,6 @@ You can also shift the numbering:
   \FourPointCorr[
     field=\phi,
     indices={a,b,c,d},
-    central=G^{(4)}
   ]
 \]
 ```
@@ -259,7 +258,6 @@ This gives `\phi_a`, `\phi_b`, `\phi_c`, `\phi_d`.
     line=pho,
     field=A,
     indices={\mu,\nu,\rho},
-    central=\Gamma^{(3)},
     momentum-labels={q_1,q_2,q_3},
     three-point-momentum-flow=all-in
   ]
@@ -276,7 +274,6 @@ Use `leg-styles={...}` for per-leg propagator styles in that order.
   \FourPointCorr[
     leg-labels={\psi_i,\bar\psi_j,\psi_k,\bar\psi_l},
     momentum-labels={p_1,p_2,p_3,p_4},
-    central=\Gamma^{(4)}
   ]
 \]
 ```
@@ -340,6 +337,16 @@ Momentum labels are plain text by default. There is no white box behind them unl
 - `momentum-label-inner-sep=...`
 - `momentum-label-style=...`
 
+Momentum arrows are intentionally lightweight by default: the package uses a
+thin line and small arrowhead so momentum flow reads as an annotation rather
+than as a propagator. The default label gap leaves a small break around each
+momentum label so the arrow segments do not crowd the text.
+
+- `momentum-line-width=...`
+- `momentum-arrow-size=...`
+- `momentum-arrow-sizes={...}`
+- `momentum-label-gap=...`
+
 ### 3-point momentum flow
 
 For `\ThreePointCorr`, the default momentum flow is useful for a vertex with one incoming leg and two outgoing legs:
@@ -373,6 +380,13 @@ The shared arrow and label controls still apply:
 - `momentum-label-fill=...`
 - `momentum-label-inner-sep=...`
 - `momentum-label-style=...`
+
+3-point momentum placement controls apply to all three legs:
+
+- `three-point-momentum-start=...`
+- `three-point-momentum-end=...`
+- `three-point-momentum-label-fraction=...`
+- `three-point-momentum-offset=...`
 
 ### One-loop `s/t/u` bubbles: the internal loop momenta
 
@@ -1005,7 +1019,6 @@ Per-leg overrides:
     leg-styles={scalarpolarized,pho,pho},
     three-point-momentum-flow=all-in,
     momentum-labels={q_1,q_2,q_3},
-    momentum-arrow-size=5pt,
     propagator-arrow-sizes={14pt,,}
   ]
 \]
@@ -1018,6 +1031,13 @@ Per-leg overrides:
 - `three-point-right-xspan=...`
 - `three-point-bottom-yspan=...`
 - `three-point-central-label-yshift=...`
+
+3-point momentum placement controls:
+
+- `three-point-momentum-start=...`
+- `three-point-momentum-end=...`
+- `three-point-momentum-label-fraction=...`
+- `three-point-momentum-offset=...`
 
 Aliases for the upper-left leg geometry:
 
@@ -1121,7 +1141,6 @@ Minimal box:
   \BoxLoopCorr[
     field=A,
     indices={\mu,\nu,\rho,\sigma},
-    central=\Gamma^{(1)}_{\mathrm{box}}
   ]
 \]
 ```
@@ -1170,6 +1189,16 @@ Box momentum labels:
 - `box-edge-momenta={left-label,top-label,right-label,bottom-label}`
 - `box-loop-momentum=...`
 
+Use `box-edge-momenta={...}` for internal edge momentum arrows plus labels.
+Use `box-edge-labels={...}` for internal edge labels only, with no arrows.
+
+- `box-left-edge-label=...`
+- `box-top-edge-label=...`
+- `box-right-edge-label=...`
+- `box-bottom-edge-label=...`
+- `box-edge-labels={left-label,top-label,right-label,bottom-label}`
+- `box-internal-labels={left-label,top-label,right-label,bottom-label}`
+
 Box geometry:
 
 - `box-xspan=...`
@@ -1177,6 +1206,13 @@ Box geometry:
 - `box-external-xspan=...`
 - `box-external-yspan=...`
 - `box-central-label-yshift=...`
+
+Box external momentum arrow placement:
+
+- `box-external-momentum-start=...`
+- `box-external-momentum-end=...`
+- `box-external-momentum-label-fraction=...`
+- `box-external-momentum-offset=...`
 
 Box edge arrow placement follows the same predictable pattern for each edge:
 
@@ -1228,7 +1264,6 @@ Equivalent explicit forms:
   \SChannelCorr[
     field=\phi,
     indices={a,b,c,d},
-    central=\Gamma^{(1)}_s,
     momentum-labels={p_1,p_2,p_3,p_4},
     loop-channel-top-momentum=\ell,
     loop-channel-bottom-momentum=p_1+p_2-\ell
@@ -1527,7 +1562,6 @@ Minimal default sunset:
 \[
   \SunsetDiagram[
     field=\phi,
-    central=\Sigma(p)
   ]
 \]
 ```
@@ -1541,7 +1575,6 @@ The packaged default layout is tuned for a simple scalar sunset:
     sunset-right-line=sca,
     scale=1.2,
     field=,
-    central=\hspace{1mm},
     sunset-external-momentum=p,
     sunset-top-momentum=k,
     sunset-top-label-yshift=27pt,

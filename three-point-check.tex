@@ -19,7 +19,6 @@ scalar-polarized incoming leg.
     line=pho,
     field=A,
     indices={\mu,\nu,\rho},
-    central=\Gamma^{(3)},
     momentum-labels={q_1,q_2,q_3}
   ] &
   \ThreePointCorr[
@@ -27,7 +26,6 @@ scalar-polarized incoming leg.
     leg-styles={scalarpolarized,pho,pho},
     three-point-momentum-flow=all-in,
     momentum-labels={q_1,q_2,q_3},
-    momentum-arrow-size=5pt,
     propagator-arrow-sizes={14pt,,},
     leg-labels={A_1,A_2,A_3}
   ]
@@ -36,12 +34,12 @@ scalar-polarized incoming leg.
 
 \newpage
 
-Per-leg direction overrides and arrow sizing:
+Per-leg direction overrides and placement tuning:
 
 \[
 \begin{array}{cc}
   \text{Upper-left out only} &
-  \text{Larger first arrow} \\
+  \text{Longer annotation span} \\
   \ThreePointCorr[
     line=pho,
     momentum-labels={p_1,p_2,p_3},
@@ -54,9 +52,10 @@ Per-leg direction overrides and arrow sizing:
     line=pho,
     leg-styles={scalarpolarized,pho,pho},
     three-point-momentum-flow=all-in,
+    three-point-momentum-start=0.12,
+    three-point-momentum-end=0.84,
     momentum-labels={q_1,q_2,q_3},
     leg-labels={A_1,A_2,A_3},
-    momentum-arrow-sizes={8pt,5pt,5pt},
     propagator-arrow-sizes={16pt,,}
   ]
 \end{array}
@@ -77,12 +76,10 @@ Geometry, labels, and amputation controls:
     three-point-upper-left-yspan=1.55,
     three-point-right-xspan=2.25,
     three-point-bottom-yspan=2.20,
-    three-point-central-label-yshift=-30pt,
     momentum-labels={k_1,k_2,k_3},
     three-point-momentum-flow=all-out,
     field=\chi,
     indices={a,b,c},
-    central=V^{(3)}
   ] &
   \ThreePointCorr[
     external-legs=false,
@@ -90,7 +87,6 @@ Geometry, labels, and amputation controls:
     show-momenta=false,
     field=\phi,
     indices={1,2,3},
-    central=\Gamma_{\mathrm{amp}}^{(3)}
   ]
 \end{array}
 \]
