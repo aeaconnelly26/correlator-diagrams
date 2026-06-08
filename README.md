@@ -28,8 +28,8 @@ Fast defaults when you just need the figure. One-option switches for common clea
   <tr>
     <td valign="top" width="50%">
       <strong>3-point vertex</strong><br>
-      <sub>Photon-like legs with the annotations hidden.</sub>
-      <pre lang="tex">\ThreePointCorr[line=pho, field={}, show-momenta=false]</pre>
+      <sub>EW boson-like legs with the annotations hidden.</sub>
+      <pre lang="tex">\ThreePointCorr[line=ewboson, field={}, show-momenta=false]</pre>
       <p align="center">
         <img src="assets/readme-threepoint-default.png" alt="Default three-point correlator" width="320">
       </p>
@@ -56,7 +56,9 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
 - quick cleanup switches like `show-momenta=false`
+- a looser shared EW-boson/wavy style via `ewboson` or `EWboson`
 - uniform propagator color via global `color=...`
+- box-specific color controls for external and internal propagators
 - deeper per-leg and per-internal-line styling when you need it
 - external momentum flow presets such as `left-in-right-out`
 - sunset self-energies are supported too, with a dedicated `\SunsetDiagram` macro

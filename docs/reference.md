@@ -255,7 +255,7 @@ This gives `\phi_a`, `\phi_b`, `\phi_c`, `\phi_d`.
 ```tex
 \[
   \ThreePointCorr[
-    line=pho,
+    line=ewboson,
     field=A,
     indices={\mu,\nu,\rho},
     momentum-labels={q_1,q_2,q_3},
@@ -331,11 +331,14 @@ For simple diagrams you can rely on:
 - `momentum-start=<integer>`
 - `momentum-labels={...}`
 
-Momentum labels are plain text by default. There is no white box behind them unless you add one yourself with:
+Momentum labels use a normal-sized math label by default so they remain
+readable when figures are reproduced smaller. There is no white box behind
+them unless you add one yourself with:
 
 - `momentum-label-fill=...`
 - `momentum-label-inner-sep=...`
 - `momentum-label-style=...`
+- `momentum-label-size=...`
 
 Momentum arrows are intentionally lightweight by default: the package uses a
 thin line and small arrowhead so momentum flow reads as an annotation rather
@@ -1011,13 +1014,31 @@ Global line style:
 \]
 ```
 
+Global line color:
+
+```tex
+\[
+  \FourPointCorr[
+    color=fieldA
+  ]
+\]
+```
+
+`line-color=...` is an alias for `color=...`. Global color is appended to
+propagator styles across the package, including ordinary correlators,
+3-point vertices, box diagrams, channel diagrams, and sunset diagrams.
+
+The default EW-boson style used by `ewboson` and `EWboson` is a single clean wavy
+line with a loose sinusoidal wavelength. It is shared globally, so changing a
+leg or internal line to `ewboson` uses the same visual language in every topology.
+
 Per-leg overrides:
 
 ```tex
 \[
   \ThreePointCorr[
-    line=pho,
-    leg-styles={scalarpolarized,pho,pho},
+    line=ewboson,
+    leg-styles={scalarpolarized,ewboson,ewboson},
     three-point-momentum-flow=all-in,
     momentum-labels={q_1,q_2,q_3},
     propagator-arrow-sizes={14pt,,}
@@ -1164,7 +1185,7 @@ Mixed exterior line styles use the existing `leg-styles` slot order:
 ```tex
 \[
   \BoxLoopCorr[
-    leg-styles={spol,pho,pho,pho},
+    leg-styles={spol,ewboson,ewboson,ewboson},
     scalar-arrow-direction=out,
     leg-labels={W_\mu,A_\nu,A_\rho,A_\sigma}
   ]
@@ -1181,6 +1202,18 @@ Box line controls:
 - `box-top-line=...`
 - `box-right-line=...`
 - `box-bottom-line=...`
+
+Box color controls:
+
+- `box-color=...`
+- `box-external-color=...`
+- `box-internal-color=...`
+
+`box-color=...` colors both external and internal box propagators.
+`box-external-color=...` overrides that color for the four diagonal external
+legs, and `box-internal-color=...` overrides it for the four internal box
+edges. These controls compose with `box-line`, `box-external-line`,
+`box-internal-lines={...}`, and `leg-styles={...}`.
 
 Box momentum labels:
 
@@ -1363,6 +1396,12 @@ Main geometry keys:
 - `loop-channel-a-line=...`
 - `loop-channel-b-line=...`
 
+Channel propagators use the same shared line-style and color machinery as the
+rest of the package. Use `line=...` and `color=...` for broad styling,
+`leg-styles={...}` for external slot overrides, and
+`loop-channel-a-line=...` / `loop-channel-b-line=...` for the two internal
+loop propagators.
+
 Loop-momentum arrow geometry keys:
 
 - `loop-channel-a-arrow-start=...`
@@ -1421,7 +1460,7 @@ Safe reset for one-loop channel indices:
     loop-channel-left-indices={m,\mu,n},
     loop-channel-right-indices={r,\nu,s},
     loop-channel-index-layout=balanced,
-    loop-channel-vertex-index-size=scriptscript,
+    loop-channel-vertex-index-size=script,
     loop-channel-propagator-index-size=script
   ]
 \]
@@ -1430,8 +1469,11 @@ Safe reset for one-loop channel indices:
 Current defaults behind that reset:
 
 - `loop-channel-index-layout=balanced`
-- `loop-channel-vertex-index-size=scriptscript`
+- `loop-channel-vertex-index-size=script`
 - `loop-channel-propagator-index-size=script`
+
+Use `loop-channel-vertex-index-size=scriptscript` only when a very compact
+diagram needs extra room.
 
 What the loop-channel index presets actually do:
 
@@ -1593,6 +1635,11 @@ The packaged default layout is tuned for a simple scalar sunset:
   ]
 \]
 ```
+
+Sunset propagators use the shared package color machinery. Use `color=...` for
+a whole sunset, and combine it with `sunset-left-line=...`,
+`sunset-middle-line=...`, `sunset-right-line=...`, `sunset-top-line=...`, and
+`sunset-bottom-line=...` for segment-level line styles.
 
 ### Sunset index model
 

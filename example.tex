@@ -78,13 +78,13 @@ is upper-left incoming and the other two outgoing.
   \text{Default flow} &
   \text{All incoming with styled leg} \\
   \ThreePointCorr[
-    line=pho,
+    line=ewboson,
     field=A,
     momentum-labels={q_1,q_2,q_3}
   ] &
   \ThreePointCorr[
-    line=pho,
-    leg-styles={scalarpolarized,pho,pho},
+    line=ewboson,
+    leg-styles={scalarpolarized,ewboson,ewboson},
     three-point-momentum-flow=all-in,
     momentum-labels={q_1,q_2,q_3},
     propagator-arrow-sizes={14pt,,},
@@ -211,6 +211,7 @@ The channel wrappers are fixed-topology versions of \verb|\FourPointCorr|.
     scale=0.80,
     show-momenta=false,
     external-momentum-flow=left-in-right-out,
+    color=fieldA,
     field=\phi,
   ] &
   \TChannelCorr[
@@ -278,7 +279,7 @@ right and slot 4 is upper right.
 \begin{array}{ccc}
   \text{Default wavy box} &
   \text{No momentum labels} &
-  \text{Mixed external styles} \\
+  \text{Colored box} \\
   \BoxLoopCorr[
     scale=0.72,
     field=A,
@@ -295,10 +296,25 @@ right and slot 4 is upper right.
     scale=0.72,
     box-external-line=plain,
     box-line=plain,
-    field=A,
-    leg-labels={A_\mu,A_\nu,A_\rho,A_\sigma},
+    show-momenta=false,
+    box-external-color=fieldB,
+    box-internal-color=fieldA,
+    field={},
   ]
 \end{array}
+\]
+
+Mixed exterior styles still use the usual slot order:
+\[
+  \BoxLoopCorr[
+    scale=0.72,
+    box-external-line=plain,
+    box-line=plain,
+    show-momenta=false,
+    leg-styles={spol,plain,plain,plain},
+    box-color=fieldA,
+    leg-labels={W,A,A,A},
+  ]
 \]
 
 \subsection*{8. Tree-Level Exchange Channels}
@@ -337,6 +353,7 @@ Minimal sunset diagram:
 \[
   \SunsetDiagram[
     show-momenta=false,
+    color=fieldA,
     field=\phi,
   ]
 \]

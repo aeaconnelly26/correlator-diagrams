@@ -21,13 +21,15 @@
       mark=at position #1 with {
         \node[
           transform shape,
-          xshift=-0.166666\feynhandarrowsize,
+          xshift=-0.08\feynhandarrowsize,
           fill opacity=0,
           draw,
           line width=0.7\feynhandlinesize,
           inner sep=0mm,
-          minimum width=\tikzfeynhand@arrow@size,
-          isosceles triangle
+          minimum size=\tikzfeynhand@arrow@size,
+          regular polygon,
+          regular polygon sides=3,
+          shape border rotate=-90
         ] { };
       },
     },
@@ -41,14 +43,16 @@
       mark=at position #1 with {
         \node[
           transform shape,
-          xshift=0.166666\feynhandarrowsize,
+          xshift=0.08\feynhandarrowsize,
           rotate=180,
           fill opacity=0,
           draw,
           line width=0.7\feynhandlinesize,
           inner sep=0mm,
-          minimum width=\tikzfeynhand@arrow@size,
-          isosceles triangle
+          minimum size=\tikzfeynhand@arrow@size,
+          regular polygon,
+          regular polygon sides=3,
+          shape border rotate=-90
         ] { };
       },
     },
@@ -83,6 +87,7 @@
 \def\corr@momentumlabelfill{none}
 \def\corr@momentumlabelinnersep{0.2pt}
 \def\corr@momentumlabelstyle{}
+\def\corr@momentumlabelsize{\normalsize}
 \def\corr@externalleftmomentumdirection{in}
 \def\corr@externalrightmomentumdirection{in}
 \def\corr@propagatorarrowsize{}
@@ -223,7 +228,7 @@
 \def\corr@channelinternalindexxshift{auto}
 \def\corr@channelinternalindexyshift{auto}
 \def\corr@channelinternalindexstyle{}
-\def\corr@channelvertexindexmathstyle{\scriptscriptstyle}
+\def\corr@channelvertexindexmathstyle{\scriptstyle}
 \def\corr@channelpropagatorindexmathstyle{\scriptstyle}
 \def\corr@channelinternalindexfill{none}
 \def\corr@channelinternalindexinnersep{0.4pt}
@@ -295,7 +300,7 @@
 \def\corr@loopchannelbinternalindexxshift{0pt}
 \def\corr@loopchannelbinternalindexyshift{auto}
 \def\corr@loopchannelinternalindexstyle{}
-\def\corr@loopchannelvertexindexmathstyle{\scriptscriptstyle}
+\def\corr@loopchannelvertexindexmathstyle{\scriptstyle}
 \def\corr@loopchannelpropagatorindexmathstyle{\scriptstyle}
 \def\corr@loopchannelinternalindexfill{none}
 \def\corr@loopchannelinternalindexinnersep{0.4pt}
@@ -304,8 +309,11 @@
 \def\corr@boxyspan{1.04}
 \def\corr@boxexternalxspan{2.10}
 \def\corr@boxexternalyspan{1.70}
-\def\corr@boxline{pho}
-\def\corr@boxexternalline{pho}
+\def\corr@boxcolor{}
+\def\corr@boxexternalcolor{}
+\def\corr@boxinternalcolor{}
+\def\corr@boxline{ewboson}
+\def\corr@boxexternalline{ewboson}
 \def\corr@boxleftline{}
 \def\corr@boxtopline{}
 \def\corr@boxrightline{}
@@ -885,7 +893,7 @@
   \def\corr@channelinternalindexxshift{auto}%
   \def\corr@channelinternalindexyshift{auto}%
   \def\corr@channelinternalindexstyle{}%
-  \def\corr@channelvertexindexmathstyle{\scriptscriptstyle}%
+  \def\corr@channelvertexindexmathstyle{\scriptstyle}%
   \def\corr@channelpropagatorindexmathstyle{\scriptstyle}%
   \def\corr@channelinternalindexfill{none}%
   \def\corr@channelinternalindexinnersep{0.4pt}%
@@ -961,7 +969,7 @@
   \def\corr@loopchannelbinternalindexxshift{0pt}%
   \def\corr@loopchannelbinternalindexyshift{auto}%
   \def\corr@loopchannelinternalindexstyle{}%
-  \def\corr@loopchannelvertexindexmathstyle{\scriptscriptstyle}%
+  \def\corr@loopchannelvertexindexmathstyle{\scriptstyle}%
   \def\corr@loopchannelpropagatorindexmathstyle{\scriptstyle}%
   \def\corr@loopchannelinternalindexfill{none}%
   \def\corr@loopchannelinternalindexinnersep{0.4pt}%
@@ -993,8 +1001,11 @@
   \corr@topologysetdefault\corr@boxyspan{1.04}%
   \corr@topologysetdefault\corr@boxexternalxspan{2.10}%
   \corr@topologysetdefault\corr@boxexternalyspan{1.70}%
-  \corr@topologysetdefault\corr@boxline{pho}%
-  \corr@topologysetdefault\corr@boxexternalline{pho}%
+  \corr@topologysetdefault\corr@boxcolor{}%
+  \corr@topologysetdefault\corr@boxexternalcolor{}%
+  \corr@topologysetdefault\corr@boxinternalcolor{}%
+  \corr@topologysetdefault\corr@boxline{ewboson}%
+  \corr@topologysetdefault\corr@boxexternalline{ewboson}%
   \corr@topologysetdefault\corr@boxleftline{}%
   \corr@topologysetdefault\corr@boxtopline{}%
   \corr@topologysetdefault\corr@boxrightline{}%
@@ -1184,7 +1195,7 @@
     }%
   }%
   \tikzfeynhandset{
-    every photon@@/.style={
+    every ewboson@@/.style={
       /tikz/draw=none,
       /tikz/decoration={name=none},
       /tikz/postaction={
@@ -1192,16 +1203,20 @@
         /tikz/line width=\feynhandlinesize,
         /tikz/decoration={
           complete sines,
-          amplitude=2.6\feynhandlinesize,
-          segment length=11\feynhandlinesize,
+          amplitude=2.3\feynhandlinesize,
+          segment length=22\feynhandlinesize,
         },
         /tikz/decorate=true,
       },
     },
-    every photon/.style={/tikzfeynhand/every photon@@/.append style={##1}},
-    photon/.style={
-      /tikzfeynhand/every photon@@,
+    every ewboson/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
+    ewboson/.style={
+      /tikzfeynhand/every ewboson@@,
     },
+    EWboson/.style={/tikzfeynhand/ewboson},
+    ew boson/.style={/tikzfeynhand/ewboson},
+    every photon/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
+    photon/.style={/tikzfeynhand/ewboson},
     pho/.style={/tikzfeynhand/photon},
     every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
     scalar polarized/.style={
@@ -1256,6 +1271,7 @@
   momentum-label-fill/.store in=\corr@momentumlabelfill,
   momentum-label-inner-sep/.store in=\corr@momentumlabelinnersep,
   momentum-label-style/.store in=\corr@momentumlabelstyle,
+  momentum-label-size/.store in=\corr@momentumlabelsize,
   external-left-momentum-direction/.store in=\corr@externalleftmomentumdirection,
   external-right-momentum-direction/.store in=\corr@externalrightmomentumdirection,
   left-momentum-direction/.style={external-left-momentum-direction={#1}},
@@ -1520,6 +1536,9 @@
   box-yspan/.store in=\corr@boxyspan,
   box-external-xspan/.store in=\corr@boxexternalxspan,
   box-external-yspan/.store in=\corr@boxexternalyspan,
+  box-color/.store in=\corr@boxcolor,
+  box-external-color/.store in=\corr@boxexternalcolor,
+  box-internal-color/.store in=\corr@boxinternalcolor,
   box-line/.store in=\corr@boxline,
   box-internal-line/.style={box-line={#1}},
   box-internal-lines/.code={\corr@setboxquad{line}{#1}},
@@ -1672,7 +1691,7 @@
   channel-vertex-index-size/normal/.code={\def\corr@channelvertexindexmathstyle{}},
   channel-vertex-index-size/script/.code={\def\corr@channelvertexindexmathstyle{\scriptstyle}},
   channel-vertex-index-size/scriptscript/.code={\def\corr@channelvertexindexmathstyle{\scriptscriptstyle}},
-  channel-vertex-index-size/default/.style={channel-vertex-index-size=scriptscript},
+  channel-vertex-index-size/default/.style={channel-vertex-index-size=script},
   channel-propagator-index-size/.is choice,
   channel-propagator-index-size/normal/.code={\def\corr@channelpropagatorindexmathstyle{}},
   channel-propagator-index-size/script/.code={\def\corr@channelpropagatorindexmathstyle{\scriptstyle}},
@@ -1894,7 +1913,7 @@
   loop-channel-vertex-index-size/normal/.code={\def\corr@loopchannelvertexindexmathstyle{}},
   loop-channel-vertex-index-size/script/.code={\def\corr@loopchannelvertexindexmathstyle{\scriptstyle}},
   loop-channel-vertex-index-size/scriptscript/.code={\def\corr@loopchannelvertexindexmathstyle{\scriptscriptstyle}},
-  loop-channel-vertex-index-size/default/.style={loop-channel-vertex-index-size=scriptscript},
+  loop-channel-vertex-index-size/default/.style={loop-channel-vertex-index-size=script},
   loop-channel-propagator-index-size/.is choice,
   loop-channel-propagator-index-size/normal/.code={\def\corr@loopchannelpropagatorindexmathstyle{}},
   loop-channel-propagator-index-size/script/.code={\def\corr@loopchannelpropagatorindexmathstyle{\scriptstyle}},
@@ -2068,6 +2087,13 @@
   }%
 }
 
+\newcommand{\corr@appendpropcolorvalue}[1]{%
+  \edef\corr@propcolortmp{#1}%
+  \ifdefempty{\corr@propcolortmp}{}{%
+    \edef\corr@propoptions{\corr@propoptions,\corr@propcolortmp}%
+  }%
+}
+
 \newcommand{\corr@momentumarrowsizefor}[1]{%
   \ifnum\corr@momarrowsizeitemslen<#1
     \corr@momentumarrowsize
@@ -2120,7 +2146,7 @@
     inner sep=\corr@momentumlabelinnersep,
     outer sep=0pt,
     \corr@momentumlabelstyle
-  ] at #1 {$#6$};
+  ] at #1 {\hbox{\corr@momentumlabelsize $#6$}};
 }
 
 \newcommand{\corr@drawmomentumrangein}[7]{%
@@ -2362,6 +2388,8 @@
   \edef\corr@propoptions{\corr@boxexternalstylefor{#1}}%
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
+  \corr@appendpropcolorvalue{\corr@boxcolor}%
+  \corr@appendpropcolorvalue{\corr@boxexternalcolor}%
   \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
 }
 
@@ -2374,6 +2402,8 @@
   }%
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
+  \corr@appendpropcolorvalue{\corr@boxcolor}%
+  \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
 }
 
