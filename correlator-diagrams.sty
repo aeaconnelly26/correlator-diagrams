@@ -73,6 +73,8 @@
 \newif\ifcorr@externalvertices
 \newif\ifcorr@sunsetinternalvertices
 \newif\ifcorr@sunsetindexawaremomenta
+\newif\ifcorr@lineexplicit
+\newif\ifcorr@slotselected
 
 \def\corr@line{plain}
 \def\corr@color{}
@@ -377,6 +379,33 @@
 \def\corr@boxlooplabelxshift{0pt}
 \def\corr@boxlooplabelyshift{0pt}
 \def\corr@boxcentrallabelyshift{-62pt}
+\def\corr@halfboxxspan{0.86}
+\def\corr@halfboxtopstub{0.72}
+\def\corr@halfboxdownspan{1.05}
+\def\corr@halfboxdownxoffset{0.18}
+\def\corr@halfboxline{ewboson}
+\def\corr@halfboxcolors{}
+\def\corr@halfboxbridgecolor{}
+\def\corr@halfboxbridgelabel{}
+\def\corr@halfboxbridgelabelposition{above}
+\def\corr@halfboxbridgelabelxshift{0pt}
+\def\corr@halfboxbridgelabelyshift{5pt}
+\def\corr@halfboxmomentumstart{0.30}
+\def\corr@halfboxmomentumend{0.70}
+\def\corr@halfboxmomentumoffset{10pt}
+\def\corr@halfboxmomentumlabelfraction{0.50}
+\def\corr@halfboxmomentumlabelgap{0.10}
+\def\corr@halfboxmomentumslots{1,2,3,4}
+\def\corr@flatcontactxspan{1.18}
+\def\corr@flatcontactyspan{1.08}
+\def\corr@flatcontactline{ewboson}
+\def\corr@flatcontactcolors{}
+\def\corr@flatcontactmomentumstart{0.30}
+\def\corr@flatcontactmomentumend{0.70}
+\def\corr@flatcontactmomentumoffset{10pt}
+\def\corr@flatcontactmomentumlabelfraction{0.50}
+\def\corr@flatcontactmomentumlabelgap{0.10}
+\def\corr@flatcontactmomentumslots{1,2,3,4}
 \corr@blobtrue
 \def\corr@blobstyle{blob}
 \corr@showmomentatrue
@@ -1070,6 +1099,39 @@
   \corr@topologysetdefault\corr@boxcentrallabelyshift{-62pt}%
 }
 
+\newcommand{\corr@resethalfboxdefaults}{%
+  \corr@topologysetdefault\corr@halfboxxspan{0.86}%
+  \corr@topologysetdefault\corr@halfboxtopstub{0.72}%
+  \corr@topologysetdefault\corr@halfboxdownspan{1.05}%
+  \corr@topologysetdefault\corr@halfboxdownxoffset{0.18}%
+  \corr@topologysetdefault\corr@halfboxline{ewboson}%
+  \corr@topologysetdefault\corr@halfboxcolors{}%
+  \corr@topologysetdefault\corr@halfboxbridgecolor{}%
+  \corr@topologysetdefault\corr@halfboxbridgelabel{}%
+  \corr@topologysetdefault\corr@halfboxbridgelabelposition{above}%
+  \corr@topologysetdefault\corr@halfboxbridgelabelxshift{0pt}%
+  \corr@topologysetdefault\corr@halfboxbridgelabelyshift{5pt}%
+  \corr@topologysetdefault\corr@halfboxmomentumstart{0.30}%
+  \corr@topologysetdefault\corr@halfboxmomentumend{0.70}%
+  \corr@topologysetdefault\corr@halfboxmomentumoffset{10pt}%
+  \corr@topologysetdefault\corr@halfboxmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@halfboxmomentumlabelgap{0.10}%
+  \corr@topologysetdefault\corr@halfboxmomentumslots{1,2,3,4}%
+}
+
+\newcommand{\corr@resetflatcontactdefaults}{%
+  \corr@topologysetdefault\corr@flatcontactxspan{1.18}%
+  \corr@topologysetdefault\corr@flatcontactyspan{1.08}%
+  \corr@topologysetdefault\corr@flatcontactline{ewboson}%
+  \corr@topologysetdefault\corr@flatcontactcolors{}%
+  \corr@topologysetdefault\corr@flatcontactmomentumstart{0.30}%
+  \corr@topologysetdefault\corr@flatcontactmomentumend{0.70}%
+  \corr@topologysetdefault\corr@flatcontactmomentumoffset{10pt}%
+  \corr@topologysetdefault\corr@flatcontactmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@flatcontactmomentumlabelgap{0.10}%
+  \corr@topologysetdefault\corr@flatcontactmomentumslots{1,2,3,4}%
+}
+
 \newcommand{\corr@resetsunsetdefaults}{%
   \def\corr@field{}%
   \def\corr@central{}%
@@ -1202,7 +1264,7 @@
         /tikz/draw,
         /tikz/line width=\feynhandlinesize,
         /tikz/decoration={
-          complete sines,
+          snake,
           amplitude=2.3\feynhandlinesize,
           segment length=22\feynhandlinesize,
         },
@@ -1255,7 +1317,7 @@
 \pgfkeys{
   /corrdiag/.is family,
   /corrdiag,
-  line/.store in=\corr@line,
+  line/.code={\def\corr@line{#1}\corr@lineexplicittrue},
   color/.store in=\corr@color,
   line-color/.style={color={#1}},
   leg-styles/.store in=\corr@legstyles,
@@ -1518,6 +1580,10 @@
   topology/t-tree/.code={\def\corr@fourpointtopology{t-tree}},
   topology/u-tree/.code={\def\corr@fourpointtopology{u-tree}},
   topology/box/.code={\def\corr@fourpointtopology{box}},
+  topology/half-box/.code={\def\corr@fourpointtopology{half-box}},
+  topology/halfbox/.code={\def\corr@fourpointtopology{half-box}},
+  topology/flat-contact/.code={\def\corr@fourpointtopology{flat-contact}},
+  topology/flatcontact/.code={\def\corr@fourpointtopology{flat-contact}},
   topology/default/.style={topology=contact},
   channel-topology/.style={topology={#1}},
   fourpoint-topology/.style={topology={#1}},
@@ -1534,6 +1600,60 @@
   fourpoint-yspan/.store in=\corr@fourpointyspan,
   box-xspan/.store in=\corr@boxxspan,
   box-yspan/.store in=\corr@boxyspan,
+  half-box-xspan/.store in=\corr@halfboxxspan,
+  half-box-top-stub/.store in=\corr@halfboxtopstub,
+  half-box-down-span/.store in=\corr@halfboxdownspan,
+  half-box-down-xoffset/.store in=\corr@halfboxdownxoffset,
+  half-box-line/.store in=\corr@halfboxline,
+  half-box-colors/.store in=\corr@halfboxcolors,
+  half-box-bridge-color/.store in=\corr@halfboxbridgecolor,
+  half-box-bridge-label/.store in=\corr@halfboxbridgelabel,
+  half-box-bridge-label-position/.store in=\corr@halfboxbridgelabelposition,
+  half-box-bridge-label-xshift/.store in=\corr@halfboxbridgelabelxshift,
+  half-box-bridge-label-yshift/.store in=\corr@halfboxbridgelabelyshift,
+  half-box-momentum-start/.store in=\corr@halfboxmomentumstart,
+  half-box-momentum-end/.store in=\corr@halfboxmomentumend,
+  half-box-momentum-offset/.store in=\corr@halfboxmomentumoffset,
+  half-box-momentum-label-fraction/.store in=\corr@halfboxmomentumlabelfraction,
+  half-box-momentum-label-gap/.store in=\corr@halfboxmomentumlabelgap,
+  half-box-momentum-slots/.store in=\corr@halfboxmomentumslots,
+  halfbox-xspan/.style={half-box-xspan={#1}},
+  halfbox-top-stub/.style={half-box-top-stub={#1}},
+  halfbox-down-span/.style={half-box-down-span={#1}},
+  halfbox-down-xoffset/.style={half-box-down-xoffset={#1}},
+  halfbox-line/.style={half-box-line={#1}},
+  halfbox-colors/.style={half-box-colors={#1}},
+  halfbox-bridge-color/.style={half-box-bridge-color={#1}},
+  halfbox-bridge-label/.style={half-box-bridge-label={#1}},
+  halfbox-bridge-label-position/.style={half-box-bridge-label-position={#1}},
+  halfbox-bridge-label-xshift/.style={half-box-bridge-label-xshift={#1}},
+  halfbox-bridge-label-yshift/.style={half-box-bridge-label-yshift={#1}},
+  halfbox-momentum-start/.style={half-box-momentum-start={#1}},
+  halfbox-momentum-end/.style={half-box-momentum-end={#1}},
+  halfbox-momentum-offset/.style={half-box-momentum-offset={#1}},
+  halfbox-momentum-label-fraction/.style={half-box-momentum-label-fraction={#1}},
+  halfbox-momentum-label-gap/.style={half-box-momentum-label-gap={#1}},
+  halfbox-momentum-slots/.style={half-box-momentum-slots={#1}},
+  flat-contact-xspan/.store in=\corr@flatcontactxspan,
+  flat-contact-yspan/.store in=\corr@flatcontactyspan,
+  flat-contact-line/.store in=\corr@flatcontactline,
+  flat-contact-colors/.store in=\corr@flatcontactcolors,
+  flat-contact-momentum-start/.store in=\corr@flatcontactmomentumstart,
+  flat-contact-momentum-end/.store in=\corr@flatcontactmomentumend,
+  flat-contact-momentum-offset/.store in=\corr@flatcontactmomentumoffset,
+  flat-contact-momentum-label-fraction/.store in=\corr@flatcontactmomentumlabelfraction,
+  flat-contact-momentum-label-gap/.store in=\corr@flatcontactmomentumlabelgap,
+  flat-contact-momentum-slots/.store in=\corr@flatcontactmomentumslots,
+  flatcontact-xspan/.style={flat-contact-xspan={#1}},
+  flatcontact-yspan/.style={flat-contact-yspan={#1}},
+  flatcontact-line/.style={flat-contact-line={#1}},
+  flatcontact-colors/.style={flat-contact-colors={#1}},
+  flatcontact-momentum-start/.style={flat-contact-momentum-start={#1}},
+  flatcontact-momentum-end/.style={flat-contact-momentum-end={#1}},
+  flatcontact-momentum-offset/.style={flat-contact-momentum-offset={#1}},
+  flatcontact-momentum-label-fraction/.style={flat-contact-momentum-label-fraction={#1}},
+  flatcontact-momentum-label-gap/.style={flat-contact-momentum-label-gap={#1}},
+  flatcontact-momentum-slots/.style={flat-contact-momentum-slots={#1}},
   box-external-xspan/.store in=\corr@boxexternalxspan,
   box-external-yspan/.store in=\corr@boxexternalyspan,
   box-color/.store in=\corr@boxcolor,
@@ -2008,6 +2128,8 @@
   \def\corr@proparrowsizeitemslen{0}%
   \def\corr@indexitemslen{0}%
   \def\corr@legitemslen{0}%
+  \def\corr@halfboxcoloritemslen{0}%
+  \def\corr@flatcontactcoloritemslen{0}%
   \ifdefempty{\corr@legstyles}{}{%
     \readlist*\corr@legstyleitems{\corr@legstyles}%
   }%
@@ -2025,6 +2147,12 @@
   }%
   \ifdefempty{\corr@leglabels}{}{%
     \readlist*\corr@legitems{\corr@leglabels}%
+  }%
+  \ifdefempty{\corr@halfboxcolors}{}{%
+    \readlist*\corr@halfboxcoloritems{\corr@halfboxcolors}%
+  }%
+  \ifdefempty{\corr@flatcontactcolors}{}{%
+    \readlist*\corr@flatcontactcoloritems{\corr@flatcontactcolors}%
   }%
 }
 
@@ -2405,6 +2533,165 @@
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+}
+
+\newcommand{\corr@topologydefaultstylefor}[2]{%
+  \ifnum\corr@legstyleitemslen<#1
+    \ifcorr@lineexplicit
+      \corr@line
+    \else
+      #2%
+    \fi
+  \else
+    \corr@legstyleitems[#1]%
+  \fi
+}
+
+\newcommand{\corr@selectmomentumslot}[2]{%
+  \corr@slotselectedfalse
+  \edef\corr@targetslot{#1}%
+  \edef\corr@slotlist{#2}%
+  \foreach \corr@slotcandidate in \corr@slotlist {%
+    \edef\corr@currentslot{\corr@slotcandidate}%
+    \ifx\corr@targetslot\corr@currentslot
+      \global\corr@slotselectedtrue
+    \fi
+  }%
+}
+
+\newcommand{\corr@scalarstyletoend}[1]{%
+  \edef\corr@orientedstyle{#1}%
+  \corr@ifstringeq{#1}{scalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
+  \corr@ifstringeq{#1}{scalar polarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
+  \corr@ifstringeq{#1}{spol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
+  \corr@ifstringeq{#1}{antiscalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
+  \corr@ifstringeq{#1}{antspol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
+}
+
+\newcommand{\corr@scalarstyletostart}[1]{%
+  \edef\corr@orientedstyle{#1}%
+  \corr@ifstringeq{#1}{scalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
+  \corr@ifstringeq{#1}{scalar polarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
+  \corr@ifstringeq{#1}{spol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
+  \corr@ifstringeq{#1}{antiscalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
+  \corr@ifstringeq{#1}{antspol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
+}
+
+\newcommand{\corr@appendhalfboxpropcolor}[1]{%
+  \ifnum\corr@halfboxcoloritemslen<#1
+    \corr@appendpropcolor
+  \else
+    \edef\corr@thispropcolor{\corr@halfboxcoloritems[#1]}%
+    \ifdefempty{\corr@thispropcolor}{\corr@appendpropcolor}{\corr@appendpropcolorvalue{\corr@thispropcolor}}%
+  \fi
+}
+
+\newcommand{\corr@appendflatcontactpropcolor}[1]{%
+  \ifnum\corr@flatcontactcoloritemslen<#1
+    \corr@appendpropcolor
+  \else
+    \edef\corr@thispropcolor{\corr@flatcontactcoloritems[#1]}%
+    \ifdefempty{\corr@thispropcolor}{\corr@appendpropcolor}{\corr@appendpropcolorvalue{\corr@thispropcolor}}%
+  \fi
+}
+
+\newcommand{\corr@drawhalfboxprop}[3]{%
+  \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@halfboxline}}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendhalfboxpropcolor{#1}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+}
+
+\newcommand{\corr@drawhalfboxorientedprop}[4]{%
+  \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@halfboxline}}%
+  \corr@ifstringeq{#4}{start}{%
+    \corr@scalarstyletostart{\corr@propoptions}%
+  }{%
+    \corr@scalarstyletoend{\corr@propoptions}%
+  }%
+  \edef\corr@propoptions{\corr@orientedstyle}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendhalfboxpropcolor{#1}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+}
+
+\newcommand{\corr@drawflatcontactprop}[3]{%
+  \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@flatcontactline}}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendflatcontactpropcolor{#1}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+}
+
+\newcommand{\corr@drawflatcontactorientedprop}[4]{%
+  \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@flatcontactline}}%
+  \corr@ifstringeq{#4}{start}{%
+    \corr@scalarstyletostart{\corr@propoptions}%
+  }{%
+    \corr@scalarstyletoend{\corr@propoptions}%
+  }%
+  \edef\corr@propoptions{\corr@orientedstyle}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendflatcontactpropcolor{#1}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+}
+
+\newcommand{\corr@drawhalfboxmomentum}[4]{%
+  \corr@selectmomentumslot{#1}{\corr@halfboxmomentumslots}%
+  \ifcorr@slotselected
+    \begingroup
+    \def\corr@externalmomoffset{\corr@halfboxmomentumoffset}%
+    \def\corr@momentumlabelgap{\corr@halfboxmomentumlabelgap}%
+    \corr@ifstringeq{\corr@externalmomentumdirectionfor{#1}}{out}{%
+      \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@halfboxmomentumstart}{\corr@halfboxmomentumend}{\corr@halfboxmomentumlabelfraction}{0pt}{0pt}%
+    }{%
+      \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@halfboxmomentumstart}{\corr@halfboxmomentumend}{\corr@halfboxmomentumlabelfraction}{0pt}{0pt}%
+    }%
+    \endgroup
+  \fi
+}
+
+\newcommand{\corr@drawflatcontactmomentum}[4]{%
+  \corr@selectmomentumslot{#1}{\corr@flatcontactmomentumslots}%
+  \ifcorr@slotselected
+    \begingroup
+    \def\corr@externalmomoffset{\corr@flatcontactmomentumoffset}%
+    \def\corr@momentumlabelgap{\corr@flatcontactmomentumlabelgap}%
+    \corr@ifstringeq{\corr@externalmomentumdirectionfor{#1}}{out}{%
+      \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@flatcontactmomentumstart}{\corr@flatcontactmomentumend}{\corr@flatcontactmomentumlabelfraction}{0pt}{0pt}%
+    }{%
+      \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@flatcontactmomentumstart}{\corr@flatcontactmomentumend}{\corr@flatcontactmomentumlabelfraction}{0pt}{0pt}%
+    }%
+    \endgroup
+  \fi
+}
+
+\newcommand{\corr@drawhalfboxbridge}[2]{%
+  \ifcorr@lineexplicit
+    \edef\corr@propoptions{\corr@line}%
+  \else
+    \edef\corr@propoptions{\corr@halfboxline}%
+  \fi
+  \ifdefempty{\corr@halfboxbridgecolor}{\corr@appendpropcolor}{\corr@appendpropcolorvalue{\corr@halfboxbridgecolor}}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#1) to (#2);
+}
+
+\newcommand{\corr@puthalfboxbridgelabel}{%
+  \ifdefempty{\corr@halfboxbridgelabel}{}{%
+    \corr@ifstringeq{\corr@halfboxbridgelabelposition}{below}{%
+      \def\corr@halfboxbridgelabelanchor{north}%
+    }{%
+      \corr@ifstringeq{\corr@halfboxbridgelabelposition}{above}{%
+        \def\corr@halfboxbridgelabelanchor{south}%
+      }{%
+        \edef\corr@halfboxbridgelabelanchor{\corr@halfboxbridgelabelposition}%
+      }%
+    }%
+    \node[
+      anchor=\corr@halfboxbridgelabelanchor,
+      xshift=\corr@halfboxbridgelabelxshift,
+      yshift=\corr@halfboxbridgelabelyshift
+    ] at ($(corrHBVL)!0.5!(corrHBVR)$) {$\corr@halfboxbridgelabel$};
+  }%
 }
 
 \newcommand{\corr@topologyputexternallabel}[3]{%
@@ -3191,6 +3478,98 @@
   }%
 }
 
+\newcommand{\corr@halfboxplaceexternallabels}{%
+  \corr@topologyputexternallabel{corrHBTL}{xshift=-10pt,yshift=8pt}{1}%
+  \corr@topologyputexternallabel{corrHBDL}{xshift=-8pt,yshift=-10pt}{2}%
+  \corr@topologyputexternallabel{corrHBDR}{xshift=8pt,yshift=-10pt}{3}%
+  \corr@topologyputexternallabel{corrHBTR}{xshift=10pt,yshift=8pt}{4}%
+}
+
+\newcommand{\corr@halfboxplaceexternalvertices}{%
+  \corr@topologyputexternalvertex{corrHBTL}%
+  \corr@topologyputexternalvertex{corrHBDL}%
+  \corr@topologyputexternalvertex{corrHBDR}%
+  \corr@topologyputexternalvertex{corrHBTR}%
+}
+
+\newcommand{\corr@drawfourpointhalfbox}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,-0.48*\corr@halfboxdownspan);
+    \vertex (corrHBVL) at (-\corr@halfboxxspan,0);
+    \vertex (corrHBVR) at (\corr@halfboxxspan,0);
+    \vertex (corrHBTL) at (-\corr@halfboxxspan-\corr@halfboxtopstub,0);
+    \vertex (corrHBTR) at (\corr@halfboxxspan+\corr@halfboxtopstub,0);
+    \vertex (corrHBDL) at (-\corr@halfboxxspan-\corr@halfboxdownxoffset,-\corr@halfboxdownspan);
+    \vertex (corrHBDR) at (\corr@halfboxxspan+\corr@halfboxdownxoffset,-\corr@halfboxdownspan);
+    \corr@ifexternallegs{%
+      \corr@drawhalfboxorientedprop{1}{corrHBTL}{corrHBVL}{end}%
+      \corr@drawhalfboxorientedprop{2}{corrHBVL}{corrHBDL}{start}%
+      \corr@drawhalfboxorientedprop{3}{corrHBVR}{corrHBDR}{start}%
+      \corr@drawhalfboxorientedprop{4}{corrHBVR}{corrHBTR}{start}%
+    }%
+    \corr@drawhalfboxbridge{corrHBVL}{corrHBVR}%
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrHBVL}{\corr@centervertexstyle}%
+    \corr@putvertex{corrHBVR}{\corr@centervertexstyle}%
+  \fi
+  \corr@halfboxplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawhalfboxmomentum{1}{corrHBTL}{corrHBVL}{90}
+    \corr@drawhalfboxmomentum{2}{corrHBVL}{corrHBDL}{-90}
+    \corr@drawhalfboxmomentum{3}{corrHBVR}{corrHBDR}{90}
+    \corr@drawhalfboxmomentum{4}{corrHBVR}{corrHBTR}{-90}
+  \fi
+  \corr@puthalfboxbridgelabel
+  \corr@halfboxplaceexternallabels
+  \corr@putcentral{corrC}
+}
+
+\newcommand{\corr@flatcontactplaceexternallabels}{%
+  \corr@topologyputexternallabel{corrFCTL}{xshift=-10pt,yshift=8pt}{1}%
+  \corr@topologyputexternallabel{corrFCDL}{xshift=-8pt,yshift=-10pt}{2}%
+  \corr@topologyputexternallabel{corrFCDR}{xshift=8pt,yshift=-10pt}{3}%
+  \corr@topologyputexternallabel{corrFCTR}{xshift=10pt,yshift=8pt}{4}%
+}
+
+\newcommand{\corr@flatcontactplaceexternalvertices}{%
+  \corr@topologyputexternalvertex{corrFCTL}%
+  \corr@topologyputexternalvertex{corrFCDL}%
+  \corr@topologyputexternalvertex{corrFCDR}%
+  \corr@topologyputexternalvertex{corrFCTR}%
+}
+
+\newcommand{\corr@drawfourpointflatcontact}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrFCTL) at (-\corr@flatcontactxspan,0);
+    \vertex (corrFCTR) at (\corr@flatcontactxspan,0);
+    \vertex (corrFCDL) at (-0.72*\corr@flatcontactxspan,-\corr@flatcontactyspan);
+    \vertex (corrFCDR) at (0.72*\corr@flatcontactxspan,-\corr@flatcontactyspan);
+    \corr@ifexternallegs{%
+      \corr@drawflatcontactorientedprop{1}{corrFCTL}{corrC}{end}%
+      \corr@drawflatcontactorientedprop{2}{corrFCDL}{corrC}{end}%
+      \corr@drawflatcontactorientedprop{3}{corrFCDR}{corrC}{end}%
+      \corr@drawflatcontactorientedprop{4}{corrFCTR}{corrC}{end}%
+    }%
+    \ifcorr@blob
+      \corr@putblob{corrC}{\corr@blobstyle}
+    \fi
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrC}{\corr@centervertexstyle}%
+  \fi
+  \corr@flatcontactplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawflatcontactmomentum{1}{corrFCTL}{corrC}{90}
+    \corr@drawflatcontactmomentum{2}{corrFCDL}{corrC}{-90}
+    \corr@drawflatcontactmomentum{3}{corrFCDR}{corrC}{90}
+    \corr@drawflatcontactmomentum{4}{corrFCTR}{corrC}{-90}
+  \fi
+  \corr@flatcontactplaceexternallabels
+  \corr@putcentral{corrC}
+}
+
 \newcommand{\corr@drawfourpointstreeschannel}{%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
@@ -3482,6 +3861,9 @@
   \corr@resetchanneldefaults
   \corr@resetloopchanneldefaults
   \corr@resetboxdefaults
+  \corr@resethalfboxdefaults
+  \corr@resetflatcontactdefaults
+  \corr@lineexplicitfalse
   \pgfqkeys{/corrdiag}{#1}%
   \corr@preparelists
   \corr@configurestyles
@@ -3503,13 +3885,21 @@
             \corr@ifstringeq{\corr@fourpointtopology}{box}{%
               \corr@drawfourpointbox
             }{%
-              \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
-                \corr@drawfourpointstreeschannel
+              \corr@ifstringeq{\corr@fourpointtopology}{half-box}{%
+                \corr@drawfourpointhalfbox
               }{%
-                \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
-                  \corr@drawfourpointtreetchannel
+                \corr@ifstringeq{\corr@fourpointtopology}{flat-contact}{%
+                  \corr@drawfourpointflatcontact
                 }{%
-                  \corr@drawfourpointtreeuchannel
+                  \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+                    \corr@drawfourpointstreeschannel
+                  }{%
+                    \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+                      \corr@drawfourpointtreetchannel
+                    }{%
+                      \corr@drawfourpointtreeuchannel
+                    }%
+                  }%
                 }%
               }%
             }%
@@ -3706,6 +4096,8 @@
 \NewDocumentCommand{\TTreeChannelCorr}{O{}}{\FourPointCorr[topology=t-tree,#1]}
 \NewDocumentCommand{\UTreeChannelCorr}{O{}}{\FourPointCorr[topology=u-tree,#1]}
 \NewDocumentCommand{\BoxLoopCorr}{O{}}{\FourPointCorr[topology=box,#1]}
+\NewDocumentCommand{\HalfBoxCorr}{O{}}{\FourPointCorr[topology=half-box,#1]}
+\NewDocumentCommand{\FlatContactCorr}{O{}}{\FourPointCorr[topology=flat-contact,#1]}
 \NewDocumentCommand{\SunsetDiag}{O{}}{\SunsetDiagram[#1]}
 
 \makeatother
