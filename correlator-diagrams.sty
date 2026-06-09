@@ -15,6 +15,35 @@
 \makeatletter
 
 \tikzfeynhandset{
+  circ position/.initial=0.5,
+  circ size/.initial=11pt,
+  circ fill/.initial=white,
+  circ draw/.initial=black,
+  every circ label@@/.style={},
+  circ label style/.style={/tikzfeynhand/every circ label@@/.style={#1}},
+  with circ/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position \pgfkeysvalueof{/tikzfeynhand/circ position} with {
+        \node[
+          circle,
+          draw=\pgfkeysvalueof{/tikzfeynhand/circ draw},
+          fill=\pgfkeysvalueof{/tikzfeynhand/circ fill},
+          line width=0.7\feynhandlinesize,
+          inner sep=0pt,
+          minimum size=\pgfkeysvalueof{/tikzfeynhand/circ size},
+          outer sep=0pt,
+          /tikzfeynhand/every circ label@@
+        ] {\ensuremath{\scriptstyle #1}};
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  circ/.style={/tikzfeynhand/with circ={#1}},
+  with circle/.style={/tikzfeynhand/circ={#1}},
+  circled/.style={/tikzfeynhand/circ={#1}},
   with open arrow/.style={
     /tikz/decoration={
       markings,

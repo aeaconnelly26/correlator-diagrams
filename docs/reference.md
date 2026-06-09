@@ -1037,6 +1037,30 @@ line with fixed-frequency squiggles. The `photon` and legacy `pho` aliases route
 through the same shared style, so changing a leg or internal line to any of
 these styles uses the same visual language in every topology.
 
+Circled propagator markers can be added to any propagator style with `circ=...`:
+
+```tex
+\[
+  \ThreePointCorr[
+    line={ewboson,circ=Z},
+    field={},
+    show-momenta=false
+  ]
+\]
+```
+
+Use `circ={}` for a blank circle. The aliases `with circle=...` and
+`circled=...` are also accepted. Marker tuning keys are:
+
+- `circ position=...`
+- `circ size=...`
+- `circ fill=...`
+- `circ draw=...`
+- `circ label style={...}`
+
+When a style contains commas inside `leg-styles={...}`, wrap that slot in braces:
+`leg-styles={{ewboson,circ=W},plain,{ewboson,circ=Z}}`.
+
 Per-leg overrides:
 
 ```tex
