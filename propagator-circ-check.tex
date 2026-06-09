@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.3\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\newcommand{\widecell}[2]{%
+  \begin{minipage}[t]{0.92\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\newcommand{\linecheck}[2]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (2.25,0);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+  \end{tikzpicture}\par
+  {\small #2}
+}
+
+\begin{document}
+
+\section*{Propagator Circle Marker Capacity Sheet}
+
+\subsection*{Full Box With Circ Labels}
+
+\begin{center}
+\widecell{All external and internal box edges circ-labelled}{
+\BoxLoopCorr[
+  scale=1.35,
+  box-xspan=1.45,
+  box-yspan=1.08,
+  box-external-xspan=2.50,
+  box-external-yspan=1.88,
+  field={},
+  show-momenta=false,
+  central={},
+  leg-styles={{ewboson,circ=W},{ewboson,circ=W},{ewboson,circ=W},{ewboson,circ=W}},
+  box-left-line={ewboson,circ=W},
+  box-top-line={ewboson,circ=Z},
+  box-right-line={ewboson,circ=W},
+  box-bottom-line={ewboson,circ=W}
+]
+}
+\end{center}
+
+\subsection*{Basic Line Styles}
+
+\begin{center}
+\diagramcell{Blank plain}{
+\linecheck{plain,circ={}}{\texttt{plain,circ=\{\}}}
+}
+\hfill
+\diagramcell{\(Z\) EW-boson}{
+\linecheck{ewboson,circ=Z}{\texttt{ewboson,circ=Z}}
+}
+\hfill
+\diagramcell{\(Y\) fermion}{
+\linecheck{fer,circ=Y}{\texttt{fer,circ=Y}}
+}
+\end{center}
+
+\subsection*{Leg-Style Composition}
+
+\begin{center}
+\widecell{Per-leg circ markers}{
+\ThreePointCorr[
+  line=ewboson,
+  field={},
+  show-momenta=false,
+  central={},
+  leg-styles={{ewboson,circ=W},{ewboson,circ=Z},{plain,circ={}}}
+]
+}
+\end{center}
+
+\subsection*{Topology Internals}
+
+\begin{center}
+\diagramcell{Box internal markers only}{
+\BoxLoopCorr[
+  field={},
+  show-momenta=false,
+  central={},
+  box-top-line={ewboson,circ=Z},
+  box-bottom-line={ewboson,circ=W},
+  box-left-line=ewboson,
+  box-right-line=ewboson
+]
+}
+\hfill
+\diagramcell{Half-box bridge}{
+\HalfBoxCorr[
+  field={},
+  show-momenta=false,
+  central={},
+  leg-labels={W^+,W^-,W^-,W^+},
+  leg-styles={ewboson,ewboson,ewboson,ewboson},
+  half-box-line={ewboson,circ=Z},
+  half-box-bridge-label={},
+  half-box-bridge-color={}
+]
+}
+\hfill
+\diagramcell{Flat contact}{
+\FlatContactCorr[
+  field={},
+  show-momenta=false,
+  central={},
+  line={ewboson,circ=W}
+]
+}
+\end{center}
+
+\subsection*{Tuning}
+
+\begin{center}
+\diagramcell{Shifted marker}{
+\linecheck{ewboson,circ position=0.35,circ=Z}{\texttt{circ position=0.35}}
+}
+\hfill
+\diagramcell{Larger marker}{
+\linecheck{ewboson,circ size=15pt,circ=W}{\texttt{circ size=15pt}}
+}
+\hfill
+\diagramcell{Colored marker}{
+\linecheck{ewboson,circ fill=magenta!12,circ draw=magenta!85!red,circ=Y}{\texttt{circ fill} and \texttt{circ draw}}
+}
+\end{center}
+
+\subsection*{Aliases}
+
+\begin{center}
+\diagramcell{\texttt{with circle}}{
+\linecheck{plain,with circle=Z}{\texttt{with circle=Z}}
+}
+\hfill
+\diagramcell{\texttt{circled}}{
+\linecheck{ewboson,circled=W}{\texttt{circled=W}}
+}
+\hfill
+\diagramcell{Label style}{
+\linecheck{ewboson,circ label style={font=\footnotesize},circ=W^-}{\texttt{circ label style}}
+}
+\end{center}
+
+\end{document}
