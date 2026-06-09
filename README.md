@@ -82,7 +82,8 @@ Main demo files in this repository:
 - [`three-point-check.tex`](three-point-check.tex)
 - [`scalar-polarization-check.tex`](scalar-polarization-check.tex)
 - [`sunset-example.tex`](sunset-example.tex)
-- [`simple-sunset.tex`](simple-sunset.tex)
+- [`sunset-index-regression.tex`](sunset-index-regression.tex)
+- [`propagator-circ-check.tex`](propagator-circ-check.tex)
 
 Compile with:
 
@@ -123,6 +124,7 @@ Common wrappers and aliases:
 - Use [`box-topology-regression.tex`](box-topology-regression.tex) to inspect the one-loop box topology in isolation.
 - Use [`three-point-check.tex`](three-point-check.tex) to verify the 3-point topology and momentum placement.
 - Use [`scalar-polarization-check.tex`](scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.
+- Use [`sunset-example.tex`](sunset-example.tex) to inspect the current sunset topology.
 
 The full reference covers:
 
@@ -143,6 +145,8 @@ The full reference covers:
 - `three-point-check.tex`: focused 3-point regression cases
 - `scalar-polarization-check.tex`: single-leg scalar-polarized regression cases
 - `sunset-example.tex`: sunset-specific examples
+- `sunset-index-regression.tex`: sunset index stress cases
+- `propagator-circ-check.tex`: circled propagator marker capacity sheet
 - `assets/`: README graphics
 
 ## License

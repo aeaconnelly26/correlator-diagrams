@@ -7,6 +7,16 @@
 
 \section*{Sunset Diagram Example}
 
+Minimal sunset topology with labels and momenta hidden:
+\[
+  \SunsetDiagram[
+    scale=1.35,
+    field={},
+    show-momenta=false,
+    sunset-central-label={}
+  ]
+\]
+
 Scalar sunset self-energy with external momentum \(p\):
 \[
   \SunsetDiagram[
@@ -19,7 +29,7 @@ Scalar sunset self-energy with external momentum \(p\):
   ]
 \]
 
-The same macro also supports different labels and momentum assignments, for example:
+The same macro also supports hiding momentum annotations while keeping external fields:
 \[
   \SunsetDiagram[
     scale=1.2,

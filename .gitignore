@@ -1,6 +1,7 @@
 *.aux
 *.log
 *.out
+.DS_Store
 *.fdb_latexmk
 *.fls
 texput.log
