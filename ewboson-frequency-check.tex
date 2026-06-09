@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.3\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\newcommand{\linecheck}[2]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (#1,0);
+      \propag[ewboson] (a) to (b);
+    \end{feynhand}
+  \end{tikzpicture}\par
+  {\small #2}
+}
+
+\begin{document}
+
+\section*{EW-Boson Frequency Check}
+
+\subsection*{Straight Lines}
+
+\begin{center}
+\diagramcell{Short}{\linecheck{0.85}{0.85 units}}
+\hfill
+\diagramcell{Medium}{\linecheck{1.7}{1.7 units}}
+\hfill
+\diagramcell{Long}{\linecheck{2.8}{2.8 units}}
+\end{center}
+
+\subsection*{Vertex Identity Topologies}
+
+\begin{center}
+\diagramcell{Half-box}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={}
+]
+}
+\hfill
+\diagramcell{Bridge label}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,Z,Z,W^+},
+  half-box-bridge-label=W^-,
+  central={}
+]
+}
+\hfill
+\diagramcell{Flat contact}{
+\FlatContactCorr[
+  show-momenta=false,
+  field={},
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Existing Topology Families}
+
+\begin{center}
+\diagramcell{Three-point}{
+\ThreePointCorr[
+  line=ewboson,
+  field={},
+  show-momenta=false,
+  central={}
+]
+}
+\hfill
+\diagramcell{Box}{
+\BoxLoopCorr[
+  show-momenta=false,
+  field={},
+  central={}
+]
+}
+\hfill
+\diagramcell{Legacy alias}{
+\ThreePointCorr[
+  line=pho,
+  field={},
+  show-momenta=false,
+  central={}
+]
+}
+\end{center}
+
+\end{document}

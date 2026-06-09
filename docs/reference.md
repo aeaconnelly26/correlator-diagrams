@@ -102,12 +102,16 @@ That is the logic used by this package.
 | `\ThreePointCorr` | 3-point vertex | upper-left, right, and bottom legs meeting at one vertex |
 | `\FourPointCorr` | 4-point object | contact topology by default |
 | `\BoxLoopCorr` | one-loop box | four corner vertices, square internal loop, four diagonal external legs |
+| `\HalfBoxCorr` | vertex-identity half-box | continuous top line through two triple vertices, with two downward legs |
+| `\FlatContactCorr` | flat-top quartic/contact piece | central contact vertex with a flattened top pair |
 | `\SunsetDiagram` | self-energy sunset | two external legs plus top/middle/bottom internal lines |
 
 The convenience channel wrappers are just `\FourPointCorr` with a fixed topology:
 
 - `\SChannelCorr`, `\TChannelCorr`, `\UChannelCorr` for the one-loop `\phi^4` bubbles
 - `\BoxLoopCorr` for the one-loop four-point box, equivalent to `\FourPointCorr[topology=box,...]`
+- `\HalfBoxCorr` for the vertex-identity half-box, equivalent to `\FourPointCorr[topology=half-box,...]`
+- `\FlatContactCorr` for the flat-top contact piece, equivalent to `\FourPointCorr[topology=flat-contact,...]`
 - `\STreeChannelCorr`, `\TTreeChannelCorr`, `\UTreeChannelCorr` for the explicit tree-level exchange graphs
 
 ## Leg Order And Slot Order
@@ -1029,8 +1033,9 @@ propagator styles across the package, including ordinary correlators,
 3-point vertices, box diagrams, channel diagrams, and sunset diagrams.
 
 The default EW-boson style used by `ewboson` and `EWboson` is a single clean wavy
-line with a loose sinusoidal wavelength. It is shared globally, so changing a
-leg or internal line to `ewboson` uses the same visual language in every topology.
+line with fixed-frequency squiggles. The `photon` and legacy `pho` aliases route
+through the same shared style, so changing a leg or internal line to any of
+these styles uses the same visual language in every topology.
 
 Per-leg overrides:
 
@@ -1274,6 +1279,73 @@ Central loop arrow controls:
 - `box-loop-label-position=...`
 - `box-loop-label-xshift=...`
 - `box-loop-label-yshift=...`
+
+## Vertex Identity Prototype Topologies
+
+The vertex-identity derivation helpers are:
+
+```tex
+\HalfBoxCorr[...]
+\FourPointCorr[topology=half-box,...]
+\FlatContactCorr[...]
+\FourPointCorr[topology=flat-contact,...]
+```
+
+The shared slot order is:
+
+- slot 1 = left top
+- slot 2 = left down
+- slot 3 = right down
+- slot 4 = right top
+
+`\HalfBoxCorr` draws a continuous top EW-boson line through two triple
+vertices, with two downward legs. `\FlatContactCorr` draws a flat-top
+quartic/contact piece with one central vertex. Both default to `ewboson` but
+still accept `leg-styles={...}`, `leg-labels={...}`, `momentum-labels={...}`,
+`show-momenta=false`, and the usual color and vertex controls.
+
+Half-box geometry and style controls:
+
+- `half-box-xspan=...`
+- `half-box-top-stub=...`
+- `half-box-down-span=...`
+- `half-box-down-xoffset=...`
+- `half-box-line=...`
+- `half-box-colors={slot-1,slot-2,slot-3,slot-4}`
+- `half-box-bridge-color=...`
+- `half-box-bridge-label=...`
+- `half-box-bridge-label-position=above|below|<anchor>`
+- `half-box-bridge-label-xshift=...`
+- `half-box-bridge-label-yshift=...`
+- `half-box-momentum-start=...`
+- `half-box-momentum-end=...`
+- `half-box-momentum-offset=...`
+- `half-box-momentum-label-fraction=...`
+- `half-box-momentum-label-gap=...`
+- `half-box-momentum-slots={1,2,3,4}`
+
+Flat-contact geometry and style controls:
+
+- `flat-contact-xspan=...`
+- `flat-contact-yspan=...`
+- `flat-contact-line=...`
+- `flat-contact-colors={slot-1,slot-2,slot-3,slot-4}`
+- `flat-contact-momentum-start=...`
+- `flat-contact-momentum-end=...`
+- `flat-contact-momentum-offset=...`
+- `flat-contact-momentum-label-fraction=...`
+- `flat-contact-momentum-label-gap=...`
+- `flat-contact-momentum-slots={1,2,3,4}`
+
+The `halfbox-*` and `flatcontact-*` spellings are also accepted as aliases.
+The momentum slot filters let a diagram show only selected external momentum
+arrows, for example `half-box-momentum-slots={2,3}` for the two lower legs.
+
+Inside package-managed topologies, `scalarpolarized`/`spol` external legs are
+oriented toward the topology vertex. The explicit aliases such as
+`spolin`/`spolout` remain available for manual control.
+
+Focused visual QA lives in `vertex-identity-check.tex`.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 

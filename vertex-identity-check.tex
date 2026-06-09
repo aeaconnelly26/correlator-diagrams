@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.9em}
+  #2
+  \end{minipage}%
+}
+
+\newcommand{\widecell}[2]{%
+  \begin{minipage}[t]{0.92\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.9em}
+  #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Vertex Identity Diagram Check}
+
+\subsection*{Core Topologies}
+
+\begin{center}
+\diagramcell{Bare half-box}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={}
+]
+}
+\hfill
+\diagramcell{Flat contact}{
+\FlatContactCorr[
+  show-momenta=false,
+  field={},
+  central={}
+]
+}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+\diagramcell{W/Z half-box}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,Z,Z,W^+},
+  half-box-bridge-label=W^-,
+  central={}
+]
+}
+\hfill
+\diagramcell{Charged lower legs}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,W^-,W^-,W^+},
+  half-box-bridge-label=Z,
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Focused Momentum}
+
+\begin{center}
+\widecell{Selected lower momentum arrows}{
+\HalfBoxCorr[
+  field={},
+  leg-labels={W^+,{},{},W^+},
+  momentum-labels={,p_1,q_1,},
+  half-box-momentum-slots={2,3},
+  half-box-momentum-start=0.26,
+  half-box-momentum-end=0.72,
+  half-box-momentum-offset=12pt,
+  half-box-momentum-label-gap=0.12,
+  half-box-bridge-label=Z,
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Line Styles}
+
+\begin{center}
+\diagramcell{Scalar-polarized leg points inward}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  leg-styles={ewboson,plain,spol,ewboson},
+  leg-labels={W^+,W^-,W^-,W^+},
+  half-box-bridge-label=Z,
+  central={}
+]
+}
+\hfill
+\diagramcell{Plain flat contact}{
+\FlatContactCorr[
+  show-momenta=false,
+  line=plain,
+  field={},
+  leg-labels={W^+,Z,Z,W^+},
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Color Controls}
+
+\begin{center}
+\diagramcell{Half-box edge colors}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  half-box-colors={blue!70!black,green!45!black,orange!85!black,purple!70!black},
+  half-box-bridge-color=magenta!85!red,
+  central={}
+]
+}
+\hfill
+\diagramcell{Hot-pink flat contact}{
+\FlatContactCorr[
+  show-momenta=false,
+  field={},
+  flat-contact-colors={magenta!85!red,magenta!85!red,black,black},
+  central={}
+]
+}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+\diagramcell{Global color}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  color=blue!65!black,
+  central={}
+]
+}
+\hfill
+\diagramcell{Mixed color and labels}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,Z,Z,W^+},
+  half-box-colors={blue!65!black,black,black,blue!65!black},
+  half-box-bridge-color=red!70!magenta,
+  half-box-bridge-label=W^-,
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Reduction Sketch}
+
+\begin{center}
+\widecell{Example-level composition}{
+\(
+\begin{array}{ccc}
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,Z,Z,W^+},
+  half-box-bridge-label=W^-,
+  central={}
+]
+&
+-
+&
+\FlatContactCorr[
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,Z,Z,W^+},
+  central={}
+]
+\end{array}
+\)
+}
+\end{center}
+
+\subsection*{Dispatch}
+
+\begin{center}
+\diagramcell{\texttt{\string\FourPointCorr} half-box}{
+\FourPointCorr[
+  topology=half-box,
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,W^-,W^-,W^+},
+  half-box-bridge-label=Z,
+  central={}
+]
+}
+\hfill
+\diagramcell{\texttt{\string\FourPointCorr} flat-contact}{
+\FourPointCorr[
+  topology=flat-contact,
+  show-momenta=false,
+  field={},
+  leg-labels={W^+,Z,Z,W^+},
+  central={}
+]
+}
+\end{center}
+
+\end{document}
