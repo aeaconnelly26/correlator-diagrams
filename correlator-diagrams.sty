@@ -137,6 +137,10 @@
 \newif\ifcorr@sunsetindexawaremomenta
 \newif\ifcorr@lineexplicit
 \newif\ifcorr@slotselected
+\newif\ifcorr@crossboxleftcirc
+\newif\ifcorr@crossboxrightcirc
+\newif\ifcorr@crossboxupcirc
+\newif\ifcorr@crossboxdowncirc
 
 \def\corr@line{plain}
 \def\corr@color{}
@@ -468,6 +472,35 @@
 \def\corr@flatcontactmomentumlabelfraction{0.50}
 \def\corr@flatcontactmomentumlabelgap{0.10}
 \def\corr@flatcontactmomentumslots{1,2,3,4}
+\def\corr@crossboxdownline{}
+\def\corr@crossboxupline{}
+\def\corr@crossboxcrossinggap{0.045}
+\def\corr@crossboxleftcirc{}
+\def\corr@crossboxrightcirc{}
+\def\corr@crossboxupcirc{}
+\def\corr@crossboxdowncirc{}
+\def\corr@crossboxleftcircpos{0.50}
+\def\corr@crossboxrightcircpos{0.50}
+\def\corr@crossboxupcircpos{0.36}
+\def\corr@crossboxdowncircpos{0.64}
+\def\corr@trianglecontactorientation{bottom}
+\def\corr@trianglecontactxspan{1.10}
+\def\corr@trianglecontactyspan{0.98}
+\def\corr@trianglecontactexternalxspan{1.72}
+\def\corr@trianglecontactexternalyspan{1.55}
+\def\corr@trianglecontactline{ewboson}
+\def\corr@trianglecontactexternalline{}
+\def\corr@trianglecontactinternalline{}
+\def\corr@trianglecontactcolor{}
+\def\corr@trianglecontactexternalcolor{}
+\def\corr@trianglecontactinternalcolor{}
+\def\corr@trianglecontactmomentumstart{0.30}
+\def\corr@trianglecontactmomentumend{0.70}
+\def\corr@trianglecontactmomentumoffset{10pt}
+\def\corr@trianglecontactmomentumlabelfraction{0.50}
+\def\corr@trianglecontactmomentumlabelgap{0.10}
+\def\corr@trianglecontactmomentumslots{1,2,3,4}
+\def\corr@trianglecontactcentrallabelyshift{-42pt}
 \corr@blobtrue
 \def\corr@blobstyle{blob}
 \corr@showmomentatrue
@@ -909,6 +942,17 @@
   \expandafter\def\csname corr@boxbottom#1\endcsname{#5}%
 }
 
+\def\corr@crossbox@stop{\corr@crossbox@stop}
+
+\newcommand{\corr@setcrossboxpair}[2]{%
+  \expandafter\corr@@setcrossboxpair\expandafter{#1}#2,,\corr@crossbox@stop
+}
+
+\def\corr@@setcrossboxpair#1#2,#3,#4\corr@crossbox@stop{%
+  \expandafter\def\csname corr@crossboxdown#1\endcsname{#2}%
+  \expandafter\def\csname corr@crossboxup#1\endcsname{#3}%
+}
+
 \newcommand{\corr@sunsetmarklinehasindices}[4]{%
   \def#4{0}%
   \def\corr@sunsetinternalindextmp{#1}%
@@ -1192,6 +1236,45 @@
   \corr@topologysetdefault\corr@flatcontactmomentumlabelfraction{0.50}%
   \corr@topologysetdefault\corr@flatcontactmomentumlabelgap{0.10}%
   \corr@topologysetdefault\corr@flatcontactmomentumslots{1,2,3,4}%
+}
+
+\newcommand{\corr@resetcrossboxdefaults}{%
+  \corr@topologysetdefault\corr@crossboxdownline{}%
+  \corr@topologysetdefault\corr@crossboxupline{}%
+  \corr@topologysetdefault\corr@crossboxcrossinggap{0.045}%
+  \corr@topologysetdefault\corr@crossboxleftcirc{}%
+  \corr@topologysetdefault\corr@crossboxrightcirc{}%
+  \corr@topologysetdefault\corr@crossboxupcirc{}%
+  \corr@topologysetdefault\corr@crossboxdowncirc{}%
+  \corr@topologysetdefault\corr@crossboxleftcircpos{0.50}%
+  \corr@topologysetdefault\corr@crossboxrightcircpos{0.50}%
+  \corr@topologysetdefault\corr@crossboxupcircpos{0.36}%
+  \corr@topologysetdefault\corr@crossboxdowncircpos{0.64}%
+  \corr@crossboxleftcircfalse
+  \corr@crossboxrightcircfalse
+  \corr@crossboxupcircfalse
+  \corr@crossboxdowncircfalse
+}
+
+\newcommand{\corr@resettrianglecontactdefaults}{%
+  \corr@topologysetdefault\corr@trianglecontactorientation{bottom}%
+  \corr@topologysetdefault\corr@trianglecontactxspan{1.10}%
+  \corr@topologysetdefault\corr@trianglecontactyspan{0.98}%
+  \corr@topologysetdefault\corr@trianglecontactexternalxspan{1.72}%
+  \corr@topologysetdefault\corr@trianglecontactexternalyspan{1.55}%
+  \corr@topologysetdefault\corr@trianglecontactline{ewboson}%
+  \corr@topologysetdefault\corr@trianglecontactexternalline{}%
+  \corr@topologysetdefault\corr@trianglecontactinternalline{}%
+  \corr@topologysetdefault\corr@trianglecontactcolor{}%
+  \corr@topologysetdefault\corr@trianglecontactexternalcolor{}%
+  \corr@topologysetdefault\corr@trianglecontactinternalcolor{}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumstart{0.30}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumend{0.70}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumoffset{10pt}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumlabelgap{0.10}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumslots{1,2,3,4}%
+  \corr@topologysetdefault\corr@trianglecontactcentrallabelyshift{-42pt}%
 }
 
 \newcommand{\corr@resetsunsetdefaults}{%
@@ -1642,10 +1725,14 @@
   topology/t-tree/.code={\def\corr@fourpointtopology{t-tree}},
   topology/u-tree/.code={\def\corr@fourpointtopology{u-tree}},
   topology/box/.code={\def\corr@fourpointtopology{box}},
+  topology/cross-box/.code={\def\corr@fourpointtopology{cross-box}},
+  topology/crossbox/.code={\def\corr@fourpointtopology{cross-box}},
   topology/half-box/.code={\def\corr@fourpointtopology{half-box}},
   topology/halfbox/.code={\def\corr@fourpointtopology{half-box}},
   topology/flat-contact/.code={\def\corr@fourpointtopology{flat-contact}},
   topology/flatcontact/.code={\def\corr@fourpointtopology{flat-contact}},
+  topology/triangle-contact/.code={\def\corr@fourpointtopology{triangle-contact}},
+  topology/trianglecontact/.code={\def\corr@fourpointtopology{triangle-contact}},
   topology/default/.style={topology=contact},
   channel-topology/.style={topology={#1}},
   fourpoint-topology/.style={topology={#1}},
@@ -1716,6 +1803,71 @@
   flatcontact-momentum-label-fraction/.style={flat-contact-momentum-label-fraction={#1}},
   flatcontact-momentum-label-gap/.style={flat-contact-momentum-label-gap={#1}},
   flatcontact-momentum-slots/.style={flat-contact-momentum-slots={#1}},
+  cross-box-down-line/.store in=\corr@crossboxdownline,
+  cross-box-up-line/.store in=\corr@crossboxupline,
+  cross-box-diagonal-lines/.code={\corr@setcrossboxpair{line}{#1}},
+  cross-box-crossing-gap/.store in=\corr@crossboxcrossinggap,
+  cross-box-left-circ/.code={\def\corr@crossboxleftcirc{#1}\corr@crossboxleftcirctrue},
+  cross-box-right-circ/.code={\def\corr@crossboxrightcirc{#1}\corr@crossboxrightcirctrue},
+  cross-box-up-circ/.code={\def\corr@crossboxupcirc{#1}\corr@crossboxupcirctrue},
+  cross-box-down-circ/.code={\def\corr@crossboxdowncirc{#1}\corr@crossboxdowncirctrue},
+  cross-box-left-circ-position/.store in=\corr@crossboxleftcircpos,
+  cross-box-right-circ-position/.store in=\corr@crossboxrightcircpos,
+  cross-box-up-circ-position/.store in=\corr@crossboxupcircpos,
+  cross-box-down-circ-position/.store in=\corr@crossboxdowncircpos,
+  crossbox-down-line/.style={cross-box-down-line={#1}},
+  crossbox-up-line/.style={cross-box-up-line={#1}},
+  crossbox-diagonal-lines/.style={cross-box-diagonal-lines={#1}},
+  crossbox-crossing-gap/.style={cross-box-crossing-gap={#1}},
+  crossbox-left-circ/.style={cross-box-left-circ={#1}},
+  crossbox-right-circ/.style={cross-box-right-circ={#1}},
+  crossbox-up-circ/.style={cross-box-up-circ={#1}},
+  crossbox-down-circ/.style={cross-box-down-circ={#1}},
+  crossbox-left-circ-position/.style={cross-box-left-circ-position={#1}},
+  crossbox-right-circ-position/.style={cross-box-right-circ-position={#1}},
+  crossbox-up-circ-position/.style={cross-box-up-circ-position={#1}},
+  crossbox-down-circ-position/.style={cross-box-down-circ-position={#1}},
+  triangle-contact-orientation/.is choice,
+  triangle-contact-orientation/bottom/.code={\def\corr@trianglecontactorientation{bottom}},
+  triangle-contact-orientation/top/.code={\def\corr@trianglecontactorientation{top}},
+  triangle-contact-orientation/left/.code={\def\corr@trianglecontactorientation{left}},
+  triangle-contact-orientation/right/.code={\def\corr@trianglecontactorientation{right}},
+  triangle-contact-orientation/default/.style={triangle-contact-orientation=bottom},
+  triangle-contact-xspan/.store in=\corr@trianglecontactxspan,
+  triangle-contact-yspan/.store in=\corr@trianglecontactyspan,
+  triangle-contact-external-xspan/.store in=\corr@trianglecontactexternalxspan,
+  triangle-contact-external-yspan/.store in=\corr@trianglecontactexternalyspan,
+  triangle-contact-line/.store in=\corr@trianglecontactline,
+  triangle-contact-external-line/.store in=\corr@trianglecontactexternalline,
+  triangle-contact-internal-line/.store in=\corr@trianglecontactinternalline,
+  triangle-contact-color/.store in=\corr@trianglecontactcolor,
+  triangle-contact-external-color/.store in=\corr@trianglecontactexternalcolor,
+  triangle-contact-internal-color/.store in=\corr@trianglecontactinternalcolor,
+  triangle-contact-momentum-start/.store in=\corr@trianglecontactmomentumstart,
+  triangle-contact-momentum-end/.store in=\corr@trianglecontactmomentumend,
+  triangle-contact-momentum-offset/.store in=\corr@trianglecontactmomentumoffset,
+  triangle-contact-momentum-label-fraction/.store in=\corr@trianglecontactmomentumlabelfraction,
+  triangle-contact-momentum-label-gap/.store in=\corr@trianglecontactmomentumlabelgap,
+  triangle-contact-momentum-slots/.store in=\corr@trianglecontactmomentumslots,
+  triangle-contact-central-label-yshift/.store in=\corr@trianglecontactcentrallabelyshift,
+  trianglecontact-orientation/.style={triangle-contact-orientation={#1}},
+  trianglecontact-xspan/.style={triangle-contact-xspan={#1}},
+  trianglecontact-yspan/.style={triangle-contact-yspan={#1}},
+  trianglecontact-external-xspan/.style={triangle-contact-external-xspan={#1}},
+  trianglecontact-external-yspan/.style={triangle-contact-external-yspan={#1}},
+  trianglecontact-line/.style={triangle-contact-line={#1}},
+  trianglecontact-external-line/.style={triangle-contact-external-line={#1}},
+  trianglecontact-internal-line/.style={triangle-contact-internal-line={#1}},
+  trianglecontact-color/.style={triangle-contact-color={#1}},
+  trianglecontact-external-color/.style={triangle-contact-external-color={#1}},
+  trianglecontact-internal-color/.style={triangle-contact-internal-color={#1}},
+  trianglecontact-momentum-start/.style={triangle-contact-momentum-start={#1}},
+  trianglecontact-momentum-end/.style={triangle-contact-momentum-end={#1}},
+  trianglecontact-momentum-offset/.style={triangle-contact-momentum-offset={#1}},
+  trianglecontact-momentum-label-fraction/.style={triangle-contact-momentum-label-fraction={#1}},
+  trianglecontact-momentum-label-gap/.style={triangle-contact-momentum-label-gap={#1}},
+  trianglecontact-momentum-slots/.style={triangle-contact-momentum-slots={#1}},
+  trianglecontact-central-label-yshift/.style={triangle-contact-central-label-yshift={#1}},
   box-external-xspan/.store in=\corr@boxexternalxspan,
   box-external-yspan/.store in=\corr@boxexternalyspan,
   box-color/.store in=\corr@boxcolor,
@@ -2727,6 +2879,116 @@
   \fi
 }
 
+\newcommand{\corr@crossboxstylefor}[1]{%
+  \edef\corr@crossboxspecificline{#1}%
+  \ifdefempty{\corr@crossboxspecificline}{%
+    \edef\corr@propoptions{\corr@boxline}%
+  }{%
+    \edef\corr@propoptions{#1}%
+  }%
+}
+
+\newcommand{\corr@drawcrossboxinternalprop}[4]{%
+  \corr@crossboxstylefor{#2}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
+  \corr@appendpropcolorvalue{\corr@boxcolor}%
+  \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+}
+
+\newcommand{\corr@drawcrossboxsplitinternalprop}[6]{%
+  \pgfmathsetmacro{\corr@crossboxgapstart}{0.5-\corr@crossboxcrossinggap}%
+  \pgfmathsetmacro{\corr@crossboxgapend}{0.5+\corr@crossboxcrossinggap}%
+  \path
+    (#3) --
+    coordinate[pos=\corr@crossboxgapstart] (#5)
+    coordinate[pos=\corr@crossboxgapend] (#6)
+    (#4);
+  \corr@drawcrossboxinternalprop{#1}{#2}{#3}{#5}%
+  \corr@drawcrossboxinternalprop{#1}{#2}{#6}{#4}%
+}
+
+\newcommand{\corr@putcircatcoord}[2]{%
+  \edef\corr@manualcirclabel{#2}%
+  \node[
+    circle,
+    draw=\pgfkeysvalueof{/tikzfeynhand/circ draw},
+    fill=\pgfkeysvalueof{/tikzfeynhand/circ fill},
+    line width=0.7\feynhandlinesize,
+    inner sep=0pt,
+    minimum size=\pgfkeysvalueof{/tikzfeynhand/circ size},
+    outer sep=0pt
+  ] at (#1) {};
+  \node[
+    anchor=center,
+    inner sep=0pt,
+    outer sep=0pt,
+    /tikzfeynhand/every circ label@@
+  ] at (#1) {\expandafter\corr@circlabel\expandafter{\corr@manualcirclabel}};
+}
+
+\newcommand{\corr@placecrossboxcircs}{%
+  \ifcorr@crossboxleftcirc
+    \path (corrBoxBL) -- coordinate[pos=\corr@crossboxleftcircpos] (corrCrossBoxLeftCirc) (corrBoxTL);
+    \corr@putcircatcoord{corrCrossBoxLeftCirc}{\corr@crossboxleftcirc}%
+  \fi
+  \ifcorr@crossboxrightcirc
+    \path (corrBoxTR) -- coordinate[pos=\corr@crossboxrightcircpos] (corrCrossBoxRightCirc) (corrBoxBR);
+    \corr@putcircatcoord{corrCrossBoxRightCirc}{\corr@crossboxrightcirc}%
+  \fi
+  \ifcorr@crossboxupcirc
+    \path (corrBoxBL) -- coordinate[pos=\corr@crossboxupcircpos] (corrCrossBoxUpCirc) (corrBoxTR);
+    \corr@putcircatcoord{corrCrossBoxUpCirc}{\corr@crossboxupcirc}%
+  \fi
+  \ifcorr@crossboxdowncirc
+    \path (corrBoxTL) -- coordinate[pos=\corr@crossboxdowncircpos] (corrCrossBoxDownCirc) (corrBoxBR);
+    \corr@putcircatcoord{corrCrossBoxDownCirc}{\corr@crossboxdowncirc}%
+  \fi
+}
+
+\newcommand{\corr@trianglecontactstylefor}[2]{%
+  \edef\corr@trianglecontactspecificline{#2}%
+  \ifdefempty{\corr@trianglecontactspecificline}{%
+    \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@trianglecontactline}}%
+  }{%
+    \edef\corr@propoptions{#2}%
+  }%
+}
+
+\newcommand{\corr@drawtrianglecontactexternalprop}[3]{%
+  \corr@trianglecontactstylefor{#1}{\corr@trianglecontactexternalline}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
+  \corr@appendpropcolorvalue{\corr@trianglecontactcolor}%
+  \corr@appendpropcolorvalue{\corr@trianglecontactexternalcolor}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+}
+
+\newcommand{\corr@drawtrianglecontactinternalprop}[3]{%
+  \corr@trianglecontactstylefor{#1}{\corr@trianglecontactinternalline}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
+  \corr@appendpropcolorvalue{\corr@trianglecontactcolor}%
+  \corr@appendpropcolorvalue{\corr@trianglecontactinternalcolor}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+}
+
+\newcommand{\corr@drawtrianglecontactmomentum}[4]{%
+  \corr@selectmomentumslot{#1}{\corr@trianglecontactmomentumslots}%
+  \ifcorr@slotselected
+    \begingroup
+    \def\corr@externalmomoffset{\corr@trianglecontactmomentumoffset}%
+    \def\corr@momentumlabelgap{\corr@trianglecontactmomentumlabelgap}%
+    \corr@ifstringeq{\corr@externalmomentumdirectionfor{#1}}{out}{%
+      \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@trianglecontactmomentumstart}{\corr@trianglecontactmomentumend}{\corr@trianglecontactmomentumlabelfraction}{0pt}{0pt}%
+    }{%
+      \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@trianglecontactmomentumstart}{\corr@trianglecontactmomentumend}{\corr@trianglecontactmomentumlabelfraction}{0pt}{0pt}%
+    }%
+    \endgroup
+  \fi
+}
+
 \newcommand{\corr@drawhalfboxbridge}[2]{%
   \ifcorr@lineexplicit
     \edef\corr@propoptions{\corr@line}%
@@ -3408,6 +3670,46 @@
   \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
 }
 
+\newcommand{\corr@drawfourpointcrossbox}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrBoxTL) at (-\corr@boxxspan,\corr@boxyspan);
+    \vertex (corrBoxTR) at (\corr@boxxspan,\corr@boxyspan);
+    \vertex (corrBoxBR) at (\corr@boxxspan,-\corr@boxyspan);
+    \vertex (corrBoxBL) at (-\corr@boxxspan,-\corr@boxyspan);
+    \vertex (corrExtUL) at (-\corr@boxexternalxspan,\corr@boxexternalyspan);
+    \vertex (corrExtLL) at (-\corr@boxexternalxspan,-\corr@boxexternalyspan);
+    \vertex (corrExtLR) at (\corr@boxexternalxspan,-\corr@boxexternalyspan);
+    \vertex (corrExtUR) at (\corr@boxexternalxspan,\corr@boxexternalyspan);
+    \corr@ifexternallegs{%
+      \corr@drawboxexternalprop{1}{corrExtUL}{corrBoxTL}%
+      \corr@drawboxexternalprop{2}{corrExtLL}{corrBoxBL}%
+      \corr@drawboxexternalprop{3}{corrExtLR}{corrBoxBR}%
+      \corr@drawboxexternalprop{4}{corrExtUR}{corrBoxTR}%
+    }%
+    \corr@drawboxinternalprop{5}{\corr@boxleftline}{corrBoxBL}{corrBoxTL}%
+    \corr@drawboxinternalprop{6}{\corr@boxrightline}{corrBoxTR}{corrBoxBR}%
+    \corr@drawcrossboxinternalprop{8}{\corr@crossboxupline}{corrBoxBL}{corrBoxTR}%
+    \corr@drawcrossboxsplitinternalprop{7}{\corr@crossboxdownline}{corrBoxTL}{corrBoxBR}{corrCrossDownA}{corrCrossDownB}%
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrBoxTL}{\corr@centervertexstyle}%
+    \corr@putvertex{corrBoxTR}{\corr@centervertexstyle}%
+    \corr@putvertex{corrBoxBR}{\corr@centervertexstyle}%
+    \corr@putvertex{corrBoxBL}{\corr@centervertexstyle}%
+  \fi
+  \corr@placecrossboxcircs
+  \corr@boxplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawboxexternalmomentumul{1}{corrExtUL}{corrBoxTL}
+    \corr@drawboxexternalmomentumll{2}{corrExtLL}{corrBoxBL}
+    \corr@drawboxexternalmomentumlr{3}{corrExtLR}{corrBoxBR}
+    \corr@drawboxexternalmomentumur{4}{corrExtUR}{corrBoxTR}
+  \fi
+  \corr@boxplaceexternallabels
+  \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
+}
+
 \newcommand{\corr@drawfourpointcontactcentral}{%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
@@ -3630,6 +3932,165 @@
   \fi
   \corr@flatcontactplaceexternallabels
   \corr@putcentral{corrC}
+}
+
+\newcommand{\corr@trianglecontactplaceexternallabels}{%
+  \corr@topologyputexternallabel{corrExtUL}{xshift=-11pt,yshift=8pt}{1}%
+  \corr@topologyputexternallabel{corrExtLL}{xshift=-11pt,yshift=-8pt}{2}%
+  \corr@topologyputexternallabel{corrExtLR}{xshift=11pt,yshift=-8pt}{3}%
+  \corr@topologyputexternallabel{corrExtUR}{xshift=11pt,yshift=8pt}{4}%
+}
+
+\newcommand{\corr@trianglecontactplaceexternalvertices}{%
+  \corr@topologyputexternalvertex{corrExtUL}%
+  \corr@topologyputexternalvertex{corrExtLL}%
+  \corr@topologyputexternalvertex{corrExtLR}%
+  \corr@topologyputexternalvertex{corrExtUR}%
+}
+
+\newcommand{\corr@trianglecontactputvertices}{%
+  \ifcorr@centervertex
+    \corr@putvertex{corrTriA}{\corr@centervertexstyle}%
+    \corr@putvertex{corrTriB}{\corr@centervertexstyle}%
+    \corr@putvertex{corrTriContact}{\corr@centervertexstyle}%
+  \fi
+}
+
+\newcommand{\corr@trianglecontactfinish}{%
+  \corr@trianglecontactputvertices
+  \corr@trianglecontactplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawtrianglecontactmomentum{1}{corrExtUL}{corrTriSlotOne}{90}
+    \corr@drawtrianglecontactmomentum{2}{corrExtLL}{corrTriSlotTwo}{-90}
+    \corr@drawtrianglecontactmomentum{3}{corrExtLR}{corrTriSlotThree}{90}
+    \corr@drawtrianglecontactmomentum{4}{corrExtUR}{corrTriSlotFour}{-90}
+  \fi
+  \corr@trianglecontactplaceexternallabels
+  \corr@topologyputcentral{corrC}{\corr@trianglecontactcentrallabelyshift}
+}
+
+\newcommand{\corr@drawfourpointtrianglecontactbottom}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrTriA) at (-\corr@trianglecontactxspan,\corr@trianglecontactyspan);
+    \vertex (corrTriB) at (\corr@trianglecontactxspan,\corr@trianglecontactyspan);
+    \vertex (corrTriContact) at (0,-\corr@trianglecontactyspan);
+    \vertex (corrExtUL) at (-\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \coordinate (corrTriSlotOne) at (corrTriA);
+    \coordinate (corrTriSlotTwo) at (corrTriContact);
+    \coordinate (corrTriSlotThree) at (corrTriContact);
+    \coordinate (corrTriSlotFour) at (corrTriB);
+    \corr@ifexternallegs{%
+      \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriA}%
+      \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriB}%
+    }%
+    \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
+    \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriContact}%
+    \corr@drawtrianglecontactinternalprop{7}{corrTriContact}{corrTriB}%
+  \end{feynhand}
+  \corr@trianglecontactfinish
+}
+
+\newcommand{\corr@drawfourpointtrianglecontacttop}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrTriContact) at (0,\corr@trianglecontactyspan);
+    \vertex (corrTriA) at (-\corr@trianglecontactxspan,-\corr@trianglecontactyspan);
+    \vertex (corrTriB) at (\corr@trianglecontactxspan,-\corr@trianglecontactyspan);
+    \vertex (corrExtUL) at (-\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \coordinate (corrTriSlotOne) at (corrTriContact);
+    \coordinate (corrTriSlotTwo) at (corrTriA);
+    \coordinate (corrTriSlotThree) at (corrTriB);
+    \coordinate (corrTriSlotFour) at (corrTriContact);
+    \corr@ifexternallegs{%
+      \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriA}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriB}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriContact}%
+    }%
+    \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
+    \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
+    \corr@drawtrianglecontactinternalprop{7}{corrTriB}{corrTriContact}%
+  \end{feynhand}
+  \corr@trianglecontactfinish
+}
+
+\newcommand{\corr@drawfourpointtrianglecontactleft}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrTriContact) at (-\corr@trianglecontactxspan,0);
+    \vertex (corrTriA) at (\corr@trianglecontactxspan,\corr@trianglecontactyspan);
+    \vertex (corrTriB) at (\corr@trianglecontactxspan,-\corr@trianglecontactyspan);
+    \vertex (corrExtUL) at (-\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \coordinate (corrTriSlotOne) at (corrTriContact);
+    \coordinate (corrTriSlotTwo) at (corrTriContact);
+    \coordinate (corrTriSlotThree) at (corrTriB);
+    \coordinate (corrTriSlotFour) at (corrTriA);
+    \corr@ifexternallegs{%
+      \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriB}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriA}%
+    }%
+    \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
+    \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
+    \corr@drawtrianglecontactinternalprop{7}{corrTriB}{corrTriContact}%
+  \end{feynhand}
+  \corr@trianglecontactfinish
+}
+
+\newcommand{\corr@drawfourpointtrianglecontactright}{%
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrTriA) at (-\corr@trianglecontactxspan,\corr@trianglecontactyspan);
+    \vertex (corrTriB) at (-\corr@trianglecontactxspan,-\corr@trianglecontactyspan);
+    \vertex (corrTriContact) at (\corr@trianglecontactxspan,0);
+    \vertex (corrExtUL) at (-\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+    \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+    \coordinate (corrTriSlotOne) at (corrTriA);
+    \coordinate (corrTriSlotTwo) at (corrTriB);
+    \coordinate (corrTriSlotThree) at (corrTriContact);
+    \coordinate (corrTriSlotFour) at (corrTriContact);
+    \corr@ifexternallegs{%
+      \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriA}%
+      \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriB}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriContact}%
+    }%
+    \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
+    \corr@drawtrianglecontactinternalprop{6}{corrTriB}{corrTriContact}%
+    \corr@drawtrianglecontactinternalprop{7}{corrTriContact}{corrTriA}%
+  \end{feynhand}
+  \corr@trianglecontactfinish
+}
+
+\newcommand{\corr@drawfourpointtrianglecontact}{%
+  \corr@ifstringeq{\corr@trianglecontactorientation}{top}{%
+    \corr@drawfourpointtrianglecontacttop
+  }{%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{left}{%
+      \corr@drawfourpointtrianglecontactleft
+    }{%
+      \corr@ifstringeq{\corr@trianglecontactorientation}{right}{%
+        \corr@drawfourpointtrianglecontactright
+      }{%
+        \corr@drawfourpointtrianglecontactbottom
+      }%
+    }%
+  }%
 }
 
 \newcommand{\corr@drawfourpointstreeschannel}{%
@@ -3923,8 +4384,10 @@
   \corr@resetchanneldefaults
   \corr@resetloopchanneldefaults
   \corr@resetboxdefaults
+  \corr@resetcrossboxdefaults
   \corr@resethalfboxdefaults
   \corr@resetflatcontactdefaults
+  \corr@resettrianglecontactdefaults
   \corr@lineexplicitfalse
   \pgfqkeys{/corrdiag}{#1}%
   \corr@preparelists
@@ -3947,19 +4410,27 @@
             \corr@ifstringeq{\corr@fourpointtopology}{box}{%
               \corr@drawfourpointbox
             }{%
-              \corr@ifstringeq{\corr@fourpointtopology}{half-box}{%
-                \corr@drawfourpointhalfbox
+              \corr@ifstringeq{\corr@fourpointtopology}{cross-box}{%
+                \corr@drawfourpointcrossbox
               }{%
-                \corr@ifstringeq{\corr@fourpointtopology}{flat-contact}{%
-                  \corr@drawfourpointflatcontact
+                \corr@ifstringeq{\corr@fourpointtopology}{half-box}{%
+                  \corr@drawfourpointhalfbox
                 }{%
-                  \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
-                    \corr@drawfourpointstreeschannel
+                  \corr@ifstringeq{\corr@fourpointtopology}{flat-contact}{%
+                    \corr@drawfourpointflatcontact
                   }{%
-                    \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
-                      \corr@drawfourpointtreetchannel
+                    \corr@ifstringeq{\corr@fourpointtopology}{triangle-contact}{%
+                      \corr@drawfourpointtrianglecontact
                     }{%
-                      \corr@drawfourpointtreeuchannel
+                      \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+                        \corr@drawfourpointstreeschannel
+                      }{%
+                        \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+                          \corr@drawfourpointtreetchannel
+                        }{%
+                          \corr@drawfourpointtreeuchannel
+                        }%
+                      }%
                     }%
                   }%
                 }%
@@ -4158,8 +4629,10 @@
 \NewDocumentCommand{\TTreeChannelCorr}{O{}}{\FourPointCorr[topology=t-tree,#1]}
 \NewDocumentCommand{\UTreeChannelCorr}{O{}}{\FourPointCorr[topology=u-tree,#1]}
 \NewDocumentCommand{\BoxLoopCorr}{O{}}{\FourPointCorr[topology=box,#1]}
+\NewDocumentCommand{\CrossBoxCorr}{O{}}{\FourPointCorr[topology=cross-box,#1]}
 \NewDocumentCommand{\HalfBoxCorr}{O{}}{\FourPointCorr[topology=half-box,#1]}
 \NewDocumentCommand{\FlatContactCorr}{O{}}{\FourPointCorr[topology=flat-contact,#1]}
+\NewDocumentCommand{\TriangleContactCorr}{O{}}{\FourPointCorr[topology=triangle-contact,#1]}
 \NewDocumentCommand{\SunsetDiag}{O{}}{\SunsetDiagram[#1]}
 
 \makeatother

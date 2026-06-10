@@ -52,6 +52,8 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - `\TwoPointCorr`, `\ThreePointCorr`, and `\FourPointCorr` as the main correlator entry points
 - 3-point vertices via `\ThreePointCorr`, including per-leg styles, custom labels, and all-in/all-out momentum flow
 - one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`
+- crossed-box diagrams via `\CrossBoxCorr` or `\FourPointCorr[topology=cross-box]`
+- triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations and split color controls
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
@@ -107,6 +109,8 @@ Common wrappers and aliases:
 \ThreePtCorr[...]
 \FourPtCorr[...]
 \BoxLoopCorr[...]
+\CrossBoxCorr[...]
+\TriangleContactCorr[...]
 \SChannelCorr[...]
 \TChannelCorr[...]
 \UChannelCorr[...]
