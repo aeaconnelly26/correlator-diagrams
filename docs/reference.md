@@ -33,13 +33,16 @@ Main package:
 Main demos:
 
 - `example.tex`
-- `box-topology-regression.tex`
-- `channel-topology-regression.tex`
-- `three-point-check.tex`
-- `scalar-polarization-check.tex`
-- `sunset-example.tex`
-- `sunset-index-regression.tex`
-- `propagator-circ-check.tex`
+- `regressions/topologies/box/box-topology-regression.tex`
+- `regressions/topologies/channel/channel-topology-regression.tex`
+- `regressions/topologies/cross-box/cross-box-regression.tex`
+- `regressions/topologies/triangle-contact/triangle-contact-regression.tex`
+- `regressions/topologies/vertex-identity/vertex-identity-check.tex`
+- `regressions/topologies/three-point/three-point-check.tex`
+- `regressions/topologies/sunset/sunset-example.tex`
+- `regressions/topologies/sunset/sunset-index-regression.tex`
+- `regressions/propagators/circ/propagator-circ-check.tex`
+- `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`
 
 Add the package to your document:
 
@@ -1340,7 +1343,8 @@ Inside package-managed topologies, `scalarpolarized`/`spol` external legs are
 oriented toward the topology vertex. The explicit aliases such as
 `spolin`/`spolout` remain available for manual control.
 
-Focused visual QA lives in `vertex-identity-check.tex`.
+Focused visual QA lives in
+`regressions/topologies/vertex-identity/vertex-identity-check.tex`.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 
@@ -1801,7 +1805,11 @@ What the sunset index presets actually do:
 
 #### Sunset modernization note
 
-`sunset-index-regression.tex` is the current focused stress test for sunset index placement. The next planned sunset branch should add a broader `sunset-capacity-check.tex` before changing defaults, so the visual problems are diagnosed in one place instead of handled through scattered fix-it recipes.
+`regressions/topologies/sunset/sunset-index-regression.tex` is the current
+focused stress test for sunset index placement. The next planned sunset branch
+should add a broader sunset capacity sheet before changing defaults, so the
+visual problems are diagnosed in one place instead of handled through scattered
+fix-it recipes.
 
 ## Explicit Tree-Level Channel Topologies
 
@@ -1833,12 +1841,16 @@ Those use the legacy `channel-*` key family, for example:
 ## Which Example File To Open
 
 - `example.tex`: broad package tour
-- `channel-topology-regression.tex`: one-loop `s/t/u` channel checks
-- `three-point-check.tex`: focused 3-point topology checks
-- `scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
-- `sunset-example.tex`: focused sunset examples
-- `sunset-index-regression.tex`: sunset index stress cases
-- `propagator-circ-check.tex`: circled propagator marker capacity sheet
+- `regressions/topologies/channel/channel-topology-regression.tex`: one-loop `s/t/u` channel checks
+- `regressions/topologies/box/box-topology-regression.tex`: one-loop box checks
+- `regressions/topologies/cross-box/cross-box-regression.tex`: crossed-box checks
+- `regressions/topologies/triangle-contact/triangle-contact-regression.tex`: triangle-contact orientation checks
+- `regressions/topologies/vertex-identity/vertex-identity-check.tex`: vertex-identity helper checks
+- `regressions/topologies/three-point/three-point-check.tex`: focused 3-point topology checks
+- `regressions/topologies/sunset/sunset-example.tex`: focused sunset examples
+- `regressions/topologies/sunset/sunset-index-regression.tex`: sunset index stress cases
+- `regressions/propagators/circ/propagator-circ-check.tex`: circled propagator marker capacity sheet
+- `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
 
 ## Overleaf And Local Use
 

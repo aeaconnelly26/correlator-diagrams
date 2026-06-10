@@ -79,13 +79,16 @@ The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which a
 Main demo files in this repository:
 
 - [`example.tex`](example.tex)
-- [`box-topology-regression.tex`](box-topology-regression.tex)
-- [`channel-topology-regression.tex`](channel-topology-regression.tex)
-- [`three-point-check.tex`](three-point-check.tex)
-- [`scalar-polarization-check.tex`](scalar-polarization-check.tex)
-- [`sunset-example.tex`](sunset-example.tex)
-- [`sunset-index-regression.tex`](sunset-index-regression.tex)
-- [`propagator-circ-check.tex`](propagator-circ-check.tex)
+- [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex)
+- [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex)
+- [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex)
+- [`regressions/topologies/triangle-contact/triangle-contact-regression.tex`](regressions/topologies/triangle-contact/triangle-contact-regression.tex)
+- [`regressions/topologies/vertex-identity/vertex-identity-check.tex`](regressions/topologies/vertex-identity/vertex-identity-check.tex)
+- [`regressions/topologies/three-point/three-point-check.tex`](regressions/topologies/three-point/three-point-check.tex)
+- [`regressions/topologies/sunset/sunset-example.tex`](regressions/topologies/sunset/sunset-example.tex)
+- [`regressions/topologies/sunset/sunset-index-regression.tex`](regressions/topologies/sunset/sunset-index-regression.tex)
+- [`regressions/propagators/circ/propagator-circ-check.tex`](regressions/propagators/circ/propagator-circ-check.tex)
+- [`regressions/propagators/scalar-polarization/scalar-polarization-check.tex`](regressions/propagators/scalar-polarization/scalar-polarization-check.tex)
 
 Compile with:
 
@@ -124,11 +127,13 @@ Common wrappers and aliases:
 
 - Start with [`example.tex`](example.tex) if you want copy-paste examples.
 - Use [`docs/reference.md`](docs/reference.md) for the full macro and tuning reference.
-- Use [`channel-topology-regression.tex`](channel-topology-regression.tex) to inspect channel layouts in isolation.
-- Use [`box-topology-regression.tex`](box-topology-regression.tex) to inspect the one-loop box topology in isolation.
-- Use [`three-point-check.tex`](three-point-check.tex) to verify the 3-point topology and momentum placement.
-- Use [`scalar-polarization-check.tex`](scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.
-- Use [`sunset-example.tex`](sunset-example.tex) to inspect the current sunset topology.
+- Use [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex) to inspect channel layouts in isolation.
+- Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
+- Use [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex) to inspect the crossed-box topology in isolation.
+- Use [`regressions/topologies/triangle-contact/triangle-contact-regression.tex`](regressions/topologies/triangle-contact/triangle-contact-regression.tex) to inspect triangle-contact orientations.
+- Use [`regressions/topologies/three-point/three-point-check.tex`](regressions/topologies/three-point/three-point-check.tex) to verify the 3-point topology and momentum placement.
+- Use [`regressions/propagators/scalar-polarization/scalar-polarization-check.tex`](regressions/propagators/scalar-polarization/scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.
+- Use [`regressions/topologies/sunset/sunset-example.tex`](regressions/topologies/sunset/sunset-example.tex) to inspect the current sunset topology.
 
 The full reference covers:
 
@@ -144,13 +149,8 @@ The full reference covers:
 
 - `correlator-diagrams.sty`: package source
 - `example.tex`: broad feature gallery
-- `box-topology-regression.tex`: focused one-loop box regression cases
-- `channel-topology-regression.tex`: focused channel regression cases
-- `three-point-check.tex`: focused 3-point regression cases
-- `scalar-polarization-check.tex`: single-leg scalar-polarized regression cases
-- `sunset-example.tex`: sunset-specific examples
-- `sunset-index-regression.tex`: sunset index stress cases
-- `propagator-circ-check.tex`: circled propagator marker capacity sheet
+- `regressions/topologies/`: focused topology regression cases
+- `regressions/propagators/`: focused propagator regression and capacity sheets
 - `assets/`: README graphics
 
 ## License
