@@ -876,6 +876,20 @@ Use `circ={}` for a blank circle. The aliases `with circle=...` and
 - `circ draw=...`
 - `circ label style={...}`
 
+The circle keeps the configured `circ size`; labels are overlaid rather than
+allowed to resize the marker. Increase `circ size` when a deliberately wide
+custom label should fit fully inside the circle.
+
+W-family markers are hand-tuned to keep the default circle size readable:
+
+- `circ=W` for a compact neutral W marker
+- `circ=Wp` for \(W^+\)
+- `circ=Wm` for \(W^-\)
+
+Arbitrary labels such as `circ=Z`, `circ=Y`, or raw math like `circ=W^+` still
+work, but prefer `Wp` and `Wm` when you want charged W markers to align with
+the default `circ=W` circle.
+
 When a style contains commas inside `leg-styles={...}`, wrap that slot in braces:
 `leg-styles={{ewboson,circ=W},plain,{ewboson,circ=Z}}`.
 

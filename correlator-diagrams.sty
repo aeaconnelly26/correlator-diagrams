@@ -14,9 +14,37 @@
 
 \makeatletter
 
+\newcommand{\corr@wcirc}{%
+  \ensuremath{\scriptstyle W}%
+}
+
+\newcommand{\corr@chargedwcirc}[1]{%
+  \ensuremath{\scriptstyle W^{\mkern-2mu\raisebox{0.08ex}{\scalebox{0.68}{\ensuremath{\scriptscriptstyle #1}}}}}%
+}
+
+\newcommand{\corr@circlabel}[1]{%
+  \def\corr@circlabelraw{#1}%
+  \def\corr@circlabelw{W}%
+  \def\corr@circlabelwp{Wp}%
+  \def\corr@circlabelwm{Wm}%
+  \ifx\corr@circlabelraw\corr@circlabelw
+    \corr@wcirc
+  \else
+    \ifx\corr@circlabelraw\corr@circlabelwp
+      \corr@chargedwcirc{+}%
+    \else
+      \ifx\corr@circlabelraw\corr@circlabelwm
+        \corr@chargedwcirc{-}%
+      \else
+        \ensuremath{\scriptstyle #1}%
+      \fi
+    \fi
+  \fi
+}
+
 \tikzfeynhandset{
   circ position/.initial=0.5,
-  circ size/.initial=11pt,
+  circ size/.initial=12pt,
   circ fill/.initial=white,
   circ draw/.initial=black,
   every circ label@@/.style={},
@@ -32,9 +60,14 @@
           line width=0.7\feynhandlinesize,
           inner sep=0pt,
           minimum size=\pgfkeysvalueof{/tikzfeynhand/circ size},
+          outer sep=0pt
+        ] {};
+        \node[
+          anchor=center,
+          inner sep=0pt,
           outer sep=0pt,
           /tikzfeynhand/every circ label@@
-        ] {\ensuremath{\scriptstyle #1}};
+        ] {\corr@circlabel{#1}};
       },
     },
     /tikz/postaction={
