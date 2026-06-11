@@ -122,6 +122,51 @@
       /tikz/decorate=true,
     },
   },
+  with filled arrow/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \node[
+          transform shape,
+          xshift=-0.08\feynhandarrowsize,
+          fill,
+          draw,
+          line width=0.7\feynhandlinesize,
+          inner sep=0mm,
+          minimum size=\tikzfeynhand@arrow@size,
+          regular polygon,
+          regular polygon sides=3,
+          shape border rotate=-90
+        ] { };
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  with reversed filled arrow/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \node[
+          transform shape,
+          xshift=0.08\feynhandarrowsize,
+          rotate=180,
+          fill,
+          draw,
+          line width=0.7\feynhandlinesize,
+          inner sep=0mm,
+          minimum size=\tikzfeynhand@arrow@size,
+          regular polygon,
+          regular polygon sides=3,
+          shape border rotate=-90
+        ] { };
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
   every scalar polarized base@@/.style={
     /tikz/draw=none,
     /tikz/decoration={name=none},
@@ -1425,6 +1470,14 @@
     every photon/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
     photon/.style={/tikzfeynhand/ewboson},
     pho/.style={/tikzfeynhand/photon},
+    every proca/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
+    proca/.style={
+      /tikzfeynhand/every ewboson@@,
+      /tikzfeynhand/circ={},
+      /tikz/postaction={/tikzfeynhand/with reversed filled arrow=0.08},
+      /tikz/postaction={/tikzfeynhand/with filled arrow=0.92},
+    },
+    Proca/.style={/tikzfeynhand/proca},
     every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
     scalar polarized/.style={
       /tikzfeynhand/scalar,
