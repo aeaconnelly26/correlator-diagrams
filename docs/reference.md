@@ -16,6 +16,8 @@ For the short overview, visuals, and starter examples, see [README](../README.md
 - [Line Styles, Arrows, And Vertices](#line-styles-arrows-and-vertices)
 - [Scalar-Polarized Legs](#scalar-polarized-legs)
 - [One-Loop Box Topology](#one-loop-box-topology)
+- [Cross-Box Topology](#cross-box-topology)
+- [Triangle-Contact Topology](#triangle-contact-topology)
 - [One-Loop `s/t/u` Channel Bubbles For `\phi^4`](#one-loop-stu-channel-bubbles-for-phi4)
 - [Sunset Diagrams](#sunset-diagrams)
 - [Explicit Tree-Level Channel Topologies](#explicit-tree-level-channel-topologies)
@@ -31,13 +33,16 @@ Main package:
 Main demos:
 
 - `example.tex`
-- `box-topology-regression.tex`
-- `channel-topology-regression.tex`
-- `three-point-check.tex`
-- `scalar-polarization-check.tex`
-- `sunset-example.tex`
-- `sunset-index-regression.tex`
-- `propagator-circ-check.tex`
+- `regressions/topologies/box/box-topology-regression.tex`
+- `regressions/topologies/channel/channel-topology-regression.tex`
+- `regressions/topologies/cross-box/cross-box-regression.tex`
+- `regressions/topologies/triangle-contact/triangle-contact-regression.tex`
+- `regressions/topologies/vertex-identity/vertex-identity-check.tex`
+- `regressions/topologies/three-point/three-point-check.tex`
+- `regressions/topologies/sunset/sunset-example.tex`
+- `regressions/topologies/sunset/sunset-index-regression.tex`
+- `regressions/propagators/circ/propagator-circ-check.tex`
+- `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`
 
 Add the package to your document:
 
@@ -53,6 +58,8 @@ The main entry points are:
 \ThreePointCorr[...]
 \FourPointCorr[...]
 \BoxLoopCorr[...]
+\CrossBoxCorr[...]
+\TriangleContactCorr[...]
 \SunsetDiagram[...]
 ```
 
@@ -69,6 +76,8 @@ Common aliases:
 \TLoopChannelCorr[...]
 \ULoopChannelCorr[...]
 \BoxLoopCorr[...]
+\CrossBoxCorr[...]
+\TriangleContactCorr[...]
 \STreeChannelCorr[...]
 \TTreeChannelCorr[...]
 \UTreeChannelCorr[...]
@@ -103,6 +112,8 @@ That is the logic used by this package.
 | `\ThreePointCorr` | 3-point vertex | upper-left, right, and bottom legs meeting at one vertex |
 | `\FourPointCorr` | 4-point object | contact topology by default |
 | `\BoxLoopCorr` | one-loop box | four corner vertices, square internal loop, four diagonal external legs |
+| `\CrossBoxCorr` | crossed box | four corner vertices with crossed internal diagonals |
+| `\TriangleContactCorr` | triangle-contact helper | two trivalent vertices and one quartic/contact vertex |
 | `\HalfBoxCorr` | vertex-identity half-box | continuous top line through two triple vertices, with two downward legs |
 | `\FlatContactCorr` | flat-top quartic/contact piece | central contact vertex with a flattened top pair |
 | `\SunsetDiagram` | self-energy sunset | two external legs plus top/middle/bottom internal lines |
@@ -111,6 +122,8 @@ The convenience channel wrappers are just `\FourPointCorr` with a fixed topology
 
 - `\SChannelCorr`, `\TChannelCorr`, `\UChannelCorr` for the one-loop `\phi^4` bubbles
 - `\BoxLoopCorr` for the one-loop four-point box, equivalent to `\FourPointCorr[topology=box,...]`
+- `\CrossBoxCorr` for the crossed-box helper, equivalent to `\FourPointCorr[topology=cross-box,...]`
+- `\TriangleContactCorr` for the triangle-contact helper, equivalent to `\FourPointCorr[topology=triangle-contact,...]`
 - `\HalfBoxCorr` for the vertex-identity half-box, equivalent to `\FourPointCorr[topology=half-box,...]`
 - `\FlatContactCorr` for the flat-top contact piece, equivalent to `\FourPointCorr[topology=flat-contact,...]`
 - `\STreeChannelCorr`, `\TTreeChannelCorr`, `\UTreeChannelCorr` for the explicit tree-level exchange graphs
@@ -199,6 +212,39 @@ The box has four internal propagator slots:
 - slot 8 = bottom edge
 
 The central loop momentum arrow uses slot 9 for `momentum-arrow-sizes={...}`.
+
+For `topology=cross-box` and `\CrossBoxCorr`, the external order is the same
+as the box order:
+
+- slot 1 = upper left
+- slot 2 = lower left
+- slot 3 = lower right
+- slot 4 = upper right
+
+The two internal box-edge segments use:
+
+- slot 5 = left edge
+- slot 6 = right edge
+
+The crossed internal diagonals use:
+
+- slot 7 = upper-left to lower-right diagonal, drawn with a small gap at the crossing
+- slot 8 = lower-left to upper-right diagonal, drawn continuously
+
+For `topology=triangle-contact` and `\TriangleContactCorr`, the external slots
+stay spatially fixed for every orientation:
+
+- slot 1 = upper left
+- slot 2 = lower left
+- slot 3 = lower right
+- slot 4 = upper right
+
+The contact vertex carries adjacent external pairs:
+
+- `triangle-contact-orientation=bottom`: slots 2 and 3
+- `triangle-contact-orientation=top`: slots 1 and 4
+- `triangle-contact-orientation=left`: slots 1 and 2
+- `triangle-contact-orientation=right`: slots 3 and 4
 
 ### `\SunsetDiagram`
 
@@ -1136,6 +1182,102 @@ Central loop arrow controls:
 - `box-loop-label-xshift=...`
 - `box-loop-label-yshift=...`
 
+## Cross-Box Topology
+
+The public crossed-box entry points are:
+
+```tex
+\CrossBoxCorr[...]
+\FourPointCorr[topology=cross-box,...]
+```
+
+The default crossed box uses the same external slot order and geometry controls
+as `\BoxLoopCorr`, and draws the two side internal box-edge segments plus the
+two crossed diagonals between the four corner vertices. The upper-left to
+lower-right diagonal is broken slightly at the crossing so the crossing reads
+as over/under routing, not as a central vertex.
+
+Useful controls:
+
+- `box-xspan=...`
+- `box-yspan=...`
+- `box-external-xspan=...`
+- `box-external-yspan=...`
+- `box-external-line=...`
+- `box-line=...`
+- `box-left-line=...`
+- `box-right-line=...`
+- `cross-box-down-line=...`
+- `cross-box-up-line=...`
+- `cross-box-diagonal-lines={down-style,up-style}`
+- `cross-box-crossing-gap=...`
+- `cross-box-left-circ=...`
+- `cross-box-right-circ=...`
+- `cross-box-up-circ=...`
+- `cross-box-down-circ=...`
+- `cross-box-left-circ-position=...`
+- `cross-box-right-circ-position=...`
+- `cross-box-up-circ-position=...`
+- `cross-box-down-circ-position=...`
+
+`box-color`, `box-external-color`, and `box-internal-color` work for the
+crossed-box helper too. The default has no circ markers; add them explicitly
+with the `cross-box-*-circ` keys when needed. These place topology-level circ
+markers independently of the line drawing, so the split diagonal can keep its
+over/under crossing gap while its marker sits safely away from the crossing.
+By default, side markers sit halfway along their side edges, the lower-left to
+upper-right diagonal marker sits before the crossing, and the upper-left to
+lower-right diagonal marker sits after it.
+
+Focused visual QA lives in
+`regressions/topologies/cross-box/cross-box-regression.tex`.
+
+## Triangle-Contact Topology
+
+The public triangle-contact entry points are:
+
+```tex
+\TriangleContactCorr[...]
+\FourPointCorr[topology=triangle-contact,...]
+```
+
+This helper draws a triangular loop with two trivalent vertices and one
+quartic/contact vertex. The contact vertex orientation is controlled by:
+
+- `triangle-contact-orientation=bottom`
+- `triangle-contact-orientation=top`
+- `triangle-contact-orientation=left`
+- `triangle-contact-orientation=right`
+
+The default is `bottom`. External slots remain fixed as upper left, lower left,
+lower right, and upper right while the contact vertex moves.
+
+Useful controls:
+
+- `triangle-contact-xspan=...`
+- `triangle-contact-yspan=...`
+- `triangle-contact-external-xspan=...`
+- `triangle-contact-external-yspan=...`
+- `triangle-contact-line=...`
+- `triangle-contact-external-line=...`
+- `triangle-contact-internal-line=...`
+- `triangle-contact-color=...`
+- `triangle-contact-external-color=...`
+- `triangle-contact-internal-color=...`
+- `triangle-contact-momentum-slots={1,2,3,4}`
+- `triangle-contact-central-label-yshift=...`
+
+`triangle-contact-color=...` colors all triangle-contact propagators.
+`triangle-contact-external-color=...` overrides the color for the four external
+legs, and `triangle-contact-internal-color=...` overrides the color for the
+three internal triangle edges. The global `color=...` key still works, and the
+more specific triangle-contact color keys take precedence when both are set.
+
+The `trianglecontact-*` spellings are also accepted as aliases.
+
+Focused visual QA lives in
+`regressions/topologies/triangle-contact/triangle-contact-regression.tex`.
+
 ## Vertex Identity Prototype Topologies
 
 The vertex-identity derivation helpers are:
@@ -1201,7 +1343,8 @@ Inside package-managed topologies, `scalarpolarized`/`spol` external legs are
 oriented toward the topology vertex. The explicit aliases such as
 `spolin`/`spolout` remain available for manual control.
 
-Focused visual QA lives in `vertex-identity-check.tex`.
+Focused visual QA lives in
+`regressions/topologies/vertex-identity/vertex-identity-check.tex`.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 
@@ -1662,7 +1805,11 @@ What the sunset index presets actually do:
 
 #### Sunset modernization note
 
-`sunset-index-regression.tex` is the current focused stress test for sunset index placement. The next planned sunset branch should add a broader `sunset-capacity-check.tex` before changing defaults, so the visual problems are diagnosed in one place instead of handled through scattered fix-it recipes.
+`regressions/topologies/sunset/sunset-index-regression.tex` is the current
+focused stress test for sunset index placement. The next planned sunset branch
+should add a broader sunset capacity sheet before changing defaults, so the
+visual problems are diagnosed in one place instead of handled through scattered
+fix-it recipes.
 
 ## Explicit Tree-Level Channel Topologies
 
@@ -1694,12 +1841,16 @@ Those use the legacy `channel-*` key family, for example:
 ## Which Example File To Open
 
 - `example.tex`: broad package tour
-- `channel-topology-regression.tex`: one-loop `s/t/u` channel checks
-- `three-point-check.tex`: focused 3-point topology checks
-- `scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
-- `sunset-example.tex`: focused sunset examples
-- `sunset-index-regression.tex`: sunset index stress cases
-- `propagator-circ-check.tex`: circled propagator marker capacity sheet
+- `regressions/topologies/channel/channel-topology-regression.tex`: one-loop `s/t/u` channel checks
+- `regressions/topologies/box/box-topology-regression.tex`: one-loop box checks
+- `regressions/topologies/cross-box/cross-box-regression.tex`: crossed-box checks
+- `regressions/topologies/triangle-contact/triangle-contact-regression.tex`: triangle-contact orientation checks
+- `regressions/topologies/vertex-identity/vertex-identity-check.tex`: vertex-identity helper checks
+- `regressions/topologies/three-point/three-point-check.tex`: focused 3-point topology checks
+- `regressions/topologies/sunset/sunset-example.tex`: focused sunset examples
+- `regressions/topologies/sunset/sunset-index-regression.tex`: sunset index stress cases
+- `regressions/propagators/circ/propagator-circ-check.tex`: circled propagator marker capacity sheet
+- `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
 
 ## Overleaf And Local Use
 

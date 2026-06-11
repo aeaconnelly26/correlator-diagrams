@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Triangle-Contact Capacity Sheet}
+
+\subsection*{Orientations}
+
+\begin{center}
+\diagramcell{Contact bottom}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  central={}
+]
+}
+\hfill
+\diagramcell{Contact top}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-orientation=top,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Contact left}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-orientation=left,
+  central={}
+]
+}
+\hfill
+\diagramcell{Contact right}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-orientation=right,
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Dispatch And Styling}
+
+\begin{center}
+\diagramcell{\texttt{\string\FourPointCorr} dispatch}{
+\FourPointCorr[
+  topology=triangle-contact,
+  field={},
+  show-momenta=false,
+  central={}
+]
+}
+\hfill
+\diagramcell{Plain scalar labels}{
+\TriangleContactCorr[
+  field=\phi,
+  line=plain,
+  show-momenta=false,
+  leg-labels={\phi_1,\phi_2,\phi_3,\phi_4},
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Selected momenta}{
+\TriangleContactCorr[
+  field={},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-momentum-slots={2,3},
+  triangle-contact-momentum-offset=12pt,
+  central={}
+]
+}
+\hfill
+\diagramcell{Optional circ markers}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-line={ewboson,circ=Wp},
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Geometry And Line Splits}
+
+\begin{center}
+\diagramcell{Compact contact top}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-orientation=top,
+  triangle-contact-xspan=0.95,
+  triangle-contact-yspan=0.86,
+  triangle-contact-external-xspan=1.50,
+  triangle-contact-external-yspan=1.36,
+  central={compact},
+  triangle-contact-central-label-yshift=-34pt
+]
+}
+\hfill
+\diagramcell{External/internal line split}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=ewboson,
+  triangle-contact-external-color=fieldB,
+  triangle-contact-internal-color=fieldA,
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Color Controls}
+
+\begin{center}
+\diagramcell{Unified triangle-contact color}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-color=blue!70!black,
+  central={}
+]
+}
+\hfill
+\diagramcell{External/internal split}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-external-color=orange!85!black,
+  triangle-contact-internal-color=green!45!black,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Colored contact top}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  triangle-contact-orientation=top,
+  triangle-contact-external-color=red!70!magenta,
+  triangle-contact-internal-color=fieldA,
+  central={}
+]
+}
+\hfill
+\diagramcell{Global plus override}{
+\TriangleContactCorr[
+  field={},
+  show-momenta=false,
+  color=gray!65,
+  triangle-contact-internal-color=fieldB,
+  central={}
+]
+}
+\end{center}
+
+\end{document}

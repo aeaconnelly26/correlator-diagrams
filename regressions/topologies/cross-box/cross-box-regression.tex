@@ -1,0 +1,188 @@
+\documentclass{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Cross-Box Capacity Sheet}
+
+\subsection*{Core Shape}
+
+\begin{center}
+\diagramcell{Default}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  central={}
+]
+}
+\hfill
+\diagramcell{\texttt{\string\FourPointCorr} dispatch}{
+\FourPointCorr[
+  topology=cross-box,
+  field={},
+  show-momenta=false,
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Lines And Color}
+
+\begin{center}
+\diagramcell{Plain lines}{
+\CrossBoxCorr[
+  field=\phi,
+  show-momenta=false,
+  box-external-line=plain,
+  box-line=plain,
+  central={}
+]
+}
+\hfill
+\diagramcell{Split colors}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=plain,
+  box-line=plain,
+  box-external-color=fieldB,
+  box-internal-color=fieldA,
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Labels And Markers}
+
+\begin{center}
+\diagramcell{Optional circ markers}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line={ewboson,circ=Wp},
+  cross-box-left-circ=Z,
+  cross-box-right-circ=Wm,
+  cross-box-up-circ=Wp,
+  cross-box-down-circ=W,
+  cross-box-down-line=ewboson,
+  cross-box-up-line=ewboson,
+  central={}
+]
+}
+\hfill
+\diagramcell{External labels}{
+\CrossBoxCorr[
+  show-momenta=false,
+  box-external-line=plain,
+  box-line=plain,
+  field={},
+  leg-labels={A_\mu,A_\nu,A_\rho,A_\sigma},
+  central={}
+]
+}
+\end{center}
+
+\subsection*{Geometry And Momentum}
+
+\begin{center}
+\diagramcell{Tighter geometry}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=plain,
+  box-line=plain,
+  box-xspan=1.05,
+  box-yspan=0.84,
+  box-external-xspan=1.68,
+  box-external-yspan=1.36,
+  central={compact},
+  box-central-label-yshift=-52pt
+]
+}
+\hfill
+\diagramcell{External momenta}{
+\CrossBoxCorr[
+  field={},
+  box-external-line=plain,
+  box-line=plain,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  box-external-momentum-offset=10pt,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Diagonal style split}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=plain,
+  cross-box-down-line={ewboson,fieldA},
+  cross-box-up-line={plain,fieldB},
+  central={}
+]
+}
+\hfill
+\diagramcell{Global color plus override}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-line=plain,
+  box-external-line=plain,
+  box-color=gray!65,
+  box-internal-color=red!70!black,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{All edges colored}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=plain,
+  box-line=plain,
+  leg-styles={{plain,red!75!black},{plain,orange!85!black},{plain,green!55!black},{plain,purple!75!black}},
+  box-left-line={plain,blue!75!black},
+  box-right-line={plain,teal!75!black},
+  cross-box-down-line={plain,brown!75!black},
+  cross-box-up-line={plain,magenta!75!black},
+  central={}
+]
+}
+\hfill
+\diagramcell{Colored internal circs}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line={plain,gray!70},
+  box-line=plain,
+  box-left-line={plain,blue!75!black},
+  box-right-line={plain,teal!75!black},
+  cross-box-down-line={plain,brown!75!black},
+  cross-box-up-line={plain,magenta!75!black},
+  cross-box-left-circ=Z,
+  cross-box-right-circ=Wm,
+  cross-box-up-circ=Wp,
+  cross-box-down-circ=W,
+  central={}
+]
+}
+\end{center}
+
+\end{document}
