@@ -901,6 +901,12 @@ line with fixed-frequency squiggles. The `photon` and legacy `pho` aliases route
 through the same shared style, so changing a leg or internal line to any of
 these styles uses the same visual language in every topology.
 
+The `proca` style is a massive-vector convenience style built on the same
+fixed-frequency EW-boson line. It adds a blank circ marker at the midpoint and
+two filled arrow markers just inside the endpoints, with each arrow pointing
+toward the nearest vertex. The arrows use the same size as the scalar-polarized
+arrow markers and follow the propagator color. `Proca` is accepted as an alias.
+
 Circled propagator markers can be added to any propagator style with `circ=...`:
 
 ```tex
