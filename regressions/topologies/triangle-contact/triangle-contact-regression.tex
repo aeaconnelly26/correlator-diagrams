@@ -180,4 +180,51 @@
 }
 \end{center}
 
+\subsection*{Proca Style}
+
+\begin{center}
+\diagramcell{Proca contact top}{
+\TriangleContactCorr[
+  triangle-contact-orientation=top,
+  triangle-contact-xspan=0.95,
+  triangle-contact-yspan=0.86,
+  triangle-contact-external-xspan=1.50,
+  triangle-contact-external-yspan=1.36,
+  field={W},
+  indices={\alpha,\sigma,\delta,\eta},
+  show-momenta=false,
+  triangle-contact-line=proca
+]
+}
+\hfill
+\diagramcell{Mixed Proca legs}{
+\TriangleContactCorr[
+  triangle-contact-orientation=top,
+  field={},
+  show-momenta=false,
+  triangle-contact-internal-line=proca,
+  leg-styles={proca,ewboson,proca,ewboson},
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Single Proca contact leg}{
+\TriangleContactCorr[
+  triangle-contact-orientation=top,
+  triangle-contact-xspan=0.95,
+  triangle-contact-yspan=0.86,
+  triangle-contact-external-xspan=1.50,
+  triangle-contact-external-yspan=1.36,
+  field={W},
+  indices={\alpha,\sigma,\delta,\eta},
+  show-momenta=false,
+  triangle-contact-line=ewboson,
+  leg-styles={proca,ewboson,ewboson,ewboson},
+  central={}
+]
+}
+\end{center}
+
 \end{document}
