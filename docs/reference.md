@@ -1235,6 +1235,12 @@ By default, side markers sit halfway along their side edges, the lower-left to
 upper-right diagonal marker sits before the crossing, and the upper-left to
 lower-right diagonal marker sits after it.
 
+When `cross-box-up-line=proca` or `cross-box-down-line=proca` is used, the
+blank Proca circ is promoted to the same topology-level placement automatically.
+This also works inside comma-composed styles such as `{proca,fieldA}`. An
+explicit `cross-box-up-circ=...` or `cross-box-down-circ=...` label overrides
+the automatic blank Proca marker.
+
 Focused visual QA lives in
 `regressions/topologies/cross-box/cross-box-regression.tex`.
 

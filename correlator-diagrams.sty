@@ -186,6 +186,9 @@
 \newif\ifcorr@crossboxrightcirc
 \newif\ifcorr@crossboxupcirc
 \newif\ifcorr@crossboxdowncirc
+\newif\ifcorr@stylehasproca
+\newif\ifcorr@crossboxupproca
+\newif\ifcorr@crossboxdownproca
 
 \def\corr@line{plain}
 \def\corr@color{}
@@ -1299,6 +1302,8 @@
   \corr@crossboxrightcircfalse
   \corr@crossboxupcircfalse
   \corr@crossboxdowncircfalse
+  \corr@crossboxupprocafalse
+  \corr@crossboxdownprocafalse
 }
 
 \newcommand{\corr@resettrianglecontactdefaults}{%
@@ -1471,11 +1476,25 @@
     photon/.style={/tikzfeynhand/ewboson},
     pho/.style={/tikzfeynhand/photon},
     every proca/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
-    proca/.style={
+    proca line/.style={
       /tikzfeynhand/every ewboson@@,
-      /tikzfeynhand/circ={},
+    },
+    proca base/.style={
+      /tikzfeynhand/proca line,
       /tikz/postaction={/tikzfeynhand/with reversed filled arrow=0.08},
       /tikz/postaction={/tikzfeynhand/with filled arrow=0.92},
+    },
+    proca start/.style={
+      /tikzfeynhand/proca line,
+      /tikz/postaction={/tikzfeynhand/with reversed filled arrow=0.08},
+    },
+    proca end/.style={
+      /tikzfeynhand/proca line,
+      /tikz/postaction={/tikzfeynhand/with filled arrow=0.92},
+    },
+    proca/.style={
+      /tikzfeynhand/proca base,
+      /tikzfeynhand/circ={},
     },
     Proca/.style={/tikzfeynhand/proca},
     every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
@@ -2941,6 +2960,39 @@
   }%
 }
 
+\newcommand{\corr@appendprocastyleitem}[1]{%
+  \ifdefempty{\corr@procareplacedstyle}{%
+    \edef\corr@procareplacedstyle{#1}%
+  }{%
+    \edef\corr@procareplacedstyle{\corr@procareplacedstyle,#1}%
+  }%
+}
+
+\newcommand{\corr@replaceprocastyle}[2]{%
+  \corr@stylehasprocafalse
+  \def\corr@procareplacedstyle{}%
+  \@for\corr@styleitem:=#1\do{%
+    \edef\corr@thisstyleitem{\corr@styleitem}%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca}{%
+      \corr@stylehasprocatrue
+      \corr@appendprocastyleitem{#2}%
+    }{%
+      \corr@ifstringeq{\corr@thisstyleitem}{Proca}{%
+        \corr@stylehasprocatrue
+        \corr@appendprocastyleitem{#2}%
+      }{%
+        \corr@appendprocastyleitem{\corr@thisstyleitem}%
+      }%
+    }%
+  }%
+}
+
+\newcommand{\corr@crossboxstyleforproca}[2]{%
+  \corr@crossboxstylefor{#1}%
+  \expandafter\corr@replaceprocastyle\expandafter{\corr@propoptions}{#2}%
+  \edef\corr@propoptions{\corr@procareplacedstyle}%
+}
+
 \newcommand{\corr@drawcrossboxinternalprop}[4]{%
   \corr@crossboxstylefor{#2}%
   \corr@appendproparrowsize{#1}%
@@ -2948,6 +3000,22 @@
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+}
+
+\newcommand{\corr@drawcrossboxinternalprocaprop}[5]{%
+  \corr@crossboxstyleforproca{#2}{#5}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
+  \corr@appendpropcolorvalue{\corr@boxcolor}%
+  \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+}
+
+\newcommand{\corr@drawcrossboxupdiagonalprop}[4]{%
+  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#3}{#4}{proca base}%
+  \ifcorr@stylehasproca
+    \global\corr@crossboxupprocatrue
+  \fi
 }
 
 \newcommand{\corr@drawcrossboxsplitinternalprop}[6]{%
@@ -2958,8 +3026,14 @@
     coordinate[pos=\corr@crossboxgapstart] (#5)
     coordinate[pos=\corr@crossboxgapend] (#6)
     (#4);
-  \corr@drawcrossboxinternalprop{#1}{#2}{#3}{#5}%
-  \corr@drawcrossboxinternalprop{#1}{#2}{#6}{#4}%
+  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#3}{#5}{proca start}%
+  \ifcorr@stylehasproca
+    \global\corr@crossboxdownprocatrue
+  \fi
+  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#6}{#4}{proca end}%
+  \ifcorr@stylehasproca
+    \global\corr@crossboxdownprocatrue
+  \fi
 }
 
 \newcommand{\corr@putcircatcoord}[2]{%
@@ -2993,10 +3067,20 @@
   \ifcorr@crossboxupcirc
     \path (corrBoxBL) -- coordinate[pos=\corr@crossboxupcircpos] (corrCrossBoxUpCirc) (corrBoxTR);
     \corr@putcircatcoord{corrCrossBoxUpCirc}{\corr@crossboxupcirc}%
+  \else
+    \ifcorr@crossboxupproca
+      \path (corrBoxBL) -- coordinate[pos=\corr@crossboxupcircpos] (corrCrossBoxUpCirc) (corrBoxTR);
+      \corr@putcircatcoord{corrCrossBoxUpCirc}{}%
+    \fi
   \fi
   \ifcorr@crossboxdowncirc
     \path (corrBoxTL) -- coordinate[pos=\corr@crossboxdowncircpos] (corrCrossBoxDownCirc) (corrBoxBR);
     \corr@putcircatcoord{corrCrossBoxDownCirc}{\corr@crossboxdowncirc}%
+  \else
+    \ifcorr@crossboxdownproca
+      \path (corrBoxTL) -- coordinate[pos=\corr@crossboxdowncircpos] (corrCrossBoxDownCirc) (corrBoxBR);
+      \corr@putcircatcoord{corrCrossBoxDownCirc}{}%
+    \fi
   \fi
 }
 
@@ -3742,7 +3826,7 @@
     }%
     \corr@drawboxinternalprop{5}{\corr@boxleftline}{corrBoxBL}{corrBoxTL}%
     \corr@drawboxinternalprop{6}{\corr@boxrightline}{corrBoxTR}{corrBoxBR}%
-    \corr@drawcrossboxinternalprop{8}{\corr@crossboxupline}{corrBoxBL}{corrBoxTR}%
+    \corr@drawcrossboxupdiagonalprop{8}{\corr@crossboxupline}{corrBoxBL}{corrBoxTR}%
     \corr@drawcrossboxsplitinternalprop{7}{\corr@crossboxdownline}{corrBoxTL}{corrBoxBR}{corrCrossDownA}{corrCrossDownB}%
   \end{feynhand}
   \ifcorr@centervertex
