@@ -199,13 +199,63 @@
 ]
 }
 \hfill
-\diagramcell{Single Proca diagonal}{
+\diagramcell{Single Proca up diagonal}{
 \CrossBoxCorr[
   field={},
   show-momenta=false,
   box-external-line=ewboson,
   box-line=ewboson,
   cross-box-up-line=proca,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Single Proca down diagonal}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-down-line=proca,
+  central={}
+]
+}
+\hfill
+\diagramcell{Both Proca diagonals}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-up-line=proca,
+  cross-box-down-line=Proca,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Colored Proca diagonal}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-up-line={proca,fieldA},
+  central={}
+]
+}
+\hfill
+\diagramcell{Proca with circ override}{
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-up-line=proca,
+  cross-box-up-circ=Wp,
   central={}
 ]
 }
