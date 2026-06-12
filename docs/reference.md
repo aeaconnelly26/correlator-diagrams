@@ -1345,6 +1345,7 @@ Half-box geometry and style controls:
 - `half-box-down-xoffset=...`
 - `half-box-line=...`
 - `half-box-colors={slot-1,slot-2,slot-3,slot-4}`
+- `half-box-bridge-line=...`
 - `half-box-bridge-color=...`
 - `half-box-bridge-label=...`
 - `half-box-bridge-label-position=above|below|<anchor>`
@@ -1369,6 +1370,10 @@ Both styles add endcaps to the top external stubs. The circ labels default to
 `half-box-right-lower-circ=...`. `half-box-style=halfpropagator` is the shared
 angled/endcap geometry without choosing which lower leg becomes scalar
 polarized.
+
+`half-box-line=...` sets the default line style for the half-box external
+segments and bridge. Use `half-box-bridge-line=...` when only the middle bridge
+should change, for example `half-box-bridge-line={proca,circ={}}`.
 
 Flat-contact geometry and style controls:
 
