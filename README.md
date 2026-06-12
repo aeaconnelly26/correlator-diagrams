@@ -43,6 +43,24 @@ Fast defaults when you just need the figure. One-option switches for common clea
       </p>
     </td>
   </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <strong>Half-box half-prop</strong><br>
+      <sub>A vertex-identity helper with one circled lower half-propagator.</sub>
+      <pre lang="tex">\HalfBoxCorr[half-box-style=halfpropright, half-box-right-lower-circ=Wm]</pre>
+      <p align="center">
+        <img src="assets/readme-halfprop-halfbox.png" alt="Half-box with angled top stubs and one circled lower half-propagator" width="320">
+      </p>
+    </td>
+    <td valign="top" width="50%">
+      <strong>Contact pairing</strong><br>
+      <sub>A compact contact layout with external annotations hidden.</sub>
+      <pre lang="tex">\FourPointCorr[external-legs=false, center-vertex=false]</pre>
+      <p align="center">
+        <img src="assets/readme-contact-horizontal.png" alt="Four-point contact pairing with external legs hidden" width="320">
+      </p>
+    </td>
+  </tr>
 </table>
 
 The detailed geometry tuning is there when you need it, but the common cases above are meant to stay copy-pasteable.
@@ -54,6 +72,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`
 - crossed-box diagrams via `\CrossBoxCorr` or `\FourPointCorr[topology=cross-box]`
 - triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations and split color controls
+- vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
@@ -79,6 +98,7 @@ The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which a
 Main demo files in this repository:
 
 - [`example.tex`](example.tex)
+- [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex)
 - [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex)
 - [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex)
 - [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex)
@@ -103,6 +123,8 @@ pdflatex -interaction=nonstopmode -halt-on-error example.tex
 \TwoPointCorr[...]
 \ThreePointCorr[...]
 \FourPointCorr[...]
+\HalfBoxCorr[...]
+\FlatContactCorr[...]
 \SunsetDiagram[...]
 ```
 
@@ -114,6 +136,8 @@ Common wrappers and aliases:
 \FourPtCorr[...]
 \BoxLoopCorr[...]
 \CrossBoxCorr[...]
+\HalfBoxCorr[...]
+\FlatContactCorr[...]
 \TriangleContactCorr[...]
 \SChannelCorr[...]
 \TChannelCorr[...]
@@ -128,6 +152,7 @@ Common wrappers and aliases:
 
 - Start with [`example.tex`](example.tex) if you want copy-paste examples.
 - Use [`docs/reference.md`](docs/reference.md) for the full macro and tuning reference.
+- Use [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex) for the compact vertex-identity sketch.
 - Use [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex) to inspect channel layouts in isolation.
 - Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
 - Use [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex) to inspect the crossed-box topology in isolation.
@@ -141,6 +166,7 @@ The full reference covers:
 
 - slot order and leg ordering
 - 3-point vertex and one-loop box topologies
+- vertex-identity half-box helpers and half-prop lower-leg circ markers
 - momentum labels and arrow tuning
 - box edge labels and mixed external leg styles
 - loop-channel and sunset layout controls

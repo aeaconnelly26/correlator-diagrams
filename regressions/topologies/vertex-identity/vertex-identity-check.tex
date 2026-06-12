@@ -71,6 +71,86 @@
 }
 \end{center}
 
+\subsection*{Half-Propagator Mode}
+
+\begin{center}
+\diagramcell{\texttt{halfpropleft}}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-style=halfpropleft,
+  half-box-left-lower-circ=Wp,
+  leg-labels={,,,}
+]
+}
+\hfill
+\diagramcell{\texttt{halfpropright}}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-style=halfpropright,
+  half-box-right-lower-circ=Wm,
+  leg-labels={,,,}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Proca lower leg}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-style=halfpropagator,
+  half-box-lower-circ-position=0.82,
+  leg-styles={ewboson,proca,spol,ewboson},
+  leg-labels={,,,}
+]
+}
+\hfill
+\diagramcell{Circ only lower legs}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-style=halfpropagator,
+  half-box-left-lower-circ=Z,
+  half-box-right-lower-circ=Wm,
+  leg-styles={ewboson,ewboson,ewboson,ewboson},
+  leg-labels={,,,}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Lower circ position}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-style=halfpropleft,
+  half-box-left-lower-circ=Z,
+  half-box-lower-circ-position=0.82,
+  leg-labels={,,,}
+]
+}
+\hfill
+\diagramcell{Explicit leg styles}{
+\HalfBoxCorr[
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-style=halfpropright,
+  half-box-left-lower-circ=Z,
+  half-box-right-lower-circ=Wm,
+  leg-styles={fieldA,ewboson,{ewboson,arrowin},fieldA},
+  leg-labels={,,,}
+]
+}
+\end{center}
+
 \subsection*{Focused Momentum}
 
 \begin{center}

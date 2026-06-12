@@ -327,7 +327,50 @@ Mixed exterior styles still use the usual slot order:
   ]
 \]
 
-\subsection*{8. Tree-Level Exchange Channels}
+\subsection*{8. Vertex-Identity Half-Box Helpers}
+
+The half-box helpers are focused vertex-identity topologies. The
+\verb|halfpropleft| and \verb|halfpropright| styles angle the top stubs, add
+top endcaps, and pair one lower circled EW-boson half-propagator with one
+scalar-polarized leg.
+\[
+\begin{array}{ccc}
+  \text{\texttt{halfpropleft}} &
+  \text{\texttt{halfpropright}} &
+  \text{circ markers only} \\
+  \HalfBoxCorr[
+    scale=0.86,
+    show-momenta=false,
+    field={},
+    central={},
+    half-box-style=halfpropleft,
+    half-box-left-lower-circ=Wp,
+    leg-labels={,,,}
+  ] &
+  \HalfBoxCorr[
+    scale=0.86,
+    show-momenta=false,
+    field={},
+    central={},
+    half-box-style=halfpropright,
+    half-box-right-lower-circ=Wm,
+    leg-labels={,,,}
+  ] &
+  \HalfBoxCorr[
+    scale=0.86,
+    show-momenta=false,
+    field={},
+    central={},
+    half-box-style=halfpropagator,
+    half-box-left-lower-circ=Z,
+    half-box-right-lower-circ=Wm,
+    leg-styles={ewboson,ewboson,ewboson,ewboson},
+    leg-labels={,,,}
+  ]
+\end{array}
+\]
+
+\subsection*{9. Tree-Level Exchange Channels}
 
 Tree-level exchange channels use the same external slots as the loop channels,
 but their internal propagator uses the older \verb|channel-*| key family.
@@ -357,7 +400,7 @@ but their internal propagator uses the older \verb|channel-*| key family.
 \end{array}
 \]
 
-\subsection*{9. Sunset Self-Energies}
+\subsection*{10. Sunset Self-Energies}
 
 Minimal sunset diagram:
 \[

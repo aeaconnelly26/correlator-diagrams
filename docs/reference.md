@@ -1338,6 +1338,9 @@ Half-box geometry and style controls:
 
 - `half-box-xspan=...`
 - `half-box-top-stub=...`
+- `half-box-top-yspan=...`
+- `half-box-mode=straight|angled|halfpropleft|halfpropright`
+- `half-box-style=straight|halfpropagator|halfpropleft|halfpropright`
 - `half-box-down-span=...`
 - `half-box-down-xoffset=...`
 - `half-box-line=...`
@@ -1353,6 +1356,19 @@ Half-box geometry and style controls:
 - `half-box-momentum-label-fraction=...`
 - `half-box-momentum-label-gap=...`
 - `half-box-momentum-slots={1,2,3,4}`
+- `half-box-left-lower-circ=...`
+- `half-box-right-lower-circ=...`
+- `half-box-lower-circ-position=...`
+
+The default `straight` half-box geometry is unchanged. Use
+`half-box-style=halfpropleft` for an angled top-stub half-box whose lower-left
+leg is an EW-boson half-propagator with a circ marker and whose lower-right leg
+defaults to `spol`. Use `half-box-style=halfpropright` for the mirrored case.
+Both styles add endcaps to the top external stubs. The circ labels default to
+`Z`; override them with `half-box-left-lower-circ=...` or
+`half-box-right-lower-circ=...`. `half-box-style=halfpropagator` is the shared
+angled/endcap geometry without choosing which lower leg becomes scalar
+polarized.
 
 Flat-contact geometry and style controls:
 
