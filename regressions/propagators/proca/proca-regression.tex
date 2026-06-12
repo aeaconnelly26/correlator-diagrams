@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.3\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\newcommand{\widecell}[2]{%
+  \begin{minipage}[t]{0.92\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\newcommand{\linecheck}[3]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (#2,0);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+  \end{tikzpicture}\par
+  {\small #3}
+}
+
+\newcommand{\diagonalcheck}[2]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (1.9,0.95);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+  \end{tikzpicture}\par
+  {\small #2}
+}
+
+\newcommand{\procaendpointcheck}[3]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (#2,0);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (a) circle[radius=1.05pt];
+    \filldraw[draw=black,fill=black] (b) circle[radius=1.05pt];
+  \end{tikzpicture}\par
+  {\small #3}
+}
+
+\newcommand{\diagonalendpointcheck}[2]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (1.9,0.95);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (a) circle[radius=1.05pt];
+    \filldraw[draw=black,fill=black] (b) circle[radius=1.05pt];
+  \end{tikzpicture}\par
+  {\small #2}
+}
+
+\begin{document}
+
+\section*{Proca Propagator Regression}
+
+\subsection*{Public Styles}
+
+\begin{center}
+\diagramcell{Default}{
+\linecheck{proca}{2.25}{\texttt{proca}}
+}
+\hfill
+\diagramcell{Alias}{
+\linecheck{Proca}{2.25}{\texttt{Proca}}
+}
+\hfill
+\diagramcell{Colored}{
+\linecheck{proca,fieldA}{2.25}{\texttt{proca,fieldA}}
+}
+\end{center}
+
+\subsection*{Endpoint Fit}
+
+\begin{center}
+\diagramcell{Horizontal}{
+\procaendpointcheck{proca}{2.25}{\texttt{proca} with endpoint dots}
+}
+\hfill
+\diagramcell{Colored}{
+\procaendpointcheck{proca,fieldA}{2.25}{\texttt{proca,fieldA} with endpoint dots}
+}
+\hfill
+\diagramcell{Diagonal}{
+\diagonalendpointcheck{proca}{\texttt{proca} diagonal endpoint dots}
+}
+\end{center}
+
+\subsection*{Length And Orientation}
+
+\begin{center}
+\diagramcell{Short}{
+\linecheck{proca}{1.45}{\texttt{proca} short}
+}
+\hfill
+\diagramcell{Long}{
+\linecheck{proca}{3.20}{\texttt{proca} long}
+}
+\hfill
+\diagramcell{Diagonal colored}{
+\diagonalcheck{proca,fieldA}{\texttt{proca,fieldA} diagonal}
+}
+\end{center}
+
+\subsection*{Marker And Arrow Interaction}
+
+\begin{center}
+\widecell{White-filled open arrows with blank midpoint circ}{
+\linecheck{proca}{3.20}{\texttt{proca}: blank midpoint circ, endpoint arrows mask the squiggle}
+}
+\end{center}
+
+\end{document}

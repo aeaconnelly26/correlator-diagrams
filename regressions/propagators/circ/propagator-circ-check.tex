@@ -33,6 +33,19 @@
   {\small #2}
 }
 
+\newcommand{\procaendpointcheck}[2]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (2.25,0);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (a) circle[radius=1.05pt];
+    \filldraw[draw=black,fill=black] (b) circle[radius=1.05pt];
+  \end{tikzpicture}\par
+  {\small #2}
+}
+
 \begin{document}
 
 \section*{Propagator Circle Marker Capacity Sheet}
@@ -88,6 +101,16 @@
 \hfill
 \diagramcell{Colored}{
 \linecheck{proca,fieldA}{\texttt{proca,fieldA}}
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Endpoint fit}{
+\procaendpointcheck{proca}{\texttt{proca} with endpoint dots}
+}
+\hfill
+\diagramcell{Colored endpoint fit}{
+\procaendpointcheck{proca,fieldA}{\texttt{proca,fieldA} with endpoint dots}
 }
 \end{center}
 

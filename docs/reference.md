@@ -42,6 +42,7 @@ Main demos:
 - `regressions/topologies/sunset/sunset-example.tex`
 - `regressions/topologies/sunset/sunset-index-regression.tex`
 - `regressions/propagators/circ/propagator-circ-check.tex`
+- `regressions/propagators/proca/proca-regression.tex`
 - `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`
 
 Add the package to your document:
@@ -903,9 +904,10 @@ these styles uses the same visual language in every topology.
 
 The `proca` style is a massive-vector convenience style built on the same
 fixed-frequency EW-boson line. It adds a blank circ marker at the midpoint and
-two filled arrow markers just inside the endpoints, with each arrow pointing
-toward the nearest vertex. The arrows use the same size as the scalar-polarized
-arrow markers and follow the propagator color. `Proca` is accepted as an alias.
+two white-filled open arrow markers just inside the endpoints, with each arrow
+pointing toward the nearest vertex. The arrows use the same size as the
+scalar-polarized arrow markers and follow the propagator color. `Proca` is
+accepted as an alias.
 
 Circled propagator markers can be added to any propagator style with `circ=...`:
 
@@ -1862,6 +1864,7 @@ Those use the legacy `channel-*` key family, for example:
 - `regressions/topologies/sunset/sunset-example.tex`: focused sunset examples
 - `regressions/topologies/sunset/sunset-index-regression.tex`: sunset index stress cases
 - `regressions/propagators/circ/propagator-circ-check.tex`: circled propagator marker capacity sheet
+- `regressions/propagators/proca/proca-regression.tex`: focused Proca propagator visual sheet
 - `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
 
 ## Overleaf And Local Use
