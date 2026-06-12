@@ -88,6 +88,7 @@ Main demo files in this repository:
 - [`regressions/topologies/sunset/sunset-example.tex`](regressions/topologies/sunset/sunset-example.tex)
 - [`regressions/topologies/sunset/sunset-index-regression.tex`](regressions/topologies/sunset/sunset-index-regression.tex)
 - [`regressions/propagators/circ/propagator-circ-check.tex`](regressions/propagators/circ/propagator-circ-check.tex)
+- [`regressions/propagators/proca/proca-regression.tex`](regressions/propagators/proca/proca-regression.tex)
 - [`regressions/propagators/scalar-polarization/scalar-polarization-check.tex`](regressions/propagators/scalar-polarization/scalar-polarization-check.tex)
 
 Compile with:
