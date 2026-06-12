@@ -133,6 +133,7 @@ Common wrappers and aliases:
 - Use [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex) to inspect the crossed-box topology in isolation.
 - Use [`regressions/topologies/triangle-contact/triangle-contact-regression.tex`](regressions/topologies/triangle-contact/triangle-contact-regression.tex) to inspect triangle-contact orientations.
 - Use [`regressions/topologies/three-point/three-point-check.tex`](regressions/topologies/three-point/three-point-check.tex) to verify the 3-point topology and momentum placement.
+- Use [`regressions/propagators/endpoint-markers/endpoint-marker-regression.tex`](regressions/propagators/endpoint-markers/endpoint-marker-regression.tex) to verify endpoint arrow and endcap add-ons.
 - Use [`regressions/propagators/scalar-polarization/scalar-polarization-check.tex`](regressions/propagators/scalar-polarization/scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.
 - Use [`regressions/topologies/sunset/sunset-example.tex`](regressions/topologies/sunset/sunset-example.tex) to inspect the current sunset topology.
 
@@ -143,7 +144,7 @@ The full reference covers:
 - momentum labels and arrow tuning
 - box edge labels and mixed external leg styles
 - loop-channel and sunset layout controls
-- line styles, vertices, colors, and scalar-polarized legs
+- line styles, vertices, colors, endpoint markers, and scalar-polarized legs
 - one-loop `s/t/u` channels, tree channels, and sunset diagrams
 
 ## Repository Layout

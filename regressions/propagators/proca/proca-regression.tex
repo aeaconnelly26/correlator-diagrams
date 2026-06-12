@@ -51,8 +51,8 @@
       \vertex (b) at (#2,0);
       \propag[#1] (a) to (b);
     \end{feynhand}
-    \filldraw[draw=black,fill=black] (a) circle[radius=1.05pt];
-    \filldraw[draw=black,fill=black] (b) circle[radius=1.05pt];
+    \filldraw[draw=black,fill=black] (a) circle[radius=2.15pt];
+    \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
   \end{tikzpicture}\par
   {\small #3}
 }
@@ -64,9 +64,24 @@
       \vertex (b) at (1.9,0.95);
       \propag[#1] (a) to (b);
     \end{feynhand}
-    \filldraw[draw=black,fill=black] (a) circle[radius=1.05pt];
-    \filldraw[draw=black,fill=black] (b) circle[radius=1.05pt];
+    \filldraw[draw=black,fill=black] (a) circle[radius=2.15pt];
+    \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
   \end{tikzpicture}\par
+  {\small #2}
+}
+
+\newcommand{\scaledendpointcheck}[2]{%
+  \scalebox{#1}{%
+    \begin{tikzpicture}
+      \begin{feynhand}
+        \vertex (a) at (0,0);
+        \vertex (b) at (2.25,0);
+        \propag[proca] (a) to (b);
+      \end{feynhand}
+      \filldraw[draw=black,fill=black] (a) circle[radius=2.15pt];
+      \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
+    \end{tikzpicture}%
+  }\par
   {\small #2}
 }
 
@@ -103,6 +118,20 @@
 \hfill
 \diagramcell{Diagonal}{
 \diagonalendpointcheck{proca}{\texttt{proca} diagonal endpoint dots}
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Small scale}{
+\scaledendpointcheck{0.72}{\texttt{proca} scaled 0.72}
+}
+\hfill
+\diagramcell{Normal scale}{
+\scaledendpointcheck{1.0}{\texttt{proca} scaled 1.0}
+}
+\hfill
+\diagramcell{Large scale}{
+\scaledendpointcheck{1.28}{\texttt{proca} scaled 1.28}
 }
 \end{center}
 

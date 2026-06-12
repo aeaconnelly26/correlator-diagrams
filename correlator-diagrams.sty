@@ -212,6 +212,56 @@
       /tikz/decorate=true,
     },
   },
+  endpoint marker distance/.initial=5.4pt,
+  with endpoint bar/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \draw[
+          line width=0.95\feynhandlinesize
+        ] (0,-0.52\tikzfeynhand@arrow@size) -- (0,0.52\tikzfeynhand@arrow@size);
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  filled arrow to end/.style={
+    /tikz/postaction={/tikzfeynhand/with filled arrow=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  filled arrow from end/.style={
+    /tikz/postaction={/tikzfeynhand/with reversed filled arrow=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  filled arrow to start/.style={
+    /tikz/postaction={/tikzfeynhand/with reversed filled arrow=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  filled arrow from start/.style={
+    /tikz/postaction={/tikzfeynhand/with filled arrow=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  open arrow to end/.style={
+    /tikz/postaction={/tikzfeynhand/with white open arrow=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  open arrow from end/.style={
+    /tikz/postaction={/tikzfeynhand/with reversed white open arrow=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  open arrow to start/.style={
+    /tikz/postaction={/tikzfeynhand/with reversed white open arrow=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  open arrow from start/.style={
+    /tikz/postaction={/tikzfeynhand/with white open arrow=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  endpoint bar at end/.style={
+    /tikz/postaction={/tikzfeynhand/with endpoint bar=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  endpoint bar at start/.style={
+    /tikz/postaction={/tikzfeynhand/with endpoint bar=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  arrowin/.style={/tikzfeynhand/filled arrow to end},
+  arrowout/.style={/tikzfeynhand/filled arrow from end},
+  openarrowin/.style={/tikzfeynhand/open arrow to end},
+  openarrowout/.style={/tikzfeynhand/open arrow from end},
+  endcapin/.style={/tikzfeynhand/endpoint bar at end},
+  endcapout/.style={/tikzfeynhand/endpoint bar at start},
   every scalar polarized base@@/.style={
     /tikz/draw=none,
     /tikz/decoration={name=none},
@@ -1477,7 +1527,7 @@
     \tikzfeynhandset{
       every scalar polarized@@/.style={
         /tikzfeynhand/every scalar polarized base@@,
-        /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@scalararrowposition},
+        /tikz/postaction={/tikzfeynhand/with reversed white open arrow=\corr@scalararrowposition},
       },
     }%
   }{%
@@ -1491,7 +1541,7 @@
       \tikzfeynhandset{
         every scalar polarized@@/.style={
           /tikzfeynhand/every scalar polarized base@@,
-          /tikz/postaction={/tikzfeynhand/with open arrow=\corr@scalararrowposition},
+          /tikz/postaction={/tikzfeynhand/with white open arrow=\corr@scalararrowposition},
         },
       }%
     }%
@@ -1526,16 +1576,16 @@
     },
     proca base/.style={
       /tikzfeynhand/proca line,
-      /tikz/postaction={/tikzfeynhand/with reversed white open arrow=0.04},
-      /tikz/postaction={/tikzfeynhand/with white open arrow=0.96},
+      /tikzfeynhand/open arrow to start,
+      /tikzfeynhand/open arrow to end,
     },
     proca start/.style={
       /tikzfeynhand/proca line,
-      /tikz/postaction={/tikzfeynhand/with reversed white open arrow=0.04},
+      /tikzfeynhand/open arrow to start,
     },
     proca end/.style={
       /tikzfeynhand/proca line,
-      /tikz/postaction={/tikzfeynhand/with white open arrow=0.96},
+      /tikzfeynhand/open arrow to end,
     },
     proca/.style={
       /tikzfeynhand/proca base,
@@ -1551,12 +1601,12 @@
     scalar polarized inward/.style={
       /tikzfeynhand/scalar,
       /tikzfeynhand/every scalar polarized base@@,
-      /tikz/postaction={/tikzfeynhand/with open arrow=\corr@scalararrowposition},
+      /tikz/postaction={/tikzfeynhand/with white open arrow=\corr@scalararrowposition},
     },
     scalar polarized outward/.style={
       /tikzfeynhand/scalar,
       /tikzfeynhand/every scalar polarized base@@,
-      /tikz/postaction={/tikzfeynhand/with reversed open arrow=\corr@scalararrowposition},
+      /tikz/postaction={/tikzfeynhand/with reversed white open arrow=\corr@scalararrowposition},
     },
     scalarpolarizedin/.style={/tikzfeynhand/scalar polarized inward},
     scalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
@@ -2553,6 +2603,60 @@
   }%
 }
 
+\newif\ifcorr@endcapatstart
+\newif\ifcorr@endcapatend
+
+\newcommand{\corr@appendstrippedpropstyleitem}[1]{%
+  \ifdefempty{\corr@strippedpropoptions}{%
+    \def\corr@strippedpropoptions{#1}%
+  }{%
+    \appto\corr@strippedpropoptions{,#1}%
+  }%
+}
+
+\newcommand{\corr@appendcurrentstrippedpropstyleitem}{%
+  \expandafter\corr@appendstrippedpropstyleitem\expandafter{\corr@thisstyleitem}%
+}
+
+\newcommand{\corr@stripendcapstyleitem}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@endcapatstarttrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@endcapatendtrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{/tikzfeynhand/endpoint bar at start}{\corr@endcapatstarttrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{/tikzfeynhand/endpoint bar at end}{\corr@endcapatendtrue}{%
+    \corr@appendcurrentstrippedpropstyleitem
+  }}}}%
+}
+
+\newcommand{\corr@stripendcapstyles}[1]{%
+  \corr@endcapatstartfalse
+  \corr@endcapatendfalse
+  \def\corr@strippedpropoptions{}%
+  \@for\corr@styleitem:=#1\do{%
+    \expandafter\corr@stripendcapstyleitem\expandafter{\corr@styleitem}%
+  }%
+  \edef\corr@propoptions{\corr@strippedpropoptions}%
+}
+
+\newcommand{\corr@drawexternalendcap}[2]{%
+  \draw[
+    line width=0.95\feynhandlinesize
+  ]
+    ($(#1)!0.52\tikzfeynhand@arrow@size!90:(#2)$) --
+    ($(#1)!0.52\tikzfeynhand@arrow@size!-90:(#2)$);
+}
+
+\newcommand{\corr@propagwithexternalendcaps}[2]{%
+  \expandafter\corr@stripendcapstyles\expandafter{\corr@propoptions}%
+  \expandafter\propag\expandafter[\corr@propoptions] (#1) to (#2);
+  \ifcorr@endcapatstart
+    \corr@drawexternalendcap{#1}{#2}%
+  \fi
+  \ifcorr@endcapatend
+    \corr@drawexternalendcap{#2}{#1}%
+  \fi
+}
+
 \newcommand{\corr@momentumarrowsizefor}[1]{%
   \ifnum\corr@momarrowsizeitemslen<#1
     \corr@momentumarrowsize
@@ -2565,7 +2669,7 @@
   \edef\corr@propoptions{\corr@legstylefor{#2}}%
   \corr@appendproparrowsize{#2}%
   \corr@appendpropcolor
-  \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+  \corr@propagwithexternalendcaps{#3}{#4}%
 }
 
 \newcommand{\corr@putmomentumlabelat}[5]{%
@@ -2849,7 +2953,7 @@
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxexternalcolor}%
-  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+  \corr@propagwithexternalendcaps{#2}{#3}%
 }
 
 \newcommand{\corr@drawboxinternalprop}[4]{%
@@ -2890,22 +2994,76 @@
   }%
 }
 
+\newcommand{\corr@appendorientedstyleitem}[1]{%
+  \ifdefempty{\corr@orientedstyle}{%
+    \def\corr@orientedstyle{#1}%
+  }{%
+    \appto\corr@orientedstyle{,#1}%
+  }%
+}
+
+\newcommand{\corr@appendcurrentstyleitem}{%
+  \expandafter\corr@appendorientedstyleitem\expandafter{\corr@thisstyleitem}%
+}
+
+\newcommand{\corr@scalarorientedstyletoend}{%
+  \corr@appendorientedstyleitem{/tikzfeynhand/scalar}%
+  \corr@appendorientedstyleitem{/tikzfeynhand/every scalar polarized base@@}%
+  \corr@appendorientedstyleitem{/tikzfeynhand/open arrow to end}%
+}
+
+\newcommand{\corr@scalarorientedstyletostart}{%
+  \corr@appendorientedstyleitem{/tikzfeynhand/scalar}%
+  \corr@appendorientedstyleitem{/tikzfeynhand/every scalar polarized base@@}%
+  \corr@appendorientedstyleitem{/tikzfeynhand/open arrow to start}%
+}
+
+\newcommand{\corr@orientstyleitemtoend}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{\corr@scalarorientedstyletoend}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{\corr@scalarorientedstyletoend}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spol}{\corr@scalarorientedstyletoend}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{\corr@scalarorientedstyletoend}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{\corr@scalarorientedstyletoend}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow to end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow from end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow to end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow from end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
+    \corr@appendcurrentstyleitem
+  }}}}}}}}}}}%
+}
+
+\newcommand{\corr@orientstyleitemtostart}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{\corr@scalarorientedstyletostart}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{\corr@scalarorientedstyletostart}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spol}{\corr@scalarorientedstyletostart}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{\corr@scalarorientedstyletostart}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{\corr@scalarorientedstyletostart}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow to start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow from start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow to start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow from start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
+    \corr@appendcurrentstyleitem
+  }}}}}}}}}}}%
+}
+
 \newcommand{\corr@scalarstyletoend}[1]{%
-  \edef\corr@orientedstyle{#1}%
-  \corr@ifstringeq{#1}{scalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
-  \corr@ifstringeq{#1}{scalar polarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
-  \corr@ifstringeq{#1}{spol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
-  \corr@ifstringeq{#1}{antiscalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
-  \corr@ifstringeq{#1}{antspol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with open arrow=0.72}}}{}%
+  \def\corr@orientedstyle{}%
+  \@for\corr@styleitem:=#1\do{%
+    \expandafter\corr@orientstyleitemtoend\expandafter{\corr@styleitem}%
+  }%
 }
 
 \newcommand{\corr@scalarstyletostart}[1]{%
-  \edef\corr@orientedstyle{#1}%
-  \corr@ifstringeq{#1}{scalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
-  \corr@ifstringeq{#1}{scalar polarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
-  \corr@ifstringeq{#1}{spol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
-  \corr@ifstringeq{#1}{antiscalarpolarized}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
-  \corr@ifstringeq{#1}{antspol}{\def\corr@orientedstyle{/tikzfeynhand/scalar,/tikzfeynhand/every scalar polarized base@@,/tikz/postaction={/tikzfeynhand/with reversed open arrow=0.28}}}{}%
+  \def\corr@orientedstyle{}%
+  \@for\corr@styleitem:=#1\do{%
+    \expandafter\corr@orientstyleitemtostart\expandafter{\corr@styleitem}%
+  }%
 }
 
 \newcommand{\corr@appendhalfboxpropcolor}[1]{%
@@ -2930,7 +3088,7 @@
   \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@halfboxline}}%
   \corr@appendproparrowsize{#1}%
   \corr@appendhalfboxpropcolor{#1}%
-  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+  \corr@propagwithexternalendcaps{#2}{#3}%
 }
 
 \newcommand{\corr@drawhalfboxorientedprop}[4]{%
@@ -2943,14 +3101,14 @@
   \edef\corr@propoptions{\corr@orientedstyle}%
   \corr@appendproparrowsize{#1}%
   \corr@appendhalfboxpropcolor{#1}%
-  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+  \corr@propagwithexternalendcaps{#2}{#3}%
 }
 
 \newcommand{\corr@drawflatcontactprop}[3]{%
   \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@flatcontactline}}%
   \corr@appendproparrowsize{#1}%
   \corr@appendflatcontactpropcolor{#1}%
-  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+  \corr@propagwithexternalendcaps{#2}{#3}%
 }
 
 \newcommand{\corr@drawflatcontactorientedprop}[4]{%
@@ -2963,7 +3121,7 @@
   \edef\corr@propoptions{\corr@orientedstyle}%
   \corr@appendproparrowsize{#1}%
   \corr@appendflatcontactpropcolor{#1}%
-  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+  \corr@propagwithexternalendcaps{#2}{#3}%
 }
 
 \newcommand{\corr@drawhalfboxmomentum}[4]{%
@@ -3144,7 +3302,7 @@
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@trianglecontactcolor}%
   \corr@appendpropcolorvalue{\corr@trianglecontactexternalcolor}%
-  \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+  \corr@propagwithexternalendcaps{#2}{#3}%
 }
 
 \newcommand{\corr@drawtrianglecontactinternalprop}[3]{%
@@ -3419,7 +3577,11 @@
   \ifdefempty{\corr@channelextraoptions}{}{%
     \edef\corr@propoptions{\corr@propoptions,\corr@channelextraoptions}%
   }%
-  \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+  \ifnum#1<5
+    \corr@propagwithexternalendcaps{#3}{#4}%
+  \else
+    \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+  \fi
 }
 
 \newcommand{\corr@drawsunsetmomentumline}[7]{%

@@ -1,0 +1,191 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.31\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\newcommand{\markerline}[3]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (#2,0);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (a) circle[radius=2.15pt];
+    \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
+  \end{tikzpicture}\par
+  {\small #3}
+}
+
+\newcommand{\diagonalendpointline}[2]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (1.75,0.9);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (a) circle[radius=2.15pt];
+    \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
+  \end{tikzpicture}\par
+  {\small #2}
+}
+
+\begin{document}
+
+\section*{Endpoint Marker Regression}
+
+\subsection*{Raw Path-End Add-Ons}
+
+\begin{center}
+\diagramcell{Filled inward}{
+\markerline{ewboson,arrowin}{2.2}{\texttt{ewboson,arrowin}}
+}
+\hfill
+\diagramcell{Filled outward}{
+\markerline{ewboson,arrowout}{2.2}{\texttt{ewboson,arrowout}}
+}
+\hfill
+\diagramcell{Diagonal inward}{
+\diagonalendpointline{ewboson,arrowin}{\texttt{ewboson,arrowin}}
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Open inward}{
+\markerline{ewboson,openarrowin}{2.2}{\texttt{ewboson,openarrowin}}
+}
+\hfill
+\diagramcell{Open outward}{
+\markerline{ewboson,openarrowout}{2.2}{\texttt{ewboson,openarrowout}}
+}
+\hfill
+\diagramcell{Colored filled}{
+\markerline{ewboson,fieldA,arrowin}{2.2}{\texttt{ewboson,fieldA,arrowin}}
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Short line}{
+\markerline{ewboson,arrowin}{1.25}{\texttt{ewboson,arrowin} short}
+}
+\hfill
+\diagramcell{Short open}{
+\markerline{ewboson,openarrowin}{1.25}{\texttt{ewboson,openarrowin} short}
+}
+\hfill
+\diagramcell{Colored short}{
+\markerline{ewboson,fieldA,arrowin}{1.25}{\texttt{ewboson,fieldA,arrowin} short}
+}
+\end{center}
+
+\newpage
+
+\subsection*{Topology-Oriented External Legs}
+
+\begin{center}
+\diagramcell{Half-box arrowin}{
+\HalfBoxCorr[
+  scale=0.9,
+  show-momenta=false,
+  field={},
+  central={},
+  leg-styles={ewboson,spol,{ewboson,arrowin},ewboson},
+  leg-labels={,,,}
+]
+}
+\hfill
+\diagramcell{Half-box arrowout}{
+\HalfBoxCorr[
+  scale=0.9,
+  show-momenta=false,
+  field={},
+  central={},
+  leg-styles={ewboson,{ewboson,arrowout},spol,ewboson},
+  leg-labels={,,,}
+]
+}
+\hfill
+\diagramcell{Half-box openarrowin}{
+\HalfBoxCorr[
+  scale=0.9,
+  show-momenta=false,
+  field={},
+  central={},
+  leg-styles={ewboson,{ewboson,openarrowin},ewboson,spol},
+  leg-labels={,,,}
+]
+}
+\end{center}
+
+\subsection*{External Endcaps}
+
+\begin{center}
+\diagramcell{Upper-left cap}{
+\HalfBoxCorr[
+  scale=1.22,
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-xspan=0.92,
+  half-box-top-stub=0.52,
+  half-box-down-span=0.72,
+  leg-styles={{ewboson,endcapout},ewboson,ewboson,ewboson},
+  leg-labels={,,,}
+]
+}
+\hfill
+\diagramcell{Upper-right cap}{
+\HalfBoxCorr[
+  scale=1.22,
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-xspan=0.92,
+  half-box-top-stub=0.52,
+  half-box-down-span=0.72,
+  leg-styles={ewboson,ewboson,ewboson,{ewboson,endcapout}},
+  leg-labels={,,,}
+]
+}
+\hfill
+\diagramcell{Both upper caps}{
+\HalfBoxCorr[
+  scale=1.22,
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-xspan=0.92,
+  half-box-top-stub=0.52,
+  half-box-down-span=0.72,
+  leg-styles={{ewboson,endcapout},ewboson,ewboson,{ewboson,endcapout}},
+  leg-labels={,,,}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Lower-left diagonal cap}{
+\HalfBoxCorr[
+  scale=1.22,
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-xspan=0.92,
+  half-box-top-stub=0.52,
+  half-box-down-span=0.72,
+  leg-styles={ewboson,{ewboson,endcapout},ewboson,ewboson},
+  leg-labels={,,,}
+]
+}
+\end{center}
+
+\end{document}

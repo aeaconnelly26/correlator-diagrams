@@ -46,6 +46,42 @@ Default inward placement with one scalar-polarized leg and the others plain:
 \end{array}
 \]
 
+White-filled open scalar-polarized arrowheads mask the dashed propagator line:
+
+\[
+\begin{array}{ccc}
+  \text{\texttt{spol}} &
+  \text{\texttt{spolin}} &
+  \text{\texttt{spolout}} \\
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (1.8,0);
+      \propag[spol] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
+  \end{tikzpicture}
+  &
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (1.8,0);
+      \propag[spolin] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
+  \end{tikzpicture}
+  &
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (1.8,0);
+      \propag[spolout] (a) to (b);
+    \end{feynhand}
+    \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
+  \end{tikzpicture}
+\end{array}
+\]
+
 \newpage
 
 Same single-leg cases with a larger scalar-polarized arrow size:
