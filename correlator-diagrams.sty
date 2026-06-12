@@ -122,6 +122,51 @@
       /tikz/decorate=true,
     },
   },
+  with white open arrow/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \node[
+          transform shape,
+          xshift=-0.08\feynhandarrowsize,
+          fill=white,
+          draw,
+          line width=0.7\feynhandlinesize,
+          inner sep=0mm,
+          minimum size=\tikzfeynhand@arrow@size,
+          regular polygon,
+          regular polygon sides=3,
+          shape border rotate=-90
+        ] { };
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  with reversed white open arrow/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \node[
+          transform shape,
+          xshift=0.08\feynhandarrowsize,
+          rotate=180,
+          fill=white,
+          draw,
+          line width=0.7\feynhandlinesize,
+          inner sep=0mm,
+          minimum size=\tikzfeynhand@arrow@size,
+          regular polygon,
+          regular polygon sides=3,
+          shape border rotate=-90
+        ] { };
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
   with filled arrow/.style={
     /tikz/decoration={
       markings,
@@ -1481,16 +1526,16 @@
     },
     proca base/.style={
       /tikzfeynhand/proca line,
-      /tikz/postaction={/tikzfeynhand/with reversed filled arrow=0.08},
-      /tikz/postaction={/tikzfeynhand/with filled arrow=0.92},
+      /tikz/postaction={/tikzfeynhand/with reversed white open arrow=0.04},
+      /tikz/postaction={/tikzfeynhand/with white open arrow=0.96},
     },
     proca start/.style={
       /tikzfeynhand/proca line,
-      /tikz/postaction={/tikzfeynhand/with reversed filled arrow=0.08},
+      /tikz/postaction={/tikzfeynhand/with reversed white open arrow=0.04},
     },
     proca end/.style={
       /tikzfeynhand/proca line,
-      /tikz/postaction={/tikzfeynhand/with filled arrow=0.92},
+      /tikz/postaction={/tikzfeynhand/with white open arrow=0.96},
     },
     proca/.style={
       /tikzfeynhand/proca base,
