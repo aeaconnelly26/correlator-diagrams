@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+\newcommand{\VertexHalfBoxLeft}{%
+  \HalfBoxCorr[
+    scale=1.08,
+    show-momenta=false,
+    field={},
+    central={},
+    half-box-xspan=0.72,
+    half-box-top-stub=0.42,
+    half-box-down-span=0.82,
+    half-box-down-xoffset=0.18,
+    half-box-line=proca,
+    leg-styles={ewboson,spol,{ewboson,arrowin},ewboson},
+    leg-labels={,,,}
+  ]%
+}
+
+\newcommand{\VertexHalfBoxRight}{%
+  \HalfBoxCorr[
+    scale=1.08,
+    show-momenta=false,
+    field={},
+    central={},
+    half-box-xspan=0.72,
+    half-box-top-stub=0.42,
+    half-box-down-span=0.82,
+    half-box-down-xoffset=0.18,
+    half-box-line=proca,
+    leg-styles={ewboson,{ewboson,arrowin},spol,ewboson},
+    leg-labels={,,,}
+  ]%
+}
+
+\newcommand{\VertexFlatContact}{%
+  \FlatContactCorr[
+    scale=1.08,
+    show-momenta=false,
+    field={},
+    central={},
+    flat-contact-xspan=0.74,
+    flat-contact-yspan=0.72,
+    flat-contact-line={ewboson,arrowin},
+    leg-labels={,,,}
+  ]%
+}
+
+\begin{document}
+
+\section*{Vertex Example}
+
+\[
+\resizebox{0.92\textwidth}{!}{$
+  \VertexHalfBoxLeft
+  \!+\!
+  \VertexHalfBoxRight
+  \!+\!
+  \VertexFlatContact
+  \!=\! 0
+\vphantom{\VertexHalfBoxLeft}
+$}
+\]
+
+\end{document}

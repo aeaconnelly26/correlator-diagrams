@@ -42,6 +42,7 @@ Main demos:
 - `regressions/topologies/sunset/sunset-example.tex`
 - `regressions/topologies/sunset/sunset-index-regression.tex`
 - `regressions/propagators/circ/propagator-circ-check.tex`
+- `regressions/propagators/endpoint-markers/endpoint-marker-regression.tex`
 - `regressions/propagators/proca/proca-regression.tex`
 - `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`
 
@@ -906,8 +907,24 @@ The `proca` style is a massive-vector convenience style built on the same
 fixed-frequency EW-boson line. It adds a blank circ marker at the midpoint and
 two white-filled open arrow markers just inside the endpoints, with each arrow
 pointing toward the nearest vertex. The arrows use the same size as the
-scalar-polarized arrow markers and follow the propagator color. `Proca` is
-accepted as an alias.
+scalar-polarized arrow markers; their outlines follow the propagator color
+while their interiors stay white. `Proca` is accepted as an alias.
+
+Endpoint marker add-ons can be combined with any propagator style:
+
+- `arrowin` / `arrowout`: filled arrowhead pointing toward or away from the
+  topology vertex
+- `openarrowin` / `openarrowout`: white-filled open arrowhead pointing toward
+  or away from the topology vertex
+- `endcapout`: short perpendicular terminal bar exactly at the cropped external
+  endpoint of an external leg
+- `endcapin`: the corresponding path-end form for raw `\propag[...]` usage
+
+In package-managed topologies, these add-ons are oriented relative to the
+interaction vertex for each leg. In raw `\propag[...]` calls, they fall back to
+path-end semantics: `...in` targets the path end and `...out` points away from
+the path end. Endcaps are intended for external legs only; in topology helpers,
+use `endcapout` on an external leg style to mark the outer cropped endpoint.
 
 Circled propagator markers can be added to any propagator style with `circ=...`:
 
@@ -1019,7 +1036,7 @@ Default behavior:
 
 ## Scalar-Polarized Legs
 
-Special dashed scalar styles with open arrowheads:
+Special dashed scalar styles with white-filled open arrowheads:
 
 - `scalarpolarized`
 - `spol`
@@ -1042,7 +1059,8 @@ The default `scalarpolarized` style places an inward-pointing marker near the ve
 
 Legacy `antiscalar...` and `antspol...` names still work as aliases of the same scalar-polarized style.
 
-The open arrowhead size tracks the normal propagator arrow-size controls.
+The white fill masks the dashed line under the arrowhead. The open arrowhead
+size tracks the normal propagator arrow-size controls.
 
 ## One-Loop Box Topology
 
@@ -1354,7 +1372,10 @@ The momentum slot filters let a diagram show only selected external momentum
 arrows, for example `half-box-momentum-slots={2,3}` for the two lower legs.
 
 Inside package-managed topologies, `scalarpolarized`/`spol` external legs are
-oriented toward the topology vertex. The explicit aliases such as
+oriented toward the topology vertex. The endpoint arrow add-ons `arrowin`,
+`arrowout`, `openarrowin`, and `openarrowout` follow the same topology-aware
+orientation. For cropped external legs, use `endcapout` to put a terminal bar
+exactly at the external endpoint of the leg. The explicit aliases such as
 `spolin`/`spolout` remain available for manual control.
 
 Focused visual QA lives in
@@ -1864,6 +1885,7 @@ Those use the legacy `channel-*` key family, for example:
 - `regressions/topologies/sunset/sunset-example.tex`: focused sunset examples
 - `regressions/topologies/sunset/sunset-index-regression.tex`: sunset index stress cases
 - `regressions/propagators/circ/propagator-circ-check.tex`: circled propagator marker capacity sheet
+- `regressions/propagators/endpoint-markers/endpoint-marker-regression.tex`: endpoint arrow and endcap add-on visual sheet
 - `regressions/propagators/proca/proca-regression.tex`: focused Proca propagator visual sheet
 - `regressions/propagators/scalar-polarization/scalar-polarization-check.tex`: single-leg scalar-polarized placement and arrow-size checks
 
