@@ -281,6 +281,8 @@
 \newif\ifcorr@crossboxrightcirc
 \newif\ifcorr@crossboxupcirc
 \newif\ifcorr@crossboxdowncirc
+\newif\ifcorr@halfboxleftlowercirc
+\newif\ifcorr@halfboxrightlowercirc
 \newif\ifcorr@stylehasproca
 \newif\ifcorr@crossboxupproca
 \newif\ifcorr@crossboxdownproca
@@ -590,8 +592,10 @@
 \def\corr@boxcentrallabelyshift{-62pt}
 \def\corr@halfboxxspan{0.86}
 \def\corr@halfboxtopstub{0.72}
+\def\corr@halfboxtopyspan{0.48}
 \def\corr@halfboxdownspan{1.05}
 \def\corr@halfboxdownxoffset{0.18}
+\def\corr@halfboxmode{straight}
 \def\corr@halfboxline{ewboson}
 \def\corr@halfboxcolors{}
 \def\corr@halfboxbridgecolor{}
@@ -605,6 +609,9 @@
 \def\corr@halfboxmomentumlabelfraction{0.50}
 \def\corr@halfboxmomentumlabelgap{0.10}
 \def\corr@halfboxmomentumslots{1,2,3,4}
+\def\corr@halfboxleftlowercirc{}
+\def\corr@halfboxrightlowercirc{}
+\def\corr@halfboxlowercircpos{0.72}
 \def\corr@flatcontactxspan{1.18}
 \def\corr@flatcontactyspan{1.08}
 \def\corr@flatcontactline{ewboson}
@@ -1351,8 +1358,10 @@
 \newcommand{\corr@resethalfboxdefaults}{%
   \corr@topologysetdefault\corr@halfboxxspan{0.86}%
   \corr@topologysetdefault\corr@halfboxtopstub{0.72}%
+  \corr@topologysetdefault\corr@halfboxtopyspan{0.48}%
   \corr@topologysetdefault\corr@halfboxdownspan{1.05}%
   \corr@topologysetdefault\corr@halfboxdownxoffset{0.18}%
+  \corr@topologysetdefault\corr@halfboxmode{straight}%
   \corr@topologysetdefault\corr@halfboxline{ewboson}%
   \corr@topologysetdefault\corr@halfboxcolors{}%
   \corr@topologysetdefault\corr@halfboxbridgecolor{}%
@@ -1366,6 +1375,11 @@
   \corr@topologysetdefault\corr@halfboxmomentumlabelfraction{0.50}%
   \corr@topologysetdefault\corr@halfboxmomentumlabelgap{0.10}%
   \corr@topologysetdefault\corr@halfboxmomentumslots{1,2,3,4}%
+  \corr@topologysetdefault\corr@halfboxleftlowercirc{}%
+  \corr@topologysetdefault\corr@halfboxrightlowercirc{}%
+  \corr@topologysetdefault\corr@halfboxlowercircpos{0.72}%
+  \corr@halfboxleftlowercircfalse
+  \corr@halfboxrightlowercircfalse
 }
 
 \newcommand{\corr@resetflatcontactdefaults}{%
@@ -1918,8 +1932,21 @@
   box-yspan/.store in=\corr@boxyspan,
   half-box-xspan/.store in=\corr@halfboxxspan,
   half-box-top-stub/.store in=\corr@halfboxtopstub,
+  half-box-top-yspan/.store in=\corr@halfboxtopyspan,
   half-box-down-span/.store in=\corr@halfboxdownspan,
   half-box-down-xoffset/.store in=\corr@halfboxdownxoffset,
+  half-box-mode/.store in=\corr@halfboxmode,
+  half-box-mode/straight/.code={\def\corr@halfboxmode{straight}},
+  half-box-mode/angled/.code={\def\corr@halfboxmode{angled}},
+  half-box-style/.is choice,
+  half-box-style/default/.style={half-box-mode=straight},
+  half-box-style/straight/.style={half-box-mode=straight},
+  half-box-style/halfpropagator/.style={half-box-mode=angled},
+  half-box-style/halfpropleft/.style={half-box-mode=halfpropleft,half-box-line=ewboson,half-box-left-lower-circ=Z},
+  half-box-style/halfpropright/.style={half-box-mode=halfpropright,half-box-line=ewboson,half-box-right-lower-circ=Z},
+  halfpropagator/.style={half-box-style=halfpropagator},
+  halfpropleft/.style={half-box-style=halfpropleft},
+  halfpropright/.style={half-box-style=halfpropright},
   half-box-line/.store in=\corr@halfboxline,
   half-box-colors/.store in=\corr@halfboxcolors,
   half-box-bridge-color/.store in=\corr@halfboxbridgecolor,
@@ -1933,10 +1960,16 @@
   half-box-momentum-label-fraction/.store in=\corr@halfboxmomentumlabelfraction,
   half-box-momentum-label-gap/.store in=\corr@halfboxmomentumlabelgap,
   half-box-momentum-slots/.store in=\corr@halfboxmomentumslots,
+  half-box-left-lower-circ/.code={\def\corr@halfboxleftlowercirc{#1}\corr@halfboxleftlowercirctrue},
+  half-box-right-lower-circ/.code={\def\corr@halfboxrightlowercirc{#1}\corr@halfboxrightlowercirctrue},
+  half-box-lower-circ-position/.store in=\corr@halfboxlowercircpos,
   halfbox-xspan/.style={half-box-xspan={#1}},
   halfbox-top-stub/.style={half-box-top-stub={#1}},
+  halfbox-top-yspan/.style={half-box-top-yspan={#1}},
   halfbox-down-span/.style={half-box-down-span={#1}},
   halfbox-down-xoffset/.style={half-box-down-xoffset={#1}},
+  halfbox-mode/.style={half-box-mode={#1}},
+  halfbox-style/.style={half-box-style={#1}},
   halfbox-line/.style={half-box-line={#1}},
   halfbox-colors/.style={half-box-colors={#1}},
   halfbox-bridge-color/.style={half-box-bridge-color={#1}},
@@ -1950,6 +1983,9 @@
   halfbox-momentum-label-fraction/.style={half-box-momentum-label-fraction={#1}},
   halfbox-momentum-label-gap/.style={half-box-momentum-label-gap={#1}},
   halfbox-momentum-slots/.style={half-box-momentum-slots={#1}},
+  halfbox-left-lower-circ/.style={half-box-left-lower-circ={#1}},
+  halfbox-right-lower-circ/.style={half-box-right-lower-circ={#1}},
+  halfbox-lower-circ-position/.style={half-box-lower-circ-position={#1}},
   flat-contact-xspan/.store in=\corr@flatcontactxspan,
   flat-contact-yspan/.store in=\corr@flatcontactyspan,
   flat-contact-line/.store in=\corr@flatcontactline,
@@ -2982,6 +3018,34 @@
   \fi
 }
 
+\newcommand{\corr@resolvehalfboxstyle}[1]{%
+  \ifnum\corr@legstyleitemslen<#1
+    \ifcorr@lineexplicit
+      \edef\corr@halfboxresolvedstyle{\corr@line}%
+    \else
+      \corr@ifstringeq{\corr@halfboxmode}{halfpropleft}{%
+        \ifnum#1=3
+          \def\corr@halfboxresolvedstyle{spol}%
+        \else
+          \edef\corr@halfboxresolvedstyle{\corr@halfboxline}%
+        \fi
+      }{%
+        \corr@ifstringeq{\corr@halfboxmode}{halfpropright}{%
+          \ifnum#1=2
+            \def\corr@halfboxresolvedstyle{spol}%
+          \else
+            \edef\corr@halfboxresolvedstyle{\corr@halfboxline}%
+          \fi
+        }{%
+          \edef\corr@halfboxresolvedstyle{\corr@halfboxline}%
+        }%
+      }%
+    \fi
+  \else
+    \edef\corr@halfboxresolvedstyle{\corr@legstyleitems[#1]}%
+  \fi
+}
+
 \newcommand{\corr@selectmomentumslot}[2]{%
   \corr@slotselectedfalse
   \edef\corr@targetslot{#1}%
@@ -3085,20 +3149,32 @@
 }
 
 \newcommand{\corr@drawhalfboxprop}[3]{%
-  \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@halfboxline}}%
+  \corr@resolvehalfboxstyle{#1}%
+  \edef\corr@propoptions{\corr@halfboxresolvedstyle}%
   \corr@appendproparrowsize{#1}%
   \corr@appendhalfboxpropcolor{#1}%
   \corr@propagwithexternalendcaps{#2}{#3}%
 }
 
 \newcommand{\corr@drawhalfboxorientedprop}[4]{%
-  \edef\corr@propoptions{\corr@topologydefaultstylefor{#1}{\corr@halfboxline}}%
+  \corr@resolvehalfboxstyle{#1}%
+  \edef\corr@propoptions{\corr@halfboxresolvedstyle}%
   \corr@ifstringeq{#4}{start}{%
     \corr@scalarstyletostart{\corr@propoptions}%
   }{%
     \corr@scalarstyletoend{\corr@propoptions}%
   }%
   \edef\corr@propoptions{\corr@orientedstyle}%
+  \corr@ifstringeq{\corr@halfboxmode}{straight}{}{%
+    \ifnum#1=1
+      \corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}%
+      \edef\corr@propoptions{\corr@orientedstyle}%
+    \fi
+    \ifnum#1=4
+      \corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}%
+      \edef\corr@propoptions{\corr@orientedstyle}%
+    \fi
+  }{}%
   \corr@appendproparrowsize{#1}%
   \corr@appendhalfboxpropcolor{#1}%
   \corr@propagwithexternalendcaps{#2}{#3}%
@@ -3256,6 +3332,17 @@
     outer sep=0pt,
     /tikzfeynhand/every circ label@@
   ] at (#1) {\expandafter\corr@circlabel\expandafter{\corr@manualcirclabel}};
+}
+
+\newcommand{\corr@placehalfboxlowercircs}{%
+  \ifcorr@halfboxleftlowercirc
+    \path (corrHBVL) -- coordinate[pos=\corr@halfboxlowercircpos] (corrHalfBoxLeftLowerCirc) (corrHBDL);
+    \corr@putcircatcoord{corrHalfBoxLeftLowerCirc}{\corr@halfboxleftlowercirc}%
+  \fi
+  \ifcorr@halfboxrightlowercirc
+    \path (corrHBVR) -- coordinate[pos=\corr@halfboxlowercircpos] (corrHalfBoxRightLowerCirc) (corrHBDR);
+    \corr@putcircatcoord{corrHalfBoxRightLowerCirc}{\corr@halfboxrightlowercirc}%
+  \fi
 }
 
 \newcommand{\corr@placecrossboxcircs}{%
@@ -4205,8 +4292,13 @@
     \vertex (corrC) at (0,-0.48*\corr@halfboxdownspan);
     \vertex (corrHBVL) at (-\corr@halfboxxspan,0);
     \vertex (corrHBVR) at (\corr@halfboxxspan,0);
-    \vertex (corrHBTL) at (-\corr@halfboxxspan-\corr@halfboxtopstub,0);
-    \vertex (corrHBTR) at (\corr@halfboxxspan+\corr@halfboxtopstub,0);
+    \corr@ifstringeq{\corr@halfboxmode}{straight}{%
+      \vertex (corrHBTL) at (-\corr@halfboxxspan-\corr@halfboxtopstub,0);
+      \vertex (corrHBTR) at (\corr@halfboxxspan+\corr@halfboxtopstub,0);
+    }{%
+      \vertex (corrHBTL) at (-\corr@halfboxxspan-\corr@halfboxtopstub,\corr@halfboxtopyspan);
+      \vertex (corrHBTR) at (\corr@halfboxxspan+\corr@halfboxtopstub,\corr@halfboxtopyspan);
+    }%
     \vertex (corrHBDL) at (-\corr@halfboxxspan-\corr@halfboxdownxoffset,-\corr@halfboxdownspan);
     \vertex (corrHBDR) at (\corr@halfboxxspan+\corr@halfboxdownxoffset,-\corr@halfboxdownspan);
     \corr@ifexternallegs{%
@@ -4221,6 +4313,7 @@
     \corr@putvertex{corrHBVL}{\corr@centervertexstyle}%
     \corr@putvertex{corrHBVR}{\corr@centervertexstyle}%
   \fi
+  \corr@placehalfboxlowercircs
   \corr@halfboxplaceexternalvertices
   \ifcorr@showmomenta
     \corr@drawhalfboxmomentum{1}{corrHBTL}{corrHBVL}{90}
