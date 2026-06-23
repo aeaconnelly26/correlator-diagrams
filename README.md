@@ -167,7 +167,7 @@ The full reference covers:
 - slot order and leg ordering
 - 3-point vertex and one-loop box topologies
 - vertex-identity half-box helpers and half-prop lower-leg circ markers
-- momentum labels and arrow tuning
+- momentum labels, arrow tuning, 3-point momentum layout presets, and box direction controls
 - box edge labels and mixed external leg styles
 - loop-channel and sunset layout controls
 - line styles, vertices, colors, endpoint markers, and scalar-polarized legs

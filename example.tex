@@ -96,6 +96,7 @@ is upper-left incoming and the other two outgoing.
     line=ewboson,
     leg-styles={scalarpolarized,ewboson,ewboson},
     three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
     momentum-labels={q_1,q_2,q_3},
     propagator-arrow-sizes={14pt,,},
     leg-labels={W_\mu,A_\nu,A_\rho}
@@ -120,6 +121,20 @@ is upper-left incoming and the other two outgoing.
     field=\chi,
   ]
 \end{array}
+\]
+
+Opt-in outward momentum placement gives crowded triple vertices more room:
+\[
+  \ThreePointCorr[
+    line=ewboson,
+    field={},
+    leg-styles={scalarpolarized,ewboson,ewboson},
+    leg-labels={W_\alpha,Z_\gamma,W_\beta},
+    momentum-labels={q_1,q_3,q_2},
+    three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
+    propagator-arrow-sizes={14pt,,}
+  ]
 \]
 
 \subsection*{4. Scalar-Polarized Legs}
@@ -324,6 +339,21 @@ Mixed exterior styles still use the usual slot order:
     leg-styles={spol,plain,plain,plain},
     box-color=fieldA,
     leg-labels={W,A,A,A},
+  ]
+\]
+
+External and internal box momentum arrows can be flipped independently:
+\[
+  \BoxLoopCorr[
+    scale=0.72,
+    box-external-line=plain,
+    box-line=plain,
+    field=A,
+    leg-labels={A_1,A_2,A_3,A_4},
+    box-edge-momenta={\ell_1,\ell_2,\ell_3,\ell_4},
+    box-external-momentum-directions={out,in,out,in},
+    box-edge-momentum-directions={reverse,forward,reverse,none},
+    box-loop-momentum={}
   ]
 \]
 
