@@ -535,6 +535,14 @@
 \def\corr@boxtopmomentum{q_1+k}
 \def\corr@boxrightmomentum{q_1+k-q_4}
 \def\corr@boxbottommomentum{q_2-k}
+\def\corr@boxulmomentumdirection{}
+\def\corr@boxllmomentumdirection{}
+\def\corr@boxlrmomentumdirection{}
+\def\corr@boxurmomentumdirection{}
+\def\corr@boxleftmomentumdirection{forward}
+\def\corr@boxtopmomentumdirection{forward}
+\def\corr@boxrightmomentumdirection{forward}
+\def\corr@boxbottommomentumdirection{forward}
 \def\corr@boxleftedgelabel{}
 \def\corr@boxtopedgelabel{}
 \def\corr@boxrightedgelabel{}
@@ -545,14 +553,14 @@
 \def\corr@boxexternalmomentumlabelfraction{0.50}
 \def\corr@boxexternalmomentumlabelgap{0.14}
 \def\corr@boxexternalmomentumoffset{8pt}
-\def\corr@boxleftarrowstart{0.24}
-\def\corr@boxleftarrowend{0.72}
-\def\corr@boxtoparrowstart{0.26}
-\def\corr@boxtoparrowend{0.74}
-\def\corr@boxrightarrowstart{0.24}
-\def\corr@boxrightarrowend{0.72}
-\def\corr@boxbottomarrowstart{0.24}
-\def\corr@boxbottomarrowend{0.70}
+\def\corr@boxleftarrowstart{0.22}
+\def\corr@boxleftarrowend{0.78}
+\def\corr@boxtoparrowstart{0.22}
+\def\corr@boxtoparrowend{0.78}
+\def\corr@boxrightarrowstart{0.22}
+\def\corr@boxrightarrowend{0.78}
+\def\corr@boxbottomarrowstart{0.22}
+\def\corr@boxbottomarrowend{0.78}
 \def\corr@boxleftarrowxshift{-11pt}
 \def\corr@boxleftarrowyshift{0pt}
 \def\corr@boxtoparrowxshift{0pt}
@@ -1300,6 +1308,14 @@
   \corr@topologysetdefault\corr@boxtopmomentum{q_1+k}%
   \corr@topologysetdefault\corr@boxrightmomentum{q_1+k-q_4}%
   \corr@topologysetdefault\corr@boxbottommomentum{q_2-k}%
+  \corr@topologysetdefault\corr@boxulmomentumdirection{}%
+  \corr@topologysetdefault\corr@boxllmomentumdirection{}%
+  \corr@topologysetdefault\corr@boxlrmomentumdirection{}%
+  \corr@topologysetdefault\corr@boxurmomentumdirection{}%
+  \corr@topologysetdefault\corr@boxleftmomentumdirection{forward}%
+  \corr@topologysetdefault\corr@boxtopmomentumdirection{forward}%
+  \corr@topologysetdefault\corr@boxrightmomentumdirection{forward}%
+  \corr@topologysetdefault\corr@boxbottommomentumdirection{forward}%
   \corr@topologysetdefault\corr@boxleftedgelabel{}%
   \corr@topologysetdefault\corr@boxtopedgelabel{}%
   \corr@topologysetdefault\corr@boxrightedgelabel{}%
@@ -1309,14 +1325,14 @@
   \corr@topologysetdefault\corr@boxexternalmomentumend{0.82}%
   \corr@topologysetdefault\corr@boxexternalmomentumlabelfraction{0.50}%
   \corr@topologysetdefault\corr@boxexternalmomentumoffset{8pt}%
-  \corr@topologysetdefault\corr@boxleftarrowstart{0.24}%
-  \corr@topologysetdefault\corr@boxleftarrowend{0.72}%
-  \corr@topologysetdefault\corr@boxtoparrowstart{0.26}%
-  \corr@topologysetdefault\corr@boxtoparrowend{0.74}%
-  \corr@topologysetdefault\corr@boxrightarrowstart{0.24}%
-  \corr@topologysetdefault\corr@boxrightarrowend{0.72}%
-  \corr@topologysetdefault\corr@boxbottomarrowstart{0.24}%
-  \corr@topologysetdefault\corr@boxbottomarrowend{0.70}%
+  \corr@topologysetdefault\corr@boxleftarrowstart{0.22}%
+  \corr@topologysetdefault\corr@boxleftarrowend{0.78}%
+  \corr@topologysetdefault\corr@boxtoparrowstart{0.22}%
+  \corr@topologysetdefault\corr@boxtoparrowend{0.78}%
+  \corr@topologysetdefault\corr@boxrightarrowstart{0.22}%
+  \corr@topologysetdefault\corr@boxrightarrowend{0.78}%
+  \corr@topologysetdefault\corr@boxbottomarrowstart{0.22}%
+  \corr@topologysetdefault\corr@boxbottomarrowend{0.78}%
   \corr@topologysetdefault\corr@boxleftarrowxshift{-11pt}%
   \corr@topologysetdefault\corr@boxleftarrowyshift{0pt}%
   \corr@topologysetdefault\corr@boxtoparrowxshift{0pt}%
@@ -2094,6 +2110,44 @@
   box-bottom-momentum/.store in=\corr@boxbottommomentum,
   box-edge-momenta/.code={\corr@setboxquad{momentum}{#1}},
   box-internal-momenta/.style={box-edge-momenta={#1}},
+  box-upper-left-momentum-direction/.store in=\corr@boxulmomentumdirection,
+  box-lower-left-momentum-direction/.store in=\corr@boxllmomentumdirection,
+  box-lower-right-momentum-direction/.store in=\corr@boxlrmomentumdirection,
+  box-upper-right-momentum-direction/.store in=\corr@boxurmomentumdirection,
+  box-external-momentum-directions/.code={%
+    \readlist*\corr@boxexternalmomentumdirectionitems{#1}%
+    \ifnum\corr@boxexternalmomentumdirectionitemslen>0
+      \def\corr@boxulmomentumdirection{\corr@boxexternalmomentumdirectionitems[1]}%
+    \fi
+    \ifnum\corr@boxexternalmomentumdirectionitemslen>1
+      \def\corr@boxllmomentumdirection{\corr@boxexternalmomentumdirectionitems[2]}%
+    \fi
+    \ifnum\corr@boxexternalmomentumdirectionitemslen>2
+      \def\corr@boxlrmomentumdirection{\corr@boxexternalmomentumdirectionitems[3]}%
+    \fi
+    \ifnum\corr@boxexternalmomentumdirectionitemslen>3
+      \def\corr@boxurmomentumdirection{\corr@boxexternalmomentumdirectionitems[4]}%
+    \fi
+  },
+  box-left-momentum-direction/.store in=\corr@boxleftmomentumdirection,
+  box-top-momentum-direction/.store in=\corr@boxtopmomentumdirection,
+  box-right-momentum-direction/.store in=\corr@boxrightmomentumdirection,
+  box-bottom-momentum-direction/.store in=\corr@boxbottommomentumdirection,
+  box-edge-momentum-directions/.code={%
+    \readlist*\corr@boxedgemomentumdirectionitems{#1}%
+    \ifnum\corr@boxedgemomentumdirectionitemslen>0
+      \def\corr@boxleftmomentumdirection{\corr@boxedgemomentumdirectionitems[1]}%
+    \fi
+    \ifnum\corr@boxedgemomentumdirectionitemslen>1
+      \def\corr@boxtopmomentumdirection{\corr@boxedgemomentumdirectionitems[2]}%
+    \fi
+    \ifnum\corr@boxedgemomentumdirectionitemslen>2
+      \def\corr@boxrightmomentumdirection{\corr@boxedgemomentumdirectionitems[3]}%
+    \fi
+    \ifnum\corr@boxedgemomentumdirectionitemslen>3
+      \def\corr@boxbottommomentumdirection{\corr@boxedgemomentumdirectionitems[4]}%
+    \fi
+  },
   box-left-edge-label/.store in=\corr@boxleftedgelabel,
   box-top-edge-label/.store in=\corr@boxtopedgelabel,
   box-right-edge-label/.store in=\corr@boxrightedgelabel,
@@ -2507,6 +2561,21 @@
   three-point-momentum-label-fraction/.store in=\corr@threepointmomentumlabelfraction,
   three-point-momentum-label-gap/.store in=\corr@threepointmomentumlabelgap,
   three-point-momentum-offset/.store in=\corr@threepointmomentumoffset,
+  three-point-momentum-layout/.is choice,
+  three-point-momentum-layout/default/.style={
+    three-point-momentum-start=0.22,
+    three-point-momentum-end=0.72,
+    three-point-momentum-label-fraction=0.50,
+    three-point-momentum-label-gap=0.08,
+    three-point-momentum-offset=6pt
+  },
+  three-point-momentum-layout/outward/.style={
+    three-point-momentum-start=0.06,
+    three-point-momentum-end=0.42,
+    three-point-momentum-label-fraction=0.24,
+    three-point-momentum-label-gap=0.10,
+    three-point-momentum-offset=13pt
+  },
   three-point-upper-left-momentum-direction/.store in=\corr@threepointulmomentumdirection,
   three-point-left-momentum-direction/.style={three-point-upper-left-momentum-direction={#1}},
   three-point-ul-momentum-direction/.style={three-point-upper-left-momentum-direction={#1}},
@@ -2921,20 +2990,31 @@
   \endgroup
 }
 
+\newcommand{\corr@boxexternalmomentumdirectionfor}[2]{%
+  \edef\corr@boxthisexternaldirection{#1}%
+  \ifdefempty{\corr@boxthisexternaldirection}{%
+    \edef\corr@boxthisexternaldirection{#2}%
+  }{}%
+}
+
 \newcommand{\corr@drawboxexternalmomentumul}[3]{%
-  \corr@drawboxexternalmomentum{#1}{#2}{#3}{90}{\corr@externalleftmomentumdirection}%
+  \corr@boxexternalmomentumdirectionfor{\corr@boxulmomentumdirection}{\corr@externalleftmomentumdirection}%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{90}{\corr@boxthisexternaldirection}%
 }
 
 \newcommand{\corr@drawboxexternalmomentumll}[3]{%
-  \corr@drawboxexternalmomentum{#1}{#2}{#3}{-90}{\corr@externalleftmomentumdirection}%
+  \corr@boxexternalmomentumdirectionfor{\corr@boxllmomentumdirection}{\corr@externalleftmomentumdirection}%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{-90}{\corr@boxthisexternaldirection}%
 }
 
 \newcommand{\corr@drawboxexternalmomentumur}[3]{%
-  \corr@drawboxexternalmomentum{#1}{#2}{#3}{-90}{\corr@externalrightmomentumdirection}%
+  \corr@boxexternalmomentumdirectionfor{\corr@boxurmomentumdirection}{\corr@externalrightmomentumdirection}%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{-90}{\corr@boxthisexternaldirection}%
 }
 
 \newcommand{\corr@drawboxexternalmomentumlr}[3]{%
-  \corr@drawboxexternalmomentum{#1}{#2}{#3}{90}{\corr@externalrightmomentumdirection}%
+  \corr@boxexternalmomentumdirectionfor{\corr@boxlrmomentumdirection}{\corr@externalrightmomentumdirection}%
+  \corr@drawboxexternalmomentum{#1}{#2}{#3}{90}{\corr@boxthisexternaldirection}%
 }
 
 \newcommand{\corr@putlabel}[3]{%
@@ -3481,6 +3561,7 @@
     \def\corr@boxedgelabelyshift{\corr@boxleftlabelyshift}%
     \def\corr@boxedgelabelfraction{\corr@boxleftlabelfraction}%
     \def\corr@boxedgemomentum{\corr@boxleftmomentum}%
+    \def\corr@boxedgemomentumdirection{\corr@boxleftmomentumdirection}%
     \def\corr@boxedgelabelonly{\corr@boxleftedgelabel}%
   }{%
     \corr@ifstringeq{#1}{top}{%
@@ -3494,6 +3575,7 @@
       \def\corr@boxedgelabelyshift{\corr@boxtoplabelyshift}%
       \def\corr@boxedgelabelfraction{\corr@boxtoplabelfraction}%
       \def\corr@boxedgemomentum{\corr@boxtopmomentum}%
+      \def\corr@boxedgemomentumdirection{\corr@boxtopmomentumdirection}%
       \def\corr@boxedgelabelonly{\corr@boxtopedgelabel}%
     }{%
       \corr@ifstringeq{#1}{right}{%
@@ -3507,6 +3589,7 @@
         \def\corr@boxedgelabelyshift{\corr@boxrightlabelyshift}%
         \def\corr@boxedgelabelfraction{\corr@boxrightlabelfraction}%
         \def\corr@boxedgemomentum{\corr@boxrightmomentum}%
+        \def\corr@boxedgemomentumdirection{\corr@boxrightmomentumdirection}%
         \def\corr@boxedgelabelonly{\corr@boxrightedgelabel}%
       }{%
         \def\corr@boxedgearrowstart{\corr@boxbottomarrowstart}%
@@ -3519,6 +3602,7 @@
         \def\corr@boxedgelabelyshift{\corr@boxbottomlabelyshift}%
         \def\corr@boxedgelabelfraction{\corr@boxbottomlabelfraction}%
         \def\corr@boxedgemomentum{\corr@boxbottommomentum}%
+        \def\corr@boxedgemomentumdirection{\corr@boxbottommomentumdirection}%
         \def\corr@boxedgelabelonly{\corr@boxbottomedgelabel}%
       }%
     }%
@@ -3545,21 +3629,29 @@
 \newcommand{\corr@drawboxmomentumedge}[4]{%
   \corr@resolveboxmomentumedge{#1}%
   \ifdefempty{\corr@boxedgemomentum}{}{%
-    \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#2}}%
-    \path
-      ([xshift=\corr@boxedgearrowxshift,yshift=\corr@boxedgearrowyshift]#3) --
-      coordinate[pos=\corr@boxedgelabelfraction] (corrmomentumlabelcoord)
-      ([xshift=\corr@boxedgearrowxshift,yshift=\corr@boxedgearrowyshift]#4);
-    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
-      ($(#3)!\corr@boxedgearrowstart!(#4)+(\corr@boxedgearrowxshift,\corr@boxedgearrowyshift)$) --
-      ($(#3)!\corr@boxedgearrowend!(#4)+(\corr@boxedgearrowxshift,\corr@boxedgearrowyshift)$);
-    \corr@putmomentumlabelwithdistance
-      {(corrmomentumlabelcoord)}
-      {\corr@boxedgelabelposition}
-      {\corr@boxedgelabeldistance}
-      {\corr@boxedgelabelxshift}
-      {\corr@boxedgelabelyshift}
-      {\corr@boxedgemomentum}%
+    \corr@ifstringeq{\corr@boxedgemomentumdirection}{none}{}{%
+      \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#2}}%
+      \path
+        ([xshift=\corr@boxedgearrowxshift,yshift=\corr@boxedgearrowyshift]#3) --
+        coordinate[pos=\corr@boxedgelabelfraction] (corrmomentumlabelcoord)
+        ([xshift=\corr@boxedgearrowxshift,yshift=\corr@boxedgearrowyshift]#4);
+      \corr@ifstringeq{\corr@boxedgemomentumdirection}{reverse}{%
+        \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+          ($(#3)!\corr@boxedgearrowend!(#4)+(\corr@boxedgearrowxshift,\corr@boxedgearrowyshift)$) --
+          ($(#3)!\corr@boxedgearrowstart!(#4)+(\corr@boxedgearrowxshift,\corr@boxedgearrowyshift)$);
+      }{%
+        \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+          ($(#3)!\corr@boxedgearrowstart!(#4)+(\corr@boxedgearrowxshift,\corr@boxedgearrowyshift)$) --
+          ($(#3)!\corr@boxedgearrowend!(#4)+(\corr@boxedgearrowxshift,\corr@boxedgearrowyshift)$);
+      }%
+      \corr@putmomentumlabelwithdistance
+        {(corrmomentumlabelcoord)}
+        {\corr@boxedgelabelposition}
+        {\corr@boxedgelabeldistance}
+        {\corr@boxedgelabelxshift}
+        {\corr@boxedgelabelyshift}
+        {\corr@boxedgemomentum}%
+    }%
   }%
 }
 

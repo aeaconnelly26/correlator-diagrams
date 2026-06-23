@@ -25,6 +25,7 @@ scalar-polarized incoming leg.
     line=ewboson,
     leg-styles={scalarpolarized,ewboson,ewboson},
     three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
     momentum-labels={q_1,q_2,q_3},
     propagator-arrow-sizes={14pt,,},
     leg-labels={A_1,A_2,A_3}
@@ -57,6 +58,26 @@ Per-leg direction overrides and placement tuning:
     momentum-labels={q_1,q_2,q_3},
     leg-labels={A_1,A_2,A_3},
     propagator-arrow-sizes={16pt,,}
+  ]
+\end{array}
+\]
+
+\newpage
+
+Crowded scalar-polarized vertices can opt into outward momentum placement:
+
+\[
+\begin{array}{c}
+  \text{Incoming scalar-polarized leg with outward arrows} \\
+  \ThreePointCorr[
+    line=ewboson,
+    field={},
+    leg-styles={scalarpolarized,ewboson,ewboson},
+    leg-labels={W_\alpha,Z_\gamma,W_\beta},
+    momentum-labels={q_1,q_3,q_2},
+    three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
+    propagator-arrow-sizes={14pt,,}
   ]
 \end{array}
 \]

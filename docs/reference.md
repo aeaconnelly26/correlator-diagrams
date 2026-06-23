@@ -439,11 +439,17 @@ The shared arrow and label controls still apply:
 
 3-point momentum placement controls apply to all three legs:
 
+- `three-point-momentum-layout=default|outward`
 - `three-point-momentum-start=...`
 - `three-point-momentum-end=...`
 - `three-point-momentum-label-fraction=...`
 - `three-point-momentum-label-gap=...`
 - `three-point-momentum-offset=...`
+
+Use `three-point-momentum-layout=outward` when the default arrows crowd a
+triple vertex or scalar-polarized marker. It moves the arrows toward the
+external ends, increases their distance from the propagator lines, and centers
+each label in its arrow break.
 
 ### One-loop `s/t/u` bubbles: the internal loop momenta
 
@@ -972,6 +978,7 @@ Per-leg overrides:
     line=ewboson,
     leg-styles={scalarpolarized,ewboson,ewboson},
     three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
     momentum-labels={q_1,q_2,q_3},
     propagator-arrow-sizes={14pt,,}
   ]
@@ -988,11 +995,19 @@ Per-leg overrides:
 
 3-point momentum placement controls:
 
+- `three-point-momentum-layout=default|outward`
 - `three-point-momentum-start=...`
 - `three-point-momentum-end=...`
 - `three-point-momentum-label-fraction=...`
 - `three-point-momentum-label-gap=...`
 - `three-point-momentum-offset=...`
+
+Use `three-point-momentum-layout=outward` for crowded triple-coupling sketches,
+especially when one leg is scalar-polarized. It moves the momentum arrows
+toward the external leg ends, increases their distance from the propagators,
+and keeps each momentum label centered in its arrow break. The existing
+momentum directions are preserved. The shared start/end/fraction/gap/offset
+keys above remain available for manual tuning.
 
 Aliases for the upper-left leg geometry:
 
@@ -1159,6 +1174,46 @@ Box momentum labels:
 
 Use `box-edge-momenta={...}` for internal edge momentum arrows plus labels.
 Use `box-edge-labels={...}` for internal edge labels only, with no arrows.
+
+Box external momentum directions use the external slot order
+upper-left, lower-left, lower-right, upper-right:
+
+- `box-upper-left-momentum-direction=in|out`
+- `box-lower-left-momentum-direction=in|out`
+- `box-lower-right-momentum-direction=in|out`
+- `box-upper-right-momentum-direction=in|out`
+- `box-external-momentum-directions={ul,ll,lr,ur}`
+
+If a box-specific external direction is omitted, the older
+`external-left-momentum-direction` and `external-right-momentum-direction`
+fallbacks still apply.
+
+Box internal edge momentum directions use edge order left, top, right, bottom:
+
+- `box-left-momentum-direction=forward|reverse|none`
+- `box-top-momentum-direction=forward|reverse|none`
+- `box-right-momentum-direction=forward|reverse|none`
+- `box-bottom-momentum-direction=forward|reverse|none`
+- `box-edge-momentum-directions={left,top,right,bottom}`
+
+For example, this flips the lower-left and upper-right external arrows inward,
+reverses the left and right internal edge arrows, and hides the bottom edge
+arrow:
+
+```tex
+\[
+  \BoxLoopCorr[
+    box-external-line=plain,
+    box-line=plain,
+    field=A,
+    leg-labels={A_1,A_2,A_3,A_4},
+    box-edge-momenta={\ell_1,\ell_2,\ell_3,\ell_4},
+    box-external-momentum-directions={out,in,out,in},
+    box-edge-momentum-directions={reverse,forward,reverse,none},
+    box-loop-momentum={}
+  ]
+\]
+```
 
 - `box-left-edge-label=...`
 - `box-top-edge-label=...`
