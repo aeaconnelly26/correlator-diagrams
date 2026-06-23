@@ -925,12 +925,17 @@ Endpoint marker add-ons can be combined with any propagator style:
 - `endcapout`: short perpendicular terminal bar exactly at the cropped external
   endpoint of an external leg
 - `endcapin`: the corresponding path-end form for raw `\propag[...]` usage
+- `endcap`: ergonomic external-end alias; in package-managed topologies it
+  behaves like `endcapout`
 
 In package-managed topologies, these add-ons are oriented relative to the
 interaction vertex for each leg. In raw `\propag[...]` calls, they fall back to
 path-end semantics: `...in` targets the path end and `...out` points away from
 the path end. Endcaps are intended for external legs only; in topology helpers,
-use `endcapout` on an external leg style to mark the outer cropped endpoint.
+use `endcap` or `endcapout` on an external leg style to mark the outer cropped
+endpoint. Endcaps inherit the resolved propagator color, including global
+`color=...`, topology color keys, and simple per-leg color styles such as
+`{ewboson,fieldA,endcap}`.
 
 Circled propagator markers can be added to any propagator style with `circ=...`:
 
@@ -1140,9 +1145,26 @@ Mixed exterior line styles use the existing `leg-styles` slot order:
 \]
 ```
 
+Physical-polarization external legs add EW-boson external lines with endcaps
+without changing the internal box lines:
+
+```tex
+\[
+  \BoxLoopCorr[
+    box-external-style=physical-pol,
+    box-line=plain,
+    box-external-color=fieldA,
+    field={},
+    show-momenta=false
+  ]
+\]
+```
+
 Box line controls:
 
 - `box-external-line=...`
+- `box-external-style=physical-pol`
+- `box-physical-pol`
 - `box-line=...`
 - `box-internal-line=...`
 - `box-internal-lines={left-style,top-style,right-style,bottom-style}`
