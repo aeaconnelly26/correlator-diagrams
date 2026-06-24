@@ -287,6 +287,8 @@
 \newif\ifcorr@halfboxleftlowercirc
 \newif\ifcorr@halfboxrightlowercirc
 \newif\ifcorr@stylehasproca
+\newif\ifcorr@stylehascirc
+\newif\ifcorr@styleitemiscirc
 \newif\ifcorr@crossboxupproca
 \newif\ifcorr@crossboxdownproca
 
@@ -654,6 +656,9 @@
 \def\corr@trianglecontactline{ewboson}
 \def\corr@trianglecontactexternalline{}
 \def\corr@trianglecontactinternalline{}
+\def\corr@trianglecontactinternalfiveline{}
+\def\corr@trianglecontactinternalsixline{}
+\def\corr@trianglecontactinternalsevenline{}
 \def\corr@trianglecontactcolor{}
 \def\corr@trianglecontactexternalcolor{}
 \def\corr@trianglecontactinternalcolor{}
@@ -1116,6 +1121,22 @@
   \expandafter\def\csname corr@crossboxup#1\endcsname{#3}%
 }
 
+\newcommand{\corr@settrianglecontacttriplet}[2]{%
+  \expandafter\def\csname corr@trianglecontactinternalfive#1\endcsname{}%
+  \expandafter\def\csname corr@trianglecontactinternalsix#1\endcsname{}%
+  \expandafter\def\csname corr@trianglecontactinternalseven#1\endcsname{}%
+  \readlist*\corr@trianglecontacttripletitems{#2}%
+  \ifnum\corr@trianglecontacttripletitemslen>0
+    \expandafter\def\csname corr@trianglecontactinternalfive#1\endcsname{\corr@trianglecontacttripletitems[1]}%
+  \fi
+  \ifnum\corr@trianglecontacttripletitemslen>1
+    \expandafter\def\csname corr@trianglecontactinternalsix#1\endcsname{\corr@trianglecontacttripletitems[2]}%
+  \fi
+  \ifnum\corr@trianglecontacttripletitemslen>2
+    \expandafter\def\csname corr@trianglecontactinternalseven#1\endcsname{\corr@trianglecontacttripletitems[3]}%
+  \fi
+}
+
 \newcommand{\corr@sunsetmarklinehasindices}[4]{%
   \def#4{0}%
   \def\corr@sunsetinternalindextmp{#1}%
@@ -1447,6 +1468,9 @@
   \corr@topologysetdefault\corr@trianglecontactline{ewboson}%
   \corr@topologysetdefault\corr@trianglecontactexternalline{}%
   \corr@topologysetdefault\corr@trianglecontactinternalline{}%
+  \corr@topologysetdefault\corr@trianglecontactinternalfiveline{}%
+  \corr@topologysetdefault\corr@trianglecontactinternalsixline{}%
+  \corr@topologysetdefault\corr@trianglecontactinternalsevenline{}%
   \corr@topologysetdefault\corr@trianglecontactcolor{}%
   \corr@topologysetdefault\corr@trianglecontactexternalcolor{}%
   \corr@topologysetdefault\corr@trianglecontactinternalcolor{}%
@@ -2068,6 +2092,7 @@
   triangle-contact-line/.store in=\corr@trianglecontactline,
   triangle-contact-external-line/.store in=\corr@trianglecontactexternalline,
   triangle-contact-internal-line/.store in=\corr@trianglecontactinternalline,
+  triangle-contact-internal-lines/.code={\corr@settrianglecontacttriplet{line}{#1}},
   triangle-contact-color/.store in=\corr@trianglecontactcolor,
   triangle-contact-external-color/.store in=\corr@trianglecontactexternalcolor,
   triangle-contact-internal-color/.store in=\corr@trianglecontactinternalcolor,
@@ -2086,6 +2111,7 @@
   trianglecontact-line/.style={triangle-contact-line={#1}},
   trianglecontact-external-line/.style={triangle-contact-external-line={#1}},
   trianglecontact-internal-line/.style={triangle-contact-internal-line={#1}},
+  trianglecontact-internal-lines/.style={triangle-contact-internal-lines={#1}},
   trianglecontact-color/.style={triangle-contact-color={#1}},
   trianglecontact-external-color/.style={triangle-contact-external-color={#1}},
   trianglecontact-internal-color/.style={triangle-contact-internal-color={#1}},
@@ -2132,10 +2158,10 @@
       \def\corr@boxllmomentumdirection{\corr@boxexternalmomentumdirectionitems[2]}%
     \fi
     \ifnum\corr@boxexternalmomentumdirectionitemslen>2
-      \def\corr@boxlrmomentumdirection{\corr@boxexternalmomentumdirectionitems[3]}%
+      \def\corr@boxurmomentumdirection{\corr@boxexternalmomentumdirectionitems[3]}%
     \fi
     \ifnum\corr@boxexternalmomentumdirectionitemslen>3
-      \def\corr@boxurmomentumdirection{\corr@boxexternalmomentumdirectionitems[4]}%
+      \def\corr@boxlrmomentumdirection{\corr@boxexternalmomentumdirectionitems[4]}%
     \fi
   },
   box-left-momentum-direction/.store in=\corr@boxleftmomentumdirection,
@@ -3421,6 +3447,140 @@
   }%
 }
 
+\def\corr@style@stop{\corr@style@stop}
+
+\def\corr@splitstylekeyvalue#1=#2\corr@style@stop{%
+  \def\corr@styleitemkey{#1}%
+  \def\corr@styleitemvalue{#2}%
+}
+
+\newcommand{\corr@appendcirclessstyleitem}[1]{%
+  \ifdefempty{\corr@circlessstyle}{%
+    \edef\corr@circlessstyle{#1}%
+  }{%
+    \edef\corr@circlessstyle{\corr@circlessstyle,#1}%
+  }%
+}
+
+\newcommand{\corr@markstyleitemcircif}[1]{%
+  \edef\corr@stylekeytmpa{\corr@styleitemkey}%
+  \def\corr@stylekeytmpb{#1}%
+  \ifx\corr@stylekeytmpa\corr@stylekeytmpb
+    \corr@styleitemiscirctrue
+  \fi
+}
+
+\newcommand{\corr@stripcircstyleitem}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \corr@styleitemiscircfalse
+  \edef\corr@circstylecontainscheck{%
+    \noexpand\in@{\corr@endcapstyleequals}{\corr@thisstyleitem}%
+  }%
+  \corr@circstylecontainscheck
+  \ifin@
+    \expandafter\corr@splitstylekeyvalue\corr@thisstyleitem\corr@style@stop
+    \corr@markstyleitemcircif{circ}%
+    \corr@markstyleitemcircif{with circle}%
+    \corr@markstyleitemcircif{circled}%
+    \ifcorr@styleitemiscirc
+      \corr@stylehascirctrue
+      \edef\corr@stylecirclabel{\corr@styleitemvalue}%
+    \else
+      \corr@appendcirclessstyleitem{\corr@thisstyleitem}%
+    \fi
+  \else
+    \corr@appendcirclessstyleitem{\corr@thisstyleitem}%
+  \fi
+}
+
+\newcommand{\corr@stripcircstyle}[1]{%
+  \corr@stylehascircfalse
+  \def\corr@stylecirclabel{}%
+  \def\corr@circlessstyle{}%
+  \@for\corr@styleitem:=#1\do{%
+    \expandafter\corr@stripcircstyleitem\expandafter{\corr@styleitem}%
+  }%
+  \edef\corr@propoptions{\corr@circlessstyle}%
+}
+
+\newcommand{\corr@setcrossboxleftcircfromstyle}{%
+  \ifcorr@crossboxleftcirc
+  \else
+    \global\corr@crossboxleftcirctrue
+    \xdef\corr@crossboxleftcirc{\corr@stylecirclabel}%
+  \fi
+}
+
+\newcommand{\corr@setcrossboxrightcircfromstyle}{%
+  \ifcorr@crossboxrightcirc
+  \else
+    \global\corr@crossboxrightcirctrue
+    \xdef\corr@crossboxrightcirc{\corr@stylecirclabel}%
+  \fi
+}
+
+\newcommand{\corr@setcrossboxupcircfromstyle}{%
+  \ifcorr@crossboxupcirc
+  \else
+    \global\corr@crossboxupcirctrue
+    \xdef\corr@crossboxupcirc{\corr@stylecirclabel}%
+  \fi
+}
+
+\newcommand{\corr@setcrossboxdowncircfromstyle}{%
+  \ifcorr@crossboxdowncirc
+  \else
+    \global\corr@crossboxdowncirctrue
+    \xdef\corr@crossboxdowncirc{\corr@stylecirclabel}%
+  \fi
+}
+
+\newcommand{\corr@setcrossboxcircfromstyle}[1]{%
+  \ifcorr@stylehascirc
+    \corr@ifstringeq{#1}{left}{%
+      \corr@setcrossboxleftcircfromstyle
+    }{%
+      \corr@ifstringeq{#1}{right}{%
+        \corr@setcrossboxrightcircfromstyle
+      }{%
+        \corr@ifstringeq{#1}{up}{%
+          \corr@setcrossboxupcircfromstyle
+        }{%
+          \corr@setcrossboxdowncircfromstyle
+        }%
+      }%
+    }%
+  \fi
+}
+
+\newcommand{\corr@crossboxstyleforcirc}[2]{%
+  \corr@crossboxstylefor{#1}%
+  \expandafter\corr@stripcircstyle\expandafter{\corr@propoptions}%
+  \corr@setcrossboxcircfromstyle{#2}%
+}
+
+\newcommand{\corr@crossboxstyleforcircproca}[3]{%
+  \corr@crossboxstyleforproca{#1}{#2}%
+  \expandafter\corr@stripcircstyle\expandafter{\corr@propoptions}%
+  \corr@setcrossboxcircfromstyle{#3}%
+}
+
+\newcommand{\corr@crossboxuplinefor}{%
+  \ifdefempty{\corr@crossboxupline}{%
+    \edef\corr@crossboxresolvedline{\corr@boxtopline}%
+  }{%
+    \edef\corr@crossboxresolvedline{\corr@crossboxupline}%
+  }%
+}
+
+\newcommand{\corr@crossboxdownlinefor}{%
+  \ifdefempty{\corr@crossboxdownline}{%
+    \edef\corr@crossboxresolvedline{\corr@boxbottomline}%
+  }{%
+    \edef\corr@crossboxresolvedline{\corr@crossboxdownline}%
+  }%
+}
+
 \newcommand{\corr@appendprocastyleitem}[1]{%
   \ifdefempty{\corr@procareplacedstyle}{%
     \edef\corr@procareplacedstyle{#1}%
@@ -3454,8 +3614,8 @@
   \edef\corr@propoptions{\corr@procareplacedstyle}%
 }
 
-\newcommand{\corr@drawcrossboxinternalprop}[4]{%
-  \corr@crossboxstylefor{#2}%
+\newcommand{\corr@drawcrossboxinternalprop}[5]{%
+  \corr@crossboxstyleforcirc{#2}{#5}%
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
@@ -3463,8 +3623,8 @@
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
 }
 
-\newcommand{\corr@drawcrossboxinternalprocaprop}[5]{%
-  \corr@crossboxstyleforproca{#2}{#5}%
+\newcommand{\corr@drawcrossboxinternalprocaprop}[6]{%
+  \corr@crossboxstyleforcircproca{#2}{#5}{#6}%
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
@@ -3473,7 +3633,7 @@
 }
 
 \newcommand{\corr@drawcrossboxupdiagonalprop}[4]{%
-  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#3}{#4}{proca base}%
+  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#3}{#4}{proca base}{up}%
   \ifcorr@stylehasproca
     \global\corr@crossboxupprocatrue
   \fi
@@ -3487,11 +3647,11 @@
     coordinate[pos=\corr@crossboxgapstart] (#5)
     coordinate[pos=\corr@crossboxgapend] (#6)
     (#4);
-  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#3}{#5}{proca start}%
+  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#3}{#5}{proca start}{down}%
   \ifcorr@stylehasproca
     \global\corr@crossboxdownprocatrue
   \fi
-  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#6}{#4}{proca end}%
+  \corr@drawcrossboxinternalprocaprop{#1}{#2}{#6}{#4}{proca end}{down}%
   \ifcorr@stylehasproca
     \global\corr@crossboxdownprocatrue
   \fi
@@ -3566,6 +3726,22 @@
   }%
 }
 
+\newcommand{\corr@trianglecontactinternallinefor}[1]{%
+  \ifcase#1
+  \or
+  \or
+  \or
+  \or
+  \or \edef\corr@trianglecontactresolvedinternalline{\corr@trianglecontactinternalfiveline}%
+  \or \edef\corr@trianglecontactresolvedinternalline{\corr@trianglecontactinternalsixline}%
+  \or \edef\corr@trianglecontactresolvedinternalline{\corr@trianglecontactinternalsevenline}%
+  \else \def\corr@trianglecontactresolvedinternalline{}%
+  \fi
+  \ifdefempty{\corr@trianglecontactresolvedinternalline}{%
+    \edef\corr@trianglecontactresolvedinternalline{\corr@trianglecontactinternalline}%
+  }{}%
+}
+
 \newcommand{\corr@drawtrianglecontactexternalprop}[3]{%
   \corr@resetendcapcoloroptions
   \corr@trianglecontactstylefor{#1}{\corr@trianglecontactexternalline}%
@@ -3577,7 +3753,8 @@
 }
 
 \newcommand{\corr@drawtrianglecontactinternalprop}[3]{%
-  \corr@trianglecontactstylefor{#1}{\corr@trianglecontactinternalline}%
+  \corr@trianglecontactinternallinefor{#1}%
+  \corr@trianglecontactstylefor{#1}{\corr@trianglecontactresolvedinternalline}%
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@trianglecontactcolor}%
@@ -4213,8 +4390,8 @@
 \newcommand{\corr@boxplaceexternallabels}{%
   \corr@topologyputexternallabel{corrExtUL}{xshift=-11pt,yshift=8pt}{1}%
   \corr@topologyputexternallabel{corrExtLL}{xshift=-11pt,yshift=-8pt}{2}%
-  \corr@topologyputexternallabel{corrExtLR}{xshift=11pt,yshift=-8pt}{3}%
-  \corr@topologyputexternallabel{corrExtUR}{xshift=11pt,yshift=8pt}{4}%
+  \corr@topologyputexternallabel{corrExtUR}{xshift=11pt,yshift=8pt}{3}%
+  \corr@topologyputexternallabel{corrExtLR}{xshift=11pt,yshift=-8pt}{4}%
 }
 
 \newcommand{\corr@boxplaceexternalvertices}{%
@@ -4268,8 +4445,8 @@
     \corr@ifexternallegs{%
       \corr@drawboxexternalprop{1}{corrExtUL}{corrBoxTL}%
       \corr@drawboxexternalprop{2}{corrExtLL}{corrBoxBL}%
-      \corr@drawboxexternalprop{3}{corrExtLR}{corrBoxBR}%
-      \corr@drawboxexternalprop{4}{corrExtUR}{corrBoxTR}%
+      \corr@drawboxexternalprop{3}{corrExtUR}{corrBoxTR}%
+      \corr@drawboxexternalprop{4}{corrExtLR}{corrBoxBR}%
     }%
     \corr@drawboxinternalprop{5}{\corr@boxleftline}{corrBoxBL}{corrBoxTL}%
     \corr@drawboxinternalprop{6}{\corr@boxtopline}{corrBoxTL}{corrBoxTR}%
@@ -4286,8 +4463,8 @@
   \ifcorr@showmomenta
     \corr@drawboxexternalmomentumul{1}{corrExtUL}{corrBoxTL}
     \corr@drawboxexternalmomentumll{2}{corrExtLL}{corrBoxBL}
-    \corr@drawboxexternalmomentumlr{3}{corrExtLR}{corrBoxBR}
-    \corr@drawboxexternalmomentumur{4}{corrExtUR}{corrBoxTR}
+    \corr@drawboxexternalmomentumur{3}{corrExtUR}{corrBoxTR}
+    \corr@drawboxexternalmomentumlr{4}{corrExtLR}{corrBoxBR}
     \corr@drawboxmomentumedge{left}{5}{corrBoxBL}{corrBoxTL}
     \corr@drawboxmomentumedge{top}{6}{corrBoxTL}{corrBoxTR}
     \corr@drawboxmomentumedge{right}{7}{corrBoxTR}{corrBoxBR}
@@ -4316,13 +4493,15 @@
     \corr@ifexternallegs{%
       \corr@drawboxexternalprop{1}{corrExtUL}{corrBoxTL}%
       \corr@drawboxexternalprop{2}{corrExtLL}{corrBoxBL}%
-      \corr@drawboxexternalprop{3}{corrExtLR}{corrBoxBR}%
-      \corr@drawboxexternalprop{4}{corrExtUR}{corrBoxTR}%
+      \corr@drawboxexternalprop{3}{corrExtUR}{corrBoxTR}%
+      \corr@drawboxexternalprop{4}{corrExtLR}{corrBoxBR}%
     }%
-    \corr@drawboxinternalprop{5}{\corr@boxleftline}{corrBoxBL}{corrBoxTL}%
-    \corr@drawboxinternalprop{6}{\corr@boxrightline}{corrBoxTR}{corrBoxBR}%
-    \corr@drawcrossboxupdiagonalprop{8}{\corr@crossboxupline}{corrBoxBL}{corrBoxTR}%
-    \corr@drawcrossboxsplitinternalprop{7}{\corr@crossboxdownline}{corrBoxTL}{corrBoxBR}{corrCrossDownA}{corrCrossDownB}%
+    \corr@drawcrossboxinternalprop{5}{\corr@boxleftline}{corrBoxBL}{corrBoxTL}{left}%
+    \corr@drawcrossboxinternalprop{6}{\corr@boxrightline}{corrBoxTR}{corrBoxBR}{right}%
+    \corr@crossboxuplinefor
+    \corr@drawcrossboxupdiagonalprop{8}{\corr@crossboxresolvedline}{corrBoxBL}{corrBoxTR}%
+    \corr@crossboxdownlinefor
+    \corr@drawcrossboxsplitinternalprop{7}{\corr@crossboxresolvedline}{corrBoxTL}{corrBoxBR}{corrCrossDownA}{corrCrossDownB}%
   \end{feynhand}
   \ifcorr@centervertex
     \corr@putvertex{corrBoxTL}{\corr@centervertexstyle}%
@@ -4335,8 +4514,8 @@
   \ifcorr@showmomenta
     \corr@drawboxexternalmomentumul{1}{corrExtUL}{corrBoxTL}
     \corr@drawboxexternalmomentumll{2}{corrExtLL}{corrBoxBL}
-    \corr@drawboxexternalmomentumlr{3}{corrExtLR}{corrBoxBR}
-    \corr@drawboxexternalmomentumur{4}{corrExtUR}{corrBoxTR}
+    \corr@drawboxexternalmomentumur{3}{corrExtUR}{corrBoxTR}
+    \corr@drawboxexternalmomentumlr{4}{corrExtLR}{corrBoxBR}
   \fi
   \corr@boxplaceexternallabels
   \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
@@ -4575,8 +4754,8 @@
 \newcommand{\corr@trianglecontactplaceexternallabels}{%
   \corr@topologyputexternallabel{corrExtUL}{xshift=-11pt,yshift=8pt}{1}%
   \corr@topologyputexternallabel{corrExtLL}{xshift=-11pt,yshift=-8pt}{2}%
-  \corr@topologyputexternallabel{corrExtLR}{xshift=11pt,yshift=-8pt}{3}%
-  \corr@topologyputexternallabel{corrExtUR}{xshift=11pt,yshift=8pt}{4}%
+  \corr@topologyputexternallabel{corrExtUR}{xshift=11pt,yshift=8pt}{3}%
+  \corr@topologyputexternallabel{corrExtLR}{xshift=11pt,yshift=-8pt}{4}%
 }
 
 \newcommand{\corr@trianglecontactplaceexternalvertices}{%
@@ -4600,8 +4779,8 @@
   \ifcorr@showmomenta
     \corr@drawtrianglecontactmomentum{1}{corrExtUL}{corrTriSlotOne}{90}
     \corr@drawtrianglecontactmomentum{2}{corrExtLL}{corrTriSlotTwo}{-90}
-    \corr@drawtrianglecontactmomentum{3}{corrExtLR}{corrTriSlotThree}{90}
-    \corr@drawtrianglecontactmomentum{4}{corrExtUR}{corrTriSlotFour}{-90}
+    \corr@drawtrianglecontactmomentum{3}{corrExtUR}{corrTriSlotThree}{-90}
+    \corr@drawtrianglecontactmomentum{4}{corrExtLR}{corrTriSlotFour}{90}
   \fi
   \corr@trianglecontactplaceexternallabels
   \corr@topologyputcentral{corrC}{\corr@trianglecontactcentrallabelyshift}
@@ -4619,13 +4798,13 @@
     \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
     \coordinate (corrTriSlotOne) at (corrTriA);
     \coordinate (corrTriSlotTwo) at (corrTriContact);
-    \coordinate (corrTriSlotThree) at (corrTriContact);
-    \coordinate (corrTriSlotFour) at (corrTriB);
+    \coordinate (corrTriSlotThree) at (corrTriB);
+    \coordinate (corrTriSlotFour) at (corrTriContact);
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriA}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriContact}%
-      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriContact}%
-      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriB}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtUR}{corrTriB}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtLR}{corrTriContact}%
     }%
     \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriContact}%
@@ -4646,13 +4825,13 @@
     \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
     \coordinate (corrTriSlotOne) at (corrTriContact);
     \coordinate (corrTriSlotTwo) at (corrTriA);
-    \coordinate (corrTriSlotThree) at (corrTriB);
-    \coordinate (corrTriSlotFour) at (corrTriContact);
+    \coordinate (corrTriSlotThree) at (corrTriContact);
+    \coordinate (corrTriSlotFour) at (corrTriB);
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriContact}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriA}%
-      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriB}%
-      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtUR}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtLR}{corrTriB}%
     }%
     \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
@@ -4673,13 +4852,13 @@
     \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
     \coordinate (corrTriSlotOne) at (corrTriContact);
     \coordinate (corrTriSlotTwo) at (corrTriContact);
-    \coordinate (corrTriSlotThree) at (corrTriB);
-    \coordinate (corrTriSlotFour) at (corrTriA);
+    \coordinate (corrTriSlotThree) at (corrTriA);
+    \coordinate (corrTriSlotFour) at (corrTriB);
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriContact}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriContact}%
-      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriB}%
-      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriA}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtUR}{corrTriA}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtLR}{corrTriB}%
     }%
     \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
@@ -4705,8 +4884,8 @@
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriA}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriB}%
-      \corr@drawtrianglecontactexternalprop{3}{corrExtLR}{corrTriContact}%
-      \corr@drawtrianglecontactexternalprop{4}{corrExtUR}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{3}{corrExtUR}{corrTriContact}%
+      \corr@drawtrianglecontactexternalprop{4}{corrExtLR}{corrTriContact}%
     }%
     \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriB}{corrTriContact}%

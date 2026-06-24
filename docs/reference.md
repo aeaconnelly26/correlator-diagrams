@@ -203,8 +203,8 @@ around the diagram:
 
 - slot 1 = upper left
 - slot 2 = lower left
-- slot 3 = lower right
-- slot 4 = upper right
+- slot 3 = upper right
+- slot 4 = lower right
 
 The box has four internal propagator slots:
 
@@ -220,8 +220,8 @@ as the box order:
 
 - slot 1 = upper left
 - slot 2 = lower left
-- slot 3 = lower right
-- slot 4 = upper right
+- slot 3 = upper right
+- slot 4 = lower right
 
 The two internal box-edge segments use:
 
@@ -238,13 +238,13 @@ stay spatially fixed for every orientation:
 
 - slot 1 = upper left
 - slot 2 = lower left
-- slot 3 = lower right
-- slot 4 = upper right
+- slot 3 = upper right
+- slot 4 = lower right
 
 The contact vertex carries adjacent external pairs:
 
-- `triangle-contact-orientation=bottom`: slots 2 and 3
-- `triangle-contact-orientation=top`: slots 1 and 4
+- `triangle-contact-orientation=bottom`: slots 2 and 4
+- `triangle-contact-orientation=top`: slots 1 and 3
 - `triangle-contact-orientation=left`: slots 1 and 2
 - `triangle-contact-orientation=right`: slots 3 and 4
 
@@ -1102,8 +1102,8 @@ Default external momenta:
 
 - slot 1, upper left = `q_1`
 - slot 2, lower left = `q_2`
-- slot 3, lower right = `q_3`
-- slot 4, upper right = `q_4`
+- slot 3, upper right = `q_3`
+- slot 4, lower right = `q_4`
 
 Default internal momenta:
 
@@ -1225,13 +1225,13 @@ Use `box-edge-momenta={...}` for internal edge momentum arrows plus labels.
 Use `box-edge-labels={...}` for internal edge labels only, with no arrows.
 
 Box external momentum directions use the external slot order
-upper-left, lower-left, lower-right, upper-right:
+upper-left, lower-left, upper-right, lower-right:
 
 - `box-upper-left-momentum-direction=in|out`
 - `box-lower-left-momentum-direction=in|out`
-- `box-lower-right-momentum-direction=in|out`
 - `box-upper-right-momentum-direction=in|out`
-- `box-external-momentum-directions={ul,ll,lr,ur}`
+- `box-lower-right-momentum-direction=in|out`
+- `box-external-momentum-directions={ul,ll,ur,lr}`
 
 If a box-specific external direction is omitted, the older
 `external-left-momentum-direction` and `external-right-momentum-direction`
@@ -1257,7 +1257,7 @@ arrow:
     field=A,
     leg-labels={A_1,A_2,A_3,A_4},
     box-edge-momenta={\ell_1,\ell_2,\ell_3,\ell_4},
-    box-external-momentum-directions={out,in,out,in},
+    box-external-momentum-directions={out,in,in,out},
     box-edge-momentum-directions={reverse,forward,reverse,none},
     box-loop-momentum={}
   ]
@@ -1336,7 +1336,9 @@ Useful controls:
 - `box-external-line=...`
 - `box-line=...`
 - `box-left-line=...`
+- `box-top-line=...`
 - `box-right-line=...`
+- `box-bottom-line=...`
 - `cross-box-down-line=...`
 - `cross-box-up-line=...`
 - `cross-box-diagonal-lines={down-style,up-style}`
@@ -1358,6 +1360,28 @@ over/under crossing gap while its marker sits safely away from the crossing.
 By default, side markers sit halfway along their side edges, the lower-left to
 upper-right diagonal marker sits before the crossing, and the upper-left to
 lower-right diagonal marker sits after it.
+
+The usual box edge line keys are also accepted for screenshot-style EW-boson
+circ edge controls: `box-left-line` and `box-right-line` style the side edges,
+while `box-top-line` falls back to the lower-left to upper-right diagonal and
+`box-bottom-line` falls back to the split upper-left to lower-right diagonal
+when the explicit `cross-box-up-line` or `cross-box-down-line` keys are not
+set.
+
+```tex
+\[
+  \CrossBoxCorr[
+    field={},
+    show-momenta=false,
+    box-line=plain,
+    box-left-line={ewboson,circ=Z},
+    box-top-line={ewboson,circ=W},
+    box-right-line={ewboson,circ=A},
+    box-bottom-line={ewboson,circ=W},
+    central={}
+  ]
+\]
+```
 
 When `cross-box-up-line=proca` or `cross-box-down-line=proca` is used, the
 blank Proca circ is promoted to the same topology-level placement automatically.
@@ -1386,7 +1410,7 @@ quartic/contact vertex. The contact vertex orientation is controlled by:
 - `triangle-contact-orientation=right`
 
 The default is `bottom`. External slots remain fixed as upper left, lower left,
-lower right, and upper right while the contact vertex moves.
+upper right, and lower right while the contact vertex moves.
 
 Useful controls:
 
@@ -1397,6 +1421,7 @@ Useful controls:
 - `triangle-contact-line=...`
 - `triangle-contact-external-line=...`
 - `triangle-contact-internal-line=...`
+- `triangle-contact-internal-lines={edge5-style,edge6-style,edge7-style}`
 - `triangle-contact-color=...`
 - `triangle-contact-external-color=...`
 - `triangle-contact-internal-color=...`
@@ -1410,6 +1435,22 @@ three internal triangle edges. The global `color=...` key still works, and the
 more specific triangle-contact color keys take precedence when both are set.
 
 The `trianglecontact-*` spellings are also accepted as aliases.
+
+Use `triangle-contact-internal-lines={...}` when the three internal
+triangle-contact edges need independent propagator styles. Each item accepts
+the same composed style syntax as ordinary propagators:
+
+```tex
+\[
+  \TriangleContactCorr[
+    field={},
+    show-momenta=false,
+    triangle-contact-internal-lines={{ewboson,circ=Z},
+      {ewboson,circ=W},{ewboson,circ=A}},
+    central={}
+  ]
+\]
+```
 
 Focused visual QA lives in
 `regressions/topologies/triangle-contact/triangle-contact-regression.tex`.
