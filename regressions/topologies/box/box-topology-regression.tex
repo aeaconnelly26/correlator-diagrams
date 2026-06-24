@@ -47,11 +47,48 @@
 
 \[
 \BoxLoopCorr[
+  box-external-style=physical-pol,
+  box-line=plain,
+  box-external-color=blue!65!black,
+  show-momenta=false,
+  field={},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
   box-external-line=plain,
   box-line=plain,
   show-momenta=false,
   field={},
   leg-styles={{ewboson,fieldB,endcap},plain,plain,plain},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-external-line=plain,
+  box-line=plain,
+  show-momenta=false,
+  field={},
+  leg-styles={{ewboson,red!70!magenta,endcap},plain,plain,plain},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-line=plain,
+  show-momenta=false,
+  field={},
+  leg-styles={{ewboson,fieldA,endcap},{ewboson,fieldA,endcap},
+    {ewboson,fieldC,endcap},{ewboson,fieldC,endcap}},
+  box-left-line={plain,fieldA},
+  box-top-line={plain,fieldB},
+  box-right-line={plain,fieldC},
+  box-bottom-line={plain,fieldB},
   leg-labels={A_1,A_2,A_3,A_4}
 ]
 \]

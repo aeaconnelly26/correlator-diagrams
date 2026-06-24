@@ -11,6 +11,7 @@
 
 \definecolor{fieldA}{HTML}{2F5D8C} % deep muted blue
 \definecolor{fieldB}{HTML}{B85C5C} % muted rose/terracotta
+\definecolor{fieldC}{HTML}{4F7D52} % muted green
 
 \makeatletter
 
@@ -46,7 +47,7 @@
   circ position/.initial=0.5,
   circ size/.initial=12pt,
   circ fill/.initial=white,
-  circ draw/.initial=black,
+  circ draw/.initial={},
   every circ label@@/.style={},
   circ label style/.style={/tikzfeynhand/every circ label@@/.style={#1}},
   with circ/.style={
@@ -55,7 +56,8 @@
       mark=at position \pgfkeysvalueof{/tikzfeynhand/circ position} with {
         \node[
           circle,
-          draw=\pgfkeysvalueof{/tikzfeynhand/circ draw},
+          draw,
+          \pgfkeysvalueof{/tikzfeynhand/circ draw},
           fill=\pgfkeysvalueof{/tikzfeynhand/circ fill},
           line width=0.7\feynhandlinesize,
           inner sep=0pt,
@@ -2736,17 +2738,62 @@
   }%
 }
 
+\def\corr@endcapstyleequals{=}
+\def\corr@endcapstylebang{!}
+
+\newcommand{\corr@ifendcapstylecontains}[4]{%
+  \def\corr@endcapstyleneedle{#1}%
+  \edef\corr@endcapstylehaystack{#2}%
+  \edef\corr@endcapstylecontainscheck{%
+    \noexpand\in@{\corr@endcapstyleneedle}{\corr@endcapstylehaystack}%
+  }%
+  \corr@endcapstylecontainscheck
+  \ifin@
+    #3%
+  \else
+    #4%
+  \fi
+}
+
+\def\corr@splitendcapstylekey#1=#2\corr@stop{%
+  \def\corr@endcapstylekey{#1}%
+}
+
+\newcommand{\corr@capturebareendcapcolor}[1]{%
+  \edef\corr@endcapbarecolor{#1}%
+  \@ifundefinedcolor{\corr@endcapbarecolor}{%
+    \corr@ifendcapstylecontains{\corr@endcapstylebang}{\corr@endcapbarecolor}{%
+      \corr@appendendcapcolorvalue{\corr@endcapbarecolor}%
+    }{}%
+  }{%
+    \corr@appendendcapcolorvalue{\corr@endcapbarecolor}%
+  }%
+}
+
+\newcommand{\corr@capturekeyedendcapcolor}[1]{%
+  \expandafter\corr@splitendcapstylekey\corr@thisendcapcoloritem\corr@stop
+  \corr@ifstringeq{\corr@endcapstylekey}{color}{%
+    \corr@appendendcapcolorvalue{\corr@thisendcapcoloritem}%
+  }{%
+  \corr@ifstringeq{\corr@endcapstylekey}{draw}{%
+    \corr@appendendcapcolorvalue{\corr@thisendcapcoloritem}%
+  }{%
+  \corr@ifstringeq{\corr@endcapstylekey}{/tikz/color}{%
+    \corr@appendendcapcolorvalue{\corr@thisendcapcoloritem}%
+  }{%
+  \corr@ifstringeq{\corr@endcapstylekey}{/tikz/draw}{%
+    \corr@appendendcapcolorvalue{\corr@thisendcapcoloritem}%
+  }{}%
+  }}}%
+}
+
 \newcommand{\corr@captureendcapstylecolor}[1]{%
   \edef\corr@thisendcapcoloritem{#1}%
-  \def\corr@endcapfielda{fieldA}%
-  \def\corr@endcapfieldb{fieldB}%
-  \ifx\corr@thisendcapcoloritem\corr@endcapfielda
-    \corr@appendendcapcolorvalue{\corr@thisendcapcoloritem}%
-  \else
-    \ifx\corr@thisendcapcoloritem\corr@endcapfieldb
-      \corr@appendendcapcolorvalue{\corr@thisendcapcoloritem}%
-    \fi
-  \fi
+  \corr@ifendcapstylecontains{\corr@endcapstyleequals}{\corr@thisendcapcoloritem}{%
+    \corr@capturekeyedendcapcolor{\corr@thisendcapcoloritem}%
+  }{%
+    \corr@capturebareendcapcolor{\corr@thisendcapcoloritem}%
+  }%
 }
 
 \newcommand{\corr@appendstrippedpropstyleitem}[1]{%
@@ -3454,7 +3501,8 @@
   \edef\corr@manualcirclabel{#2}%
   \node[
     circle,
-    draw=\pgfkeysvalueof{/tikzfeynhand/circ draw},
+    draw,
+    \pgfkeysvalueof{/tikzfeynhand/circ draw},
     fill=\pgfkeysvalueof{/tikzfeynhand/circ fill},
     line width=0.7\feynhandlinesize,
     inner sep=0pt,

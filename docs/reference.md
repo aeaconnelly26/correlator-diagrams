@@ -934,8 +934,9 @@ path-end semantics: `...in` targets the path end and `...out` points away from
 the path end. Endcaps are intended for external legs only; in topology helpers,
 use `endcap` or `endcapout` on an external leg style to mark the outer cropped
 endpoint. Endcaps inherit the resolved propagator color, including global
-`color=...`, topology color keys, and simple per-leg color styles such as
-`{ewboson,fieldA,endcap}`.
+`color=...`, topology color keys, and common per-leg TikZ/xcolor styles such as
+`{ewboson,fieldA,endcap}`, `{ewboson,blue!65!black,endcap}`, and
+`{ewboson,color=orange!85!black,endcap}`.
 
 Circled propagator markers can be added to any propagator style with `circ=...`:
 
@@ -960,7 +961,9 @@ Use `circ={}` for a blank circle. The aliases `with circle=...` and
 
 The circle keeps the configured `circ size`; labels are overlaid rather than
 allowed to resize the marker. Increase `circ size` when a deliberately wide
-custom label should fit fully inside the circle.
+custom label should fit fully inside the circle. By default, the circle outline
+inherits the resolved propagator color, including Proca propagators; use
+`circ draw=...` to override the outline color independently.
 
 W-family markers are hand-tuned to keep the default circle size readable:
 
@@ -1156,6 +1159,30 @@ without changing the internal box lines:
     box-external-color=fieldA,
     field={},
     show-momenta=false
+  ]
+\]
+```
+
+For grouped visual structure, use `leg-styles` for the external legs and
+the per-edge line keys for the four box edges. This example colors the two left
+external legs and left edge one color, the top/bottom middle edges another
+color, and the right edge plus right external legs a third color:
+
+```tex
+\[
+  \BoxLoopCorr[
+    box-line=plain,
+    show-momenta=false,
+    field={},
+    leg-styles={{ewboson,blue!65!black,endcap},
+      {ewboson,blue!65!black,endcap},
+      {ewboson,green!45!black,endcap},
+      {ewboson,green!45!black,endcap}},
+    box-left-line={plain,blue!65!black},
+    box-top-line={plain,orange!85!black},
+    box-right-line={plain,green!45!black},
+    box-bottom-line={plain,orange!85!black},
+    leg-labels={A_1,A_2,A_3,A_4}
   ]
 \]
 ```

@@ -356,6 +356,25 @@ internal box styling independent:
   ]
 \]
 
+Grouped box colors can split the diagram into left, middle, and right regions:
+\[
+  \BoxLoopCorr[
+    scale=0.72,
+    box-line=plain,
+    show-momenta=false,
+    field={},
+    leg-styles={{ewboson,blue!65!black,endcap},
+      {ewboson,blue!65!black,endcap},
+      {ewboson,green!45!black,endcap},
+      {ewboson,green!45!black,endcap}},
+    box-left-line={plain,blue!65!black},
+    box-top-line={plain,orange!85!black},
+    box-right-line={plain,green!45!black},
+    box-bottom-line={plain,orange!85!black},
+    leg-labels={A_1,A_2,A_3,A_4}
+  ]
+\]
+
 External and internal box momentum arrows can be flipped independently:
 \[
   \BoxLoopCorr[
