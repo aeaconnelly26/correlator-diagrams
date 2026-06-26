@@ -1222,7 +1222,7 @@ Box momentum labels:
 - `box-loop-momentum=...`
 
 Use `box-edge-momenta={...}` for internal edge momentum arrows plus labels.
-Use `box-edge-labels={...}` for internal edge labels only, with no arrows.
+Use `box-edge-labels={...}` for internal side labels only, with no arrows.
 
 Box external momentum directions use the external slot order
 upper-left, lower-left, upper-right, lower-right:
@@ -1247,7 +1247,8 @@ Box internal edge momentum directions use edge order left, top, right, bottom:
 
 For example, this flips the lower-left and upper-right external arrows inward,
 reverses the left and right internal edge arrows, and hides the bottom edge
-arrow:
+arrow. Internal box arrows default to the shorter range `0.32` to `0.68` so
+they do not dominate the loop:
 
 ```tex
 \[
@@ -1259,6 +1260,29 @@ arrow:
     box-edge-momenta={\ell_1,\ell_2,\ell_3,\ell_4},
     box-external-momentum-directions={out,in,in,out},
     box-edge-momentum-directions={reverse,forward,reverse,none},
+    box-loop-momentum={}
+  ]
+\]
+```
+
+Label-only sides and hand-tuned arrow spans can be mixed with the same box
+controls:
+
+```tex
+\[
+  \BoxLoopCorr[
+    box-external-line=plain,
+    box-line=plain,
+    field={},
+    leg-labels={A_1,A_2,A_3,A_4},
+    box-edge-momenta={p_L,p_T,p_R,p_B},
+    box-edge-momentum-directions={forward,reverse,forward,none},
+    box-left-arrow-start=0.18,
+    box-left-arrow-end=0.45,
+    box-top-arrow-start=0.54,
+    box-top-arrow-end=0.86,
+    box-right-edge-label=Z,
+    box-bottom-edge-label=W,
     box-loop-momentum={}
   ]
 \]
@@ -1300,6 +1324,7 @@ Box edge arrow placement follows the same predictable pattern for each edge:
 - `box-left-label-fraction=...`
 
 Replace `left` with `top`, `right`, or `bottom` for the other edges.
+The default internal edge arrow range is `start=0.32,end=0.68`.
 
 Central loop arrow controls:
 
