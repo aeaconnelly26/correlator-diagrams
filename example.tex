@@ -298,8 +298,8 @@ Separate vertex and propagator indices on the two internal lines:
 \subsection*{7. One-Loop Box Topology}
 
 The box topology is a four-point loop with clockwise edge momenta. For this
-topology the right-side external slots follow the box order: slot 3 is lower
-right and slot 4 is upper right.
+topology the external slots follow the canonical box order: slot 1 is upper
+left, slot 2 is lower left, slot 3 is upper right, and slot 4 is lower right.
 \[
 \begin{array}{ccc}
   \text{Default wavy box} &
@@ -342,6 +342,39 @@ Mixed exterior styles still use the usual slot order:
   ]
 \]
 
+Physical-polarization external legs add EW-boson endcaps while keeping the
+internal box styling independent:
+\[
+  \BoxLoopCorr[
+    scale=0.72,
+    box-external-style=physical-pol,
+    box-line=plain,
+    box-external-color=fieldA,
+    show-momenta=false,
+    field={},
+    leg-labels={A_1,A_2,A_3,A_4}
+  ]
+\]
+
+Grouped box colors can split the diagram into left, middle, and right regions:
+\[
+  \BoxLoopCorr[
+    scale=0.72,
+    box-line=plain,
+    show-momenta=false,
+    field={},
+    leg-styles={{ewboson,blue!65!black,endcap},
+      {ewboson,blue!65!black,endcap},
+      {ewboson,green!45!black,endcap},
+      {ewboson,green!45!black,endcap}},
+    box-left-line={plain,blue!65!black},
+    box-top-line={plain,orange!85!black},
+    box-right-line={plain,green!45!black},
+    box-bottom-line={plain,orange!85!black},
+    leg-labels={A_1,A_2,A_3,A_4}
+  ]
+\]
+
 External and internal box momentum arrows can be flipped independently:
 \[
   \BoxLoopCorr[
@@ -351,13 +384,43 @@ External and internal box momentum arrows can be flipped independently:
     field=A,
     leg-labels={A_1,A_2,A_3,A_4},
     box-edge-momenta={\ell_1,\ell_2,\ell_3,\ell_4},
-    box-external-momentum-directions={out,in,out,in},
+    box-external-momentum-directions={out,in,in,out},
     box-edge-momentum-directions={reverse,forward,reverse,none},
     box-loop-momentum={}
   ]
 \]
 
-\subsection*{8. Vertex-Identity Half-Box Helpers}
+\subsection*{8. Cross-Box And Triangle-Contact Edge Styles}
+
+Cross-box diagrams accept the box edge line keys as a compact way to style the
+two side edges and the two crossed diagonals.
+\[
+\begin{array}{cc}
+  \text{Cross-box circ edge styles} &
+  \text{Triangle-contact internal styles} \\
+  \CrossBoxCorr[
+    scale=0.78,
+    field={},
+    show-momenta=false,
+    box-line=plain,
+    box-left-line={ewboson,circ=Z},
+    box-top-line={ewboson,circ=W},
+    box-right-line={ewboson,circ=A},
+    box-bottom-line={ewboson,circ=W},
+    central={}
+  ] &
+  \TriangleContactCorr[
+    scale=0.78,
+    field={},
+    show-momenta=false,
+    triangle-contact-internal-lines={{ewboson,circ=Z},
+      {ewboson,circ=W},{ewboson,circ=A}},
+    central={}
+  ]
+\end{array}
+\]
+
+\subsection*{9. Vertex-Identity Half-Box Helpers}
 
 The half-box helpers are focused vertex-identity topologies. The
 \verb|halfpropleft| and \verb|halfpropright| styles angle the top stubs, add
@@ -400,7 +463,7 @@ scalar-polarized leg.
 \end{array}
 \]
 
-\subsection*{9. Tree-Level Exchange Channels}
+\subsection*{10. Tree-Level Exchange Channels}
 
 Tree-level exchange channels use the same external slots as the loop channels,
 but their internal propagator uses the older \verb|channel-*| key family.
@@ -430,7 +493,7 @@ but their internal propagator uses the older \verb|channel-*| key family.
 \end{array}
 \]
 
-\subsection*{10. Sunset Self-Energies}
+\subsection*{11. Sunset Self-Energies}
 
 Minimal sunset diagram:
 \[

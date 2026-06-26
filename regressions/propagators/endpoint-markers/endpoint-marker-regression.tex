@@ -186,6 +186,51 @@
   leg-labels={,,,}
 ]
 }
+\hfill
+\diagramcell{Raw endcap alias}{
+\markerline{ewboson,endcap}{2.2}{\texttt{ewboson,endcap}}
+}
+\hfill
+\diagramcell{Colored raw endcap}{
+\markerline{ewboson,fieldA,endcap}{2.2}{\texttt{ewboson,fieldA,endcap}}
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Mixed raw endcap}{
+\markerline{ewboson,blue!65!black,endcap}{2.2}{\texttt{ewboson,blue!65!black,endcap}}
+}
+\hfill
+\diagramcell{Keyed raw endcap}{
+\markerline{ewboson,color=orange!85!black,endcap}{2.2}{\texttt{color=orange!85!black,endcap}}
+}
+\hfill
+\diagramcell{Box topology cap}{
+\BoxLoopCorr[
+  scale=0.44,
+  box-line=plain,
+  show-momenta=false,
+  field={},
+  leg-styles={{ewboson,green!45!black,endcap},plain,plain,plain},
+  leg-labels={,,,}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Colored topology cap}{
+\HalfBoxCorr[
+  scale=1.22,
+  show-momenta=false,
+  field={},
+  central={},
+  half-box-xspan=0.92,
+  half-box-top-stub=0.52,
+  half-box-down-span=0.72,
+  leg-styles={{ewboson,fieldA,endcap},ewboson,ewboson,ewboson},
+  leg-labels={,,,}
+]
+}
 \end{center}
 
 \end{document}

@@ -2,6 +2,17 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{correlator-diagrams}
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
 \begin{document}
 
 \section*{One-Loop Box Topology Regression}
@@ -36,12 +47,71 @@
 
 \[
 \BoxLoopCorr[
+  box-external-style=physical-pol,
+  box-line=plain,
+  box-external-color=fieldA,
+  show-momenta=false,
+  field={},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-external-style=physical-pol,
+  box-line=plain,
+  box-external-color=blue!65!black,
+  show-momenta=false,
+  field={},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-external-line=plain,
+  box-line=plain,
+  show-momenta=false,
+  field={},
+  leg-styles={{ewboson,fieldB,endcap},plain,plain,plain},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-external-line=plain,
+  box-line=plain,
+  show-momenta=false,
+  field={},
+  leg-styles={{ewboson,red!70!magenta,endcap},plain,plain,plain},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
+  box-line=plain,
+  show-momenta=false,
+  field={},
+  leg-styles={{ewboson,fieldA,endcap},{ewboson,fieldA,endcap},
+    {ewboson,fieldC,endcap},{ewboson,fieldC,endcap}},
+  box-left-line={plain,fieldA},
+  box-top-line={plain,fieldB},
+  box-right-line={plain,fieldC},
+  box-bottom-line={plain,fieldB},
+  leg-labels={A_1,A_2,A_3,A_4}
+]
+\]
+
+\[
+\BoxLoopCorr[
   box-external-line=plain,
   box-line=plain,
   field=A,
   leg-labels={A_1,A_2,A_3,A_4},
   box-edge-momenta={\ell_1,\ell_2,\ell_3,\ell_4},
-  box-external-momentum-directions={out,in,out,in},
+  box-external-momentum-directions={out,in,in,out},
   box-edge-momentum-directions={reverse,forward,reverse,none},
   box-loop-momentum={}
 ]
@@ -69,6 +139,108 @@
 ]
 \]
 
+\clearpage
+\section*{Box Momentum Arrangement Page}
+
+\begin{center}
+\diagramcell{Default labels, shorter arrows}{
+\BoxLoopCorr[
+  scale=0.82,
+  box-external-line=plain,
+  box-line=plain,
+  field=A,
+  leg-labels={A_1,A_2,A_3,A_4},
+  box-loop-momentum={}
+]
+}
+\hfill
+\diagramcell{Alternating internal directions}{
+\BoxLoopCorr[
+  scale=0.82,
+  box-external-line=plain,
+  box-line=plain,
+  field=A,
+  leg-labels={A_1,A_2,A_3,A_4},
+  box-edge-momenta={\ell_L,\ell_T,\ell_R,\ell_B},
+  box-edge-momentum-directions={forward,reverse,reverse,forward},
+  box-loop-momentum={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Left up, right down}{
+\BoxLoopCorr[
+  scale=0.82,
+  box-external-line=plain,
+  box-line=plain,
+  field={},
+  leg-labels={A_1,A_2,A_3,A_4},
+  box-edge-momenta={u,t,d,b},
+  box-left-momentum-direction=forward,
+  box-right-momentum-direction=forward,
+  box-top-momentum-direction=none,
+  box-bottom-momentum-direction=none,
+  box-loop-momentum={}
+]
+}
+\hfill
+\diagramcell{Label-only internal sides}{
+\BoxLoopCorr[
+  scale=0.82,
+  box-external-line=plain,
+  box-line=plain,
+  field={},
+  show-momenta=false,
+  leg-labels={A_1,A_2,A_3,A_4},
+  box-edge-labels={Z,W,Z,W}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Hand-tuned arrow placement}{
+\BoxLoopCorr[
+  scale=0.82,
+  box-external-line=plain,
+  box-line=plain,
+  field={},
+  leg-labels={A_1,A_2,A_3,A_4},
+  box-edge-momenta={p_L,p_T,p_R,p_B},
+  box-left-arrow-start=0.18,
+  box-left-arrow-end=0.45,
+  box-top-arrow-start=0.54,
+  box-top-arrow-end=0.86,
+  box-right-arrow-start=0.55,
+  box-right-arrow-end=0.82,
+  box-bottom-arrow-start=0.14,
+  box-bottom-arrow-end=0.46,
+  box-loop-momentum={}
+]
+}
+\hfill
+\diagramcell{Proca, circ, and side labels}{
+\BoxLoopCorr[
+  scale=0.82,
+  box-external-line=plain,
+  box-line=plain,
+  field={},
+  show-momenta=false,
+  leg-labels={A_1,A_2,A_3,A_4},
+  box-left-line={ewboson,circ=Z},
+  box-top-line=proca,
+  box-right-line={ewboson,circ=W},
+  box-bottom-line={plain,fieldB},
+  box-left-edge-label=Z,
+  box-right-edge-label=W,
+  box-bottom-edge-label=A,
+  box-left-label-fraction=0.74,
+  box-right-label-fraction=0.26
+]
+}
+\end{center}
+
+\clearpage
 \section*{Proca Propagator Cases}
 
 \[
