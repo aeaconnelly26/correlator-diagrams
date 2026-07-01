@@ -1631,9 +1631,12 @@
     every photon/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
     photon/.style={/tikzfeynhand/ewboson},
     pho/.style={/tikzfeynhand/photon},
-    every proca/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
+    every proca@@/.style={
+      /tikzfeynhand/scalar,
+    },
+    every proca/.style={/tikzfeynhand/every proca@@/.append style={##1}},
     proca line/.style={
-      /tikzfeynhand/every ewboson@@,
+      /tikzfeynhand/every proca@@,
     },
     proca base/.style={
       /tikzfeynhand/proca line,
@@ -1650,7 +1653,6 @@
     },
     proca/.style={
       /tikzfeynhand/proca base,
-      /tikzfeynhand/circ={},
     },
     Proca/.style={/tikzfeynhand/proca},
     every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
