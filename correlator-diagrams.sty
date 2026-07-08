@@ -215,13 +215,81 @@
     },
   },
   endpoint marker distance/.initial=5.4pt,
+  endpoint cap length/.initial=0.66,
+  endpoint double cap inner length/.initial=0.92,
+  endpoint double cap gap/.initial=3.0pt,
   with endpoint bar/.style={
     /tikz/decoration={
       markings,
       mark=at position #1 with {
         \draw[
           line width=0.95\feynhandlinesize
-        ] (0,-0.52\tikzfeynhand@arrow@size) -- (0,0.52\tikzfeynhand@arrow@size);
+        ] (0,-\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size) --
+          (0,\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size);
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  with endpoint double bar start/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \draw[
+          white,
+          line cap=butt,
+          line width=1.35\feynhandlinesize
+        ] (0pt,0pt) -- (\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap},0pt);
+        \draw[
+          line width=0.95\feynhandlinesize
+        ] (0,-\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size) --
+          (0,\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size);
+        \draw[
+          line width=0.95\feynhandlinesize
+        ] (\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap},-\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size) --
+          (\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap},\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size);
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  with endpoint double bar end/.style={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \draw[
+          white,
+          line cap=butt,
+          line width=1.35\feynhandlinesize
+        ] (0pt,0pt) -- (-\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap},0pt);
+        \draw[
+          line width=0.95\feynhandlinesize
+        ] (0,-\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size) --
+          (0,\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size);
+        \draw[
+          line width=0.95\feynhandlinesize
+        ] (-\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap},-\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size) --
+          (-\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap},\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size);
+      },
+    },
+    /tikz/postaction={
+      /tikz/decorate=true,
+    },
+  },
+  with endpoint double bar/.style 2 args={
+    /tikz/decoration={
+      markings,
+      mark=at position #1 with {
+        \draw[
+          line width=0.95\feynhandlinesize
+        ] (0,-\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size) --
+          (0,\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size);
+        \draw[
+          line width=0.95\feynhandlinesize
+        ] (#2,-\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size) --
+          (#2,\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size);
       },
     },
     /tikz/postaction={
@@ -258,6 +326,12 @@
   endpoint bar at start/.style={
     /tikz/postaction={/tikzfeynhand/with endpoint bar=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
   },
+  endpoint double bar at end/.style={
+    /tikz/postaction={/tikzfeynhand/with endpoint double bar end=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
+  endpoint double bar at start/.style={
+    /tikz/postaction={/tikzfeynhand/with endpoint double bar start=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+  },
   arrowin/.style={/tikzfeynhand/filled arrow to end},
   arrowout/.style={/tikzfeynhand/filled arrow from end},
   openarrowin/.style={/tikzfeynhand/open arrow to end},
@@ -265,6 +339,9 @@
   endcapin/.style={/tikzfeynhand/endpoint bar at end},
   endcapout/.style={/tikzfeynhand/endpoint bar at start},
   endcap/.style={/tikzfeynhand/endpoint bar at start},
+  endcappin/.style={/tikzfeynhand/endpoint double bar at end},
+  endcappout/.style={/tikzfeynhand/endpoint double bar at start},
+  endcapp/.style={/tikzfeynhand/endpoint double bar at start},
   every scalar polarized base@@/.style={
     /tikz/draw=none,
     /tikz/decoration={name=none},
@@ -321,6 +398,8 @@
 \def\corr@threepointmomentumlabelfraction{0.50}
 \def\corr@threepointmomentumlabelgap{0.08}
 \def\corr@threepointmomentumoffset{6pt}
+\def\corr@threepointorientation{right}
+\def\corr@threepointexternallength{}
 \def\corr@sunsetleftmomentum{p}
 \def\corr@sunsetrightmomentum{}
 \def\corr@sunsettopmomentum{k}
@@ -1313,6 +1392,8 @@
   \corr@topologysetdefault\corr@threepointmomentumend{0.72}%
   \corr@topologysetdefault\corr@threepointmomentumlabelfraction{0.50}%
   \corr@topologysetdefault\corr@threepointmomentumoffset{6pt}%
+  \corr@topologysetdefault\corr@threepointorientation{right}%
+  \corr@topologysetdefault\corr@threepointexternallength{}%
 }
 
 \newcommand{\corr@resetboxdefaults}{%
@@ -1676,6 +1757,10 @@
     spolin/.style={/tikzfeynhand/scalar polarized inward},
     spolout/.style={/tikzfeynhand/scalar polarized outward},
     spol/.style={/tikzfeynhand/scalar polarized},
+    epspol/.style={
+      /tikzfeynhand/scalar polarized,
+      /tikzfeynhand/endcapp,
+    },
     every anti scalar polarized/.style={/tikzfeynhand/every scalar polarized/.append style={##1}},
     anti scalar polarized/.style={/tikzfeynhand/scalar polarized},
     antiscalarpolarized/.style={/tikzfeynhand/scalar polarized},
@@ -1709,6 +1794,12 @@
   momentum-label-inner-sep/.store in=\corr@momentumlabelinnersep,
   momentum-label-style/.store in=\corr@momentumlabelstyle,
   momentum-label-size/.store in=\corr@momentumlabelsize,
+  endpoint-cap-length/.code={\tikzfeynhandset{endpoint cap length={#1}}},
+  endpoint-double-cap-inner-length/.code={\tikzfeynhandset{endpoint double cap inner length={#1}}},
+  endpoint-double-cap-gap/.code={\tikzfeynhandset{endpoint double cap gap={#1}}},
+  endcap-length/.style={endpoint-cap-length={#1}},
+  endcapp-inner-length/.style={endpoint-double-cap-inner-length={#1}},
+  endcapp-gap/.style={endpoint-double-cap-gap={#1}},
   external-left-momentum-direction/.store in=\corr@externalleftmomentumdirection,
   external-right-momentum-direction/.store in=\corr@externalrightmomentumdirection,
   left-momentum-direction/.style={external-left-momentum-direction={#1}},
@@ -2592,6 +2683,12 @@
   three-point-upper-left-yspan/.style={three-point-upper-yspan={#1}},
   three-point-right-xspan/.store in=\corr@threepointrightxspan,
   three-point-bottom-yspan/.store in=\corr@threepointbottomyspan,
+  three-point-external-length/.store in=\corr@threepointexternallength,
+  three-point-orientation/.is choice,
+  three-point-orientation/right/.code={\def\corr@threepointorientation{right}},
+  three-point-orientation/left/.code={\def\corr@threepointorientation{left}},
+  three-point-orientation/up/.code={\def\corr@threepointorientation{up}},
+  three-point-orientation/down/.code={\def\corr@threepointorientation{down}},
   three-point-central-label-yshift/.store in=\corr@threepointcentrallabelyshift,
   three-point-momentum-start/.store in=\corr@threepointmomentumstart,
   three-point-momentum-end/.store in=\corr@threepointmomentumend,
@@ -2753,6 +2850,8 @@
 
 \newif\ifcorr@endcapatstart
 \newif\ifcorr@endcapatend
+\newif\ifcorr@endcappatstart
+\newif\ifcorr@endcappend
 \def\corr@endcapcoloroptions{}
 
 \newcommand{\corr@resetendcapcoloroptions}{%
@@ -2841,16 +2940,27 @@
   \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@endcapatstarttrue}{%
   \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@endcapatendtrue}{%
   \corr@ifstringeq{\corr@thisstyleitem}{endcap}{\corr@endcapatstarttrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{\corr@endcappatstarttrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{\corr@endcappendtrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{\corr@endcappatstarttrue}{%
   \corr@ifstringeq{\corr@thisstyleitem}{/tikzfeynhand/endpoint bar at start}{\corr@endcapatstarttrue}{%
   \corr@ifstringeq{\corr@thisstyleitem}{/tikzfeynhand/endpoint bar at end}{\corr@endcapatendtrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{/tikzfeynhand/endpoint double bar at start}{\corr@endcappatstarttrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{/tikzfeynhand/endpoint double bar at end}{\corr@endcappendtrue}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{%
+    \corr@endcappatstarttrue
+    \corr@appendstrippedpropstyleitem{scalar polarized}%
+  }{%
     \corr@captureendcapstylecolor{\corr@thisstyleitem}%
     \corr@appendcurrentstrippedpropstyleitem
-  }}}}}%
+  }}}}}}}}}}}%
 }
 
 \newcommand{\corr@stripendcapstyles}[1]{%
   \corr@endcapatstartfalse
   \corr@endcapatendfalse
+  \corr@endcappatstartfalse
+  \corr@endcappendfalse
   \def\corr@strippedpropoptions{}%
   \@for\corr@styleitem:=#1\do{%
     \expandafter\corr@stripendcapstyleitem\expandafter{\corr@styleitem}%
@@ -2863,18 +2973,42 @@
     \corr@endcapcoloroptions,
     line width=0.95\feynhandlinesize
   ]
-    ($(#1)!0.52\tikzfeynhand@arrow@size!90:(#2)$) --
-    ($(#1)!0.52\tikzfeynhand@arrow@size!-90:(#2)$);
+    ($(#1)!\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size!90:(#2)$) --
+    ($(#1)!\pgfkeysvalueof{/tikzfeynhand/endpoint cap length}\tikzfeynhand@arrow@size!-90:(#2)$);
+}
+
+\newcommand{\corr@drawexternalendcapp}[2]{%
+  \corr@drawexternalendcap{#1}{#2}%
+  \expandafter\draw\expandafter[
+    \corr@endcapcoloroptions,
+    line width=0.95\feynhandlinesize
+  ]
+    ($($(#1)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap}!(#2)$)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size!90:(#2)$) --
+    ($($(#1)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap}!(#2)$)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size!-90:(#2)$);
 }
 
 \newcommand{\corr@propagwithexternalendcaps}[2]{%
   \expandafter\corr@stripendcapstyles\expandafter{\corr@propoptions}%
-  \expandafter\propag\expandafter[\corr@propoptions] (#1) to (#2);
+  \coordinate (correndcapdrawstart) at (#1);
+  \coordinate (correndcapdrawend) at (#2);
+  \ifcorr@endcappatstart
+    \coordinate (correndcapdrawstart) at ($(#1)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap}!(#2)$);
+  \fi
+  \ifcorr@endcappend
+    \coordinate (correndcapdrawend) at ($(#2)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap}!(#1)$);
+  \fi
+  \expandafter\propag\expandafter[\corr@propoptions] (correndcapdrawstart) to (correndcapdrawend);
   \ifcorr@endcapatstart
     \corr@drawexternalendcap{#1}{#2}%
   \fi
   \ifcorr@endcapatend
     \corr@drawexternalendcap{#2}{#1}%
+  \fi
+  \ifcorr@endcappatstart
+    \corr@drawexternalendcapp{#1}{#2}%
+  \fi
+  \ifcorr@endcappend
+    \corr@drawexternalendcapp{#2}{#1}%
   \fi
 }
 
@@ -3080,15 +3214,15 @@
 }
 
 \newcommand{\corr@drawthreepointmomentumul}[3]{%
-  \corr@topologydrawmomentum{#1}{#2}{#3}{-90}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointulmomentumdirection}%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{\corr@threepointmomangleone}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointulmomentumdirection}%
 }
 
 \newcommand{\corr@drawthreepointmomentumr}[3]{%
-  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointrmomentumdirection}%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{\corr@threepointmomangletwo}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointrmomentumdirection}%
 }
 
 \newcommand{\corr@drawthreepointmomentumb}[3]{%
-  \corr@topologydrawmomentum{#1}{#2}{#3}{90}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointbmomentumdirection}%
+  \corr@topologydrawmomentum{#1}{#2}{#3}{\corr@threepointmomanglethree}{\corr@threepointmomentumstart}{\corr@threepointmomentumend}{\corr@threepointmomentumlabelfraction}{\corr@threepointbmomentumdirection}%
 }
 
 \newcommand{\corr@drawboxexternalmomentum}[5]{%
@@ -3280,10 +3414,20 @@
   \corr@appendorientedstyleitem{/tikzfeynhand/open arrow to end}%
 }
 
+\newcommand{\corr@epspolorientedstyletoend}{%
+  \corr@scalarorientedstyletoend
+  \corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}%
+}
+
 \newcommand{\corr@scalarorientedstyletostart}{%
   \corr@appendorientedstyleitem{/tikzfeynhand/scalar}%
   \corr@appendorientedstyleitem{/tikzfeynhand/every scalar polarized base@@}%
   \corr@appendorientedstyleitem{/tikzfeynhand/open arrow to start}%
+}
+
+\newcommand{\corr@epspolorientedstyletostart}{%
+  \corr@scalarorientedstyletostart
+  \corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}%
 }
 
 \newcommand{\corr@orientstyleitemtoend}[1]{%
@@ -3300,8 +3444,12 @@
   \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
   \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
   \corr@ifstringeq{\corr@thisstyleitem}{endcap}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{\corr@epspolorientedstyletoend}{%
     \corr@appendcurrentstyleitem
-  }}}}}}}}}}}}%
+  }}}}}}}}}}}}}}}}%
 }
 
 \newcommand{\corr@orientstyleitemtostart}[1]{%
@@ -3318,8 +3466,12 @@
   \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
   \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
   \corr@ifstringeq{\corr@thisstyleitem}{endcap}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{\corr@epspolorientedstyletostart}{%
     \corr@appendcurrentstyleitem
-  }}}}}}}}}}}}%
+  }}}}}}}}}}}}}}}}%
 }
 
 \newcommand{\corr@scalarstyletoend}[1]{%
@@ -4285,10 +4437,112 @@
   }%
 }
 
+\newcommand{\corr@setthreepointcoordsright}{%
+  \let\corr@threepointslotonex\corr@threepointslotonexraw
+  \let\corr@threepointslotoney\corr@threepointslotoneyraw
+  \let\corr@threepointslottwox\corr@threepointslottwoxraw
+  \let\corr@threepointslottwoy\corr@threepointslottwoyraw
+  \let\corr@threepointslotthreex\corr@threepointslotthreexraw
+  \let\corr@threepointslotthreey\corr@threepointslotthreeyraw
+  \def\corr@threepointmomangleone{-90}%
+  \def\corr@threepointmomangletwo{90}%
+  \def\corr@threepointmomanglethree{90}%
+  \def\corr@threepointlabeloptsone{xshift=-11pt,yshift=8pt}%
+  \def\corr@threepointlabeloptstwo{xshift=10pt,yshift=6pt}%
+  \def\corr@threepointlabeloptsthree{yshift=-12pt}%
+}
+
+\newcommand{\corr@setthreepointcoordsleft}{%
+  \pgfmathsetmacro{\corr@threepointslotonex}{-\corr@threepointslotonexraw}%
+  \pgfmathsetmacro{\corr@threepointslotoney}{-\corr@threepointslotoneyraw}%
+  \pgfmathsetmacro{\corr@threepointslottwox}{-\corr@threepointslottwoxraw}%
+  \pgfmathsetmacro{\corr@threepointslottwoy}{-\corr@threepointslottwoyraw}%
+  \pgfmathsetmacro{\corr@threepointslotthreex}{-\corr@threepointslotthreexraw}%
+  \pgfmathsetmacro{\corr@threepointslotthreey}{-\corr@threepointslotthreeyraw}%
+  \def\corr@threepointmomangleone{90}%
+  \def\corr@threepointmomangletwo{270}%
+  \def\corr@threepointmomanglethree{270}%
+  \def\corr@threepointlabeloptsone{xshift=11pt,yshift=-8pt}%
+  \def\corr@threepointlabeloptstwo{xshift=-10pt,yshift=-6pt}%
+  \def\corr@threepointlabeloptsthree{yshift=12pt}%
+}
+
+\newcommand{\corr@setthreepointcoordsup}{%
+  \pgfmathsetmacro{\corr@threepointslotonex}{-\corr@threepointslotoneyraw}%
+  \pgfmathsetmacro{\corr@threepointslotoney}{\corr@threepointslotonexraw}%
+  \pgfmathsetmacro{\corr@threepointslottwox}{-\corr@threepointslottwoyraw}%
+  \pgfmathsetmacro{\corr@threepointslottwoy}{\corr@threepointslottwoxraw}%
+  \pgfmathsetmacro{\corr@threepointslotthreex}{-\corr@threepointslotthreeyraw}%
+  \pgfmathsetmacro{\corr@threepointslotthreey}{\corr@threepointslotthreexraw}%
+  \def\corr@threepointmomangleone{0}%
+  \def\corr@threepointmomangletwo{180}%
+  \def\corr@threepointmomanglethree{180}%
+  \def\corr@threepointlabeloptsone{xshift=-8pt,yshift=-11pt}%
+  \def\corr@threepointlabeloptstwo{xshift=-6pt,yshift=10pt}%
+  \def\corr@threepointlabeloptsthree{xshift=24pt}%
+}
+
+\newcommand{\corr@setthreepointcoordsdown}{%
+  \pgfmathsetmacro{\corr@threepointslotonex}{\corr@threepointslotoneyraw}%
+  \pgfmathsetmacro{\corr@threepointslotoney}{-\corr@threepointslotonexraw}%
+  \pgfmathsetmacro{\corr@threepointslottwox}{\corr@threepointslottwoyraw}%
+  \pgfmathsetmacro{\corr@threepointslottwoy}{-\corr@threepointslottwoxraw}%
+  \pgfmathsetmacro{\corr@threepointslotthreex}{\corr@threepointslotthreeyraw}%
+  \pgfmathsetmacro{\corr@threepointslotthreey}{-\corr@threepointslotthreexraw}%
+  \def\corr@threepointmomangleone{180}%
+  \def\corr@threepointmomangletwo{0}%
+  \def\corr@threepointmomanglethree{0}%
+  \def\corr@threepointlabeloptsone{xshift=8pt,yshift=11pt}%
+  \def\corr@threepointlabeloptstwo{xshift=6pt,yshift=-10pt}%
+  \def\corr@threepointlabeloptsthree{xshift=-24pt}%
+}
+
+\newcommand{\corr@setthreepointcoordinates}{%
+  \ifdefempty{\corr@threepointexternallength}{%
+    \pgfmathsetmacro{\corr@threepointslotonexraw}{-\corr@threepointleftxspan}%
+    \pgfmathsetmacro{\corr@threepointslotoneyraw}{\corr@threepointupperyspan}%
+  }{%
+    \pgfmathsetmacro{\corr@threepointexternalnorm}{sqrt((\corr@threepointleftxspan)^2+(\corr@threepointupperyspan)^2)}%
+    \pgfmathsetmacro{\corr@threepointslotonexraw}{-\corr@threepointexternallength*\corr@threepointleftxspan/\corr@threepointexternalnorm}%
+    \pgfmathsetmacro{\corr@threepointslotoneyraw}{\corr@threepointexternallength*\corr@threepointupperyspan/\corr@threepointexternalnorm}%
+  }%
+  \pgfmathsetmacro{\corr@threepointslottwoxraw}{\corr@threepointrightxspan}%
+  \pgfmathsetmacro{\corr@threepointslottwoyraw}{0}%
+  \pgfmathsetmacro{\corr@threepointslotthreexraw}{0}%
+  \pgfmathsetmacro{\corr@threepointslotthreeyraw}{-\corr@threepointbottomyspan}%
+  \corr@ifstringeq{\corr@threepointorientation}{left}{%
+    \corr@setthreepointcoordsleft
+  }{%
+  \corr@ifstringeq{\corr@threepointorientation}{up}{%
+    \corr@setthreepointcoordsup
+  }{%
+  \corr@ifstringeq{\corr@threepointorientation}{down}{%
+    \corr@setthreepointcoordsdown
+  }{%
+    \corr@setthreepointcoordsright
+  }}}%
+}
+
 \newcommand{\corr@threepointplaceexternallabels}{%
-  \corr@topologyputexternallabel{corrUL}{xshift=-11pt,yshift=8pt}{1}%
-  \corr@topologyputexternallabel{corrR}{xshift=10pt,yshift=6pt}{2}%
-  \corr@topologyputexternallabel{corrB}{yshift=-12pt}{3}%
+  \corr@ifstringeq{\corr@threepointorientation}{left}{%
+    \corr@topologyputexternallabel{corrUL}{xshift=11pt,yshift=-8pt}{1}%
+    \corr@topologyputexternallabel{corrR}{xshift=-10pt,yshift=-6pt}{2}%
+    \corr@topologyputexternallabel{corrB}{yshift=12pt}{3}%
+  }{%
+  \corr@ifstringeq{\corr@threepointorientation}{up}{%
+    \corr@topologyputexternallabel{corrUL}{xshift=-8pt,yshift=-11pt}{1}%
+    \corr@topologyputexternallabel{corrR}{xshift=-6pt,yshift=10pt}{2}%
+    \corr@topologyputexternallabel{corrB}{xshift=24pt}{3}%
+  }{%
+  \corr@ifstringeq{\corr@threepointorientation}{down}{%
+    \corr@topologyputexternallabel{corrUL}{xshift=8pt,yshift=11pt}{1}%
+    \corr@topologyputexternallabel{corrR}{xshift=6pt,yshift=-10pt}{2}%
+    \corr@topologyputexternallabel{corrB}{xshift=-24pt}{3}%
+  }{%
+    \corr@topologyputexternallabel{corrUL}{xshift=-11pt,yshift=8pt}{1}%
+    \corr@topologyputexternallabel{corrR}{xshift=10pt,yshift=6pt}{2}%
+    \corr@topologyputexternallabel{corrB}{yshift=-12pt}{3}%
+  }}}%
 }
 
 \newcommand{\corr@threepointplaceexternalvertices}{%
@@ -4307,12 +4561,13 @@
   \pgfqkeys{/corrdiag}{#1}%
   \corr@preparelists
   \corr@configurestyles
+  \corr@setthreepointcoordinates
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \begin{feynhand}
       \corr@topologycoordinate{corrC}{0}{0}%
-      \corr@topologycoordinate{corrUL}{-\corr@threepointleftxspan}{\corr@threepointupperyspan}%
-      \corr@topologycoordinate{corrR}{\corr@threepointrightxspan}{0}%
-      \corr@topologycoordinate{corrB}{0}{-\corr@threepointbottomyspan}%
+      \corr@topologycoordinate{corrUL}{\corr@threepointslotonex}{\corr@threepointslotoney}%
+      \corr@topologycoordinate{corrR}{\corr@threepointslottwox}{\corr@threepointslottwoy}%
+      \corr@topologycoordinate{corrB}{\corr@threepointslotthreex}{\corr@threepointslotthreey}%
       \corr@ifexternallegs{%
         \corr@topologydrawprop{mom}{1}{corrUL}{corrC}%
         \corr@topologydrawprop{mom'}{2}{corrR}{corrC}%

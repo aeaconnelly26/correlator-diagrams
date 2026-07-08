@@ -927,6 +927,9 @@ Endpoint marker add-ons can be combined with any propagator style:
 - `endcapin`: the corresponding path-end form for raw `\propag[...]` usage
 - `endcap`: ergonomic external-end alias; in package-managed topologies it
   behaves like `endcapout`
+- `endcappout`, `endcappin`, `endcapp`: staggered double-endcap variants. The
+  inner bar is longer than the terminal bar; in package-managed topologies
+  `endcapp` behaves like `endcappout`.
 
 In package-managed topologies, these add-ons are oriented relative to the
 interaction vertex for each leg. In raw `\propag[...]` calls, they fall back to
@@ -936,7 +939,15 @@ use `endcap` or `endcapout` on an external leg style to mark the outer cropped
 endpoint. Endcaps inherit the resolved propagator color, including global
 `color=...`, topology color keys, and common per-leg TikZ/xcolor styles such as
 `{ewboson,fieldA,endcap}`, `{ewboson,blue!65!black,endcap}`, and
-`{ewboson,color=orange!85!black,endcap}`.
+`{ewboson,color=orange!85!black,endcap}`. Color inheritance is order-stable for
+the cap add-on, so `{ewboson,endcapp,fieldA}` and `{ewboson,fieldA,endcapp}`
+produce matching cap colors.
+
+Endpoint cap tuning keys:
+
+- `endpoint-cap-length=...` / `endcap-length=...`
+- `endpoint-double-cap-inner-length=...` / `endcapp-inner-length=...`
+- `endpoint-double-cap-gap=...` / `endcapp-gap=...`
 
 Circled propagator markers can be added to any propagator style with `circ=...`:
 
@@ -993,13 +1004,36 @@ Per-leg overrides:
 \]
 ```
 
+Use `epspol` for a short scalar-polarized external leg with a double endcap:
+
+```tex
+\[
+  \ThreePointCorr[
+    line=ewboson,
+    leg-styles={epspol,ewboson,ewboson},
+    three-point-external-length=1.05,
+    three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward
+  ]
+\]
+```
+
 3-point geometry controls:
 
 - `three-point-left-xspan=...`
 - `three-point-upper-yspan=...`
 - `three-point-right-xspan=...`
 - `three-point-bottom-yspan=...`
+- `three-point-orientation=right|left|up|down`
+- `three-point-external-length=...`
 - `three-point-central-label-yshift=...`
+
+`three-point-orientation=right` is the compatibility layout used by existing
+figures. The other orientations rotate the three slot coordinates as a single
+object while keeping slot-based labels, indices, styles, and momentum controls
+attached to slots 1, 2, and 3. `three-point-external-length` shortens or
+lengthens slot 1 while preserving its default angle before orientation is
+applied.
 
 3-point momentum placement controls:
 

@@ -233,4 +233,52 @@
 }
 \end{center}
 
+\newpage
+
+\subsection*{Double Endcaps And Ordering}
+
+\begin{center}
+\diagramcell{Raw double cap}{
+\markerline{ewboson,endcapp}{2.2}{\texttt{ewboson,endcapp}}
+}
+\hfill
+\diagramcell{Staggered color before}{
+\markerline{ewboson,fieldA,endcapp}{2.2}{\texttt{fieldA,endcapp}}
+}
+\hfill
+\diagramcell{Staggered color after}{
+\markerline{ewboson,endcapp,fieldA}{2.2}{\texttt{endcapp,fieldA}}
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Keyed order}{
+\markerline{ewboson,endcapp,color=blue!65!black}{2.2}{\texttt{endcapp,color=blue!65!black}}
+}
+\hfill
+\diagramcell{Tuned double cap}{
+\begin{tikzpicture}
+  \begin{feynhand}
+    \vertex (a) at (0,0);
+    \vertex (b) at (2.2,0);
+    \propag[ewboson,endcapp,endpoint cap length=0.78,endpoint double cap inner length=1.12,endpoint double cap gap=4.2pt] (a) to (b);
+  \end{feynhand}
+  \filldraw[draw=black,fill=black] (a) circle[radius=2.15pt];
+  \filldraw[draw=black,fill=black] (b) circle[radius=2.15pt];
+\end{tikzpicture}\par
+{\small tuned \texttt{endcapp}}
+}
+\hfill
+\diagramcell{Topology double cap}{
+\BoxLoopCorr[
+  scale=0.44,
+  box-line=plain,
+  show-momenta=false,
+  field={},
+  leg-styles={{ewboson,endcapp,green!45!black},plain,plain,plain},
+  leg-labels={,,,}
+]
+}
+\end{center}
+
 \end{document}

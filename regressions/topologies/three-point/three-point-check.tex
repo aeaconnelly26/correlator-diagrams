@@ -112,4 +112,79 @@ Geometry, labels, and amputation controls:
 \end{array}
 \]
 
+\newpage
+
+Cardinal orientation presets rotate the slot geometry while keeping slot
+labels, indices, momenta, and styles attached to slots 1, 2, and 3:
+
+\[
+\begin{array}{cc}
+  \text{Orientation right (default)} &
+  \text{Orientation left} \\
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=right,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={A_1,A_2,A_3},
+    indices={\mu,\nu,\rho}
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=left,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={A_1,A_2,A_3},
+    indices={\mu,\nu,\rho}
+  ] \\[2.5em]
+  \text{Orientation up} &
+  \text{Orientation down} \\
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=up,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={A_1,A_2,A_3},
+    indices={\mu,\nu,\rho}
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=down,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={A_1,A_2,A_3},
+    indices={\mu,\nu,\rho}
+  ]
+\end{array}
+\]
+
+\newpage
+
+The \texttt{epspol} style combines a scalar-polarized external leg with the
+double endcap. The special external slot can be shortened independently:
+
+\[
+\begin{array}{cc}
+  \text{Short \texttt{epspol} external leg} &
+  \text{Rotated \texttt{epspol} external leg} \\
+  \ThreePointCorr[
+    line=ewboson,
+    leg-styles={epspol,ewboson,ewboson},
+    three-point-external-length=1.05,
+    three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={W_\mu,Z_\nu,W_\rho},
+    propagator-arrow-sizes={14pt,,}
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    leg-styles={{epspol,fieldA},ewboson,ewboson},
+    three-point-orientation=up,
+    three-point-external-length=1.05,
+    three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={W_\mu,Z_\nu,W_\rho},
+    propagator-arrow-sizes={14pt,,}
+  ]
+\end{array}
+\]
+
 \end{document}
