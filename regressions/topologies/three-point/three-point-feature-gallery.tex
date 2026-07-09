@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.8}
+
+\newcommand{\FeatureThreePoint}[1]{%
+  \ThreePointCorr[
+    #1,
+    line=ewboson,
+    leg-labels={W_\mu,Z_\nu,W_\rho},
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
+    leg-styles={{epspol,fieldA},ewboson,ewboson},
+    three-point-external-length=1.08,
+    propagator-arrow-sizes={13pt,,}
+  ]%
+}
+
+\newcommand{\RawEndcappSample}[1][]{%
+  \begin{tikzpicture}[baseline=(current bounding box.center),scale=1]
+    \begin{feynhand}
+      \vertex (a) at (0,0) {};
+      \vertex (b) at (1.85,0) {};
+      \propag[ewboson,endcapp,#1] (a) to (b);
+      \vertex[dot] at (a) {};
+      \vertex[dot] at (b) {};
+    \end{feynhand}
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+\section*{Three-Point Feature Gallery}
+
+All four orientations, with the special slot-1 leg styled as
+\texttt{epspol}. Slot labels, indices, momenta, and leg styles remain attached
+to slots 1, 2, and 3 after rotation.
+
+\[
+\begin{array}{cc}
+  \text{right (compatibility layout)} &
+  \text{left} \\
+  \FeatureThreePoint{three-point-orientation=right} &
+  \FeatureThreePoint{three-point-orientation=left} \\[2.5em]
+  \text{up} &
+  \text{down} \\
+  \FeatureThreePoint{three-point-orientation=up} &
+  \FeatureThreePoint{three-point-orientation=down}
+\end{array}
+\]
+
+\newpage
+
+Scaling and external-leg length. The first row scales the full drawing; the
+second row changes only the special slot-1 external leg.
+
+\[
+\begin{array}{cc}
+  \text{scale 0.72} &
+  \text{scale 1.24} \\
+  \FeatureThreePoint{scale=0.72,three-point-orientation=right} &
+  \FeatureThreePoint{scale=1.24,three-point-orientation=right} \\[2.5em]
+  \text{short slot 1} &
+  \text{longer slot 1} \\
+  \FeatureThreePoint{three-point-external-length=0.78} &
+  \FeatureThreePoint{three-point-external-length=1.45}
+\end{array}
+\]
+
+\newpage
+
+Double-endcap tuning on three-point vertices. The inner cap is intentionally
+longer than the terminal cap, and the gap between the bars stays blank.
+
+\[
+\begin{array}{cc}
+  \text{compact caps} &
+  \text{longer caps and wider gap} \\
+  \FeatureThreePoint{endpoint-cap-length=0.48,endpoint-double-cap-inner-length=0.72,endpoint-double-cap-gap=2.0pt} &
+  \FeatureThreePoint{endpoint-cap-length=0.86,endpoint-double-cap-inner-length=1.24,endpoint-double-cap-gap=5.0pt} \\[2.5em]
+  \text{rotated compact caps} &
+  \text{rotated wider gap} \\
+  \FeatureThreePoint{three-point-orientation=up,endpoint-cap-length=0.48,endpoint-double-cap-inner-length=0.72,endpoint-double-cap-gap=2.0pt} &
+  \FeatureThreePoint{three-point-orientation=down,endpoint-cap-length=0.86,endpoint-double-cap-inner-length=1.24,endpoint-double-cap-gap=5.0pt}
+\end{array}
+\]
+
+\newpage
+
+Raw \texttt{endcapp} propagators also reserve blank space between the two
+bars, independent of the topology-managed drawing path.
+
+\[
+\begin{array}{cccc}
+  \text{default} &
+  \text{color before} &
+  \text{color after} &
+  \text{wide gap} \\
+  \RawEndcappSample &
+  \RawEndcappSample[fieldA] &
+  \RawEndcappSample[color=blue!65!black] &
+  \RawEndcappSample[
+    endpoint cap length=0.78,
+    endpoint double cap inner length=1.12,
+    endpoint double cap gap=5.2pt
+  ]
+\end{array}
+\]
+
+\end{document}

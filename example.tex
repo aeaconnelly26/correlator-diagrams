@@ -137,6 +137,33 @@ Opt-in outward momentum placement gives crowded triple vertices more room:
   ]
 \]
 
+Three-point orientation presets rotate the slot geometry without changing slot
+order. The special slot-1 external leg can also be shortened and styled as
+\texttt{epspol}, which adds the double endcap.
+\[
+\begin{array}{cc}
+  \text{Left orientation} &
+  \text{Up orientation with short \texttt{epspol}} \\
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=left,
+    momentum-labels={q_1,q_2,q_3},
+    leg-labels={A_1,A_2,A_3}
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=up,
+    three-point-external-length=1.05,
+    leg-styles={{epspol,fieldA},ewboson,ewboson},
+    three-point-momentum-flow=all-in,
+    three-point-momentum-layout=outward,
+    momentum-labels={q_1,q_2,q_3},
+    propagator-arrow-sizes={14pt,,},
+    leg-labels={W_\mu,Z_\nu,W_\rho}
+  ]
+\end{array}
+\]
+
 \subsection*{4. Scalar-Polarized Legs}
 
 Scalar-polarized legs are dashed scalar lines with an open marker. The marker
