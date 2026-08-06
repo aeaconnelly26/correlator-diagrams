@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+\newcommand{\democell}[2]{%
+  \begin{minipage}[t]{0.46\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.75em}
+  #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Momentum Direction Controls}
+
+The general \texttt{momentum-directions} key follows each diagram's normal
+momentum-label slot order.
+
+\begin{center}
+\democell{Three-point slot list}{
+\ThreePointCorr[
+  line=ewboson,
+  field=A,
+  momentum-labels={q_1,q_2,q_3},
+  momentum-directions={out,in,out},
+  three-point-momentum-layout=outward,
+  leg-labels={A_\mu,A_\nu,A_\rho}
+]
+}
+\hfill
+\democell{Four-point contact slot list}{
+\FourPointCorr[
+  field={},
+  central={},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  momentum-directions={out,in,in,out},
+  momentum-label-gap=0.11,
+  leg-labels={\phi_1,\phi_2,\phi_3,\phi_4}
+]
+}
+\end{center}
+
+\begin{center}
+\democell{Triangle-contact external directions}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-orientation=top,
+  momentum-labels={k_1,k_2,k_3,k_4},
+  momentum-directions={in,out,out,in},
+  triangle-contact-momentum-offset=12pt,
+  triangle-contact-momentum-label-gap=0.12
+]
+}
+\hfill
+\democell{External plus internal directions}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-orientation=right,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  momentum-directions={out,out,in,in},
+  triangle-contact-internal-momenta={p-k,,k},
+  triangle-contact-internal-momentum-slots={5,7},
+  triangle-contact-internal-momentum-directions={forward,none,reverse},
+  triangle-contact-internal-momentum-offset=15pt,
+  triangle-contact-internal-momentum-label-fraction=0.42,
+  triangle-contact-propagator-left-indices={,,,,a,,c},
+  triangle-contact-propagator-right-indices={,,,,b,,d},
+  triangle-contact-index-left-position=left,
+  triangle-contact-index-right-position=right
+]
+}
+\end{center}
+
+\end{document}
