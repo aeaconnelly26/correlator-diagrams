@@ -147,6 +147,7 @@ That slot order matters for:
 
 - `leg-styles={...}`
 - `momentum-labels={...}`
+- `momentum-directions={...}`
 - `momentum-arrow-sizes={...}`
 - `propagator-arrow-sizes={...}`
 - `leg-labels={...}`
@@ -158,6 +159,9 @@ The default 3-point momentum convention is:
 - bottom leg outgoing
 
 Use `three-point-momentum-flow=all-in|all-out|default` to set all three arrows at once.
+Use `momentum-directions={in,out,out}` for per-leg arrow directions in slot
+order. The topology-specific spelling `three-point-momentum-directions={...}`
+is also accepted.
 
 For per-leg overrides use:
 
@@ -195,6 +199,7 @@ That slot order matters for:
 
 - `leg-styles={...}`
 - `momentum-labels={...}`
+- `momentum-directions={...}`
 - `momentum-arrow-sizes={...}`
 - `propagator-arrow-sizes={...}`
 
@@ -327,6 +332,7 @@ Use `leg-styles={...}` for per-leg propagator styles in that order.
   \FourPointCorr[
     leg-labels={\psi_i,\bar\psi_j,\psi_k,\bar\psi_l},
     momentum-labels={p_1,p_2,p_3,p_4},
+    momentum-directions={out,in,in,out}
   ]
 \]
 ```
@@ -1345,6 +1351,22 @@ Box external momentum arrow placement:
 - `box-external-momentum-label-gap=...`
 - `box-external-momentum-offset=...`
 
+Box propagator index slots use the same numbering as the propagators:
+external slots 1--4, then internal left/top/right/bottom slots 5--8.
+
+- `box-propagator-left-indices={...}`
+- `box-propagator-right-indices={...}`
+- `box-index-left-position=...`
+- `box-index-right-position=...`
+- `box-index-left-xshift=...`
+- `box-index-left-yshift=...`
+- `box-index-right-xshift=...`
+- `box-index-right-yshift=...`
+- `box-index-style=...`
+- `box-index-fill=...`
+- `box-index-inner-sep=...`
+- `box-index-size=normal|script|scriptscript`
+
 Box edge arrow placement follows the same predictable pattern for each edge:
 
 - `box-left-arrow-start=...`
@@ -1485,8 +1507,38 @@ Useful controls:
 - `triangle-contact-color=...`
 - `triangle-contact-external-color=...`
 - `triangle-contact-internal-color=...`
+- `momentum-directions={ul,ll,ur,lr}`
+- `triangle-contact-momentum-directions={ul,ll,ur,lr}`
 - `triangle-contact-momentum-slots={1,2,3,4}`
 - `triangle-contact-central-label-yshift=...`
+
+Internal triangle momentum labels are opt-in. Slots 5--7 use the same edge
+order as `triangle-contact-internal-lines={...}`:
+
+- `triangle-contact-internal-momenta={edge5,edge6,edge7}`
+- `triangle-contact-internal-momentum-directions={forward,reverse,none}`
+- `triangle-contact-internal-momentum-slots={5,6,7}`
+- `triangle-contact-internal-momentum-start=...`
+- `triangle-contact-internal-momentum-end=...`
+- `triangle-contact-internal-momentum-offset=...`
+- `triangle-contact-internal-momentum-label-fraction=...`
+- `triangle-contact-internal-momentum-label-gap=...`
+
+Triangle-contact propagator index slots use external slots 1--4 and internal
+triangle-edge slots 5--7:
+
+- `triangle-contact-propagator-left-indices={...}`
+- `triangle-contact-propagator-right-indices={...}`
+- `triangle-contact-index-left-position=...`
+- `triangle-contact-index-right-position=...`
+- `triangle-contact-index-left-xshift=...`
+- `triangle-contact-index-left-yshift=...`
+- `triangle-contact-index-right-xshift=...`
+- `triangle-contact-index-right-yshift=...`
+- `triangle-contact-index-style=...`
+- `triangle-contact-index-fill=...`
+- `triangle-contact-index-inner-sep=...`
+- `triangle-contact-index-size=normal|script|scriptscript`
 
 `triangle-contact-color=...` colors all triangle-contact propagators.
 `triangle-contact-external-color=...` overrides the color for the four external
@@ -1562,6 +1614,8 @@ Half-box geometry and style controls:
 - `half-box-momentum-label-fraction=...`
 - `half-box-momentum-label-gap=...`
 - `half-box-momentum-slots={1,2,3,4}`
+- `half-box-propagator-left-indices={...}`
+- `half-box-propagator-right-indices={...}`
 - `half-box-left-lower-circ=...`
 - `half-box-right-lower-circ=...`
 - `half-box-lower-circ-position=...`
@@ -1592,10 +1646,16 @@ Flat-contact geometry and style controls:
 - `flat-contact-momentum-label-fraction=...`
 - `flat-contact-momentum-label-gap=...`
 - `flat-contact-momentum-slots={1,2,3,4}`
+- `flat-contact-propagator-left-indices={...}`
+- `flat-contact-propagator-right-indices={...}`
 
 The `halfbox-*` and `flatcontact-*` spellings are also accepted as aliases.
 The momentum slot filters let a diagram show only selected external momentum
 arrows, for example `half-box-momentum-slots={2,3}` for the two lower legs.
+Half-box index slot 5 is the bridge; flat-contact index slots are the four
+external paths. Both topologies also accept `*-index-left-position`,
+`*-index-right-position`, matching x/y shift keys, `*-index-style`,
+`*-index-fill`, `*-index-inner-sep`, and `*-index-size`.
 
 Inside package-managed topologies, `scalarpolarized`/`spol` external legs are
 oriented toward the topology vertex. The endpoint arrow add-ons `arrowin`,

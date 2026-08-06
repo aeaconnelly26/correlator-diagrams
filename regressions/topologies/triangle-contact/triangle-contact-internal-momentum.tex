@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.9em}
+  #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Triangle-Contact Internal Momenta}
+
+\begin{center}
+\diagramcell{Contact bottom}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-internal-momenta={\ell_5,\ell_6,\ell_7},
+  triangle-contact-internal-momentum-offset=11pt
+]
+}
+\hfill
+\diagramcell{Contact top}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-orientation=top,
+  triangle-contact-internal-momenta={\ell_5,\ell_6,\ell_7},
+  triangle-contact-internal-momentum-offset=11pt
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Contact left}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-orientation=left,
+  triangle-contact-internal-momenta={\ell_5,\ell_6,\ell_7},
+  triangle-contact-internal-momentum-offset=11pt
+]
+}
+\hfill
+\diagramcell{Contact right}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-orientation=right,
+  triangle-contact-internal-momenta={\ell_5,\ell_6,\ell_7},
+  triangle-contact-internal-momentum-offset=11pt
+]
+}
+\end{center}
+
+\newpage
+
+\begin{center}
+\diagramcell{Selected internal slots}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-internal-momentum-slots={5,7},
+  triangle-contact-internal-momentum-directions={forward,reverse,reverse},
+  triangle-contact-internal-momentum-start=0.24,
+  triangle-contact-internal-momentum-end=0.76,
+  triangle-contact-internal-momentum-offset=13pt
+]
+}
+\hfill
+\diagramcell{Mixed direction controls}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-orientation=top,
+  triangle-contact-internal-momenta={q_5,q_6,q_7},
+  triangle-contact-internal-momentum-directions={reverse,none,forward},
+  triangle-contact-internal-momentum-label-gap=0.13,
+  triangle-contact-internal-momentum-offset=13pt
+]
+}
+\end{center}
+
+\newpage
+
+\begin{center}
+\diagramcell{External direction controls}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  momentum-directions={out,in,in,out},
+  triangle-contact-momentum-offset=12pt
+]
+}
+\hfill
+\diagramcell{Mixed external and internal}{
+\TriangleContactCorr[
+  field={},
+  central={},
+  triangle-contact-orientation=top,
+  momentum-labels={q_1,q_2,q_3,q_4},
+  momentum-directions={in,out,out,in},
+  triangle-contact-internal-momenta={\ell_5,\ell_6,\ell_7},
+  triangle-contact-internal-momentum-directions={reverse,none,forward},
+  triangle-contact-internal-momentum-offset=13pt
+]
+}
+\end{center}
+
+\newpage
+
+\begin{center}
+\diagramcell{Index and momentum sketch}{
+\TriangleContactCorr[
+  scale=0.86,
+  field={},
+  central={},
+  external-vertices=true,
+  leg-styles={{ewboson,endcap},ewboson,ewboson,{ewboson,endcap}},
+  triangle-contact-internal-momenta={,\ell,},
+  triangle-contact-internal-momentum-slots={6},
+  triangle-contact-internal-momentum-offset=14pt,
+  triangle-contact-propagator-left-indices={,,,,\alpha,\mu,\rho},
+  triangle-contact-propagator-right-indices={,,,,\beta,\nu,\sigma},
+  triangle-contact-index-left-position=above,
+  triangle-contact-index-right-position=below,
+  triangle-contact-index-left-yshift=2pt,
+  triangle-contact-index-right-yshift=-2pt
+]
+}
+\hfill
+\diagramcell{Tuned lower internal label}{
+\TriangleContactCorr[
+  scale=0.86,
+  field={},
+  central={},
+  triangle-contact-orientation=right,
+  triangle-contact-internal-momenta={p-k,,k},
+  triangle-contact-internal-momentum-slots={5,7},
+  triangle-contact-internal-momentum-directions={forward,none,reverse},
+  triangle-contact-internal-momentum-offset=15pt,
+  triangle-contact-internal-momentum-label-fraction=0.42,
+  triangle-contact-propagator-left-indices={,,,,a,,c},
+  triangle-contact-propagator-right-indices={,,,,b,,d},
+  triangle-contact-index-left-position=left,
+  triangle-contact-index-right-position=right
+]
+}
+\end{center}
+
+\end{document}

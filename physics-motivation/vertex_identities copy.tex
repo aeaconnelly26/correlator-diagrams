@@ -1,0 +1,585 @@
+\documentclass[12pt]{article}
+
+% Core math and symbols
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs}
+\usepackage{cancel}
+
+% Page layout and document structure
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{titling}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% Figures, tables, diagrams, and graphics
+\usepackage{graphicx}
+\usepackage{array}
+
+% Text utilities
+\usepackage{enumerate}
+\usepackage{underscore}
+\usepackage{scalefnt}
+
+% Code listings and color
+\usepackage{xcolor}
+\usepackage{listings}
+
+\IfFileExists{../correlator-diagrams.sty}{%
+  \input{../correlator-diagrams.sty}%
+}{%
+  \usepackage{correlator-diagrams}%
+}
+
+% Hyperlinks should load late.
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.48,0,0.62}
+\definecolor{codered}{rgb}{.8,0,.1}
+\definecolor{codeperi}{rgb}{.4,.4,1}
+\definecolor{commentperi}{rgb}{0.3,0.3,.75}
+\definecolor{backcolour}{rgb}{0.941,0.941,0.941}
+\definecolor{forestgreen}{RGB}{34,139,34}
+\definecolor{purple}{RGB}{112,41,99}
+
+\usepackage[
+    colorlinks=true,
+    linkcolor=codepurple,
+    citecolor=codepurple,
+    urlcolor=codepurple,
+    linktoc=page
+]{hyperref}
+
+% Listings
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{commentperi},
+    keywordstyle=\color{forestgreen},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{black},
+    stepnumber=1,
+    numbersep=3pt,
+}
+\lstdefinestyle{newstyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codepurple},
+    keywordstyle=\color{codeperi},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{black},
+    stepnumber=1,
+    numbersep=3pt,
+}
+\lstset{style=mystyle}
+\lstnewenvironment{tabularlstlisting}[1][]
+ {%
+  \lstset{aboveskip=-1.3ex,belowskip=-3.5ex,#1}%
+ }
+ {}
+
+% Numbering and page style
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\setcounter{secnumdepth}{3}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\doublespacing
+\setlength{\unitlength}{1mm}
+\renewcommand{\mathstrut}{\protect\vphantom{\hat{0123456789}}}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\bfseries\MakeUppercase}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}
+  {\normalfont\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+\titleformat{\subsubsection}
+  {\normalfont\bfseries\small}
+  {\thesubsubsection}
+  {1em}
+  {}
+
+% Theorem environments
+\newtheorem{definition}{Definition}[section]
+
+% Math shorthand
+\newcommand{\eps}{\epsilon}
+\newcommand{\id}{\mathbb{I}}
+\newcommand{\nubar}{\overline{\nu}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\bracket}[1]{\left[#1\right]}
+\newcommand{\squr}[1]{\left[#1\right]}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\bsym}[1]{\boldsymbol{#1}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\brac}[1]{\left\{#1\right\}}
+\newcommand{\clos}[1]{\left[#1\right]}
+\newcommand{\bracseq}[1]{\left\{#1\right\}_{n=1}^{\infty}}
+\newcommand\smaller[2][0.8]{{\scalefont{#1}#2}}
+
+% Urgency labels
+\newcommand{\uone}{\textbf{\textcolor{blue}{1 }}}
+\newcommand{\utwo}{\textbf{\textcolor{cyan}{2 }}}
+\newcommand{\uthree}{\textbf{\textcolor{orange}{3 }}}
+\newcommand{\ufour}{\textbf{\textcolor{red!70!black}{4 }}}
+\newcommand{\ufive}{\textbf{\textcolor{red}{5 }}}
+
+% Author comments
+\newcounter{ACQ}
+\newcommand{\commentAC}[1]{{\bf\textcolor{commentperi}{\stepcounter{ACQ}
+[$\bullet\,$ \textcolor{black}{AC Q\theACQ}\hspace*{0.15cm} #1]}}}
+
+% Diagram helpers
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\title{Electroweak theory at muon colliders \thanks{}}
+\author{Anna Elizabeth Connelly\textsuperscript{1}\textsuperscript{2}\thanks{annaelizabeth.connelly@stonybrook.edu} }
+\date{\today}
+
+\begin{document}
+
+\newpage
+
+\section{Vertex identities}
+
+\subsection{Massless boson polarization}
+In Quantum Electrodynamics (QED), we have the interaction Lagrangian.
+\begin{align*}
+    H_{\text{int}}= e\int d^4z\Bar{\psi}\gamma^\mu\psi A_\mu
+\end{align*}
+where $A_\mu\rightarrow A_\mu+\partial_\mu\alpha$ is left invariant if $J^\mu$ is conserved. We perform a Lorenz gauge fixing on the coupling of the current $J^\mu$ to the field $A^\mu$
+\begin{align}
+\label{eq:gauge_fixed}
+    \partial ^\mu A_\mu = 0.
+\end{align}
+Let us consider the plane wave field ansatz
+\begin{align*}
+    A_\mu &= \epsilon_\mu e^{-ip\cdot x}
+\end{align*}
+where $\epsilon_\mu$ is the polarization vector and $p^\mu$ is the four-momentum.
+Then, we can take the derivative
+\begin{align*}
+    \partial_\mu A^\mu = -i\epsilon_\mu p^\mu e^{-ip\cdot x}
+\end{align*}
+which satisfies the gauge fixing condition (\ref{eq:gauge_fixed}) when
+\begin{align}
+\label{eq:eps-mu}
+    \epsilon_\mu p^\mu&=\epsilon\cdot p = 0,
+\end{align}
+Since the field $A^\mu$ is massless, we demand that the invariant mass satisfies
+\begin{align*}
+    p^2&=p_\mu p^\mu=0
+\end{align*}
+using the four-momentum
+\begin{align*}
+    p^\mu &= \p{E,0,0,E}
+\end{align*}
+where we see that
+\begin{align*}
+    p_\mu p^\mu &= E^2-E^2 = 0.
+\end{align*}
+Then, in order to satisfy Eq. (\ref{eq:eps-mu}), we can only have transverse polarizations
+\begin{align*}
+    \epsilon ^\mu_{(x)}&=(0,1,0,0)\\
+        \epsilon ^\mu_{(y)}&=(0,0,1,0)\\
+\end{align*}
+
+\subsection{Vector boson polarization}
+The $W^\pm$ and $Z$ are the massive vector bosons. Notably, particles with mass have an on-shell condition. In their rest frame, the energy-momentum of a $W^\pm$ or $Z$ boson with mass $m$ is given by
+\begin{align}
+    p^\mu &= (m,0,0,0)
+\end{align}
+and has three spin degrees of freedom,
+which we can see by applying the gauge fixing identity Eq. (\ref{eq:eps-mu}) as we did for the massless case
+\begin{align*}
+    \epsilon\cdot p = \epsilon^0m - \epsilon^1\cdot 0 - \epsilon^2\cdot 0-\epsilon^3\cdot 0 &= 0 \\
+    \epsilon^0m &= 0\\
+       \epsilon^0 &= 0
+\end{align*}
+leaving the remaining degrees of freedom
+\begin{align*}
+    \epsilon ^\mu&=(0,\epsilon^1,\epsilon^2,\epsilon^3).
+\end{align*}
+We may then consider a massive vector boson with energy $E$ moving in the $z$ direction, so that
+\begin{align*}
+    p^\mu &= (E, 0,0,p), \quad     p_\mu p^\mu = E^2-p^2 = m^2
+\end{align*}
+which means that
+\begin{align*}
+ \epsilon_\mu p^\mu = \epsilon^0E-\epsilon^3p&=0\\
+ \epsilon^0E&=\epsilon^3p
+ \end{align*}
+ \begin{align*}
+      \boxed{\epsilon^0=\frac{p}{E}\epsilon^3.}
+ \end{align*}
+As such, we can define the longitudinal polarization as
+\begin{align*}
+      \epsilon_p &= \p{\frac{p}{m}, 0 , 0, \frac{E}{m}}
+      \\&= \frac{1}{m}\p{p,0,0,E}
+\end{align*}
+so that we can obtain the ratio
+\begin{align*}
+    \epsilon_0 &= \frac{p}{m} =\frac{p}{E} \frac{E}{m} = \frac{p}{E} \epsilon_3.
+\end{align*}
+In the ultra-relativistic limit, which we may assume is valid at a high-energy interaction point, we can perform the approximation
+\begin{align*}
+    E^2&= p^2+m^2 \\
+   E &= \sqrt{p^2+m^2}\\
+   &= \sqrt{p^2\p{1+\frac{m^2}{p^2}}}\\
+   &= p\sqrt{1+\frac{m^2}{p^2}}\\
+   &\approx p \sqrt{1+0}\ = p
+\end{align*}
+when $p\gg m$.
+Therefore, in this high-energy limit,
+\begin{align*}
+ p_1^\alpha &= (E, 0,0,p) \approx (p,0,0,p)\approx (p,0,0,E) = m\epsilon_p
+\end{align*}
+
+We may therefore consider the longitudinal spin $\epsilon_p$ as proportional to the external momentum $p^\alpha$
+\begin{align*}
+    \epsilon_p\approx \frac{p^\alpha}{m_1}
+\end{align*}
+
+\subsection{Scalar-polarized three-point coupling}
+
+\begin{figure}
+\[
+\begin{array}{cc}
+  \text{Incoming scalar polarized leg} \\
+  \ThreePointCorr[
+    field=\nu,
+    indices = {\alpha, \gamma, \beta},
+    leg-styles={scalarpolarized,ewboson,ewboson},
+    three-point-momentum-flow=all-in,
+    momentum-labels={q_1,q_3,q_2},
+    propagator-arrow-sizes={14pt,,},
+  ] \\
+\end{array}
+\]
+\caption{Triple-coupling vertex with incoming vector boson $\nu_\alpha$ and outgoing vector bosons $\nu_\beta$ and $\nu_\gamma$. \textbf{Future fix:} Adjust the arrow positions so that the momentum arrows are closer to the beginning/ends of the propagator legs. This will leave more visual space for the vertex structure to breathe. Right now the clustered momentum arrows make the structure feel overloaded and crowded. }
+\end{figure}
+
+Let $q_1^\alpha$ and $\epsilon_{q_1}^\alpha$ define the momentum and polarization of the external particle, respectively.
+Then, we define the tensor $T_{\beta\gamma}$ by contracting the external polarization with the vertex tensor
+\begin{align*}
+   T_{\beta\gamma} &=\epsilon_{q_1}^\alpha V_{\alpha\beta\gamma}\\
+  &= \epsilon_{q_1}^\alpha \squr{\p{q_2-q_3}_\alpha \eta_{\beta\gamma} + \p{q_3-q_1}_\beta\eta_{\alpha\gamma}+\p{q_1 -q_2}_\gamma\eta_{\alpha\beta}}\\
+  &= \p{\epsilon_{q_1}\cdot(q_2-q_3)} \eta_{\beta\gamma} + \p{q_3-q_1}_\beta\epsilon_{q_1\gamma} + \p{q_1 -q_2}_\gamma\epsilon_{q_1\beta}
+\end{align*}
+
+Then, we assume that our high energy vector boson is scalar polarized. As such, we may make the approximation
+$\epsilon_{q_1} \approx \frac{q_1}{m}$
+so that
+\begin{align*}
+ T_{\beta\gamma}&\approx \frac{1}{m_1}\p{q_1\cdot(q_2-q_3)} \eta_{\beta\gamma} + \frac{1}{m_1}\p{q_3-q_1}_\beta q_{1\gamma} + \frac{1}{m_1}\p{q_1 -q_2}_\gamma q_{1\beta}.
+\end{align*}
+We may now use momentum conservation $q_1+q_2+q_3 = 0$. At the vertex, we see that $q_1 = -q_2-q_3$
+\begin{align*}
+ T_{\beta\gamma}&\approx  \frac{1}{m_{1}}\paren{-q_2-q_3}\cdot(q_2-q_3)\eta_{\beta\gamma} +\frac{1}{m_1}\paren{q_2+2q_3}_\beta (-q_2-q_3)_\gamma +\frac{1}{m_1}\paren{-2q_2-q_3}_\gamma (-q_2-q_3)_\beta\\
+ &= \frac{1}{m_1} \left[ \paren{q_3^2-q_2^2}\eta_{\beta\gamma}+
+\paren{-q_{2\beta} q_{2\gamma} -q_{2\beta}q_{3\gamma}  -2q_{3\beta}q_{2\gamma}-2q_{3\beta}q_{3\gamma}   } \right. \\
+& \hspace{3.5cm}\left.+
+\paren{ 2q_{2\gamma}q_{2\beta} + 2q_{2\gamma}  q_{3\beta}  +q_{3\gamma}q_{2\beta} + q_{3\gamma}q_{3\beta}}\right]
+\end{align*}
+
+\begin{align}
+\label{eq:PolVertexTensor}
+     T_{\beta\gamma}\approx  \boxed{\frac{1}{m_1}\bracket{\paren{q_3^2-q_2^2}\eta_{\beta\gamma} +q_{2\beta}q_{2\gamma}-q_{3\beta}q_{3\gamma} }}.
+\end{align}
+\subsection{Computing the amplitude in unitary gauge}
+The unitary gauge propagator $ D_{\alpha\beta}^{(U)}$ is defined by
+\begin{align}
+ \label{eq:UnitaryPropagatorv1}
+ D_{\alpha\beta}^{(U)}&= -i \p{{\frac{{\eta_{\alpha\beta}}^{(H)}}{p^2-m^2+i\epsilon}}-\frac{{p_\alpha p_\beta/m^2}^{(P)}}{p^2-m^2+i\epsilon}}\\
+ \label{eq:UnitaryPropagatorv2}
+ &= \frac{-i\p{\eta_{\alpha\beta}-\frac{p_\alpha p_\beta}{m_\nu^2}}}{p^2-m_\nu^2+i\epsilon}
+\end{align}
+where $TH$ stands for T'Hooft-Feynman, $P$ stands for Proca, $m_\nu$ signifies the mass of a given internal gauge boson.
+The triple-vertex amplitude can be computed using the formula
+\begin{align}
+\label{eq:VertexAmplitude}
+i \mathcal{M}^{\beta'\gamma'}&=iT_{\beta\gamma} D^{\beta\beta'}(q_2)D^{\gamma\gamma'}(q_3) .
+\end{align}
+
+We may then compute the amplitude by inserting the contracted polarized vertex tensor Eq. (\ref{eq:PolVertexTensor}) and the unitary gauge propagators as denoted in Eq. (\ref{eq:UnitaryPropagatorv2}) into Eq. (\ref{eq:VertexAmplitude})
+\begin{align*}
+  \mathcal{M}^{\beta'\gamma'}  &=
+        T_{\beta\gamma}  \frac{-i}{q_2^2-m^2+i\epsilon}\p{\eta^{\beta\beta'}-\frac{q_2^\beta q_2^{\beta'}}{m^2}}
+    \frac{-i}{q_3^2-m^2+i\epsilon}\p{\eta^{\gamma\gamma'}-\frac{q_3^\gamma q_3^{\gamma'}}{m^2}}\\
+    &= \frac{-1}{\p{q_2^2-m^2+i\eps}\paren{q_3^2-m^2+i\eps}}T_{\beta\gamma} \p{\eta^{\beta\beta'}-\frac{q_2^\beta q_2^{\beta'}}{m^2}}\p{\eta^{\gamma\gamma'}-\frac{q_3^\gamma q_3^{\gamma'}}{m^2}}.
+\end{align*}
+We continue to simplify by contracting $T_{\beta\gamma} $with the propagator $ D^{\beta\beta'}(q_2)$ so that
+\begin{align*}
+   \mathcal{M}^{\beta'\gamma'}
+    &=\frac{-1}{\p{q_2^2-m^2+i\eps}\paren{q_3^2-m^2+i\eps}}\paren{T_{\beta\gamma}\eta^{\beta\beta'} -T_{\beta\gamma}\frac{q_2^\beta q_2^{\beta'}}{m^2}}\p{\eta^{\gamma\gamma'}-\frac{q_3^\gamma q_3^{\gamma'}}{m^2}}\\
+  &=\frac{-1}{\p{q_2^2-m^2+i\eps}\paren{q_3^2-m^2+i\eps}}\paren{ T^{\beta'}_\gamma - \frac{q_2^{\beta'}}{m^2}q_2^\beta T_{\beta\gamma}}\p{\eta^{\gamma\gamma'}-\frac{q_3^\gamma q_3^{\gamma'}}{m^2}}.
+\end{align*}
+We then expand the expression and contract it with the $D^{\gamma\gamma'}(q_3)$ propagator
+\begin{align*}
+     \mathcal{M}^{\beta'\gamma'}
+    &= \frac{-1}{\p{q_2^2-m^2+i\eps}\paren{q_3^2-m^2+i\eps}}\paren{ T^{\beta'}_\gamma - \frac{q_2^{\beta'}}{m^2}q_2^\beta T_{\beta\gamma}}\p{\eta^{\gamma\gamma'}-\frac{q_3^\gamma q_3^{\gamma'}}{m^2}}\\
+    &= \frac{-1}{\p{q_2^2-m^2+i\eps}\paren{q_3^2-m^2+i\eps}} \left[T_\gamma^{\beta'}\eta^{\gamma\gamma'} -  T_\gamma^{\beta'}q^\gamma_3\frac{ q_3^{\gamma'}}{m^2}- \frac{q_2^{\beta'}}{m^2}q_2^\beta T_{\beta\gamma}\eta^{\gamma\gamma'} \right.
+    \\& \hspace{9.5cm}+\left. \frac{q_2^{\beta'}}{m^2}q_2^\beta T_{\beta\gamma} q^\gamma_3\frac{ q_3^{\gamma'}}{m^2}\right]\\
+    &=    \frac{-1}{\p{q_2^2-m^2+i\eps}\paren{q_3^2-m^2+i\eps}} \bracket{T^{\beta'\gamma'} -  \frac{ q_3^{\gamma'}}{m^2}q^\gamma_3T_\gamma^{\beta'}- \frac{q_2^{\beta'}}{m^2}q_2^\beta T_{\beta}^{\gamma'}  + \frac{q_2^{\beta'}q_3^{\gamma'}}{m^4}q_2^\beta q^\gamma_3 T_{\beta\gamma} }
+\end{align*}
+Now, we may evaluate the contracted objects
+\begin{align*}
+      q^\gamma_3T_\gamma^{\beta'} &=  q_3^\gamma\frac{\bracket{\paren{q_3^2-q_2^2}\eta_{\gamma}^{\beta'} +q_{2\gamma}q_{2}^{\beta'}-q_{3\gamma}q_{3}^{\beta'} }}{m}\\
+    &= \frac{1}{m}\bracket{\paren{q_3^2-q_2^2}q_3^{\beta'}+ (q_2\cdot q_3)q_2^{\beta'} - q_3^2 q_3^{\beta'}}\\
+    &=  \frac{1}{m}\bracket{q_3^2q_3^{\beta'}-q_2^2q_3^{\beta'}+ (q_2\cdot q_3)q_2^{\beta'}-q_3^2q_3^{\beta'}}\\
+    &= \frac{1}{m}\paren{-q_2^2q_3^{\beta'}+ (q_2\cdot q_3)q_2^{\beta'}}
+\end{align*}
+
+\begin{align*}
+    q^\beta_2T^{\gamma'}_{\beta} &=  \frac{ q^\beta_2}{m}\bracket{\paren{q_3^2-q_2^2}\eta_{\beta}^{\gamma'} +q_{2\beta}q_{2}^{\gamma'}-q_{3\beta}q_{3}^{\gamma'} }\\
+    &= \frac{1}{m}\bracket{\paren{q_3^2-q_2^2}q_2^{\gamma'}+ q_2^2q_2^{\gamma'} - (q_2\cdot q_3)q_3^{\gamma'}}\\
+    &=  \frac{1}{m}\bracket{q_3^2q_2^{\gamma'}-q_2^2q_2^{\gamma'}+ q_2^2 q_2^{\gamma'} - (q_2\cdot q_3)q_3^{\gamma'}}\\
+    &= \frac{1}{m}\paren{q_3^2q_2^{\gamma'} - (q_2\cdot q_3)q_3^{\gamma'}}
+\end{align*}
+
+\begin{align*}
+   \frac{q_2^{\beta'}q_3^{\gamma'}}{m^4}q_2^\beta q^\gamma_3 T_{\beta\gamma} &=   \frac{q_2^{\beta'}q_3^{\gamma'}}{m^4}q_2^\beta\frac{q_3^\gamma}{m}\bracket{\paren{q_3^2-q_2^2}\eta_{\beta\gamma} +q_{2\beta}q_{2\gamma}-q_{3\beta}q_{3\gamma} } \\
+   &=
+   \frac{q_2^{\beta'}q_3^{\gamma'}}{m^4}q_2^\beta\frac{1}{m}\paren{-q_2^2q_{3\beta}+ (q_2\cdot q_3)q_{2\beta}} \\
+   &= \frac{q_2^{\beta'}q_3^{\gamma'}}{m^4}\frac{1}{m}\paren{-(q_2\cdot q_3)q_2^2  + (q_2\cdot q_3)q_2^2}\\
+   &= 0
+\end{align*}
+
+Thus, we get that
+\begin{align*}
+    \mathcal{M}^{\beta'\gamma'}&= \frac{-1}{\p{q_2^2-m_\nu^2+i\eps}\cdot \paren{q_3^2-m_\nu^2+i\eps}} \cdot \\ &\frac{1}{m} \left[  \paren{\paren{q_3^2-q_2^2}\eta^{\beta'\gamma'} +q_2^{\beta'}q_2^{\gamma'}-q_3^{\beta'}q_3^{\gamma'} }\right.
+    \\ &-  \underbrace{\left. \frac{ q_3^{\gamma'}}{m_\nu^2}  \paren{-q_2^2q_3^{\beta'}+ (q_2\cdot q_3)q_2^{\beta'}} \right.}_{(a)} - \underbrace{ \left. \frac{q_2^{\beta'}}{m_\nu^2}   \paren{q_3^2q_2^{\gamma'} - (q_2\cdot q_3)q_3^{\gamma'}}\right]}_{(b)}.
+\end{align*}
+
+Next, we simplify each term further
+\begin{align*}
+    (a)&=  \frac{ q_3^{\gamma'}}{m_\nu^2}  \paren{-q_2^2q_3^{\beta'}+ (q_2\cdot q_3)q_2^{\beta'}}\\
+    &= \frac{-q_2^2q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2} + \frac{(q_2\cdot q_3)q_2^{\beta'}q_3^{\gamma'}}{m_\nu^2}
+\end{align*}
+\begin{align*}
+    (b) &=  \frac{q_2^{\beta'}}{m_\nu^2}   \paren{q_3^2q_2^{\gamma'} - (q_2\cdot q_3)q_3^{\gamma'}}\\
+    &= \frac{q_3^2q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2} - \frac{(q_2\cdot q_3)q_3^{\gamma'}q_2^{\beta'}}{m_\nu^2}
+\end{align*}
+
+so that we get
+\begin{align*}
+ \mathcal{M}^{\beta'\gamma'}&= \frac{-1}{\p{q_2^2-m_\nu^2+i\eps}\cdot \paren{q_3^2-m_\nu^2+i\eps}} \cdot
+ \\ &\frac{1}{m} \left[  \paren{\paren{q_3^2-q_2^2}\eta^{\beta'\gamma'} +q_2^{\beta'}q_2^{\gamma'}-q_3^{\beta'}q_3^{\gamma'} }\right.
+    \\ &+ \left.  \frac{q_2^2q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2} - \frac{(q_2\cdot q_3)q_2^{\beta'}q_3^{\gamma'}}{m_\nu^2}-\frac{q_3^2q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2} + \frac{(q_2\cdot q_3)q_3^{\gamma'}q_2^{\beta'}}{m_\nu^2}  \right]
+\end{align*}
+which gives us
+\begin{align*}
+      \mathcal{M}^{\beta'\gamma'}&= \frac{-1}{\p{q_2^2-m_\nu^2+i\eps} \paren{q_3^2-m_\nu^2+i\eps}} \cdot
+ \\ &\hspace{2cm}\frac{1}{m} \left[  \paren{\paren{q_3^2-q_2^2}\eta^{\beta'\gamma'} +q_2^{\beta'}q_2^{\gamma'}-q_3^{\beta'}q_3^{\gamma'} }
+    +  \frac{q_2^2q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2}
+    -  \frac{q_3^2q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2}\right]\\
+   &= \frac{-1}{\p{q_2^2-m_\nu^2+i\eps} \paren{q_3^2-m_\nu^2+i\eps}} \cdot
+ \\  & \hspace{2cm}\frac{1}{m} \left[ \paren{q_3^2-q_2^2}\eta^{\beta'\gamma'} + \paren{1-\frac{q_3^2}{m_\nu^2}}q_2^{\beta'}q_2^{\gamma'}  - \paren{1-\frac{q_2^2}{m_\nu^2}}q_3^{\beta'}q_3^{\gamma'}
+   \right]  \\
+   &= \frac{-1}{\p{q_2^2-m_\nu^2+i\eps} \paren{q_3^2-m_\nu^2+i\eps}} \cdot \\
+   & \hspace{2cm}\frac{1}{m}\bracket{ \paren{q_3^2-q_2^2}\eta^{\beta'\gamma'}    + \frac{m_\nu^2-q_3^2}{m_\nu^2}  q_2^{\beta'}q_2^{\gamma'} - \frac{m_\nu^2 - q_2^2}{m_\nu^2}q_3^{\beta'}q_3^{\gamma'}} \\
+   &=\frac{-1}{\p{q_2^2-m_\nu^2+i\eps} \paren{q_3^2-m_\nu^2+i\eps}} \cdot \\
+   & \hspace{2cm}\frac{1}{m}\bracket{ \paren{q_3^2-q_2^2}\eta^{\beta'\gamma'}    - \frac{q_3^2-m_\nu^2}{m_\nu^2}  q_2^{\beta'}q_2^{\gamma'} + \frac{q_2^2 - m_\nu^2}{m_\nu^2}q_3^{\beta'}q_3^{\gamma'}} .
+\end{align*}
+
+Now, we define the propagator denominators
+\begin{align*}
+\boxed{
+D_{(q_2)} = q_2^2-m_\nu^2+i\eps, \quad D_{(q_3)} = q_3^2-m_\nu^2+i\eps}
+\end{align*}
+so that we get the amplitude
+\begin{align*}
+     \mathcal{M}^{\beta'\gamma'}&=  -\frac{1}{m}\cdot \bracket{\frac{\paren{q_3^2-q_2^2}\eta^{\beta'\gamma'} }{D_{(q_2)}D_{(q_3)}} -  \frac{\frac{D_{(q_3)}}{m_\nu^2}  q_2^{\beta'}q_2^{\gamma'}  }{D_{(q_2)}D_{(q_3)}} + \frac{\frac{D_{(q_2)}}{m_\nu^2}  q_3^{\beta'}q_3^{\gamma'}  }{D_{(q_2)}D_{(q_3)}}}\\
+    &= -\frac{1}{m}\cdot \bracket{\frac{\eta^{\beta'\gamma'}\bracket{(q_3^2-m_\nu^2)-(q_2^2-m_\nu^2)}}{D_{(q_2)}D_{(q_3)} }-\frac{D_{(q_3)}\frac{q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2}    }{D_{(q_2)}D_{(q_3)}} +\frac{D_{(q_2)}\frac{q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2}    }{D_{(q_2)}D_{(q_3)}}}\\
+  &= -\frac{1}{m}\cdot \bracket{\frac{\eta^{\beta'\gamma'}\bracket{D_{(q_3)}-D_{(q_2)}}}{D_{(q_2)}D_{(q_3)} }-\frac{D_{(q_3)}\frac{q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2}    }{D_{(q_2)}D_{(q_3)}} +\frac{D_{(q_2)}\frac{q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2}    }{D_{(q_2)}D_{(q_3)}}}
+\end{align*}
+
+which we simplify  to obtain the difference of two propagators in the final form
+
+\begin{align*}
+      \mathcal{M}^{\beta'\gamma'}&=-\frac{1}{m}\cdot \bracket{\frac{\eta^{\beta'\gamma'}}{D_{(q_2)} }- \frac{\eta^{\beta'\gamma'}}{D_{(q_3)}}-\frac{\frac{q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2}    }{D_{(q_2)}} +\frac{\frac{q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2}    }{D_{(q_3)}}}\\
+      &= \frac{1}{m}\cdot \bracket{-\frac{\eta^{\beta'\gamma'}}{D_{(q_2)} }+\frac{\eta^{\beta'\gamma'}}{D_{(q_3)}}+\frac{\frac{q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2}    }{D_{(q_2)}} -\frac{\frac{q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2}    }{D_{(q_3)}}}
+\end{align*}
+\begin{align*}
+\boxed{
+ i\mathcal{M}^{\beta'\gamma'}= \frac{i}{m_{\text{in}}}\cdot \bracket{\frac{\eta^{\beta'\gamma'}-\frac{q_3^{\beta'}q_3^{\gamma'}}{m_\nu^2} }{D_{(q_3)}}   -  \frac{\eta^{\beta'\gamma'}-\frac{q_2^{\beta'}q_2^{\gamma'}}{m_\nu^2} }{D_{(q_2)}} }}.
+\end{align*}
+
+\newpage
+
+\section{the Ward identity}
+
+\subsection{the baby identity we want to prove}
+\begin{figure}[htbp]
+  \centering
+  \[
+  \begin{array}{cc}
+ \HalfBoxCorr[
+  field={},
+  show-momenta=false,
+  central={},
+  propagator-arrow-size=12pt,
+  leg-styles={ewboson,spol,ewboson,ewboson},
+  half-box-line={proca,circ={}},
+  half-box-bridge-label={},
+  half-box-bridge-color={}
+]
+  \end{array}
+  \]
+  \caption{Box one-loop $W^+W^-\rightarrow W^+W^-$ topology.}
+  \label{fig:one-loop-box}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \[
+  \begin{array}{cc}
+\FourPointCorr[
+    scale=0.72,
+    show-momenta=false,
+    propagator-arrow-size=14pt,
+    leg-styles={scalarpolarized,plain,plain,plain},
+    field=\phi,
+    indices={a,b,c,d},
+  ]
+  \end{array}
+  \]
+  \caption{Box one-loop $W^+W^-\rightarrow W^+W^-$ topology.}
+  \label{fig:one-loop-box-four-point}
+\end{figure}
+
+\subsection{the big identity we want to prove }
+
+\newpage
+
+\section{\texorpdfstring{One loop $W^+W^-\rightarrow W^+W^-$ diagrams}{One loop W+W- to W+W- diagrams}}
+In each one-loop diagram, let the four external momenta be defined by $q_1$, $q_2$, $q_3$, and $q_4$ with momentum conserved at each vertex.
+We must integrate over the momentum on each side of the box under one integrand since the momenta do not factorize.
+
+\subsection{Box diagram}
+The box is the first possible $W^+W^-\rightarrow W^+W^-$ one-loop topology.
+\begin{figure}[htbp]
+  \centering
+  \[
+  \begin{array}{cc}
+    \text{Scalar-polarized gauge bosons $W_\alpha$ and $W_\sigma$}\\
+    \BoxLoopCorr[
+     field={W},
+     indices = {\alpha, \sigma, \delta, \eta},
+      leg-styles={
+    {spol,red!75!black},
+    {ewboson,black},
+    {ewboson},
+    {ewboson}
+  }
+]
+  \end{array}
+  \]
+  \caption{Box one-loop $W^+W^-\rightarrow W^+W^-$ topology.}
+  \label{fig:one-loop-box-main}
+\end{figure}
+
+\subsection{Cross-box diagram}
+The cross-box is the second possible $W^+W^-\rightarrow W^+W^-$ one-loop topology.
+
+\begin{figure}[htbp]
+  \centering
+  \[
+  \begin{array}{cc}
+    \text{Incoming scalar polarized boson} \\
+\BoxLoopCorr[
+topology= cross-box,
+  field={W},
+  indices = {\alpha, \sigma, \delta, \eta},
+  show-momenta=false,
+  box-line=ewboson,
+  box-external-line=plain,
+  leg-styles={
+    {spol,red!75!black},
+    {ewboson,black},
+    {ewboson},
+    {ewboson}
+    }
+]
+  \end{array}
+  \]
+  \caption{Cross-box one-loop $W^+W^-\rightarrow W^+W^-$ topology}
+  \label{fig:one-loop-cross-box}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \[
+  \begin{array}{cc}
+\CrossBoxCorr[
+  field={},
+  show-momenta=false,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-up-line=proca,
+  central={}
+]
+  \end{array}
+  \]
+  \caption{Cross-box one-loop $W^+W^-\rightarrow W^+W^-$ topology}
+  \label{fig:one-loop-cross-box-alt}
+\end{figure}
+
+\subsection{Triangle-box diagram}
+The triangle-box is the third possible $W^+W^-\rightarrow W^+W^-$ one-loop topology.
+
+\begin{figure}[htbp]
+  \centering
+  \[
+  \begin{array}{cc}
+\BoxLoopCorr[
+  topology= triangle-contact,
+  triangle-contact-orientation=top,
+  triangle-contact-xspan=0.95,
+  triangle-contact-yspan=0.86,
+  triangle-contact-external-xspan=1.50,
+  triangle-contact-external-yspan=1.36,
+  field={W},
+  indices = {\alpha, \sigma, \delta, \eta},
+  show-momenta=false,
+  box-line=ewboson,
+  box-external-line=plain,
+  leg-styles={
+    {ewboson,black},
+    {ewboson,black},
+    {ewboson},
+    {ewboson}
+  }
+]
+  \end{array}
+  \]
+  \caption{Triangle-box one-loop $W^+W^-\rightarrow W^+W^-$ topology}
+  \label{fig:one-loop-triangle-box}
+\end{figure}
+
+\section{SU(2) subgroup}
+\begin{enumerate}
+    \item Right now, we are not including the photon and are only consider the subgroup $SU(2)$
+    \item Considering just the subgroup $SU(2)$ means that we are (essentially) only left with the $W^+,W^-$ and $Z$ bosons
+    \item This means that we are left with two step operators and one neutral operator
+    \item Typically, the photon $\gamma$, represented by the photon field $A_\mu$, accounts for the extra degree of freedom provided by the $U(1)$ in the total gauge group $SU(2)\times U(1)$
+\end{enumerate}
+
+\end{document}

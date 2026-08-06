@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{correlator-diagrams}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.9em}
+  #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Internal Propagator Index Slots}
+
+\begin{center}
+\diagramcell{Half-box slots 1--5}{
+\HalfBoxCorr[
+  field={},
+  show-momenta=false,
+  central={},
+  half-box-bridge-label=Z,
+  half-box-propagator-left-indices={a_1,a_2,a_3,a_4,a_5},
+  half-box-propagator-right-indices={b_1,b_2,b_3,b_4,b_5},
+  half-box-index-left-position=above,
+  half-box-index-right-position=below,
+  half-box-index-left-yshift=2pt,
+  half-box-index-right-yshift=-2pt
+]
+}
+\hfill
+\diagramcell{Flat-contact slots 1--4}{
+\FlatContactCorr[
+  field={},
+  show-momenta=false,
+  central={},
+  flat-contact-propagator-left-indices={c_1,c_2,c_3,c_4},
+  flat-contact-propagator-right-indices={d_1,d_2,d_3,d_4},
+  flat-contact-index-left-position=above,
+  flat-contact-index-right-position=below,
+  flat-contact-index-left-yshift=2pt,
+  flat-contact-index-right-yshift=-2pt
+]
+}
+\end{center}
+
+\newpage
+
+\begin{center}
+\diagramcell{Box slots 1--8}{
+\BoxLoopCorr[
+  scale=0.72,
+  field={},
+  show-momenta=false,
+  central={},
+  box-loop-momentum={},
+  box-propagator-left-indices={l_1,l_2,l_3,l_4,l_5,l_6,l_7,l_8},
+  box-propagator-right-indices={r_1,r_2,r_3,r_4,r_5,r_6,r_7,r_8},
+  box-index-left-position=above,
+  box-index-right-position=below,
+  box-index-left-yshift=2pt,
+  box-index-right-yshift=-2pt
+]
+}
+\hfill
+\diagramcell{Triangle-contact slots 1--7}{
+\TriangleContactCorr[
+  scale=0.72,
+  field={},
+  show-momenta=false,
+  central={},
+  triangle-contact-propagator-left-indices={u_1,u_2,u_3,u_4,u_5,u_6,u_7},
+  triangle-contact-propagator-right-indices={v_1,v_2,v_3,v_4,v_5,v_6,v_7},
+  triangle-contact-index-left-position=above,
+  triangle-contact-index-right-position=below,
+  triangle-contact-index-left-yshift=2pt,
+  triangle-contact-index-right-yshift=-2pt
+]
+}
+\end{center}
+
+\newpage
+
+\begin{center}
+\diagramcell{Empty entries are skipped}{
+\BoxLoopCorr[
+  scale=0.78,
+  field={},
+  show-momenta=false,
+  central={},
+  box-propagator-left-indices={,,,,\alpha,,\beta,},
+  box-propagator-right-indices={,,,,,\gamma,,\delta},
+  box-index-left-position=left,
+  box-index-right-position=right,
+  box-index-left-xshift=-2pt,
+  box-index-right-xshift=2pt
+]
+}
+\hfill
+\diagramcell{Small filled index tags}{
+\TriangleContactCorr[
+  scale=0.78,
+  field={},
+  show-momenta=false,
+  central={},
+  triangle-contact-orientation=right,
+  triangle-contact-propagator-left-indices={,,,,m,n,p},
+  triangle-contact-propagator-right-indices={,,,,x,y,z},
+  triangle-contact-index-left-position=above,
+  triangle-contact-index-right-position=below,
+  triangle-contact-index-fill=white,
+  triangle-contact-index-inner-sep=0.8pt,
+  triangle-contact-index-size=scriptscript
+]
+}
+\end{center}
+
+\end{document}

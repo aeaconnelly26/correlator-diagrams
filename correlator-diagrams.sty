@@ -385,6 +385,10 @@
 \def\corr@momentumlabelsize{\normalsize}
 \def\corr@externalleftmomentumdirection{in}
 \def\corr@externalrightmomentumdirection{in}
+\def\corr@contactulmomentumdirection{}
+\def\corr@contactllmomentumdirection{}
+\def\corr@contacturmomentumdirection{}
+\def\corr@contactlrmomentumdirection{}
 \def\corr@propagatorarrowsize{}
 \def\corr@propagatorarrowsizes{}
 \def\corr@field{\phi}
@@ -683,6 +687,18 @@
 \def\corr@boxlooplabelxshift{0pt}
 \def\corr@boxlooplabelyshift{0pt}
 \def\corr@boxcentrallabelyshift{-62pt}
+\def\corr@boxpropagatorleftindices{}
+\def\corr@boxpropagatorrightindices{}
+\def\corr@boxindexleftposition{above}
+\def\corr@boxindexrightposition{below}
+\def\corr@boxindexleftxshift{0pt}
+\def\corr@boxindexleftyshift{0pt}
+\def\corr@boxindexrightxshift{0pt}
+\def\corr@boxindexrightyshift{0pt}
+\def\corr@boxindexstyle{}
+\def\corr@boxindexfill{none}
+\def\corr@boxindexinnersep{0.4pt}
+\def\corr@boxindexmathstyle{\scriptstyle}
 \def\corr@halfboxxspan{0.86}
 \def\corr@halfboxtopstub{0.72}
 \def\corr@halfboxtopyspan{0.48}
@@ -703,6 +719,18 @@
 \def\corr@halfboxmomentumlabelfraction{0.50}
 \def\corr@halfboxmomentumlabelgap{0.10}
 \def\corr@halfboxmomentumslots{1,2,3,4}
+\def\corr@halfboxpropagatorleftindices{}
+\def\corr@halfboxpropagatorrightindices{}
+\def\corr@halfboxindexleftposition{above}
+\def\corr@halfboxindexrightposition{below}
+\def\corr@halfboxindexleftxshift{0pt}
+\def\corr@halfboxindexleftyshift{0pt}
+\def\corr@halfboxindexrightxshift{0pt}
+\def\corr@halfboxindexrightyshift{0pt}
+\def\corr@halfboxindexstyle{}
+\def\corr@halfboxindexfill{none}
+\def\corr@halfboxindexinnersep{0.4pt}
+\def\corr@halfboxindexmathstyle{\scriptstyle}
 \def\corr@halfboxleftlowercirc{}
 \def\corr@halfboxrightlowercirc{}
 \def\corr@halfboxlowercircpos{0.72}
@@ -716,6 +744,18 @@
 \def\corr@flatcontactmomentumlabelfraction{0.50}
 \def\corr@flatcontactmomentumlabelgap{0.10}
 \def\corr@flatcontactmomentumslots{1,2,3,4}
+\def\corr@flatcontactpropagatorleftindices{}
+\def\corr@flatcontactpropagatorrightindices{}
+\def\corr@flatcontactindexleftposition{above}
+\def\corr@flatcontactindexrightposition{below}
+\def\corr@flatcontactindexleftxshift{0pt}
+\def\corr@flatcontactindexleftyshift{0pt}
+\def\corr@flatcontactindexrightxshift{0pt}
+\def\corr@flatcontactindexrightyshift{0pt}
+\def\corr@flatcontactindexstyle{}
+\def\corr@flatcontactindexfill{none}
+\def\corr@flatcontactindexinnersep{0.4pt}
+\def\corr@flatcontactindexmathstyle{\scriptstyle}
 \def\corr@crossboxdownline{}
 \def\corr@crossboxupline{}
 \def\corr@crossboxcrossinggap{0.045}
@@ -747,6 +787,26 @@
 \def\corr@trianglecontactmomentumlabelfraction{0.50}
 \def\corr@trianglecontactmomentumlabelgap{0.10}
 \def\corr@trianglecontactmomentumslots{1,2,3,4}
+\def\corr@trianglecontactinternalmomenta{}
+\def\corr@trianglecontactinternalmomentumdirections{forward,forward,forward}
+\def\corr@trianglecontactinternalmomentumslots{5,6,7}
+\def\corr@trianglecontactinternalmomentumstart{0.30}
+\def\corr@trianglecontactinternalmomentumend{0.70}
+\def\corr@trianglecontactinternalmomentumoffset{10pt}
+\def\corr@trianglecontactinternalmomentumlabelfraction{0.50}
+\def\corr@trianglecontactinternalmomentumlabelgap{0.10}
+\def\corr@trianglecontactpropagatorleftindices{}
+\def\corr@trianglecontactpropagatorrightindices{}
+\def\corr@trianglecontactindexleftposition{above}
+\def\corr@trianglecontactindexrightposition{below}
+\def\corr@trianglecontactindexleftxshift{0pt}
+\def\corr@trianglecontactindexleftyshift{0pt}
+\def\corr@trianglecontactindexrightxshift{0pt}
+\def\corr@trianglecontactindexrightyshift{0pt}
+\def\corr@trianglecontactindexstyle{}
+\def\corr@trianglecontactindexfill{none}
+\def\corr@trianglecontactindexinnersep{0.4pt}
+\def\corr@trianglecontactindexmathstyle{\scriptstyle}
 \def\corr@trianglecontactcentrallabelyshift{-42pt}
 \corr@blobtrue
 \def\corr@blobstyle{blob}
@@ -1216,6 +1276,56 @@
   \fi
 }
 
+\newcommand{\corr@getlistitemorblank}[2]{%
+  \def\corr@currentlistitem{}%
+  \edef\corr@topologylisttmp{#1}%
+  \ifdefempty{\corr@topologylisttmp}{}{%
+    \readlist*\corr@topologylistitems{#1}%
+    \ifnum\corr@topologylistitemslen<#2\relax
+    \else
+      \edef\corr@currentlistitem{\corr@topologylistitems[#2]}%
+    \fi
+  }%
+}
+
+\newcommand{\corr@puttopologyindexline}[8]{%
+  \edef\corr@topologyindextmp{#7}%
+  \ifdefempty{\corr@topologyindextmp}{}{%
+    \corr@resolvemomentumlabelplacement{#4}{0pt}{#5}{#6}%
+    \path (#1) -- coordinate[pos=#3] (corrtopologyidxcoord) (#2);
+    \node[
+      anchor=\corr@momentumlabelanchor,
+      xshift=\corr@momentumlabelxshift,
+      yshift=\corr@momentumlabelyshift,
+      fill=\corr@currenttopologyindexfill,
+      inner sep=\corr@currenttopologyindexinnersep,
+      outer sep=0pt,
+      \corr@currenttopologyindexstyle
+    ] at (corrtopologyidxcoord) {$#8 #7$};
+  }%
+}
+
+\newcommand{\corr@putpropagatorindiceslot}[4]{%
+  \expandafter\let\expandafter\corr@currenttopologyindexstyle\csname corr@#1indexstyle\endcsname
+  \expandafter\let\expandafter\corr@currenttopologyindexfill\csname corr@#1indexfill\endcsname
+  \expandafter\let\expandafter\corr@currenttopologyindexinnersep\csname corr@#1indexinnersep\endcsname
+  \expandafter\let\expandafter\corr@currenttopologyindexmathstyle\csname corr@#1indexmathstyle\endcsname
+  \edef\corr@topologyindexraw{\csname corr@#1propagatorleftindices\endcsname}%
+  \corr@getlistitemorblank{\corr@topologyindexraw}{#2}%
+  \edef\corr@topologyleftindex{\corr@currentlistitem}%
+  \edef\corr@topologyindexposition{\csname corr@#1indexleftposition\endcsname}%
+  \edef\corr@topologyindexxshift{\csname corr@#1indexleftxshift\endcsname}%
+  \edef\corr@topologyindexyshift{\csname corr@#1indexleftyshift\endcsname}%
+  \corr@puttopologyindexline{#3}{#4}{0.18}{\corr@topologyindexposition}{\corr@topologyindexxshift}{\corr@topologyindexyshift}{\corr@topologyleftindex}{\corr@currenttopologyindexmathstyle}%
+  \edef\corr@topologyindexraw{\csname corr@#1propagatorrightindices\endcsname}%
+  \corr@getlistitemorblank{\corr@topologyindexraw}{#2}%
+  \edef\corr@topologyrightindex{\corr@currentlistitem}%
+  \edef\corr@topologyindexposition{\csname corr@#1indexrightposition\endcsname}%
+  \edef\corr@topologyindexxshift{\csname corr@#1indexrightxshift\endcsname}%
+  \edef\corr@topologyindexyshift{\csname corr@#1indexrightyshift\endcsname}%
+  \corr@puttopologyindexline{#3}{#4}{0.82}{\corr@topologyindexposition}{\corr@topologyindexxshift}{\corr@topologyindexyshift}{\corr@topologyrightindex}{\corr@currenttopologyindexmathstyle}%
+}
+
 \newcommand{\corr@sunsetmarklinehasindices}[4]{%
   \def#4{0}%
   \def\corr@sunsetinternalindextmp{#1}%
@@ -1477,6 +1587,18 @@
   \corr@topologysetdefault\corr@boxlooplabelxshift{0pt}%
   \corr@topologysetdefault\corr@boxlooplabelyshift{0pt}%
   \corr@topologysetdefault\corr@boxcentrallabelyshift{-62pt}%
+  \corr@topologysetdefault\corr@boxpropagatorleftindices{}%
+  \corr@topologysetdefault\corr@boxpropagatorrightindices{}%
+  \corr@topologysetdefault\corr@boxindexleftposition{above}%
+  \corr@topologysetdefault\corr@boxindexrightposition{below}%
+  \corr@topologysetdefault\corr@boxindexleftxshift{0pt}%
+  \corr@topologysetdefault\corr@boxindexleftyshift{0pt}%
+  \corr@topologysetdefault\corr@boxindexrightxshift{0pt}%
+  \corr@topologysetdefault\corr@boxindexrightyshift{0pt}%
+  \corr@topologysetdefault\corr@boxindexstyle{}%
+  \corr@topologysetdefault\corr@boxindexfill{none}%
+  \corr@topologysetdefault\corr@boxindexinnersep{0.4pt}%
+  \corr@topologysetdefault\corr@boxindexmathstyle{\scriptstyle}%
 }
 
 \newcommand{\corr@resethalfboxdefaults}{%
@@ -1500,6 +1622,18 @@
   \corr@topologysetdefault\corr@halfboxmomentumlabelfraction{0.50}%
   \corr@topologysetdefault\corr@halfboxmomentumlabelgap{0.10}%
   \corr@topologysetdefault\corr@halfboxmomentumslots{1,2,3,4}%
+  \corr@topologysetdefault\corr@halfboxpropagatorleftindices{}%
+  \corr@topologysetdefault\corr@halfboxpropagatorrightindices{}%
+  \corr@topologysetdefault\corr@halfboxindexleftposition{above}%
+  \corr@topologysetdefault\corr@halfboxindexrightposition{below}%
+  \corr@topologysetdefault\corr@halfboxindexleftxshift{0pt}%
+  \corr@topologysetdefault\corr@halfboxindexleftyshift{0pt}%
+  \corr@topologysetdefault\corr@halfboxindexrightxshift{0pt}%
+  \corr@topologysetdefault\corr@halfboxindexrightyshift{0pt}%
+  \corr@topologysetdefault\corr@halfboxindexstyle{}%
+  \corr@topologysetdefault\corr@halfboxindexfill{none}%
+  \corr@topologysetdefault\corr@halfboxindexinnersep{0.4pt}%
+  \corr@topologysetdefault\corr@halfboxindexmathstyle{\scriptstyle}%
   \corr@topologysetdefault\corr@halfboxleftlowercirc{}%
   \corr@topologysetdefault\corr@halfboxrightlowercirc{}%
   \corr@topologysetdefault\corr@halfboxlowercircpos{0.72}%
@@ -1518,6 +1652,18 @@
   \corr@topologysetdefault\corr@flatcontactmomentumlabelfraction{0.50}%
   \corr@topologysetdefault\corr@flatcontactmomentumlabelgap{0.10}%
   \corr@topologysetdefault\corr@flatcontactmomentumslots{1,2,3,4}%
+  \corr@topologysetdefault\corr@flatcontactpropagatorleftindices{}%
+  \corr@topologysetdefault\corr@flatcontactpropagatorrightindices{}%
+  \corr@topologysetdefault\corr@flatcontactindexleftposition{above}%
+  \corr@topologysetdefault\corr@flatcontactindexrightposition{below}%
+  \corr@topologysetdefault\corr@flatcontactindexleftxshift{0pt}%
+  \corr@topologysetdefault\corr@flatcontactindexleftyshift{0pt}%
+  \corr@topologysetdefault\corr@flatcontactindexrightxshift{0pt}%
+  \corr@topologysetdefault\corr@flatcontactindexrightyshift{0pt}%
+  \corr@topologysetdefault\corr@flatcontactindexstyle{}%
+  \corr@topologysetdefault\corr@flatcontactindexfill{none}%
+  \corr@topologysetdefault\corr@flatcontactindexinnersep{0.4pt}%
+  \corr@topologysetdefault\corr@flatcontactindexmathstyle{\scriptstyle}%
 }
 
 \newcommand{\corr@resetcrossboxdefaults}{%
@@ -1561,6 +1707,26 @@
   \corr@topologysetdefault\corr@trianglecontactmomentumlabelfraction{0.50}%
   \corr@topologysetdefault\corr@trianglecontactmomentumlabelgap{0.10}%
   \corr@topologysetdefault\corr@trianglecontactmomentumslots{1,2,3,4}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomenta{}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumdirections{forward,forward,forward}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumslots{5,6,7}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumstart{0.30}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumend{0.70}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumoffset{10pt}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelgap{0.10}%
+  \corr@topologysetdefault\corr@trianglecontactpropagatorleftindices{}%
+  \corr@topologysetdefault\corr@trianglecontactpropagatorrightindices{}%
+  \corr@topologysetdefault\corr@trianglecontactindexleftposition{above}%
+  \corr@topologysetdefault\corr@trianglecontactindexrightposition{below}%
+  \corr@topologysetdefault\corr@trianglecontactindexleftxshift{0pt}%
+  \corr@topologysetdefault\corr@trianglecontactindexleftyshift{0pt}%
+  \corr@topologysetdefault\corr@trianglecontactindexrightxshift{0pt}%
+  \corr@topologysetdefault\corr@trianglecontactindexrightyshift{0pt}%
+  \corr@topologysetdefault\corr@trianglecontactindexstyle{}%
+  \corr@topologysetdefault\corr@trianglecontactindexfill{none}%
+  \corr@topologysetdefault\corr@trianglecontactindexinnersep{0.4pt}%
+  \corr@topologysetdefault\corr@trianglecontactindexmathstyle{\scriptstyle}%
   \corr@topologysetdefault\corr@trianglecontactcentrallabelyshift{-42pt}%
 }
 
@@ -1786,6 +1952,28 @@
   momentum-symbol/.store in=\corr@mode,
   momentum-start/.store in=\corr@momentumstart,
   momentum-labels/.store in=\corr@momentumlabels,
+  momentum-directions/.code={%
+    \readlist*\corr@momentumdirectionitems{#1}%
+    \ifnum\corr@momentumdirectionitemslen>0
+      \def\corr@threepointulmomentumdirection{\corr@momentumdirectionitems[1]}%
+      \def\corr@contactulmomentumdirection{\corr@momentumdirectionitems[1]}%
+      \def\corr@boxulmomentumdirection{\corr@momentumdirectionitems[1]}%
+    \fi
+    \ifnum\corr@momentumdirectionitemslen>1
+      \def\corr@threepointrmomentumdirection{\corr@momentumdirectionitems[2]}%
+      \def\corr@contactllmomentumdirection{\corr@momentumdirectionitems[2]}%
+      \def\corr@boxllmomentumdirection{\corr@momentumdirectionitems[2]}%
+    \fi
+    \ifnum\corr@momentumdirectionitemslen>2
+      \def\corr@threepointbmomentumdirection{\corr@momentumdirectionitems[3]}%
+      \def\corr@contacturmomentumdirection{\corr@momentumdirectionitems[3]}%
+      \def\corr@boxurmomentumdirection{\corr@momentumdirectionitems[3]}%
+    \fi
+    \ifnum\corr@momentumdirectionitemslen>3
+      \def\corr@contactlrmomentumdirection{\corr@momentumdirectionitems[4]}%
+      \def\corr@boxlrmomentumdirection{\corr@momentumdirectionitems[4]}%
+    \fi
+  },
   momentum-arrow-size/.store in=\corr@momentumarrowsize,
   momentum-arrow-sizes/.store in=\corr@momentumarrowsizes,
   momentum-line-width/.store in=\corr@momentumlinewidth,
@@ -1804,6 +1992,25 @@
   external-right-momentum-direction/.store in=\corr@externalrightmomentumdirection,
   left-momentum-direction/.style={external-left-momentum-direction={#1}},
   right-momentum-direction/.style={external-right-momentum-direction={#1}},
+  contact-upper-left-momentum-direction/.store in=\corr@contactulmomentumdirection,
+  contact-lower-left-momentum-direction/.store in=\corr@contactllmomentumdirection,
+  contact-upper-right-momentum-direction/.store in=\corr@contacturmomentumdirection,
+  contact-lower-right-momentum-direction/.store in=\corr@contactlrmomentumdirection,
+  contact-momentum-directions/.code={%
+    \readlist*\corr@contactmomentumdirectionitems{#1}%
+    \ifnum\corr@contactmomentumdirectionitemslen>0
+      \def\corr@contactulmomentumdirection{\corr@contactmomentumdirectionitems[1]}%
+    \fi
+    \ifnum\corr@contactmomentumdirectionitemslen>1
+      \def\corr@contactllmomentumdirection{\corr@contactmomentumdirectionitems[2]}%
+    \fi
+    \ifnum\corr@contactmomentumdirectionitemslen>2
+      \def\corr@contacturmomentumdirection{\corr@contactmomentumdirectionitems[3]}%
+    \fi
+    \ifnum\corr@contactmomentumdirectionitemslen>3
+      \def\corr@contactlrmomentumdirection{\corr@contactmomentumdirectionitems[4]}%
+    \fi
+  },
   external-momentum-flow/.is choice,
   external-momentum-flow/all-in/.code={
     \def\corr@externalleftmomentumdirection{in}%
@@ -2101,6 +2308,27 @@
   half-box-momentum-label-fraction/.store in=\corr@halfboxmomentumlabelfraction,
   half-box-momentum-label-gap/.store in=\corr@halfboxmomentumlabelgap,
   half-box-momentum-slots/.store in=\corr@halfboxmomentumslots,
+  half-box-momentum-directions/.style={contact-momentum-directions={#1}},
+  half-box-upper-left-momentum-direction/.style={contact-upper-left-momentum-direction={#1}},
+  half-box-lower-left-momentum-direction/.style={contact-lower-left-momentum-direction={#1}},
+  half-box-upper-right-momentum-direction/.style={contact-upper-right-momentum-direction={#1}},
+  half-box-lower-right-momentum-direction/.style={contact-lower-right-momentum-direction={#1}},
+  half-box-propagator-left-indices/.store in=\corr@halfboxpropagatorleftindices,
+  half-box-propagator-right-indices/.store in=\corr@halfboxpropagatorrightindices,
+  half-box-index-left-position/.code={\corr@storesunsetanchor{corr@halfboxindexleftposition}{#1}},
+  half-box-index-right-position/.code={\corr@storesunsetanchor{corr@halfboxindexrightposition}{#1}},
+  half-box-index-left-xshift/.store in=\corr@halfboxindexleftxshift,
+  half-box-index-left-yshift/.store in=\corr@halfboxindexleftyshift,
+  half-box-index-right-xshift/.store in=\corr@halfboxindexrightxshift,
+  half-box-index-right-yshift/.store in=\corr@halfboxindexrightyshift,
+  half-box-index-style/.store in=\corr@halfboxindexstyle,
+  half-box-index-fill/.store in=\corr@halfboxindexfill,
+  half-box-index-inner-sep/.store in=\corr@halfboxindexinnersep,
+  half-box-index-size/.is choice,
+  half-box-index-size/normal/.code={\def\corr@halfboxindexmathstyle{}},
+  half-box-index-size/script/.code={\def\corr@halfboxindexmathstyle{\scriptstyle}},
+  half-box-index-size/scriptscript/.code={\def\corr@halfboxindexmathstyle{\scriptscriptstyle}},
+  half-box-index-size/default/.style={half-box-index-size=script},
   half-box-left-lower-circ/.code={\def\corr@halfboxleftlowercirc{#1}\corr@halfboxleftlowercirctrue},
   half-box-right-lower-circ/.code={\def\corr@halfboxrightlowercirc{#1}\corr@halfboxrightlowercirctrue},
   half-box-lower-circ-position/.store in=\corr@halfboxlowercircpos,
@@ -2125,6 +2353,23 @@
   halfbox-momentum-label-fraction/.style={half-box-momentum-label-fraction={#1}},
   halfbox-momentum-label-gap/.style={half-box-momentum-label-gap={#1}},
   halfbox-momentum-slots/.style={half-box-momentum-slots={#1}},
+  halfbox-momentum-directions/.style={half-box-momentum-directions={#1}},
+  halfbox-upper-left-momentum-direction/.style={half-box-upper-left-momentum-direction={#1}},
+  halfbox-lower-left-momentum-direction/.style={half-box-lower-left-momentum-direction={#1}},
+  halfbox-upper-right-momentum-direction/.style={half-box-upper-right-momentum-direction={#1}},
+  halfbox-lower-right-momentum-direction/.style={half-box-lower-right-momentum-direction={#1}},
+  halfbox-propagator-left-indices/.style={half-box-propagator-left-indices={#1}},
+  halfbox-propagator-right-indices/.style={half-box-propagator-right-indices={#1}},
+  halfbox-index-left-position/.style={half-box-index-left-position={#1}},
+  halfbox-index-right-position/.style={half-box-index-right-position={#1}},
+  halfbox-index-left-xshift/.style={half-box-index-left-xshift={#1}},
+  halfbox-index-left-yshift/.style={half-box-index-left-yshift={#1}},
+  halfbox-index-right-xshift/.style={half-box-index-right-xshift={#1}},
+  halfbox-index-right-yshift/.style={half-box-index-right-yshift={#1}},
+  halfbox-index-style/.style={half-box-index-style={#1}},
+  halfbox-index-fill/.style={half-box-index-fill={#1}},
+  halfbox-index-inner-sep/.style={half-box-index-inner-sep={#1}},
+  halfbox-index-size/.style={half-box-index-size={#1}},
   halfbox-left-lower-circ/.style={half-box-left-lower-circ={#1}},
   halfbox-right-lower-circ/.style={half-box-right-lower-circ={#1}},
   halfbox-lower-circ-position/.style={half-box-lower-circ-position={#1}},
@@ -2138,6 +2383,27 @@
   flat-contact-momentum-label-fraction/.store in=\corr@flatcontactmomentumlabelfraction,
   flat-contact-momentum-label-gap/.store in=\corr@flatcontactmomentumlabelgap,
   flat-contact-momentum-slots/.store in=\corr@flatcontactmomentumslots,
+  flat-contact-momentum-directions/.style={contact-momentum-directions={#1}},
+  flat-contact-upper-left-momentum-direction/.style={contact-upper-left-momentum-direction={#1}},
+  flat-contact-lower-left-momentum-direction/.style={contact-lower-left-momentum-direction={#1}},
+  flat-contact-upper-right-momentum-direction/.style={contact-upper-right-momentum-direction={#1}},
+  flat-contact-lower-right-momentum-direction/.style={contact-lower-right-momentum-direction={#1}},
+  flat-contact-propagator-left-indices/.store in=\corr@flatcontactpropagatorleftindices,
+  flat-contact-propagator-right-indices/.store in=\corr@flatcontactpropagatorrightindices,
+  flat-contact-index-left-position/.code={\corr@storesunsetanchor{corr@flatcontactindexleftposition}{#1}},
+  flat-contact-index-right-position/.code={\corr@storesunsetanchor{corr@flatcontactindexrightposition}{#1}},
+  flat-contact-index-left-xshift/.store in=\corr@flatcontactindexleftxshift,
+  flat-contact-index-left-yshift/.store in=\corr@flatcontactindexleftyshift,
+  flat-contact-index-right-xshift/.store in=\corr@flatcontactindexrightxshift,
+  flat-contact-index-right-yshift/.store in=\corr@flatcontactindexrightyshift,
+  flat-contact-index-style/.store in=\corr@flatcontactindexstyle,
+  flat-contact-index-fill/.store in=\corr@flatcontactindexfill,
+  flat-contact-index-inner-sep/.store in=\corr@flatcontactindexinnersep,
+  flat-contact-index-size/.is choice,
+  flat-contact-index-size/normal/.code={\def\corr@flatcontactindexmathstyle{}},
+  flat-contact-index-size/script/.code={\def\corr@flatcontactindexmathstyle{\scriptstyle}},
+  flat-contact-index-size/scriptscript/.code={\def\corr@flatcontactindexmathstyle{\scriptscriptstyle}},
+  flat-contact-index-size/default/.style={flat-contact-index-size=script},
   flatcontact-xspan/.style={flat-contact-xspan={#1}},
   flatcontact-yspan/.style={flat-contact-yspan={#1}},
   flatcontact-line/.style={flat-contact-line={#1}},
@@ -2148,6 +2414,23 @@
   flatcontact-momentum-label-fraction/.style={flat-contact-momentum-label-fraction={#1}},
   flatcontact-momentum-label-gap/.style={flat-contact-momentum-label-gap={#1}},
   flatcontact-momentum-slots/.style={flat-contact-momentum-slots={#1}},
+  flatcontact-momentum-directions/.style={flat-contact-momentum-directions={#1}},
+  flatcontact-upper-left-momentum-direction/.style={flat-contact-upper-left-momentum-direction={#1}},
+  flatcontact-lower-left-momentum-direction/.style={flat-contact-lower-left-momentum-direction={#1}},
+  flatcontact-upper-right-momentum-direction/.style={flat-contact-upper-right-momentum-direction={#1}},
+  flatcontact-lower-right-momentum-direction/.style={flat-contact-lower-right-momentum-direction={#1}},
+  flatcontact-propagator-left-indices/.style={flat-contact-propagator-left-indices={#1}},
+  flatcontact-propagator-right-indices/.style={flat-contact-propagator-right-indices={#1}},
+  flatcontact-index-left-position/.style={flat-contact-index-left-position={#1}},
+  flatcontact-index-right-position/.style={flat-contact-index-right-position={#1}},
+  flatcontact-index-left-xshift/.style={flat-contact-index-left-xshift={#1}},
+  flatcontact-index-left-yshift/.style={flat-contact-index-left-yshift={#1}},
+  flatcontact-index-right-xshift/.style={flat-contact-index-right-xshift={#1}},
+  flatcontact-index-right-yshift/.style={flat-contact-index-right-yshift={#1}},
+  flatcontact-index-style/.style={flat-contact-index-style={#1}},
+  flatcontact-index-fill/.style={flat-contact-index-fill={#1}},
+  flatcontact-index-inner-sep/.style={flat-contact-index-inner-sep={#1}},
+  flatcontact-index-size/.style={flat-contact-index-size={#1}},
   cross-box-down-line/.store in=\corr@crossboxdownline,
   cross-box-up-line/.store in=\corr@crossboxupline,
   cross-box-diagonal-lines/.code={\corr@setcrossboxpair{line}{#1}},
@@ -2195,6 +2478,35 @@
   triangle-contact-momentum-label-fraction/.store in=\corr@trianglecontactmomentumlabelfraction,
   triangle-contact-momentum-label-gap/.store in=\corr@trianglecontactmomentumlabelgap,
   triangle-contact-momentum-slots/.store in=\corr@trianglecontactmomentumslots,
+  triangle-contact-momentum-directions/.style={contact-momentum-directions={#1}},
+  triangle-contact-upper-left-momentum-direction/.style={contact-upper-left-momentum-direction={#1}},
+  triangle-contact-lower-left-momentum-direction/.style={contact-lower-left-momentum-direction={#1}},
+  triangle-contact-upper-right-momentum-direction/.style={contact-upper-right-momentum-direction={#1}},
+  triangle-contact-lower-right-momentum-direction/.style={contact-lower-right-momentum-direction={#1}},
+  triangle-contact-internal-momenta/.store in=\corr@trianglecontactinternalmomenta,
+  triangle-contact-internal-momentum-directions/.store in=\corr@trianglecontactinternalmomentumdirections,
+  triangle-contact-internal-momentum-slots/.store in=\corr@trianglecontactinternalmomentumslots,
+  triangle-contact-internal-momentum-start/.store in=\corr@trianglecontactinternalmomentumstart,
+  triangle-contact-internal-momentum-end/.store in=\corr@trianglecontactinternalmomentumend,
+  triangle-contact-internal-momentum-offset/.store in=\corr@trianglecontactinternalmomentumoffset,
+  triangle-contact-internal-momentum-label-fraction/.store in=\corr@trianglecontactinternalmomentumlabelfraction,
+  triangle-contact-internal-momentum-label-gap/.store in=\corr@trianglecontactinternalmomentumlabelgap,
+  triangle-contact-propagator-left-indices/.store in=\corr@trianglecontactpropagatorleftindices,
+  triangle-contact-propagator-right-indices/.store in=\corr@trianglecontactpropagatorrightindices,
+  triangle-contact-index-left-position/.code={\corr@storesunsetanchor{corr@trianglecontactindexleftposition}{#1}},
+  triangle-contact-index-right-position/.code={\corr@storesunsetanchor{corr@trianglecontactindexrightposition}{#1}},
+  triangle-contact-index-left-xshift/.store in=\corr@trianglecontactindexleftxshift,
+  triangle-contact-index-left-yshift/.store in=\corr@trianglecontactindexleftyshift,
+  triangle-contact-index-right-xshift/.store in=\corr@trianglecontactindexrightxshift,
+  triangle-contact-index-right-yshift/.store in=\corr@trianglecontactindexrightyshift,
+  triangle-contact-index-style/.store in=\corr@trianglecontactindexstyle,
+  triangle-contact-index-fill/.store in=\corr@trianglecontactindexfill,
+  triangle-contact-index-inner-sep/.store in=\corr@trianglecontactindexinnersep,
+  triangle-contact-index-size/.is choice,
+  triangle-contact-index-size/normal/.code={\def\corr@trianglecontactindexmathstyle{}},
+  triangle-contact-index-size/script/.code={\def\corr@trianglecontactindexmathstyle{\scriptstyle}},
+  triangle-contact-index-size/scriptscript/.code={\def\corr@trianglecontactindexmathstyle{\scriptscriptstyle}},
+  triangle-contact-index-size/default/.style={triangle-contact-index-size=script},
   triangle-contact-central-label-yshift/.store in=\corr@trianglecontactcentrallabelyshift,
   trianglecontact-orientation/.style={triangle-contact-orientation={#1}},
   trianglecontact-xspan/.style={triangle-contact-xspan={#1}},
@@ -2214,6 +2526,31 @@
   trianglecontact-momentum-label-fraction/.style={triangle-contact-momentum-label-fraction={#1}},
   trianglecontact-momentum-label-gap/.style={triangle-contact-momentum-label-gap={#1}},
   trianglecontact-momentum-slots/.style={triangle-contact-momentum-slots={#1}},
+  trianglecontact-momentum-directions/.style={triangle-contact-momentum-directions={#1}},
+  trianglecontact-upper-left-momentum-direction/.style={triangle-contact-upper-left-momentum-direction={#1}},
+  trianglecontact-lower-left-momentum-direction/.style={triangle-contact-lower-left-momentum-direction={#1}},
+  trianglecontact-upper-right-momentum-direction/.style={triangle-contact-upper-right-momentum-direction={#1}},
+  trianglecontact-lower-right-momentum-direction/.style={triangle-contact-lower-right-momentum-direction={#1}},
+  trianglecontact-internal-momenta/.style={triangle-contact-internal-momenta={#1}},
+  trianglecontact-internal-momentum-directions/.style={triangle-contact-internal-momentum-directions={#1}},
+  trianglecontact-internal-momentum-slots/.style={triangle-contact-internal-momentum-slots={#1}},
+  trianglecontact-internal-momentum-start/.style={triangle-contact-internal-momentum-start={#1}},
+  trianglecontact-internal-momentum-end/.style={triangle-contact-internal-momentum-end={#1}},
+  trianglecontact-internal-momentum-offset/.style={triangle-contact-internal-momentum-offset={#1}},
+  trianglecontact-internal-momentum-label-fraction/.style={triangle-contact-internal-momentum-label-fraction={#1}},
+  trianglecontact-internal-momentum-label-gap/.style={triangle-contact-internal-momentum-label-gap={#1}},
+  trianglecontact-propagator-left-indices/.style={triangle-contact-propagator-left-indices={#1}},
+  trianglecontact-propagator-right-indices/.style={triangle-contact-propagator-right-indices={#1}},
+  trianglecontact-index-left-position/.style={triangle-contact-index-left-position={#1}},
+  trianglecontact-index-right-position/.style={triangle-contact-index-right-position={#1}},
+  trianglecontact-index-left-xshift/.style={triangle-contact-index-left-xshift={#1}},
+  trianglecontact-index-left-yshift/.style={triangle-contact-index-left-yshift={#1}},
+  trianglecontact-index-right-xshift/.style={triangle-contact-index-right-xshift={#1}},
+  trianglecontact-index-right-yshift/.style={triangle-contact-index-right-yshift={#1}},
+  trianglecontact-index-style/.style={triangle-contact-index-style={#1}},
+  trianglecontact-index-fill/.style={triangle-contact-index-fill={#1}},
+  trianglecontact-index-inner-sep/.style={triangle-contact-index-inner-sep={#1}},
+  trianglecontact-index-size/.style={triangle-contact-index-size={#1}},
   trianglecontact-central-label-yshift/.style={triangle-contact-central-label-yshift={#1}},
   box-external-xspan/.store in=\corr@boxexternalxspan,
   box-external-yspan/.store in=\corr@boxexternalyspan,
@@ -2333,6 +2670,22 @@
   box-loop-label-xshift/.store in=\corr@boxlooplabelxshift,
   box-loop-label-yshift/.store in=\corr@boxlooplabelyshift,
   box-central-label-yshift/.store in=\corr@boxcentrallabelyshift,
+  box-propagator-left-indices/.store in=\corr@boxpropagatorleftindices,
+  box-propagator-right-indices/.store in=\corr@boxpropagatorrightindices,
+  box-index-left-position/.code={\corr@storesunsetanchor{corr@boxindexleftposition}{#1}},
+  box-index-right-position/.code={\corr@storesunsetanchor{corr@boxindexrightposition}{#1}},
+  box-index-left-xshift/.store in=\corr@boxindexleftxshift,
+  box-index-left-yshift/.store in=\corr@boxindexleftyshift,
+  box-index-right-xshift/.store in=\corr@boxindexrightxshift,
+  box-index-right-yshift/.store in=\corr@boxindexrightyshift,
+  box-index-style/.store in=\corr@boxindexstyle,
+  box-index-fill/.store in=\corr@boxindexfill,
+  box-index-inner-sep/.store in=\corr@boxindexinnersep,
+  box-index-size/.is choice,
+  box-index-size/normal/.code={\def\corr@boxindexmathstyle{}},
+  box-index-size/script/.code={\def\corr@boxindexmathstyle{\scriptstyle}},
+  box-index-size/scriptscript/.code={\def\corr@boxindexmathstyle{\scriptscriptstyle}},
+  box-index-size/default/.style={box-index-size=script},
   channel-vertex-xspan/.store in=\corr@channelvertexxspan,
   channel-vertex-yspan/.store in=\corr@channelvertexyspan,
   channel-internal-line/.store in=\corr@channelinternalline,
@@ -2732,7 +3085,18 @@
     \def\corr@threepointrmomentumdirection{out}%
     \def\corr@threepointbmomentumdirection{out}%
   },
-  three-point-momentum-directions/.style={three-point-momentum-flow={#1}},
+  three-point-momentum-directions/.code={%
+    \readlist*\corr@threepointmomentumdirectionitems{#1}%
+    \ifnum\corr@threepointmomentumdirectionitemslen>0
+      \def\corr@threepointulmomentumdirection{\corr@threepointmomentumdirectionitems[1]}%
+    \fi
+    \ifnum\corr@threepointmomentumdirectionitemslen>1
+      \def\corr@threepointrmomentumdirection{\corr@threepointmomentumdirectionitems[2]}%
+    \fi
+    \ifnum\corr@threepointmomentumdirectionitemslen>2
+      \def\corr@threepointbmomentumdirection{\corr@threepointmomentumdirectionitems[3]}%
+    \fi
+  },
   three-point-flow/.style={three-point-momentum-flow={#1}},
   scale/.store in=\corr@scale,
   index-placement/.store in=\corr@indexplacement,
@@ -3169,12 +3533,49 @@
     {\corr@momentumlabel{#1}}%
 }
 
+\newcommand{\corr@drawcustommomentumrangeoffset}[9]{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  \pgfmathsetmacro{\corr@externalmomgapstart}{max(#5,#7-\corr@momentumlabelgap)}%
+  \pgfmathsetmacro{\corr@externalmomgapend}{min(#6,#7+\corr@momentumlabelgap)}%
+  \path
+    ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
+    coordinate (corrmomentumlabelcoord);
+  \corr@ifstringeq{\corr@custommomentumdirection}{reverse}{%
+    \draw[line width=\corr@momentumlinewidth]
+      ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$);
+    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+      ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  }{%
+    \draw[line width=\corr@momentumlinewidth]
+      ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$);
+    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+      ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  }%
+  \corr@putmomentumlabelat
+    {(corrmomentumlabelcoord)}
+    {center}
+    {#8}
+    {#9}
+    {\corr@custommomentumlabel}%
+}
+
 \newcommand{\corr@externalmomentumdirectionfor}[1]{%
   \ifnum#1<3
     \corr@externalleftmomentumdirection
   \else
     \corr@externalrightmomentumdirection
   \fi
+}
+
+\newcommand{\corr@contactexternalmomentumdirectionfor}[2]{%
+  \edef\corr@contactthisexternaldirection{#1}%
+  \ifdefempty{\corr@contactthisexternaldirection}{%
+    \edef\corr@contactthisexternaldirection{#2}%
+  }{}%
 }
 
 \newcommand{\corr@drawmomentum}[4]{%
@@ -3568,7 +3969,14 @@
     \begingroup
     \def\corr@externalmomoffset{\corr@halfboxmomentumoffset}%
     \def\corr@momentumlabelgap{\corr@halfboxmomentumlabelgap}%
-    \corr@ifstringeq{\corr@externalmomentumdirectionfor{#1}}{out}{%
+    \ifcase#1\relax
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactulmomentumdirection}{\corr@externalleftmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactllmomentumdirection}{\corr@externalleftmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contacturmomentumdirection}{\corr@externalrightmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactlrmomentumdirection}{\corr@externalrightmomentumdirection}%
+    \else \corr@contactexternalmomentumdirectionfor{}{\corr@externalmomentumdirectionfor{#1}}%
+    \fi
+    \corr@ifstringeq{\corr@contactthisexternaldirection}{out}{%
       \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@halfboxmomentumstart}{\corr@halfboxmomentumend}{\corr@halfboxmomentumlabelfraction}{0pt}{0pt}%
     }{%
       \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@halfboxmomentumstart}{\corr@halfboxmomentumend}{\corr@halfboxmomentumlabelfraction}{0pt}{0pt}%
@@ -3583,7 +3991,14 @@
     \begingroup
     \def\corr@externalmomoffset{\corr@flatcontactmomentumoffset}%
     \def\corr@momentumlabelgap{\corr@flatcontactmomentumlabelgap}%
-    \corr@ifstringeq{\corr@externalmomentumdirectionfor{#1}}{out}{%
+    \ifcase#1\relax
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactulmomentumdirection}{\corr@externalleftmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactllmomentumdirection}{\corr@externalleftmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contacturmomentumdirection}{\corr@externalrightmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactlrmomentumdirection}{\corr@externalrightmomentumdirection}%
+    \else \corr@contactexternalmomentumdirectionfor{}{\corr@externalmomentumdirectionfor{#1}}%
+    \fi
+    \corr@ifstringeq{\corr@contactthisexternaldirection}{out}{%
       \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@flatcontactmomentumstart}{\corr@flatcontactmomentumend}{\corr@flatcontactmomentumlabelfraction}{0pt}{0pt}%
     }{%
       \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@flatcontactmomentumstart}{\corr@flatcontactmomentumend}{\corr@flatcontactmomentumlabelfraction}{0pt}{0pt}%
@@ -3922,13 +4337,96 @@
     \begingroup
     \def\corr@externalmomoffset{\corr@trianglecontactmomentumoffset}%
     \def\corr@momentumlabelgap{\corr@trianglecontactmomentumlabelgap}%
-    \corr@ifstringeq{\corr@externalmomentumdirectionfor{#1}}{out}{%
+    \ifcase#1\relax
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactulmomentumdirection}{\corr@externalleftmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactllmomentumdirection}{\corr@externalleftmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contacturmomentumdirection}{\corr@externalrightmomentumdirection}%
+    \or \corr@contactexternalmomentumdirectionfor{\corr@contactlrmomentumdirection}{\corr@externalrightmomentumdirection}%
+    \else \corr@contactexternalmomentumdirectionfor{}{\corr@externalmomentumdirectionfor{#1}}%
+    \fi
+    \corr@ifstringeq{\corr@contactthisexternaldirection}{out}{%
       \corr@drawmomentumrangeoffsetout{#1}{#2}{#3}{#4}{\corr@trianglecontactmomentumstart}{\corr@trianglecontactmomentumend}{\corr@trianglecontactmomentumlabelfraction}{0pt}{0pt}%
     }{%
       \corr@drawmomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@trianglecontactmomentumstart}{\corr@trianglecontactmomentumend}{\corr@trianglecontactmomentumlabelfraction}{0pt}{0pt}%
     }%
     \endgroup
   \fi
+}
+
+\newcommand{\corr@trianglecontactinternalmomentumlabel}[1]{%
+  \pgfmathtruncatemacro{\corr@trianglecontactinternalidx}{#1-4}%
+  \corr@getlistitemorblank{\corr@trianglecontactinternalmomenta}{\corr@trianglecontactinternalidx}%
+  \edef\corr@trianglecontactthisinternalmomentum{\corr@currentlistitem}%
+}
+
+\newcommand{\corr@trianglecontactinternalmomentumdirection}[1]{%
+  \pgfmathtruncatemacro{\corr@trianglecontactinternalidx}{#1-4}%
+  \corr@getlistitemorblank{\corr@trianglecontactinternalmomentumdirections}{\corr@trianglecontactinternalidx}%
+  \edef\corr@trianglecontactthisinternalmomentumdirection{\corr@currentlistitem}%
+  \ifdefempty{\corr@trianglecontactthisinternalmomentumdirection}{%
+    \def\corr@trianglecontactthisinternalmomentumdirection{forward}%
+  }{}%
+}
+
+\newcommand{\corr@drawtrianglecontactinternalmomentum}[4]{%
+  \corr@selectmomentumslot{#1}{\corr@trianglecontactinternalmomentumslots}%
+  \ifcorr@slotselected
+    \corr@trianglecontactinternalmomentumlabel{#1}%
+    \ifdefempty{\corr@trianglecontactthisinternalmomentum}{}{%
+      \corr@trianglecontactinternalmomentumdirection{#1}%
+      \corr@ifstringeq{\corr@trianglecontactthisinternalmomentumdirection}{none}{}{%
+        \begingroup
+        \def\corr@externalmomoffset{\corr@trianglecontactinternalmomentumoffset}%
+        \def\corr@momentumlabelgap{\corr@trianglecontactinternalmomentumlabelgap}%
+        \edef\corr@custommomentumlabel{\corr@trianglecontactthisinternalmomentum}%
+        \edef\corr@custommomentumdirection{\corr@trianglecontactthisinternalmomentumdirection}%
+        \corr@drawcustommomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@trianglecontactinternalmomentumstart}{\corr@trianglecontactinternalmomentumend}{\corr@trianglecontactinternalmomentumlabelfraction}{0pt}{0pt}%
+        \endgroup
+      }%
+    }%
+  \fi
+}
+
+\newcommand{\corr@halfboxplacepropagatorindices}{%
+  \corr@putpropagatorindiceslot{halfbox}{1}{corrHBTL}{corrHBVL}%
+  \corr@putpropagatorindiceslot{halfbox}{2}{corrHBVL}{corrHBDL}%
+  \corr@putpropagatorindiceslot{halfbox}{3}{corrHBVR}{corrHBDR}%
+  \corr@putpropagatorindiceslot{halfbox}{4}{corrHBVR}{corrHBTR}%
+  \corr@putpropagatorindiceslot{halfbox}{5}{corrHBVL}{corrHBVR}%
+}
+
+\newcommand{\corr@flatcontactplacepropagatorindices}{%
+  \corr@putpropagatorindiceslot{flatcontact}{1}{corrFCTL}{corrC}%
+  \corr@putpropagatorindiceslot{flatcontact}{2}{corrFCDL}{corrC}%
+  \corr@putpropagatorindiceslot{flatcontact}{3}{corrFCDR}{corrC}%
+  \corr@putpropagatorindiceslot{flatcontact}{4}{corrFCTR}{corrC}%
+}
+
+\newcommand{\corr@boxplacepropagatorindices}{%
+  \corr@putpropagatorindiceslot{box}{1}{corrExtUL}{corrBoxTL}%
+  \corr@putpropagatorindiceslot{box}{2}{corrExtLL}{corrBoxBL}%
+  \corr@putpropagatorindiceslot{box}{3}{corrExtUR}{corrBoxTR}%
+  \corr@putpropagatorindiceslot{box}{4}{corrExtLR}{corrBoxBR}%
+  \corr@putpropagatorindiceslot{box}{5}{corrBoxBL}{corrBoxTL}%
+  \corr@putpropagatorindiceslot{box}{6}{corrBoxTL}{corrBoxTR}%
+  \corr@putpropagatorindiceslot{box}{7}{corrBoxTR}{corrBoxBR}%
+  \corr@putpropagatorindiceslot{box}{8}{corrBoxBL}{corrBoxBR}%
+}
+
+\newcommand{\corr@trianglecontactplacepropagatorindices}{%
+  \corr@putpropagatorindiceslot{trianglecontact}{1}{corrExtUL}{corrTriSlotOne}%
+  \corr@putpropagatorindiceslot{trianglecontact}{2}{corrExtLL}{corrTriSlotTwo}%
+  \corr@putpropagatorindiceslot{trianglecontact}{3}{corrExtUR}{corrTriSlotThree}%
+  \corr@putpropagatorindiceslot{trianglecontact}{4}{corrExtLR}{corrTriSlotFour}%
+  \corr@putpropagatorindiceslot{trianglecontact}{5}{corrTriEdgeFiveStart}{corrTriEdgeFiveEnd}%
+  \corr@putpropagatorindiceslot{trianglecontact}{6}{corrTriEdgeSixStart}{corrTriEdgeSixEnd}%
+  \corr@putpropagatorindiceslot{trianglecontact}{7}{corrTriEdgeSevenStart}{corrTriEdgeSevenEnd}%
+}
+
+\newcommand{\corr@trianglecontactdrawinternalmomenta}{%
+  \corr@drawtrianglecontactinternalmomentum{5}{corrTriEdgeFiveStart}{corrTriEdgeFiveEnd}{\corr@trianglecontactinternalfiveangle}%
+  \corr@drawtrianglecontactinternalmomentum{6}{corrTriEdgeSixStart}{corrTriEdgeSixEnd}{\corr@trianglecontactinternalsixangle}%
+  \corr@drawtrianglecontactinternalmomentum{7}{corrTriEdgeSevenStart}{corrTriEdgeSevenEnd}{\corr@trianglecontactinternalsevenangle}%
 }
 
 \newcommand{\corr@drawhalfboxbridge}[2]{%
@@ -4732,6 +5230,7 @@
   \corr@drawboxedgelabel{top}{corrBoxTL}{corrBoxTR}
   \corr@drawboxedgelabel{right}{corrBoxTR}{corrBoxBR}
   \corr@drawboxedgelabel{bottom}{corrBoxBL}{corrBoxBR}
+  \corr@boxplacepropagatorindices
   \corr@boxplaceexternallabels
   \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
 }
@@ -4958,6 +5457,7 @@
     \corr@drawhalfboxmomentum{3}{corrHBVR}{corrHBDR}{90}
     \corr@drawhalfboxmomentum{4}{corrHBVR}{corrHBTR}{-90}
   \fi
+  \corr@halfboxplacepropagatorindices
   \corr@puthalfboxbridgelabel
   \corr@halfboxplaceexternallabels
   \corr@putcentral{corrC}
@@ -5004,6 +5504,7 @@
     \corr@drawflatcontactmomentum{3}{corrFCDR}{corrC}{90}
     \corr@drawflatcontactmomentum{4}{corrFCTR}{corrC}{-90}
   \fi
+  \corr@flatcontactplacepropagatorindices
   \corr@flatcontactplaceexternallabels
   \corr@putcentral{corrC}
 }
@@ -5034,11 +5535,13 @@
   \corr@trianglecontactputvertices
   \corr@trianglecontactplaceexternalvertices
   \ifcorr@showmomenta
+    \corr@trianglecontactdrawinternalmomenta
     \corr@drawtrianglecontactmomentum{1}{corrExtUL}{corrTriSlotOne}{90}
     \corr@drawtrianglecontactmomentum{2}{corrExtLL}{corrTriSlotTwo}{-90}
     \corr@drawtrianglecontactmomentum{3}{corrExtUR}{corrTriSlotThree}{-90}
     \corr@drawtrianglecontactmomentum{4}{corrExtLR}{corrTriSlotFour}{90}
   \fi
+  \corr@trianglecontactplacepropagatorindices
   \corr@trianglecontactplaceexternallabels
   \corr@topologyputcentral{corrC}{\corr@trianglecontactcentrallabelyshift}
 }
@@ -5066,7 +5569,16 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriContact}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriContact}{corrTriB}%
+    \coordinate (corrTriEdgeFiveStart) at (corrTriA);
+    \coordinate (corrTriEdgeFiveEnd) at (corrTriB);
+    \coordinate (corrTriEdgeSixStart) at (corrTriA);
+    \coordinate (corrTriEdgeSixEnd) at (corrTriContact);
+    \coordinate (corrTriEdgeSevenStart) at (corrTriContact);
+    \coordinate (corrTriEdgeSevenEnd) at (corrTriB);
   \end{feynhand}
+  \def\corr@trianglecontactinternalfiveangle{90}%
+  \def\corr@trianglecontactinternalsixangle{-90}%
+  \def\corr@trianglecontactinternalsevenangle{-90}%
   \corr@trianglecontactfinish
 }
 
@@ -5093,7 +5605,16 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriB}{corrTriContact}%
+    \coordinate (corrTriEdgeFiveStart) at (corrTriContact);
+    \coordinate (corrTriEdgeFiveEnd) at (corrTriA);
+    \coordinate (corrTriEdgeSixStart) at (corrTriA);
+    \coordinate (corrTriEdgeSixEnd) at (corrTriB);
+    \coordinate (corrTriEdgeSevenStart) at (corrTriB);
+    \coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
   \end{feynhand}
+  \def\corr@trianglecontactinternalfiveangle{90}%
+  \def\corr@trianglecontactinternalsixangle{-90}%
+  \def\corr@trianglecontactinternalsevenangle{90}%
   \corr@trianglecontactfinish
 }
 
@@ -5120,7 +5641,16 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriB}{corrTriContact}%
+    \coordinate (corrTriEdgeFiveStart) at (corrTriContact);
+    \coordinate (corrTriEdgeFiveEnd) at (corrTriA);
+    \coordinate (corrTriEdgeSixStart) at (corrTriA);
+    \coordinate (corrTriEdgeSixEnd) at (corrTriB);
+    \coordinate (corrTriEdgeSevenStart) at (corrTriB);
+    \coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
   \end{feynhand}
+  \def\corr@trianglecontactinternalfiveangle{90}%
+  \def\corr@trianglecontactinternalsixangle{90}%
+  \def\corr@trianglecontactinternalsevenangle{-90}%
   \corr@trianglecontactfinish
 }
 
@@ -5147,7 +5677,16 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriB}{corrTriContact}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriContact}{corrTriA}%
+    \coordinate (corrTriEdgeFiveStart) at (corrTriA);
+    \coordinate (corrTriEdgeFiveEnd) at (corrTriB);
+    \coordinate (corrTriEdgeSixStart) at (corrTriB);
+    \coordinate (corrTriEdgeSixEnd) at (corrTriContact);
+    \coordinate (corrTriEdgeSevenStart) at (corrTriContact);
+    \coordinate (corrTriEdgeSevenEnd) at (corrTriA);
   \end{feynhand}
+  \def\corr@trianglecontactinternalfiveangle{-90}%
+  \def\corr@trianglecontactinternalsixangle{-90}%
+  \def\corr@trianglecontactinternalsevenangle{90}%
   \corr@trianglecontactfinish
 }
 
