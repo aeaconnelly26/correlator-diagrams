@@ -1,6 +1,6 @@
 # Reference
 
-Full package reference for `correlator-diagrams.sty`.
+Full package reference for `feynman-fun.sty`.
 
 For the short overview, visuals, and starter examples, see [README](../README.md).
 
@@ -28,7 +28,11 @@ For the short overview, visuals, and starter examples, see [README](../README.md
 
 Main package:
 
-- `correlator-diagrams.sty`
+- `feynman-fun.sty`
+
+Compatibility package:
+
+- `correlator-diagrams.sty` loads `feynman-fun` for older documents.
 
 Main demos:
 
@@ -50,7 +54,7 @@ Add the package to your document:
 
 ```tex
 \usepackage{amsmath}
-\usepackage{correlator-diagrams}
+\usepackage{feynman-fun}
 ```
 
 The main entry points are:
@@ -2180,12 +2184,12 @@ Those use the legacy `channel-*` key family, for example:
 For Overleaf:
 
 1. Upload your `.tex` file.
-2. Upload `correlator-diagrams.sty`.
+2. Upload `feynman-fun.sty`.
 3. Compile with `pdfLaTeX`.
 
 For local use:
 
-1. Keep your `.tex` file in the same folder as `correlator-diagrams.sty`.
+1. Keep your `.tex` file in the same folder as `feynman-fun.sty`.
 2. Run:
 
 ```sh
