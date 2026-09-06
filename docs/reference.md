@@ -1355,6 +1355,10 @@ Box geometry:
 - `box-external-yspan=...`
 - `box-central-label-yshift=...`
 
+By default, box and cross-box diagrams use matching x/y spans so the internal
+box and external envelope are square. Use the geometry keys above when a
+rectangular, wider, or tighter box is wanted for a specific figure.
+
 Box external momentum arrow placement:
 
 - `box-external-momentum-start=...`

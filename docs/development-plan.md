@@ -58,6 +58,8 @@ Usage checkpoints:
 - Before bridge-momentum implementation: 5-hour window 39% used, weekly window
   23% used.
 - After bridge-momentum tests: 5-hour window 50% used, weekly window 25% used.
+- Before square-box default implementation: 5-hour window 78% used, weekly
+  window 29% used.
 
 ## Next Session
 
@@ -297,6 +299,9 @@ Risk:
   implementation inventory in this file.
 - 2026-09-06: Added opt-in half-box bridge momentum arrows, reference docs, and
   a focused regression.
+- 2026-09-06: Made box and cross-box geometry square by default by matching
+  `box-yspan` to `box-xspan` and `box-external-yspan` to
+  `box-external-xspan`.
 
 ## Last Session Update
 
@@ -325,10 +330,21 @@ Risk:
   compact example.
 - Ran the focused bridge momentum regression; it passed.
 - Ran `scripts/check-regressions.sh`; all maintained checks passed.
+- Promoted the repeated square-box manual tuning into package defaults:
+  `box-yspan=1.34` and `box-external-yspan=2.10`.
+- Updated `docs/reference.md` to document square box/cross-box defaults.
+- Regenerated `regressions/topologies/box/box-topology-regression.pdf` and
+  `regressions/topologies/cross-box/cross-box-regression.pdf`.
+- Ran `scripts/check-regressions.sh`; all maintained checks passed after the
+  square-box default change.
+- Visually inspected rendered first pages for the box and cross-box regression
+  PDFs; the default shapes are square and the visible labels/arrows still fit.
+- Deferred global three-point momentum default changes until the actual source
+  `.tex` behind the screenshot is available for context.
 - Usage checkpoints: implementation started at 11% 5-hour / 19% weekly, and
   after helper inspection was 24% 5-hour / 21% weekly. Bridge-momentum work
   started at 39% 5-hour / 23% weekly; after tests it was 50% 5-hour / 25%
-  weekly.
+  weekly. Square-box default work started at 78% 5-hour / 29% weekly.
 - Did not push.
 - Did not rename the remote repository.
 - Did not delete branches.
