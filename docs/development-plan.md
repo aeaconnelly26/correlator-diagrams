@@ -44,36 +44,101 @@ Before ending each session:
 
 Goal for 2026-09-06:
 
-- Confirm whether the previous git checkpoint was completed.
-- If not completed, make the requested regression-check commit.
-- Create this planning document so future work has a durable roadmap.
+- Commit this planning document as its own checkpoint.
+- Inspect the current topology, momentum, propagator, and index helper
+  structure in `feynman-fun.sty`.
+- Add an implementation inventory so future work does not need to rediscover
+  the same macro families.
+- Reframe single propagator legs as an infrastructure probe, not a top
+  user-facing priority.
 - Do not push.
 - Do not rename the remote repository.
 - Do not delete branches.
 
-Stretch goal if there is enough time after the plan:
+Usage checkpoints:
 
-- Inspect the current topology and momentum helper structure in
-  `feynman-fun.sty`.
-- Identify the smallest next implementation slice for single propagator legs
-  and half-box bridge momentum arrows.
+- Start of implementation: 5-hour window 11% used, weekly window 19% used.
+- After helper inspection: 5-hour window 24% used, weekly window 21% used.
 
 ## Next Session
 
 Recommended first technical session:
 
-- Focus area: helper design and inventory.
-- Read the existing helper families for external legs, internal momentum slots,
-  topology dispatch, and key handling in `feynman-fun.sty`.
-- Document the slot conventions for the topologies that already work.
-- Add a short internal note in this file describing which helpers should be
-  reused for new loop topologies.
-- Avoid adding new visual features until the helper plan is clear.
+- Focus area: half-box bridge momentum arrows as the first small implementation
+  target.
+- Add bridge-momentum keys modeled on existing box edge momentum keys, not on a
+  standalone single-propagator feature.
+- Keep the bridge slot as slot 5, matching the existing half-box propagator
+  index placement.
+- Add a focused regression file for half-box bridge labels/arrows before
+  broadening the feature.
 
 Likely deliverable:
 
-- A small implementation memo in this file, or a new `docs/internal-design.md`
-  if the notes become too large.
+- A small code change in `feynman-fun.sty`, one focused regression `.tex`, and
+  an update to `scripts/check-regressions.sh` if the regression compiles.
+
+## Implementation Inventory
+
+Current helper map from the 2026-09-06 inspection:
+
+- Public topology selection is handled by `/corrdiag/topology` keys in
+  `feynman-fun.sty`, with `\FourPointCorr` dispatching to contact, loop
+  channels, tree channels, box, cross-box, half-box, flat-contact, and
+  triangle-contact draw macros.
+- The newer topology framework starts near the internal comment "Internal
+  topology framework." It includes reusable wrappers for drawing propagators,
+  placing external labels/vertices, selecting momentum slots, and placing
+  propagator endpoint indices.
+- `\propag` from `tikz-feynhand` is already the primitive behind most line
+  drawing. Higher-level helpers usually set `\corr@propoptions`, append
+  arrow-size/color/endcap options, then call `\propag`.
+- `\corr@drawprop` is the basic external-leg wrapper. `\corr@drawchannelprop`,
+  `\corr@drawsunsetprop`, `\corr@drawboxinternalprop`,
+  `\corr@drawhalfboxprop`, and triangle-contact draw helpers are specialized
+  variants around the same primitive.
+- Shared momentum drawing exists in `\corr@drawmomentumrange`,
+  `\corr@drawmomentumrangeoffset`, `\corr@drawmomentumrangeoffsetout`, and
+  `\corr@drawcustommomentumrangeoffset`. These should be reused for bridge and
+  triple-vertex arrows.
+- External momentum direction is still mostly slot based: slots 1 and 2 inherit
+  left direction, slots 3 and 4 inherit right direction. Contact, box, and
+  half-box add per-slot overrides on top of that.
+- General list helpers include `\corr@getlistitemorblank`,
+  `\corr@selectmomentumslot`, and topology-specific list setters for box,
+  cross-box, triangle-contact, loop-channel, and sunset structures.
+- The most reusable index helper is `\corr@putpropagatorindiceslot`, which
+  reads `<topology>propagatorleftindices` and
+  `<topology>propagatorrightindices` lists and places endpoint labels at fixed
+  0.18 and 0.82 fractions on a named line segment.
+- `box`, `half-box`, `flat-contact`, and `triangle-contact` already use
+  `\corr@putpropagatorindiceslot`; this is the best pattern for the next
+  general internal index rework.
+- `channel`, `loop-channel`, and `sunset` have older, more specialized index
+  systems with start/prop/end triplets, auto placement, and curve-aware label
+  placement. Do not rewrite these first; mine them for behavior after the newer
+  slot-list pattern is made explicit.
+- Three-point orientation is handled by coordinate setup helpers for right,
+  left, up, and down orientations. Momentum angles and label offsets are
+  orientation-specific, while momentum labels still use slots 1, 2, and 3.
+- Half-box already has a bridge line and bridge label. It also already places
+  propagator endpoint indices on slot 5 for the bridge, but it does not yet
+  have bridge momentum arrows. This makes half-box bridge momentum the cleanest
+  first feature slice.
+- Single propagator macros should not be prioritized as a public feature now.
+  If used, they should be a tiny infrastructure probe that exercises the same
+  `\propag` plus slot/index/momentum helper path planned for larger topologies.
+
+Design direction from this inventory:
+
+- Standardize around "slot metadata plus drawing primitive": each topology
+  should declare stable slot numbers and named endpoint coordinates, then call
+  shared helpers for labels, indices, and momentum where possible.
+- Keep geometry local to each topology. The helper layer should know about
+  slot lists, labels, directions, and index placement, not the physics shape.
+- Migrate incrementally. First extend half-box bridge momentum using existing
+  slot 5, then use that as the model for triple-vertex and future loop topology
+  metadata.
 
 ## Planned Work
 
@@ -132,17 +197,20 @@ Target window: sessions 4 to 7.
 
 Implement in this order unless new information changes the risk:
 
-1. Single propagator legs implementation.
-2. Momentum arrows for half-box bridges.
-3. Triple vertex momentum implementation for the main orientations.
+1. Momentum arrows for half-box bridges.
+2. Triple vertex momentum implementation for the main orientations.
+3. Single propagator macros only if useful as an infrastructure probe.
 4. Option for an extended leg.
 
 Why this order:
 
-- Single propagator legs and half-box bridges are close to existing helper
-  behavior and should improve confidence before larger topology work.
+- Half-box bridge momentum is close to existing helper behavior and already has
+  a natural slot 5 through the propagator-index path.
 - Triple vertex momentum probably touches orientation conventions, so it should
   happen after the helper inventory.
+- Single propagator macros can lean on `feynhand`'s existing `\propag`
+  primitive, so they do not need to lead the feature queue unless they clarify
+  the slot/index model.
 - Extended legs may be simple visually, but the option shape should be decided
   after the propagator and vertex momentum conventions are clearer.
 
@@ -225,6 +293,10 @@ Risk:
   made. Created commit `057bfbd Add feynman-fun regression checks` on
   `codex/adopt-feynman-fun` without pushing.
 - 2026-09-06: Added this development plan.
+- 2026-09-06: Committed the initial planning roadmap as
+  `8ab5737 Add development planning roadmap`.
+- 2026-09-06: Inspected the current helper structure and documented the
+  implementation inventory in this file.
 
 ## Last Session Update
 
@@ -236,13 +308,26 @@ Risk:
 - Ran `scripts/check-regressions.sh`; all listed checks passed.
 - Committed the requested regression-check files as `057bfbd Add feynman-fun
   regression checks`.
-- Created `docs/development-plan.md` as the planning and handoff document.
+- Created `docs/development-plan.md` as the planning and handoff document, then
+  committed the initial version as `8ab5737 Add development planning roadmap`.
+- Inspected `feynman-fun.sty` for topology dispatch, `\propag` usage, momentum
+  helpers, index helpers, half-box structure, and three-point orientation logic.
+- Added the `Implementation Inventory` section above.
+- Reframed single propagator macros as a possible infrastructure probe instead
+  of a top user-facing priority.
+- Package code was not changed after commit `057bfbd`.
+- Regression tests after the documentation-only inventory update were skipped
+  because no package code changed; the last package-code test run passed before
+  commit `057bfbd`.
+- Usage checkpoints: implementation started at 11% 5-hour / 19% weekly, and
+  after helper inspection was 24% 5-hour / 21% weekly.
 - Did not push.
 - Did not rename the remote repository.
 - Did not delete branches.
 
 Next planned action:
 
-- Start Phase 1 and Phase 2 together in a light way: inspect current topology,
-  index, and momentum helpers, then write down the helper inventory before
-  implementing new diagram features.
+- Implement half-box bridge momentum arrows as the first small feature slice.
+  Use existing bridge slot 5, reuse the current momentum drawing helpers, add
+  keys for bridge momentum label/direction/tuning, and add one focused
+  regression before broad topology work.
