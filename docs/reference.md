@@ -34,6 +34,8 @@ Compatibility package:
 
 - `correlator-diagrams.sty` loads `feynman-fun` for older documents.
 
+New documents should use `feynman-fun`; keep `correlator-diagrams` only for older documents that have not been renamed yet.
+
 Main demos:
 
 - `example.tex`
@@ -94,6 +96,12 @@ Compile locally with:
 
 ```sh
 pdflatex -interaction=nonstopmode -halt-on-error example.tex
+```
+
+Run the maintained regression smoke checks with:
+
+```sh
+scripts/check-regressions.sh
 ```
 
 If you want the fastest first pass, start with `example.tex`, then copy one of the channel or contact examples and adjust the topology, labels, and line styles.

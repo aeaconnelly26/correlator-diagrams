@@ -4380,8 +4380,7 @@
     \def\corr@tcstart{\corr@trianglecontactmomentumstart}%
     \def\corr@tcend{\corr@trianglecontactmomentumend}%
     \def\corr@tcgap{\corr@trianglecontactmomentumlabelgap}%
-    %
-    % Custom longer arrows and smaller label gap for q_2 and q_4:
+    % Custom longer arrows and smaller label gap for q_2 and q_4.
     \ifnum#1=2
       \def\corr@tcstart{0.12}%
       \def\corr@tcend{0.9}%
@@ -4392,9 +4391,7 @@
       \def\corr@tcend{0.9}%
       \def\corr@tcgap{0.2pt}%
     \fi
-    %
     \def\corr@momentumlabelgap{\corr@tcgap}%
-    %
     \ifcase#1\relax
     \or \corr@contactexternalmomentumdirectionfor{\corr@contactulmomentumdirection}{\corr@externalleftmomentumdirection}%
     \or \corr@contactexternalmomentumdirectionfor{\corr@contactllmomentumdirection}{\corr@externalleftmomentumdirection}%
@@ -4438,54 +4435,30 @@
         \def\corr@momentumlabelgap{\corr@trianglecontactinternalmomentumlabelgap}%
         \edef\corr@custommomentumlabel{\corr@trianglecontactthisinternalmomentum}%
         \edef\corr@custommomentumdirection{\corr@trianglecontactthisinternalmomentumdirection}%
-
-            % Local defaults:
-
-
-      \def\corr@tcinternalstart{\corr@trianglecontactinternalmomentumstart}%
-      \def\corr@tcinternalend{\corr@trianglecontactinternalmomentumend}%
-      \def\corr@tcinternalfrac{\corr@trianglecontactinternalmomentumlabelfraction}%
-
-      % Slot 5 tuning
-      \ifnum#1=5
-        \def\corr@tcinternalstart{0.3}%
-        \def\corr@tcinternalend{0.72}%
-        \def\corr@tcinternalfrac{0.50}%
-      \fi
-
-      % Slot 6 tuning
-      \ifnum#1=6
-        \def\corr@tcinternalstart{0.25}%
-        \def\corr@tcinternalend{0.75}%
-        \def\corr@tcinternalfrac{0.50}%
-      \fi
-
-      % Slot 7 tuning
-      \ifnum#1=7
-        \def\corr@tcinternalstart{0.28}%
-        \def\corr@tcinternalend{0.7}%
-        \def\corr@tcinternalfrac{0.50}%
-      \fi
-
-      \corr@drawcustommomentumrangeoffset
-        {#1}{#2}{#3}{#4}
-        {\corr@tcinternalstart}
-        {\corr@tcinternalend}
-        {\corr@tcinternalfrac}
-        {0pt}{0pt}%
-        % % Local defaults:xs
-        % \def\corr@tcinternalstart{\corr@trianglecontactinternalmomentumstart}%
-        % \def\corr@tcinternalend{\corr@trianglecontactinternalmomentumend}%
-        % \def\corr@tcinternalfrac{\corr@trianglecontactinternalmomentumlabelfraction}%
-
-        % % Custom label+arrow-gap positions for q_5 and q_7:
-        % \ifnum#1=5
-        %   \def\corr@tcinternalfrac{0.9}%
-        % \fi
-        % \ifnum#1=7
-        %   \def\corr@tcinternalfrac{0.9}%
-        % \fi
-        % \corr@drawcustommomentumrangeoffset{#1}{#2}{#3}{#4}{\corr@trianglecontactinternalmomentumstart}{\corr@trianglecontactinternalmomentumend}{\corr@trianglecontactinternalmomentumlabelfraction}{0pt}{0pt}%
+        \def\corr@tcinternalstart{\corr@trianglecontactinternalmomentumstart}%
+        \def\corr@tcinternalend{\corr@trianglecontactinternalmomentumend}%
+        \def\corr@tcinternalfrac{\corr@trianglecontactinternalmomentumlabelfraction}%
+        \ifnum#1=5
+          \def\corr@tcinternalstart{0.3}%
+          \def\corr@tcinternalend{0.72}%
+          \def\corr@tcinternalfrac{0.50}%
+        \fi
+        \ifnum#1=6
+          \def\corr@tcinternalstart{0.25}%
+          \def\corr@tcinternalend{0.75}%
+          \def\corr@tcinternalfrac{0.50}%
+        \fi
+        \ifnum#1=7
+          \def\corr@tcinternalstart{0.28}%
+          \def\corr@tcinternalend{0.7}%
+          \def\corr@tcinternalfrac{0.50}%
+        \fi
+        \corr@drawcustommomentumrangeoffset
+          {#1}{#2}{#3}{#4}
+          {\corr@tcinternalstart}
+          {\corr@tcinternalend}
+          {\corr@tcinternalfrac}
+          {0pt}{0pt}%
         \endgroup
       }%
     }%

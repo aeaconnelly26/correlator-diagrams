@@ -97,6 +97,12 @@ Older documents that load `correlator-diagrams` still work through a compatibili
 
 The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which are loaded internally.
 
+To run the maintained regression smoke checks:
+
+```sh
+scripts/check-regressions.sh
+```
+
 Main demo files in this repository:
 
 - [`example.tex`](example.tex)
