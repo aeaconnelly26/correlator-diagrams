@@ -44,13 +44,9 @@ Before ending each session:
 
 Goal for 2026-09-06:
 
-- Commit this planning document as its own checkpoint.
-- Inspect the current topology, momentum, propagator, and index helper
-  structure in `feynman-fun.sty`.
-- Add an implementation inventory so future work does not need to rediscover
-  the same macro families.
-- Reframe single propagator legs as an infrastructure probe, not a top
-  user-facing priority.
+- Implement opt-in half-box bridge momentum arrows using existing bridge slot 5.
+- Add a focused regression for bridge momentum behavior.
+- Update the reference docs and this roadmap with the result.
 - Do not push.
 - Do not rename the remote repository.
 - Do not delete branches.
@@ -59,24 +55,26 @@ Usage checkpoints:
 
 - Start of implementation: 5-hour window 11% used, weekly window 19% used.
 - After helper inspection: 5-hour window 24% used, weekly window 21% used.
+- Before bridge-momentum implementation: 5-hour window 39% used, weekly window
+  23% used.
+- After bridge-momentum tests: 5-hour window 50% used, weekly window 25% used.
 
 ## Next Session
 
 Recommended first technical session:
 
-- Focus area: half-box bridge momentum arrows as the first small implementation
-  target.
-- Add bridge-momentum keys modeled on existing box edge momentum keys, not on a
-  standalone single-propagator feature.
-- Keep the bridge slot as slot 5, matching the existing half-box propagator
-  index placement.
-- Add a focused regression file for half-box bridge labels/arrows before
-  broadening the feature.
+- Focus area: triple vertex momentum implementation for the main orientations.
+- Start from the existing three-point orientation coordinate helpers and
+  momentum angle helpers.
+- Decide whether triple-vertex momentum means improving `\ThreePointCorr`
+  itself, adding a reusable lower-level triple-vertex helper, or both.
+- Add a focused orientation regression before any broad topology migration.
 
 Likely deliverable:
 
-- A small code change in `feynman-fun.sty`, one focused regression `.tex`, and
-  an update to `scripts/check-regressions.sh` if the regression compiles.
+- A small design note or code change for triple-vertex momentum orientation,
+  one focused regression `.tex`, and updates to reference docs if the API
+  changes.
 
 ## Implementation Inventory
 
@@ -297,6 +295,8 @@ Risk:
   `8ab5737 Add development planning roadmap`.
 - 2026-09-06: Inspected the current helper structure and documented the
   implementation inventory in this file.
+- 2026-09-06: Added opt-in half-box bridge momentum arrows, reference docs, and
+  a focused regression.
 
 ## Last Session Update
 
@@ -315,19 +315,27 @@ Risk:
 - Added the `Implementation Inventory` section above.
 - Reframed single propagator macros as a possible infrastructure probe instead
   of a top user-facing priority.
-- Package code was not changed after commit `057bfbd`.
-- Regression tests after the documentation-only inventory update were skipped
-  because no package code changed; the last package-code test run passed before
-  commit `057bfbd`.
+- Implemented opt-in half-box bridge momentum arrows using existing bridge slot
+  5.
+- Added keys for bridge momentum label, direction, start/end, offset, label
+  fraction, and label gap, plus `halfbox-*` aliases.
+- Added `regressions/topologies/vertex-identity/half-box-bridge-momentum.tex`
+  and included it in `scripts/check-regressions.sh`.
+- Updated `docs/reference.md` with the new half-box bridge momentum keys and a
+  compact example.
+- Ran the focused bridge momentum regression; it passed.
+- Ran `scripts/check-regressions.sh`; all maintained checks passed.
 - Usage checkpoints: implementation started at 11% 5-hour / 19% weekly, and
-  after helper inspection was 24% 5-hour / 21% weekly.
+  after helper inspection was 24% 5-hour / 21% weekly. Bridge-momentum work
+  started at 39% 5-hour / 23% weekly; after tests it was 50% 5-hour / 25%
+  weekly.
 - Did not push.
 - Did not rename the remote repository.
 - Did not delete branches.
 
 Next planned action:
 
-- Implement half-box bridge momentum arrows as the first small feature slice.
-  Use existing bridge slot 5, reuse the current momentum drawing helpers, add
-  keys for bridge momentum label/direction/tuning, and add one focused
-  regression before broad topology work.
+- Plan or implement triple vertex momentum orientations. Start by clarifying
+  whether the goal is only better `\ThreePointCorr` orientation behavior or a
+  reusable lower-level triple-vertex helper that future loop topologies can
+  call.

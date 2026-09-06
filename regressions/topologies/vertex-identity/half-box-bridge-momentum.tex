@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{feynman-fun}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+\newcommand{\diagramcell}[2]{%
+  \begin{minipage}[t]{0.44\linewidth}
+  \centering
+  \textbf{#1}\par\vspace{0.8em}
+  #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Half-Box Bridge Momentum}
+
+\begin{center}
+\diagramcell{Default has no bridge momentum}{
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  central={}
+]
+}
+\hfill
+\diagramcell{Forward bridge momentum}{
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  half-box-bridge-momentum=\ell,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Reverse bridge momentum}{
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  half-box-bridge-momentum=\ell,
+  half-box-bridge-momentum-direction=reverse,
+  central={}
+]
+}
+\hfill
+\diagramcell{Direction none hides it}{
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  half-box-bridge-momentum=\ell,
+  half-box-bridge-momentum-direction=none,
+  central={}
+]
+}
+\end{center}
+
+\begin{center}
+\diagramcell{Label, momentum, and indices}{
+\HalfBoxCorr[
+  field={},
+  leg-labels={W^+,{},{},W^+},
+  momentum-labels={,p_1,q_1,},
+  half-box-momentum-slots={2,3},
+  half-box-bridge-label=Z,
+  half-box-bridge-label-yshift=14pt,
+  half-box-bridge-momentum=k,
+  half-box-bridge-momentum-offset=13pt,
+  half-box-propagator-left-indices={,,,,a},
+  half-box-propagator-right-indices={,,,,b},
+  central={}
+]
+}
+\hfill
+\diagramcell{Alias spelling and slot 5 arrow size}{
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  momentum-labels={p_1,p_2,p_3,p_4},
+  halfbox-bridge-momentum=r,
+  halfbox-bridge-momentum-direction=reverse,
+  momentum-arrow-sizes={3pt,3pt,3pt,3pt,8pt},
+  central={}
+]
+}
+\end{center}
+
+\end{document}

@@ -1620,6 +1620,13 @@ Half-box geometry and style controls:
 - `half-box-bridge-label-position=above|below|<anchor>`
 - `half-box-bridge-label-xshift=...`
 - `half-box-bridge-label-yshift=...`
+- `half-box-bridge-momentum=...`
+- `half-box-bridge-momentum-direction=forward|reverse|none`
+- `half-box-bridge-momentum-start=...`
+- `half-box-bridge-momentum-end=...`
+- `half-box-bridge-momentum-offset=...`
+- `half-box-bridge-momentum-label-fraction=...`
+- `half-box-bridge-momentum-label-gap=...`
 - `half-box-momentum-start=...`
 - `half-box-momentum-end=...`
 - `half-box-momentum-offset=...`
@@ -1645,6 +1652,17 @@ polarized.
 `half-box-line=...` sets the default line style for the half-box external
 segments and bridge. Use `half-box-bridge-line=...` when only the middle bridge
 should change, for example `half-box-bridge-line={proca,circ={}}`.
+
+Bridge momentum is opt-in and uses bridge slot 5 for arrow sizing:
+
+```tex
+\HalfBoxCorr[
+  momentum-labels={,p_1,q_1,},
+  half-box-momentum-slots={2,3},
+  half-box-bridge-label=Z,
+  half-box-bridge-momentum=\ell
+]
+```
 
 Flat-contact geometry and style controls:
 

@@ -713,6 +713,13 @@
 \def\corr@halfboxbridgelabelposition{above}
 \def\corr@halfboxbridgelabelxshift{0pt}
 \def\corr@halfboxbridgelabelyshift{5pt}
+\def\corr@halfboxbridgemomentum{}
+\def\corr@halfboxbridgemomentumdirection{forward}
+\def\corr@halfboxbridgemomentumstart{0.28}
+\def\corr@halfboxbridgemomentumend{0.72}
+\def\corr@halfboxbridgemomentumoffset{12pt}
+\def\corr@halfboxbridgemomentumlabelfraction{0.50}
+\def\corr@halfboxbridgemomentumlabelgap{0.10}
 \def\corr@halfboxmomentumstart{0.30}
 \def\corr@halfboxmomentumend{0.70}
 \def\corr@halfboxmomentumoffset{10pt}
@@ -1622,6 +1629,13 @@
   \corr@topologysetdefault\corr@halfboxbridgelabelposition{above}%
   \corr@topologysetdefault\corr@halfboxbridgelabelxshift{0pt}%
   \corr@topologysetdefault\corr@halfboxbridgelabelyshift{5pt}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentum{}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentumdirection{forward}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentumstart{0.28}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentumend{0.72}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentumoffset{12pt}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentumlabelgap{0.10}%
   \corr@topologysetdefault\corr@halfboxmomentumstart{0.14}%
   \corr@topologysetdefault\corr@halfboxmomentumend{0.90}%
   \corr@topologysetdefault\corr@halfboxmomentumoffset{7pt}%
@@ -2316,6 +2330,13 @@
   half-box-bridge-label-position/.store in=\corr@halfboxbridgelabelposition,
   half-box-bridge-label-xshift/.store in=\corr@halfboxbridgelabelxshift,
   half-box-bridge-label-yshift/.store in=\corr@halfboxbridgelabelyshift,
+  half-box-bridge-momentum/.store in=\corr@halfboxbridgemomentum,
+  half-box-bridge-momentum-direction/.store in=\corr@halfboxbridgemomentumdirection,
+  half-box-bridge-momentum-start/.store in=\corr@halfboxbridgemomentumstart,
+  half-box-bridge-momentum-end/.store in=\corr@halfboxbridgemomentumend,
+  half-box-bridge-momentum-offset/.store in=\corr@halfboxbridgemomentumoffset,
+  half-box-bridge-momentum-label-fraction/.store in=\corr@halfboxbridgemomentumlabelfraction,
+  half-box-bridge-momentum-label-gap/.store in=\corr@halfboxbridgemomentumlabelgap,
   half-box-momentum-start/.store in=\corr@halfboxmomentumstart,
   half-box-momentum-end/.store in=\corr@halfboxmomentumend,
   half-box-momentum-offset/.store in=\corr@halfboxmomentumoffset,
@@ -2375,6 +2396,13 @@
   halfbox-bridge-label-position/.style={half-box-bridge-label-position={#1}},
   halfbox-bridge-label-xshift/.style={half-box-bridge-label-xshift={#1}},
   halfbox-bridge-label-yshift/.style={half-box-bridge-label-yshift={#1}},
+  halfbox-bridge-momentum/.style={half-box-bridge-momentum={#1}},
+  halfbox-bridge-momentum-direction/.style={half-box-bridge-momentum-direction={#1}},
+  halfbox-bridge-momentum-start/.style={half-box-bridge-momentum-start={#1}},
+  halfbox-bridge-momentum-end/.style={half-box-bridge-momentum-end={#1}},
+  halfbox-bridge-momentum-offset/.style={half-box-bridge-momentum-offset={#1}},
+  halfbox-bridge-momentum-label-fraction/.style={half-box-bridge-momentum-label-fraction={#1}},
+  halfbox-bridge-momentum-label-gap/.style={half-box-bridge-momentum-label-gap={#1}},
   halfbox-momentum-start/.style={half-box-momentum-start={#1}},
   halfbox-momentum-end/.style={half-box-momentum-end={#1}},
   halfbox-momentum-offset/.style={half-box-momentum-offset={#1}},
@@ -4540,6 +4568,25 @@
   }%
 }
 
+\newcommand{\corr@drawhalfboxbridgemomentum}{%
+  \ifdefempty{\corr@halfboxbridgemomentum}{}{%
+    \corr@ifstringeq{\corr@halfboxbridgemomentumdirection}{none}{}{%
+      \begingroup
+      \def\corr@externalmomoffset{\corr@halfboxbridgemomentumoffset}%
+      \def\corr@momentumlabelgap{\corr@halfboxbridgemomentumlabelgap}%
+      \edef\corr@custommomentumlabel{\corr@halfboxbridgemomentum}%
+      \edef\corr@custommomentumdirection{\corr@halfboxbridgemomentumdirection}%
+      \corr@drawcustommomentumrangeoffset
+        {5}{corrHBVL}{corrHBVR}{90}
+        {\corr@halfboxbridgemomentumstart}
+        {\corr@halfboxbridgemomentumend}
+        {\corr@halfboxbridgemomentumlabelfraction}
+        {0pt}{0pt}%
+      \endgroup
+    }%
+  }%
+}
+
 \newcommand{\corr@topologyputexternallabel}[3]{%
   \corr@putlabel{#1}{#2}{#3}%
 }
@@ -5534,6 +5581,7 @@
     \corr@drawhalfboxmomentum{2}{corrHBVL}{corrHBDL}{-90}
     \corr@drawhalfboxmomentum{3}{corrHBVR}{corrHBDR}{90}
     \corr@drawhalfboxmomentum{4}{corrHBVR}{corrHBTR}{90}
+    \corr@drawhalfboxbridgemomentum
   \fi
   \corr@halfboxplacepropagatorindices
   \corr@puthalfboxbridgelabel
