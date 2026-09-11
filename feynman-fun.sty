@@ -5146,32 +5146,26 @@
   }}}%
 }
 
+\newcommand{\corr@threepointputexternallabel}[3]{%
+  \expanded{\noexpand\corr@topologyputexternallabel{#1}{#2}{#3}}%
+}
+
 \newcommand{\corr@threepointplaceexternallabels}{%
-  \corr@ifstringeq{\corr@threepointorientation}{left}{%
-    \corr@topologyputexternallabel{corrUL}{xshift=11pt,yshift=-8pt}{1}%
-    \corr@topologyputexternallabel{corrR}{xshift=-10pt,yshift=-6pt}{2}%
-    \corr@topologyputexternallabel{corrB}{yshift=12pt}{3}%
-  }{%
-  \corr@ifstringeq{\corr@threepointorientation}{up}{%
-    \corr@topologyputexternallabel{corrUL}{xshift=-8pt,yshift=-11pt}{1}%
-    \corr@topologyputexternallabel{corrR}{xshift=-6pt,yshift=10pt}{2}%
-    \corr@topologyputexternallabel{corrB}{xshift=24pt}{3}%
-  }{%
-  \corr@ifstringeq{\corr@threepointorientation}{down}{%
-    \corr@topologyputexternallabel{corrUL}{xshift=8pt,yshift=11pt}{1}%
-    \corr@topologyputexternallabel{corrR}{xshift=6pt,yshift=-10pt}{2}%
-    \corr@topologyputexternallabel{corrB}{xshift=-24pt}{3}%
-  }{%
-    \corr@topologyputexternallabel{corrUL}{xshift=-11pt,yshift=8pt}{1}%
-    \corr@topologyputexternallabel{corrR}{xshift=10pt,yshift=6pt}{2}%
-    \corr@topologyputexternallabel{corrB}{yshift=-12pt}{3}%
-  }}}%
+  \corr@threepointputexternallabel{corrUL}{\corr@threepointlabeloptsone}{1}%
+  \corr@threepointputexternallabel{corrR}{\corr@threepointlabeloptstwo}{2}%
+  \corr@threepointputexternallabel{corrB}{\corr@threepointlabeloptsthree}{3}%
 }
 
 \newcommand{\corr@threepointplaceexternalvertices}{%
   \corr@topologyputexternalvertex{corrUL}%
   \corr@topologyputexternalvertex{corrR}%
   \corr@topologyputexternalvertex{corrB}%
+}
+
+\newcommand{\corr@threepointdrawlogicalslotmomenta}{%
+  \corr@drawthreepointmomentumul{1}{corrUL}{corrC}%
+  \corr@drawthreepointmomentumr{2}{corrR}{corrC}%
+  \corr@drawthreepointmomentumb{3}{corrB}{corrC}%
 }
 
 \newcommand{\corr@putthreepointcentral}[1]{%
@@ -5205,9 +5199,7 @@
     \fi
     \corr@threepointplaceexternalvertices
     \ifcorr@showmomenta
-      \corr@drawthreepointmomentumul{1}{corrUL}{corrC}
-      \corr@drawthreepointmomentumr{2}{corrR}{corrC}
-      \corr@drawthreepointmomentumb{3}{corrB}{corrC}
+      \corr@threepointdrawlogicalslotmomenta
     \fi
     \corr@threepointplaceexternallabels
     \corr@putthreepointcentral{corrC}

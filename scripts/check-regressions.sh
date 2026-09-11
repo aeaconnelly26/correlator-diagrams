@@ -48,6 +48,7 @@ run_tex "regressions/topologies/triangle-contact/momentum-directions-demo.tex"
 run_tex "regressions/topologies/vertex-identity/vertex-identity-check.tex"
 run_tex "regressions/topologies/vertex-identity/half-box-bridge-momentum.tex"
 run_tex "regressions/topologies/three-point/three-point-check.tex"
+run_tex "regressions/topologies/three-point/three-point-translation-check.tex"
 run_tex "regressions/topologies/box/box-topology-regression.tex"
 
 cleanup_latex_scratch
