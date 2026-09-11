@@ -204,4 +204,62 @@ to slots 1, 2, and 3 under each corner orientation.
 \end{array}
 \]
 
+\newpage
+
+Additional slot-style permutations show the same corner orientations with
+different slots carrying the distinctive styles and momentum choices.
+
+\[
+\begin{array}{cc}
+  \text{\texttt{top,left}: slot 2 emphasized} &
+  \text{\texttt{top,right}: slot 3 emphasized} \\
+  \ThreePointCorr[
+    orientation={top,left},
+    line=plain,
+    field=P,
+    indices={1,2,3},
+    leg-styles={{plain,fieldB},{epspol,fieldA},{ewboson,fieldC}},
+    leg-labels={P_1,P_2,P_3},
+    momentum-labels={p_1,p_2,p_3},
+    three-point-momentum-directions={in,out,out},
+    propagator-arrow-sizes={,13pt,10pt}
+  ] &
+  \ThreePointCorr[
+    orientation={top,right},
+    line=plain,
+    field=Q,
+    indices={1,2,3},
+    leg-styles={{ewboson,fieldC},{plain,fieldB},{epspol,fieldA}},
+    leg-labels={Q_1,Q_2,Q_3},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-directions={out,out,in},
+    propagator-arrow-sizes={10pt,,13pt}
+  ] \\[3.5em]
+  \text{\texttt{bottom,left}: scalar slot 1} &
+  \text{\texttt{bottom,right}: scalar slot 3} \\
+  \ThreePointCorr[
+    orientation={bottom,left},
+    line=ewboson,
+    field=M,
+    indices={1,2,3},
+    leg-styles={{scalarpolarized,fieldB},{plain,fieldC},{ewboson,fieldA}},
+    leg-labels={M_1,M_2,M_3},
+    momentum-labels={m_1,m_2,m_3},
+    three-point-momentum-directions={in,in,out},
+    propagator-arrow-sizes={11pt,,10pt}
+  ] &
+  \ThreePointCorr[
+    orientation={bottom,right},
+    line=plain,
+    field=N,
+    indices={1,2,3},
+    leg-styles={{ewboson,fieldA},{plain,fieldC},{scalarpolarized,fieldB}},
+    leg-labels={N_1,N_2,N_3},
+    momentum-labels={n_1,n_2,n_3},
+    three-point-momentum-directions={out,in,in},
+    propagator-arrow-sizes={10pt,,11pt}
+  ]
+\end{array}
+\]
+
 \end{document}
