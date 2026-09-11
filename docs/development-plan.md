@@ -10,7 +10,8 @@ up quickly without spending credits reconstructing context.
 - Active branch: `codex/adopt-feynman-fun`
 - Recovery baseline: `2253c64 Adopt feynman-fun package`
 - Regression checkpoint: `057bfbd Add feynman-fun regression checks`
-- Push status: not pushed by Codex
+- Push status: pushed by Codex as review branch after 2026-09-11 adoption
+  closeout
 - Remote repository: do not rename
 - Branch cleanup: do not delete branches
 - Current priority: confidence and maintainability before new diagram features
@@ -42,24 +43,21 @@ Before ending each session:
 
 ## Today
 
-Goal for 2026-09-06:
+Goal for 2026-09-11:
 
-- Implement opt-in half-box bridge momentum arrows using existing bridge slot 5.
-- Add a focused regression for bridge momentum behavior.
-- Update the reference docs and this roadmap with the result.
-- Do not push.
+- Finish the adoption branch before starting new topology work.
+- Confirm the maintained regression suite passes.
+- Account for dirty or untracked artifacts.
+- Push `codex/adopt-feynman-fun` as a reviewable branch if the adoption audit
+  is clean.
 - Do not rename the remote repository.
 - Do not delete branches.
 
 Usage checkpoints:
 
-- Start of implementation: 5-hour window 11% used, weekly window 19% used.
-- After helper inspection: 5-hour window 24% used, weekly window 21% used.
-- Before bridge-momentum implementation: 5-hour window 39% used, weekly window
-  23% used.
-- After bridge-momentum tests: 5-hour window 50% used, weekly window 25% used.
-- Before square-box default implementation: 5-hour window 78% used, weekly
-  window 29% used.
+- Start of adoption closeout: 5-hour window 6% used, weekly window 1% used.
+- Available reset credits: 3 full Codex resets.
+- Maintained regression suite passed during adoption closeout.
 
 ## Next Session
 
@@ -302,56 +300,35 @@ Risk:
 - 2026-09-06: Made box and cross-box geometry square by default by matching
   `box-yspan` to `box-xspan` and `box-external-yspan` to
   `box-external-xspan`.
+- 2026-09-11: Closed the adoption audit for branch review: restored the
+  accidental `Icon\r` deletion, tracked the generated half-box bridge momentum
+  regression PDF, confirmed maintained regressions pass, and pushed
+  `codex/adopt-feynman-fun`.
 
 ## Last Session Update
 
-2026-09-06:
+2026-09-11:
 
 - Verified branch: `codex/adopt-feynman-fun`.
-- Verified baseline before the regression commit: `2253c64 Adopt feynman-fun
-  package`.
-- Ran `scripts/check-regressions.sh`; all listed checks passed.
-- Committed the requested regression-check files as `057bfbd Add feynman-fun
-  regression checks`.
-- Created `docs/development-plan.md` as the planning and handoff document, then
-  committed the initial version as `8ab5737 Add development planning roadmap`.
-- Inspected `feynman-fun.sty` for topology dispatch, `\propag` usage, momentum
-  helpers, index helpers, half-box structure, and three-point orientation logic.
-- Added the `Implementation Inventory` section above.
-- Reframed single propagator macros as a possible infrastructure probe instead
-  of a top user-facing priority.
-- Implemented opt-in half-box bridge momentum arrows using existing bridge slot
-  5.
-- Added keys for bridge momentum label, direction, start/end, offset, label
-  fraction, and label gap, plus `halfbox-*` aliases.
-- Added `regressions/topologies/vertex-identity/half-box-bridge-momentum.tex`
-  and included it in `scripts/check-regressions.sh`.
-- Updated `docs/reference.md` with the new half-box bridge momentum keys and a
-  compact example.
-- Ran the focused bridge momentum regression; it passed.
+- Audited branch contents against `main`; local adoption commits are
+  `2253c64`, `057bfbd`, `8ab5737`, `ae00ab2`, `dd56536`, and `d195189`.
+- Confirmed current usage at start of closeout: 5-hour window 6% used, weekly
+  window 1% used, with 3 full reset credits available.
 - Ran `scripts/check-regressions.sh`; all maintained checks passed.
-- Promoted the repeated square-box manual tuning into package defaults:
-  `box-yspan=1.34` and `box-external-yspan=2.10`.
-- Updated `docs/reference.md` to document square box/cross-box defaults.
-- Regenerated `regressions/topologies/box/box-topology-regression.pdf` and
-  `regressions/topologies/cross-box/cross-box-regression.pdf`.
-- Ran `scripts/check-regressions.sh`; all maintained checks passed after the
-  square-box default change.
-- Visually inspected rendered first pages for the box and cross-box regression
-  PDFs; the default shapes are square and the visible labels/arrows still fit.
-- Deferred global three-point momentum default changes until the actual source
-  `.tex` behind the screenshot is available for context.
-- Usage checkpoints: implementation started at 11% 5-hour / 19% weekly, and
-  after helper inspection was 24% 5-hour / 21% weekly. Bridge-momentum work
-  started at 39% 5-hour / 23% weekly; after tests it was 50% 5-hour / 25%
-  weekly. Square-box default work started at 78% 5-hour / 29% weekly.
-- Did not push.
+- Restored the accidental tracked `Icon\r` deletion.
+- Added the generated
+  `regressions/topologies/vertex-identity/half-box-bridge-momentum.pdf` so the
+  new regression follows the existing source-plus-rendered-PDF pattern.
+- Updated this roadmap so the branch no longer looks like an abandoned
+  adoption session.
+- Pushed `codex/adopt-feynman-fun` to `origin/codex/adopt-feynman-fun` as a
+  reviewable checkpoint.
 - Did not rename the remote repository.
 - Did not delete branches.
 
 Next planned action:
 
-- Plan or implement triple vertex momentum orientations. Start by clarifying
-  whether the goal is only better `\ThreePointCorr` orientation behavior or a
-  reusable lower-level triple-vertex helper that future loop topologies can
-  call.
+- After adoption review/push, fix `\ThreePointCorr` orientation and momentum
+  behavior first. Then extract a reusable triple-vertex slot/index/momentum
+  helper before implementing symmetric bubble, seagull, or swordfish
+  topologies.
