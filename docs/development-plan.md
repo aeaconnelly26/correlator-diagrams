@@ -45,35 +45,41 @@ Before ending each session:
 
 Goal for 2026-09-11:
 
-- Finish the adoption branch before starting new topology work.
-- Confirm the maintained regression suite passes.
-- Account for dirty or untracked artifacts.
-- Push `codex/adopt-feynman-fun` as a reviewable branch if the adoption audit
-  is clean.
+- Finish the adoption branch, then start one focused topology-foundation slice.
+- Use `\ThreePointCorr` to prove the logical-slot translation model before
+  adding new bubble, seagull, or swordfish topologies.
+- Add a focused regression for rotated labels, indices, styles, and momenta.
+- Keep public APIs stable unless a narrow bug fix requires a change.
 - Do not rename the remote repository.
 - Do not delete branches.
 
 Usage checkpoints:
 
 - Start of adoption closeout: 5-hour window 6% used, weekly window 1% used.
+- Start of translation-safe topology slice: 5-hour window 35% used, weekly
+  window 5% used.
+- End of translation-safe topology slice: 5-hour window 72% used, weekly
+  window 11% used.
 - Available reset credits: 3 full Codex resets.
 - Maintained regression suite passed during adoption closeout.
+- Maintained regression suite passed after the translation-safe topology slice.
 
 ## Next Session
 
 Recommended first technical session:
 
-- Focus area: triple vertex momentum implementation for the main orientations.
-- Start from the existing three-point orientation coordinate helpers and
-  momentum angle helpers.
-- Decide whether triple-vertex momentum means improving `\ThreePointCorr`
-  itself, adding a reusable lower-level triple-vertex helper, or both.
+- Focus area: use the three-point topology to prove translation-safe logical
+  slots before adding new loop topologies.
+- Start from the existing three-point orientation coordinate helpers, label
+  offset metadata, and momentum angle helpers.
+- Keep `\ThreePointCorr` public keys stable while making private helpers
+  clearer about logical slot data versus translated geometry.
 - Add a focused orientation regression before any broad topology migration.
 
 Likely deliverable:
 
-- A small design note or code change for triple-vertex momentum orientation,
-  one focused regression `.tex`, and updates to reference docs if the API
+- A small design note, a private three-point helper cleanup, one focused
+  translation regression `.tex`, and updates to reference docs only if the API
   changes.
 
 ## Implementation Inventory
@@ -137,6 +143,27 @@ Design direction from this inventory:
 - Migrate incrementally. First extend half-box bridge momentum using existing
   slot 5, then use that as the model for triple-vertex and future loop topology
   metadata.
+
+Translation model for the next topology family:
+
+- Public keys should address logical slots. Orientation changes should
+  translate coordinates, label offsets, momentum offsets, and index anchors
+  without changing which label, style, momentum, or index belongs to a slot.
+- `\ThreePointCorr` is the current proving ground for this rule. Its slot 1,
+  slot 2, and slot 3 data should remain attached to the same logical legs in
+  right, left, up, and down orientations.
+- Sunset remains useful as a record of the hard cases for parallel curved and
+  straight internal-line indices, especially clearance between labels and
+  endpoint/index triplets. It should not be copied wholesale for the new
+  two-line bubble structures.
+- The one-loop `s/t/u` channel topology is archival for future public API work.
+  Its slot 5/6 curved-line machinery can still inform private helpers, but new
+  diagram families should prefer the newer slot-list pattern used by half-box,
+  box, flat-contact, and triangle-contact.
+- Tree-level `s/t/u` channels remain useful as the structural precedent for two
+  vertices joined by one internal propagator. Future bubble-on-leg diagrams can
+  be thought of as tree exchange structures with one logical leg replaced by a
+  translated bubble subdiagram.
 
 ## Planned Work
 
@@ -304,6 +331,12 @@ Risk:
   accidental `Icon\r` deletion, tracked the generated half-box bridge momentum
   regression PDF, confirmed maintained regressions pass, and pushed
   `codex/adopt-feynman-fun`.
+- 2026-09-11: Started the translation-safe topology foundation on
+  `codex/translation-safe-topology`, using `\ThreePointCorr` as the first
+  controlled test for logical slots under rotated geometry.
+- 2026-09-11: Added a three-point translation regression, simplified private
+  three-point label/momentum helper calls, and confirmed focused plus full
+  regressions pass.
 
 ## Last Session Update
 
@@ -323,12 +356,35 @@ Risk:
   adoption session.
 - Pushed `codex/adopt-feynman-fun` to `origin/codex/adopt-feynman-fun` as a
   reviewable checkpoint.
+- Switched to `main` after the adoption branch was merged, then created
+  `codex/translation-safe-topology` for the next focused slice.
+- Recorded the translation model for future bubble, seagull, and swordfish
+  work: public keys bind to logical slots while orientation translates
+  geometry, anchors, offsets, and momentum/index placement.
+- Added
+  `regressions/topologies/three-point/three-point-translation-check.tex` to
+  make logical slot translation visible across right, left, up, and down
+  orientations.
+- Simplified `\ThreePointCorr` label placement and momentum drawing through
+  private helper calls that use the orientation-resolved slot metadata.
+- Usage checkpoint: 5-hour window 35% used, weekly window 5% used, with 3 full
+  reset credits available at the start of this slice.
+- Focused compile passed for
+  `regressions/topologies/three-point/three-point-translation-check.tex`.
+- Visually inspected both rendered translation-check pages. Logical slot data
+  remains attached under right, left, up, and down rotations; the dense
+  horizontal momentum-label cases expose crowding to consider in the deeper
+  helper design.
+- Ran `scripts/check-regressions.sh`; all maintained checks passed, including
+  the new translation regression.
+- Usage checkpoint after implementation and checks: 5-hour window 72% used,
+  weekly window 11% used, with 3 full reset credits still available.
 - Did not rename the remote repository.
 - Did not delete branches.
 
 Next planned action:
 
-- After adoption review/push, fix `\ThreePointCorr` orientation and momentum
-  behavior first. Then extract a reusable triple-vertex slot/index/momentum
-  helper before implementing symmetric bubble, seagull, or swordfish
-  topologies.
+- Commit and push `codex/translation-safe-topology` as a reviewable foundation
+  slice. After review, decide whether the next branch should deepen the
+  reusable triple-vertex helper or begin the first two-line bubble topology
+  prototype.

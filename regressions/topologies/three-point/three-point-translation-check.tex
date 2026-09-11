@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{feynman-fun}
+
+\begin{document}
+
+\section*{Three-Point Translation Check}
+
+Logical slots should keep their labels, indices, styles, and momenta while the
+orientation translates geometric placement.
+
+\[
+\begin{array}{cc}
+  \text{right} &
+  \text{left} \\
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=right,
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=left,
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ] \\[3em]
+  \text{up} &
+  \text{down} \\
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=up,
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=down,
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ]
+\end{array}
+\]
+
+\newpage
+
+The styled first slot and per-slot momentum directions should remain attached
+to the same logical slot after rotation.
+
+\[
+\begin{array}{cc}
+  \text{right, slot 1 styled} &
+  \text{up, slot 1 styled} \\
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=right,
+    field=W,
+    indices={\mu,\nu,\rho},
+    leg-styles={{epspol,fieldA},ewboson,ewboson},
+    momentum-labels={p,k,r},
+    three-point-momentum-directions={out,in,in},
+    three-point-momentum-layout=outward,
+    propagator-arrow-sizes={14pt,,}
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=up,
+    field=W,
+    indices={\mu,\nu,\rho},
+    leg-styles={{epspol,fieldA},ewboson,ewboson},
+    momentum-labels={p,k,r},
+    three-point-momentum-directions={out,in,in},
+    three-point-momentum-layout=outward,
+    propagator-arrow-sizes={14pt,,}
+  ] \\[3em]
+  \text{left, slot 1 styled} &
+  \text{down, slot 1 styled} \\
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=left,
+    field=W,
+    indices={\mu,\nu,\rho},
+    leg-styles={{epspol,fieldA},ewboson,ewboson},
+    momentum-labels={p,k,r},
+    three-point-momentum-directions={out,in,in},
+    three-point-momentum-layout=outward,
+    propagator-arrow-sizes={14pt,,}
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-orientation=down,
+    field=W,
+    indices={\mu,\nu,\rho},
+    leg-styles={{epspol,fieldA},ewboson,ewboson},
+    momentum-labels={p,k,r},
+    three-point-momentum-directions={out,in,in},
+    three-point-momentum-layout=outward,
+    propagator-arrow-sizes={14pt,,}
+  ]
+\end{array}
+\]
+
+\end{document}
