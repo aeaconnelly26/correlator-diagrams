@@ -381,10 +381,19 @@ Risk:
   weekly window 11% used, with 3 full reset credits still available.
 - Did not rename the remote repository.
 - Did not delete branches.
+- 2026-09-11: Added the next orientation slice: a generic `orientation` key
+  that resolves corner pairs such as `{top,left}` and `{bottom,right}` for
+  diagram families that opt into it. `\ThreePointCorr` now uses this resolver,
+  while legacy `three-point-orientation` values remain aliases.
+- Tuned three-point default momentum label clearance and added the missing
+  reset for `three-point-momentum-label-gap`, so rotated diagrams do not depend
+  on stale or too-tight defaults.
+- Corrected the up/down three-point momentum-angle metadata so rotated
+  momentum labels offset perpendicular to their propagator lines instead of
+  riding the wavy line.
 
 Next planned action:
 
-- Commit and push `codex/translation-safe-topology` as a reviewable foundation
-  slice. After review, decide whether the next branch should deepen the
-  reusable triple-vertex helper or begin the first two-line bubble topology
-  prototype.
+- Use the generic orientation resolver as the placement convention for the
+  first bubble-leg prototype, so bubble objects can inherit the same corner
+  grammar instead of growing a separate orientation system.

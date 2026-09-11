@@ -170,6 +170,19 @@ The default 3-point momentum convention is:
 - right leg outgoing
 - bottom leg outgoing
 
+Use the generic corner orientation key to move the diagonal slot-1 leg while
+keeping slot data attached:
+
+- `orientation={top,left}` or `orientation={left,top}`: diagonal leg points to the upper left
+- `orientation={top,right}` or `orientation={right,top}`: diagonal leg points to the upper right
+- `orientation={bottom,left}` or `orientation={left,bottom}`: diagonal leg points to the lower left
+- `orientation={bottom,right}` or `orientation={right,bottom}`: diagonal leg points to the lower right
+
+One-entry shorthand accepts `orientation={left}` and `orientation={right}`;
+both default to the top diagonal. The three-point aliases
+`three-point-corner={...}` and `three-point-diagonal-corner={...}` feed the
+same resolver.
+
 Use `three-point-momentum-flow=all-in|all-out|default` to set all three arrows at once.
 Use `momentum-directions={in,out,out}` for per-leg arrow directions in slot
 order. The topology-specific spelling `three-point-momentum-directions={...}`
@@ -1042,16 +1055,22 @@ Use `epspol` for a short scalar-polarized external leg with a double endcap:
 - `three-point-upper-yspan=...`
 - `three-point-right-xspan=...`
 - `three-point-bottom-yspan=...`
+- `orientation={top,left|top,right|bottom,left|bottom,right}`
+- `three-point-corner=...`
+- `three-point-diagonal-corner=...`
 - `three-point-orientation=right|left|up|down`
 - `three-point-external-length=...`
 - `three-point-central-label-yshift=...`
 
-`three-point-orientation=right` is the compatibility layout used by existing
-figures. The other orientations rotate the three slot coordinates as a single
-object while keeping slot-based labels, indices, styles, and momentum controls
-attached to slots 1, 2, and 3. `three-point-external-length` shortens or
-lengthens slot 1 while preserving its default angle before orientation is
-applied.
+`orientation={top,left}` is the compatibility layout used by existing figures.
+The generic `orientation` key is intended for any diagram family that needs a
+corner placement convention. For `\ThreePointCorr`, it chooses where the
+diagonal slot-1 leg points while keeping slot-based labels, indices, styles,
+and momentum controls attached to slots 1, 2, and 3. The legacy
+`three-point-orientation` values remain available as aliases:
+`right={top,left}`, `down={top,right}`, `up={bottom,left}`, and
+`left={bottom,right}`. `three-point-external-length` shortens or lengthens slot
+1 while preserving its default angle before orientation is applied.
 
 3-point momentum placement controls:
 

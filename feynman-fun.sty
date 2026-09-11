@@ -383,6 +383,9 @@
 \def\corr@momentumlabelinnersep{0.2pt}
 \def\corr@momentumlabelstyle{}
 \def\corr@momentumlabelsize{\normalsize}
+\def\corr@orientation{}
+\def\corr@orientationvertical{}
+\def\corr@orientationhorizontal{}
 \def\corr@externalleftmomentumdirection{in}
 \def\corr@externalrightmomentumdirection{in}
 \def\corr@contactulmomentumdirection{}
@@ -400,7 +403,7 @@
 \def\corr@threepointmomentumstart{0.22}
 \def\corr@threepointmomentumend{0.72}
 \def\corr@threepointmomentumlabelfraction{0.50}
-\def\corr@threepointmomentumlabelgap{0.08}
+\def\corr@threepointmomentumlabelgap{0.12}
 \def\corr@threepointmomentumoffset{6pt}
 \def\corr@threepointorientation{right}
 \def\corr@threepointexternallength{}
@@ -845,6 +848,84 @@
   \else
     #4%
   \fi
+}
+
+\newcommand{\corr@normalizestring}[2]{%
+  \edef#1{#2}%
+  \edef#1{\expandafter\zap@space#1 \@empty}%
+}
+
+\newcommand{\corr@recordcornerorientationpart}[1]{%
+  \corr@normalizestring\corr@orientationitem{#1}%
+  \corr@ifstringeq{\corr@orientationitem}{top}{%
+    \def\corr@orientationvertical{top}%
+  }{%
+  \corr@ifstringeq{\corr@orientationitem}{bottom}{%
+    \def\corr@orientationvertical{bottom}%
+  }{%
+  \corr@ifstringeq{\corr@orientationitem}{left}{%
+    \def\corr@orientationhorizontal{left}%
+  }{%
+  \corr@ifstringeq{\corr@orientationitem}{right}{%
+    \def\corr@orientationhorizontal{right}%
+  }{%
+    \PackageError{feynman-fun}{Invalid orientation component `\corr@orientationitem'}{Use top, bottom, left, or right.}%
+  }}}}%
+}
+
+\newcommand{\corr@resolvecornerorientation}[1]{%
+  \def\corr@orientationvertical{}%
+  \def\corr@orientationhorizontal{}%
+  \readlist*\corr@orientationitems{#1}%
+  \ifnum\corr@orientationitemslen=1
+    \corr@normalizestring\corr@orientationitem{\corr@orientationitems[1]}%
+    \corr@ifstringeq{\corr@orientationitem}{left}{%
+      \def\corr@orientationvertical{top}%
+      \def\corr@orientationhorizontal{left}%
+    }{%
+    \corr@ifstringeq{\corr@orientationitem}{right}{%
+      \def\corr@orientationvertical{top}%
+      \def\corr@orientationhorizontal{right}%
+    }{%
+      \PackageError{feynman-fun}{Invalid one-entry orientation `\corr@orientationitem'}{Use left or right, or use a two-entry corner such as top,left.}%
+      \def\corr@orientationvertical{top}%
+      \def\corr@orientationhorizontal{left}%
+    }}%
+  \else
+    \ifnum\corr@orientationitemslen=2
+      \corr@recordcornerorientationpart{\corr@orientationitems[1]}%
+      \corr@recordcornerorientationpart{\corr@orientationitems[2]}%
+      \ifdefempty{\corr@orientationvertical}{%
+        \PackageError{feynman-fun}{Orientation `#1' needs one vertical component}{Use one of top or bottom, and one of left or right.}%
+        \def\corr@orientationvertical{top}%
+      }{}%
+      \ifdefempty{\corr@orientationhorizontal}{%
+        \PackageError{feynman-fun}{Orientation `#1' needs one horizontal component}{Use one of top or bottom, and one of left or right.}%
+        \def\corr@orientationhorizontal{left}%
+      }{}%
+    \else
+      \PackageError{feynman-fun}{Invalid orientation `#1'}{Use left, right, or a two-entry corner such as top,left.}%
+      \def\corr@orientationvertical{top}%
+      \def\corr@orientationhorizontal{left}%
+    \fi
+  \fi
+}
+
+\newcommand{\corr@setthreepointorientationfromcorner}[1]{%
+  \corr@resolvecornerorientation{#1}%
+  \corr@ifstringeq{\corr@orientationvertical}{top}{%
+    \corr@ifstringeq{\corr@orientationhorizontal}{left}{%
+      \def\corr@threepointorientation{right}%
+    }{%
+      \def\corr@threepointorientation{down}%
+    }%
+  }{%
+    \corr@ifstringeq{\corr@orientationhorizontal}{left}{%
+      \def\corr@threepointorientation{up}%
+    }{%
+      \def\corr@threepointorientation{left}%
+    }%
+  }%
 }
 
 \newcommand{\corr@ifexternallegs}[1]{%
@@ -1514,7 +1595,9 @@
   \corr@topologysetdefault\corr@threepointmomentumstart{0.22}%
   \corr@topologysetdefault\corr@threepointmomentumend{0.72}%
   \corr@topologysetdefault\corr@threepointmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@threepointmomentumlabelgap{0.12}%
   \corr@topologysetdefault\corr@threepointmomentumoffset{6pt}%
+  \corr@topologysetdefault\corr@orientation{top,left}%
   \corr@topologysetdefault\corr@threepointorientation{right}%
   \corr@topologysetdefault\corr@threepointexternallength{}%
 }
@@ -1970,6 +2053,7 @@
   line/.code={\def\corr@line{#1}\corr@lineexplicittrue},
   color/.store in=\corr@color,
   line-color/.style={color={#1}},
+  orientation/.store in=\corr@orientation,
   leg-styles/.store in=\corr@legstyles,
   mode/.store in=\corr@mode,
   momentum/.style={mode={#1}},
@@ -3094,10 +3178,12 @@
   three-point-bottom-yspan/.store in=\corr@threepointbottomyspan,
   three-point-external-length/.store in=\corr@threepointexternallength,
   three-point-orientation/.is choice,
-  three-point-orientation/right/.code={\def\corr@threepointorientation{right}},
-  three-point-orientation/left/.code={\def\corr@threepointorientation{left}},
-  three-point-orientation/up/.code={\def\corr@threepointorientation{up}},
-  three-point-orientation/down/.code={\def\corr@threepointorientation{down}},
+  three-point-orientation/right/.style={orientation={top,left}},
+  three-point-orientation/left/.style={orientation={bottom,right}},
+  three-point-orientation/up/.style={orientation={bottom,left}},
+  three-point-orientation/down/.style={orientation={top,right}},
+  three-point-diagonal-corner/.style={orientation={#1}},
+  three-point-corner/.style={orientation={#1}},
   three-point-central-label-yshift/.store in=\corr@threepointcentrallabelyshift,
   three-point-momentum-start/.store in=\corr@threepointmomentumstart,
   three-point-momentum-end/.store in=\corr@threepointmomentumend,
@@ -3109,7 +3195,7 @@
     three-point-momentum-start=0.22,
     three-point-momentum-end=0.72,
     three-point-momentum-label-fraction=0.50,
-    three-point-momentum-label-gap=0.08,
+    three-point-momentum-label-gap=0.12,
     three-point-momentum-offset=6pt
   },
   three-point-momentum-layout/outward/.style={
@@ -5097,9 +5183,9 @@
   \pgfmathsetmacro{\corr@threepointslottwoy}{\corr@threepointslottwoxraw}%
   \pgfmathsetmacro{\corr@threepointslotthreex}{-\corr@threepointslotthreeyraw}%
   \pgfmathsetmacro{\corr@threepointslotthreey}{\corr@threepointslotthreexraw}%
-  \def\corr@threepointmomangleone{0}%
-  \def\corr@threepointmomangletwo{180}%
-  \def\corr@threepointmomanglethree{180}%
+  \def\corr@threepointmomangleone{-90}%
+  \def\corr@threepointmomangletwo{90}%
+  \def\corr@threepointmomanglethree{90}%
   \def\corr@threepointlabeloptsone{xshift=-8pt,yshift=-11pt}%
   \def\corr@threepointlabeloptstwo{xshift=-6pt,yshift=10pt}%
   \def\corr@threepointlabeloptsthree{xshift=24pt}%
@@ -5112,15 +5198,16 @@
   \pgfmathsetmacro{\corr@threepointslottwoy}{-\corr@threepointslottwoxraw}%
   \pgfmathsetmacro{\corr@threepointslotthreex}{\corr@threepointslotthreeyraw}%
   \pgfmathsetmacro{\corr@threepointslotthreey}{-\corr@threepointslotthreexraw}%
-  \def\corr@threepointmomangleone{180}%
-  \def\corr@threepointmomangletwo{0}%
-  \def\corr@threepointmomanglethree{0}%
+  \def\corr@threepointmomangleone{-90}%
+  \def\corr@threepointmomangletwo{90}%
+  \def\corr@threepointmomanglethree{90}%
   \def\corr@threepointlabeloptsone{xshift=8pt,yshift=11pt}%
   \def\corr@threepointlabeloptstwo{xshift=6pt,yshift=-10pt}%
   \def\corr@threepointlabeloptsthree{xshift=-24pt}%
 }
 
 \newcommand{\corr@setthreepointcoordinates}{%
+  \corr@setthreepointorientationfromcorner{\corr@orientation}%
   \ifdefempty{\corr@threepointexternallength}{%
     \pgfmathsetmacro{\corr@threepointslotonexraw}{-\corr@threepointleftxspan}%
     \pgfmathsetmacro{\corr@threepointslotoneyraw}{\corr@threepointupperyspan}%
