@@ -1,4 +1,4 @@
-# Correlator Diagram Macros
+# Feynman Fun
 
 Reusable LaTeX macros for the QFT diagrams that actually show up in notes, assignments, and writeups: correlators, contraction classes, amputated vertices, loop bubbles, one-loop boxes, and exchange channels.
 
@@ -86,14 +86,22 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 
 ## Quick Start
 
-Place `correlator-diagrams.sty` next to your document or in your local `texmf` tree, then load:
+Place `feynman-fun.sty` next to your document or in your local `texmf` tree, then load:
 
 ```tex
 \usepackage{amsmath}
-\usepackage{correlator-diagrams}
+\usepackage{feynman-fun}
 ```
 
+Older documents that load `correlator-diagrams` still work through a compatibility wrapper, but new documents should use `feynman-fun`.
+
 The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which are loaded internally.
+
+To run the maintained regression smoke checks:
+
+```sh
+scripts/check-regressions.sh
+```
 
 Main demo files in this repository:
 
@@ -175,7 +183,8 @@ The full reference covers:
 
 ## Repository Layout
 
-- `correlator-diagrams.sty`: package source
+- `feynman-fun.sty`: package source
+- `correlator-diagrams.sty`: compatibility wrapper for older documents
 - `example.tex`: broad feature gallery
 - `regressions/topologies/`: focused topology regression cases
 - `regressions/propagators/`: focused propagator regression and capacity sheets

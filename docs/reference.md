@@ -1,6 +1,6 @@
 # Reference
 
-Full package reference for `correlator-diagrams.sty`.
+Full package reference for `feynman-fun.sty`.
 
 For the short overview, visuals, and starter examples, see [README](../README.md).
 
@@ -28,7 +28,13 @@ For the short overview, visuals, and starter examples, see [README](../README.md
 
 Main package:
 
-- `correlator-diagrams.sty`
+- `feynman-fun.sty`
+
+Compatibility package:
+
+- `correlator-diagrams.sty` loads `feynman-fun` for older documents.
+
+New documents should use `feynman-fun`; keep `correlator-diagrams` only for older documents that have not been renamed yet.
 
 Main demos:
 
@@ -50,7 +56,7 @@ Add the package to your document:
 
 ```tex
 \usepackage{amsmath}
-\usepackage{correlator-diagrams}
+\usepackage{feynman-fun}
 ```
 
 The main entry points are:
@@ -90,6 +96,12 @@ Compile locally with:
 
 ```sh
 pdflatex -interaction=nonstopmode -halt-on-error example.tex
+```
+
+Run the maintained regression smoke checks with:
+
+```sh
+scripts/check-regressions.sh
 ```
 
 If you want the fastest first pass, start with `example.tex`, then copy one of the channel or contact examples and adjust the topology, labels, and line styles.
@@ -1343,6 +1355,10 @@ Box geometry:
 - `box-external-yspan=...`
 - `box-central-label-yshift=...`
 
+By default, box and cross-box diagrams use matching x/y spans so the internal
+box and external envelope are square. Use the geometry keys above when a
+rectangular, wider, or tighter box is wanted for a specific figure.
+
 Box external momentum arrow placement:
 
 - `box-external-momentum-start=...`
@@ -1608,6 +1624,13 @@ Half-box geometry and style controls:
 - `half-box-bridge-label-position=above|below|<anchor>`
 - `half-box-bridge-label-xshift=...`
 - `half-box-bridge-label-yshift=...`
+- `half-box-bridge-momentum=...`
+- `half-box-bridge-momentum-direction=forward|reverse|none`
+- `half-box-bridge-momentum-start=...`
+- `half-box-bridge-momentum-end=...`
+- `half-box-bridge-momentum-offset=...`
+- `half-box-bridge-momentum-label-fraction=...`
+- `half-box-bridge-momentum-label-gap=...`
 - `half-box-momentum-start=...`
 - `half-box-momentum-end=...`
 - `half-box-momentum-offset=...`
@@ -1633,6 +1656,17 @@ polarized.
 `half-box-line=...` sets the default line style for the half-box external
 segments and bridge. Use `half-box-bridge-line=...` when only the middle bridge
 should change, for example `half-box-bridge-line={proca,circ={}}`.
+
+Bridge momentum is opt-in and uses bridge slot 5 for arrow sizing:
+
+```tex
+\HalfBoxCorr[
+  momentum-labels={,p_1,q_1,},
+  half-box-momentum-slots={2,3},
+  half-box-bridge-label=Z,
+  half-box-bridge-momentum=\ell
+]
+```
 
 Flat-contact geometry and style controls:
 
@@ -2180,12 +2214,12 @@ Those use the legacy `channel-*` key family, for example:
 For Overleaf:
 
 1. Upload your `.tex` file.
-2. Upload `correlator-diagrams.sty`.
+2. Upload `feynman-fun.sty`.
 3. Compile with `pdfLaTeX`.
 
 For local use:
 
-1. Keep your `.tex` file in the same folder as `correlator-diagrams.sty`.
+1. Keep your `.tex` file in the same folder as `feynman-fun.sty`.
 2. Run:
 
 ```sh
