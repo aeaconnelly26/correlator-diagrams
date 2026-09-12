@@ -5294,6 +5294,29 @@
   \endgroup
 }
 
+\NewDocumentCommand{\ThreePointThesis}{O{}}{%
+  \ThreePointCorr[
+    scale=0.75,
+    show-momenta=true,
+    leg-styles={{ewboson,endcapp},{ewboson,endcap},{spol,magenta!85!red,endcap}},
+    leg-labels={\hspace{1mm}*\alpha,\hspace{1mm}*\lambda,\frac{1}{m_Z}},
+    momentum-labels={q_1,p,k^\kappa},
+    propagator-arrow-sizes={0pt,0pt,11pt},
+    three-point-upper-left-momentum-direction=in,
+    three-point-right-momentum-direction=in,
+    three-point-bottom-momentum-direction=out,
+    three-point-momentum-start=0.1,
+    three-point-momentum-end=0.7,
+    three-point-momentum-offset=10pt,
+    three-point-momentum-label-gap=.11,
+    three-point-momentum-label-fraction=0.4,
+    three-point-external-length=1.6,
+    #1
+  ]%
+}
+
+\NewDocumentCommand{\ThesisVertex}{O{}}{\ThreePointThesis[#1]}
+
 \NewDocumentCommand{\TwoPointCorr}{O{}}{%
   \begingroup
   \pgfqkeys{/corrdiag}{#1}%

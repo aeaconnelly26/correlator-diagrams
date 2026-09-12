@@ -1049,6 +1049,18 @@ Use `epspol` for a short scalar-polarized external leg with a double endcap:
 \]
 ```
 
+For the compact thesis-rule style used in electroweak three-point identities,
+use `\ThreePointThesis` or the alias `\ThesisVertex`. It expands to
+`\ThreePointCorr` with the common thesis defaults for scale, endpoint caps,
+external labels, momentum labels, momentum-arrow placement, and slot-3 arrow
+size. Any normal three-point key can still be passed as an override:
+
+```tex
+\[
+  \ThreePointThesis[orientation={bottom,right}]
+\]
+```
+
 3-point geometry controls:
 
 - `three-point-left-xspan=...`
