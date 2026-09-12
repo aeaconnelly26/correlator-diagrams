@@ -8,15 +8,15 @@
 \section*{Three-Point Translation Check}
 
 Logical slots should keep their labels, indices, styles, and momenta while the
-orientation translates geometric placement.
+generic corner orientation key translates geometric placement.
 
 \[
 \begin{array}{cc}
-  \text{right} &
-  \text{left} \\
+  \text{\texttt{orientation=\{top,left\}}} &
+  \text{\texttt{three-point-corner=\{left,top\}}} \\
   \ThreePointCorr[
     line=ewboson,
-    three-point-orientation=right,
+    orientation={top,left},
     field=A,
     indices={\alpha,\beta,\gamma},
     momentum-labels={q_1,q_2,q_3},
@@ -24,17 +24,17 @@ orientation translates geometric placement.
   ] &
   \ThreePointCorr[
     line=ewboson,
-    three-point-orientation=left,
+    three-point-corner={left,top},
     field=A,
     indices={\alpha,\beta,\gamma},
     momentum-labels={q_1,q_2,q_3},
     three-point-momentum-flow=default
-  ] \\[3em]
-  \text{up} &
-  \text{down} \\
+  ] \\[2.75em]
+  \text{\texttt{orientation=\{right\}}} &
+  \text{\texttt{three-point-corner=\{left\}}} \\
   \ThreePointCorr[
     line=ewboson,
-    three-point-orientation=up,
+    orientation={right},
     field=A,
     indices={\alpha,\beta,\gamma},
     momentum-labels={q_1,q_2,q_3},
@@ -42,7 +42,43 @@ orientation translates geometric placement.
   ] &
   \ThreePointCorr[
     line=ewboson,
-    three-point-orientation=down,
+    three-point-corner={left},
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ] \\[2.75em]
+  \text{\texttt{orientation=\{bottom,left\}}} &
+  \text{\texttt{three-point-diagonal-corner=\{left,bottom\}}} \\
+  \ThreePointCorr[
+    line=ewboson,
+    orientation={bottom,left},
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-diagonal-corner={left,bottom},
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ] \\[2.75em]
+  \text{\texttt{orientation=\{bottom,right\}}} &
+  \text{\texttt{three-point-corner=\{right,bottom\}}} \\
+  \ThreePointCorr[
+    line=ewboson,
+    orientation={bottom,right},
+    field=A,
+    indices={\alpha,\beta,\gamma},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-flow=default
+  ] &
+  \ThreePointCorr[
+    line=ewboson,
+    three-point-corner={right,bottom},
     field=A,
     indices={\alpha,\beta,\gamma},
     momentum-labels={q_1,q_2,q_3},
@@ -53,8 +89,9 @@ orientation translates geometric placement.
 
 \newpage
 
-The styled first slot and per-slot momentum directions should remain attached
-to the same logical slot after rotation.
+The legacy \texttt{three-point-orientation} key still maps to the same corner
+orientation resolver. The styled first slot and per-slot momentum directions
+should remain attached to the same logical slot after rotation.
 
 \[
 \begin{array}{cc}
@@ -106,6 +143,179 @@ to the same logical slot after rotation.
     three-point-momentum-layout=outward,
     propagator-arrow-sizes={14pt,,}
   ]
+\end{array}
+\]
+
+\newpage
+
+Mixed slot styles, colors, labels, and momentum directions should stay attached
+to slots 1, 2, and 3 under each corner orientation.
+
+\[
+\begin{array}{cc}
+  \text{\texttt{top,left}: mixed line styles} &
+  \text{\texttt{top,right}: flipped flow} \\
+  \ThreePointCorr[
+    orientation={top,left},
+    line=ewboson,
+    field=X,
+    indices={1,2,3},
+    leg-styles={{epspol,fieldA},{ewboson,fieldB},{plain,fieldC}},
+    leg-labels={S_1,S_2,S_3},
+    momentum-labels={a,b,c},
+    three-point-momentum-directions={out,in,out},
+    propagator-arrow-sizes={13pt,9pt,}
+  ] &
+  \ThreePointCorr[
+    orientation={top,right},
+    line=plain,
+    field=Y,
+    indices={1,2,3},
+    leg-styles={{epspol,fieldA},{plain,fieldB},{ewboson,fieldC}},
+    leg-labels={T_1,T_2,T_3},
+    momentum-labels={u,v,w},
+    three-point-momentum-directions={in,out,in},
+    propagator-arrow-sizes={13pt,,10pt}
+  ] \\[3.5em]
+  \text{\texttt{bottom,left}: scalar slot 2} &
+  \text{\texttt{bottom,right}: colored vector slots} \\
+  \ThreePointCorr[
+    orientation={bottom,left},
+    line=plain,
+    field=Z,
+    indices={1,2,3},
+    leg-styles={{epspol,fieldA},{scalarpolarized,fieldB},{ewboson,fieldC}},
+    leg-labels={U_1,U_2,U_3},
+    momentum-labels={\ell,m,n},
+    three-point-momentum-directions={out,out,in},
+    propagator-arrow-sizes={13pt,11pt,}
+  ] &
+  \ThreePointCorr[
+    orientation={bottom,right},
+    line=ewboson,
+    field=V,
+    indices={1,2,3},
+    leg-styles={{epspol,fieldA},{ewboson,fieldB},{plain,fieldC}},
+    leg-labels={R_1,R_2,R_3},
+    momentum-labels={r,s,t},
+    three-point-momentum-directions={in,in,out},
+    propagator-arrow-sizes={13pt,,10pt}
+  ]
+\end{array}
+\]
+
+\newpage
+
+Additional slot-style permutations show the same corner orientations with
+different slots carrying the distinctive styles and momentum choices.
+
+\[
+\begin{array}{cc}
+  \text{\texttt{top,left}: slot 2 emphasized} &
+  \text{\texttt{top,right}: slot 3 emphasized} \\
+  \ThreePointCorr[
+    orientation={top,left},
+    line=plain,
+    field=P,
+    indices={1,2,3},
+    leg-styles={{plain,fieldB},{epspol,fieldA},{ewboson,fieldC}},
+    leg-labels={P_1,P_2,P_3},
+    momentum-labels={p_1,p_2,p_3},
+    three-point-momentum-directions={in,out,out},
+    propagator-arrow-sizes={,13pt,10pt}
+  ] &
+  \ThreePointCorr[
+    orientation={top,right},
+    line=plain,
+    field=Q,
+    indices={1,2,3},
+    leg-styles={{ewboson,fieldC},{plain,fieldB},{epspol,fieldA}},
+    leg-labels={Q_1,Q_2,Q_3},
+    momentum-labels={q_1,q_2,q_3},
+    three-point-momentum-directions={out,out,in},
+    propagator-arrow-sizes={10pt,,13pt}
+  ] \\[3.5em]
+  \text{\texttt{bottom,left}: scalar slot 1} &
+  \text{\texttt{bottom,right}: scalar slot 3} \\
+  \ThreePointCorr[
+    orientation={bottom,left},
+    line=ewboson,
+    field=M,
+    indices={1,2,3},
+    leg-styles={{scalarpolarized,fieldB},{plain,fieldC},{ewboson,fieldA}},
+    leg-labels={M_1,M_2,M_3},
+    momentum-labels={m_1,m_2,m_3},
+    three-point-momentum-directions={in,in,out},
+    propagator-arrow-sizes={11pt,,10pt}
+  ] &
+  \ThreePointCorr[
+    orientation={bottom,right},
+    line=plain,
+    field=N,
+    indices={1,2,3},
+    leg-styles={{ewboson,fieldA},{plain,fieldC},{scalarpolarized,fieldB}},
+    leg-labels={N_1,N_2,N_3},
+    momentum-labels={n_1,n_2,n_3},
+    three-point-momentum-directions={out,in,in},
+    propagator-arrow-sizes={10pt,,11pt}
+  ]
+\end{array}
+\]
+
+\newpage
+
+Equation-style rows exercise the thesis-style wrapper in the compact format
+used for algebraic rules.
+
+\[
+\begin{array}{rl}
+  \ThreePointThesis[orientation={top,left}]
+  &=
+  \displaystyle
+  \frac{ig}{m_Z}\epsilon^\alpha(q_1)(-k^*)\Gamma_{\alpha\lambda}(q_1)
+  \\[3.5em]
+  \ThreePointThesis[orientation={top,right}]
+  &=
+  \displaystyle
+  \frac{ig}{m_Z}\epsilon^\alpha(q_1)(-k^*)\Gamma_{\alpha\lambda}(q_1)
+  \\[3.5em]
+  \ThreePointThesis[orientation={bottom,left}]
+  &=
+  \displaystyle
+  \frac{ig}{m_Z}\epsilon^\alpha(q_1)(-k^*)\Gamma_{\alpha\lambda}(q_1)
+  \\[3.5em]
+  \ThreePointThesis[orientation={bottom,right}]
+  &=
+  \displaystyle
+  \frac{ig}{m_Z}\epsilon^\alpha(q_1)(-k^*)\Gamma_{\alpha\lambda}(q_1)
+\end{array}
+\]
+
+\newpage
+
+The thesis-style wrapper still accepts normal three-point overrides, including
+which logical slot carries the scalar-polarized leg and which momentum labels
+are printed.
+
+\[
+\begin{array}{rl}
+  \ThreePointThesis[
+    orientation={top,left},
+    leg-styles={{spol,magenta!85!red,endcap},{ewboson,endcap},{ewboson,endcapp}},
+    momentum-labels={r,s,t}
+  ]
+  &=
+  \displaystyle
+  \mathcal{V}_{1}(r,s,t)
+  \\[4.0em]
+  \ThreePointThesis[
+    orientation={bottom,right},
+    leg-styles={{ewboson,endcapp},{spol,magenta!85!red,endcap},{ewboson,endcap}},
+    momentum-labels={\ell_1,\ell_2,\ell_3}
+  ]
+  &=
+  \displaystyle
+  \mathcal{V}_{2}(\ell_1,\ell_2,\ell_3)
 \end{array}
 \]
 
