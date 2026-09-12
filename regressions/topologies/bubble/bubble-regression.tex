@@ -1,0 +1,309 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{feynman-fun}
+
+\newcommand{\bubblecell}[2]{%
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \texttt{#1}\par\medskip
+    #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Self-Energy Bubble Regression}
+
+Package-level standalone self-energy bubbles. These examples use the public
+\verb|\BubbleCorr| API, not raw mockup drawing.
+
+\[
+\begin{array}{cc}
+  \bubblecell{clean default}{
+    \BubbleCorr[
+      show-momenta=false
+    ]
+  }&
+  \bubblecell{momenta}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p,p},
+      bubble-momenta={\ell,p-\ell}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \bubblecell{endpoint indices}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-external-line={ewboson,endcap},
+      bubble-a-indices={a,b},
+      bubble-b-indices={c,d}
+    ]
+  }&
+  \bubblecell{flat endpoint shorthand}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-external-line={ewboson,endcap},
+      bubble-endpoint-indices={\alpha,\beta,\rho,\sigma},
+      bubble-index-size=script
+    ]
+  }
+\end{array}
+\]
+
+\newpage
+
+\section*{Outer Labels And Vertex-Side Indices}
+
+\[
+\begin{array}{cc}
+  \bubblecell{explicit outer labels}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-external-line={ewboson,endcap},
+      field=\phi,
+      indices={i,j}
+    ]
+  }&
+  \bubblecell{external vertex-side indices}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-external-line={ewboson,endcap},
+      bubble-external-indices={i,j},
+      bubble-endpoint-indices={a,b,c,d}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{c}
+  \bubblecell{three index labels per vertex}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-external-line={ewboson,endcap},
+      bubble-external-indices={i,j},
+      bubble-a-indices={a,b},
+      bubble-b-indices={c,d},
+      bubble-external-index-position=below
+    ]
+  }
+\end{array}
+\]
+
+\newpage
+
+\section*{Styles And Momentum Directions}
+
+\[
+\begin{array}{cc}
+  \bubblecell{styled internal slots}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-external-indices={m,n},
+      bubble-top-line={ewboson,fieldA},
+      bubble-bottom-line={scalarpolarized,fieldB},
+      bubble-external-line={ewboson,endcap,fieldC},
+      propagator-arrow-sizes={,,,5.5pt},
+      bubble-endpoint-indices={a,b,c,d}
+    ]
+  }&
+  \bubblecell{reversed lower loop}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p,p},
+      bubble-momenta={\ell,p-\ell},
+      bubble-b-momentum-direction=reverse,
+      bubble-momentum-label-distance=6pt
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \bubblecell{clockwise rotation key}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p,p},
+      bubble-momenta={\ell,p-\ell},
+      bubble-momentum-rotation=clockwise,
+      bubble-momentum-label-distance=6pt
+    ]
+  }&
+  \bubblecell{counterclockwise rotation key}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p,p},
+      bubble-momenta={\ell,p-\ell},
+      bubble-momentum-rotation=counterclockwise,
+      bubble-momentum-label-distance=6pt
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \bubblecell{shorter arrows farther out}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p,p},
+      bubble-momenta={k,p-k},
+      bubble-momentum-start=0.35,
+      bubble-momentum-end=0.65,
+      bubble-momentum-offset=9pt
+    ]
+  }&
+  \bubblecell{external momentum labels}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p_{\rm in},p_{\rm out}},
+      bubble-a-momentum=,
+      bubble-b-momentum=,
+      bubble-a-momentum-direction=none,
+      bubble-b-momentum-direction=none
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{c}
+  \bubblecell{compact thesis-style bubble}{
+    \BubbleCorr[
+      scale=1.12,
+      show-momenta=true,
+      momentum-labels={q_1,q_1},
+      momentum-directions={in,out},
+      bubble-momenta={\ell,k},
+      bubble-momentum-rotation=clockwise,
+      bubble-top-line={plain},
+      bubble-bottom-line={scalarpolarized,magenta!85!red},
+      bubble-external-line={ewboson,endcap},
+      propagator-arrow-sizes={,,,5.5pt},
+      bubble-external-indices={\gamma,\rho},
+      bubble-endpoint-indices={\alpha,\pi,\delta,\kappa},
+      bubble-external-length=0.92,
+      bubble-loop-looseness=1.40,
+      bubble-momentum-offset=7.5pt,
+      bubble-momentum-start=0.28,
+      bubble-momentum-end=0.72
+    ]
+  }
+\end{array}
+\]
+
+\newpage
+
+\section*{Internal Line Key Variations}
+
+\[
+\begin{array}{cc}
+  \bubblecell{proca upper internal}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-top-line={proca,fieldA},
+      bubble-bottom-line={plain},
+      bubble-external-line={ewboson,endcap,fieldC},
+      propagator-arrow-sizes={,,5.5pt,},
+      bubble-endpoint-indices={a,b,c,d}
+    ]
+  }&
+  \bubblecell{black circ ewboson and pink proca}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-top-line={ewboson,circ=Z,black},
+      bubble-bottom-line={proca,magenta!85!red},
+      bubble-external-line={ewboson,endcap},
+      propagator-arrow-sizes={,,,5.5pt},
+      bubble-endpoint-indices={\alpha,\beta,\rho,\sigma}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \bubblecell{two circ ewbosons}{
+    \BubbleCorr[
+      show-momenta=true,
+      momentum-labels={p,p},
+      bubble-momenta={\ell,p-\ell},
+      bubble-momentum-rotation=clockwise,
+      bubble-top-line={ewboson,circ=W,fieldA},
+      bubble-bottom-line={ewboson,circ=Z,fieldB},
+      bubble-external-line={ewboson,endcap}
+    ]
+  }&
+  \bubblecell{external key separated}{
+    \BubbleCorr[
+      show-momenta=false,
+      bubble-external-line={ewboson,endcap,circ=W,fieldC},
+      bubble-top-line={plain,fieldA},
+      bubble-bottom-line={scalarpolarized,magenta!85!red},
+      propagator-arrow-sizes={,,,5.5pt},
+      bubble-endpoint-indices={a,b,c,d},
+      bubble-external-indices={i,j}
+    ]
+  }
+\end{array}
+\]
+
+\newpage
+
+\section*{Endcap Sanity Checks}
+
+\[
+\begin{array}{cc}
+  \bubblecell{default cap placement}{
+    \BubbleCorr[
+      scale=1.25,
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={q_1,q_2},
+      bubble-external-length=1.05
+    ]
+  }&
+  \bubblecell{colored caps}{
+    \BubbleCorr[
+      scale=1.25,
+      show-momenta=false,
+      bubble-external-line={ewboson,endcap,magenta!85!red},
+      bubble-a-line={plain,blue!70!black},
+      bubble-b-line={plain,green!45!black},
+      bubble-loop-looseness=1.50
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{c}
+  \bubblecell{alias smoke check}{
+    \SelfEnergyBubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={q,q},
+      bubble-momenta={r,q-r},
+      bubble-external-indices={1,2},
+      bubble-endpoint-indices={u,v,w,z}
+    ]
+  }
+\end{array}
+\]
+
+\end{document}

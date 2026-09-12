@@ -18,6 +18,7 @@ For the short overview, visuals, and starter examples, see [README](../README.md
 - [One-Loop Box Topology](#one-loop-box-topology)
 - [Cross-Box Topology](#cross-box-topology)
 - [Triangle-Contact Topology](#triangle-contact-topology)
+- [Self-Energy Bubble](#self-energy-bubble)
 - [One-Loop `s/t/u` Channel Bubbles For `\phi^4`](#one-loop-stu-channel-bubbles-for-phi4)
 - [Sunset Diagrams](#sunset-diagrams)
 - [Explicit Tree-Level Channel Topologies](#explicit-tree-level-channel-topologies)
@@ -43,6 +44,7 @@ Main demos:
 - `regressions/topologies/channel/channel-topology-regression.tex`
 - `regressions/topologies/cross-box/cross-box-regression.tex`
 - `regressions/topologies/triangle-contact/triangle-contact-regression.tex`
+- `regressions/topologies/bubble/bubble-regression.tex`
 - `regressions/topologies/vertex-identity/vertex-identity-check.tex`
 - `regressions/topologies/three-point/three-point-check.tex`
 - `regressions/topologies/sunset/sunset-example.tex`
@@ -63,6 +65,7 @@ The main entry points are:
 
 ```tex
 \TwoPointCorr[...]
+\BubbleCorr[...]
 \ThreePointCorr[...]
 \FourPointCorr[...]
 \BoxLoopCorr[...]
@@ -75,6 +78,8 @@ Common aliases:
 
 ```tex
 \TwoPtCorr[...]
+\SelfEnergyCorr[...]
+\SelfEnergyBubbleCorr[...]
 \ThreePtCorr[...]
 \FourPtCorr[...]
 \SChannelCorr[...]
@@ -123,6 +128,7 @@ That is the logic used by this package.
 | Macro | Purpose | Default shape |
 | --- | --- | --- |
 | `\TwoPointCorr` | 2-point function | left leg, right leg, central blob/vertex |
+| `\BubbleCorr` | self-energy bubble | two horizontal vertices, two internal arcs, two amputated external legs |
 | `\ThreePointCorr` | 3-point vertex | upper-left, right, and bottom legs meeting at one vertex |
 | `\FourPointCorr` | 4-point object | contact topology by default |
 | `\BoxLoopCorr` | one-loop box | four corner vertices, square internal loop, four diagonal external legs |
@@ -148,6 +154,30 @@ The convenience channel wrappers are just `\FourPointCorr` with a fixed topology
 
 - slot 1 = left leg
 - slot 2 = right leg
+
+### `\BubbleCorr`
+
+- slot 1 = left external leg
+- slot 2 = right external leg
+- `bubble-a` / `bubble-top` = upper internal propagator
+- `bubble-b` / `bubble-bottom` = lower internal propagator
+
+Use `momentum-labels={...,...}` for the two external legs. Use
+`bubble-momenta={...,...}` or `bubble-a-momentum=...` /
+`bubble-b-momentum=...` for loop momenta. Internal loop momentum arrows are
+drawn only when their bubble momentum text is provided.
+Use `bubble-momentum-rotation=clockwise|counterclockwise` when the two loop
+arrows should circulate in opposite directions around the bubble.
+
+Use `bubble-external-indices={left,right}` for vertex-side external-leg
+indices near the bubble vertices. The generic `indices={...}` key belongs to
+outer field labels when those labels are explicitly enabled.
+
+Endpoint indices use two entries per internal propagator:
+
+- `bubble-a-indices={left,right}`
+- `bubble-b-indices={left,right}`
+- `bubble-endpoint-indices={aL,aR,bL,bR}`
 
 ### `\ThreePointCorr`
 
@@ -1744,6 +1774,105 @@ exactly at the external endpoint of the leg. The explicit aliases such as
 
 Focused visual QA lives in
 `regressions/topologies/vertex-identity/vertex-identity-check.tex`.
+
+## Self-Energy Bubble
+
+The standalone two-point self-energy bubble entry points are:
+
+```tex
+\BubbleCorr[...]
+\SelfEnergyCorr[...]
+\SelfEnergyBubbleCorr[...]
+```
+
+Minimal scalar bubble:
+
+```tex
+\[
+  \BubbleCorr[]
+\]
+```
+
+With loop momenta, two endpoint indices per internal propagator, and
+vertex-side external indices:
+
+```tex
+\[
+  \BubbleCorr[
+    show-momenta=true,
+    momentum-labels={p,p},
+    bubble-momenta={\ell,p-\ell},
+    bubble-a-indices={a,b},
+    bubble-b-indices={c,d},
+    bubble-external-indices={i,j}
+  ]
+\]
+```
+
+Outer field labels are opt-in:
+
+```tex
+\[
+  \BubbleCorr[
+    field=\phi,
+    indices={i,j}
+  ]
+\]
+```
+
+Useful controls:
+
+- `bubble-vertex-span=...`
+- `bubble-external-length=...`
+- `bubble-loop-looseness=...`
+- `bubble-external-line=...`
+- `bubble-a-line=...` / `bubble-top-line=...`
+- `bubble-b-line=...` / `bubble-bottom-line=...`
+- `bubble-vertex-radius=...`
+- `bubble-endpoint-marker-distance=...`
+- `momentum-directions={left,right}`
+- `bubble-momenta={top,bottom}`
+- `bubble-a-momentum-direction=forward|reverse|none`
+- `bubble-b-momentum-direction=forward|reverse|none`
+- `bubble-momentum-rotation=clockwise|counterclockwise`
+- `bubble-momentum-start=...`
+- `bubble-momentum-end=...`
+- `bubble-momentum-offset=...`
+- `bubble-momentum-style-clearance=...`
+- `bubble-momentum-label-distance=...`
+- `bubble-momentum-label-fraction=...`
+- `bubble-external-momentum-start=...`
+- `bubble-external-momentum-end=...`
+- `bubble-external-momentum-label-fraction=...`
+- `bubble-external-momentum-label-gap=...`
+- `bubble-endpoint-indices={aL,aR,bL,bR}`
+- `bubble-external-indices={left,right}`
+- `bubble-left-external-index=...`
+- `bubble-right-external-index=...`
+- `bubble-external-index-position=...`
+- `bubble-external-index-yshift=...`
+- `bubble-external-index-size=normal|script|scriptscript`
+
+The default external legs are horizontal amputated scalar-style stubs with
+endpoint caps. Set their style with `bubble-external-line=...`. The internal
+propagators default to solid/plain lines; set the upper and lower slots with
+`bubble-a-line` / `bubble-top-line` and `bubble-b-line` /
+`bubble-bottom-line`. Bubble internal scalar-polarized and Proca endpoint
+markers are drawn as white-filled equilateral triangles against explicit tip
+coordinates on the vertex boundary.
+With `bubble-endpoint-marker-distance=auto`, the target point is the
+`bubble-vertex-radius` edge; set an explicit distance only when you want the
+tip target moved inward or outward. Loop momentum arrows are opt-in through
+`bubble-momenta` or the per-slot momentum keys. Internal momentum arrows use
+`bubble-momentum-offset`, and add
+`bubble-momentum-style-clearance` automatically when the corresponding internal
+line is structurally wider, such as `ewboson`, `photon`, `proca`, or `circ=...`.
+`momentum-labels={...,...}` labels the two external momentum arrows. The bare
+bubble is quiet by default, while explicit `field=...`, `indices={...}`, or
+`leg-labels={...}` restores ordinary outer field labels.
+
+Focused visual QA lives in
+`regressions/topologies/bubble/bubble-regression.tex`.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 

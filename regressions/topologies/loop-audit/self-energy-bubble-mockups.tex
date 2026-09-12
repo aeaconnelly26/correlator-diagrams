@@ -1,0 +1,192 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{feynman-fun}
+
+\newcommand{\mockcell}[2]{%
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \texttt{#1}\par\medskip
+    #2
+  \end{minipage}%
+}
+
+\makeatletter
+\newcommand{\MockCurvedMomentum}[9]{%
+  \pgfmathsetmacro{\mockmomstep}{(#5-#4)/8}%
+  \pgfmathsetmacro{\mockmompone}{#4+\mockmomstep}%
+  \pgfmathsetmacro{\mockmomptwo}{#4+2*\mockmomstep}%
+  \pgfmathsetmacro{\mockmompthree}{#4+3*\mockmomstep}%
+  \pgfmathsetmacro{\mockmompfour}{#4+4*\mockmomstep}%
+  \pgfmathsetmacro{\mockmompfive}{#4+5*\mockmomstep}%
+  \pgfmathsetmacro{\mockmompsix}{#4+6*\mockmomstep}%
+  \pgfmathsetmacro{\mockmompseven}{#4+7*\mockmomstep}%
+  \path
+    #1 to[#3]
+    coordinate[pos=#4] (mockmomstart)
+    coordinate[pos=\mockmompone] (mockmompone)
+    coordinate[pos=\mockmomptwo] (mockmomptwo)
+    coordinate[pos=\mockmompthree] (mockmompthree)
+    coordinate[pos=\mockmompfour] (mockmompfour)
+    coordinate[pos=\mockmompfive] (mockmompfive)
+    coordinate[pos=\mockmompsix] (mockmompsix)
+    coordinate[pos=\mockmompseven] (mockmompseven)
+    coordinate[pos=#6] (mockmomlabel)
+    coordinate[pos=#5] (mockmomend)
+    #2;
+  \draw[-{Stealth[length=3.8pt]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
+    (mockmomstart) --
+    (mockmompone) --
+    (mockmomptwo) --
+    (mockmompthree) --
+    (mockmompfour) --
+    (mockmompfive) --
+    (mockmompsix) --
+    (mockmompseven) --
+    (mockmomend);
+  \corr@putmomentumlabelwithdistance
+    {(mockmomlabel)}
+    {#7}
+    {#8}
+    {0pt}
+    {0pt}
+    {#9}%
+}
+\newcommand{\MockStraightMomentum}[5]{%
+  \path #1 -- coordinate[pos=#3] (mockstraightlabel) #2;
+  \draw[-{Stealth[length=3.6pt]},line width=\corr@momentumlinewidth,line cap=round]
+    #1 -- #2;
+  \corr@putmomentumlabelwithdistance
+    {(mockstraightlabel)}
+    {above}
+    {#4}
+    {0pt}
+    {0pt}
+    {#5}%
+}
+\newcommand{\MockPackageLoopBody}[2]{%
+  \corr@preparelists
+  \corr@drawsunsetprop{5}{plain}{vl}{vr}{half left,looseness=#1}%
+  \corr@drawsunsetprop{6}{plain}{vl}{vr}{half right,looseness=#2}%
+}
+\makeatother
+
+\newcommand{\SelfEnergyBubbleMock}[1][]{%
+  \begin{tikzpicture}[baseline=(current bounding box.center),scale=1,#1]
+    \begin{feynhand}
+      \vertex (vl) at (-0.74,0) {};
+      \vertex (vr) at (0.74,0) {};
+      \vertex (ll) at (-1.55,0) {};
+      \vertex (rr) at (1.55,0) {};
+      \propag[plain,endcap] (ll) to (vl);
+      \propag[plain,endcapin] (vr) to (rr);
+      \MockPackageLoopBody{1.50}{1.50}
+      \vertex[dot] at (vl) {};
+      \vertex[dot] at (vr) {};
+      \node[left] at (ll) {$\phi$};
+      \node[right] at (rr) {$\phi$};
+    \end{feynhand}
+  \end{tikzpicture}%
+}
+
+\newcommand{\SelfEnergyBubbleMomentumMock}{%
+  \begin{tikzpicture}[baseline=(current bounding box.center),scale=1]
+    \begin{feynhand}
+      \vertex (vl) at (-0.74,0) {};
+      \vertex (vr) at (0.74,0) {};
+      \vertex (ll) at (-1.55,0) {};
+      \vertex (rr) at (1.55,0) {};
+      \propag[plain,endcap] (ll) to (vl);
+      \propag[plain,endcapin] (vr) to (rr);
+      \MockPackageLoopBody{1.50}{1.50}
+      \MockCurvedMomentum{([yshift=5pt]vl)}{([yshift=5pt]vr)}
+        {out=90,in=90,looseness=1.50}{0.31}{0.69}{0.50}{above}{3pt}{\ell}
+      \MockCurvedMomentum{([yshift=-5pt]vl)}{([yshift=-5pt]vr)}
+        {out=-90,in=-90,looseness=1.50}{0.31}{0.69}{0.50}{below}{3pt}{p-\ell}
+      \MockStraightMomentum{($(ll)!0.18!(vl)$)}{($(ll)!0.58!(vl)$)}{0.50}{2pt}{p}
+      \MockStraightMomentum{($(vr)!0.42!(rr)$)}{($(vr)!0.82!(rr)$)}{0.50}{2pt}{p}
+      \vertex[dot] at (vl) {};
+      \vertex[dot] at (vr) {};
+      \node[left] at (ll) {$\phi$};
+      \node[right] at (rr) {$\phi$};
+    \end{feynhand}
+  \end{tikzpicture}%
+}
+
+\newcommand{\SelfEnergyBubbleIndicesMock}{%
+  \begin{tikzpicture}[baseline=(current bounding box.center),scale=1]
+    \begin{feynhand}
+      \vertex (vl) at (-0.74,0) {};
+      \vertex (vr) at (0.74,0) {};
+      \vertex (ll) at (-1.55,0) {};
+      \vertex (rr) at (1.55,0) {};
+      \propag[plain,endcap] (ll) to (vl);
+      \propag[plain,endcapin] (vr) to (rr);
+      \MockPackageLoopBody{1.50}{1.50}
+      \path (vl) to[out=90,in=90,looseness=1.50]
+        node[pos=0.18,below right=0pt] {$\scriptstyle a$}
+        node[pos=0.82,below left=0pt] {$\scriptstyle b$}
+        (vr);
+      \path (vl) to[out=-90,in=-90,looseness=1.50]
+        node[pos=0.18,above right=0pt] {$\scriptstyle c$}
+        node[pos=0.82,above left=0pt] {$\scriptstyle d$}
+        (vr);
+      \vertex[dot] at (vl) {};
+      \vertex[dot] at (vr) {};
+      \node[left] at (ll) {$\phi_i$};
+      \node[right] at (rr) {$\phi_j$};
+    \end{feynhand}
+  \end{tikzpicture}%
+}
+
+\newcommand{\SelfEnergyBubbleTunedMock}{%
+  \begin{tikzpicture}[baseline=(current bounding box.center),scale=1]
+    \begin{feynhand}
+      \vertex (vl) at (-0.74,0) {};
+      \vertex (vr) at (0.74,0) {};
+      \vertex (ll) at (-1.55,0) {};
+      \vertex (rr) at (1.55,0) {};
+      \propag[plain,endcap] (ll) to (vl);
+      \propag[plain,endcapin] (vr) to (rr);
+      \MockPackageLoopBody{1.38}{1.38}
+      \MockCurvedMomentum{([yshift=6pt]vl)}{([yshift=6pt]vr)}
+        {out=90,in=90,looseness=1.28}{0.34}{0.66}{0.50}{above}{3pt}{\ell}
+      \MockCurvedMomentum{([yshift=-6pt]vl)}{([yshift=-6pt]vr)}
+        {out=-90,in=-90,looseness=1.28}{0.34}{0.66}{0.50}{below}{3pt}{p-\ell}
+      \path (vl) to[out=90,in=90,looseness=1.38]
+        node[pos=0.17,below right=0pt] {$\scriptstyle a$}
+        node[pos=0.83,below left=0pt] {$\scriptstyle b$}
+        (vr);
+      \path (vl) to[out=-90,in=-90,looseness=1.38]
+        node[pos=0.17,above right=0pt] {$\scriptstyle c$}
+        node[pos=0.83,above left=0pt] {$\scriptstyle d$}
+        (vr);
+      \MockStraightMomentum{($(ll)!0.14!(vl)$)}{($(ll)!0.52!(vl)$)}{0.50}{2pt}{p}
+      \MockStraightMomentum{($(vr)!0.48!(rr)$)}{($(vr)!0.86!(rr)$)}{0.50}{2pt}{p}
+      \vertex[dot] at (vl) {};
+      \vertex[dot] at (vr) {};
+      \node[left] at (ll) {$\phi_i$};
+      \node[right] at (rr) {$\phi_j$};
+    \end{feynhand}
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+\section*{Self-Energy Bubble Mockups}
+
+Naive standalone bubble candidates derived from the one-loop channel shape:
+two horizontal vertices, two internal propagators, and one amputated scalar leg
+per vertex.
+
+\[
+\begin{array}{cc}
+  \mockcell{plain bubble}{\SelfEnergyBubbleMock} &
+  \mockcell{with loop momenta}{\SelfEnergyBubbleMomentumMock} \\[6.5em]
+  \mockcell{two endpoint indices per propagator}{\SelfEnergyBubbleIndicesMock} &
+  \mockcell{tuned compact momentum pass}{\SelfEnergyBubbleTunedMock}
+\end{array}
+\]
+
+\end{document}

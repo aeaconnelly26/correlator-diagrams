@@ -68,19 +68,20 @@ Usage checkpoints:
 
 Recommended first technical session:
 
-- Focus area: use the three-point topology to prove translation-safe logical
-  slots before adding new loop topologies.
-- Start from the existing three-point orientation coordinate helpers, label
-  offset metadata, and momentum angle helpers.
-- Keep `\ThreePointCorr` public keys stable while making private helpers
-  clearer about logical slot data versus translated geometry.
-- Add a focused orientation regression before any broad topology migration.
+- Focus area: audit and modernize the older loop-channel and sunset momentum
+  systems before using them as precedent for new bubble-leg topologies.
+- Treat `loop-channel` and `sunset` as partly abandoned QFT-I-era systems:
+  useful for structure, but not visually authoritative.
+- Compare old defaults, documented fix-it recipes, index-heavy cases, and
+  direction/style variants in one audit PDF.
+- Use the audit to decide which momentum helpers/defaults should be kept,
+  revised, or discarded before implementing bubble-on-leg diagrams.
 
 Likely deliverable:
 
-- A small design note, a private three-point helper cleanup, one focused
-  translation regression `.tex`, and updates to reference docs only if the API
-  changes.
+- A loop momentum audit regression PDF, roadmap updates, and then a first
+  bubble-on-leg prototype plan/implementation that does not inherit ugly old
+  defaults by accident.
 
 ## Implementation Inventory
 
@@ -252,7 +253,8 @@ Target window: sessions 7 to 12.
 
 Candidate order:
 
-1. Self-energy/bubble.
+1. Bubble-on-leg prototype using two 3-point vertices, reusing the standalone
+   bubble slot and momentum conventions.
 2. Tadpole.
 3. Seagull.
 4. Extended triangle.
@@ -260,7 +262,16 @@ Candidate order:
 
 Notes:
 
-- Self-energy/bubble and tadpole should benefit directly from the helper work.
+- The bubble-on-leg topology is not the same as the sunset: it should use two
+  3-point vertices to form the bubble on a leg, while sunset has two 4-point
+  vertices.
+- Future bubble-on-leg variants should include `s` and `t` versions, so the
+  implementation should preserve logical bubble slots and translate geometry.
+- Tadpole should benefit directly from the helper work.
+- The standalone `\BubbleCorr` self-energy macro is now the first real package
+  version of the bubble system; future bubble-on-leg work should reuse its
+  `bubble-a` / `bubble-b` slot naming, endpoint-index convention, and curved
+  momentum defaults.
 - Seagull may be conceptually small but needs careful labeling conventions.
 - Extended triangle should wait until triangle-contact and triple-vertex
   momentum are more robust.
@@ -311,6 +322,68 @@ Risk:
   geometry, momentum direction, internal index order, crossing style, or API?
 - Should future topology names follow physics names only, or include aliases
   like `self-energy`, `bubble`, and `two-point-loop`?
+
+## Loop Momentum Audit Notes
+
+2026-09-12 audit target:
+
+- The old `loop-channel` and `sunset` systems should be treated as
+  partially-finished visual systems, not as final defaults to inherit.
+- `regressions/topologies/loop-audit/loop-momentum-audit.tex` compares current
+  defaults, documented manual relief settings, reversed flow, mixed internal
+  styles, crossed-channel crowding, and sunset momentum/index presets.
+
+Initial findings from the rendered audit:
+
+- Keep the logical idea of two internal loop slots (`a/b`, with visual
+  top/bottom or left/right aliases) and per-line momentum text/direction.
+- Keep per-line style overrides; they are useful for future bubble-on-leg
+  diagrams where the two bubble propagators may differ.
+- Revise loop-channel defaults before reusing them: the raw labels can ride too
+  close to arrows/curves, while the documented relief settings sometimes feel
+  too detached or large.
+- Revise crossed-channel defaults separately; the `u` channel has different
+  crowding because crossed external momenta compete with the right loop label.
+- Avoid copying the sunset approach directly into bubble-on-leg work. Sunset is
+  useful for multi-line momentum/index stress, but its two 4-point vertices and
+  older y-shift-heavy controls are not the geometry model for a bubble made
+  from two 3-point vertices.
+
+Next implementation rule:
+
+- Build a private modern curved-momentum helper for bubble-on-leg diagrams
+  using the audited concepts, then backport improvements to `loop-channel` or
+  `sunset` only after the new helper proves its defaults visually.
+
+## Generic Insertion Architecture Notes
+
+2026-09-12 planning target:
+
+- Treat this branch as the standalone bubble and loop-audit groundwork branch;
+  do not add public insertion keys here.
+- Future bubble-on-leg, seagull, counterterm, and related diagrams should use a
+  shared insertion model instead of one-off topology hacks.
+- Research reference: TikZ-Feynman/FeynHand model `insertion` as an
+  edge-attached object with position, size, and style. For this package, keep
+  the same conceptual shape, but expose semantic keys and let each topology
+  translate them into concrete geometry.
+
+Planned first insertion API direction:
+
+- Start with one insertion per diagram.
+- Prefer semantic public keys such as `insertion=none|bubble|seagull|counterterm`,
+  `insertion-slot=...`, `insertion-position=...`,
+  `insertion-orientation=auto|top|bottom|left|right`, `insertion-style=...`,
+  and `insertion-scale=...`.
+- Do not make users pass arbitrary TikZ drawing code in the first public API.
+  Advanced custom hooks can wait until semantic presets are stable.
+- Topology macros should own the geometry: split the chosen host propagator,
+  place the insertion object, preserve host momentum/label behavior, and route
+  insertion-specific momenta/indices through the package's existing slot model.
+- The first prototype should reuse `\BubbleCorr` conventions: `bubble-a` /
+  `bubble-b` slots, two endpoint indices per internal propagator,
+  vertex-side external indices, curved momentum defaults, and white-filled
+  equilateral `spol`/Proca endpoint markers.
 
 ## Completed
 
@@ -391,9 +464,14 @@ Risk:
 - Corrected the up/down three-point momentum-angle metadata so rotated
   momentum labels offset perpendicular to their propagator lines instead of
   riding the wavy line.
+- 2026-09-12: Added the first package-level self-energy bubble,
+  `\BubbleCorr`, with `\SelfEnergyCorr` and `\SelfEnergyBubbleCorr` aliases,
+  standalone bubble keys, opt-in curved loop momenta, two-endpoint internal
+  indices, managed amputated external endcaps, reference docs, and a focused
+  bubble regression.
 
 Next planned action:
 
-- Use the generic orientation resolver as the placement convention for the
-  first bubble-leg prototype, so bubble objects can inherit the same corner
-  grammar instead of growing a separate orientation system.
+- Create a new insertion branch and implement the first semantic insertion
+  prototype, starting with one bubble insertion on an `s`-tree or `t`-tree
+  host leg.

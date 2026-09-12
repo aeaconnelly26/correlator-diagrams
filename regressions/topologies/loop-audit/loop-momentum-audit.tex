@@ -1,0 +1,259 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.7in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{feynman-fun}
+
+\newcommand{\auditcell}[2]{%
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \texttt{#1}\par\medskip
+    #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Loop Momentum Audit}
+
+This sheet records the older loop-channel and sunset defaults before the
+bubble-on-leg work changes or reuses any of their machinery.
+
+\subsection*{One-loop channel bubbles}
+
+\[
+\begin{array}{cc}
+  \auditcell{SChannelCorr default loop momenta}{
+    \SChannelCorr[
+      scale=0.9,
+      line=plain,
+      field=\phi,
+      indices={a,b,c,d},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      loop-channel-top-line=plain,
+      loop-channel-bottom-line=plain,
+      loop-channel-top-momentum=\ell,
+      loop-channel-bottom-momentum=p_1+p_2-\ell,
+      loop-channel-contracted-indices={\alpha,\beta}
+    ]
+  } &
+  \auditcell{SChannelCorr documented wider arrows}{
+    \SChannelCorr[
+      scale=0.9,
+      line=plain,
+      field=\phi,
+      indices={a,b,c,d},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      loop-channel-top-line=plain,
+      loop-channel-bottom-line=plain,
+      loop-channel-top-momentum=\ell,
+      loop-channel-bottom-momentum=p_1+p_2-\ell,
+      loop-channel-top-arrow-yshift=18pt,
+      loop-channel-bottom-arrow-yshift=-18pt,
+      loop-channel-top-label-distance=14pt,
+      loop-channel-bottom-label-distance=14pt,
+      loop-channel-contracted-indices={\alpha,\beta}
+    ]
+  } \\[5em]
+  \auditcell{TChannelCorr default-ish vertical loop}{
+    \TChannelCorr[
+      scale=0.9,
+      line=plain,
+      field=\phi,
+      indices={a,b,c,d},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      loop-channel-left-line=plain,
+      loop-channel-right-line=plain,
+      loop-channel-left-momentum=\ell,
+      loop-channel-right-momentum=q-\ell,
+      loop-channel-left-indices={m,\mu,n},
+      loop-channel-right-indices={r,\nu,s}
+    ]
+  } &
+  \auditcell{TChannelCorr moved annotation pair}{
+    \TChannelCorr[
+      scale=0.9,
+      line=plain,
+      field=\phi,
+      indices={a,b,c,d},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      loop-channel-left-line=plain,
+      loop-channel-right-line=plain,
+      loop-channel-left-momentum=\ell,
+      loop-channel-right-momentum=q-\ell,
+      loop-channel-left-label-distance=12pt,
+      loop-channel-right-label-distance=12pt,
+      loop-channel-left-arrow-xshift=-24pt,
+      loop-channel-right-arrow-xshift=24pt,
+      loop-channel-left-label-xshift=-6pt,
+      loop-channel-right-label-xshift=6pt,
+      loop-channel-left-indices={m,\mu,n},
+      loop-channel-right-indices={r,\nu,s}
+    ]
+  }
+\end{array}
+\]
+
+\newpage
+
+\subsection*{Crossed channel stress and style identity}
+
+\[
+\begin{array}{cc}
+  \auditcell{UChannelCorr crowded crossed side}{
+    \UChannelCorr[
+      scale=0.9,
+      line=plain,
+      field=\phi,
+      indices={a,b,c,d},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      loop-channel-left-line=plain,
+      loop-channel-right-line=plain,
+      loop-channel-left-momentum=r-\ell,
+      loop-channel-right-momentum=\ell,
+      loop-channel-start-vertex-indices={i,m},
+      loop-channel-internal-indices={\rho,\sigma},
+      loop-channel-end-vertex-indices={j,n}
+    ]
+  } &
+  \auditcell{UChannelCorr documented crossed relief}{
+    \UChannelCorr[
+      scale=0.9,
+      line=plain,
+      field=\phi,
+      indices={a,b,c,d},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      loop-channel-left-line=plain,
+      loop-channel-right-line=plain,
+      loop-channel-left-momentum=r-\ell,
+      loop-channel-right-momentum=\ell,
+      loop-channel-right-label-distance=13pt,
+      loop-channel-right-label-xshift=6pt,
+      loop-channel-right-label-yshift=8pt,
+      loop-channel-crossed-external-momentum-start=0.00,
+      loop-channel-crossed-external-momentum-end=0.20,
+      loop-channel-crossed-external-momentum-label-fraction=0.06,
+      loop-channel-start-vertex-indices={i,m},
+      loop-channel-internal-indices={\rho,\sigma},
+      loop-channel-end-vertex-indices={j,n}
+    ]
+  } \\[5em]
+  \auditcell{Mixed solid internal styles}{
+    \SChannelCorr[
+      scale=0.9,
+      field=W,
+      indices={\alpha,\beta,\gamma,\delta},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      line=plain,
+      loop-channel-top-line={plain,fieldA},
+      loop-channel-bottom-line=plain,
+      loop-channel-top-momentum=\ell,
+      loop-channel-bottom-momentum=p-\ell
+    ]
+  } &
+  \auditcell{Reversed loop directions}{
+    \TChannelCorr[
+      scale=0.9,
+      line=plain,
+      field=X,
+      indices={1,2,3,4},
+      leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}},
+      momentum-labels={p_1,p_2,p_3,p_4},
+      loop-channel-left-line=plain,
+      loop-channel-right-line=plain,
+      loop-channel-left-momentum=\ell,
+      loop-channel-right-momentum=q-\ell,
+      loop-channel-left-momentum-direction=reverse,
+      loop-channel-right-momentum-direction=reverse,
+      loop-channel-left-label-distance=12pt,
+      loop-channel-right-label-distance=12pt
+    ]
+  }
+\end{array}
+\]
+
+\newpage
+
+\subsection*{Sunset defaults and presets}
+
+\[
+\begin{array}{cc}
+  \auditcell{Sunset default}{
+    \SunsetDiagram[
+      scale=1.25,
+      field=\phi,
+      sunset-left-line={plain,endcap},
+      sunset-right-line={plain,endcapin},
+      sunset-top-line=plain,
+      sunset-middle-line=plain,
+      sunset-bottom-line=plain,
+      sunset-external-momentum=p,
+      sunset-top-momentum=k,
+      sunset-middle-momentum=p-k-q,
+      sunset-bottom-momentum=q
+    ]
+  } &
+  \auditcell{Sunset compact}{
+    \SunsetDiagram[
+      scale=1.25,
+      field=\phi,
+      sunset-left-line={plain,endcap},
+      sunset-right-line={plain,endcapin},
+      sunset-top-line=plain,
+      sunset-middle-line=plain,
+      sunset-bottom-line=plain,
+      sunset-momentum-layout=compact,
+      sunset-external-momentum=p,
+      sunset-top-momentum=k,
+      sunset-middle-momentum=p-k-q,
+      sunset-bottom-momentum=q
+    ]
+  } \\[5em]
+  \auditcell{Sunset balanced with indices}{
+    \SunsetDiagram[
+      scale=1.25,
+      field=\phi,
+      sunset-left-line={plain,endcap},
+      sunset-right-line={plain,endcapin},
+      sunset-top-line=plain,
+      sunset-middle-line=plain,
+      sunset-bottom-line=plain,
+      sunset-momentum-layout=balanced,
+      sunset-top-momentum=\ell,
+      sunset-middle-momentum=p-\ell-r,
+      sunset-bottom-momentum=r,
+      sunset-left-vertex-indices={a,c,e},
+      sunset-internal-indices={\alpha,\beta,\gamma},
+      sunset-right-vertex-indices={b,d,f}
+    ]
+  } &
+  \auditcell{Sunset wide with indices}{
+    \SunsetDiagram[
+      scale=1.25,
+      field=\phi,
+      sunset-left-line={plain,endcap},
+      sunset-right-line={plain,endcapin},
+      sunset-top-line=plain,
+      sunset-middle-line=plain,
+      sunset-bottom-line=plain,
+      sunset-momentum-layout=wide,
+      sunset-index-layout=wide,
+      sunset-top-momentum=\ell,
+      sunset-middle-momentum=p-\ell-r,
+      sunset-bottom-momentum=r,
+      sunset-left-vertex-indices={a,c,e},
+      sunset-internal-indices={\alpha,\beta,\gamma},
+      sunset-right-vertex-indices={b,d,f}
+    ]
+  }
+\end{array}
+\]
+
+\end{document}
