@@ -357,6 +357,8 @@
 \newif\ifcorr@sunsetindexawaremomenta
 \newif\ifcorr@lineexplicit
 \newif\ifcorr@slotselected
+\newif\ifcorr@bubblemarkerstart
+\newif\ifcorr@bubblemarkerend
 \newif\ifcorr@crossboxleftcirc
 \newif\ifcorr@crossboxrightcirc
 \newif\ifcorr@crossboxupcirc
@@ -376,7 +378,7 @@
 \def\corr@momentumstart{1}
 \def\corr@momentumlabels{}
 \def\corr@momentumarrowsize{3.5pt}
-\def\corr@momentumlinewidth{0.45pt}
+\def\corr@momentumlinewidth{0.38pt}
 \def\corr@momentumarrowsizes{}
 \def\corr@momentumlabelgap{0.08}
 \def\corr@momentumlabelfill{none}
@@ -609,6 +611,41 @@
 \def\corr@loopchannelinternalindexfill{none}
 \def\corr@loopchannelinternalindexinnersep{0.4pt}
 \def\corr@loopchannelindexlayout{balanced}
+\def\corr@bubblevertexspan{0.74}
+\def\corr@bubbleexternallength{0.8}
+\def\corr@bubblelooplooseness{1.45}
+\def\corr@bubbleexternalline{plain,endcap}
+\def\corr@bubblealine{plain}
+\def\corr@bubblebline{plain}
+\def\corr@bubblevertexradius{2.15pt}
+\def\corr@bubbleendpointmarkerdistance{auto}
+\def\corr@bubbleamomentum{}
+\def\corr@bubblebmomentum{}
+\def\corr@bubbleadir{forward}
+\def\corr@bubblebdir{forward}
+\def\corr@bubblemomentumstart{0.30}
+\def\corr@bubblemomentumend{0.70}
+\def\corr@bubblemomentumoffset{7pt}
+\def\corr@bubblemomentumstyleclearance{2pt}
+\def\corr@bubblemomentumlabeldistance{5pt}
+\def\corr@bubblemomentumlabelfraction{0.50}
+\def\corr@bubbleexternalmomentumstart{0.18}
+\def\corr@bubbleexternalmomentumend{0.82}
+\def\corr@bubbleexternalmomentumlabelfraction{0.50}
+\def\corr@bubbleexternalmomentumlabelgap{0.10}
+\def\corr@bubblealeftindex{}
+\def\corr@bubblearightindex{}
+\def\corr@bubblebleftindex{}
+\def\corr@bubblebrightindex{}
+\def\corr@bubbleleftexternalindex{}
+\def\corr@bubblerightexternalindex{}
+\def\corr@bubbleexternalindexposition{north}
+\def\corr@bubbleexternalindexyshift{-2pt}
+\def\corr@bubbleindexstyle{}
+\def\corr@bubbleindexfill{none}
+\def\corr@bubbleindexinnersep{0.4pt}
+\def\corr@bubbleindexmathstyle{\scriptstyle}
+\def\corr@bubbleexternalindexmathstyle{\scriptstyle}
 \def\corr@boxxspan{1.34}
 \def\corr@boxyspan{1.04}
 \def\corr@boxexternalxspan{2.10}
@@ -1330,6 +1367,90 @@
   \corr@setloopchannelcontractedindex{b}{#2}%
 }
 
+\def\corr@bubble@stop{\corr@bubble@stop}
+
+\newcommand{\corr@setbubblepair}[2]{%
+  \expandafter\corr@@setbubblepair\expandafter{#1}#2,,\corr@bubble@stop
+}
+
+\def\corr@@setbubblepair#1#2,#3,#4\corr@bubble@stop{%
+  \expandafter\def\csname corr@bubblea#1\endcsname{#2}%
+  \expandafter\def\csname corr@bubbleb#1\endcsname{#3}%
+}
+
+\newcommand{\corr@setbubbleindexpair}[2]{%
+  \expandafter\corr@@setbubbleindexpair\expandafter{#1}#2,,\corr@bubble@stop
+}
+
+\def\corr@@setbubbleindexpair#1#2,#3,#4\corr@bubble@stop{%
+  \expandafter\def\csname corr@bubble#1leftindex\endcsname{#2}%
+  \expandafter\def\csname corr@bubble#1rightindex\endcsname{#3}%
+}
+
+\newcommand{\corr@setbubbleendpointindices}[1]{%
+  \expandafter\corr@@setbubbleendpointindices#1,,,,\corr@bubble@stop
+}
+
+\def\corr@@setbubbleendpointindices#1,#2,#3,#4,#5\corr@bubble@stop{%
+  \def\corr@bubblealeftindex{#1}%
+  \def\corr@bubblearightindex{#2}%
+  \def\corr@bubblebleftindex{#3}%
+  \def\corr@bubblebrightindex{#4}%
+}
+
+\newcommand{\corr@setbubbleexternalindices}[1]{%
+  \expandafter\corr@@setbubbleexternalindices#1,,\corr@bubble@stop
+}
+
+\def\corr@@setbubbleexternalindices#1,#2,#3\corr@bubble@stop{%
+  \def\corr@bubbleleftexternalindex{#1}%
+  \def\corr@bubblerightexternalindex{#2}%
+}
+
+\newcommand{\corr@resolvebubbleendpointmarkerdistance}{%
+  \corr@ifstringeq{\corr@bubbleendpointmarkerdistance}{auto}{%
+    \let\corr@bubbleresolvedendpointmarkerdistance\corr@bubblevertexradius
+  }{%
+    \let\corr@bubbleresolvedendpointmarkerdistance\corr@bubbleendpointmarkerdistance
+  }%
+}
+
+\newcommand{\corr@setbubblemomentumrotation}[1]{%
+  \corr@ifstringeq{#1}{clockwise}{%
+    \def\corr@bubbleadir{forward}%
+    \def\corr@bubblebdir{reverse}%
+  }{%
+    \corr@ifstringeq{#1}{counterclockwise}{%
+      \def\corr@bubbleadir{reverse}%
+      \def\corr@bubblebdir{forward}%
+    }{}%
+  }%
+}
+
+\newcommand{\corr@ifbubblelinecontains}[4]{%
+  \def\corr@bubblelineneedle{#1}%
+  \edef\corr@bubblelinehaystack{#2}%
+  \edef\corr@bubblelinecontainscheck{%
+    \noexpand\in@{\corr@bubblelineneedle}{\corr@bubblelinehaystack}%
+  }%
+  \corr@bubblelinecontainscheck
+  \ifin@
+    #3%
+  \else
+    #4%
+  \fi
+}
+
+\newcommand{\corr@resolvebubblemomentumstyleclearance}[1]{%
+  \def\corr@bubbleresolvedstyleclearance{0pt}%
+  \corr@ifbubblelinecontains{circ}{#1}{\def\corr@bubbleresolvedstyleclearance{\corr@bubblemomentumstyleclearance}}{%
+  \corr@ifbubblelinecontains{ewboson}{#1}{\def\corr@bubbleresolvedstyleclearance{\corr@bubblemomentumstyleclearance}}{%
+  \corr@ifbubblelinecontains{photon}{#1}{\def\corr@bubbleresolvedstyleclearance{\corr@bubblemomentumstyleclearance}}{%
+  \corr@ifbubblelinecontains{proca}{#1}{\def\corr@bubbleresolvedstyleclearance{\corr@bubblemomentumstyleclearance}}{%
+  \corr@ifbubblelinecontains{Proca}{#1}{\def\corr@bubbleresolvedstyleclearance{\corr@bubblemomentumstyleclearance}}{}%
+  }}}}%
+}
+
 \def\corr@box@stop{\corr@box@stop}
 
 \newcommand{\corr@setboxquad}[2]{%
@@ -1577,6 +1698,49 @@
   \def\corr@loopchannelinternalindexinnersep{0.4pt}%
   \def\corr@loopchannelindexlayout{balanced}%
   \corr@loopchannelindexlayoutbalanced
+}
+
+\newcommand{\corr@resetbubbledefaults}{%
+  \corr@topologysetdefault\corr@field{}%
+  \corr@topologysetdefault\corr@indices{}%
+  \corr@topologysetdefault\corr@leglabels{}%
+  \corr@topologysetdefault\corr@central{}%
+  \corr@topologysetdefault\corr@momentumlabels{}%
+  \corr@topologysetdefault\corr@bubblevertexspan{0.74}%
+  \corr@topologysetdefault\corr@bubbleexternallength{0.8}%
+  \corr@topologysetdefault\corr@bubblelooplooseness{1.45}%
+  \corr@topologysetdefault\corr@bubbleexternalline{plain,endcap}%
+  \corr@topologysetdefault\corr@bubblealine{plain}%
+  \corr@topologysetdefault\corr@bubblebline{plain}%
+  \corr@topologysetdefault\corr@bubblevertexradius{2.15pt}%
+  \corr@topologysetdefault\corr@bubbleendpointmarkerdistance{auto}%
+  \corr@topologysetdefault\corr@bubbleamomentum{}%
+  \corr@topologysetdefault\corr@bubblebmomentum{}%
+  \corr@topologysetdefault\corr@bubbleadir{forward}%
+  \corr@topologysetdefault\corr@bubblebdir{forward}%
+  \corr@topologysetdefault\corr@bubblemomentumstart{0.30}%
+  \corr@topologysetdefault\corr@bubblemomentumend{0.70}%
+  \corr@topologysetdefault\corr@bubblemomentumoffset{7pt}%
+  \corr@topologysetdefault\corr@bubblemomentumstyleclearance{2pt}%
+  \corr@topologysetdefault\corr@bubblemomentumlabeldistance{5pt}%
+  \corr@topologysetdefault\corr@bubblemomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@bubbleexternalmomentumstart{0.18}%
+  \corr@topologysetdefault\corr@bubbleexternalmomentumend{0.82}%
+  \corr@topologysetdefault\corr@bubbleexternalmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@bubbleexternalmomentumlabelgap{0.10}%
+  \corr@topologysetdefault\corr@bubblealeftindex{}%
+  \corr@topologysetdefault\corr@bubblearightindex{}%
+  \corr@topologysetdefault\corr@bubblebleftindex{}%
+  \corr@topologysetdefault\corr@bubblebrightindex{}%
+  \corr@topologysetdefault\corr@bubbleleftexternalindex{}%
+  \corr@topologysetdefault\corr@bubblerightexternalindex{}%
+  \corr@topologysetdefault\corr@bubbleexternalindexposition{north}%
+  \corr@topologysetdefault\corr@bubbleexternalindexyshift{-2pt}%
+  \corr@topologysetdefault\corr@bubbleindexstyle{}%
+  \corr@topologysetdefault\corr@bubbleindexfill{none}%
+  \corr@topologysetdefault\corr@bubbleindexinnersep{0.4pt}%
+  \corr@topologysetdefault\corr@bubbleindexmathstyle{\scriptstyle}%
+  \corr@topologysetdefault\corr@bubbleexternalindexmathstyle{\scriptstyle}%
 }
 
 \newcommand{\corr@topologysetdefault}[2]{%
@@ -2063,12 +2227,14 @@
   momentum-directions/.code={%
     \readlist*\corr@momentumdirectionitems{#1}%
     \ifnum\corr@momentumdirectionitemslen>0
+      \def\corr@externalleftmomentumdirection{\corr@momentumdirectionitems[1]}%
       \def\corr@threepointulmomentumdirection{\corr@momentumdirectionitems[1]}%
       \def\corr@contactulmomentumdirection{\corr@momentumdirectionitems[1]}%
       \def\corr@boxulmomentumdirection{\corr@momentumdirectionitems[1]}%
       \def\corr@halfboxmomentumonedirection{\corr@momentumdirectionitems[1]}%
     \fi
     \ifnum\corr@momentumdirectionitemslen>1
+      \def\corr@externalrightmomentumdirection{\corr@momentumdirectionitems[2]}%
       \def\corr@threepointrmomentumdirection{\corr@momentumdirectionitems[2]}%
       \def\corr@contactllmomentumdirection{\corr@momentumdirectionitems[2]}%
       \def\corr@boxllmomentumdirection{\corr@momentumdirectionitems[2]}%
@@ -3149,6 +3315,61 @@
     \def\corr@loopchannelpropagatorindexmathstyle{\scriptscriptstyle}%
   },
   loop-channel-internal-index-size/default/.style={loop-channel-internal-index-size=script},
+  bubble-vertex-span/.store in=\corr@bubblevertexspan,
+  bubble-external-length/.store in=\corr@bubbleexternallength,
+  bubble-loop-looseness/.store in=\corr@bubblelooplooseness,
+  bubble-external-line/.store in=\corr@bubbleexternalline,
+  bubble-a-line/.store in=\corr@bubblealine,
+  bubble-b-line/.store in=\corr@bubblebline,
+  bubble-top-line/.style={bubble-a-line={#1}},
+  bubble-bottom-line/.style={bubble-b-line={#1}},
+  bubble-vertex-radius/.store in=\corr@bubblevertexradius,
+  bubble-endpoint-marker-distance/.store in=\corr@bubbleendpointmarkerdistance,
+  bubble-a-momentum/.store in=\corr@bubbleamomentum,
+  bubble-b-momentum/.store in=\corr@bubblebmomentum,
+  bubble-top-momentum/.style={bubble-a-momentum={#1}},
+  bubble-bottom-momentum/.style={bubble-b-momentum={#1}},
+  bubble-momenta/.code={\corr@setbubblepair{momentum}{#1}},
+  bubble-a-momentum-direction/.store in=\corr@bubbleadir,
+  bubble-b-momentum-direction/.store in=\corr@bubblebdir,
+  bubble-top-momentum-direction/.style={bubble-a-momentum-direction={#1}},
+  bubble-bottom-momentum-direction/.style={bubble-b-momentum-direction={#1}},
+  bubble-momentum-rotation/.is choice,
+  bubble-momentum-rotation/clockwise/.code={\corr@setbubblemomentumrotation{clockwise}},
+  bubble-momentum-rotation/counterclockwise/.code={\corr@setbubblemomentumrotation{counterclockwise}},
+  bubble-momentum-start/.store in=\corr@bubblemomentumstart,
+  bubble-momentum-end/.store in=\corr@bubblemomentumend,
+  bubble-momentum-offset/.store in=\corr@bubblemomentumoffset,
+  bubble-momentum-style-clearance/.store in=\corr@bubblemomentumstyleclearance,
+  bubble-momentum-label-distance/.store in=\corr@bubblemomentumlabeldistance,
+  bubble-momentum-label-fraction/.store in=\corr@bubblemomentumlabelfraction,
+  bubble-external-momentum-start/.store in=\corr@bubbleexternalmomentumstart,
+  bubble-external-momentum-end/.store in=\corr@bubbleexternalmomentumend,
+  bubble-external-momentum-label-fraction/.store in=\corr@bubbleexternalmomentumlabelfraction,
+  bubble-external-momentum-label-gap/.store in=\corr@bubbleexternalmomentumlabelgap,
+  bubble-a-indices/.code={\corr@setbubbleindexpair{a}{#1}},
+  bubble-b-indices/.code={\corr@setbubbleindexpair{b}{#1}},
+  bubble-top-indices/.style={bubble-a-indices={#1}},
+  bubble-bottom-indices/.style={bubble-b-indices={#1}},
+  bubble-endpoint-indices/.code={\corr@setbubbleendpointindices{#1}},
+  bubble-external-indices/.code={\corr@setbubbleexternalindices{#1}},
+  bubble-left-external-index/.store in=\corr@bubbleleftexternalindex,
+  bubble-right-external-index/.store in=\corr@bubblerightexternalindex,
+  bubble-external-index-position/.code={\corr@storesunsetanchor{corr@bubbleexternalindexposition}{#1}},
+  bubble-external-index-yshift/.store in=\corr@bubbleexternalindexyshift,
+  bubble-index-style/.store in=\corr@bubbleindexstyle,
+  bubble-index-fill/.store in=\corr@bubbleindexfill,
+  bubble-index-inner-sep/.store in=\corr@bubbleindexinnersep,
+  bubble-index-size/.is choice,
+  bubble-index-size/normal/.code={\def\corr@bubbleindexmathstyle{}},
+  bubble-index-size/script/.code={\def\corr@bubbleindexmathstyle{\scriptstyle}},
+  bubble-index-size/scriptscript/.code={\def\corr@bubbleindexmathstyle{\scriptscriptstyle}},
+  bubble-index-size/default/.style={bubble-index-size=script},
+  bubble-external-index-size/.is choice,
+  bubble-external-index-size/normal/.code={\def\corr@bubbleexternalindexmathstyle{}},
+  bubble-external-index-size/script/.code={\def\corr@bubbleexternalindexmathstyle{\scriptstyle}},
+  bubble-external-index-size/scriptscript/.code={\def\corr@bubbleexternalindexmathstyle{\scriptscriptstyle}},
+  bubble-external-index-size/default/.style={bubble-external-index-size=script},
   field/.store in=\corr@field,
   indices/.store in=\corr@indices,
   leg-labels/.store in=\corr@leglabels,
@@ -3336,6 +3557,25 @@
   \else
     \edef\corr@thisproparrowsize{\corr@proparrowsizeitems[#1]}%
     \edef\corr@propoptions{\corr@propoptions,arrow size=\corr@thisproparrowsize}%
+  \fi
+}
+
+\newcommand{\corr@resolveproparrowsize}[1]{%
+  \ifnum\corr@proparrowsizeitemslen<#1
+    \ifdefempty{\corr@propagatorarrowsize}{%
+      \def\corr@resolvedproparrowsize{6pt}%
+    }{%
+      \edef\corr@resolvedproparrowsize{\corr@propagatorarrowsize}%
+    }%
+  \else
+    \edef\corr@resolvedproparrowsize{\corr@proparrowsizeitems[#1]}%
+    \ifdefempty{\corr@resolvedproparrowsize}{%
+      \ifdefempty{\corr@propagatorarrowsize}{%
+        \def\corr@resolvedproparrowsize{6pt}%
+      }{%
+        \edef\corr@resolvedproparrowsize{\corr@propagatorarrowsize}%
+      }%
+    }{}%
   \fi
 }
 
@@ -4841,6 +5081,309 @@
   }%
 }
 
+\newcommand{\corr@putbubblecentral}[1]{%
+  \ifdefempty{\corr@central}{}{%
+    \node[anchor=north] at ([yshift=-34pt]#1) {$\corr@central$};
+  }%
+}
+
+\newcommand{\corr@putbubbleinternalindexcurve}[9]{%
+  \edef\corr@bubbleinternalindextmp{#8}%
+  \ifdefempty{\corr@bubbleinternalindextmp}{}{%
+    \path #1 to[#2] coordinate[pos=#4] (corrbubbleidxcoord) #3;
+    \node[
+      anchor=#5,
+      xshift=#6,
+      yshift=#7,
+      fill=\corr@bubbleindexfill,
+      inner sep=\corr@bubbleindexinnersep,
+      outer sep=0pt,
+      \corr@bubbleindexstyle
+    ] at (corrbubbleidxcoord) {$#9 #8$};
+  }%
+}
+
+\newcommand{\corr@putbubbleexternalindex}[4]{%
+  \edef\corr@bubbleexternalindextmp{#4}%
+  \ifdefempty{\corr@bubbleexternalindextmp}{}{%
+    \path (#1) -- coordinate[pos=#3] (corrbubbleexternalidxcoord) (#2);
+    \node[
+      anchor=\corr@bubbleexternalindexposition,
+      yshift=\corr@bubbleexternalindexyshift,
+      fill=\corr@bubbleindexfill,
+      inner sep=\corr@bubbleindexinnersep,
+      outer sep=0pt,
+      \corr@bubbleindexstyle
+    ] at (corrbubbleexternalidxcoord) {$\corr@bubbleexternalindexmathstyle #4$};
+  }%
+}
+
+\newcommand{\corr@drawbubbleexternalprop}[3]{%
+  \corr@resetendcapcoloroptions
+  \edef\corr@propoptions{\corr@bubbleexternalline}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
+  \corr@propagwithexternalendcaps{#2}{#3}%
+}
+
+\newcommand{\corr@appendbubblebasepropstyleitem}[1]{%
+  \ifdefempty{\corr@bubblebasepropoptions}{%
+    \def\corr@bubblebasepropoptions{#1}%
+  }{%
+    \appto\corr@bubblebasepropoptions{,#1}%
+  }%
+}
+
+\newcommand{\corr@appendbubblemarkerstyleitem}[1]{%
+  \ifdefempty{\corr@bubblemarkeroptions}{%
+    \def\corr@bubblemarkeroptions{#1}%
+  }{%
+    \appto\corr@bubblemarkeroptions{,#1}%
+  }%
+}
+
+\newcommand{\corr@bubblemarkersforglobalspoldirection}{%
+  \corr@ifstringeq{\corr@scalararrowdirection}{none}{}{%
+    \corr@ifstringeq{\corr@scalararrowdirection}{out}{%
+      \corr@bubblemarkerstarttrue
+    }{%
+      \corr@bubblemarkerendtrue
+    }%
+  }%
+}
+
+\newcommand{\corr@maybecapturebubblemarkerstyle}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \edef\corr@bubblemarkerequals{=}%
+  \edef\corr@bubblemarkerequalprobe{%
+    \noexpand\in@{\corr@bubblemarkerequals}{\corr@thisstyleitem}%
+  }%
+  \corr@bubblemarkerequalprobe
+  \ifin@\else
+    \corr@ifstringeq{\corr@thisstyleitem}{plain}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalar}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{ewboson}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{EWboson}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{ew boson}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{photon}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{pho}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{Proca}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca line}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca base}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca start}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca end}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{spol}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{spolin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{spolout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antspol}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antspolin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antspolout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{epspol}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcap}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{}{%
+      \expandafter\corr@appendbubblemarkerstyleitem\expandafter{\corr@thisstyleitem}%
+    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}%
+  \fi
+}
+
+\newcommand{\corr@preparebubbleinternalstyleitem}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@bubblemarkerstarttrue
+    \corr@bubblemarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{Proca}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@bubblemarkerstarttrue
+    \corr@bubblemarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca base}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@bubblemarkerstarttrue
+    \corr@bubblemarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca start}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@bubblemarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca end}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@bubblemarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spol}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolin}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedin}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolin}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolout}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedout}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolout}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{%
+    \corr@appendbubblebasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@bubblemarkersforglobalspoldirection
+  }{%
+    \corr@appendbubblebasepropstyleitem{#1}%
+  }}}}}}}}}}}}}}}}}%
+  \corr@maybecapturebubblemarkerstyle{#1}%
+}
+
+\newcommand{\corr@preparebubbleinternalstyle}[1]{%
+  \corr@bubblemarkerstartfalse
+  \corr@bubblemarkerendfalse
+  \def\corr@bubblebasepropoptions{}%
+  \def\corr@bubblemarkeroptions{}%
+  \@for\corr@styleitem:=#1\do{%
+    \expandafter\corr@preparebubbleinternalstyleitem\expandafter{\corr@styleitem}%
+  }%
+  \edef\corr@propoptions{\corr@bubblebasepropoptions}%
+}
+
+\newcommand{\corr@drawbubbleendpointmarker}[2]{%
+  \pgfmathanglebetweenpoints{\pgfpointanchor{#1}{center}}{\pgfpointanchor{#2}{center}}%
+  \edef\corr@bubblemarkerangle{\pgfmathresult}%
+  \coordinate (corrBubbleMarkerSideA) at ([shift={({\corr@bubblemarkerangle+150}:\corr@resolvedproparrowsize)}]#2);
+  \coordinate (corrBubbleMarkerSideB) at ([shift={({\corr@bubblemarkerangle-150}:\corr@resolvedproparrowsize)}]#2);
+  \draw[
+    line width=0.7\feynhandlinesize,
+    line cap=round,
+    line join=round,
+    \corr@bubblemarkeroptions,
+    fill=white
+  ] (#2) -- (corrBubbleMarkerSideA) -- (corrBubbleMarkerSideB) -- cycle;
+}
+
+\newcommand{\corr@drawbubbleendpointmarkers}[5]{%
+  \corr@resolvebubbleendpointmarkerdistance
+  \ifcorr@bubblemarkerstart
+    \path (#3) to [#5] coordinate[pos=0.13] (corrBubble#1MarkerStartGuide) (#4);
+    \coordinate (corrBubble#1MarkerStartTip) at ($(#3)!\corr@bubbleresolvedendpointmarkerdistance!(corrBubble#1MarkerStartGuide)$);
+    \coordinate (corrBubble#1MarkerStartBack) at ($(corrBubble#1MarkerStartTip)!\corr@resolvedproparrowsize!(corrBubble#1MarkerStartGuide)$);
+    \corr@drawbubbleendpointmarker{corrBubble#1MarkerStartBack}{corrBubble#1MarkerStartTip}%
+  \fi
+  \ifcorr@bubblemarkerend
+    \path (#3) to [#5] coordinate[pos=0.87] (corrBubble#1MarkerEndGuide) (#4);
+    \coordinate (corrBubble#1MarkerEndTip) at ($(#4)!\corr@bubbleresolvedendpointmarkerdistance!(corrBubble#1MarkerEndGuide)$);
+    \coordinate (corrBubble#1MarkerEndBack) at ($(corrBubble#1MarkerEndTip)!\corr@resolvedproparrowsize!(corrBubble#1MarkerEndGuide)$);
+    \corr@drawbubbleendpointmarker{corrBubble#1MarkerEndBack}{corrBubble#1MarkerEndTip}%
+  \fi
+}
+
+\newcommand{\corr@drawbubbleinternalprop}[5]{%
+  \corr@preparebubbleinternalstyle{#2}%
+  \corr@resolveproparrowsize{#1}%
+  \corr@appendproparrowsize{#1}%
+  \corr@appendpropcolor
+  \expandafter\propag\expandafter[\corr@propoptions] (#3) to [#5] (#4);
+  \corr@drawbubbleendpointmarkers{#1}{#2}{#3}{#4}{#5}%
+}
+
+\newcommand{\corr@drawbubbleexternalmomentum}[5]{%
+  \def\corr@momentumlabelgap{\corr@bubbleexternalmomentumlabelgap}%
+  \corr@drawmomentumrange
+    {#1}{#2}{#3}{#4}
+    {\corr@bubbleexternalmomentumstart}
+    {\corr@bubbleexternalmomentumend}
+    {\corr@bubbleexternalmomentumlabelfraction}
+    {#5}%
+}
+
+\newcommand{\corr@drawbubble}{%
+  \pgfmathsetmacro{\corr@bubbleextx}{\corr@bubblevertexspan+\corr@bubbleexternallength}%
+  \begin{feynhand}
+    \vertex (corrBubbleC) at (0,0);
+    \vertex (corrBubbleL) at (-\corr@bubblevertexspan,0);
+    \vertex (corrBubbleR) at (\corr@bubblevertexspan,0);
+    \vertex (corrBubbleLext) at (-\corr@bubbleextx,0);
+    \vertex (corrBubbleRext) at (\corr@bubbleextx,0);
+    \corr@ifexternallegs{%
+      \corr@drawbubbleexternalprop{1}{corrBubbleLext}{corrBubbleL}%
+      \corr@drawbubbleexternalprop{2}{corrBubbleRext}{corrBubbleR}%
+    }%
+    \corr@drawbubbleinternalprop{3}{\corr@bubblealine}{corrBubbleL}{corrBubbleR}{out=90,in=90,looseness=\corr@bubblelooplooseness}
+    \corr@drawbubbleinternalprop{4}{\corr@bubblebline}{corrBubbleL}{corrBubbleR}{out=-90,in=-90,looseness=\corr@bubblelooplooseness}
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrBubbleL}{\corr@centervertexstyle}
+    \corr@putvertex{corrBubbleR}{\corr@centervertexstyle}
+  \fi
+  \corr@ifshowexternalvertices{%
+    \corr@putvertex{corrBubbleLext}{\corr@externalvertexstyle}%
+    \corr@putvertex{corrBubbleRext}{\corr@externalvertexstyle}%
+  }%
+  \ifcorr@showmomenta
+    \corr@drawbubbleexternalmomentum{1}{corrBubbleLext}{corrBubbleL}{90}{\corr@externalleftmomentumdirection}%
+    \corr@drawbubbleexternalmomentum{2}{corrBubbleRext}{corrBubbleR}{-90}{\corr@externalrightmomentumdirection}%
+    \corr@drawbubblemomentumslot{a}{3}{corrBubbleL}{corrBubbleR}
+      {out=90,in=90,looseness=\corr@bubblelooplooseness}%
+    \corr@drawbubblemomentumslot{b}{4}{corrBubbleL}{corrBubbleR}
+      {out=-90,in=-90,looseness=\corr@bubblelooplooseness}%
+  \fi
+  \corr@putbubbleinternalindexcurve
+    {(corrBubbleL)}{out=90,in=90,looseness=\corr@bubblelooplooseness}{(corrBubbleR)}
+    {0.14}{south east}{-1pt}{4pt}{\corr@bubblealeftindex}{\corr@bubbleindexmathstyle}
+  \corr@putbubbleinternalindexcurve
+    {(corrBubbleL)}{out=90,in=90,looseness=\corr@bubblelooplooseness}{(corrBubbleR)}
+    {0.86}{south west}{1pt}{4pt}{\corr@bubblearightindex}{\corr@bubbleindexmathstyle}
+  \corr@putbubbleinternalindexcurve
+    {(corrBubbleL)}{out=-90,in=-90,looseness=\corr@bubblelooplooseness}{(corrBubbleR)}
+    {0.14}{north east}{-1pt}{-4pt}{\corr@bubblebleftindex}{\corr@bubbleindexmathstyle}
+  \corr@putbubbleinternalindexcurve
+    {(corrBubbleL)}{out=-90,in=-90,looseness=\corr@bubblelooplooseness}{(corrBubbleR)}
+    {0.86}{north west}{1pt}{-4pt}{\corr@bubblebrightindex}{\corr@bubbleindexmathstyle}
+  \corr@putbubbleexternalindex{corrBubbleLext}{corrBubbleL}{0.62}{\corr@bubbleleftexternalindex}%
+  \corr@putbubbleexternalindex{corrBubbleR}{corrBubbleRext}{0.38}{\corr@bubblerightexternalindex}%
+  \corr@putlabel{corrBubbleLext}{xshift=-10pt}{1}%
+  \corr@putlabel{corrBubbleRext}{xshift=10pt}{2}%
+  \corr@putbubblecentral{corrBubbleC}%
+}
+
 \newcommand{\corr@channelmomentumlabel}{%
   \ifdefempty{\corr@channelmomentum}{%
     \corr@momentumlabel{5}%
@@ -5054,6 +5597,91 @@
       {\corr@loopchannelmomlabelxshift}
       {\corr@loopchannelmomlabelyshift}
       {\corr@loopchannelmomlabel}%
+  }%
+}
+
+\newcommand{\corr@bubblemomentumlabel}[1]{%
+  \corr@ifstringeq{#1}{a}{%
+    \corr@bubbleamomentum
+  }{%
+    \corr@bubblebmomentum
+  }%
+}
+
+\newcommand{\corr@resolvebubblemomentumslot}[1]{%
+  \corr@ifstringeq{#1}{a}{%
+    \def\corr@bubblemomdir{\corr@bubbleadir}%
+    \corr@resolvebubblemomentumstyleclearance{\corr@bubblealine}%
+    \def\corr@bubblemomoffset{\dimexpr\corr@bubblemomentumoffset+\corr@bubbleresolvedstyleclearance\relax}%
+    \def\corr@bubblemomlabelposition{above}%
+    \let\corr@bubblemomlabel\corr@bubbleamomentum
+  }{%
+    \def\corr@bubblemomdir{\corr@bubblebdir}%
+    \corr@resolvebubblemomentumstyleclearance{\corr@bubblebline}%
+    \def\corr@bubblemomoffset{\dimexpr-\corr@bubblemomentumoffset-\corr@bubbleresolvedstyleclearance\relax}%
+    \def\corr@bubblemomlabelposition{below}%
+    \let\corr@bubblemomlabel\corr@bubblebmomentum
+  }%
+}
+
+\newcommand{\corr@drawbubblemomentumslot}[5]{%
+  \corr@resolvebubblemomentumslot{#1}%
+  \ifdefempty{\corr@bubblemomlabel}{}{%
+  \corr@ifstringeq{\corr@bubblemomdir}{none}{}{%
+    \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#2}}%
+    \pgfmathsetmacro{\corr@bubblemomstep}{(\corr@bubblemomentumend-\corr@bubblemomentumstart)/8}%
+    \pgfmathsetmacro{\corr@bubblemompone}{\corr@bubblemomentumstart+\corr@bubblemomstep}%
+    \pgfmathsetmacro{\corr@bubblemomptwo}{\corr@bubblemomentumstart+2*\corr@bubblemomstep}%
+    \pgfmathsetmacro{\corr@bubblemompthree}{\corr@bubblemomentumstart+3*\corr@bubblemomstep}%
+    \pgfmathsetmacro{\corr@bubblemompfour}{\corr@bubblemomentumstart+4*\corr@bubblemomstep}%
+    \pgfmathsetmacro{\corr@bubblemompfive}{\corr@bubblemomentumstart+5*\corr@bubblemomstep}%
+    \pgfmathsetmacro{\corr@bubblemompsix}{\corr@bubblemomentumstart+6*\corr@bubblemomstep}%
+    \pgfmathsetmacro{\corr@bubblemompseven}{\corr@bubblemomentumstart+7*\corr@bubblemomstep}%
+    \path
+      ([yshift=\corr@bubblemomoffset]#3)
+      to [#5]
+      coordinate[pos=\corr@bubblemomentumstart] (corrbubblemomstart)
+      coordinate[pos=\corr@bubblemompone] (corrbubblemompone)
+      coordinate[pos=\corr@bubblemomptwo] (corrbubblemomptwo)
+      coordinate[pos=\corr@bubblemompthree] (corrbubblemompthree)
+      coordinate[pos=\corr@bubblemompfour] (corrbubblemompfour)
+      coordinate[pos=\corr@bubblemompfive] (corrbubblemompfive)
+      coordinate[pos=\corr@bubblemompsix] (corrbubblemompsix)
+      coordinate[pos=\corr@bubblemompseven] (corrbubblemompseven)
+      coordinate[pos=\corr@bubblemomentumlabelfraction] (corrmomentumlabelcoord)
+      coordinate[pos=\corr@bubblemomentumend] (corrbubblemomend)
+      ([yshift=\corr@bubblemomoffset]#4);
+    \corr@ifstringeq{\corr@bubblemomdir}{reverse}{%
+      \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
+        (corrbubblemomend) --
+        (corrbubblemompseven) --
+        (corrbubblemompsix) --
+        (corrbubblemompfive) --
+        (corrbubblemompfour) --
+        (corrbubblemompthree) --
+        (corrbubblemomptwo) --
+        (corrbubblemompone) --
+        (corrbubblemomstart);%
+    }{%
+      \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
+        (corrbubblemomstart) --
+        (corrbubblemompone) --
+        (corrbubblemomptwo) --
+        (corrbubblemompthree) --
+        (corrbubblemompfour) --
+        (corrbubblemompfive) --
+        (corrbubblemompsix) --
+        (corrbubblemompseven) --
+        (corrbubblemomend);%
+    }%
+    \corr@putmomentumlabelwithdistance
+      {(corrmomentumlabelcoord)}
+      {\corr@bubblemomlabelposition}
+      {\corr@bubblemomentumlabeldistance}
+      {0pt}
+      {0pt}
+      {\corr@bubblemomlabel}%
+  }%
   }%
 }
 
@@ -5349,6 +5977,19 @@
     \corr@putlabel{corrL}{xshift=-10pt}{1}
     \corr@putlabel{corrR}{xshift=10pt}{2}
     \corr@putcentral{corrC}
+  \end{tikzpicture}%
+  \endgroup
+}
+
+\NewDocumentCommand{\BubbleCorr}{O{}}{%
+  \begingroup
+  \corr@resetbubbledefaults
+  \corr@lineexplicitfalse
+  \pgfqkeys{/corrdiag}{#1}%
+  \corr@preparelists
+  \corr@configurestyles
+  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+    \corr@drawbubble
   \end{tikzpicture}%
   \endgroup
 }
@@ -6460,6 +7101,8 @@
 \NewDocumentCommand{\TwoPtCorr}{O{}}{\TwoPointCorr[#1]}
 \NewDocumentCommand{\ThreePtCorr}{O{}}{\ThreePointCorr[#1]}
 \NewDocumentCommand{\FourPtCorr}{O{}}{\FourPointCorr[#1]}
+\NewDocumentCommand{\SelfEnergyCorr}{O{}}{\BubbleCorr[#1]}
+\NewDocumentCommand{\SelfEnergyBubbleCorr}{O{}}{\BubbleCorr[#1]}
 \NewDocumentCommand{\SLoopChannelCorr}{O{}}{\FourPointCorr[topology=s,#1]}
 \NewDocumentCommand{\TLoopChannelCorr}{O{}}{\FourPointCorr[topology=t,#1]}
 \NewDocumentCommand{\ULoopChannelCorr}{O{}}{\FourPointCorr[topology=u,#1]}

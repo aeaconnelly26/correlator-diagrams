@@ -49,6 +49,9 @@ run_tex "regressions/topologies/vertex-identity/vertex-identity-check.tex"
 run_tex "regressions/topologies/vertex-identity/half-box-bridge-momentum.tex"
 run_tex "regressions/topologies/three-point/three-point-check.tex"
 run_tex "regressions/topologies/three-point/three-point-translation-check.tex"
+run_tex "regressions/topologies/bubble/bubble-regression.tex"
+run_tex "regressions/topologies/loop-audit/loop-momentum-audit.tex"
+run_tex "regressions/topologies/loop-audit/self-energy-bubble-mockups.tex"
 run_tex "regressions/topologies/box/box-topology-regression.tex"
 
 cleanup_latex_scratch
