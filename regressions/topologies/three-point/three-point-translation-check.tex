@@ -291,4 +291,32 @@ used for algebraic rules.
 \end{array}
 \]
 
+\newpage
+
+The thesis-style wrapper still accepts normal three-point overrides, including
+which logical slot carries the scalar-polarized leg and which momentum labels
+are printed.
+
+\[
+\begin{array}{rl}
+  \ThreePointThesis[
+    orientation={top,left},
+    leg-styles={{spol,magenta!85!red,endcap},{ewboson,endcap},{ewboson,endcapp}},
+    momentum-labels={r,s,t}
+  ]
+  &=
+  \displaystyle
+  \mathcal{V}_{1}(r,s,t)
+  \\[4.0em]
+  \ThreePointThesis[
+    orientation={bottom,right},
+    leg-styles={{ewboson,endcapp},{spol,magenta!85!red,endcap},{ewboson,endcap}},
+    momentum-labels={\ell_1,\ell_2,\ell_3}
+  ]
+  &=
+  \displaystyle
+  \mathcal{V}_{2}(\ell_1,\ell_2,\ell_3)
+\end{array}
+\]
+
 \end{document}

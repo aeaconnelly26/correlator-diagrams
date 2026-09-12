@@ -1061,6 +1061,19 @@ size. Any normal three-point key can still be passed as an override:
 \]
 ```
 
+The wrapper defaults are ordinary keys, so a figure can move the scalar-polarized
+leg and rename momenta without rewriting the full preset:
+
+```tex
+\[
+  \ThreePointThesis[
+    orientation={top,left},
+    leg-styles={{spol,magenta!85!red,endcap},{ewboson,endcap},{ewboson,endcapp}},
+    momentum-labels={r,s,t}
+  ]
+\]
+```
+
 3-point geometry controls:
 
 - `three-point-left-xspan=...`
