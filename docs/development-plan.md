@@ -385,6 +385,41 @@ Planned first insertion API direction:
   vertex-side external indices, curved momentum defaults, and white-filled
   equilateral `spol`/Proca endpoint markers.
 
+2026-09-12 implementation start:
+
+- The first prototype branch is `codex/bubble-on-leg`.
+- The first supported host is `TTreeChannelCorr` / `topology=t-tree`.
+- The first supported insertion is `insertion=bubble` on external slot `1`.
+- The prototype splits the slot-1 host leg into pre-insertion and
+  post-insertion segments, places two insertion vertices on that leg, and draws
+  the bubble internals with the standalone `\BubbleCorr` style conventions.
+- Unsupported insertion slots and types remain no-ops for now.
+- Next expansion target after visual approval: add an internal slot-5 insertion
+  case or a second external slot, then decide whether seagull should share the
+  same host-splitting helper.
+
+2026-09-12 branch closeout:
+
+- `codex/bubble-on-leg` now contains the first semantic insertion prototype:
+  `insertion=bubble` on `TTreeChannelCorr` / `topology=t-tree` external slot
+  `1`.
+- The insertion implementation owns the host split into pre-insertion and
+  post-insertion segments, reuses the standalone bubble visual conventions, and
+  exposes tuning keys for bubble endpoint indices, pre/post slot-1 momentum,
+  and the detached middle-channel momentum annotation.
+- The branch intentionally stops at one insertion type on one host slot. This
+  keeps the mergeable slice focused while proving the public semantic API
+  shape.
+- Follow-up order after merge:
+  1. Quartic/seagull leg insertion using the same semantic insertion model.
+  2. Swordfish-style insertion, reusing the host-split and momentum/index
+     lessons from bubble and seagull.
+  3. Triangle insertion/topology work after the lower-order insertion cases are
+     visually stable.
+- The next branch should avoid broadening arbitrary user draw hooks. Continue
+  with package-owned insertion objects, semantic slot keys, and focused
+  regressions for each new insertion family.
+
 ## Completed
 
 - 2026-09-06: Confirmed the previous regression-check commit had not yet been
@@ -472,6 +507,7 @@ Planned first insertion API direction:
 
 Next planned action:
 
-- Create a new insertion branch and implement the first semantic insertion
-  prototype, starting with one bubble insertion on an `s`-tree or `t`-tree
-  host leg.
+- Merge `codex/bubble-on-leg`, then create the quartic/seagull insertion
+  branch. Start with one seagull insertion on the same t-tree host context so
+  it can reuse the bubble-on-leg split-segment controls before expanding to
+  swordfish and triangle cases.

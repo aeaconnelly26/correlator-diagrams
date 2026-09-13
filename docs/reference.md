@@ -19,6 +19,7 @@ For the short overview, visuals, and starter examples, see [README](../README.md
 - [Cross-Box Topology](#cross-box-topology)
 - [Triangle-Contact Topology](#triangle-contact-topology)
 - [Self-Energy Bubble](#self-energy-bubble)
+- [Semantic Insertions](#semantic-insertions)
 - [One-Loop `s/t/u` Channel Bubbles For `\phi^4`](#one-loop-stu-channel-bubbles-for-phi4)
 - [Sunset Diagrams](#sunset-diagrams)
 - [Explicit Tree-Level Channel Topologies](#explicit-tree-level-channel-topologies)
@@ -45,6 +46,7 @@ Main demos:
 - `regressions/topologies/cross-box/cross-box-regression.tex`
 - `regressions/topologies/triangle-contact/triangle-contact-regression.tex`
 - `regressions/topologies/bubble/bubble-regression.tex`
+- `regressions/topologies/insertion/insertion-regression.tex`
 - `regressions/topologies/vertex-identity/vertex-identity-check.tex`
 - `regressions/topologies/three-point/three-point-check.tex`
 - `regressions/topologies/sunset/sunset-example.tex`
@@ -168,6 +170,27 @@ Use `momentum-labels={...,...}` for the two external legs. Use
 drawn only when their bubble momentum text is provided.
 Use `bubble-momentum-rotation=clockwise|counterclockwise` when the two loop
 arrows should circulate in opposite directions around the bubble.
+The default `bubble-momentum-layout=manual` uses the same
+`bubble-momentum-start`, `bubble-momentum-end`, and
+`bubble-momentum-label-fraction` on both internal arcs. Use
+`bubble-momentum-layout=vertex-split` to put the upper and lower arrows on
+opposite halves of the loop, mirrored automatically by
+`bubble-momentum-rotation`.
+Tune that mode with either grouped triples or individual side keys:
+
+```tex
+bubble-momentum-layout=vertex-split,
+bubble-vertex-split-left={0.06,0.35,0.24},
+bubble-vertex-split-right={0.65,0.94,0.76},
+```
+
+Each grouped value is `{start,end,label-fraction}`. The same controls are also
+available individually as `bubble-vertex-split-left-start=...`,
+`bubble-vertex-split-left-end=...`,
+`bubble-vertex-split-left-label-fraction=...`, and the matching
+`bubble-vertex-split-right-*` keys. Aliases
+`bubble-vertex-split-near-left-*` and `bubble-vertex-split-near-right-*` are
+provided for the same values.
 
 Use `bubble-external-indices={left,right}` for vertex-side external-leg
 indices near the bubble vertices. The generic `indices={...}` key belongs to
@@ -463,6 +486,9 @@ momentum label so the arrow segments do not crowd the text.
 - `momentum-arrow-size=...`
 - `momentum-arrow-sizes={...}`
 - `momentum-label-gap=...`
+- `external-momentum-start=...`
+- `external-momentum-end=...`
+- `external-momentum-label-fraction=...`
 
 ### 3-point momentum flow
 
@@ -1835,6 +1861,13 @@ Useful controls:
 - `bubble-a-momentum-direction=forward|reverse|none`
 - `bubble-b-momentum-direction=forward|reverse|none`
 - `bubble-momentum-rotation=clockwise|counterclockwise`
+- `bubble-momentum-layout=manual|vertex-split`
+- `bubble-vertex-split-left={start,end,label-fraction}`
+- `bubble-vertex-split-right={start,end,label-fraction}`
+- `bubble-vertex-split-left-start=...`
+- `bubble-vertex-split-left-end=...`
+- `bubble-vertex-split-left-label-fraction=...`
+- matching `bubble-vertex-split-right-*` keys
 - `bubble-momentum-start=...`
 - `bubble-momentum-end=...`
 - `bubble-momentum-offset=...`
@@ -1846,6 +1879,17 @@ Useful controls:
 - `bubble-external-momentum-label-fraction=...`
 - `bubble-external-momentum-label-gap=...`
 - `bubble-endpoint-indices={aL,aR,bL,bR}`
+- `bubble-a-index-fractions={left,right}`
+- `bubble-b-index-fractions={left,right}`
+- `bubble-a-left-index-fraction=...`
+- `bubble-a-left-index-position=...`
+- `bubble-a-left-index-xshift=...`
+- `bubble-a-left-index-yshift=...`
+- matching `bubble-a-right-index-*`, `bubble-b-left-index-*`, and
+  `bubble-b-right-index-*` keys
+- `bubble-a-index-yshift=...`
+- `bubble-b-index-yshift=...`
+- `bubble-endpoint-index-yshift=...`
 - `bubble-external-indices={left,right}`
 - `bubble-left-external-index=...`
 - `bubble-right-external-index=...`
@@ -1873,6 +1917,118 @@ bubble is quiet by default, while explicit `field=...`, `indices={...}`, or
 
 Focused visual QA lives in
 `regressions/topologies/bubble/bubble-regression.tex`.
+
+## Semantic Insertions
+
+Semantic insertions attach a package-owned object to a logical propagator slot.
+The user chooses what and where; the topology owns the geometry.
+
+Current v1 support is intentionally narrow:
+
+```tex
+\[
+  \TTreeChannelCorr[
+    insertion=bubble,
+    insertion-slot=1
+  ]
+\]
+```
+
+Supported insertion keys:
+
+- `insertion=none|bubble`
+- `insertion-slot=1|2|3|4|5`
+- `insertion-position=...`
+- `insertion-orientation=auto|top|bottom|left|right`
+- `insertion-scale=...`
+- `insertion-style=...`
+- `insertion-post-indices={bubble-side,vertex-side}`
+- `insertion-pre-momentum-start=...`
+- `insertion-pre-momentum-end=...`
+- `insertion-pre-momentum-label-fraction=...`
+- `insertion-pre-momentum-offset=...`
+- `insertion-pre-momentum-label-position=...`
+- `insertion-pre-momentum-label-distance=...`
+- `insertion-pre-momentum-label-xshift=...`
+- `insertion-pre-momentum-label-yshift=...`
+- `insertion-post-momentum-start=...`
+- `insertion-post-momentum-end=...`
+- `insertion-post-momentum-label-fraction=...`
+- `insertion-post-momentum-offset=...`
+- `insertion-post-momentum-label-position=...`
+- `insertion-post-momentum-label-distance=...`
+- `insertion-post-momentum-label-xshift=...`
+- `insertion-post-momentum-label-yshift=...`
+- `insertion-middle-momentum-xshift=...`
+- `insertion-middle-momentum-start-yshift=...`
+- `insertion-middle-momentum-end-yshift=...`
+- `insertion-middle-momentum-label-position=...`
+- `insertion-middle-momentum-label-distance=...`
+- `insertion-middle-momentum-label-xshift=...`
+- `insertion-middle-momentum-label-yshift=...`
+
+In this first prototype, only `insertion=bubble` on external slot `1` of
+`topology=t-tree` is drawn. Unsupported insertion combinations are ignored.
+The inserted bubble reuses the `bubble-*` key family for internal styles,
+loop momenta, endpoint indices, vertex-side external indices, and Proca /
+scalar-polarized endpoint markers. Slot-1 external momentum is drawn on the
+outer pre-insertion host segment so it does not collide with the bubble.
+When this insertion is active, the t-tree host uses roomier default geometry
+with steeper external legs and a shorter middle channel leg; explicit
+`fourpoint-xspan=...`, `fourpoint-yspan=...`, and `channel-vertex-yspan=...`
+values still override those insertion-friendly defaults.
+
+For the short host segment after the inserted bubble, use
+`insertion-post-indices={j,m}` to place two labels on the segment from the
+bubble-side insertion vertex to the main t-channel vertex. Tune those labels
+with `insertion-post-index-fractions={...,...}`,
+`insertion-post-index-position=...`, `insertion-post-index-yshift=...`, or the
+per-side keys `insertion-post-bubble-index-*` and
+`insertion-post-vertex-index-*`. This is separate from
+`bubble-endpoint-indices`, which label the inserted bubble's internal
+propagator endpoints; tune those `a,b,c,d` labels with the `bubble-*-index-*`
+keys above.
+
+The pre/post momentum keys tune the two split slot-1 momentum arrows around the
+inserted bubble. The aliases `insertion-outer-momentum-*` and
+`insertion-inner-momentum-*` map to the same pre/post controls, respectively:
+
+```tex
+\[
+  \TTreeChannelCorr[
+    field={},
+    show-momenta=true,
+    insertion=bubble,
+    insertion-slot=1,
+    momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3},
+    insertion-outer-momentum-end=0.7,
+    insertion-outer-momentum-label-fraction=0.4,
+    insertion-outer-momentum-offset=6pt,
+    insertion-outer-momentum-label-distance=1pt,
+    insertion-inner-momentum-start=0.2,
+    insertion-inner-momentum-end=0.8,
+    insertion-inner-momentum-label-fraction=0.54,
+    insertion-inner-momentum-offset=5pt,
+    insertion-inner-momentum-label-distance=1pt
+  ]
+\]
+```
+
+The detached middle-channel momentum arrow is separate from the external-leg
+and split slot-1 arrows. Move it with the `insertion-middle-momentum-*` keys,
+or the equivalent `insertion-channel-momentum-*` aliases:
+
+```tex
+insertion-middle-momentum-xshift=34pt,
+insertion-middle-momentum-start-yshift=12pt,
+insertion-middle-momentum-end-yshift=-12pt,
+insertion-middle-momentum-label-xshift=36pt,
+insertion-middle-momentum-label-position=right,
+insertion-middle-momentum-label-distance=4pt,
+```
+
+Focused visual QA lives in
+`regressions/topologies/insertion/insertion-regression.tex`.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 
