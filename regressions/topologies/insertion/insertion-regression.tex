@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{feynman-fun}
+
+\newcommand{\insertcell}[2]{%
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \texttt{#1}\par\medskip
+    #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Semantic Insertion Regression}
+
+Prototype bubble insertions on \verb|\TTreeChannelCorr| external slot 1.
+The baseline keeps the existing tree-channel geometry unchanged.
+
+\[
+\begin{array}{cc}
+  \insertcell{baseline t-tree}{
+    \TTreeChannelCorr[
+      field={},
+      show-momenta=true,
+      momentum-labels={q_1,q_2,q_3,q_4,p}
+    ]
+  }&
+  \insertcell{slot 1 bubble insertion}{
+    \TTreeChannelCorr[
+      field={},
+      show-momenta=false,
+      insertion=bubble,
+      insertion-slot=1,
+      leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}},
+      channel-line={ewboson},
+      bubble-top-line={ewboson},
+      bubble-bottom-line={ewboson}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \insertcell{thesis-style ew host}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.04,
+      show-momenta=true,
+      insertion=bubble,
+      insertion-slot=1,
+      leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}},
+      momentum-labels={q_1,q_2,q_3,q_4,p},
+      bubble-momenta={\ell,k},
+      bubble-momentum-rotation=clockwise,
+      bubble-top-line={plain},
+      bubble-bottom-line={scalarpolarized,magenta!85!red},
+      propagator-arrow-sizes={,,5.5pt,5.5pt},
+      bubble-external-indices={\gamma,\rho},
+      bubble-endpoint-indices={\alpha,\pi,\delta,\kappa},
+      bubble-momentum-label-distance=8pt,
+      bubble-momentum-offset=7.5pt,
+      bubble-momentum-start=0.30,
+      bubble-momentum-end=0.70
+    ]
+  }&
+  \insertcell{black circ ew and pink proca}{
+    \TTreeChannelCorr[
+	      field={},
+	      show-momenta=true,
+	      insertion=bubble,
+	      insertion-slot=1,
+	      leg-styles={{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp}},
+	      momentum-labels={q_1,q_2,q_3,q_4,p},
+	      bubble-momenta={\ell,q_1-\ell},
+	      bubble-momentum-rotation=clockwise,
+	      bubble-momentum-layout=vertex-split,
+	      channel-line={ewboson,magenta!85!red},
+	      bubble-top-line={ewboson,circ=Z,black},
+	      bubble-bottom-line={proca,magenta!85!red},
+      propagator-arrow-sizes={,,5.5pt,5.5pt},
+      bubble-endpoint-indices={\alpha,\beta,\rho,\sigma},
+      bubble-a-index-fractions={0.18,0.82},
+      bubble-b-index-fractions={0.18,0.82},
+      bubble-a-index-yshift=1.5pt,
+      bubble-b-index-yshift=-1.5pt
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{c}
+  \insertcell{momentum and index stress}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.08,
+      show-momenta=true,
+      insertion=bubble,
+      insertion-slot=1,
+      line=ewboson,
+      momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3},
+      bubble-momenta={\ell,q_1-\ell},
+      bubble-momentum-rotation=counterclockwise,
+      bubble-a-indices={a,b},
+      bubble-b-indices={c,d},
+      bubble-external-indices={i,},
+      insertion-post-indices={j,m},
+      insertion-pre-momentum-label-yshift=1pt,
+      insertion-post-momentum-label-xshift=-1pt,
+      insertion-middle-momentum-xshift=34pt,
+      insertion-middle-momentum-label-xshift=36pt,
+      insertion-middle-momentum-label-distance=4pt
+    ]
+  }
+\end{array}
+\]
+
+\end{document}
