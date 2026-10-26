@@ -1,0 +1,172 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.65in]{geometry}
+\usepackage{amsmath}
+\usepackage{feynman-fun}
+
+% Count actual emitted draw commands and momentum label nodes in complete
+% diagrams. Compare public behavior rather than testing the visibility helper.
+\newcount\momentumdrawcount
+\newcount\momentumlabelcount
+\newcount\baselinedrawcount
+\newcount\baselinelabelcount
+\newbox\checkdiagram
+\makeatletter
+\let\originalmomentumlabel\corr@putmomentumlabelwithdistance
+\renewcommand{\corr@putmomentumlabelwithdistance}[6]{%
+  \global\advance\momentumlabelcount by 1
+  \originalmomentumlabel{#1}{#2}{#3}{#4}{#5}{#6}}
+\apptocmd{\tikz@installcommands}{%
+  \def\draw{\global\advance\momentumdrawcount by 1\path[draw]}%
+}{}{\PackageError{external-momentum-visibility}{Cannot instrument TikZ draws}{}}
+\makeatother
+\newcommand{\measurediagram}[1]{%
+  \global\momentumdrawcount=0 \global\momentumlabelcount=0
+  \setbox\checkdiagram=\hbox{$#1$}}
+\newcommand{\assertcount}[3]{%
+  \ifnum#1=#2\relax\else
+    \PackageError{external-momentum-visibility}{#3: got \the#1, expected #2}{}%
+  \fi}
+\newcommand{\assertlabels}[2]{\measurediagram{#2}\assertcount\momentumlabelcount{#1}{Label count}}
+
+\newcommand{\assertsuppressed}[4]{%
+  \measurediagram{#1[#2]}%
+  \baselinelabelcount=\momentumlabelcount
+  \baselinedrawcount=\momentumdrawcount
+  \measurediagram{#1[#2,external-momentum-hide={#3}]}%
+  \assertcount\momentumlabelcount{\numexpr\baselinelabelcount-#4\relax}{Hidden external label count}%
+  \ifnum\momentumdrawcount<\baselinedrawcount\else
+    \PackageError{external-momentum-visibility}{Hiding did not remove arrow paths}{}%
+  \fi}
+
+\newcommand{\hiddenlabelerror}{\PackageError{external-momentum-visibility}{Hidden label was typeset}{}}
+\begin{document}
+\assertlabels{3}{\FlatContactCorr[momentum-labels={q_1,\hiddenlabelerror,p,q_3},external-momentum-hide={2}]}
+
+% Hidden beats nonempty text, topology selection, and key order.
+\measurediagram{\FlatContactCorr[field={},momentum-labels={q_1,q_2,p,q_3}]}
+\baselinedrawcount=\momentumdrawcount \baselinelabelcount=\momentumlabelcount
+\measurediagram{\FlatContactCorr[field={},momentum-labels={q_1,,p,q_3}]}
+\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-1\relax}{Unlabeled arrow must be one continuous draw}
+\assertcount\momentumlabelcount{3}{Empty label must not emit a node}
+\measurediagram{\FlatContactCorr[field={},momentum-labels={q_1,,p,q_3},external-momentum-hide={2}]}
+\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-2\relax}{Hidden arrow must emit no draws}
+\assertcount\momentumlabelcount{3}{Hidden slot must not emit a node}
+\assertlabels{3}{\FlatContactCorr[external-momentum-hide={2},flat-contact-momentum-slots={1,2,3,4},momentum-labels={q_1,q_2,p,q_3}]}
+\assertlabels{3}{\FlatContactCorr[momentum-labels={q_1,q_2,p,q_3},flat-contact-momentum-slots={1,2,3,4},external-momentum-hide={2,2,99}]}
+\assertlabels{1}{\FlatContactCorr[external-momentum-hide={2},flat-contact-momentum-slots={2,3}]}
+\assertlabels{4}{\FlatContactCorr[]} % no per-diagram state leakage
+\assertlabels{4}{\FlatContactCorr[momentum-labels={p}]} % missing entries use defaults
+\assertlabels{1}{\FlatContactCorr[momentum-labels={,{},{ },q_4}]}
+\assertlabels{1}{\FlatContactCorr[momentum-labels={q_1,,,}]}
+\assertlabels{4}{\FlatContactCorr[momentum-labels={na,none,\frac{k}{2},q_4}]}
+\assertlabels{0}{\FlatContactCorr[show-momenta=false,external-momentum-hide={2}]}
+\assertlabels{1}{\TwoPointCorr[external-momentum-hide={2}]}
+\assertlabels{2}{\ThreePointCorr[three-point-orientation=up,external-momentum-hide={2}]}
+\assertlabels{2}{\ThreePointCorr[orientation=left,momentum-labels={q_1,{},q_3}]}
+\assertlabels{2}{\FourPointCorr[external-momentum-hide={1,3}]}
+\assertlabels{3}{\HalfBoxCorr[external-momentum-hide={2}]}
+\assertlabels{3}{\TriangleContactCorr[external-momentum-hide={2}]}
+\assertsuppressed{\BoxLoopCorr}{}{2}{1}
+\assertsuppressed{\CrossBoxCorr}{}{2}{1}
+\assertlabels{4}{\TTreeChannelCorr[external-momentum-hide={2}]}
+\assertlabels{5}{\TChannelCorr[external-momentum-hide={2}]}
+\assertlabels{1}{\BubbleCorr[external-momentum-hide={2}]}
+\assertlabels{3}{\SunsetDiagram[external-momentum-hide={1,2,4,5}]}
+\assertsuppressed{\TTreeChannelCorr}{insertion=bubble,bubble-momenta={k,p-k}}{1}{2}
+\assertsuppressed{\TTreeChannelCorr}{insertion=seagull,seagull-loop-momentum=k}{1}{2}
+\assertsuppressed{\SunsetDiagram}{}{1,2,4,5}{2}
+\assertlabels{3}{\SunsetDiagram[momentum-labels={{},{} }]}
+\assertsuppressed{\FlatContactCorr}{external-momentum-flow=left-out-right-in}{2}{1}
+\assertlabels{2}{\FlatContactCorr[momentum-labels={q_1,q_2,p,q_3},external-momentum-hide={1,4}]}
+
+\measurediagram{\TwoPointCorr[momentum-labels={a,b},external-momentum-flow=left-in-right-out]}
+\baselinedrawcount=\momentumdrawcount
+\measurediagram{\TwoPointCorr[momentum-labels={a,{}},external-momentum-flow=left-in-right-out]}
+\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-1\relax}{Reverse unlabeled arrow must be continuous}
+\assertcount\momentumlabelcount{1}{Reverse empty label must not emit a node}
+\measurediagram{\FlatContactCorr[momentum-labels={a,b,c,d},external-momentum-flow=left-in-right-out]}
+\baselinedrawcount=\momentumdrawcount
+\measurediagram{\FlatContactCorr[momentum-labels={a,b,c,{}},external-momentum-flow=left-in-right-out]}
+\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-1\relax}{Reverse offset arrow must be continuous}
+\assertcount\momentumlabelcount{3}{Reverse offset empty label must not emit a node}
+
+\section*{External momentum visibility}
+\noindent Slot 2 hidden: no momentum annotation. Its propagator and particle label remain.
+\[
+\FlatContactCorr[
+  scale=1.1,show-momenta=true,field={},central={},
+  flat-contact-xspan=1.2,flat-contact-yspan=0.9,
+  flat-contact-line={ewboson,arrowin},
+  leg-styles={{endcapp,ewboson},{magenta!85!red,endcap,sca},
+    {magenta!85!red,ewboson,endcap},{endcapp,ewboson}},
+  leg-labels={{\hspace{0.1mm}_\alpha},\frac{1}{m_Z},
+    {\hspace{0.1mm}_\delta},{\hspace{0.1mm}_\sigma}},
+  flat-contact-momentum-start=0.12,flat-contact-momentum-end=0.63,
+  flat-contact-momentum-offset=6pt,flat-contact-momentum-label-fraction=0.35,
+  flat-contact-momentum-label-gap=0.125,
+  momentum-labels={q_1,,p,q_3},external-momentum-hide={2},
+  external-momentum-flow=left-in-right-out,
+  propagator-arrow-sizes={8pt,8pt,8pt,8pt}
+]
+\]
+\noindent Same momentum slots without hiding: slot 2 has a continuous unlabeled arrow.
+\[
+\FlatContactCorr[field={},scale=1.1,flat-contact-xspan=1.2,flat-contact-yspan=0.9,
+  flat-contact-line={ewboson,arrowin},
+  leg-styles={{endcapp,ewboson},{magenta!85!red,endcap,sca},
+    {magenta!85!red,ewboson,endcap},{endcapp,ewboson}},
+  leg-labels={\alpha,1/m_Z,\delta,\sigma},momentum-labels={q_1,,p,q_3},
+  flat-contact-momentum-start=0.12,flat-contact-momentum-end=0.63,
+  flat-contact-momentum-offset=6pt,flat-contact-momentum-label-fraction=0.35,
+  flat-contact-momentum-label-gap=0.125,
+  external-momentum-flow=left-in-right-out]
+\]
+\noindent Empty entries at the beginning and end preserve slot positions.
+\[
+\FlatContactCorr[field={},flat-contact-xspan=1.8,flat-contact-yspan=1.4,
+  flat-contact-momentum-offset=12pt,momentum-labels={,q_2,p,}]
+\qquad
+\FlatContactCorr[field={},flat-contact-xspan=1.8,flat-contact-yspan=1.4,
+  flat-contact-momentum-offset=12pt,momentum-labels={q_1,{},{ },q_4}]
+\]
+
+\newpage
+\section*{Logical slots and internal momenta}
+\noindent Rotated three-point diagrams: slot 2 hidden in both orientations.
+\[
+\ThreePointCorr[field={},three-point-orientation=up,momentum-labels={a,b,c},external-momentum-hide={2}]
+\qquad
+\ThreePointCorr[field={},orientation=left,momentum-labels={a,b,c},external-momentum-hide={2}]
+\]
+\noindent Tree and loop channels: external slots hidden; internal momenta retained.
+\[
+\TTreeChannelCorr[field={},scale=0.8,external-momentum-hide={1,2,3,4},channel-momentum=p,channel-momentum-angle=90]
+\qquad
+\TChannelCorr[field={},scale=0.8,external-momentum-hide={1,2,3,4},loop-channel-top-momentum=k,loop-channel-bottom-momentum=p-k]
+\]
+\noindent Standalone bubble: slot 2 hidden. Sunset: both external slots hidden.
+\[
+\BubbleCorr[scale=0.8,momentum-labels={p,p},external-momentum-hide={2},bubble-momenta={k,p-k}]
+\qquad
+\SunsetDiagram[scale=0.7,external-momentum-hide={1,2},
+  sunset-top-label-yshift=2pt,sunset-top-arrow-yshift=42pt,
+  sunset-middle-momentum=r,sunset-middle-label-yshift=-1pt,sunset-middle-arrow-yshift=10pt,
+  sunset-bottom-label-yshift=-2pt,sunset-bottom-arrow-yshift=-36pt,
+  sunset-central-label={}]
+\]
+
+\newpage
+\section*{Inserted external leg}
+\noindent Bubble insertion: hiding slot 1 removes both split annotations, preserving loop momenta.
+\[
+\TTreeChannelCorr[field={},scale=0.85,insertion=bubble,external-momentum-hide={1},bubble-momenta={k,p-k}]
+\]
+\noindent Seagull insertion: same logical slot behavior, preserving its loop momentum.
+\[
+\TTreeChannelCorr[field={},scale=0.85,insertion=seagull,external-momentum-hide={1},seagull-loop-momentum=k]
+\]
+\noindent Empty slot 1: both split arrows remain, without label nodes.
+\[
+\TTreeChannelCorr[field={},scale=0.85,insertion=seagull,momentum-labels={,q_2,q_3,q_4,p},seagull-loop-momentum=k]
+\]
+\end{document}

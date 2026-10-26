@@ -453,6 +453,44 @@ If you need complete manual control, use:
 
 ## Momentum Labels And Arrows
 
+### Hide selected external momenta
+
+Use `external-momentum-hide={2}` to remove both the momentum arrow and its
+label from logical external slot 2. Multiple slots can be hidden with, for
+example, `external-momentum-hide={1,4}`. The default `{}` hides nothing.
+
+```tex
+\FlatContactCorr[
+  momentum-labels={q_1,,p,q_3},
+  external-momentum-hide={2}
+]
+```
+
+The slot-2 propagator, particle label, and propagator arrow/endcap styling
+remain visible. This key overrides nonempty momentum text and topology-specific
+selection keys such as `flat-contact-momentum-slots`, regardless of key order.
+Repeated numbers are harmless; numbers outside the external slots are ignored.
+`show-momenta=false` still disables all momentum annotations.
+
+An explicitly empty momentum-label entry (including `{}` or whitespace) keeps
+a continuous **unlabeled arrow**, with no label node or artificial gap. Empty
+entries retain their list positions: `{q_1,,p,q_3}` assigns `p` to slot 3.
+An omitted/empty whole `momentum-labels` list uses the normal defaults; entries
+beyond a shorter list also retain their normal automatic labels. No strings
+such as `na` or `none` have special meaning in label text.
+
+The hide key applies to external slots across two-, three-, and four-point
+families, including bubble and sunset. Slots follow the family's logical
+external label order, so they stay attached when a three-point diagram rotates.
+Bubble and sunset external momentum slots are 1 (left) and 2 (right).
+For bubble/seagull insertions on external slot 1, hiding slot 1 suppresses
+both pre- and post-insertion momentum annotations. Channel, bridge, box-edge,
+and loop momenta retain their existing controls; this key does not hide them.
+The setting is scoped to the current diagram.
+
+Focused visual and behavioral checks:
+`regressions/momenta/external-momentum-visibility.tex`.
+
 ### First: what kind of key moves what?
 
 For momentum annotations, the naming pattern matters:
@@ -963,6 +1001,8 @@ The most important motion keys there are:
 - `channel-momentum-distance=...`
 - `channel-momentum-angle=...`
 - `channel-momentum-label-position=...`
+  Side placements draw a continuous momentum arrow. Use `center` to place the
+  label in an intentional arrow gap controlled by `momentum-label-gap`.
 - `channel-momentum-label-xshift=...`
 - `channel-momentum-label-yshift=...`
 
@@ -1829,12 +1869,16 @@ external paths. Both topologies also accept `*-index-left-position`,
 `*-index-right-position`, matching x/y shift keys, `*-index-style`,
 `*-index-fill`, `*-index-inner-sep`, and `*-index-size`.
 
-Inside package-managed topologies, `scalarpolarized`/`spol` external legs are
-oriented toward the topology vertex. The endpoint arrow add-ons `arrowin`,
-`arrowout`, `openarrowin`, and `openarrowout` follow the same topology-aware
-orientation. For cropped external legs, use `endcapout` to put a terminal bar
-exactly at the external endpoint of the leg. The explicit aliases such as
-`spolin`/`spolout` remain available for manual control.
+Inside package-managed topologies, `scalarpolarized`/`spol`, `proca`,
+`arrowin`/`arrowout`, and `openarrowin`/`openarrowout` are endpoint-aware:
+marker-bearing styles are stripped from the raw propagator body and redrawn
+after the vertices so triangle tips kiss the vertex edge instead of being
+covered by the dot. The clearance is controlled by
+`semantic-marker-tip-clearance=...`; custom dot sizes can use
+`semantic-marker-vertex-radius=...`. For cropped external legs, use
+`endcapout` to put a terminal bar exactly at the external endpoint of the leg.
+The explicit aliases such as `spolin`/`spolout` remain available for manual
+control.
 
 Focused visual QA lives in
 `regressions/topologies/vertex-identity/vertex-identity-check.tex`.

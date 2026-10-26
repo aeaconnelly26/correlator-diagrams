@@ -397,6 +397,7 @@
 \def\corr@legstyles{}
 \def\corr@mode{q}
 \def\corr@momentumstart{1}
+\def\corr@externalmomentumhide{}
 \def\corr@momentumlabels{}
 \def\corr@momentumarrowsize{3.5pt}
 \def\corr@momentumlinewidth{0.38pt}
@@ -864,7 +865,7 @@
 \def\corr@halfboxbridgemomentumend{0.72}
 \def\corr@halfboxbridgemomentumoffset{10pt}
 \def\corr@halfboxbridgemomentumlabelfraction{0.50}
-\def\corr@halfboxbridgemomentumlabelgap{0.10}
+\def\corr@halfboxbridgemomentumlabelgap{0.075}
 \def\corr@halfboxmomentumstart{0.30}
 \def\corr@halfboxmomentumend{0.70}
 \def\corr@halfboxmomentumoffset{10pt}
@@ -2259,7 +2260,7 @@
   \corr@topologysetdefault\corr@halfboxbridgemomentumend{0.72}%
   \corr@topologysetdefault\corr@halfboxbridgemomentumoffset{10pt}%
   \corr@topologysetdefault\corr@halfboxbridgemomentumlabelfraction{0.50}%
-  \corr@topologysetdefault\corr@halfboxbridgemomentumlabelgap{0.10}%
+  \corr@topologysetdefault\corr@halfboxbridgemomentumlabelgap{0.075}%
   \corr@topologysetdefault\corr@halfboxmomentumstart{0.14}%
   \corr@topologysetdefault\corr@halfboxmomentumend{0.90}%
   \corr@topologysetdefault\corr@halfboxmomentumoffset{7pt}%
@@ -2601,6 +2602,7 @@
   momentum-symbol/.store in=\corr@mode,
   momentum-start/.store in=\corr@momentumstart,
   momentum-labels/.store in=\corr@momentumlabels,
+  external-momentum-hide/.store in=\corr@externalmomentumhide,
   momentum-directions/.code={%
     \readlist*\corr@momentumdirectionitems{#1}%
     \ifnum\corr@momentumdirectionitemslen>0
@@ -4026,6 +4028,7 @@
     \readlist*\corr@legstyleitems{\corr@legstyles}%
   }%
   \ifdefempty{\corr@momentumlabels}{}{%
+    \reademptyitems
     \readlist*\corr@momitems{\corr@momentumlabels}%
   }%
   \ifdefempty{\corr@momentumarrowsizes}{}{%
@@ -4071,6 +4074,41 @@
     \corr@fieldwithindex{#1}%
   \else
     \corr@legitems[#1]%
+  \fi
+}
+
+% Visibility is independent of label contents and propagator styling.
+\newcommand{\corr@ifexternalmomentumvisible}[2]{%
+  \corr@selectmomentumslot{#1}{\corr@externalmomentumhide}%
+  \ifcorr@slotselected\else
+    #2%
+  \fi
+}
+
+% Inspect literal list entries without expanding user label commands.
+% Strip singleton groups so {}, { }, and nested empty groups count as blank.
+\ExplSyntaxOn
+\cs_new_protected:Npn \corr@ifblanklabel #1#2#3
+  {
+    \tl_if_blank:nTF {#1} {#2}
+      {
+        \tl_if_single:nTF {#1}
+          {
+            \tl_if_head_is_group:nTF {#1}
+              {\exp_after:wN \corr@ifblanklabel #1 {#2} {#3}}
+              {#3}
+          }
+          {#3}
+      }
+  }
+\ExplSyntaxOff
+
+\newcommand{\corr@ifemptymomentumlabel}[3]{%
+  \ifnum\corr@momitemslen<#1\relax
+    #3%
+  \else
+    \itemtomacro\corr@momitems[#1]\corr@momentumlabeltokens
+    \expandafter\corr@ifblanklabel\expandafter{\corr@momentumlabeltokens}{#2}{#3}%
   \fi
 }
 
@@ -4470,6 +4508,13 @@
 }
 
 \newcommand{\corr@drawmomentumrangein}[7]{%
+  \corr@ifexternalmomentumvisible{#1}{%
+  \corr@ifemptymomentumlabel{#1}{%
+    \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+      ($(#2)!#5!(#3)!9pt!#4:(#3)$) --
+      ($(#2)!#6!(#3)!9pt!#4:(#3)$);
+  }{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
@@ -4490,9 +4535,18 @@
     {0pt}
     {0pt}
     {\corr@momentumlabel{#1}}%
+  }%
+  }%
 }
 
 \newcommand{\corr@drawmomentumrangeout}[7]{%
+  \corr@ifexternalmomentumvisible{#1}{%
+  \corr@ifemptymomentumlabel{#1}{%
+    \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+      ($(#2)!#6!(#3)!9pt!#4:(#3)$) --
+      ($(#2)!#5!(#3)!9pt!#4:(#3)$);
+  }{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
@@ -4513,6 +4567,8 @@
     {0pt}
     {0pt}
     {\corr@momentumlabel{#1}}%
+  }%
+  }%
 }
 
 \newcommand{\corr@drawmomentumrange}[8]{%
@@ -4525,6 +4581,13 @@
 
 \def\corr@externalmomoffset{6pt}
 \newcommand{\corr@drawmomentumrangeoffset}[9]{%
+  \corr@ifexternalmomentumvisible{#1}{%
+  \corr@ifemptymomentumlabel{#1}{%
+    \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+      ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  }{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
@@ -4545,9 +4608,18 @@
     {#8}
     {#9}
     {\corr@momentumlabel{#1}}%
+  }%
+  }%
 }
 
 \newcommand{\corr@drawmomentumrangeoffsetout}[9]{%
+  \corr@ifexternalmomentumvisible{#1}{%
+  \corr@ifemptymomentumlabel{#1}{%
+    \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+      ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$);
+  }{%
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   \def\corr@currentmomentumshortenstart{0pt}%
   \def\corr@currentmomentumshortenend{0pt}%
@@ -4568,6 +4640,8 @@
     {#8}
     {#9}
     {\corr@momentumlabel{#1}}%
+  }%
+  }%
 }
 
 \newcommand{\corr@drawcustommomentumrangeoffset}[9]{%
@@ -6726,6 +6800,7 @@
 }
 
 \newcommand{\corr@drawttreeinsertionoutermomentum}{%
+  \corr@ifexternalmomentumvisible{1}{%
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{1}}%
   \coordinate (corrttreeinsertionoutermomguideorigin) at ($(corrUL)!-\corr@insertionpremomentumguideextension!(corrInsertionA)$);
@@ -6739,6 +6814,7 @@
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertionoutermomstart) -- (corrttreeinsertionoutermomend);
   }%
+  \corr@ifemptymomentumlabel{1}{}{%
   \corr@putmomentumlabelwithdistance
     {(corrttreeinsertionoutermomlabel)}
     {\corr@insertionpremomentumlabelposition}
@@ -6746,10 +6822,13 @@
     {\corr@insertionpremomentumlabelxshift}
     {\corr@insertionpremomentumlabelyshift}
     {\corr@momentumlabel{1}}%
+  }%
   \endgroup
+  }%
 }
 
 \newcommand{\corr@drawttreeinsertioninnermomentum}{%
+  \corr@ifexternalmomentumvisible{1}{%
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{1}}%
   \coordinate (corrttreeinsertioninnermomstart) at ($(corrInsertionB)!\corr@insertionpostmomentumstart!(corrVT)!\corr@insertionpostmomentumoffset!90:(corrVT)$);
@@ -6762,6 +6841,7 @@
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertioninnermomstart) -- (corrttreeinsertioninnermomend);
   }%
+  \corr@ifemptymomentumlabel{1}{}{%
   \corr@putmomentumlabelwithdistance
     {(corrttreeinsertioninnermomlabel)}
     {\corr@insertionpostmomentumlabelposition}
@@ -6769,7 +6849,9 @@
     {\corr@insertionpostmomentumlabelxshift}
     {\corr@insertionpostmomentumlabelyshift}
     {\corr@momentumlabel{1}}%
+  }%
   \endgroup
+  }%
 }
 
 \newcommand{\corr@drawttreeinsertionmiddlemomentum}{%
@@ -6911,12 +6993,20 @@
     ($(#1)!\corr@channelmomstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
     coordinate[pos=0.5] (corrmomentumlabelcoord)
     ($(#1)!\corr@channelmomend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
+  % Only a label centered on the momentum guide needs an interruption.
+  % Side labels must not leave an empty gap at their unshifted position.
+  \corr@ifstringeq{\corr@channelmomlabelposition}{center}{%
   \draw[line width=\corr@momentumlinewidth]
     ($(#1)!\corr@channelmomstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
     ($(#1)!\corr@channelmomgapstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
     ($(#1)!\corr@channelmomgapend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
     ($(#1)!\corr@channelmomend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
+  }{%
+    \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+      ($(#1)!\corr@channelmomstart!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$) --
+      ($(#1)!\corr@channelmomend!(#2)!\corr@channelmomdist!\corr@channelmomangle:(#2)$);
+  }%
   \corr@putmomentumlabelat
     {(corrmomentumlabelcoord)}
     {\corr@channelmomlabelposition}
@@ -8469,6 +8559,11 @@
       \corr@putvertex{sunRext}{\corr@externalvertexstyle}
     }%
     \ifcorr@showmomenta
+      \corr@ifexternalmomentumvisible{1}{%
+      \begingroup
+      \corr@ifemptymomentumlabel{1}{%
+        \renewcommand{\corr@putmomentumlabelwithdistance}[6]{}%
+      }{}%
       \corr@drawsunsetmomentumline{1}
         {($(sunLext)!\corr@sunsetexternalarrowstart!(sunLv)+(0,\corr@sunsetexternalarrowyshift)$)}
         {($(sunLext)!\corr@sunsetexternalarrowend!(sunLv)+(0,\corr@sunsetexternalarrowyshift)$)}
@@ -8476,6 +8571,13 @@
         {\corr@sunsetleftlabelxshift}
         {\corr@sunsetleftlabelyshift}
         {\corr@sunsetmomentumlabel{1}}
+      \endgroup
+      }%
+      \corr@ifexternalmomentumvisible{2}{%
+      \begingroup
+      \corr@ifemptymomentumlabel{2}{%
+        \renewcommand{\corr@putmomentumlabelwithdistance}[6]{}%
+      }{}%
       \corr@drawsunsetmomentumline{2}
         {($(sunRv)!\corr@sunsetexternalarrowstart!(sunRext)+(0,\corr@sunsetexternalarrowyshift)$)}
         {($(sunRv)!\corr@sunsetexternalarrowend!(sunRext)+(0,\corr@sunsetexternalarrowyshift)$)}
@@ -8483,6 +8585,8 @@
         {\corr@sunsetrightlabelxshift}
         {\corr@sunsetrightlabelyshift}
         {\corr@sunsetmomentumlabel{2}}
+      \endgroup
+      }%
       \corr@drawsunsetmomentumcurve{3}
         {($(sunLv)!\corr@sunsetlooparrowstart!(sunRv)+(0,\corr@sunsettoparrowyshift)$)}
         {bend left}
