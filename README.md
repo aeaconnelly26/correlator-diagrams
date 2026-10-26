@@ -74,9 +74,11 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations and split color controls
 - vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
+- standalone self-energy bubbles via `\BubbleCorr`, and bubble/seagull insertions on t-tree external slot 1
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
 - quick cleanup switches like `show-momenta=false`
+- selected external momentum hiding via `external-momentum-hide={...}` and compact empty-field indices via `index-placement=mini`
 - a looser shared EW-boson/wavy style via `ewboson` or `EWboson`
 - uniform propagator color via global `color=...`
 - box-specific color controls for external and internal propagators
@@ -97,16 +99,21 @@ Older documents that load `correlator-diagrams` still work through a compatibili
 
 The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which are loaded internally.
 
-To run the maintained regression smoke checks:
+To compile all 33 maintained regression and example documents:
 
 ```sh
 scripts/check-regressions.sh
 ```
 
+The runner requires `pdflatex`, builds in a temporary directory, and prints the
+end of the LaTeX log on failure. It can also be invoked by absolute path from
+another working directory.
+
 Main demo files in this repository:
 
 - [`example.tex`](example.tex)
 - [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex)
+- [`compton-example/compton-example.tex`](compton-example/compton-example.tex): scalar-QED Compton scattering with reusable local macros
 - [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex)
 - [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex)
 - [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex)
@@ -124,6 +131,19 @@ Compile with:
 ```sh
 pdflatex -interaction=nonstopmode -halt-on-error example.tex
 ```
+
+The Compton example contains the scalar exchange `s` and `u` channels and the
+local two-photon/two-scalar contact vertex. Compile it from the repository root:
+
+```sh
+TEXINPUTS=".//:" pdflatex -interaction=nonstopmode -halt-on-error \
+  -output-directory=compton-example compton-example/compton-example.tex
+```
+
+Its [reviewed PDF](compton-example/compton-example.pdf) lives beside the source.
+Copy [`compton-macros.tex`](compton-example/compton-macros.tex) into a document
+after loading `amsmath` and `feynman-fun`, then use `\ComptonS`, `\ComptonU`,
+or `\ComptonContact`; each accepts optional package keys for local overrides.
 
 ## Core Macros
 
@@ -188,6 +208,8 @@ The full reference covers:
 - `example.tex`: broad feature gallery
 - `regressions/topologies/`: focused topology regression cases
 - `regressions/propagators/`: focused propagator regression and capacity sheets
+- `regressions/momenta/` and `regressions/labels/`: focused annotation checks
+- `compton-example/`: reusable scalar-QED scattering example and rendered PDF
 - `assets/`: README graphics
 
 ## License
