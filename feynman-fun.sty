@@ -4062,7 +4062,11 @@
     \corr@field
   \else
     \ifdefempty{\corr@field}{%
-      \corr@indexitems[#1]%
+      \corr@ifstringeq{\corr@indexplacement}{mini}{%
+        {}_{\corr@indexitems[#1]}%
+      }{%
+        \corr@indexitems[#1]%
+      }%
     }{%
       \corr@field\corr@indexsuffix{\corr@indexitems[#1]}%
     }%

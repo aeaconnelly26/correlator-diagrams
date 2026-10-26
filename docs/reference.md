@@ -444,6 +444,24 @@ Index placement:
 - `index-placement=sub`
 - `index-placement=sup`
 - `index-placement=none`
+- `index-placement=mini`
+
+With `field={}`, `index-placement=mini` typesets each entry of `indices` as
+an index on an empty math base, for example `{}_{\alpha}`. This gives a small,
+lowered index without adding `\hspace`. With a nonempty field, `mini` uses the
+normal field subscript, such as `A_{\alpha}`. Explicit `leg-labels` still take
+precedence and are not reformatted. Other index-placement modes keep their
+existing behavior.
+
+```tex
+\FourPointCorr[
+  field={},
+  index-placement=mini,
+  indices={\alpha,\nu,\tau,\sigma},
+  show-momenta=false
+]
+```
+
 
 If you need complete manual control, use:
 
