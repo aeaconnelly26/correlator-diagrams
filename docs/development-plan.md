@@ -7,11 +7,13 @@ up quickly without spending credits reconstructing context.
 ## Current State
 
 - Date created: 2026-09-06
-- Active branch: `codex/adopt-feynman-fun`
+- Last updated: 2026-10-26
+- Active branch: `codex/seagull-insertion`
 - Recovery baseline: `2253c64 Adopt feynman-fun package`
 - Regression checkpoint: `057bfbd Add feynman-fun regression checks`
-- Push status: pushed by Codex as review branch after 2026-09-11 adoption
-  closeout
+- Merge base: `0dbf733` (merged bubble-on-leg prototype)
+- Delivery status: five focused closeout commits prepared for PR review;
+  merging remains a user action
 - Remote repository: do not rename
 - Branch cleanup: do not delete branches
 - Current priority: confidence and maintainability before new diagram features
@@ -23,8 +25,7 @@ up quickly without spending credits reconstructing context.
 At the start of each session:
 
 1. Run `git status --short --branch`.
-2. Confirm the branch is `codex/adopt-feynman-fun` unless the user says
-   otherwise.
+2. Confirm the active branch against `Current State` and the user's request.
 3. Read this file, especially `Last Session Update`, `Today`, and
    `Open Questions`.
 4. Run `scripts/check-regressions.sh` before risky edits when enough credits
@@ -43,17 +44,20 @@ Before ending each session:
 
 ## Today
 
-Goal for 2026-09-11:
+Goal for 2026-10-26:
 
-- Finish the adoption branch, then start one focused topology-foundation slice.
-- Use `\ThreePointCorr` to prove the logical-slot translation model before
-  adding new bubble, seagull, or swordfish topologies.
-- Add a focused regression for rotated labels, indices, styles, and momenta.
-- Keep public APIs stable unless a narrow bug fix requires a change.
+- Finish and review the seagull insertion, endpoint marker, momentum, and index
+  changes already implemented on this branch.
+- Include the scalar-QED Compton example as a buildable, documented demo.
+- Keep curated PDFs beside sources and exclude metadata-only PDF changes.
+- Expand regression coverage to all 33 regression and example documents;
+  build in temporary directories without deleting repository scratch files.
+- Create focused buildable commits, push, and open a PR against `main`.
+- Leave the actual merge to the user.
 - Do not rename the remote repository.
 - Do not delete branches.
 
-Usage checkpoints:
+Historical adoption-session usage checkpoints (2026-09-11):
 
 - Start of adoption closeout: 5-hour window 6% used, weekly window 1% used.
 - Start of translation-safe topology slice: 5-hour window 35% used, weekly
@@ -66,22 +70,18 @@ Usage checkpoints:
 
 ## Next Session
 
-Recommended first technical session:
+After this branch is reviewed and merged:
 
-- Focus area: audit and modernize the older loop-channel and sunset momentum
-  systems before using them as precedent for new bubble-leg topologies.
-- Treat `loop-channel` and `sunset` as partly abandoned QFT-I-era systems:
-  useful for structure, but not visually authoritative.
-- Compare old defaults, documented fix-it recipes, index-heavy cases, and
-  direction/style variants in one audit PDF.
-- Use the audit to decide which momentum helpers/defaults should be kept,
-  revised, or discarded before implementing bubble-on-leg diagrams.
+- Generalize bubble insertions to other external host slots and orientations.
+- Follow with swordfish insertions, then triangle-contact momentum routing
+  with per-internal-edge controls.
+- Keep the current bubble/seagull insertion contract limited to t-tree slot 1
+  until those follow-up changes have their own focused regressions.
 
 Likely deliverable:
 
-- A loop momentum audit regression PDF, roadmap updates, and then a first
-  bubble-on-leg prototype plan/implementation that does not inherit ugly old
-  defaults by accident.
+- A separate branch with broader insertion host-slot support, documented slot
+  semantics, and focused visual and behavioral checks.
 
 ## Implementation Inventory
 
@@ -316,8 +316,8 @@ Risk:
   flow?
 - For triple vertex momentum, which orientations matter first: all-in/all-out,
   rotated geometric variants, or the vertex-identity use cases?
-- For seagull, what is the preferred visual convention: two external legs plus a
-  loop at one vertex, or a contact-like vertex with an attached loop?
+- How should insertion orientation and momentum placement translate to the
+  other external host slots after the t-tree slot-1 prototype?
 - For corrected cross-box, what specifically is wrong in the current version:
   geometry, momentum direction, internal index order, crossing style, or API?
 - Should future topology names follow physics names only, or include aliases
@@ -420,8 +420,27 @@ Planned first insertion API direction:
   with package-owned insertion objects, semantic slot keys, and focused
   regressions for each new insertion family.
 
+2026-09-12 seagull insertion start:
+
+- Created `codex/seagull-insertion` from clean `main`.
+- The branch adds `insertion=seagull` as the second semantic insertion object,
+  still scoped to `TTreeChannelCorr` / `topology=t-tree` external slot `1`.
+- V1 seagull means one quartic/contact insertion vertex on the host leg with a
+  compact package-styled self-loop propagator that starts and ends at that
+  vertex.
+- This branch should not change triangle-contact momentum routing; that remains
+  a later per-internal-edge cleanup.
+- Revised follow-up order after seagull:
+  1. Bubble insertion orientation and other host slots.
+  2. Swordfish insertion.
+  3. Triangle-contact momentum rework with per-edge internal controls.
+
 ## Completed
 
+- 2026-10-26: Closed out seagull insertions, endpoint-marker repairs, external
+  momentum controls, mini indices, and the scalar-QED Compton example. Removed
+  superseded private helpers and repository metadata/scratch files, refreshed
+  curated PDFs, and expanded the isolated regression runner to 33 documents.
 - 2026-09-06: Confirmed the previous regression-check commit had not yet been
   made. Created commit `057bfbd Add feynman-fun regression checks` on
   `codex/adopt-feynman-fun` without pushing.
@@ -447,6 +466,37 @@ Planned first insertion API direction:
   regressions pass.
 
 ## Last Session Update
+
+2026-10-26 repository cleanup and merge preparation:
+
+- Organized package work into separate seagull/endpoint-marker, momentum,
+  mini-index, Compton-example, and repository-maintenance commits.
+- Preserved intentional geometry and the t-tree external-slot-1 limitation
+  for both insertion families. Broader host-slot support remains follow-up work.
+- Removed unused marker experiments and an unused momentum helper; the active
+  marker queue and curve-tangent path remain shared by bubbles and seagulls.
+- Rendered and compared curated PDFs against the merge baseline. Updated
+  visibly different previews, kept the pixel-identical Proca sheet unchanged,
+  and corrected the circ-marker tuning row's wrapped captions.
+- Preserved the existing policy that selected build-only PDFs stay ignored.
+  Moved the Compton PDF beside its source and documented reuse/build commands.
+- Replaced repository-wide scratch deletion with a unique temporary build
+  directory. The suite now includes all 30 regression documents plus the three
+  main examples, with the final LaTeX log excerpt printed on failure.
+- All 33 documents passed from the repository root and from `/private/tmp`.
+  Focused intermediate commit builds passed, including momentum visibility,
+  curved marker-count/dimension assertions, mini indices, and compatibility.
+  The runner's simulated failure diagnostics, temporary cleanup, and existing
+  scratch-file preservation also passed; `git diff --check` passed.
+- Legacy loop-channel/sunset momentum crowding remains recorded in the audit;
+  this closeout preserves those established layouts.
+- Next action: PR review and user-controlled merge, then broader bubble host
+  slots on a separate branch, followed by swordfish and triangle momentum work.
+
+## Earlier Session Updates
+
+The dated entries below retain the status and plans recorded at each session;
+their references to uncommitted work are superseded by the closeout above.
 
 2026-09-11:
 
@@ -507,7 +557,70 @@ Planned first insertion API direction:
 
 Next planned action:
 
-- Merge `codex/bubble-on-leg`, then create the quartic/seagull insertion
-  branch. Start with one seagull insertion on the same t-tree host context so
-  it can reuse the bubble-on-leg split-segment controls before expanding to
-  swordfish and triangle cases.
+- Finish and review `codex/seagull-insertion`, then use a separate branch to
+  generalize bubble insertions across the other external leg slots before
+  swordfish and the triangle-contact momentum rework.
+
+## 2026-10-16 Tree-channel label-gap fix
+
+- On `codex/seagull-insertion`, fixed the tree-channel momentum helper so
+  side-positioned labels no longer leave an empty interruption in the arrow.
+  Explicit `channel-momentum-label-position=center` retains the intentional gap.
+- Added `regressions/topologies/channel/channel-momentum-label-gap.tex` and its
+  rendered PDF, covering the supplied charged-scalar t-tree example, side
+  labels on horizontal/vertical guides, and a centered label.
+- Visually checked the focused PDF; all 18 maintained regression checks pass.
+- Existing seagull/endpoint-marker work remains uncommitted. Next: finish its
+  visual review and branch closeout before expanding insertion host slots.
+
+## 2026-10-16 External momentum visibility
+
+- Added `external-momentum-hide={...}` for logical external slots across
+  two-/three-/four-point families, bubble, and sunset. It overrides supplied
+  labels and existing topology slot selectors without changing propagators,
+  particle labels, endpoint markers, or internal momenta.
+- Hiding insertion slot 1 removes both pre/post momentum annotations. Rotated
+  three-point geometry retains logical slot numbering.
+- Explicitly empty label entries now emit a continuous unlabeled external
+  arrow and no label node; empty list positions remain intact. Missing list
+  entries retain their existing automatic labels. No sentinel label strings.
+- Added a three-page visual regression and behavioral assertions in
+  `regressions/momenta/external-momentum-visibility.tex`, registered in the
+  maintained suite. Checks cover precedence, empty/braced/whitespace entries,
+  ordinary labels, both flow directions, no state leakage, each diagram family,
+  internal momentum preservation, and split insertion legs.
+- All 19 maintained checks passed; the focused sheet passed again after visual
+  layout tuning. Visually inspected all three pages, and documented the key in
+  `docs/reference.md`. Changes remain uncommitted on `codex/seagull-insertion`.
+
+## 2026-10-17 Mini external index formatting
+
+- Added `index-placement=mini` using the existing external field/index helper.
+  Empty fields now support compact indices on an empty math base (`{}_{...}`)
+  without a horizontal spacer. Nonempty fields retain normal subscripts;
+  explicit leg labels retain precedence. Other placement modes are unchanged.
+- Added and visually inspected `regressions/labels/mini-index.tex` and its PDF,
+  covering the square double-endcap example, field subscripts, explicit label
+  overrides, rotated logical slots, and normal formatting in the next diagram.
+- Documented the mode in `docs/reference.md` and added the focused regression
+  to the maintained suite.
+- All 20 maintained regression checks passed. Changes remain uncommitted on
+  `codex/seagull-insertion`.
+
+## 2026-10-17 One-sided curved Proca marker repair
+
+- Reproduced the reported seagull example: start/end selections queued the
+  correct markers, but the curve helper sized triangles from the tiny distance
+  between the endpoint tip and a 16-percent curve sample. On the default
+  seagull, that reduced marker sides to roughly 0.4pt and hid the feature.
+- Fixed the shared curved endpoint helper to use the configured propagator
+  arrow size for equilateral triangles, using the sampled outward curve tangent
+  for orientation. Vertex-boundary tip placement remains intact.
+- Added `regressions/propagators/proca/one-sided-loop-markers.tex` and its
+  two-page PDF. The exact user macro is included with start-only, end-only,
+  and both-end variants. Assertions check actual emitted marker counts and
+  triangle dimensions across standalone bubbles, inserted bubbles, seagulls,
+  and 3pt/10pt sizes on different loop radii. The old geometry fails this check.
+- Visually inspected both pages and documented start/end semantics in the
+  reference. Changes remain uncommitted on `codex/seagull-insertion`.
+- All 21 maintained regression checks passed after the repair.
