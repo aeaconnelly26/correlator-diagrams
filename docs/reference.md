@@ -180,8 +180,9 @@ Tune that mode with either grouped triples or individual side keys:
 
 ```tex
 bubble-momentum-layout=vertex-split,
-bubble-vertex-split-left={0.06,0.35,0.24},
-bubble-vertex-split-right={0.65,0.94,0.76},
+bubble-vertex-split-left={0.14,0.40,0.24},
+bubble-vertex-split-right={0.60,0.86,0.76},
+bubble-vertex-split-offset-scale=0.75,
 ```
 
 Each grouped value is `{start,end,label-fraction}`. The same controls are also
@@ -190,7 +191,12 @@ available individually as `bubble-vertex-split-left-start=...`,
 `bubble-vertex-split-left-label-fraction=...`, and the matching
 `bubble-vertex-split-right-*` keys. Aliases
 `bubble-vertex-split-near-left-*` and `bubble-vertex-split-near-right-*` are
-provided for the same values.
+provided for the same values. In vertex-split mode, the package keeps these
+values inside a shoulder band of the bubble curve so arrows do not plunge into
+the steep vertex tangent. `bubble-vertex-split-offset-scale=...` multiplies
+`bubble-momentum-offset` for the split arrows only, so near-vertex arrows can
+stay closer to the propagator curvature without changing the broad/manual
+momentum layout.
 
 Use `bubble-external-indices={left,right}` for vertex-side external-leg
 indices near the bubble vertices. The generic `indices={...}` key belongs to
@@ -438,6 +444,24 @@ Index placement:
 - `index-placement=sub`
 - `index-placement=sup`
 - `index-placement=none`
+- `index-placement=mini`
+
+With `field={}`, `index-placement=mini` typesets each entry of `indices` as
+an index on an empty math base, for example `{}_{\alpha}`. This gives a small,
+lowered index without adding `\hspace`. With a nonempty field, `mini` uses the
+normal field subscript, such as `A_{\alpha}`. Explicit `leg-labels` still take
+precedence and are not reformatted. Other index-placement modes keep their
+existing behavior.
+
+```tex
+\FourPointCorr[
+  field={},
+  index-placement=mini,
+  indices={\alpha,\nu,\tau,\sigma},
+  show-momenta=false
+]
+```
+
 
 If you need complete manual control, use:
 
@@ -446,6 +470,44 @@ If you need complete manual control, use:
 `leg-labels` overrides `field` and `indices` for the legs you specify.
 
 ## Momentum Labels And Arrows
+
+### Hide selected external momenta
+
+Use `external-momentum-hide={2}` to remove both the momentum arrow and its
+label from logical external slot 2. Multiple slots can be hidden with, for
+example, `external-momentum-hide={1,4}`. The default `{}` hides nothing.
+
+```tex
+\FlatContactCorr[
+  momentum-labels={q_1,,p,q_3},
+  external-momentum-hide={2}
+]
+```
+
+The slot-2 propagator, particle label, and propagator arrow/endcap styling
+remain visible. This key overrides nonempty momentum text and topology-specific
+selection keys such as `flat-contact-momentum-slots`, regardless of key order.
+Repeated numbers are harmless; numbers outside the external slots are ignored.
+`show-momenta=false` still disables all momentum annotations.
+
+An explicitly empty momentum-label entry (including `{}` or whitespace) keeps
+a continuous **unlabeled arrow**, with no label node or artificial gap. Empty
+entries retain their list positions: `{q_1,,p,q_3}` assigns `p` to slot 3.
+An omitted/empty whole `momentum-labels` list uses the normal defaults; entries
+beyond a shorter list also retain their normal automatic labels. No strings
+such as `na` or `none` have special meaning in label text.
+
+The hide key applies to external slots across two-, three-, and four-point
+families, including bubble and sunset. Slots follow the family's logical
+external label order, so they stay attached when a three-point diagram rotates.
+Bubble and sunset external momentum slots are 1 (left) and 2 (right).
+For bubble/seagull insertions on external slot 1, hiding slot 1 suppresses
+both pre- and post-insertion momentum annotations. Channel, bridge, box-edge,
+and loop momenta retain their existing controls; this key does not hide them.
+The setting is scoped to the current diagram.
+
+Focused visual and behavioral checks:
+`regressions/momenta/external-momentum-visibility.tex`.
 
 ### First: what kind of key moves what?
 
@@ -957,6 +1019,8 @@ The most important motion keys there are:
 - `channel-momentum-distance=...`
 - `channel-momentum-angle=...`
 - `channel-momentum-label-position=...`
+  Side placements draw a continuous momentum arrow. Use `center` to place the
+  label in an intentional arrow gap controlled by `momentum-label-gap`.
 - `channel-momentum-label-xshift=...`
 - `channel-momentum-label-yshift=...`
 
@@ -997,11 +1061,21 @@ through the same shared style, so changing a leg or internal line to any of
 these styles uses the same visual language in every topology.
 
 The `proca` style is a massive-vector convenience style built on a straight
-scalar-style dashed line with two white-filled open arrow markers just inside
-the endpoints, with each arrow pointing toward the nearest vertex. The arrows
-use the same size as the scalar-polarized arrow markers; their outlines follow
-the propagator color while their interiors stay white. `Proca` is accepted as
-an alias. Add `circ={}` explicitly when a blank midpoint circle is wanted.
+scalar-style dashed line with two white-filled open arrow markers. In
+package-managed topologies, the package strips those markers from the raw line
+style and redraws them as endpoint-aware triangles whose tips kiss the semantic
+vertex boundary. The arrows use the same size as scalar-polarized markers;
+their outlines follow simple propagator color tokens while their interiors stay
+white. `Proca` is accepted as an alias. Add `circ={}` explicitly when a blank
+midpoint circle is wanted.
+Use `proca start` or `proca end` instead of `proca` for a single triangle
+at the drawn path's start or end. This also applies to bubble internal lines
+and `seagull-loop-line`. With the default lower seagull loop, `proca start`
+marks the right branch and `proca end` marks the left branch; reversing the
+loop orientation swaps their visual sides. Curved endpoint triangles use the
+configured propagator arrow size independently of loop radius or diagram
+scale, with their tips at the semantic vertex boundary.
+
 
 Endpoint marker add-ons can be combined with any propagator style:
 
@@ -1019,7 +1093,8 @@ Endpoint marker add-ons can be combined with any propagator style:
   `endcapp` behaves like `endcappout`.
 
 In package-managed topologies, these add-ons are oriented relative to the
-interaction vertex for each leg. In raw `\propag[...]` calls, they fall back to
+interaction vertex for each leg and use the same endpoint-aware triangle
+placement as `proca`/`spol`. In raw `\propag[...]` calls, they fall back to
 path-end semantics: `...in` targets the path end and `...out` points away from
 the path end. Endcaps are intended for external legs only; in topology helpers,
 use `endcap` or `endcapout` on an external leg style to mark the outer cropped
@@ -1053,6 +1128,8 @@ Use `circ={}` for a blank circle. The aliases `with circle=...` and
 
 - `circ position=...`
 - `circ size=...`
+- `circ scale=...`
+- `circ label scale=...`
 - `circ fill=...`
 - `circ draw=...`
 - `circ label style={...}`
@@ -1061,7 +1138,10 @@ The circle keeps the configured `circ size`; labels are overlaid rather than
 allowed to resize the marker. Increase `circ size` when a deliberately wide
 custom label should fit fully inside the circle. By default, the circle outline
 inherits the resolved propagator color, including Proca propagators; use
-`circ draw=...` to override the outline color independently.
+`circ draw=...` to override the outline color independently. Use
+`circ scale=...` for short segment markers; it scales the default circle and
+the overlaid label contents together while keeping labels upright on sloped
+segments. Use `circ label scale=...` to tune only the label size.
 
 W-family markers are hand-tuned to keep the default circle size readable:
 
@@ -1227,10 +1307,26 @@ Relevant controls:
 
 - `scalar-arrow-direction=in|out|none`
 - `scalar-arrow-position=<0..1>`
+- `/tikzfeynhand/open arrow marker distance=...` for raw/manual open arrows
+- `semantic-marker-tip-clearance=...` for package-managed topology endpoints
+- `semantic-marker-vertex-radius=...` for custom package-managed vertex dots
+- `semantic-open-arrow-tip-clearance=...` as a compatibility alias
 
-The default `scalarpolarized` style places an inward-pointing marker near the vertex.
+The default `scalarpolarized` style places an inward-pointing marker near the
+vertex. In package-managed topologies, external scalar-polarized legs are
+drawn with package-owned endpoint-aware triangle markers. The triangle tip is
+placed at the semantic topology vertex edge plus a small clearance, even when
+the propagator arrow size changes. The default clearance is `0.25pt`; tune
+`semantic-marker-tip-clearance=...` only if a custom vertex size or line
+weight needs the tip slightly closer to or farther from the dot. If a custom
+vertex style uses a nonstandard dot radius, set
+`semantic-marker-vertex-radius=...`. Raw/manual open-arrow decorations keep the
+older `/tikzfeynhand/open arrow marker distance=...` key and TikZ decoration
+geometry.
 
-`out` flips the marker so the triangle points outward while keeping it near the vertex end of the leg.
+On raw/manual paths, `out` keeps the older decoration-style outward marker
+orientation. Inside package-managed topologies, the semantic endpoint marker is
+kept tied to the vertex boundary so the tip placement remains stable.
 
 Legacy `antiscalar...` and `antspol...` names still work as aliases of the same scalar-polarized style.
 
@@ -1791,12 +1887,16 @@ external paths. Both topologies also accept `*-index-left-position`,
 `*-index-right-position`, matching x/y shift keys, `*-index-style`,
 `*-index-fill`, `*-index-inner-sep`, and `*-index-size`.
 
-Inside package-managed topologies, `scalarpolarized`/`spol` external legs are
-oriented toward the topology vertex. The endpoint arrow add-ons `arrowin`,
-`arrowout`, `openarrowin`, and `openarrowout` follow the same topology-aware
-orientation. For cropped external legs, use `endcapout` to put a terminal bar
-exactly at the external endpoint of the leg. The explicit aliases such as
-`spolin`/`spolout` remain available for manual control.
+Inside package-managed topologies, `scalarpolarized`/`spol`, `proca`,
+`arrowin`/`arrowout`, and `openarrowin`/`openarrowout` are endpoint-aware:
+marker-bearing styles are stripped from the raw propagator body and redrawn
+after the vertices so triangle tips kiss the vertex edge instead of being
+covered by the dot. The clearance is controlled by
+`semantic-marker-tip-clearance=...`; custom dot sizes can use
+`semantic-marker-vertex-radius=...`. For cropped external legs, use
+`endcapout` to put a terminal bar exactly at the external endpoint of the leg.
+The explicit aliases such as `spolin`/`spolout` remain available for manual
+control.
 
 Focused visual QA lives in
 `regressions/topologies/vertex-identity/vertex-identity-check.tex`.
@@ -1868,6 +1968,7 @@ Useful controls:
 - `bubble-vertex-split-left-end=...`
 - `bubble-vertex-split-left-label-fraction=...`
 - matching `bubble-vertex-split-right-*` keys
+- `bubble-vertex-split-offset-scale=...`
 - `bubble-momentum-start=...`
 - `bubble-momentum-end=...`
 - `bubble-momentum-offset=...`
@@ -1905,8 +2006,9 @@ propagators default to solid/plain lines; set the upper and lower slots with
 markers are drawn as white-filled equilateral triangles against explicit tip
 coordinates on the vertex boundary.
 With `bubble-endpoint-marker-distance=auto`, the target point is the
-`bubble-vertex-radius` edge; set an explicit distance only when you want the
-tip target moved inward or outward. Loop momentum arrows are opt-in through
+`bubble-vertex-radius` edge plus `semantic-marker-tip-clearance`; set an
+explicit distance only when you want the tip target moved inward or outward.
+Loop momentum arrows are opt-in through
 `bubble-momenta` or the per-slot momentum keys. Internal momentum arrows use
 `bubble-momentum-offset`, and add
 `bubble-momentum-style-clearance` automatically when the corresponding internal
@@ -1928,7 +2030,7 @@ Current v1 support is intentionally narrow:
 ```tex
 \[
   \TTreeChannelCorr[
-    insertion=bubble,
+    insertion=bubble, % or seagull
     insertion-slot=1
   ]
 \]
@@ -1936,16 +2038,19 @@ Current v1 support is intentionally narrow:
 
 Supported insertion keys:
 
-- `insertion=none|bubble`
+- `insertion=none|bubble|seagull`
 - `insertion-slot=1|2|3|4|5`
 - `insertion-position=...`
 - `insertion-orientation=auto|top|bottom|left|right`
 - `insertion-scale=...`
 - `insertion-style=...`
+- `insertion-pre-line=...` / `insertion-outer-line=...`
+- `insertion-post-line=...` / `insertion-inner-line=...`
 - `insertion-post-indices={bubble-side,vertex-side}`
 - `insertion-pre-momentum-start=...`
 - `insertion-pre-momentum-end=...`
 - `insertion-pre-momentum-label-fraction=...`
+- `insertion-pre-momentum-guide-extension=...` / `insertion-outer-momentum-guide-extension=...`
 - `insertion-pre-momentum-offset=...`
 - `insertion-pre-momentum-label-position=...`
 - `insertion-pre-momentum-label-distance=...`
@@ -1966,15 +2071,57 @@ Supported insertion keys:
 - `insertion-middle-momentum-label-distance=...`
 - `insertion-middle-momentum-label-xshift=...`
 - `insertion-middle-momentum-label-yshift=...`
+- `seagull-loop-line=...`
+- `seagull-loop-size=...`
+- `seagull-loop-looseness=...`
+- `seagull-loop-momentum=...`
+- `seagull-loop-momentum-direction=clockwise|counterclockwise|none`
+- `seagull-loop-momentum-start=...`
+- `seagull-loop-momentum-end=...`
+- `seagull-loop-momentum-offset=...`
+- `seagull-loop-momentum-label-fraction=...`
+- `seagull-loop-momentum-label-distance=...`
+- `seagull-loop-momentum-looseness=...`
+- `seagull-loop-marker-distance=auto|...`
+- `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
-In this first prototype, only `insertion=bubble` on external slot `1` of
-`topology=t-tree` is drawn. Unsupported insertion combinations are ignored.
+Currently, `insertion=bubble` and `insertion=seagull` draw on external slot
+`1` of `topology=t-tree`. Unsupported insertion combinations are ignored.
 The inserted bubble reuses the `bubble-*` key family for internal styles,
 loop momenta, endpoint indices, vertex-side external indices, and Proca /
 scalar-polarized endpoint markers. Slot-1 external momentum is drawn on the
 outer pre-insertion host segment so it does not collide with the bubble.
-When this insertion is active, the t-tree host uses roomier default geometry
-with steeper external legs and a shorter middle channel leg; explicit
+By default, that pre-insertion momentum uses a virtual guide that begins
+`0.40` pre-segment lengths before the true external endpoint; tune it with
+`insertion-pre-momentum-guide-extension=...` or set it to `0` for the old
+segment-local behavior:
+
+```tex
+insertion-pre-momentum-guide-extension=0.40,
+insertion-pre-momentum-start=0.04,
+insertion-pre-momentum-end=0.65,
+insertion-pre-momentum-label-fraction=0.40,
+```
+
+Use `insertion-pre-line=...` and `insertion-post-line=...` to style the two
+host-leg pieces independently; empty values inherit the ordinary slot-1 style.
+The pre segment is drawn as the external piece and can keep `endcap` /
+`endcapp`, while the post segment is drawn without insertion-side external
+endcaps.
+The seagull insertion draws one quartic/contact insertion vertex on the host
+leg with a single package-styled self-loop propagator that starts and ends at
+that insertion vertex. On t-tree slot `1`, `insertion-orientation=auto`
+places the seagull loop under the host edge; use
+`insertion-orientation=top` for the opposite side. The default
+`seagull-loop-looseness=1.0` uses a true oval loop, and the seagull momentum
+arc is sampled from the same loop geometry. Scalar-polarized and Proca-style
+seagull loops use vertex-aware white-filled triangular markers; the default
+`seagull-loop-marker-distance=auto` places marker tips on the insertion
+vertex edge plus `semantic-marker-tip-clearance`, and slot `3` of
+`propagator-arrow-sizes={...}` controls the marker size. When either
+insertion is active, the t-tree host uses roomier
+default geometry with steeper external
+legs and a shorter middle channel leg; explicit
 `fourpoint-xspan=...`, `fourpoint-yspan=...`, and `channel-vertex-yspan=...`
 values still override those insertion-friendly defaults.
 
@@ -2028,7 +2175,8 @@ insertion-middle-momentum-label-distance=4pt,
 ```
 
 Focused visual QA lives in
-`regressions/topologies/insertion/insertion-regression.tex`.
+`regressions/topologies/insertion/insertion-regression.tex` and
+`regressions/topologies/insertion/seagull-insertion-regression.tex`.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 

@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{feynman-fun}
+\begin{document}
+\section*{Tree-channel momentum label gaps}
+Side labels must leave a continuous arrow; centered labels retain their gap.
+
+User example: shifted label to the right.
+\[
+\TTreeChannelCorr[
+    scale=0.80,
+    show-momenta=true,
+    fourpoint-xspan=1.55,
+    fourpoint-yspan=1.55,
+    channel-vertex-yspan=0.72,
+    channel-momentum=q_1-q_4,
+    leg-styles={{chasca,endcap},{antsca,endcap},{pho,endcap},{spol,endcap}},
+    propagator-arrow-sizes={6pt,6pt,10pt,10pt,6pt},
+    channel-internal-line={chasca},
+    leg-labels={e^-,e^+,\epsilon^\nu,\epsilon^\mu},
+    momentum-labels={q_1,q_2,q_4,q_3},
+    external-momentum-flow=left-in-right-out,
+    channel-momentum-start=.24,
+    channel-momentum-end=.76,
+    channel-momentum-distance=10pt,
+    channel-momentum-angle=90,
+    channel-momentum-label-xshift=4pt,
+    channel-momentum-label-yshift=2pt,
+    momentum-label-gap=0.12
+]
+\]
+Side labels, horizontal and vertical guides:
+\[
+  \STreeChannelCorr[field={},channel-momentum=p,
+    channel-momentum-angle=90,channel-momentum-label-position=above,
+    channel-momentum-label-yshift=3pt]
+  \qquad
+  \TTreeChannelCorr[field={},channel-momentum=p,
+    channel-momentum-angle=90,channel-momentum-label-xshift=3pt]
+\]
+Explicit centered label (intentional interruption):
+\[
+  \TTreeChannelCorr[field={},channel-momentum=p,
+    channel-momentum-angle=90,
+    channel-momentum-label-position=center,
+    channel-momentum-label-xshift=0pt,
+    channel-momentum-label-yshift=0pt]
+\]
+\end{document}

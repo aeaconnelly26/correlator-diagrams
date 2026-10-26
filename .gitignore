@@ -2,6 +2,9 @@
 *.log
 *.out
 .DS_Store
+Icon?
+*.out copy
+/output/
 *.fdb_latexmk
 *.fls
 texput.log

@@ -33,6 +33,17 @@
   {\small #2}
 }
 
+\newcommand{\slopedlinecheck}[2]{%
+  \begin{tikzpicture}
+    \begin{feynhand}
+      \vertex (a) at (0,0);
+      \vertex (b) at (2.25,0.62);
+      \propag[#1] (a) to (b);
+    \end{feynhand}
+  \end{tikzpicture}\par
+  {\small #2}
+}
+
 \newcommand{\procaendpointcheck}[2]{%
   \begin{tikzpicture}
     \begin{feynhand}
@@ -201,8 +212,18 @@
 \linecheck{ewboson,circ size=15pt,circ=W}{\texttt{circ size=15pt}}
 }
 \hfill
+\diagramcell{Scaled marker}{
+\linecheck{ewboson,circ scale=0.65,circ=W}{\texttt{circ scale=0.65}}
+}
+\end{center}
+
+\begin{center}
 \diagramcell{Colored marker}{
 \linecheck{ewboson,circ fill=magenta!12,circ draw=magenta!85!red,circ=Y}{\texttt{circ fill} and \texttt{circ draw}}
+}
+\hspace{0.05\linewidth}
+\diagramcell{Scaled sloped Z}{
+\slopedlinecheck{ewboson,circ=Z,circ scale=0.65}{upright \texttt{Z}}
 }
 \end{center}
 
