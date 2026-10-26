@@ -3,6 +3,7 @@
 
 \RequirePackage{xparse}
 \RequirePackage{etoolbox}
+\RequirePackage{graphicx}
 \RequirePackage{tikz}
 \RequirePackage[compat=1.1.0]{tikz-feynhand}
 \RequirePackage{listofitems}
@@ -48,8 +49,16 @@
   circ size/.initial=12pt,
   circ fill/.initial=white,
   circ draw/.initial={},
+  circ label scale/.initial=1,
   every circ label@@/.style={},
   circ label style/.style={/tikzfeynhand/every circ label@@/.style={#1}},
+  circ scale/.code={%
+    \pgfmathsetlengthmacro{\corr@scaledcircsize}{12pt*(#1)}%
+    \pgfkeysalso{
+      /tikzfeynhand/circ size=\corr@scaledcircsize,
+      /tikzfeynhand/circ label scale=#1
+    }%
+  },
   with circ/.style={
     /tikz/decoration={
       markings,
@@ -69,7 +78,7 @@
           inner sep=0pt,
           outer sep=0pt,
           /tikzfeynhand/every circ label@@
-        ] {\corr@circlabel{#1}};
+        ] {\scalebox{\pgfkeysvalueof{/tikzfeynhand/circ label scale}}{\corr@circlabel{#1}}};
       },
     },
     /tikz/postaction={
@@ -215,6 +224,9 @@
     },
   },
   endpoint marker distance/.initial=5.4pt,
+  open arrow marker distance/.initial=5.4pt,
+  semantic marker vertex radius/.initial=2.15pt,
+  semantic marker tip clearance/.initial=0.25pt,
   endpoint cap length/.initial=0.66,
   endpoint double cap inner length/.initial=0.92,
   endpoint double cap gap/.initial=3.0pt,
@@ -309,16 +321,16 @@
     /tikz/postaction={/tikzfeynhand/with filled arrow=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
   },
   open arrow to end/.style={
-    /tikz/postaction={/tikzfeynhand/with white open arrow=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+    /tikz/postaction={/tikzfeynhand/with white open arrow=-\pgfkeysvalueof{/tikzfeynhand/open arrow marker distance}},
   },
   open arrow from end/.style={
-    /tikz/postaction={/tikzfeynhand/with reversed white open arrow=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+    /tikz/postaction={/tikzfeynhand/with reversed white open arrow=-\pgfkeysvalueof{/tikzfeynhand/open arrow marker distance}},
   },
   open arrow to start/.style={
-    /tikz/postaction={/tikzfeynhand/with reversed white open arrow=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+    /tikz/postaction={/tikzfeynhand/with reversed white open arrow=\pgfkeysvalueof{/tikzfeynhand/open arrow marker distance}},
   },
   open arrow from start/.style={
-    /tikz/postaction={/tikzfeynhand/with white open arrow=\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
+    /tikz/postaction={/tikzfeynhand/with white open arrow=\pgfkeysvalueof{/tikzfeynhand/open arrow marker distance}},
   },
   endpoint bar at end/.style={
     /tikz/postaction={/tikzfeynhand/with endpoint bar=-\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}},
@@ -359,6 +371,12 @@
 \newif\ifcorr@slotselected
 \newif\ifcorr@bubblemarkerstart
 \newif\ifcorr@bubblemarkerend
+\newif\ifcorr@seagullmarkerstart
+\newif\ifcorr@seagullmarkerend
+\newif\ifcorr@semanticspolmarkerstart
+\newif\ifcorr@semanticspolmarkerend
+\newif\ifcorr@semanticmarkerstartfilled
+\newif\ifcorr@semanticmarkerendfilled
 \newif\ifcorr@crossboxleftcirc
 \newif\ifcorr@crossboxrightcirc
 \newif\ifcorr@crossboxupcirc
@@ -631,12 +649,13 @@
 \def\corr@bubblebdir{forward}
 \def\corr@bubblemomentumlayout{manual}
 \def\corr@bubblemomentumrotation{}
-\def\corr@bubblevertexsplitleftstart{0.06}
-\def\corr@bubblevertexsplitleftend{0.35}
+\def\corr@bubblevertexsplitleftstart{0.14}
+\def\corr@bubblevertexsplitleftend{0.40}
 \def\corr@bubblevertexsplitleftlabelfraction{0.24}
-\def\corr@bubblevertexsplitrightstart{0.65}
-\def\corr@bubblevertexsplitrightend{0.94}
+\def\corr@bubblevertexsplitrightstart{0.60}
+\def\corr@bubblevertexsplitrightend{0.86}
 \def\corr@bubblevertexsplitrightlabelfraction{0.76}
+\def\corr@bubblevertexsplitoffsetscale{0.75}
 \def\corr@bubblemomentumstart{0.30}
 \def\corr@bubblemomentumend{0.70}
 \def\corr@bubblemomentumoffset{12pt}
@@ -660,13 +679,13 @@
 \def\corr@bubblebleftindexposition{north east}
 \def\corr@bubblebrightindexposition{north west}
 \def\corr@bubblealeftindexxshift{2pt}
-\def\corr@bubblearightindexxshift{-3pt}
-\def\corr@bubblebleftindexxshift{-0.5pt}
+\def\corr@bubblearightindexxshift{-3.5pt}
+\def\corr@bubblebleftindexxshift{0.4pt}
 \def\corr@bubblebrightindexxshift{0.5pt}
-\def\corr@bubblealeftindexyshift{1.5pt}
-\def\corr@bubblearightindexyshift{5pt}
-\def\corr@bubblebleftindexyshift{-1pt}
-\def\corr@bubblebrightindexyshift{-1pt}
+\def\corr@bubblealeftindexyshift{1.0pt}
+\def\corr@bubblearightindexyshift{4.5pt}
+\def\corr@bubblebleftindexyshift{0.4pt}
+\def\corr@bubblebrightindexyshift{0.4pt}
 \def\corr@bubbleleftexternalindex{}
 \def\corr@bubblerightexternalindex{}
 \def\corr@bubbleexternalindexposition{north}
@@ -682,6 +701,8 @@
 \def\corr@insertionorientation{auto}
 \def\corr@insertionscale{0.66}
 \def\corr@insertionstyle{}
+\def\corr@insertionpreline{}
+\def\corr@insertionpostline{}
 \def\corr@insertionpoststartindex{}
 \def\corr@insertionpostendindex{}
 \def\corr@insertionpoststartindexfraction{0.20}
@@ -699,6 +720,7 @@
 \def\corr@insertionpremomentumstart{0.04}
 \def\corr@insertionpremomentumend{0.65}
 \def\corr@insertionpremomentumlabelfraction{0.4}
+\def\corr@insertionpremomentumguideextension{0.40}
 \def\corr@insertionpremomentumoffset{6pt}
 \def\corr@insertionpremomentumlabelposition{above}
 \def\corr@insertionpremomentumlabeldistance{1pt}
@@ -712,6 +734,23 @@
 \def\corr@insertionpostmomentumlabeldistance{1pt}
 \def\corr@insertionpostmomentumlabelxshift{0pt}
 \def\corr@insertionpostmomentumlabelyshift{0pt}
+\def\corr@seagullloopline{ewboson}
+\def\corr@seagullloopsize{1.55}
+\def\corr@seagulllooplooseness{1.0}
+\def\corr@seagullloopmomentum{}
+\def\corr@seagullloopmomentumdirection{clockwise}
+\def\corr@seagullloopmomentumstart{0.20}
+\def\corr@seagullloopmomentumend{0.62}
+\def\corr@seagullloopmomentumoffset{9pt}
+\def\corr@seagullloopmomentumlabelfraction{0.42}
+\def\corr@seagullloopmomentumlabeldistance{4pt}
+\def\corr@seagullloopmomentumlooseness{1.0}
+\def\corr@seagullloopmarkerdistance{auto}
+\def\corr@seagullhostleftindex{}
+\def\corr@seagullhostrightindex{}
+\def\corr@seagullloopleftindex{}
+\def\corr@seagulllooprightindex{}
+\def\corr@seagullindexmathstyle{\scriptstyle}
 \def\corr@boxxspan{1.34}
 \def\corr@boxyspan{1.04}
 \def\corr@boxexternalxspan{2.10}
@@ -1515,9 +1554,22 @@
   \def\corr@insertionpostendindexfraction{#2}%
 }
 
+\newcommand{\corr@setseagullvertexindices}[1]{%
+  \expandafter\corr@@setseagullvertexindices#1,,,,\corr@bubble@stop
+}
+
+\def\corr@@setseagullvertexindices#1,#2,#3,#4,#5\corr@bubble@stop{%
+  \def\corr@seagullhostleftindex{#1}%
+  \def\corr@seagullhostrightindex{#2}%
+  \def\corr@seagullloopleftindex{#3}%
+  \def\corr@seagulllooprightindex{#4}%
+}
+
 \newcommand{\corr@resolvebubbleendpointmarkerdistance}{%
   \corr@ifstringeq{\corr@bubbleendpointmarkerdistance}{auto}{%
-    \let\corr@bubbleresolvedendpointmarkerdistance\corr@bubblevertexradius
+    \pgfmathsetlengthmacro{\corr@bubbleresolvedendpointmarkerdistance}{%
+      \corr@bubblevertexradius+
+      \pgfkeysvalueof{/tikzfeynhand/semantic marker tip clearance}}%
   }{%
     \let\corr@bubbleresolvedendpointmarkerdistance\corr@bubbleendpointmarkerdistance
   }%
@@ -1540,29 +1592,48 @@
   \def\corr@bubblemomstart{\corr@bubblemomentumstart}%
   \def\corr@bubblemomend{\corr@bubblemomentumend}%
   \def\corr@bubblemomlabelfraction{\corr@bubblemomentumlabelfraction}%
+  \def\corr@bubblevertexsplitside{none}%
   \corr@ifstringeq{\corr@bubblemomentumlayout}{vertex-split}{%
     \corr@ifstringeq{\corr@bubblemomentumrotation}{counterclockwise}{%
       \corr@ifstringeq{#1}{a}{%
+        \def\corr@bubblevertexsplitside{left}%
         \def\corr@bubblemomstart{\corr@bubblevertexsplitleftstart}%
         \def\corr@bubblemomend{\corr@bubblevertexsplitleftend}%
         \def\corr@bubblemomlabelfraction{\corr@bubblevertexsplitleftlabelfraction}%
       }{%
+        \def\corr@bubblevertexsplitside{right}%
         \def\corr@bubblemomstart{\corr@bubblevertexsplitrightstart}%
         \def\corr@bubblemomend{\corr@bubblevertexsplitrightend}%
         \def\corr@bubblemomlabelfraction{\corr@bubblevertexsplitrightlabelfraction}%
       }%
     }{%
       \corr@ifstringeq{#1}{a}{%
+        \def\corr@bubblevertexsplitside{right}%
         \def\corr@bubblemomstart{\corr@bubblevertexsplitrightstart}%
         \def\corr@bubblemomend{\corr@bubblevertexsplitrightend}%
         \def\corr@bubblemomlabelfraction{\corr@bubblevertexsplitrightlabelfraction}%
       }{%
+        \def\corr@bubblevertexsplitside{left}%
         \def\corr@bubblemomstart{\corr@bubblevertexsplitleftstart}%
         \def\corr@bubblemomend{\corr@bubblevertexsplitleftend}%
         \def\corr@bubblemomlabelfraction{\corr@bubblevertexsplitleftlabelfraction}%
       }%
     }%
   }{}%
+}
+
+\newcommand{\corr@clampbubblevertexsplitfractions}{%
+  \corr@ifstringeq{\corr@bubblevertexsplitside}{left}{%
+    \pgfmathsetmacro{\corr@bubblemomstart}{min(max(\corr@bubblemomstart,0.14),0.40)}%
+    \pgfmathsetmacro{\corr@bubblemomend}{min(max(\corr@bubblemomend,0.14),0.40)}%
+    \pgfmathsetmacro{\corr@bubblemomlabelfraction}{min(max(\corr@bubblemomlabelfraction,\corr@bubblemomstart),\corr@bubblemomend)}%
+  }{%
+    \corr@ifstringeq{\corr@bubblevertexsplitside}{right}{%
+      \pgfmathsetmacro{\corr@bubblemomstart}{min(max(\corr@bubblemomstart,0.60),0.86)}%
+      \pgfmathsetmacro{\corr@bubblemomend}{min(max(\corr@bubblemomend,0.60),0.86)}%
+      \pgfmathsetmacro{\corr@bubblemomlabelfraction}{min(max(\corr@bubblemomlabelfraction,\corr@bubblemomstart),\corr@bubblemomend)}%
+    }{}%
+  }%
 }
 
 \newcommand{\corr@ifbubblelinecontains}[4]{%
@@ -1766,7 +1837,7 @@
 }
 
 \newcommand{\corr@applyinsertionhostdefaults}{%
-  \corr@ifttreeslotonebubbleinsertion{%
+  \corr@ifttreeslotoneinsertion{%
     \ifcorr@channelvertexyspanexplicit\else
       \def\corr@channelvertexyspan{0.9}%
     \fi
@@ -1869,12 +1940,13 @@
   \corr@topologysetdefault\corr@bubblebdir{forward}%
   \corr@topologysetdefault\corr@bubblemomentumlayout{manual}%
   \corr@topologysetdefault\corr@bubblemomentumrotation{}%
-  \corr@topologysetdefault\corr@bubblevertexsplitleftstart{0.06}%
-  \corr@topologysetdefault\corr@bubblevertexsplitleftend{0.35}%
+  \corr@topologysetdefault\corr@bubblevertexsplitleftstart{0.14}%
+  \corr@topologysetdefault\corr@bubblevertexsplitleftend{0.40}%
   \corr@topologysetdefault\corr@bubblevertexsplitleftlabelfraction{0.24}%
-  \corr@topologysetdefault\corr@bubblevertexsplitrightstart{0.65}%
-  \corr@topologysetdefault\corr@bubblevertexsplitrightend{0.94}%
+  \corr@topologysetdefault\corr@bubblevertexsplitrightstart{0.60}%
+  \corr@topologysetdefault\corr@bubblevertexsplitrightend{0.86}%
   \corr@topologysetdefault\corr@bubblevertexsplitrightlabelfraction{0.76}%
+  \corr@topologysetdefault\corr@bubblevertexsplitoffsetscale{0.75}%
   \corr@topologysetdefault\corr@bubblemomentumstart{0.30}%
   \corr@topologysetdefault\corr@bubblemomentumend{0.70}%
   \corr@topologysetdefault\corr@bubblemomentumoffset{12pt}%
@@ -1898,13 +1970,13 @@
   \corr@topologysetdefault\corr@bubblebleftindexposition{north east}%
   \corr@topologysetdefault\corr@bubblebrightindexposition{north west}%
   \corr@topologysetdefault\corr@bubblealeftindexxshift{2pt}%
-  \corr@topologysetdefault\corr@bubblearightindexxshift{-3pt}%
-  \corr@topologysetdefault\corr@bubblebleftindexxshift{-0.5pt}%
+  \corr@topologysetdefault\corr@bubblearightindexxshift{-3.5pt}%
+  \corr@topologysetdefault\corr@bubblebleftindexxshift{0.4pt}%
   \corr@topologysetdefault\corr@bubblebrightindexxshift{0.5pt}%
-  \corr@topologysetdefault\corr@bubblealeftindexyshift{1.5pt}%
-  \corr@topologysetdefault\corr@bubblearightindexyshift{5pt}%
-  \corr@topologysetdefault\corr@bubblebleftindexyshift{-1pt}%
-  \corr@topologysetdefault\corr@bubblebrightindexyshift{-1pt}%
+  \corr@topologysetdefault\corr@bubblealeftindexyshift{1.0pt}%
+  \corr@topologysetdefault\corr@bubblearightindexyshift{4.5pt}%
+  \corr@topologysetdefault\corr@bubblebleftindexyshift{0.4pt}%
+  \corr@topologysetdefault\corr@bubblebrightindexyshift{0.4pt}%
   \corr@topologysetdefault\corr@bubbleleftexternalindex{}%
   \corr@topologysetdefault\corr@bubblerightexternalindex{}%
   \corr@topologysetdefault\corr@bubbleexternalindexposition{north}%
@@ -1931,12 +2003,13 @@
   \corr@topologysetdefault\corr@bubblebdir{forward}%
   \corr@topologysetdefault\corr@bubblemomentumlayout{manual}%
   \corr@topologysetdefault\corr@bubblemomentumrotation{}%
-  \corr@topologysetdefault\corr@bubblevertexsplitleftstart{0.06}%
-  \corr@topologysetdefault\corr@bubblevertexsplitleftend{0.35}%
+  \corr@topologysetdefault\corr@bubblevertexsplitleftstart{0.14}%
+  \corr@topologysetdefault\corr@bubblevertexsplitleftend{0.40}%
   \corr@topologysetdefault\corr@bubblevertexsplitleftlabelfraction{0.24}%
-  \corr@topologysetdefault\corr@bubblevertexsplitrightstart{0.65}%
-  \corr@topologysetdefault\corr@bubblevertexsplitrightend{0.94}%
+  \corr@topologysetdefault\corr@bubblevertexsplitrightstart{0.60}%
+  \corr@topologysetdefault\corr@bubblevertexsplitrightend{0.86}%
   \corr@topologysetdefault\corr@bubblevertexsplitrightlabelfraction{0.76}%
+  \corr@topologysetdefault\corr@bubblevertexsplitoffsetscale{0.75}%
   \corr@topologysetdefault\corr@bubblemomentumstart{0.30}%
   \corr@topologysetdefault\corr@bubblemomentumend{0.70}%
   \corr@topologysetdefault\corr@bubblemomentumoffset{12pt}%
@@ -1960,13 +2033,13 @@
   \corr@topologysetdefault\corr@bubblebleftindexposition{north east}%
   \corr@topologysetdefault\corr@bubblebrightindexposition{north west}%
   \corr@topologysetdefault\corr@bubblealeftindexxshift{2pt}%
-  \corr@topologysetdefault\corr@bubblearightindexxshift{-3pt}%
-  \corr@topologysetdefault\corr@bubblebleftindexxshift{-0.5pt}%
+  \corr@topologysetdefault\corr@bubblearightindexxshift{-3.5pt}%
+  \corr@topologysetdefault\corr@bubblebleftindexxshift{0.4pt}%
   \corr@topologysetdefault\corr@bubblebrightindexxshift{0.5pt}%
-  \corr@topologysetdefault\corr@bubblealeftindexyshift{1.5pt}%
-  \corr@topologysetdefault\corr@bubblearightindexyshift{5pt}%
-  \corr@topologysetdefault\corr@bubblebleftindexyshift{-1pt}%
-  \corr@topologysetdefault\corr@bubblebrightindexyshift{-1pt}%
+  \corr@topologysetdefault\corr@bubblealeftindexyshift{1.0pt}%
+  \corr@topologysetdefault\corr@bubblearightindexyshift{4.5pt}%
+  \corr@topologysetdefault\corr@bubblebleftindexyshift{0.4pt}%
+  \corr@topologysetdefault\corr@bubblebrightindexyshift{0.4pt}%
   \corr@topologysetdefault\corr@bubbleleftexternalindex{}%
   \corr@topologysetdefault\corr@bubblerightexternalindex{}%
   \corr@topologysetdefault\corr@bubbleexternalindexposition{north}%
@@ -1985,6 +2058,8 @@
   \def\corr@insertionorientation{auto}%
   \def\corr@insertionscale{0.66}%
   \def\corr@insertionstyle{}%
+  \def\corr@insertionpreline{}%
+  \def\corr@insertionpostline{}%
   \def\corr@insertionpoststartindex{}%
   \def\corr@insertionpostendindex{}%
   \def\corr@insertionpoststartindexfraction{0.20}%
@@ -2002,6 +2077,7 @@
   \def\corr@insertionpremomentumstart{0.04}%
   \def\corr@insertionpremomentumend{0.65}%
   \def\corr@insertionpremomentumlabelfraction{0.4}%
+  \def\corr@insertionpremomentumguideextension{0.40}%
   \def\corr@insertionpremomentumoffset{6pt}%
   \def\corr@insertionpremomentumlabelposition{above}%
   \def\corr@insertionpremomentumlabeldistance{1pt}%
@@ -2022,6 +2098,26 @@
   \def\corr@insertionmiddlemomentumlabelyshift{0pt}%
   \def\corr@insertionmiddlemomentumlabelposition{right}%
   \def\corr@insertionmiddlemomentumlabeldistance{4pt}%
+}
+
+\newcommand{\corr@resetseagullinsertiondefaults}{%
+  \corr@topologysetdefault\corr@seagullloopline{ewboson}%
+  \corr@topologysetdefault\corr@seagullloopsize{1.55}%
+  \corr@topologysetdefault\corr@seagulllooplooseness{1.0}%
+  \corr@topologysetdefault\corr@seagullloopmomentum{}%
+  \corr@topologysetdefault\corr@seagullloopmomentumdirection{clockwise}%
+  \corr@topologysetdefault\corr@seagullloopmomentumstart{0.20}%
+  \corr@topologysetdefault\corr@seagullloopmomentumend{0.62}%
+  \corr@topologysetdefault\corr@seagullloopmomentumoffset{9pt}%
+  \corr@topologysetdefault\corr@seagullloopmomentumlabelfraction{0.42}%
+  \corr@topologysetdefault\corr@seagullloopmomentumlabeldistance{4pt}%
+  \corr@topologysetdefault\corr@seagullloopmomentumlooseness{1.0}%
+  \corr@topologysetdefault\corr@seagullloopmarkerdistance{auto}%
+  \corr@topologysetdefault\corr@seagullhostleftindex{}%
+  \corr@topologysetdefault\corr@seagullhostrightindex{}%
+  \corr@topologysetdefault\corr@seagullloopleftindex{}%
+  \corr@topologysetdefault\corr@seagulllooprightindex{}%
+  \corr@topologysetdefault\corr@seagullindexmathstyle{\scriptstyle}%
 }
 
 \newcommand{\corr@topologysetdefault}[2]{%
@@ -2547,6 +2643,11 @@
   endpoint-cap-length/.code={\tikzfeynhandset{endpoint cap length={#1}}},
   endpoint-double-cap-inner-length/.code={\tikzfeynhandset{endpoint double cap inner length={#1}}},
   endpoint-double-cap-gap/.code={\tikzfeynhandset{endpoint double cap gap={#1}}},
+  semantic-marker-vertex-radius/.code={\tikzfeynhandset{semantic marker vertex radius={#1}}},
+  semantic-marker-tip-clearance/.code={%
+    \tikzfeynhandset{semantic marker tip clearance={#1}}%
+  },
+  semantic-open-arrow-tip-clearance/.style={semantic-marker-tip-clearance={#1}},
   endcap-length/.style={endpoint-cap-length={#1}},
   endcapp-inner-length/.style={endpoint-double-cap-inner-length={#1}},
   endcapp-gap/.style={endpoint-double-cap-gap={#1}},
@@ -3643,6 +3744,7 @@
   bubble-vertex-split-near-right-start/.style={bubble-vertex-split-right-start={#1}},
   bubble-vertex-split-near-right-end/.style={bubble-vertex-split-right-end={#1}},
   bubble-vertex-split-near-right-label-fraction/.style={bubble-vertex-split-right-label-fraction={#1}},
+  bubble-vertex-split-offset-scale/.store in=\corr@bubblevertexsplitoffsetscale,
   bubble-momentum-start/.store in=\corr@bubblemomentumstart,
   bubble-momentum-end/.store in=\corr@bubblemomentumend,
   bubble-momentum-offset/.store in=\corr@bubblemomentumoffset,
@@ -3707,6 +3809,10 @@
   insertion-orientation/.store in=\corr@insertionorientation,
   insertion-scale/.store in=\corr@insertionscale,
   insertion-style/.store in=\corr@insertionstyle,
+  insertion-pre-line/.store in=\corr@insertionpreline,
+  insertion-post-line/.store in=\corr@insertionpostline,
+  insertion-outer-line/.style={insertion-pre-line={#1}},
+  insertion-inner-line/.style={insertion-post-line={#1}},
   insertion-post-indices/.code={\corr@setinsertionpostindices{#1}},
   insertion-post-bubble-index/.store in=\corr@insertionpoststartindex,
   insertion-post-vertex-index/.store in=\corr@insertionpostendindex,
@@ -3743,6 +3849,7 @@
   insertion-pre-momentum-start/.store in=\corr@insertionpremomentumstart,
   insertion-pre-momentum-end/.store in=\corr@insertionpremomentumend,
   insertion-pre-momentum-label-fraction/.store in=\corr@insertionpremomentumlabelfraction,
+  insertion-pre-momentum-guide-extension/.store in=\corr@insertionpremomentumguideextension,
   insertion-pre-momentum-offset/.store in=\corr@insertionpremomentumoffset,
   insertion-pre-momentum-label-position/.code={\corr@storesunsetanchor{corr@insertionpremomentumlabelposition}{#1}},
   insertion-pre-momentum-label-distance/.store in=\corr@insertionpremomentumlabeldistance,
@@ -3759,6 +3866,7 @@
   insertion-outer-momentum-start/.style={insertion-pre-momentum-start={#1}},
   insertion-outer-momentum-end/.style={insertion-pre-momentum-end={#1}},
   insertion-outer-momentum-label-fraction/.style={insertion-pre-momentum-label-fraction={#1}},
+  insertion-outer-momentum-guide-extension/.style={insertion-pre-momentum-guide-extension={#1}},
   insertion-outer-momentum-offset/.style={insertion-pre-momentum-offset={#1}},
   insertion-outer-momentum-label-position/.style={insertion-pre-momentum-label-position={#1}},
   insertion-outer-momentum-label-distance/.style={insertion-pre-momentum-label-distance={#1}},
@@ -3786,6 +3894,23 @@
   insertion-channel-momentum-label-yshift/.style={insertion-middle-momentum-label-yshift={#1}},
   insertion-channel-momentum-label-position/.style={insertion-middle-momentum-label-position={#1}},
   insertion-channel-momentum-label-distance/.style={insertion-middle-momentum-label-distance={#1}},
+  seagull-loop-line/.store in=\corr@seagullloopline,
+  seagull-loop-size/.store in=\corr@seagullloopsize,
+  seagull-loop-looseness/.store in=\corr@seagulllooplooseness,
+  seagull-loop-momentum/.store in=\corr@seagullloopmomentum,
+  seagull-loop-momentum-direction/.is choice,
+  seagull-loop-momentum-direction/clockwise/.code={\def\corr@seagullloopmomentumdirection{clockwise}},
+  seagull-loop-momentum-direction/counterclockwise/.code={\def\corr@seagullloopmomentumdirection{counterclockwise}},
+  seagull-loop-momentum-direction/none/.code={\def\corr@seagullloopmomentumdirection{none}},
+  seagull-loop-momentum-direction/default/.style={seagull-loop-momentum-direction=clockwise},
+  seagull-loop-momentum-start/.store in=\corr@seagullloopmomentumstart,
+  seagull-loop-momentum-end/.store in=\corr@seagullloopmomentumend,
+  seagull-loop-momentum-offset/.store in=\corr@seagullloopmomentumoffset,
+  seagull-loop-momentum-label-fraction/.store in=\corr@seagullloopmomentumlabelfraction,
+  seagull-loop-momentum-label-distance/.store in=\corr@seagullloopmomentumlabeldistance,
+  seagull-loop-momentum-looseness/.store in=\corr@seagullloopmomentumlooseness,
+  seagull-loop-marker-distance/.store in=\corr@seagullloopmarkerdistance,
+  seagull-vertex-indices/.code={\corr@setseagullvertexindices{#1}},
   field/.store in=\corr@field,
   indices/.store in=\corr@indices,
   leg-labels/.store in=\corr@leglabels,
@@ -3995,6 +4120,118 @@
   \fi
 }
 
+\def\corr@semanticmarkerqueue{}
+
+\newcommand{\corr@clearsemanticmarkerqueue}{%
+  \gdef\corr@semanticmarkerqueue{}%
+}
+
+\newcommand{\corr@flushsemanticmarkerqueue}{%
+  \corr@semanticmarkerqueue
+  \gdef\corr@semanticmarkerqueue{}%
+}
+
+\newcommand{\corr@drawsemanticendpointmarker}[5]{%
+  \corr@resolvesemanticmarkerdimensions{#1}%
+  \corr@resolvesemanticmarkertipdistance
+  \coordinate (corrSemanticMarkerTip) at ($(#2)!\corr@semanticmarkertipdistance!(#3)$);
+  \coordinate (corrSemanticMarkerBack) at ($(corrSemanticMarkerTip)!\corr@semanticmarkerheight!(#3)$);
+  \coordinate (corrSemanticMarkerSideA) at ($(corrSemanticMarkerBack)!\corr@semanticmarkerhalfwidth!90:(corrSemanticMarkerTip)$);
+  \coordinate (corrSemanticMarkerSideB) at ($(corrSemanticMarkerBack)!\corr@semanticmarkerhalfwidth!-90:(corrSemanticMarkerTip)$);
+  \corr@ifstringeq{#4}{filled}{%
+    \draw[
+      line width=0.7\feynhandlinesize,
+      line join=round,
+      line cap=round,
+      #5,
+      fill
+    ] (corrSemanticMarkerTip) -- (corrSemanticMarkerSideA) -- (corrSemanticMarkerSideB) -- cycle;
+  }{%
+    \draw[
+      line width=0.7\feynhandlinesize,
+      line join=round,
+      line cap=round,
+      #5,
+      fill=white
+    ] (corrSemanticMarkerTip) -- (corrSemanticMarkerSideA) -- (corrSemanticMarkerSideB) -- cycle;
+  }%
+}
+
+\newcommand{\corr@resolvesemanticmarkertipdistance}{%
+  \pgfmathsetlengthmacro{\corr@semanticmarkertipdistance}{%
+    \pgfkeysvalueof{/tikzfeynhand/semantic marker vertex radius}+
+    \pgfkeysvalueof{/tikzfeynhand/semantic marker tip clearance}}%
+}
+
+\newcommand{\corr@resolvesemanticmarkerdimensions}[1]{%
+  \corr@resolveproparrowsize{#1}%
+  \pgfmathsetlengthmacro{\corr@semanticmarkerside}{\corr@resolvedproparrowsize}%
+  \pgfmathsetlengthmacro{\corr@semanticmarkerheight}{0.8660254*\corr@semanticmarkerside}%
+  \pgfmathsetlengthmacro{\corr@semanticmarkerhalfwidth}{0.5*\corr@semanticmarkerside}%
+}
+
+\newcommand{\corr@queuesemanticendpointmarker}[5]{%
+  \begingroup
+  \edef\corr@semanticmarkerappend{%
+    \endgroup
+    \noexpand\gappto\noexpand\corr@semanticmarkerqueue{%
+      \noexpand\corr@drawsemanticendpointmarker{#1}{#2}{#3}{#4}{#5}%
+    }%
+  }%
+  \corr@semanticmarkerappend
+}
+
+\newcommand{\corr@drawsemanticopenendpointmarkerfromsidecoords}[5]{%
+  \draw[
+    line width=0.7\feynhandlinesize,
+    line join=round,
+    line cap=round,
+    #5,
+    fill=white
+  ] (#2) -- (#3) -- (#4) -- cycle;
+}
+
+\newcommand{\corr@queuesemanticopenendpointmarkerfromsidecoords}[5]{%
+  \begingroup
+  \edef\corr@semanticmarkerappend{%
+    \endgroup
+    \noexpand\gappto\noexpand\corr@semanticmarkerqueue{%
+      \noexpand\corr@drawsemanticopenendpointmarkerfromsidecoords{#1}{#2}{#3}{#4}{#5}%
+    }%
+  }%
+  \corr@semanticmarkerappend
+}
+
+% Keep the marker size independent of the distance between curve samples.
+% #7 -> #8 supplies the outward tangent at either endpoint; #6 remains the
+% legacy axis guide so existing private callers keep the same signature.
+\newcommand{\corr@queuesemanticopenendpointmarkerfromcurvetangent}[9]{%
+  \corr@resolvesemanticmarkerdimensions{#1}%
+  \coordinate (#2Tip) at ($(#4)!#3!(#5)$);
+  \coordinate (#2TangentTarget) at ($(#2Tip)+(#8)-(#7)$);
+  \coordinate (#2BaseCenter) at ($(#2Tip)!\corr@semanticmarkerheight!(#2TangentTarget)$);
+  \coordinate (#2SideA) at ($(#2BaseCenter)!\corr@semanticmarkerhalfwidth!90:(#2Tip)$);
+  \coordinate (#2SideB) at ($(#2BaseCenter)!\corr@semanticmarkerhalfwidth!-90:(#2Tip)$);
+  \corr@queuesemanticopenendpointmarkerfromsidecoords{#1}{#2Tip}{#2SideA}{#2SideB}{#9}%
+}
+
+\newcommand{\corr@drawsemanticspolmarkers}[3]{%
+  \ifcorr@semanticspolmarkerstart
+    \ifcorr@semanticmarkerstartfilled
+      \corr@queuesemanticendpointmarker{#1}{#2}{#3}{filled}{\corr@semanticmarkeroptions}%
+    \else
+      \corr@queuesemanticendpointmarker{#1}{#2}{#3}{open}{\corr@semanticmarkeroptions}%
+    \fi
+  \fi
+  \ifcorr@semanticspolmarkerend
+    \ifcorr@semanticmarkerendfilled
+      \corr@queuesemanticendpointmarker{#1}{#3}{#2}{filled}{\corr@semanticmarkeroptions}%
+    \else
+      \corr@queuesemanticendpointmarker{#1}{#3}{#2}{open}{\corr@semanticmarkeroptions}%
+    \fi
+  \fi
+}
+
 \newcommand{\corr@appendpropcolor}{%
   \ifdefempty{\corr@color}{}{%
     \edef\corr@propoptions{\corr@propoptions,\corr@color}%
@@ -4187,7 +4424,9 @@
   \edef\corr@propoptions{\corr@legstylefor{#2}}%
   \corr@appendproparrowsize{#2}%
   \corr@appendpropcolor
+  \corr@orientpropoptionstoend
   \corr@propagwithexternalendcaps{#3}{#4}%
+  \corr@drawsemanticspolmarkers{#2}{#3}{#4}%
 }
 
 \newcommand{\corr@putmomentumlabelat}[5]{%
@@ -4526,21 +4765,28 @@
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxexternalcolor}%
+  \corr@orientpropoptionstoend
   \corr@propagwithexternalendcaps{#2}{#3}%
+  \corr@drawsemanticspolmarkers{#1}{#2}{#3}%
 }
 
 \newcommand{\corr@drawboxinternalprop}[4]{%
   \edef\corr@boxspecificline{#2}%
   \ifdefempty{\corr@boxspecificline}{%
-    \edef\corr@propoptions{\corr@boxline}%
+    \edef\corr@boxresolvedinternalline{\corr@boxline}%
   }{%
-    \edef\corr@propoptions{#2}%
+    \edef\corr@boxresolvedinternalline{#2}%
   }%
+  \corr@semanticstyleinternal{\corr@boxresolvedinternalline}%
+  \edef\corr@propoptions{\corr@orientedstyle}%
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
+  \ifdefempty{\corr@boxcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@boxcolor}}%
+  \ifdefempty{\corr@boxinternalcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@boxinternalcolor}}%
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+  \corr@drawsemanticspolmarkers{#1}{#3}{#4}%
 }
 
 \newcommand{\corr@topologydefaultstylefor}[2]{%
@@ -4603,14 +4849,75 @@
   }%
 }
 
+\newcommand{\corr@appendsemanticmarkerstyleitem}[1]{%
+  \ifdefempty{\corr@semanticmarkeroptions}{%
+    \def\corr@semanticmarkeroptions{#1}%
+  }{%
+    \appto\corr@semanticmarkeroptions{,#1}%
+  }%
+}
+
+\newcommand{\corr@maybecapturesemanticmarkerstyle}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \corr@ifstringeq{\corr@thisstyleitem}{black}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{white}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{red}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{green}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{blue}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{cyan}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{magenta}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{yellow}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{orange}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{purple}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{gray}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{fieldA}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{fieldB}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+  \corr@ifstringeq{\corr@thisstyleitem}{fieldC}{\corr@appendsemanticmarkerstyleitem{#1}}{%
+    \edef\corr@semanticmarkerbang{!}%
+    \edef\corr@semanticmarkercolorprobe{\noexpand\in@{\corr@semanticmarkerbang}{\corr@thisstyleitem}}%
+    \corr@semanticmarkercolorprobe
+    \ifin@
+      \corr@appendsemanticmarkerstyleitem{#1}%
+    \else
+      \edef\corr@semanticmarkercolorprefix{color=}%
+      \edef\corr@semanticmarkercolorprefixprobe{\noexpand\in@{\corr@semanticmarkercolorprefix}{\corr@thisstyleitem}}%
+      \corr@semanticmarkercolorprefixprobe
+      \ifin@
+        \corr@appendsemanticmarkerstyleitem{#1}%
+      \fi
+    \fi
+  }}}}}}}}}}}}}}%
+}
+
 \newcommand{\corr@appendcurrentstyleitem}{%
   \expandafter\corr@appendorientedstyleitem\expandafter{\corr@thisstyleitem}%
+  \expandafter\corr@maybecapturesemanticmarkerstyle\expandafter{\corr@thisstyleitem}%
+}
+
+\newcommand{\corr@setsemanticmarkerstartopen}{%
+  \corr@semanticspolmarkerstarttrue
+  \corr@semanticmarkerstartfilledfalse
+}
+
+\newcommand{\corr@setsemanticmarkerendopen}{%
+  \corr@semanticspolmarkerendtrue
+  \corr@semanticmarkerendfilledfalse
+}
+
+\newcommand{\corr@setsemanticmarkerstartfilled}{%
+  \corr@semanticspolmarkerstarttrue
+  \corr@semanticmarkerstartfilledtrue
+}
+
+\newcommand{\corr@setsemanticmarkerendfilled}{%
+  \corr@semanticspolmarkerendtrue
+  \corr@semanticmarkerendfilledtrue
 }
 
 \newcommand{\corr@scalarorientedstyletoend}{%
   \corr@appendorientedstyleitem{/tikzfeynhand/scalar}%
   \corr@appendorientedstyleitem{/tikzfeynhand/every scalar polarized base@@}%
-  \corr@appendorientedstyleitem{/tikzfeynhand/open arrow to end}%
+  \corr@setsemanticmarkerendopen
 }
 
 \newcommand{\corr@epspolorientedstyletoend}{%
@@ -4621,7 +4928,7 @@
 \newcommand{\corr@scalarorientedstyletostart}{%
   \corr@appendorientedstyleitem{/tikzfeynhand/scalar}%
   \corr@appendorientedstyleitem{/tikzfeynhand/every scalar polarized base@@}%
-  \corr@appendorientedstyleitem{/tikzfeynhand/open arrow to start}%
+  \corr@setsemanticmarkerstartopen
 }
 
 \newcommand{\corr@epspolorientedstyletostart}{%
@@ -4629,52 +4936,93 @@
   \corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}%
 }
 
+\newcommand{\corr@procaorientedstyle}{%
+  \corr@appendorientedstyleitem{/tikzfeynhand/proca line}%
+  \corr@setsemanticmarkerstartopen
+  \corr@setsemanticmarkerendopen
+}
+
+\newcommand{\corr@procastartorientedstyle}{%
+  \corr@appendorientedstyleitem{/tikzfeynhand/proca line}%
+  \corr@setsemanticmarkerstartopen
+}
+
+\newcommand{\corr@procaendorientedstyle}{%
+  \corr@appendorientedstyleitem{/tikzfeynhand/proca line}%
+  \corr@setsemanticmarkerendopen
+}
+
+\newcommand{\corr@markstylehandled}{\def\corr@stylehandled{1}}
+
 \newcommand{\corr@orientstyleitemtoend}[1]{%
   \edef\corr@thisstyleitem{#1}%
-  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{\corr@scalarorientedstyletoend}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{\corr@scalarorientedstyletoend}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{spol}{\corr@scalarorientedstyletoend}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{\corr@scalarorientedstyletoend}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{\corr@scalarorientedstyletoend}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{arrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow to end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{arrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow from end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{openarrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow to end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{openarrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow from end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcap}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{\corr@epspolorientedstyletoend}{%
-    \corr@appendcurrentstyleitem
-  }}}}}}}}}}}}}}}}%
+  \def\corr@stylehandled{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spol}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolin}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolout}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolin}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolout}{\corr@scalarorientedstyletoend\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{Proca}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca base}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca start}{\corr@procastartorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca end}{\corr@procaendorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowin}{\corr@setsemanticmarkerendfilled\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowout}{\corr@setsemanticmarkerendfilled\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowin}{\corr@setsemanticmarkerendopen\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowout}{\corr@setsemanticmarkerendopen\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcap}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{\corr@epspolorientedstyletoend\corr@markstylehandled}{}%
+  \ifdefempty{\corr@stylehandled}{\corr@appendcurrentstyleitem}{}%
 }
 
 \newcommand{\corr@orientstyleitemtostart}[1]{%
   \edef\corr@thisstyleitem{#1}%
-  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{\corr@scalarorientedstyletostart}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{\corr@scalarorientedstyletostart}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{spol}{\corr@scalarorientedstyletostart}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{\corr@scalarorientedstyletostart}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{\corr@scalarorientedstyletostart}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{arrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow to start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{arrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/filled arrow from start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{openarrowin}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow to start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{openarrowout}{\corr@appendorientedstyleitem{/tikzfeynhand/open arrow from start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcap}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}}{%
-  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{\corr@epspolorientedstyletostart}{%
-    \corr@appendcurrentstyleitem
-  }}}}}}}}}}}}}}}}%
+  \def\corr@stylehandled{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spol}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolin}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolout}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolin}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolout}{\corr@scalarorientedstyletostart\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{Proca}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca base}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca start}{\corr@procastartorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca end}{\corr@procaendorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowin}{\corr@setsemanticmarkerstartfilled\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowout}{\corr@setsemanticmarkerstartfilled\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowin}{\corr@setsemanticmarkerstartopen\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowout}{\corr@setsemanticmarkerstartopen\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at start}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcap}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint bar at end}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at start}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{\corr@appendorientedstyleitem{/tikzfeynhand/endpoint double bar at end}\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{\corr@epspolorientedstyletostart\corr@markstylehandled}{}%
+  \ifdefempty{\corr@stylehandled}{\corr@appendcurrentstyleitem}{}%
 }
 
 \newcommand{\corr@scalarstyletoend}[1]{%
   \def\corr@orientedstyle{}%
+  \def\corr@semanticmarkeroptions{}%
+  \corr@semanticspolmarkerstartfalse
+  \corr@semanticspolmarkerendfalse
+  \corr@semanticmarkerstartfilledfalse
+  \corr@semanticmarkerendfilledfalse
   \@for\corr@styleitem:=#1\do{%
     \expandafter\corr@orientstyleitemtoend\expandafter{\corr@styleitem}%
   }%
@@ -4682,9 +5030,58 @@
 
 \newcommand{\corr@scalarstyletostart}[1]{%
   \def\corr@orientedstyle{}%
+  \def\corr@semanticmarkeroptions{}%
+  \corr@semanticspolmarkerstartfalse
+  \corr@semanticspolmarkerendfalse
+  \corr@semanticmarkerstartfilledfalse
+  \corr@semanticmarkerendfilledfalse
   \@for\corr@styleitem:=#1\do{%
     \expandafter\corr@orientstyleitemtostart\expandafter{\corr@styleitem}%
   }%
+}
+
+\newcommand{\corr@internalstyleitem}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \def\corr@stylehandled{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{Proca}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca base}{\corr@procaorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca start}{\corr@procastartorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca end}{\corr@procaendorientedstyle\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowin}{\corr@setsemanticmarkerendfilled\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{arrowout}{\corr@setsemanticmarkerendfilled\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowin}{\corr@setsemanticmarkerendopen\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{openarrowout}{\corr@setsemanticmarkerendopen\corr@markstylehandled}{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolin}{%
+    \corr@appendorientedstyleitem{/tikzfeynhand/scalar}%
+    \corr@appendorientedstyleitem{/tikzfeynhand/every scalar polarized base@@}%
+    \corr@setsemanticmarkerendopen
+    \corr@markstylehandled
+  }{}%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolout}{%
+    \corr@appendorientedstyleitem{/tikzfeynhand/scalar}%
+    \corr@appendorientedstyleitem{/tikzfeynhand/every scalar polarized base@@}%
+    \corr@setsemanticmarkerstartopen
+    \corr@markstylehandled
+  }{}%
+  \ifdefempty{\corr@stylehandled}{\corr@appendcurrentstyleitem}{}%
+}
+
+\newcommand{\corr@semanticstyleinternal}[1]{%
+  \def\corr@orientedstyle{}%
+  \def\corr@semanticmarkeroptions{}%
+  \corr@semanticspolmarkerstartfalse
+  \corr@semanticspolmarkerendfalse
+  \corr@semanticmarkerstartfilledfalse
+  \corr@semanticmarkerendfilledfalse
+  \@for\corr@styleitem:=#1\do{%
+    \expandafter\corr@internalstyleitem\expandafter{\corr@styleitem}%
+  }%
+}
+
+\newcommand{\corr@orientpropoptionstoend}{%
+  \expandafter\corr@scalarstyletoend\expandafter{\corr@propoptions}%
+  \edef\corr@propoptions{\corr@orientedstyle}%
 }
 
 \newcommand{\corr@appendhalfboxpropcolor}[1]{%
@@ -4712,6 +5109,7 @@
   \corr@appendproparrowsize{#1}%
   \corr@appendhalfboxpropcolor{#1}%
   \corr@propagwithexternalendcaps{#2}{#3}%
+  \corr@drawsemanticspolmarkers{#1}{#2}{#3}%
 }
 
 \newcommand{\corr@drawhalfboxorientedprop}[4]{%
@@ -4737,6 +5135,7 @@
   \corr@appendproparrowsize{#1}%
   \corr@appendhalfboxpropcolor{#1}%
   \corr@propagwithexternalendcaps{#2}{#3}%
+  \corr@drawsemanticspolmarkers{#1}{#2}{#3}%
 }
 
 \newcommand{\corr@drawflatcontactprop}[3]{%
@@ -4745,6 +5144,7 @@
   \corr@appendproparrowsize{#1}%
   \corr@appendflatcontactpropcolor{#1}%
   \corr@propagwithexternalendcaps{#2}{#3}%
+  \corr@drawsemanticspolmarkers{#1}{#2}{#3}%
 }
 
 \newcommand{\corr@drawflatcontactorientedprop}[4]{%
@@ -4759,6 +5159,7 @@
   \corr@appendproparrowsize{#1}%
   \corr@appendflatcontactpropcolor{#1}%
   \corr@propagwithexternalendcaps{#2}{#3}%
+  \corr@drawsemanticspolmarkers{#1}{#2}{#3}%
 }
 
 % Resolve a half-box leg's momentum direction. A nonempty per-leg
@@ -5054,7 +5455,7 @@
     inner sep=0pt,
     outer sep=0pt,
     /tikzfeynhand/every circ label@@
-  ] at (#1) {\expandafter\corr@circlabel\expandafter{\corr@manualcirclabel}};
+  ] at (#1) {\scalebox{\pgfkeysvalueof{/tikzfeynhand/circ label scale}}{\expandafter\corr@circlabel\expandafter{\corr@manualcirclabel}}};
 }
 
 \newcommand{\corr@placehalfboxlowercircs}{%
@@ -5129,17 +5530,24 @@
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@trianglecontactcolor}%
   \corr@appendpropcolorvalue{\corr@trianglecontactexternalcolor}%
+  \corr@orientpropoptionstoend
   \corr@propagwithexternalendcaps{#2}{#3}%
+  \corr@drawsemanticspolmarkers{#1}{#2}{#3}%
 }
 
 \newcommand{\corr@drawtrianglecontactinternalprop}[3]{%
   \corr@trianglecontactinternallinefor{#1}%
   \corr@trianglecontactstylefor{#1}{\corr@trianglecontactresolvedinternalline}%
+  \corr@semanticstyleinternal{\corr@propoptions}%
+  \edef\corr@propoptions{\corr@orientedstyle}%
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@trianglecontactcolor}%
   \corr@appendpropcolorvalue{\corr@trianglecontactinternalcolor}%
+  \ifdefempty{\corr@trianglecontactcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@trianglecontactcolor}}%
+  \ifdefempty{\corr@trianglecontactinternalcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@trianglecontactinternalcolor}}%
   \expandafter\propag\expandafter[\corr@propoptions] (#2) to (#3);
+  \corr@drawsemanticspolmarkers{#1}{#2}{#3}%
 }
 
 \newcommand{\corr@drawtrianglecontactmomentum}[4]{%
@@ -5279,16 +5687,20 @@
 
 \newcommand{\corr@drawhalfboxbridge}[2]{%
   \ifcorr@lineexplicit
-    \edef\corr@propoptions{\corr@line}%
+    \edef\corr@halfboxresolvedbridgeline{\corr@line}%
   \else
     \ifdefempty{\corr@halfboxbridgeline}{%
-      \edef\corr@propoptions{\corr@halfboxline}%
+      \edef\corr@halfboxresolvedbridgeline{\corr@halfboxline}%
     }{%
-      \edef\corr@propoptions{\corr@halfboxbridgeline}%
+      \edef\corr@halfboxresolvedbridgeline{\corr@halfboxbridgeline}%
     }%
   \fi
+  \corr@semanticstyleinternal{\corr@halfboxresolvedbridgeline}%
+  \edef\corr@propoptions{\corr@orientedstyle}%
   \ifdefempty{\corr@halfboxbridgecolor}{\corr@appendpropcolor}{\corr@appendpropcolorvalue{\corr@halfboxbridgecolor}}%
+  \ifdefempty{\corr@halfboxbridgecolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@halfboxbridgecolor}}%
   \expandafter\propag\expandafter[\corr@propoptions] (#1) to (#2);
+  \corr@drawsemanticspolmarkers{5}{#1}{#2}%
 }
 
 \newcommand{\corr@puthalfboxbridgelabel}{%
@@ -5701,33 +6113,33 @@
   \edef\corr@propoptions{\corr@bubblebasepropoptions}%
 }
 
-\newcommand{\corr@drawbubbleendpointmarker}[2]{%
-  \pgfmathanglebetweenpoints{\pgfpointanchor{#1}{center}}{\pgfpointanchor{#2}{center}}%
-  \edef\corr@bubblemarkerangle{\pgfmathresult}%
-  \coordinate (corrBubbleMarkerSideA) at ([shift={({\corr@bubblemarkerangle+150}:\corr@resolvedproparrowsize)}]#2);
-  \coordinate (corrBubbleMarkerSideB) at ([shift={({\corr@bubblemarkerangle-150}:\corr@resolvedproparrowsize)}]#2);
-  \draw[
-    line width=0.7\feynhandlinesize,
-    line cap=round,
-    line join=round,
-    \corr@bubblemarkeroptions,
-    fill=white
-  ] (#2) -- (corrBubbleMarkerSideA) -- (corrBubbleMarkerSideB) -- cycle;
-}
-
 \newcommand{\corr@drawbubbleendpointmarkers}[5]{%
   \corr@resolvebubbleendpointmarkerdistance
   \ifcorr@bubblemarkerstart
-    \path (#3) to [#5] coordinate[pos=0.13] (corrBubble#1MarkerStartGuide) (#4);
-    \coordinate (corrBubble#1MarkerStartTip) at ($(#3)!\corr@bubbleresolvedendpointmarkerdistance!(corrBubble#1MarkerStartGuide)$);
-    \coordinate (corrBubble#1MarkerStartBack) at ($(corrBubble#1MarkerStartTip)!\corr@resolvedproparrowsize!(corrBubble#1MarkerStartGuide)$);
-    \corr@drawbubbleendpointmarker{corrBubble#1MarkerStartBack}{corrBubble#1MarkerStartTip}%
+    \path (#3) to [#5]
+      coordinate[pos=0.03] (corrBubble#1MarkerStartTipGuide)
+      coordinate[pos=0.16] (corrBubble#1MarkerStartAxisGuide)
+      coordinate[pos=0.14] (corrBubble#1MarkerStartTangentBefore)
+      coordinate[pos=0.18] (corrBubble#1MarkerStartTangentAfter)
+      (#4);
+    \corr@queuesemanticopenendpointmarkerfromcurvetangent
+      {#1}{corrBubble#1MarkerStart}{\corr@bubbleresolvedendpointmarkerdistance}
+      {#3}{corrBubble#1MarkerStartTipGuide}{corrBubble#1MarkerStartAxisGuide}
+      {corrBubble#1MarkerStartTangentBefore}{corrBubble#1MarkerStartTangentAfter}
+      {\corr@bubblemarkeroptions}%
   \fi
   \ifcorr@bubblemarkerend
-    \path (#3) to [#5] coordinate[pos=0.87] (corrBubble#1MarkerEndGuide) (#4);
-    \coordinate (corrBubble#1MarkerEndTip) at ($(#4)!\corr@bubbleresolvedendpointmarkerdistance!(corrBubble#1MarkerEndGuide)$);
-    \coordinate (corrBubble#1MarkerEndBack) at ($(corrBubble#1MarkerEndTip)!\corr@resolvedproparrowsize!(corrBubble#1MarkerEndGuide)$);
-    \corr@drawbubbleendpointmarker{corrBubble#1MarkerEndBack}{corrBubble#1MarkerEndTip}%
+    \path (#3) to [#5]
+      coordinate[pos=0.86] (corrBubble#1MarkerEndTangentBefore)
+      coordinate[pos=0.82] (corrBubble#1MarkerEndTangentAfter)
+      coordinate[pos=0.84] (corrBubble#1MarkerEndAxisGuide)
+      coordinate[pos=0.97] (corrBubble#1MarkerEndTipGuide)
+      (#4);
+    \corr@queuesemanticopenendpointmarkerfromcurvetangent
+      {#1}{corrBubble#1MarkerEnd}{\corr@bubbleresolvedendpointmarkerdistance}
+      {#4}{corrBubble#1MarkerEndTipGuide}{corrBubble#1MarkerEndAxisGuide}
+      {corrBubble#1MarkerEndTangentBefore}{corrBubble#1MarkerEndTangentAfter}
+      {\corr@bubblemarkeroptions}%
   \fi
 }
 
@@ -5865,9 +6277,14 @@
     \edef\corr@propoptions{\corr@propoptions,\corr@channelextraoptions}%
   }%
   \ifnum#1<5
+    \corr@orientpropoptionstoend
     \corr@propagwithexternalendcaps{#3}{#4}%
+    \corr@drawsemanticspolmarkers{#1}{#3}{#4}%
   \else
+    \expandafter\corr@semanticstyleinternal\expandafter{\corr@propoptions}%
+    \edef\corr@propoptions{\corr@orientedstyle}%
     \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+    \corr@drawsemanticspolmarkers{#1}{#3}{#4}%
   \fi
 }
 
@@ -5886,7 +6303,10 @@
     \edef\corr@propoptions{\corr@propoptions,\corr@channelextraoptions}%
   }%
   \expandafter\corr@stripendcapstyles\expandafter{\corr@propoptions}%
+  \expandafter\corr@semanticstyleinternal\expandafter{\corr@propoptions}%
+  \edef\corr@propoptions{\corr@orientedstyle}%
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+  \corr@drawsemanticspolmarkers{#1}{#3}{#4}%
 }
 
 \newcommand{\corr@ifttreeslotonebubbleinsertion}[2]{%
@@ -5895,6 +6315,20 @@
       \corr@ifstringeq{\corr@insertionslot}{1}{#1}{#2}%
     }{#2}%
   }{#2}%
+}
+
+\newcommand{\corr@ifttreeslotoneseagullinsertion}[2]{%
+  \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+    \corr@ifstringeq{\corr@insertion}{seagull}{%
+      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{#2}%
+    }{#2}%
+  }{#2}%
+}
+
+\newcommand{\corr@ifttreeslotoneinsertion}[2]{%
+  \corr@ifttreeslotonebubbleinsertion{#1}{%
+    \corr@ifttreeslotoneseagullinsertion{#1}{#2}%
+  }%
 }
 
 \newcommand{\corr@setttreeslotoneinsertioncoords}{%
@@ -5912,8 +6346,8 @@
 
 \newcommand{\corr@drawttreeslotonebubbleinsertion}{%
   \corr@setttreeslotoneinsertioncoords
-  \corr@drawchannelprop{1}{}{corrUL}{corrInsertionA}{}%
-  \corr@drawchannelpropnoendcaps{1}{}{corrInsertionB}{corrVT}{}%
+  \corr@drawchannelprop{1}{\corr@insertionpreline}{corrUL}{corrInsertionA}{}%
+  \corr@drawchannelpropnoendcaps{1}{\corr@insertionpostline}{corrInsertionB}{corrVT}{}%
   \corr@drawbubbleinternalprop{3}{\corr@bubblealine}{corrInsertionA}{corrInsertionB}{out=\corr@insertiontopangle,in=\corr@insertiontopangle,looseness=\corr@bubblelooplooseness}
   \corr@drawbubbleinternalprop{4}{\corr@bubblebline}{corrInsertionA}{corrInsertionB}{out=\corr@insertionbottomangle,in=\corr@insertionbottomangle,looseness=\corr@bubblelooplooseness}
 }
@@ -5925,12 +6359,379 @@
     {out=\corr@insertionbottomangle,in=\corr@insertionbottomangle,looseness=\corr@bubblelooplooseness}{\corr@insertionbottomangle}%
 }
 
+\newcommand{\corr@resolveseagullorientation}{%
+  \xdef\corr@seagullloopangle{\corr@insertionbottomangle}%
+  \xdef\corr@seagullloopmomentumlabelposition{below}%
+  \corr@ifstringeq{\corr@insertionorientation}{top}{%
+    \xdef\corr@seagullloopangle{\corr@insertiontopangle}%
+    \xdef\corr@seagullloopmomentumlabelposition{above}%
+  }{}%
+  \corr@ifstringeq{\corr@insertionorientation}{bottom}{%
+    \xdef\corr@seagullloopangle{\corr@insertionbottomangle}%
+    \xdef\corr@seagullloopmomentumlabelposition{below}%
+  }{}%
+  \corr@ifstringeq{\corr@insertionorientation}{left}{%
+    \xdef\corr@seagullloopangle{180}%
+    \xdef\corr@seagullloopmomentumlabelposition{left}%
+  }{}%
+  \corr@ifstringeq{\corr@insertionorientation}{right}{%
+    \xdef\corr@seagullloopangle{0}%
+    \xdef\corr@seagullloopmomentumlabelposition{right}%
+  }{}%
+}
+
+\newcommand{\corr@setttreeslotoneseagullcoords}{%
+  \coordinate (corrInsertionV) at ($(corrUL)!\corr@insertionposition!(corrVT)$);
+  \coordinate (corrInsertionA) at (corrInsertionV);
+  \coordinate (corrInsertionB) at (corrInsertionV);
+  \pgfmathanglebetweenpoints{\pgfpointanchor{corrUL}{center}}{\pgfpointanchor{corrVT}{center}}%
+  \xdef\corr@insertionangle{\pgfmathresult}%
+  \pgfmathsetmacro{\corr@insertiontopangle}{\corr@insertionangle+90}%
+  \xdef\corr@insertiontopangle{\corr@insertiontopangle}%
+  \pgfmathsetmacro{\corr@insertionbottomangle}{\corr@insertionangle-90}%
+  \xdef\corr@insertionbottomangle{\corr@insertionbottomangle}%
+  \corr@resolveseagullorientation
+  \pgfmathsetmacro{\corr@seagulllooplefttangenttmp}{\corr@seagullloopangle+90}%
+  \xdef\corr@seagulllooplefttangent{\corr@seagulllooplefttangenttmp}%
+  \pgfmathsetmacro{\corr@seagulllooprighttangenttmp}{\corr@seagullloopangle-90}%
+  \xdef\corr@seagulllooprighttangent{\corr@seagulllooprighttangenttmp}%
+  \pgfmathsetmacro{\corr@seagullloopbackangletmp}{\corr@seagullloopangle+180}%
+  \xdef\corr@seagullloopbackangle{\corr@seagullloopbackangletmp}%
+  \pgfmathsetlengthmacro{\corr@seagullloopdiametertmp}{0.72*\corr@seagullloopsize*\corr@insertionscale*1cm}%
+  \xdef\corr@seagullloopdiameter{\corr@seagullloopdiametertmp}%
+  \pgfmathsetlengthmacro{\corr@seagullloopradiustmp}{0.36*\corr@seagullloopsize*\corr@insertionscale*1cm}%
+  \xdef\corr@seagullloopradius{\corr@seagullloopradiustmp}%
+  \pgfmathsetlengthmacro{\corr@seagullloopcontroltmp}{0.36*0.55228475*\corr@seagullloopsize*\corr@insertionscale*\corr@seagulllooplooseness*1cm}%
+  \xdef\corr@seagullloopcontrol{\corr@seagullloopcontroltmp}%
+}
+
+\newcommand{\corr@appendseagullbasepropstyleitem}[1]{%
+  \ifdefempty{\corr@seagullbasepropoptions}{%
+    \def\corr@seagullbasepropoptions{#1}%
+  }{%
+    \appto\corr@seagullbasepropoptions{,#1}%
+  }%
+}
+
+\newcommand{\corr@appendseagullmarkerstyleitem}[1]{%
+  \ifdefempty{\corr@seagullmarkeroptions}{%
+    \def\corr@seagullmarkeroptions{#1}%
+  }{%
+    \appto\corr@seagullmarkeroptions{,#1}%
+  }%
+}
+
+\newcommand{\corr@seagullmarkersforglobalspoldirection}{%
+  \corr@ifstringeq{\corr@scalararrowdirection}{none}{}{%
+    \corr@ifstringeq{\corr@scalararrowdirection}{out}{%
+      \corr@seagullmarkerstarttrue
+    }{%
+      \corr@seagullmarkerendtrue
+    }%
+  }%
+}
+
+\newcommand{\corr@maybecaptureseagullmarkerstyle}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \edef\corr@seagullmarkerequals{=}%
+  \edef\corr@seagullmarkerequalprobe{%
+    \noexpand\in@{\corr@seagullmarkerequals}{\corr@thisstyleitem}%
+  }%
+  \corr@seagullmarkerequalprobe
+  \ifin@\else
+    \corr@ifstringeq{\corr@thisstyleitem}{plain}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalar}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{ewboson}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{EWboson}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{ew boson}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{photon}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{pho}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{Proca}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca line}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca base}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca start}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{proca end}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{spol}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{spolin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{spolout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antspol}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antspolin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{antspolout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{epspol}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcap}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcapin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcapout}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcapp}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcappin}{}{%
+    \corr@ifstringeq{\corr@thisstyleitem}{endcappout}{}{%
+      \expandafter\corr@appendseagullmarkerstyleitem\expandafter{\corr@thisstyleitem}%
+    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}%
+  \fi
+}
+
+\newcommand{\corr@prepareseagullloopstyleitem}[1]{%
+  \edef\corr@thisstyleitem{#1}%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@seagullmarkerstarttrue
+    \corr@seagullmarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{Proca}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@seagullmarkerstarttrue
+    \corr@seagullmarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca base}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@seagullmarkerstarttrue
+    \corr@seagullmarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca start}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@seagullmarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{proca end}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/proca line}%
+    \corr@seagullmarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarized}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalar polarized}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spol}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antiscalarpolarized}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspol}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkersforglobalspoldirection
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolin}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedin}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolin}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkerendtrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{spolout}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{scalarpolarizedout}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{antspolout}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkerstarttrue
+  }{%
+  \corr@ifstringeq{\corr@thisstyleitem}{epspol}{%
+    \corr@appendseagullbasepropstyleitem{/tikzfeynhand/scalar}%
+    \corr@seagullmarkersforglobalspoldirection
+  }{%
+    \corr@appendseagullbasepropstyleitem{#1}%
+  }}}}}}}}}}}}}}}}}%
+  \corr@maybecaptureseagullmarkerstyle{#1}%
+}
+
+\newcommand{\corr@prepareseagullloopstyle}{%
+  \corr@seagullmarkerstartfalse
+  \corr@seagullmarkerendfalse
+  \def\corr@seagullbasepropoptions{}%
+  \def\corr@seagullmarkeroptions{}%
+  \@for\corr@styleitem:=\corr@seagullloopline\do{%
+    \expandafter\corr@prepareseagullloopstyleitem\expandafter{\corr@styleitem}%
+  }%
+  \edef\corr@propoptions{\corr@seagullbasepropoptions}%
+  \corr@appendproparrowsize{3}%
+  \corr@appendpropcolor
+}
+
+\newcommand{\corr@resolveseagullloopmarkerdistance}{%
+  \corr@ifstringeq{\corr@seagullloopmarkerdistance}{auto}{%
+    \corr@resolvesemanticmarkertipdistance
+    \let\corr@seagullresolvedloopmarkerdistance\corr@semanticmarkertipdistance
+  }{%
+    \let\corr@seagullresolvedloopmarkerdistance\corr@seagullloopmarkerdistance
+  }%
+}
+
+\newcommand{\corr@drawseagullloopmarkers}{%
+  \corr@resolveseagullloopmarkerdistance
+  \corr@resolveproparrowsize{3}%
+  \ifcorr@seagullmarkerstart
+    \path (corrInsertionV)
+      .. controls +(\corr@seagulllooplefttangent:\corr@seagullloopcontrol)
+        and +(\corr@seagullloopbackangle:\corr@seagullloopcontrol) ..
+      coordinate[pos=0.03] (corrSeagullMarkerStartTipGuide)
+      coordinate[pos=0.16] (corrSeagullMarkerStartAxisGuide)
+      coordinate[pos=0.14] (corrSeagullMarkerStartTangentBefore)
+      coordinate[pos=0.18] (corrSeagullMarkerStartTangentAfter)
+      (corrSeagullLoopLeft);
+    \corr@queuesemanticopenendpointmarkerfromcurvetangent
+      {3}{corrSeagullMarkerStart}{\corr@seagullresolvedloopmarkerdistance}
+      {corrInsertionV}{corrSeagullMarkerStartTipGuide}{corrSeagullMarkerStartAxisGuide}
+      {corrSeagullMarkerStartTangentBefore}{corrSeagullMarkerStartTangentAfter}
+      {\corr@seagullmarkeroptions}%
+  \fi
+  \ifcorr@seagullmarkerend
+    \path (corrSeagullLoopRight)
+      .. controls +(\corr@seagullloopbackangle:\corr@seagullloopcontrol)
+        and +(\corr@seagulllooprighttangent:\corr@seagullloopcontrol) ..
+      coordinate[pos=0.86] (corrSeagullMarkerEndTangentBefore)
+      coordinate[pos=0.82] (corrSeagullMarkerEndTangentAfter)
+      coordinate[pos=0.84] (corrSeagullMarkerEndAxisGuide)
+      coordinate[pos=0.97] (corrSeagullMarkerEndTipGuide)
+      (corrInsertionV);
+    \corr@queuesemanticopenendpointmarkerfromcurvetangent
+      {3}{corrSeagullMarkerEnd}{\corr@seagullresolvedloopmarkerdistance}
+      {corrInsertionV}{corrSeagullMarkerEndTipGuide}{corrSeagullMarkerEndAxisGuide}
+      {corrSeagullMarkerEndTangentBefore}{corrSeagullMarkerEndTangentAfter}
+      {\corr@seagullmarkeroptions}%
+  \fi
+}
+
+\newcommand{\corr@drawseagullloop}{%
+  \corr@prepareseagullloopstyle
+  \coordinate (corrSeagullLoopFar) at ([shift=(\corr@seagullloopangle:\corr@seagullloopdiameter)]corrInsertionV);
+  \coordinate (corrSeagullLoopLeft) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooplefttangent:\corr@seagullloopradius)]corrInsertionV);
+  \coordinate (corrSeagullLoopRight) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooprighttangent:\corr@seagullloopradius)]corrInsertionV);
+  \expandafter\propag\expandafter[\corr@propoptions] (corrInsertionV)
+    .. controls +(\corr@seagulllooplefttangent:\corr@seagullloopcontrol)
+      and +(\corr@seagullloopbackangle:\corr@seagullloopcontrol) .. (corrSeagullLoopLeft)
+    .. controls +(\corr@seagullloopangle:\corr@seagullloopcontrol)
+      and +(\corr@seagulllooplefttangent:\corr@seagullloopcontrol) .. (corrSeagullLoopFar)
+    .. controls +(\corr@seagulllooprighttangent:\corr@seagullloopcontrol)
+      and +(\corr@seagullloopangle:\corr@seagullloopcontrol) .. (corrSeagullLoopRight)
+    .. controls +(\corr@seagullloopbackangle:\corr@seagullloopcontrol)
+      and +(\corr@seagulllooprighttangent:\corr@seagullloopcontrol) .. (corrInsertionV);
+  \corr@drawseagullloopmarkers
+}
+
+\newcommand{\corr@drawttreeslotoneseagullinsertion}{%
+  \corr@setttreeslotoneseagullcoords
+  \corr@drawchannelprop{1}{\corr@insertionpreline}{corrUL}{corrInsertionV}{}%
+  \corr@drawchannelpropnoendcaps{1}{\corr@insertionpostline}{corrInsertionV}{corrVT}{}%
+  \corr@drawseagullloop
+}
+
+\newcommand{\corr@setseagullmomentumcoord}[2]{%
+  \pgfmathsetmacro{\corr@seagullouterfractiontmp}{#1}%
+  \ifdim\corr@seagullouterfractiontmp pt<0.5pt
+    \pgfmathsetmacro{\corr@seagullouterlocalfraction}{2*(#1)}%
+    \path (corrSeagullMomentumLeft)
+      .. controls +(\corr@seagullloopangle:\corr@seagullmomentumcontrol)
+        and +(\corr@seagulllooplefttangent:\corr@seagullmomentumcontrol) ..
+      coordinate[pos=\corr@seagullouterlocalfraction] (#2)
+      (corrSeagullMomentumFar);
+  \else
+    \pgfmathsetmacro{\corr@seagullouterlocalfraction}{2*(#1)-1}%
+    \path (corrSeagullMomentumFar)
+      .. controls +(\corr@seagulllooprighttangent:\corr@seagullmomentumcontrol)
+        and +(\corr@seagullloopangle:\corr@seagullmomentumcontrol) ..
+      coordinate[pos=\corr@seagullouterlocalfraction] (#2)
+      (corrSeagullMomentumRight);
+  \fi
+}
+
+\newcommand{\corr@drawseagullmomentumforward}{%
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
+    (corrseagullmomstart) --
+    (corrseagullmompone) --
+    (corrseagullmomptwo) --
+    (corrseagullmompthree) --
+    (corrseagullmompfour) --
+    (corrseagullmompfive) --
+    (corrseagullmompsix) --
+    (corrseagullmompseven) --
+    (corrseagullmomend);
+}
+
+\newcommand{\corr@drawseagullmomentumreverse}{%
+  \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
+    (corrseagullmomend) --
+    (corrseagullmompseven) --
+    (corrseagullmompsix) --
+    (corrseagullmompfive) --
+    (corrseagullmompfour) --
+    (corrseagullmompthree) --
+    (corrseagullmomptwo) --
+    (corrseagullmompone) --
+    (corrseagullmomstart);
+}
+
+\newcommand{\corr@drawttreeinsertionseagullmomentum}{%
+  \ifdefempty{\corr@seagullloopmomentum}{}{%
+    \corr@ifstringeq{\corr@seagullloopmomentumdirection}{none}{}{%
+      \begingroup
+      \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{3}}%
+      \pgfmathsetlengthmacro{\corr@seagullmomentumcontroltmp}{\corr@seagullloopmomentumlooseness*\corr@seagullloopcontrol}%
+      \xdef\corr@seagullmomentumcontrol{\corr@seagullmomentumcontroltmp}%
+      \pgfmathsetmacro{\corr@seagullmomstep}{(\corr@seagullloopmomentumend-\corr@seagullloopmomentumstart)/8}%
+      \pgfmathsetmacro{\corr@seagullmomponefraction}{\corr@seagullloopmomentumstart+\corr@seagullmomstep}%
+      \pgfmathsetmacro{\corr@seagullmomptwofraction}{\corr@seagullloopmomentumstart+2*\corr@seagullmomstep}%
+      \pgfmathsetmacro{\corr@seagullmompthreefraction}{\corr@seagullloopmomentumstart+3*\corr@seagullmomstep}%
+      \pgfmathsetmacro{\corr@seagullmompfourfraction}{\corr@seagullloopmomentumstart+4*\corr@seagullmomstep}%
+      \pgfmathsetmacro{\corr@seagullmompfivefraction}{\corr@seagullloopmomentumstart+5*\corr@seagullmomstep}%
+      \pgfmathsetmacro{\corr@seagullmompsixfraction}{\corr@seagullloopmomentumstart+6*\corr@seagullmomstep}%
+      \pgfmathsetmacro{\corr@seagullmompsevenfraction}{\corr@seagullloopmomentumstart+7*\corr@seagullmomstep}%
+      \coordinate (corrSeagullMomentumV) at ([shift=(\corr@seagullloopangle:\corr@seagullloopmomentumoffset)]corrInsertionV);
+      \coordinate (corrSeagullMomentumFar) at ([shift=(\corr@seagullloopangle:\corr@seagullloopdiameter)]corrSeagullMomentumV);
+      \coordinate (corrSeagullMomentumLeft) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooplefttangent:\corr@seagullloopradius)]corrSeagullMomentumV);
+      \coordinate (corrSeagullMomentumRight) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooprighttangent:\corr@seagullloopradius)]corrSeagullMomentumV);
+      \corr@setseagullmomentumcoord{\corr@seagullloopmomentumstart}{corrseagullmomstart}%
+      \corr@setseagullmomentumcoord{\corr@seagullmomponefraction}{corrseagullmompone}%
+      \corr@setseagullmomentumcoord{\corr@seagullmomptwofraction}{corrseagullmomptwo}%
+      \corr@setseagullmomentumcoord{\corr@seagullmompthreefraction}{corrseagullmompthree}%
+      \corr@setseagullmomentumcoord{\corr@seagullmompfourfraction}{corrseagullmompfour}%
+      \corr@setseagullmomentumcoord{\corr@seagullmompfivefraction}{corrseagullmompfive}%
+      \corr@setseagullmomentumcoord{\corr@seagullmompsixfraction}{corrseagullmompsix}%
+      \corr@setseagullmomentumcoord{\corr@seagullmompsevenfraction}{corrseagullmompseven}%
+      \corr@setseagullmomentumcoord{\corr@seagullloopmomentumlabelfraction}{corrseagullmomlabel}%
+      \corr@setseagullmomentumcoord{\corr@seagullloopmomentumend}{corrseagullmomend}%
+      \corr@ifstringeq{\corr@seagullloopmomentumdirection}{counterclockwise}{%
+        \corr@drawseagullmomentumreverse
+      }{%
+        \corr@drawseagullmomentumforward
+      }%
+      \corr@putmomentumlabelwithdistance
+        {(corrseagullmomlabel)}
+        {\corr@seagullloopmomentumlabelposition}
+        {\corr@seagullloopmomentumlabeldistance}
+        {0pt}
+        {0pt}
+        {\corr@seagullloopmomentum}%
+      \endgroup
+    }%
+  }%
+}
+
 \newcommand{\corr@drawttreeinsertionoutermomentum}{%
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{1}}%
-  \coordinate (corrttreeinsertionoutermomstart) at ($(corrUL)!\corr@insertionpremomentumstart!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
-  \coordinate (corrttreeinsertionoutermomend) at ($(corrUL)!\corr@insertionpremomentumend!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
-  \coordinate (corrttreeinsertionoutermomlabel) at ($(corrUL)!\corr@insertionpremomentumlabelfraction!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
+  \coordinate (corrttreeinsertionoutermomguideorigin) at ($(corrUL)!-\corr@insertionpremomentumguideextension!(corrInsertionA)$);
+  \coordinate (corrttreeinsertionoutermomstart) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumstart!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
+  \coordinate (corrttreeinsertionoutermomend) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumend!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
+  \coordinate (corrttreeinsertionoutermomlabel) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumlabelfraction!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
   \corr@ifstringeq{\corr@externalleftmomentumdirection}{out}{%
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertionoutermomend) -- (corrttreeinsertionoutermomstart);
@@ -6047,6 +6848,26 @@
   }{%
     \corr@putttreeinsertionpostindices
   }%
+}
+
+\newcommand{\corr@putseagullvertexindex}[5]{%
+  \edef\corr@seagullindextmp{#5}%
+  \ifdefempty{\corr@seagullindextmp}{}{%
+    \node[
+      anchor=#1,
+      xshift=#2,
+      yshift=#3,
+      inner sep=0.4pt,
+      outer sep=0pt
+    ] at (corrInsertionV) {$#4 #5$};
+  }%
+}
+
+\newcommand{\corr@putttreeinsertionseagullindices}{%
+  \corr@putseagullvertexindex{south east}{-4pt}{-3pt}{\corr@seagullindexmathstyle}{\corr@seagullhostleftindex}%
+  \corr@putseagullvertexindex{south west}{4pt}{-3pt}{\corr@seagullindexmathstyle}{\corr@seagullhostrightindex}%
+  \corr@putseagullvertexindex{north east}{-5pt}{5pt}{\corr@seagullindexmathstyle}{\corr@seagullloopleftindex}%
+  \corr@putseagullvertexindex{north west}{5pt}{5pt}{\corr@seagullindexmathstyle}{\corr@seagulllooprightindex}%
 }
 
 \newcommand{\corr@drawsunsetmomentumline}[7]{%
@@ -6227,6 +7048,9 @@
 \newcommand{\corr@drawbubblemomentumslot}[6]{%
   \corr@resolvebubblemomentumslot{#1}%
   \corr@resolvebubblemomentumfractions{#1}%
+  \corr@ifstringeq{\corr@bubblemomentumlayout}{vertex-split}{%
+    \corr@clampbubblevertexsplitfractions
+  }{}%
   \ifdefempty{\corr@bubblemomlabel}{}{%
   \corr@ifstringeq{\corr@bubblemomdir}{none}{}{%
     \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#2}}%
@@ -6238,20 +7062,48 @@
     \pgfmathsetmacro{\corr@bubblemompfive}{\corr@bubblemomstart+5*\corr@bubblemomstep}%
     \pgfmathsetmacro{\corr@bubblemompsix}{\corr@bubblemomstart+6*\corr@bubblemomstep}%
     \pgfmathsetmacro{\corr@bubblemompseven}{\corr@bubblemomstart+7*\corr@bubblemomstep}%
-    \path
-      ([shift={(#6:\corr@bubblemomoffset)}]#3)
-      to [#5]
-      coordinate[pos=\corr@bubblemomstart] (corrbubblemomstart)
-      coordinate[pos=\corr@bubblemompone] (corrbubblemompone)
-      coordinate[pos=\corr@bubblemomptwo] (corrbubblemomptwo)
-      coordinate[pos=\corr@bubblemompthree] (corrbubblemompthree)
-      coordinate[pos=\corr@bubblemompfour] (corrbubblemompfour)
-      coordinate[pos=\corr@bubblemompfive] (corrbubblemompfive)
-      coordinate[pos=\corr@bubblemompsix] (corrbubblemompsix)
-      coordinate[pos=\corr@bubblemompseven] (corrbubblemompseven)
-      coordinate[pos=\corr@bubblemomlabelfraction] (corrmomentumlabelcoord)
-      coordinate[pos=\corr@bubblemomend] (corrbubblemomend)
-      ([shift={(#6:\corr@bubblemomoffset)}]#4);
+    \corr@ifstringeq{\corr@bubblemomentumlayout}{vertex-split}{%
+      \pgfmathsetlengthmacro{\corr@bubblemomeffectiveoffset}{\corr@bubblemomoffset*\corr@bubblevertexsplitoffsetscale}%
+      \path
+        (#3)
+        to [#5]
+        coordinate[pos=\corr@bubblemomstart] (corrbubblemomrawstart)
+        coordinate[pos=\corr@bubblemompone] (corrbubblemomrawpone)
+        coordinate[pos=\corr@bubblemomptwo] (corrbubblemomrawptwo)
+        coordinate[pos=\corr@bubblemompthree] (corrbubblemomrawpthree)
+        coordinate[pos=\corr@bubblemompfour] (corrbubblemomrawpfour)
+        coordinate[pos=\corr@bubblemompfive] (corrbubblemomrawpfive)
+        coordinate[pos=\corr@bubblemompsix] (corrbubblemomrawpsix)
+        coordinate[pos=\corr@bubblemompseven] (corrbubblemomrawpseven)
+        coordinate[pos=\corr@bubblemomlabelfraction] (corrmomentumlabelrawcoord)
+        coordinate[pos=\corr@bubblemomend] (corrbubblemomrawend)
+        (#4);
+      \coordinate (corrbubblemomstart) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawstart);
+      \coordinate (corrbubblemompone) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpone);
+      \coordinate (corrbubblemomptwo) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawptwo);
+      \coordinate (corrbubblemompthree) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpthree);
+      \coordinate (corrbubblemompfour) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpfour);
+      \coordinate (corrbubblemompfive) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpfive);
+      \coordinate (corrbubblemompsix) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpsix);
+      \coordinate (corrbubblemompseven) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpseven);
+      \coordinate (corrmomentumlabelcoord) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrmomentumlabelrawcoord);
+      \coordinate (corrbubblemomend) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawend);
+    }{%
+      \path
+        ([shift={(#6:\corr@bubblemomoffset)}]#3)
+        to [#5]
+        coordinate[pos=\corr@bubblemomstart] (corrbubblemomstart)
+        coordinate[pos=\corr@bubblemompone] (corrbubblemompone)
+        coordinate[pos=\corr@bubblemomptwo] (corrbubblemomptwo)
+        coordinate[pos=\corr@bubblemompthree] (corrbubblemompthree)
+        coordinate[pos=\corr@bubblemompfour] (corrbubblemompfour)
+        coordinate[pos=\corr@bubblemompfive] (corrbubblemompfive)
+        coordinate[pos=\corr@bubblemompsix] (corrbubblemompsix)
+        coordinate[pos=\corr@bubblemompseven] (corrbubblemompseven)
+        coordinate[pos=\corr@bubblemomlabelfraction] (corrmomentumlabelcoord)
+        coordinate[pos=\corr@bubblemomend] (corrbubblemomend)
+        ([shift={(#6:\corr@bubblemomoffset)}]#4);
+    }%
     \corr@ifstringeq{\corr@bubblemomdir}{reverse}{%
       \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth,line cap=round,line join=round]
         (corrbubblemomend) --
@@ -6495,6 +7347,7 @@
   \corr@preparelists
   \corr@configurestyles
   \corr@setthreepointcoordinates
+  \corr@clearsemanticmarkerqueue
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \begin{feynhand}
       \corr@topologycoordinate{corrC}{0}{0}%
@@ -6519,6 +7372,7 @@
     \fi
     \corr@threepointplaceexternallabels
     \corr@putthreepointcentral{corrC}
+    \corr@flushsemanticmarkerqueue
   \end{tikzpicture}%
   \endgroup
 }
@@ -6551,6 +7405,7 @@
   \pgfqkeys{/corrdiag}{#1}%
   \corr@preparelists
   \corr@configurestyles
+  \corr@clearsemanticmarkerqueue
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \begin{feynhand}
       \vertex (corrC) at (0,0);
@@ -6578,6 +7433,7 @@
     \corr@putlabel{corrL}{xshift=-10pt}{1}
     \corr@putlabel{corrR}{xshift=10pt}{2}
     \corr@putcentral{corrC}
+    \corr@flushsemanticmarkerqueue
   \end{tikzpicture}%
   \endgroup
 }
@@ -6590,8 +7446,10 @@
   \corr@applyinsertionhostdefaults
   \corr@preparelists
   \corr@configurestyles
+  \corr@clearsemanticmarkerqueue
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \corr@drawbubble
+    \corr@flushsemanticmarkerqueue
   \end{tikzpicture}%
   \endgroup
 }
@@ -7224,7 +8082,11 @@
       \corr@ifttreeslotonebubbleinsertion{%
         \corr@drawttreeslotonebubbleinsertion
       }{%
-        \corr@drawchannelprop{1}{}{corrUL}{corrVT}{}%
+        \corr@ifttreeslotoneseagullinsertion{%
+          \corr@drawttreeslotoneseagullinsertion
+        }{%
+          \corr@drawchannelprop{1}{}{corrUL}{corrVT}{}%
+        }%
       }%
       \corr@drawchannelprop{2}{}{corrLL}{corrVB}{}%
       \corr@drawchannelprop{3}{}{corrUR}{corrVT}{}%
@@ -7239,10 +8101,13 @@
       \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}
       \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}
     }{}%
+    \corr@ifttreeslotoneseagullinsertion{%
+      \corr@putvertex{corrInsertionV}{\corr@centervertexstyle}
+    }{}%
   \fi
   \corr@fourpointplaceexternalvertices
   \ifcorr@showmomenta
-    \corr@ifttreeslotonebubbleinsertion{%
+    \corr@ifttreeslotoneinsertion{%
       \corr@drawttreeinsertionoutermomentum
       \corr@drawttreeinsertioninnermomentum
     }{%
@@ -7251,7 +8116,7 @@
     \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
     \corr@drawexternalmomentumur{3}{corrUR}{corrVT}
     \corr@drawexternalmomentumlr{4}{corrLR}{corrVB}
-    \corr@ifttreeslotonebubbleinsertion{%
+    \corr@ifttreeslotoneinsertion{%
       \corr@drawttreeinsertionmiddlemomentum
     }{%
       \corr@drawchannelmomentum{corrVT}{corrVB}%
@@ -7259,10 +8124,16 @@
     \corr@ifttreeslotonebubbleinsertion{%
       \corr@drawttreeinsertionbubblemomenta
     }{}%
+    \corr@ifttreeslotoneseagullinsertion{%
+      \corr@drawttreeinsertionseagullmomentum
+    }{}%
   \fi
   \corr@fourpointchannelindices{corrVT}{corrVB}
   \corr@ifttreeslotonebubbleinsertion{%
     \corr@putttreeinsertionbubbleindices
+  }{}%
+  \corr@ifttreeslotoneseagullinsertion{%
+    \corr@putttreeinsertionseagullindices
   }{}%
   \corr@fourpointplaceexternallabels
   \corr@putchannelcentral{corrC}
@@ -7496,6 +8367,7 @@
   \corr@resetflatcontactdefaults
   \corr@resettrianglecontactdefaults
   \corr@resetinsertedbubbledefaults
+  \corr@resetseagullinsertiondefaults
   \corr@resetinsertiondefaults
   \corr@lineexplicitfalse
   \pgfqkeys{/corrdiag}{#1}%
@@ -7504,6 +8376,7 @@
   \corr@configurestyles
   \corr@resolvechanneldefaults
   \corr@resolveloopchanneldefaults
+  \corr@clearsemanticmarkerqueue
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \corr@ifstringeq{\corr@fourpointtopology}{contact}{%
       \corr@drawfourpointcontact
@@ -7550,6 +8423,7 @@
         }%
       }%
     }%
+    \corr@flushsemanticmarkerqueue
   \end{tikzpicture}%
   \endgroup
 }
@@ -7564,6 +8438,7 @@
   \ifdefempty{\corr@central}{%
     \def\corr@central{\corr@sunsetcentrallabel}%
   }{}%
+  \corr@clearsemanticmarkerqueue
   \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
     \pgfmathsetmacro{\corr@sunsetleftvertexx}{-\corr@sunsetinnerspan}
     \pgfmathsetmacro{\corr@sunsetrightvertexx}{\corr@sunsetinnerspan}
@@ -7722,6 +8597,7 @@
     \corr@putlabel{sunLext}{xshift=-10pt}{1}
     \corr@putlabel{sunRext}{xshift=10pt}{2}
     \corr@putsunsetcentral{sunC}
+    \corr@flushsemanticmarkerqueue
   \end{tikzpicture}%
   \endgroup
 }

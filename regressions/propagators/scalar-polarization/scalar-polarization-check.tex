@@ -127,4 +127,123 @@ Same single-leg cases with a larger scalar-polarized arrow size:
 \end{array}
 \]
 
+\newpage
+
+Package-managed topologies keep scalar-polarized marker tips on the semantic
+vertex edge, even with larger marker sizes:
+
+\[
+\begin{array}{cc}
+  \text{Three-point} &
+  \text{Quartic/contact} \\
+  \ThreePointCorr[
+    scale=0.78,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    leg-styles={spol,plain,plain},
+    field={},
+    leg-labels={,,}
+  ] &
+  \FourPointCorr[
+    scale=0.70,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    leg-styles={spol,plain,plain,plain},
+    field={},
+    leg-labels={,,,}
+  ] \\
+  \text{Half-box} &
+  \text{Flat contact} \\
+  \HalfBoxCorr[
+    scale=0.72,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    field={},
+    central={},
+    leg-styles={plain,plain,spol,plain},
+    leg-labels={,,,}
+  ] &
+  \FourPointCorr[
+    topology=flat-contact,
+    scale=0.70,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    leg-styles={spol,plain,plain,plain},
+    field={},
+    leg-labels={,,,}
+  ]
+\end{array}
+\]
+
+\newpage
+
+Package-managed endpoint markers also keep Proca/open/filled marker tips on
+semantic vertex edges:
+
+\[
+\begin{array}{cc}
+  \text{Three-point Proca leg} &
+  \text{Quartic/contact open arrow} \\
+  \ThreePointCorr[
+    scale=0.78,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    leg-styles={{proca,magenta!85!red},plain,plain},
+    field={},
+    leg-labels={,,}
+  ] &
+  \FourPointCorr[
+    scale=0.70,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    leg-styles={{openarrowin,magenta!85!red},plain,plain,plain},
+    field={},
+    leg-labels={,,,}
+  ] \\
+  \text{Half-box filled arrow} &
+  \text{Flat contact Proca leg} \\
+  \HalfBoxCorr[
+    scale=0.72,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    field={},
+    central={},
+    leg-styles={plain,plain,{arrowin,magenta!85!red},plain},
+    leg-labels={,,,}
+  ] &
+  \FourPointCorr[
+    topology=flat-contact,
+    scale=0.70,
+    show-momenta=false,
+    propagator-arrow-size=16pt,
+    leg-styles={{proca,magenta!85!red},plain,plain,plain},
+    field={},
+    leg-labels={,,,}
+  ] \\
+  \text{T-tree Proca channel} &
+  \text{Insertion split Proca segment} \\
+  \TTreeChannelCorr[
+    scale=0.70,
+    show-momenta=false,
+    field={},
+    leg-labels={,,,},
+    channel-line={proca,magenta!85!red},
+    propagator-arrow-sizes={,,,,16pt}
+  ] &
+  \TTreeChannelCorr[
+    scale=0.70,
+    show-momenta=false,
+    field={},
+    insertion=bubble,
+    insertion-slot=1,
+    insertion-scale=0.65,
+    insertion-pre-line={proca,magenta!85!red},
+    insertion-post-line={proca end,magenta!85!red},
+    bubble-momenta={,},
+    leg-labels={,,,},
+    propagator-arrow-size=16pt
+  ]
+\end{array}
+\]
+
 \end{document}
