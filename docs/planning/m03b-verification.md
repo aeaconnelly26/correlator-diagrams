@@ -2,8 +2,11 @@
 
 Date: 2026-11-03. Baseline: published main `6549efa`, including M03a's
 `2c3b467` loop-arrow fixes. Branch: `codex/m03b-s-tree-bubbles`.
-M03a was fast-forwarded and pushed before this branch started. M03b is a local
-checkpoint; its merge/push is pending. No user-side manual preparation is needed.
+M03a was fast-forwarded and pushed before this branch started. Verified M03b
+checkpoint `97495ba` is now fast-forwarded into main and published to GitHub.
+The feature branch is retained; no user-side manual preparation remains.
+Publication only updates handoff records; package source and PDFs retain the
+verified hashes and the results below.
 
 ## Scope and public recipe
 
@@ -97,6 +100,6 @@ Numerical contact report: `regressions/topologies/insertion/s-tree-bubble-contac
 Machine-readable closeout: [m03b-checks.json](m03b-checks.json).
 
 Next feature session: **M04**, expand direct seagull insertions on remaining
-T external legs and then S external legs, one placement at a time. Publish M03b
-first when authorized. Index-placement cleanup stays deferred beyond these
-feature sessions.
+T external legs and then S external legs, one placement at a time, starting
+from synchronized main including `97495ba`. Index-placement cleanup stays
+deferred beyond these feature sessions.

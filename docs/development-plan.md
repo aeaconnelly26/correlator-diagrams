@@ -6,9 +6,10 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/m03b-s-tree-bubbles`, based on published main `6549efa`.
-- M03b is complete locally: all four s-tree external bubble placements; see
-  [M03b verification](planning/m03b-verification.md). It is not merged or pushed.
+- Current branch: `main`, including verified M03b checkpoint `97495ba`.
+- M03b is complete, merged and published to GitHub: all four s-tree external
+  bubble placements. See [M03b verification](planning/m03b-verification.md).
+  The implementation branch is retained.
 - M03a, including loop-arrow spacing/label-side fixes, is merged and published
   to GitHub. The implementation branch is retained.
 - M03a is complete: bubble insertion on any one t-tree external leg.
@@ -50,7 +51,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M01 | Audit and correct demonstrated Proca endpoint failures | Complete on published main; diagnostic and vector checks passed |
 | Integration | Reconcile seagull/endpoint work with M01 | Complete; reconciled on local/GitHub `main`; combined tests pass |
 | M02 | Independent triangle-contact annotations, four orientations | Complete on published main; 35 regression documents and 600 endpoint contacts pass |
-| M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a published; M03b complete locally, awaiting publication |
+| M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a and M03b complete on published main |
 | M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
 | M05 | External swordfish on s/t trees | Planned |
 | M06 | Regular tree-attached triangle corrections, four placements | Planned |
@@ -63,9 +64,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Next coding session
 
 M04 is next: expand the existing t-tree slot-1 seagull to the remaining t-tree
-legs, then the four s-tree legs, one insertion at a time. First integrate and
-publish the verified M03b checkpoint from `codex/m03b-s-tree-bubbles` when
-publication is authorized. The user needs no manual Git preparation.
+legs, then the four s-tree legs, one insertion at a time. Start from synchronized
+main, which includes verified M03b checkpoint `97495ba`. No M03b merge/push or
+manual Git preparation remains for the user.
 Freeze the direct self-loop at one quartic host vertex; it is distinct from
 the two-vertex self-energy bubbles. Read R11 and M04. Keep D01 deferred to a
 separate later workflow; do not tidy index positions during the feature sessions.
@@ -218,7 +219,7 @@ actual arcs, so the right-hand a/b swap cannot invert above/below placement.
 The focused tests measure 34 rendered label sides/clearances across four slots
 and reversed arrows. The gallery/inventory are regenerated; no topology changed.
 
-## M03b implementation record - 2026-11-03
+## Historical M03b implementation record - 2026-11-03
 
 - Published M03a and its arrow-spacing/label-side fixes to main; `6549efa`
   records publication and the explicitly deferred D01 index workflow.
@@ -230,3 +231,14 @@ and reversed arrows. The gallery/inventory are regenerated; no topology changed.
   measured contact results and reproduction commands are in M03b verification.
 - M03b is checkpointed locally; main/GitHub still contain M03a, not M03b.
   M04 is the next feature milestone after M03b publication.
+
+## M03b publication - 2026-11-03
+
+- Fetched GitHub before merging; its main remained at `6549efa`.
+- Fast-forwarded local main to verified M03b checkpoint `97495ba` and published
+  it with this documentation handoff. The feature branch is retained.
+- Package source, focused source, gallery, catalog and atlas match the verified
+  SHA-256 records. The existing 37-document/632-contact verification applies;
+  publication changed only handoff documentation.
+- Current checkout is clean main, synchronized with GitHub. M04 is next.
+  D01 remains deferred to a separate later workflow.

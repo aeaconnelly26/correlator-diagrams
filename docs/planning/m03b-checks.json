@@ -3,8 +3,7 @@
   "date": "2026-11-03",
   "baseline": "6549efa",
   "branch": "codex/m03b-s-tree-bubbles",
-  "published": false,
-  "main_and_origin_main": "6549efa",
+  "published": true,
   "m03a_published_checkpoint": "2c3b467",
   "s_tree_external_bubble_slots": [
     1,
@@ -48,5 +47,7 @@
     "regressions/topologies/insertion/s-tree-bubble-slots.pdf": "db4313082034fdf325381a589ed2742da20d5b966e592b826113119a3544e8f0",
     "docs/diagram-inventory/catalog.json": "16db7dd138625936e28ecad3b1c7f5d0244c4cdfd6a05a668456c601178796f9",
     "docs/diagram-inventory/inventory.pdf": "8150c739a3a7f510781ab3c9cbec2ddd957e99b345f4f1f6f17af1aabe50cbf7"
-  }
+  },
+  "verified_code_checkpoint": "97495ba",
+  "published_branch": "main"
 }

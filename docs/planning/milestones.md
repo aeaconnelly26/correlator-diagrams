@@ -11,8 +11,8 @@ The seagull slot-1 prototype, prior marker/momentum/index work, and M01 raw
 Proca fixes are reconciled. See [integration verification](integration-verification.md).
 M04 expands the existing prototype. Integration commit `4584aff` is included
 in published `main` at `6657735`. M02 checkpoint `8f95755` is now also merged
-and published on main. M03a is published through `6549efa`; M03b is complete
-locally on `codex/m03b-s-tree-bubbles`. M04 follows after M03b publication.
+and published on main. M03a is published through `6549efa`; M03b checkpoint
+`97495ba` is also merged and published on main. M04 is next.
 
 ## Common session contract
 
@@ -107,9 +107,10 @@ M03a is complete on `codex/m03a-t-tree-bubbles`, based on `b917ed2`;
 verified checkpoint `2c3b467` is merged and published on main.
 All four t-tree external slots are checked, including actual graph/caps/momentum
 and style/index coverage. See [M03a verification](m03a-verification.md).
-M03b is complete locally on `codex/m03b-s-tree-bubbles`, based on published
-main `6549efa`: all four s-tree placements, with existing t-tree output retained.
-See [M03b verification](m03b-verification.md). Its merge/push remains pending.
+M03b checkpoint `97495ba` is complete, merged and published on main: all four
+s-tree placements, with existing t-tree output retained. Its implementation
+branch `codex/m03b-s-tree-bubbles` is retained.
+See [M03b verification](m03b-verification.md).
 The following contract remains the regression gate for both families.
 Index-placement appearance is expressly deferred to a later separate workflow,
 [D01](deferred-workflows.md). Preserve attachment/controls during M03b; do not

@@ -7,8 +7,8 @@ Built against `codex/m03b-s-tree-bubbles`, based on published `main` at
 These are recipes and meaningful layouts/styles, not 58 distinct graph topologies.
 
 M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
-on main. M03b adds all four s-tree placements (C01-C04), currently local on its
-feature branch. Index positioning remains a later
+on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
+`97495ba` is now also merged and published on main. Index positioning remains a later
 [dedicated review](../planning/deferred-workflows.md); attachment checks do not
 certify its visual placement.
 The loop-spacing review uses closer bubble momentum arrows and labels outward

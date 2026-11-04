@@ -3,9 +3,11 @@
 M03a checkpoint `2c3b467` is now merged and published on main; see
 [M03a verification](m03a-verification.md) and the current development plan.
 Index placement is deferred to a separate later workflow, [D01](deferred-workflows.md).
-M03b is complete locally on `codex/m03b-s-tree-bubbles`, based on published
-main `6549efa`. It preserves index behavior without polishing positions.
-See [M03b verification](m03b-verification.md). It has not been merged or pushed. The main/M02 record below preserves earlier history.
+M03b checkpoint `97495ba`, based on `6549efa`, is now also merged and published
+on main. The branch `codex/m03b-s-tree-bubbles` is retained. It preserves index
+behavior without polishing positions; see [M03b verification](m03b-verification.md).
+The current checkout is clean, synchronized main. The main/M02 record below
+preserves earlier history.
 
 The published integration baseline was `6657735`. M02 checkpoint `8f95755`
 is now merged into main and published to GitHub. The feature branch
@@ -61,9 +63,9 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M04 is next after M03b integration/publication. M03b is complete locally;
-main and GitHub remain at `6549efa`, including M03a. No manual Git preparation
-is needed from the user. Swordfish and regular triangles remain future work.
+M04 is next, based on synchronized main containing verified M03b checkpoint
+`97495ba`. No M03b merge/push or manual Git preparation remains for the user.
+Swordfish and regular triangles remain future work; D01 remains deferred.
 
 Remote state was refreshed with `git fetch origin` for this synchronization.
 When publishing main, verify `git ls-remote origin refs/heads/main` matches

@@ -16,7 +16,8 @@ published main. The dedicated index panel records current placement as a known
 limitation, explicitly deferred to D01; M03b did not retune index positioning.
 
 See [M03b verification](../planning/m03b-verification.md) for scope, controls,
-limits and reproduction. M03b remains local; M03a is published on main.
+limits and reproduction. M03a and M03b are merged and published on main;
+M03b checkpoint `97495ba` retains these exact verified package/PDF hashes.
 Historical records follow and retain their original counts/limitations.
 
 # Historical M03a inventory verification - 2026-11-03
