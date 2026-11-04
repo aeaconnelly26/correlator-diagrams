@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M02 directions on 99c9d07`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M03a on b917ed2`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -227,7 +227,7 @@ One quartic vertex with a flat upper pair.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** Bubble/seagull insertions: t-tree leg 1 only.
+**Limit:** External insertions are implemented on t trees; s/u hosts are unsupported.
 
 ```tex
 \STreeChannelCorr[
@@ -248,7 +248,7 @@ Two trivalent vertices joined by one exchange edge.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** Bubble/seagull insertions: t-tree leg 1 only.
+**Limit:** Bubbles: any one external leg. Seagull: external leg 1 only.
 
 ```tex
 \TTreeChannelCorr[
@@ -269,7 +269,7 @@ Two trivalent vertices joined by one exchange edge.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** Bubble/seagull insertions: t-tree leg 1 only.
+**Limit:** External insertions are implemented on t trees; s/u hosts are unsupported.
 
 ```tex
 \UTreeChannelCorr[
@@ -586,7 +586,7 @@ The quartic/contact vertex lies on the right side.
 ]
 ```
 
-## Loops and the insertion prototype
+## Loops and external bubble insertions
 
 ### I27 - Self-energy bubble
 
@@ -641,7 +641,7 @@ Two quartic vertices joined by three internal edges.
 
 A self-energy bubble splits the upper-left external leg.
 
-**Limit:** Only t-tree external slot 1 is implemented; other slots are no-ops.
+**Limit:** T-tree external slots 1-4; one self-energy insertion at a time.
 
 ```tex
 \TTreeChannelCorr[
@@ -658,6 +658,81 @@ A self-energy bubble splits the upper-left external leg.
   channel-line=plain,
   insertion=bubble,
   insertion-slot=1,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### B02 - Bubble on t-tree leg 2
+
+Two trivalent vertices split the lower-left external leg.
+
+**Limit:** The other three legs and the exchange edge keep their logical identities.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### B03 - Bubble on t-tree leg 3
+
+Two trivalent vertices split the upper-right external leg.
+
+**Limit:** The other three legs and the exchange edge keep their logical identities.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### B04 - Bubble on t-tree leg 4
+
+Two trivalent vertices split the lower-right external leg.
+
+**Limit:** The other three legs and the exchange edge keep their logical identities.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4,
+  channel-line=plain,
   bubble-top-line=plain,
   bubble-bottom-line=plain
 ]

@@ -1,11 +1,16 @@
 # Integrated branch state and coding-session closeout
 
+Current work is M03a on `codex/m03a-t-tree-bubbles`, based on published main
+`b917ed2`. It is complete locally and is not merged or pushed; see
+[M03a verification](m03a-verification.md) and the current development plan.
+The main/M02 publication record below describes the baseline, not this new slice.
+
 The published integration baseline was `6657735`. M02 checkpoint `8f95755`
 is now merged into main and published to GitHub. The feature branch
 `codex/m02-triangle-contact-annotations` is retained; see the
 [current development plan](../development-plan.md) and [M02 verification](m02-verification.md).
-The current checkout is main, synchronized with GitHub. No M02 merge or push
-is pending; M03a has not started.
+At that closeout the checkout was main, synchronized with GitHub. No M02 merge
+or push remains pending. M03a was subsequently implemented on its feature branch.
 
 Updated 2026-11-03. The seagull and M01 lines are now combined on
 `codex/integrate-seagull-and-proca`, with merge parents `1b85ef8` and `5a657cd`.
@@ -54,12 +59,9 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M02 used published `main` at `6657735`; its final checkpoint `8f95755` is now
-included in published main. M03a should use a new branch from synchronized main.
-No manual Git preparation is needed from the user. M04 remains
-an expansion of the existing single-leg seagull prototype, not a new prototype.
-The other t-tree legs, s-tree support, swordfish, and regular triangles remain
-future requirements.
+M03b is next, based on the M03a checkpoint or its descendant. Publish/merge M03a
+before starting from main. No manual Git preparation is needed from the user.
+M04 remains the seagull expansion; swordfish and regular triangles are future work.
 
 Remote state was refreshed with `git fetch origin` for this synchronization.
 At closeout, verify that `git ls-remote origin refs/heads/main` matches local

@@ -6,9 +6,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`, including verified M02 checkpoint `8f95755`.
+- Published baseline: synchronized main at `b917ed2`, including M02.
+- Current branch: `codex/m03a-t-tree-bubbles`, based on `b917ed2`.
+- M03a is complete locally: bubble insertion on any one t-tree external leg.
+  See [M03a verification](planning/m03a-verification.md). Not merged or pushed.
 - M02 was fast-forwarded into main and published to GitHub on 2026-11-03;
-  local/GitHub main are synchronized. The implementation branch is retained.
+  that published baseline is retained. The implementation branch is retained.
 - M02 is complete: independent controls for all seven triangle-contact
   momentum annotations, with outside-facing defaults. See
   [M02 verification](planning/m02-verification.md).
@@ -16,8 +19,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   contact; it adds a low-level custom-radius line option and no new topology.
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
   triangle-contact orientations are already implemented.
-- Semantic bubble and seagull insertions are implemented only on external slot 1 of t trees.
-  Accepted keys for other insertion combinations can silently do nothing.
+- Semantic bubbles support t-tree external slots 1-4. Seagulls remain slot 1
+  only. S/u and internal bubble insertions are unsupported and can be no-ops.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
   the repository or delete branches.
 
@@ -25,7 +28,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Eleven pages: 51 current examples, including seagulls and independent triangle-contact annotations. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Eleven pages: 54 current examples, including all four t-tree bubble placements. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -41,7 +44,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M01 | Audit and correct demonstrated Proca endpoint failures | Complete on published main; diagnostic and vector checks passed |
 | Integration | Reconcile seagull/endpoint work with M01 | Complete; reconciled on local/GitHub `main`; combined tests pass |
 | M02 | Independent triangle-contact annotations, four orientations | Complete on published main; 35 regression documents and 600 endpoint contacts pass |
-| M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | Slot-1 t prototype exists; expansion planned |
+| M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a complete locally; M03b (s-tree) next |
 | M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
 | M05 | External swordfish on s/t trees | Planned |
 | M06 | Regular tree-attached triangle corrections, four placements | Planned |
@@ -53,12 +56,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M03a is next: expand external self-energy bubbles from t-tree slot 1 to the
-other t-tree legs, one placement at a time. Read R09 and M03 in
+M03b is next: external self-energy bubbles on s-tree slots 1-4, one placement
+at a time. Read R10 and M03 in
 [requirements](planning/requirements.md) and [milestones](planning/milestones.md).
-Create the next feature branch from synchronized `main`, which includes M02
-checkpoint `8f95755`. Begin by freezing the slot-2 graph and preserved
-styles, momentum, indices, and outer endpoint behavior. Do not start M03 here.
+Use the M03a checkpoint or its descendant; merge/publish it before starting
+from main. Begin by freezing the s-tree slot-1 graph and preserved styles,
+momentum, indices and outer endpoint behavior. M03b has not started.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -176,7 +179,7 @@ arrows point toward their trivalent endpoints in all four orientations, in gap
 and side layouts. The third internal edge and all explicit direction controls
 are preserved. No topology or slot layout changed.
 
-## Latest closeout - M02 publication, 2026-11-03
+## Historical closeout - M02 publication, 2026-11-03
 
 - Fetched GitHub before merging; its main had no new commits beyond `6657735`.
 - Fast-forwarded main to verified M02 checkpoint `8f95755`, preserving all
@@ -185,3 +188,17 @@ are preserved. No topology or slot layout changed.
   only handoff/publication records changed during closeout.
 - Published through a normal push and verified local/remote main equality.
 - Ready to switch tasks. M03a is the next roadmap item; it has not started.
+
+## Latest session - M03a t-tree bubble expansion
+
+- Preserved the slot-1 baseline, then verified slots 2, 3 and 4 in sequence.
+- Shared selected-leg aliases route host geometry, style, momentum labels,
+  visibility, direction, cap placement and indices without swapping a/b arcs.
+- The graph has eight propagators, four interaction vertices and one loop;
+  exactly one external leg is replaced. Lower-leg host momentum labels default
+  below their legs; explicit positions still take precedence.
+- All 36 maintained documents pass. The focused source checks 51 complete
+  graphs; its isolated page verifies 16 Proca tips, alongside the existing
+  600-contact audit. The four-page gallery has 16 examples; atlas has 54 recipes.
+- Only M03a is complete. Seagulls remain t-tree slot 1; s-tree bubbles are M03b.
+- Work is checkpointed locally on `codex/m03a-t-tree-bubbles`; no merge or push.

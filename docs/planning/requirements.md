@@ -78,17 +78,17 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R09 - Bubble insertion on all t-tree external legs
 
-- **Status:** Existing with limitations.
-- **Existing construction / evidence:** I29/TTreeChannelCorr[insertion=bubble,insertion-slot=1] works. Only slot 1 is drawn; accepted slots 2-5 do not establish support.
-- **Remaining target / limitation:** Expand self-energy insertion to external slots 1,2,3,4; each loop has two new trivalent vertices and pre/post host segments.
-- **Milestone:** M03a. **Dependencies:** M01, M02.
+- **Status:** Verified existing.
+- **Existing construction / evidence:** M03a: I29 and B02-B04 render all four external slots. `t-tree-bubble-slots.tex/pdf` checks connectivity, styles, logical momenta, indices, outer caps and state reset; the isolated Proca page has 16 vector-checked tips.
+- **Remaining target / limitation:** Implemented for one selected t-tree external leg at a time. S/u hosts, internal slot 5 and simultaneous insertions are unsupported.
+- **Milestone:** M03a complete. **Dependencies:** M01, M02.
 - **Acceptance:** Four t-tree external slots render the bubble; each retains host style, caps, pre/post momentum, and endpoint indices without state leakage.
 - **Sources:** P2-04; S05-C2, S05-R2, S08-C2, S08-R2.
 
 ## R10 - Bubble insertion on all s-tree external legs
 
 - **Status:** Missing.
-- **Existing construction / evidence:** I11 is a supported s-tree baseline, but semantic insertion rendering is implemented only in t-tree slot 1.
+- **Existing construction / evidence:** I11 is a supported s-tree baseline, but semantic bubble insertion rendering now covers t-tree external slots 1-4; s-tree insertions are still missing.
 - **Remaining target / limitation:** Same self-energy construction on s-tree external slots 1,2,3,4.
 - **Milestone:** M03b. **Dependencies:** M03a.
 - **Acceptance:** Four s-tree recipes work with one selected leg at a time; logical data remain attached after translation/reflection.

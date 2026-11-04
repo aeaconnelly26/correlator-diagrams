@@ -2208,11 +2208,25 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
-Currently, `insertion=bubble` and `insertion=seagull` draw on external slot
-`1` of `topology=t-tree`. Unsupported insertion combinations are ignored.
+`insertion=bubble` supports external slots `1,2,3,4` of `topology=t-tree`:
+upper-left, lower-left, upper-right, lower-right. One selected leg is replaced
+by outer--A, two distinct A--B arcs, then B--tree-vertex. The two new vertices
+are trivalent. `insertion=seagull` remains external slot `1` only. S-tree,
+u-tree and internal slot `5` bubble insertions are unsupported and retain their
+existing no-op behavior. Simultaneous insertions are not supported.
+
+```tex
+\TTreeChannelCorr[
+  field={},central={},leg-labels={,,,},show-momenta=false,
+  line=plain,channel-line=plain,
+  insertion=bubble,insertion-slot=2,
+  bubble-top-line=plain,bubble-bottom-line=plain
+]
+```
+
 The inserted bubble reuses the `bubble-*` key family for internal styles,
 loop momenta, endpoint indices, vertex-side external indices, and Proca /
-scalar-polarized endpoint markers. Slot-1 external momentum is drawn on the
+scalar-polarized endpoint markers. The selected external momentum is drawn on the
 outer pre-insertion host segment so it does not collide with the bubble.
 By default, that pre-insertion momentum uses a virtual guide that begins
 `0.40` pre-segment lengths before the true external endpoint; tune it with
@@ -2227,10 +2241,24 @@ insertion-pre-momentum-label-fraction=0.40,
 ```
 
 Use `insertion-pre-line=...` and `insertion-post-line=...` to style the two
-host-leg pieces independently; empty values inherit the ordinary slot-1 style.
+host-leg pieces independently; empty values inherit the selected logical leg's style.
 The pre segment is drawn as the external piece and can keep `endcap` /
 `endcapp`, while the post segment is drawn without insertion-side external
 endcaps.
+The logical a/b arcs always run from A (outer side) to B (tree side): a is the
++90-degree curve, b the -90-degree curve relative to that direction. Existing
+`bubble-top-line` / `bubble-bottom-line` aliases still mean a/b; they need not
+be page-top/page-bottom on right-hand legs. Bubble-local arrow-size slots remain
+3/4, as in the prototype; they share the existing size list with external slots
+3/4. No size-list renumbering was introduced.
+
+Host pre/post momentum labels, visibility, directions and marker sizes follow
+the selected external slot. Hiding that slot hides both host momentum annotations
+without hiding the loop momenta. Blank host labels keep their arrows. Pre/post
+label-position defaults are now `auto`: above upper legs (1/3), below lower legs
+(2/4); explicit above/below/etc. settings still win. Label/index x/y shifts remain
+page-axis values. `insertion-orientation` continues to control seagulls; bubble
+arcs follow the selected host direction rather than that option.
 The seagull insertion draws one quartic/contact insertion vertex on the host
 leg with a single package-styled self-loop propagator that starts and ends at
 that insertion vertex. On t-tree slot `1`, `insertion-orientation=auto`
@@ -2259,7 +2287,7 @@ per-side keys `insertion-post-bubble-index-*` and
 propagator endpoints; tune those `a,b,c,d` labels with the `bubble-*-index-*`
 keys above.
 
-The pre/post momentum keys tune the two split slot-1 momentum arrows around the
+The pre/post momentum keys tune the two split selected-leg momentum arrows around the
 inserted bubble. The aliases `insertion-outer-momentum-*` and
 `insertion-inner-momentum-*` map to the same pre/post controls, respectively:
 
@@ -2285,7 +2313,7 @@ inserted bubble. The aliases `insertion-outer-momentum-*` and
 ```
 
 The detached middle-channel momentum arrow is separate from the external-leg
-and split slot-1 arrows. Move it with the `insertion-middle-momentum-*` keys,
+and split host arrows. Move it with the `insertion-middle-momentum-*` keys,
 or the equivalent `insertion-channel-momentum-*` aliases:
 
 ```tex
@@ -2300,6 +2328,11 @@ insertion-middle-momentum-label-distance=4pt,
 Focused visual QA lives in
 `regressions/topologies/insertion/insertion-regression.tex` and
 `regressions/topologies/insertion/seagull-insertion-regression.tex`.
+The all-slot t-tree gallery and graph/style/cap/momentum checks are in
+`regressions/topologies/insertion/t-tree-bubble-slots.tex` and its PDF. Its
+isolated Proca page has an independent 16-tip vector check in
+`check-t-tree-bubble-contact.py`, run by the maintained suite when
+`FEYNMANFUN_PDF_PYTHON` is set to a Python interpreter with `pypdf`.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 

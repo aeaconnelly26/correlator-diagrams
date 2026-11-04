@@ -1,4 +1,24 @@
-# M02 inventory verification - 2026-11-03
+# M03a inventory verification - 2026-11-03
+
+Current atlas: **54 recipes on eleven pages**, built against
+`codex/m03a-t-tree-bubbles` on baseline `b917ed2`. I29 retains slot 1;
+B02-B04 add the lower-left, upper-right and lower-right external bubble placements.
+The main topology pages remain plain and unlabeled. Seagulls remain t-tree slot 1.
+
+The four-page focused gallery has 16 examples and 51 automatic public-diagram
+checks: actual graph/vertex/selected-leg geometry, pre/post style inheritance,
+logical momentum labels and visibility, blank/reversed momenta, independent
+indices, outer-only caps, scale/position changes and state reset. Its isolated
+Proca page has 16 vector-checked white-filled pink endpoint tips. All 36 maintained
+documents and the existing 600-contact endpoint audit pass. Slot 1 was compared
+with baseline: text is identical, with maximum PDF text displacement 0.014pt
+from coordinate-copy/polar rounding; rendered connectivity and styling are retained.
+
+All new gallery pages and changed atlas pages were rendered and reviewed.
+See [M03a verification](../planning/m03a-verification.md) for scope, recipe and
+reproduction commands. Records below preserve earlier milestone states/counts.
+
+# Historical M02 inventory verification - 2026-11-03
 
 Current atlas: **51 recipes on eleven pages**, compiled against M02 on baseline
 `6657735`. Existing structural IDs and seagull examples remain intact. T01-T04

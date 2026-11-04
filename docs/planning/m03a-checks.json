@@ -1,0 +1,25 @@
+{
+  "milestone": "M03a",
+  "baseline": "b917ed2",
+  "branch": "codex/m03a-t-tree-bubbles",
+  "published": false,
+  "package_sha256": "ea479a1a87737d8310166267833a800ddc7b2fa3b1927f9839386d49ab68ab7e",
+  "t_tree_external_bubble_slots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "regression_documents": 36,
+  "focused_diagram_cases": 51,
+  "gallery_pages": 4,
+  "gallery_examples": 16,
+  "atlas_pages": 11,
+  "atlas_recipes": 54,
+  "existing_endpoint_contacts": 600,
+  "new_endpoint_contacts": 16,
+  "slot_one_max_text_displacement_pdf_pt": 0.014,
+  "graph_propagators": 8,
+  "graph_interaction_vertices": 4,
+  "collinearity_tolerance_tex_pt": 0.03
+}

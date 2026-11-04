@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M02 directions on 99c9d07 | 2026-11-03}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M03a on b917ed2 | 2026-11-03}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -182,7 +182,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{Bubble/seagull insertions: t-tree leg 1 only.}\hfill
+}{Two trivalent vertices joined by one exchange edge.}{External insertions are implemented on t trees; s/u hosts are unsupported.}\hfill
 \atlascell{I12  t-channel tree}{\TTreeChannelCorr}{%
 \TTreeChannelCorr[
   field={},
@@ -196,7 +196,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{Bubble/seagull insertions: t-tree leg 1 only.}\par\vspace{4pt}
+}{Two trivalent vertices joined by one exchange edge.}{Bubbles: any one external leg. Seagull: external leg 1 only.}\par\vspace{4pt}
 \atlascell{I13  u-channel tree}{\UTreeChannelCorr}{%
 \UTreeChannelCorr[
   field={},
@@ -210,7 +210,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{Bubble/seagull insertions: t-tree leg 1 only.}\hfill
+}{Two trivalent vertices joined by one exchange edge.}{External insertions are implemented on t trees; s/u hosts are unsupported.}\hfill
 \atlascell{I14  s-channel bubble}{\SChannelCorr}{%
 \SChannelCorr[
   field={},
@@ -421,7 +421,7 @@
 ]
 }{The quartic/contact vertex lies on the right side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\par\vspace{4pt}
 \newpage
-\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and the insertion prototype}{Bubble and seagull insertions currently support t-tree external slot 1 only. Seagull examples appear on page 8.}
+\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and external bubble insertions}{Bubble insertions support all four t-tree external legs. Seagulls remain t-tree slot 1 only (page 8).}
 \atlascell{I27  Self-energy bubble}{\BubbleCorr}{%
 \BubbleCorr[
   field={},
@@ -475,7 +475,61 @@
   bubble-top-line=plain,
   bubble-bottom-line=plain
 ]
-}{A self-energy bubble splits the upper-left external leg.}{Only t-tree external slot 1 is implemented; other slots are no-ops.}\par\vspace{4pt}
+}{A self-energy bubble splits the upper-left external leg.}{T-tree external slots 1-4; one self-energy insertion at a time.}\hfill
+\atlascell{B02  Bubble on t-tree leg 2}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Two trivalent vertices split the lower-left external leg.}{The other three legs and the exchange edge keep their logical identities.}\par\vspace{4pt}
+\atlascell{B03  Bubble on t-tree leg 3}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Two trivalent vertices split the upper-right external leg.}{The other three legs and the exchange edge keep their logical identities.}\hfill
+\atlascell{B04  Bubble on t-tree leg 4}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Two trivalent vertices split the lower-right external leg.}{The other three legs and the exchange edge keep their logical identities.}\par\vspace{4pt}
 \newpage
 \atlaspage{07 / STYLE APPENDIX}{Existing styles and annotations}{Representative combinations, not a promise of every style on every topology. Recipes include all displayed options.}
 \atlascell{A01  Your pink Proca t-bubble}{\TChannelCorr}{%

@@ -758,7 +758,7 @@
 \def\corr@insertionpremomentumlabelfraction{0.4}
 \def\corr@insertionpremomentumguideextension{0.40}
 \def\corr@insertionpremomentumoffset{6pt}
-\def\corr@insertionpremomentumlabelposition{above}
+\def\corr@insertionpremomentumlabelposition{auto}
 \def\corr@insertionpremomentumlabeldistance{1pt}
 \def\corr@insertionpremomentumlabelxshift{0pt}
 \def\corr@insertionpremomentumlabelyshift{0pt}
@@ -766,7 +766,7 @@
 \def\corr@insertionpostmomentumend{0.8}
 \def\corr@insertionpostmomentumlabelfraction{0.54}
 \def\corr@insertionpostmomentumoffset{5pt}
-\def\corr@insertionpostmomentumlabelposition{above}
+\def\corr@insertionpostmomentumlabelposition{auto}
 \def\corr@insertionpostmomentumlabeldistance{1pt}
 \def\corr@insertionpostmomentumlabelxshift{0pt}
 \def\corr@insertionpostmomentumlabelyshift{0pt}
@@ -1400,7 +1400,7 @@
     \corr@resolvechannelauto{\corr@channelinternalindexxshift}{\def\corr@channelinternalindexxshift{0pt}}{}%
     \corr@resolvechannelauto{\corr@channelinternalindexyshift}{\def\corr@channelinternalindexyshift{-5pt}}{}%
   }{%
-    \corr@ifttreeslotonebubbleinsertion{%
+    \corr@ifttreebubbleinsertion{%
       \corr@resolvechannelauto{\corr@channelmomdist}{\def\corr@channelmomdist{17pt}}{}%
       \corr@ifstringeq{\corr@channelmomlabelxshift}{0pt}{\def\corr@channelmomlabelxshift{5pt}}{}%
     }{%
@@ -1874,7 +1874,7 @@
 }
 
 \newcommand{\corr@applyinsertionhostdefaults}{%
-  \corr@ifttreeslotoneinsertion{%
+  \corr@ifttreeinsertion{%
     \ifcorr@channelvertexyspanexplicit\else
       \def\corr@channelvertexyspan{0.9}%
     \fi
@@ -2116,7 +2116,7 @@
   \def\corr@insertionpremomentumlabelfraction{0.4}%
   \def\corr@insertionpremomentumguideextension{0.40}%
   \def\corr@insertionpremomentumoffset{6pt}%
-  \def\corr@insertionpremomentumlabelposition{above}%
+  \def\corr@insertionpremomentumlabelposition{auto}%
   \def\corr@insertionpremomentumlabeldistance{1pt}%
   \def\corr@insertionpremomentumlabelxshift{0pt}%
   \def\corr@insertionpremomentumlabelyshift{0pt}%
@@ -2124,7 +2124,7 @@
   \def\corr@insertionpostmomentumend{0.8}%
   \def\corr@insertionpostmomentumlabelfraction{0.54}%
   \def\corr@insertionpostmomentumoffset{5pt}%
-  \def\corr@insertionpostmomentumlabelposition{above}%
+  \def\corr@insertionpostmomentumlabelposition{auto}%
   \def\corr@insertionpostmomentumlabeldistance{1pt}%
   \def\corr@insertionpostmomentumlabelxshift{0pt}%
   \def\corr@insertionpostmomentumlabelyshift{0pt}%
@@ -6630,10 +6630,10 @@
   \corr@drawsemanticspolmarkers{#1}{#3}{#4}%
 }
 
-\newcommand{\corr@ifttreeslotonebubbleinsertion}[2]{%
+\newcommand{\corr@ifttreebubbleinsertion}[2]{%
   \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
     \corr@ifstringeq{\corr@insertion}{bubble}{%
-      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{#2}%
+      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{\corr@ifstringeq{\corr@insertionslot}{2}{#1}{\corr@ifstringeq{\corr@insertionslot}{3}{#1}{\corr@ifstringeq{\corr@insertionslot}{4}{#1}{#2}}}}%
     }{#2}%
   }{#2}%
 }
@@ -6646,15 +6646,61 @@
   }{#2}%
 }
 
-\newcommand{\corr@ifttreeslotoneinsertion}[2]{%
-  \corr@ifttreeslotonebubbleinsertion{#1}{%
+\newcommand{\corr@ifttreeinsertion}[2]{%
+  \corr@ifttreebubbleinsertion{#1}{%
     \corr@ifttreeslotoneseagullinsertion{#1}{#2}%
   }%
 }
 
-\newcommand{\corr@setttreeslotoneinsertioncoords}{%
-  \coordinate (corrInsertionC) at ($(corrUL)!\corr@insertionposition!(corrVT)$);
-  \pgfmathanglebetweenpoints{\pgfpointanchor{corrUL}{center}}{\pgfpointanchor{corrVT}{center}}%
+% Host-relative aliases preserve logical slots without reflecting text/labels.
+\newcommand{\corr@resolvettreeinsertionhost}{%
+  \edef\corr@insertionhostslot{\corr@insertionslot}%
+  \def\corr@insertionmomentumangle{90}%
+  \ifnum\corr@insertionhostslot=2 \def\corr@insertionmomentumangle{-90}\fi
+  \ifnum\corr@insertionhostslot=3 \def\corr@insertionmomentumangle{-90}\fi
+  \edef\corr@insertionhostmomentumdirection{\corr@externalmomentumdirectionfor{\corr@insertionhostslot}}%
+  \def\corr@insertiondefaultlabelposition{above}%
+  \ifnum\corr@insertionhostslot=2 \def\corr@insertiondefaultlabelposition{below}\fi
+  \ifnum\corr@insertionhostslot=4 \def\corr@insertiondefaultlabelposition{below}\fi
+  \corr@ifstringeq{\corr@insertionpremomentumlabelposition}{auto}{\let\corr@insertionpremomentumlabelposition\corr@insertiondefaultlabelposition}{}%
+  \corr@ifstringeq{\corr@insertionpostmomentumlabelposition}{auto}{\let\corr@insertionpostmomentumlabelposition\corr@insertiondefaultlabelposition}{}%
+}
+
+\newcommand{\corr@setttreeinsertionhost}{%
+  \ifcase\corr@insertionhostslot\relax
+  \or \coordinate (corrInsertionOuter) at (corrUL);\coordinate (corrInsertionHost) at (corrVT);%
+  \or \coordinate (corrInsertionOuter) at (corrLL);\coordinate (corrInsertionHost) at (corrVB);%
+  \or \coordinate (corrInsertionOuter) at (corrUR);\coordinate (corrInsertionHost) at (corrVT);%
+  \or \coordinate (corrInsertionOuter) at (corrLR);\coordinate (corrInsertionHost) at (corrVB);%
+  \fi
+}
+
+\newcommand{\corr@drawttreeexternalprop}[3]{%
+  \corr@ifttreebubbleinsertion{%
+    \ifnum#1=\corr@insertionslot\relax
+      \corr@drawttreebubbleinsertion
+    \else \corr@drawchannelprop{#1}{}{#2}{#3}{}%
+    \fi
+  }{%
+    \corr@ifttreeslotoneseagullinsertion{%
+      \ifnum#1=1 \corr@drawttreeslotoneseagullinsertion
+      \else \corr@drawchannelprop{#1}{}{#2}{#3}{}\fi
+    }{\corr@drawchannelprop{#1}{}{#2}{#3}{}}%
+  }%
+}
+
+\newcommand{\corr@drawttreeexternalmomentum}[4]{%
+  \corr@ifttreeinsertion{%
+    \ifnum#1=\corr@insertionslot\relax
+      \corr@drawttreeinsertionoutermomentum
+      \corr@drawttreeinsertioninnermomentum
+    \else \corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}\fi
+  }{\corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}}%
+}
+
+\newcommand{\corr@setttreebubbleinsertioncoords}{%
+  \coordinate (corrInsertionC) at ($(corrInsertionOuter)!\corr@insertionposition!(corrInsertionHost)$);
+  \pgfmathanglebetweenpoints{\pgfpointanchor{corrInsertionOuter}{center}}{\pgfpointanchor{corrInsertionHost}{center}}%
   \xdef\corr@insertionangle{\pgfmathresult}%
   \pgfmathsetlengthmacro{\corr@insertionhalflength}{\corr@bubblevertexspan*\corr@insertionscale*1cm}%
   \pgfmathsetmacro{\corr@insertiontopangle}{\corr@insertionangle+90}%
@@ -6665,10 +6711,10 @@
   \coordinate (corrInsertionB) at ([shift=({\corr@insertionangle}:\corr@insertionhalflength)]corrInsertionC);
 }
 
-\newcommand{\corr@drawttreeslotonebubbleinsertion}{%
-  \corr@setttreeslotoneinsertioncoords
-  \corr@drawchannelprop{1}{\corr@insertionpreline}{corrUL}{corrInsertionA}{}%
-  \corr@drawchannelpropnoendcaps{1}{\corr@insertionpostline}{corrInsertionB}{corrVT}{}%
+\newcommand{\corr@drawttreebubbleinsertion}{%
+  \corr@setttreebubbleinsertioncoords
+  \corr@drawchannelprop{\corr@insertionhostslot}{\corr@insertionpreline}{corrInsertionOuter}{corrInsertionA}{}%
+  \corr@drawchannelpropnoendcaps{\corr@insertionhostslot}{\corr@insertionpostline}{corrInsertionB}{corrInsertionHost}{}%
   \corr@drawbubbleinternalprop{3}{\corr@bubblealine}{corrInsertionA}{corrInsertionB}{out=\corr@insertiontopangle,in=\corr@insertiontopangle,looseness=\corr@bubblelooplooseness}
   \corr@drawbubbleinternalprop{4}{\corr@bubblebline}{corrInsertionA}{corrInsertionB}{out=\corr@insertionbottomangle,in=\corr@insertionbottomangle,looseness=\corr@bubblelooplooseness}
 }
@@ -7047,55 +7093,55 @@
 }
 
 \newcommand{\corr@drawttreeinsertionoutermomentum}{%
-  \corr@ifexternalmomentumvisible{1}{%
+  \corr@ifexternalmomentumvisible{\corr@insertionhostslot}{%
   \begingroup
-  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{1}}%
-  \coordinate (corrttreeinsertionoutermomguideorigin) at ($(corrUL)!-\corr@insertionpremomentumguideextension!(corrInsertionA)$);
-  \coordinate (corrttreeinsertionoutermomstart) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumstart!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
-  \coordinate (corrttreeinsertionoutermomend) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumend!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
-  \coordinate (corrttreeinsertionoutermomlabel) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumlabelfraction!(corrInsertionA)!\corr@insertionpremomentumoffset!90:(corrInsertionA)$);
-  \corr@ifstringeq{\corr@externalleftmomentumdirection}{out}{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{\corr@insertionhostslot}}%
+  \coordinate (corrttreeinsertionoutermomguideorigin) at ($(corrInsertionOuter)!-\corr@insertionpremomentumguideextension!(corrInsertionA)$);
+  \coordinate (corrttreeinsertionoutermomstart) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumstart!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
+  \coordinate (corrttreeinsertionoutermomend) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumend!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
+  \coordinate (corrttreeinsertionoutermomlabel) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumlabelfraction!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
+  \corr@ifstringeq{\corr@insertionhostmomentumdirection}{out}{%
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertionoutermomend) -- (corrttreeinsertionoutermomstart);
   }{%
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertionoutermomstart) -- (corrttreeinsertionoutermomend);
   }%
-  \corr@ifemptymomentumlabel{1}{}{%
+  \corr@ifemptymomentumlabel{\corr@insertionhostslot}{}{%
   \corr@putmomentumlabelwithdistance
     {(corrttreeinsertionoutermomlabel)}
     {\corr@insertionpremomentumlabelposition}
     {\corr@insertionpremomentumlabeldistance}
     {\corr@insertionpremomentumlabelxshift}
     {\corr@insertionpremomentumlabelyshift}
-    {\corr@momentumlabel{1}}%
+    {\corr@momentumlabel{\corr@insertionhostslot}}%
   }%
   \endgroup
   }%
 }
 
 \newcommand{\corr@drawttreeinsertioninnermomentum}{%
-  \corr@ifexternalmomentumvisible{1}{%
+  \corr@ifexternalmomentumvisible{\corr@insertionhostslot}{%
   \begingroup
-  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{1}}%
-  \coordinate (corrttreeinsertioninnermomstart) at ($(corrInsertionB)!\corr@insertionpostmomentumstart!(corrVT)!\corr@insertionpostmomentumoffset!90:(corrVT)$);
-  \coordinate (corrttreeinsertioninnermomend) at ($(corrInsertionB)!\corr@insertionpostmomentumend!(corrVT)!\corr@insertionpostmomentumoffset!90:(corrVT)$);
-  \coordinate (corrttreeinsertioninnermomlabel) at ($(corrInsertionB)!\corr@insertionpostmomentumlabelfraction!(corrVT)!\corr@insertionpostmomentumoffset!90:(corrVT)$);
-  \corr@ifstringeq{\corr@externalleftmomentumdirection}{out}{%
+  \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{\corr@insertionhostslot}}%
+  \coordinate (corrttreeinsertioninnermomstart) at ($(corrInsertionB)!\corr@insertionpostmomentumstart!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
+  \coordinate (corrttreeinsertioninnermomend) at ($(corrInsertionB)!\corr@insertionpostmomentumend!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
+  \coordinate (corrttreeinsertioninnermomlabel) at ($(corrInsertionB)!\corr@insertionpostmomentumlabelfraction!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
+  \corr@ifstringeq{\corr@insertionhostmomentumdirection}{out}{%
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertioninnermomend) -- (corrttreeinsertioninnermomstart);
   }{%
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertioninnermomstart) -- (corrttreeinsertioninnermomend);
   }%
-  \corr@ifemptymomentumlabel{1}{}{%
+  \corr@ifemptymomentumlabel{\corr@insertionhostslot}{}{%
   \corr@putmomentumlabelwithdistance
     {(corrttreeinsertioninnermomlabel)}
     {\corr@insertionpostmomentumlabelposition}
     {\corr@insertionpostmomentumlabeldistance}
     {\corr@insertionpostmomentumlabelxshift}
     {\corr@insertionpostmomentumlabelyshift}
-    {\corr@momentumlabel{1}}%
+    {\corr@momentumlabel{\corr@insertionhostslot}}%
   }%
   \endgroup
   }%
@@ -7128,7 +7174,7 @@
 \newcommand{\corr@putttreeinsertionpostindex}[6]{%
   \edef\corr@insertionpostindextmp{#6}%
   \ifdefempty{\corr@insertionpostindextmp}{}{%
-    \path (corrInsertionB) -- coordinate[pos=#1] (corrinsertionpostidxcoord) (corrVT);
+    \path (corrInsertionB) -- coordinate[pos=#1] (corrinsertionpostidxcoord) (corrInsertionHost);
     \node[
       anchor=#2,
       xshift=#3,
@@ -7171,9 +7217,9 @@
   \corr@putbubbleinternalindexcurve
     {(corrInsertionA)}{out=\corr@insertionbottomangle,in=\corr@insertionbottomangle,looseness=\corr@bubblelooplooseness}{(corrInsertionB)}
     {\corr@bubblebrightindexfraction}{\corr@bubblebrightindexposition}{\corr@bubblebrightindexxshift}{\corr@bubblebrightindexyshift}{\corr@bubblebrightindex}{\corr@bubbleindexmathstyle}
-  \corr@putbubbleexternalindex{corrUL}{corrInsertionA}{0.68}{\corr@bubbleleftexternalindex}%
+  \corr@putbubbleexternalindex{corrInsertionOuter}{corrInsertionA}{0.68}{\corr@bubbleleftexternalindex}%
   \corr@ifinsertionpostindicesempty{%
-    \corr@putbubbleexternalindex{corrInsertionB}{corrVT}{0.32}{\corr@bubblerightexternalindex}%
+    \corr@putbubbleexternalindex{corrInsertionB}{corrInsertionHost}{0.32}{\corr@bubblerightexternalindex}%
   }{%
     \corr@putttreeinsertionpostindices
   }%
@@ -8408,6 +8454,7 @@
 }
 
 \newcommand{\corr@drawfourpointtreetchannel}{%
+  \corr@ifttreeinsertion{\corr@resolvettreeinsertionhost}{}%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
     \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
@@ -8416,26 +8463,19 @@
     \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
     \vertex (corrVT) at (0,\corr@channelvertexyspan);
     \vertex (corrVB) at (0,-\corr@channelvertexyspan);
+    \corr@ifttreeinsertion{\corr@setttreeinsertionhost}{}%
     \corr@ifexternallegs{%
-      \corr@ifttreeslotonebubbleinsertion{%
-        \corr@drawttreeslotonebubbleinsertion
-      }{%
-        \corr@ifttreeslotoneseagullinsertion{%
-          \corr@drawttreeslotoneseagullinsertion
-        }{%
-          \corr@drawchannelprop{1}{}{corrUL}{corrVT}{}%
-        }%
-      }%
-      \corr@drawchannelprop{2}{}{corrLL}{corrVB}{}%
-      \corr@drawchannelprop{3}{}{corrUR}{corrVT}{}%
-      \corr@drawchannelprop{4}{}{corrLR}{corrVB}{}%
+      \corr@drawttreeexternalprop{1}{corrUL}{corrVT}%
+      \corr@drawttreeexternalprop{2}{corrLL}{corrVB}%
+      \corr@drawttreeexternalprop{3}{corrUR}{corrVT}%
+      \corr@drawttreeexternalprop{4}{corrLR}{corrVB}%
     }%
     \corr@drawchannelprop{5}{\corr@channelinternalline}{corrVT}{corrVB}{}
   \end{feynhand}
   \ifcorr@centervertex
     \corr@putvertex{corrVT}{\corr@centervertexstyle}
     \corr@putvertex{corrVB}{\corr@centervertexstyle}
-    \corr@ifttreeslotonebubbleinsertion{%
+    \corr@ifttreebubbleinsertion{%
       \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}
       \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}
     }{}%
@@ -8445,21 +8485,16 @@
   \fi
   \corr@fourpointplaceexternalvertices
   \ifcorr@showmomenta
-    \corr@ifttreeslotoneinsertion{%
-      \corr@drawttreeinsertionoutermomentum
-      \corr@drawttreeinsertioninnermomentum
-    }{%
-      \corr@drawexternalmomentumul{1}{corrUL}{corrVT}%
-    }%
-    \corr@drawexternalmomentumll{2}{corrLL}{corrVB}
-    \corr@drawexternalmomentumur{3}{corrUR}{corrVT}
-    \corr@drawexternalmomentumlr{4}{corrLR}{corrVB}
-    \corr@ifttreeslotoneinsertion{%
+    \corr@drawttreeexternalmomentum{1}{corrUL}{corrVT}{90}%
+    \corr@drawttreeexternalmomentum{2}{corrLL}{corrVB}{-90}%
+    \corr@drawttreeexternalmomentum{3}{corrUR}{corrVT}{-90}%
+    \corr@drawttreeexternalmomentum{4}{corrLR}{corrVB}{90}%
+    \corr@ifttreeinsertion{%
       \corr@drawttreeinsertionmiddlemomentum
     }{%
       \corr@drawchannelmomentum{corrVT}{corrVB}%
     }%
-    \corr@ifttreeslotonebubbleinsertion{%
+    \corr@ifttreebubbleinsertion{%
       \corr@drawttreeinsertionbubblemomenta
     }{}%
     \corr@ifttreeslotoneseagullinsertion{%
@@ -8467,7 +8502,7 @@
     }{}%
   \fi
   \corr@fourpointchannelindices{corrVT}{corrVB}
-  \corr@ifttreeslotonebubbleinsertion{%
+  \corr@ifttreebubbleinsertion{%
     \corr@putttreeinsertionbubbleindices
   }{}%
   \corr@ifttreeslotoneseagullinsertion{%

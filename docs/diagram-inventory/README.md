@@ -2,20 +2,21 @@
 
 [Open the atlas](inventory.pdf) or [copy a recipe](recipes.md).
 
-Built against `codex/m02-triangle-contact-annotations`, based on synchronized
-`main` at `6657735`, on 2026-11-03. There are **51 current examples on eleven
+Built against `codex/m03a-t-tree-bubbles`, based on synchronized
+`main` at `b917ed2`, on 2026-11-03. There are **54 current examples on eleven
 pages**, including the structural/style gallery, five seagull examples, three
 integrated annotation controls, and eight M02 annotation examples. These are not
-51 distinct graph topologies: aliases, orientations, and style variants are
+54 distinct graph topologies: aliases, orientations, and style variants are
 identified separately.
 
-The verified M02 checkpoint `8f95755` is now included in published main. The
-inventory and package are unchanged from that verification; the branch name
-above records where the examples were implemented and checked.
+M03a adds lower-left, upper-right and lower-right t-tree bubble placements.
+I29 retains slot 1; B02-B04 show the other legs. This branch is checkpointed
+locally and has not yet been merged or pushed.
 
 ## How to read it
 
-- Pages 1-6 show minimal structures with fields and momentum annotations hidden.
+- Pages 1-6 show minimal structures with fields and momentum annotations hidden;
+  page 6 now includes all four t-tree self-energy insertion placements.
 - Page 7 demonstrates named style/annotation features, including the explicitly
   requested pink Proca t-bubble with four double-capped EW legs.
 - Page 8 shows the supported seagull prototype and one-/two-sided Proca loop
@@ -30,8 +31,9 @@ above records where the examples were implemented and checked.
 
 Important limits:
 
-- Bubble and seagull insertions support **t-tree external slot 1 only**. Other
-  accepted insertion settings can silently do nothing.
+- Bubble insertions support **t-tree external slots 1-4**, one at a time.
+  Seagulls remain **t-tree external slot 1 only**. S/u hosts and internal
+  bubble insertions are unsupported; accepted keys can still do nothing there.
 - Horizontal/vertical contact pairings are disconnected pairs, not tree exchanges.
 - The existing crossed box fixes its side edges and crosses its diagonals;
   internal momentum/index coverage remains incomplete.

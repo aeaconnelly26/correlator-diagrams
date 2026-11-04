@@ -11,7 +11,8 @@ The seagull slot-1 prototype, prior marker/momentum/index work, and M01 raw
 Proca fixes are reconciled. See [integration verification](integration-verification.md).
 M04 expands the existing prototype. Integration commit `4584aff` is included
 in published `main` at `6657735`. M02 checkpoint `8f95755` is now also merged
-and published on main. M03a is next, on a new branch from synchronized main.
+and published on main. M03a is complete locally on its feature branch; M03b
+is next and must use that checkpoint or its descendant.
 
 ## Common session contract
 
@@ -101,6 +102,11 @@ the acceptance contract below remains a regression gate.
 ## M03 - Generalize external self-energy bubbles
 
 **Requirements:** R09, R10. **Dependencies:** M01, M02.
+
+M03a is complete on `codex/m03a-t-tree-bubbles`, based on `b917ed2`.
+All four t-tree external slots are checked, including actual graph/caps/momentum
+and style/index coverage. See [M03a verification](m03a-verification.md).
+M03b (s-tree) remains future work. Keep the following contract for that expansion.
 
 - M03a: preserve the t-tree slot-1 baseline and add slots 2-4 through a shared
   translated/reflected host-splitting model. Keep bubble a/b slot conventions.
