@@ -1,0 +1,87 @@
+# M02 verification - independent triangle-contact annotations
+
+Baseline: synchronized local/GitHub `main` at `6657735`.
+Implementation branch: `codex/m02-triangle-contact-annotations`.
+Requirement: R06; retain R07's four graph layouts. M02 sessions A-C are complete.
+This slice is checkpointed locally; it has not been merged or pushed.
+
+## What changed
+
+`triangle-contact-momentum-1={...}` through `triangle-contact-momentum-7={...}`
+provide independent ranges, perpendicular arrow clearance, label fraction,
+arrow break, label-only offset/shifts/anchor, and side. The `trianglecontact-*`
+aliases are retained and extended. Grouped settings supply unspecified fields;
+slot fields win regardless of key order. Options reset for each diagram.
+
+The former hard-coded assignments overwrote explicit grouped settings on
+external slots 2/4 and internal slots 5-7. These now act only as `auto` defaults;
+explicit settings really affect all selected slots. The tuned default ranges
+remain. Some earlier internal labels faced inside the triangle; sides now use
+the actual centroid and directed edge. Reversing an arrow retains its side
+and label coordinate frame. External labels default to 6pt additional outward
+clearance to avoid crowding short arrows; set `label-offset=0pt` for inline
+labels. Internal labels remain inline by default.
+
+Other topology momentum renderers are unchanged. Triangle-contact uses the
+existing momentum font/fill/style, arrow-size, direction, visibility, and label
+interfaces. Propagator/style/index code and endpoint code were not modified.
+No topology, insertion placement, or connectivity was added.
+
+The exact slot endpoint map, public interface, and acceptance matrix are in
+the [contract](../../regressions/topologies/triangle-contact/M02-contract.md)
+and [reference](../reference.md#triangle-contact-topology).
+
+## Automated evidence
+
+- **35 maintained regression/example documents pass**, including old triangle
+  recipes, momentum direction/visibility and blank-label assertions, indices,
+  one-sided markers, insertions, and the new focused regression.
+- **81 complete public diagrams** in the focused regression have automatic
+  geometry/behavior checks. All seven slots are altered independently in all
+  four orientations with unequal spans. Unselected annotations stay identical.
+- Outside-side checks observe emitted arrow coordinates relative to edge and
+  centroid half-planes. Additional calls cover scales 0.72/1.2, grouped settings,
+  aliases/key order, label-only motion without arrow motion, reversal without
+  side flips, selected/hidden annotations, momentum off, and state reset.
+- The independent PDF-vector audit still passes **600 automatic Proca endpoint
+  contacts**. M02 does not relax or modify its checker.
+
+Reproduce the maintained suite with a Python interpreter containing `pypdf`:
+
+```sh
+FEYNMANFUN_PDF_PYTHON=python3 scripts/check-regressions.sh
+```
+
+The final full suite passed after the final package change. Eight scale cases
+and explicit label-only arrow-invariance checks are also included in the focused
+regression, which was recompiled successfully during closeout. The package hash
+and counts are in [the check record](m02-checks.json).
+
+## Rendered evidence and inventory
+
+- [Focused gallery](../../regressions/topologies/triangle-contact/triangle-contact-annotations.pdf):
+  four pages, 16 minimal examples; all orientations, unequal geometry/mixed
+  lines, individual external/internal controls, and hidden/blank entries.
+- [Current atlas](../diagram-inventory/inventory.pdf): ten pages, 47 recipes;
+  T01-T04 demonstrate the new controls in four orientations.
+- [Recipes](../diagram-inventory/recipes.md): generated copy/paste examples.
+
+All pages were rendered and inspected for labels, arrow directions, vertex
+connectivity, clipping and crowding. The diagnostic avoids unnecessary endcaps
+and circles. The existing atlas style appendix retains its purpose-specific
+cap/circle examples. Historical diagnostic PDFs retain their stated baselines;
+the current new gallery and atlas demonstrate M02 behavior.
+
+## Limits and next step
+
+This is manual placement control, not automatic label collision avoidance for
+arbitrary text or degenerate geometry. Long labels, very short arrows, and
+labels manually shifted toward the graph can require tuning. Fractions remain
+relative to each directed edge, so unequal lengths can be adjusted separately.
+Per-slot blocks replace earlier blocks for the same slot; unspecified fields
+inherit grouped settings. A negative offset or explicit side can intentionally
+put annotations inside. No other topology receives these new slot keys.
+
+M03a is next: external self-energy bubbles on the remaining t-tree legs, starting
+with a narrowly defined slot-2 case. Use the M02 checkpoint or its descendant;
+the published main baseline does not yet include this slice.

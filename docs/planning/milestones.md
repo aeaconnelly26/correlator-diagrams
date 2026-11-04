@@ -9,9 +9,9 @@ sessions, not changes made by the inventory work. R IDs refer to
 `codex/integrate-seagull-and-proca` now combines `1b85ef8` and `5a657cd`.
 The seagull slot-1 prototype, prior marker/momentum/index work, and M01 raw
 Proca fixes are reconciled. See [integration verification](integration-verification.md).
-M04 expands the existing prototype; M02 remains the next feature milestone.
-Integration commit `4584aff` is now merged into local `main`. Start M02 on
-a new branch from current `main`, now reconciled and published to GitHub.
+M04 expands the existing prototype. Integration commit `4584aff` is included
+in published `main` at `6657735`. M02 is completed on its own branch; M03a
+is next, based on that checkpoint or its descendant.
 
 ## Common session contract
 
@@ -76,9 +76,16 @@ Completed and reconciled on `codex/integrate-seagull-and-proca`; see [integratio
   detached circ markers distinct from endpoint arrow placement.
 - Follow-up sessions may fix separate affected helper families, one at a time.
 
-## M02 - Independent triangle-contact annotations
+## M02 - Independent triangle-contact annotations (completed)
 
 **Requirements:** R06, preserving R07. **Dependency:** M01.
+
+Completed on `codex/m02-triangle-contact-annotations`, based on `6657735`.
+Sessions A-C are covered by the new slot option blocks and the focused
+four-page gallery. All seven logical slots, four orientations, unequal spans,
+grouped compatibility, scale, reversal, visibility and isolation are verified.
+See [M02 verification](m02-verification.md). M03a is the next feature slice;
+the acceptance contract below remains a regression gate.
 
 - Session A: external slots 1-4, independent arrow ranges and label positions.
   Remove hard-coded slot tuning that prevents an explicit setting taking effect.

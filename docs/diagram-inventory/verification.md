@@ -1,4 +1,23 @@
-# Current integrated inventory verification - 2026-11-03
+# M02 inventory verification - 2026-11-03
+
+Current atlas: **47 recipes on ten pages**, compiled against M02 on baseline
+`6657735`. Existing structural IDs and seagull examples remain intact. T01-T04
+add one annotation example for each triangle-contact orientation; they are style
+and annotation variants, not new topologies. All examples use current public APIs.
+
+The four-page M02 diagnostic includes 16 minimal rendered examples and automated
+checks on complete public diagrams. These observe emitted coordinates, verify
+all seven slots independently, preserve the other six, check outside half-planes,
+label-only movement, grouped keys, aliases, reversed arrows, scales, visibility,
+and consecutive diagrams. No unnecessary endcaps or circ decorations are used.
+
+All **35 maintained regression/example documents** pass; the independent Proca
+PDF check still passes **600 automatic contacts**. The final atlas and M02 gallery
+were rendered and inspected. See [M02 verification](../planning/m02-verification.md)
+for the implementation boundary and reproducible commands. Older PDFs and audit
+records below preserve the behavior of their stated revisions.
+
+# Historical integrated inventory verification - 2026-11-03
 
 Current atlas: nine pages and 43 recipes, all compiled against the combined
 checkout from parents `1b85ef8` and `5a657cd`. There is no branch-only package

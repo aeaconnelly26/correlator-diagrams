@@ -2,11 +2,11 @@
 
 [Open the atlas](inventory.pdf) or [copy a recipe](recipes.md).
 
-Built against the combined `codex/integrate-seagull-and-proca` checkout,
-from parents `1b85ef8` and `5a657cd`, on 2026-11-03. There are **43 current
-examples on nine pages**, including the original structural/style gallery,
-five seagull examples, and three integrated annotation controls. These are not
-43 distinct graph topologies: aliases, orientations, and style variants are
+Built against `codex/m02-triangle-contact-annotations`, based on synchronized
+`main` at `6657735`, on 2026-11-03. There are **47 current examples on ten
+pages**, including the structural/style gallery, five seagull examples, three
+integrated annotation controls, and four M02 annotation examples. These are not
+47 distinct graph topologies: aliases, orientations, and style variants are
 identified separately.
 
 ## How to read it
@@ -19,6 +19,8 @@ identified separately.
   identifiers from the former branch-only preview; they now work here.
 - Page 9 demonstrates compact indices, logical-slot momentum hiding, unlabeled
   arrows, and the tree-channel side-label fix.
+- Page 10 demonstrates independent triangle-contact momentum placement in all
+  four orientations. T01-T04 have reproducible per-slot recipes.
 
 Important limits:
 
@@ -27,8 +29,8 @@ Important limits:
 - Horizontal/vertical contact pairings are disconnected pairs, not tree exchanges.
 - The existing crossed box fixes its side edges and crosses its diagonals;
   internal momentum/index coverage remains incomplete.
-- All four triangle-contact orientations exist; independent annotation placement
-  remains M02. A regular triangle attached to a tree is a different missing graph.
+- All four triangle-contact orientations have independent annotation controls
+  for slots 1-7. A regular triangle attached to a tree is a different missing graph.
 - `SunsetDiagram` is a two-loop graph.
 - The integrated endpoint matrix certifies its documented circular vertices,
   scales, and settings, not every arbitrary custom transform or vertex shape.

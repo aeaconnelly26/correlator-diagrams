@@ -9,6 +9,7 @@ feature implementation belongs in later coding sessions.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.
 - [Branch integration and session workflow](branch-integration.md): integrated state and closeout policy.
 - [Integration verification](integration-verification.md): combined test, PDF, and compatibility evidence.
+- [M02 verification](m02-verification.md): independent triangle-contact annotations and current handoff.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.
 - [Historical plan](history/development-plan-before-2026-11-03.md): the complete previous plan, preserved before refresh.

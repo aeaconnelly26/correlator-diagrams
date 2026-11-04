@@ -6,11 +6,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`, containing verified integration `4584aff` and
-  GitHub's existing PR #28 merge `0717abb`. Reconciled and published to
-  GitHub on 2026-11-03; package code and inventory are unchanged from verification.
-- Integration is complete and verified. M02 independent triangle-contact
-  annotations is the next coding milestone, based on this integrated branch.
+- Published baseline: `main` at `6657735`, reconciled with GitHub's PR #28 and
+  synchronized on 2026-11-03.
+- Current branch: `codex/m02-triangle-contact-annotations`, based on `6657735`.
+- M02 is complete locally: independent controls for all seven triangle-contact
+  momentum annotations, with outside-facing defaults. See
+  [M02 verification](planning/m02-verification.md). Not merged or pushed.
 - M00 produced the inventory and roadmap. M01 now corrects generic Proca tip
   contact; it adds a low-level custom-radius line option and no new topology.
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
@@ -24,7 +25,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Nine pages: 43 current examples, including seagulls and integrated annotation controls. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Ten pages: 47 current examples, including seagulls and independent triangle-contact annotations. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -39,7 +40,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M00 | Archive sources; audit capacity; publish repository atlas and roadmap | Complete; included in checkpoint `1b85ef8` |
 | M01 | Audit and correct demonstrated Proca endpoint failures | Complete locally; diagnostic and vector checks passed |
 | Integration | Reconcile seagull/endpoint work with M01 | Complete; reconciled on local/GitHub `main`; combined tests pass |
-| M02 | Independent triangle-contact annotations, four orientations | Next coding target on the integrated baseline |
+| M02 | Independent triangle-contact annotations, four orientations | Complete locally; 35 regression documents and 600 endpoint contacts pass |
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | Slot-1 t prototype exists; expansion planned |
 | M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
 | M05 | External swordfish on s/t trees | Planned |
@@ -52,11 +53,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-Read M02 in [milestones](planning/milestones.md) and R06 in
-[requirements](planning/requirements.md). Create the M02 branch from current
-local `main`, which now includes integration commit `4584aff`. Begin with
-independent external-slot annotation controls, then internal-edge controls and
-all four orientations. Preserve the integrated marker and momentum/index behavior.
+M03a is next: expand external self-energy bubbles from t-tree slot 1 to the
+other t-tree legs, one placement at a time. Read R09 and M03 in
+[requirements](planning/requirements.md) and [milestones](planning/milestones.md).
+Use the M02 checkpoint (or its descendant); publish/merge this branch before
+starting from `main`. Begin by freezing the slot-2 graph and preserved
+styles, momentum, indices, and outer endpoint behavior. Do not start M03 here.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -129,7 +131,7 @@ Before closing a feature slice:
 - Future closeouts include a local commit, inventory update, verification record,
   and explicit push/merge status. See the branch-integration workflow.
 
-## Latest session update - integration, 2026-11-03
+## Historical session update - integration, 2026-11-03
 
 - Combined `1b85ef8` and `5a657cd` on `codex/integrate-seagull-and-proca`,
   preserving both parent branches. Resolved package, runner, and plan conflicts.
@@ -143,3 +145,17 @@ Before closing a feature slice:
   indices, channel side-label fixes, and the Compton example remain covered.
 - M02 is next. Slot-1-only insertion limits remain; no additional topology was
   implemented as part of integration. `main` is unchanged; no push or PR.
+
+## Latest session update - M02, 2026-11-03
+
+- Added `triangle-contact-momentum-1` through `-7` option blocks and aliases;
+  grouped options remain fallbacks, independent of key order.
+- Explicit grouped ranges/fractions now work on every slot. Tuned ranges
+  remain defaults through `auto`. Outside directions follow the triangle
+  centroid, and external labels receive clearance from short arrows.
+- Label shifts/anchors move only the label; reversal keeps the same geometric
+  side and fractions. Slot numbering, styles, indices, and visibility remain.
+- All 35 maintained documents and 600 automatic endpoint contacts pass.
+  Saved the four-page focused gallery; atlas updated to ten pages/47 recipes.
+- No new topology or insertion placement was added. M03a is next.
+- Work is checkpointed on the M02 branch; no main merge or push for this slice.

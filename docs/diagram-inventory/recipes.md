@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `integration of 1b85ef8 + 5a657cd`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M02 on 6657735`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1023,5 +1023,120 @@ Slot 1 has an unlabeled arrow, slot 2 has q, and slot 3 has no arrow.
   show-momenta=true,
   momentum-labels={,q,r},
   external-momentum-hide={3}
+]
+```
+
+## Independent momentum placement
+
+### T01 - Annotations: contact bottom
+
+Slot 2 arrow and slot 6 label move independently.
+
+**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=bottom,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-2={offset=16pt},
+  triangle-contact-momentum-6={label-offset=4pt}
+]
+```
+
+### T02 - Annotations: contact top
+
+Slot 5 has its own range and reversed arrow.
+
+**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=top,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-5={start=0.15,end=0.85,label-fraction=0.43},
+  triangle-contact-internal-momentum-directions={reverse,forward,forward}
+]
+```
+
+### T03 - Annotations: contact left
+
+Slot 3 has its own label shift and anchor.
+
+**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=left,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-3={label-xshift=2pt,label-anchor=south},
+  triangle-contact-yspan=1.15
+]
+```
+
+### T04 - Annotations: contact right
+
+Unequal edges retain mixed styles and logical slots.
+
+**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=right,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-internal-lines={proca,ewboson,proca},
+  triangle-contact-xspan=1.20,
+  triangle-contact-yspan=0.80
 ]
 ```

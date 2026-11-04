@@ -1,5 +1,5 @@
 {
-  "baseline": "integration of 1b85ef8 + 5a657cd",
+  "baseline": "M02 on 6657735",
   "date": "2026-11-03",
   "base_options": [
     "field={}",
@@ -277,7 +277,7 @@
     {
       "section": "05 / TRIANGLE-CONTACT",
       "title": "Four triangle-contact orientations",
-      "subtitle": "Two trivalent vertices and one quartic vertex. These orientations already exist; label independence remains future work.",
+      "subtitle": "Two trivalent vertices and one quartic vertex. Independent momentum placement is demonstrated on page 10.",
       "entries": [
         {
           "id": "I23",
@@ -629,7 +629,83 @@
           "limitation": "An empty entry hides text; external-momentum-hide hides the whole arrow."
         }
       ]
+    },
+    {
+      "section": "10 / TRIANGLE-CONTACT ANNOTATIONS",
+      "title": "Independent momentum placement",
+      "subtitle": "M02: seven logical slots; per-slot ranges, clearance, label positions and anchors. No new topology.",
+      "entries": [
+        {
+          "id": "T01",
+          "title": "Annotations: contact bottom",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=bottom",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-momentum-2={offset=16pt}",
+            "triangle-contact-momentum-6={label-offset=4pt}"
+          ],
+          "description": "Slot 2 arrow and slot 6 label move independently.",
+          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+        },
+        {
+          "id": "T02",
+          "title": "Annotations: contact top",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=top",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-momentum-5={start=0.15,end=0.85,label-fraction=0.43}",
+            "triangle-contact-internal-momentum-directions={reverse,forward,forward}"
+          ],
+          "description": "Slot 5 has its own range and reversed arrow.",
+          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+        },
+        {
+          "id": "T03",
+          "title": "Annotations: contact left",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=left",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-momentum-3={label-xshift=2pt,label-anchor=south}",
+            "triangle-contact-yspan=1.15"
+          ],
+          "description": "Slot 3 has its own label shift and anchor.",
+          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+        },
+        {
+          "id": "T04",
+          "title": "Annotations: contact right",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=right",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-internal-lines={proca,ewboson,proca}",
+            "triangle-contact-xspan=1.20",
+            "triangle-contact-yspan=0.80"
+          ],
+          "description": "Unequal edges retain mixed styles and logical slots.",
+          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+        }
+      ]
     }
   ],
-  "branch": "codex/integrate-seagull-and-proca"
+  "branch": "codex/m02-triangle-contact-annotations"
 }

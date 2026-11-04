@@ -86,9 +86,9 @@
   {
     "id": "R06",
     "title": "Independent triangle-contact labeling",
-    "status": "Existing with limitations",
-    "evidence": "I23-I26 verify shapes. Existing triangle-contact regression and internal-momentum source demonstrate annotations; code shares offsets/fractions and includes hard-coded slot adjustments.",
-    "target": "Control each external/internal momentum label and arrow independently. Defaults stay outside the triangle for all orientations. Unequal edge lengths must not force linked label/arrow sizing.",
+    "status": "Verified existing",
+    "evidence": "M02: T01-T04 and triangle-contact-annotations.tex/pdf demonstrate independent momentum controls for all seven logical slots, outside defaults in four orientations, unequal spans and mixed EW/Proca styles. Automated emitted-coordinate isolation, grouped fallbacks, reversal, label-only movement, scale, visibility and state-reset checks pass.",
+    "target": "Implemented. Long labels or unusually short legs can still need explicit per-slot ranges, clearance, anchor or label shifts. This adds annotation controls, not a topology.",
     "milestone": "M02",
     "dependencies": "M01 baseline endpoint audit",
     "acceptance": "All four orientations pass a labeled mixed-Proca/EW example; changing one annotation does not move another; old public keys still work.",

@@ -71,7 +71,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - 3-point vertices via `\ThreePointCorr`, including per-leg styles, custom labels, and all-in/all-out momentum flow
 - one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`
 - crossed-box diagrams via `\CrossBoxCorr` or `\FourPointCorr[topology=cross-box]`
-- triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations and split color controls
+- triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations, split color controls, and independent momentum placement for all seven slots
 - vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - standalone self-energy bubbles via `\BubbleCorr`, and bubble/seagull insertions on t-tree external slot 1
@@ -187,6 +187,7 @@ Common wrappers and aliases:
 - Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
 - Use [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex) to inspect the crossed-box topology in isolation.
 - Use [`regressions/topologies/triangle-contact/triangle-contact-regression.tex`](regressions/topologies/triangle-contact/triangle-contact-regression.tex) to inspect triangle-contact orientations.
+- Use the [M02 annotation gallery](regressions/topologies/triangle-contact/triangle-contact-annotations.pdf) and its [source](regressions/topologies/triangle-contact/triangle-contact-annotations.tex) for independent arrow and label controls.
 - Use [`regressions/topologies/three-point/three-point-check.tex`](regressions/topologies/three-point/three-point-check.tex) to verify the 3-point topology and momentum placement.
 - Use [`regressions/propagators/endpoint-markers/endpoint-marker-regression.tex`](regressions/propagators/endpoint-markers/endpoint-marker-regression.tex) to verify endpoint arrow and endcap add-ons.
 - Use [`regressions/propagators/scalar-polarization/scalar-polarization-check.tex`](regressions/propagators/scalar-polarization/scalar-polarization-check.tex) to verify single-leg scalar-polarized placement and arrow-size changes.

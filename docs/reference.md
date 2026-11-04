@@ -1748,6 +1748,9 @@ Useful controls:
 - `momentum-directions={ul,ll,ur,lr}`
 - `triangle-contact-momentum-directions={ul,ll,ur,lr}`
 - `triangle-contact-momentum-slots={1,2,3,4}`
+- `triangle-contact-momentum-start=...`, `triangle-contact-momentum-end=...`
+- `triangle-contact-momentum-offset=...`
+- `triangle-contact-momentum-label-fraction=...`, `triangle-contact-momentum-label-gap=...`
 - `triangle-contact-central-label-yshift=...`
 
 Internal triangle momentum labels are opt-in. Slots 5--7 use the same edge
@@ -1761,6 +1764,69 @@ order as `triangle-contact-internal-lines={...}`:
 - `triangle-contact-internal-momentum-offset=...`
 - `triangle-contact-internal-momentum-label-fraction=...`
 - `triangle-contact-internal-momentum-label-gap=...`
+
+Each of the seven momentum annotations can be positioned independently:
+
+```tex
+\TriangleContactCorr[
+  field={},central={},leg-labels={,,,},line=plain,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-momentum-2={start=0.12,end=0.88,offset=16pt},
+  triangle-contact-momentum-6={label-fraction=0.43,label-offset=4pt,
+    label-xshift=-2pt,label-anchor=south}
+]
+```
+
+The keys `triangle-contact-momentum-1` through `triangle-contact-momentum-7`
+accept the following fields. Their `trianglecontact-momentum-N` aliases work
+the same way. These controls use the existing slots, not a new ordering.
+
+| Field | Meaning |
+| --- | --- |
+| `start`, `end` | Arrow endpoints as fractions of the directed propagator, normally `0 <= start < end <= 1`. |
+| `offset` | Perpendicular distance from propagator to arrow, in TeX units. |
+| `label-fraction` | Label location along the same directed propagator, independent of arrow range. |
+| `label-gap` | Half-width of the break in the arrow, as an edge fraction; zero makes it continuous. |
+| `label-offset` | Extra perpendicular distance from arrow to label; default `6pt` externally and `0pt` internally. |
+| `label-xshift`, `label-yshift` | Move only the label in the diagram's x/y frame; default `0pt`. |
+| `label-anchor` | TikZ anchor of the label, e.g. `center`, `south`, `north east`; default `center`. |
+| `side` | `outside` (default), `inside`, `left`, or `right`; left/right are relative to the directed edge. |
+
+Outside-facing sides are computed from the actual triangle centroid for all
+four orientations and unequal spans. Arrow reversal retains the same side,
+fractions, and label position. Label-only shifts/anchors never move the arrow;
+changing `label-fraction` or `label-gap` also moves the break around the label.
+For a label beside a continuous arrow, set `label-gap=0` and a nonzero
+`label-offset`. Long labels or unusually short edges can require explicit tuning.
+
+Unspecified per-slot fields inherit the existing external or internal grouped
+settings. A per-slot field wins over a grouped setting regardless of key order.
+Per-slot option blocks are replaced if repeated and reset between diagrams.
+The formerly ignored grouped ranges/fractions now apply to every selected edge.
+The grouped start/end keys accept `auto` (their default) to preserve the tuned
+ranges: external slots 1/3 use `0.30..0.70`, 2/4 use `0.12..0.90`; internal
+slots 5/6/7 use `0.30..0.72`, `0.25..0.75`, and `0.28..0.70` respectively.
+The external grouped gap defaults to `auto`, preserving `0.10` for slots 1/3
+and the legacy `0.2pt` numeric expression for 2/4. New recipes should use unitless
+fractions for `label-gap`. Explicit per-slot values use fractions, not `auto`.
+
+External slots run from the outer endpoint to the interaction vertex. Internal
+edge endpoint order is:
+
+| Contact orientation | Slot 5 | Slot 6 | Slot 7 |
+| --- | --- | --- | --- |
+| bottom | A to B | A to contact | contact to B |
+| top / left | contact to A | A to B | B to contact |
+| right | A to B | B to contact | contact to A |
+
+For bottom/top, A/B are the left/right trivalent vertices. For left/right,
+A/B are the upper/lower trivalent vertices. The four external slots remain
+upper-left, lower-left, upper-right, lower-right. Directions, momentum visibility,
+styles, and indices keep their existing interfaces. Blank external labels
+keep a continuous unlabeled arrow; blank internal labels omit the annotation.
+See `regressions/topologies/triangle-contact/triangle-contact-annotations.tex`
+and its PDF for the four-page gallery and automated isolation checks.
 
 Triangle-contact propagator index slots use external slots 1--4 and internal
 triangle-edge slots 5--7:

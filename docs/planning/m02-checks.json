@@ -1,0 +1,15 @@
+{
+  "milestone": "M02",
+  "baseline": "6657735",
+  "branch": "codex/m02-triangle-contact-annotations",
+  "package_sha256": "f5f20c77d86df5eadfa849527b95c5bb005c1bdde74ef5a28554048505d9a2d5",
+  "regression_documents": 35,
+  "automatic_public_diagrams": 81,
+  "focused_gallery_pages": 4,
+  "focused_gallery_examples": 16,
+  "atlas_pages": 10,
+  "atlas_recipes": 47,
+  "proca_automatic_contacts": 600,
+  "new_topologies": 0,
+  "published": false
+}

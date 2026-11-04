@@ -1,0 +1,204 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,graphicx,adjustbox,fancyhdr}
+\usepackage{feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M02 triangle-contact annotations}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+
+% Observe emitted arrow/label coordinates in full public diagrams. Changes to
+% a selected slot must leave all six other annotations exactly unchanged.
+\newbox\tcbox
+\newcount\tccount
+\newcount\tcdiagramchecks
+\makeatletter
+\def\tcphase{baseline}
+\def\tccheckoutside{yes}
+\let\tcoriginaldraw\corr@trianglecontactdrawannotation
+\newcommand{\tccapturepoint}[1]{%
+  \pgfpointanchor{#1}{center}%
+  \edef\tcsignature{\tcsignature,\the\pgf@x,\the\pgf@y}}
+\renewcommand{\corr@trianglecontactdrawannotation}[3]{%
+  \tcoriginaldraw{#1}{#2}{#3}%
+  \global\advance\tccount by 1
+  \def\tcsignature{}%
+  \tccapturepoint{corrTCArrowStart}\tccapturepoint{corrTCArrowEnd}%
+  \global\expandafter\let\csname tcarrow\tcphase#1\endcsname\tcsignature
+  \tccapturepoint{corrTCLabel}%
+  \tccapturepoint{corrTCGapStart}\tccapturepoint{corrTCGapEnd}%
+  \edef\tcsignature{\tcsignature,\corr@tclabelanchor,\corr@tclabelxshift,\corr@tclabelyshift,\corr@tcdirection}%
+  \global\expandafter\let\csname tc\tcphase#1\endcsname\tcsignature
+  \corr@ifstringeq{\tccheckoutside}{yes}{%
+    % Independent geometric test: actual emitted arrow points must lie on the
+    % opposite side of the supporting edge from the triangle centroid.
+    \pgfpointdiff{\pgfpointanchor{#2}{center}}{\pgfpointanchor{#3}{center}}%
+    \pgfmathsetmacro{\tcdx}{\pgf@x/1cm}\pgfmathsetmacro{\tcdy}{\pgf@y/1cm}%
+    \pgfpointdiff{\pgfpointanchor{#2}{center}}{\pgfpointanchor{corrTCArrowStart}{center}}%
+    \pgfmathsetmacro{\tcax}{\pgf@x/1cm}\pgfmathsetmacro{\tcay}{\pgf@y/1cm}%
+    \pgfpointdiff{\pgfpointanchor{#2}{center}}{\pgfpointanchor{corrTriCentroid}{center}}%
+    \pgfmathsetmacro{\tccx}{\pgf@x/1cm}\pgfmathsetmacro{\tccy}{\pgf@y/1cm}%
+    \pgfmathsetmacro{\tcsideproduct}{(\tcdx*\tcay-\tcdy*\tcax)*(\tcdx*\tccy-\tcdy*\tccx)}%
+    \ifdim\tcsideproduct pt<0pt\else
+      \PackageError{M02}{Slot #1 arrow is not outside the triangle}{}%
+    \fi
+  }{}%
+}
+\newcommand{\tcmeasure}[2]{%
+  \global\advance\tcdiagramchecks by 1
+  \def\tcphase{#1}\global\tccount=0
+  \edef\tcmeasureoptions{field={},central={},leg-labels={,,,},
+    line=plain,show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4},
+    triangle-contact-internal-momenta={k_5,k_6,k_7},#2}%
+  \setbox\tcbox=\hbox{\expandafter\TriangleContactCorr\expandafter[\tcmeasureoptions]}}
+\newcommand{\tcassertcount}[1]{%
+  \ifnum\tccount=#1\relax\else\PackageError{M02}{Expected #1 annotations, got \the\tccount}{}\fi}
+\newcommand{\tccompare}[1]{%
+  \edef\tctarget{#1}%
+  \@for\tccompareslot:={1,2,3,4,5,6,7}\do{%
+    \expandafter\let\expandafter\tca\csname tcbaseline\tccompareslot\endcsname
+    \expandafter\let\expandafter\tcb\csname tcchanged\tccompareslot\endcsname
+    \ifnum\tccompareslot=\tctarget\relax
+      \ifx\tca\tcb\PackageError{M02}{Slot \tctarget option had no effect}{}\fi
+    \else
+      \ifx\tca\tcb\else\PackageError{M02}{Changing slot \tctarget also changed slot \tccompareslot}{}\fi
+    \fi}}
+\newcommand{\tcassertsame}{%
+  \@for\tccompareslot:={1,2,3,4,5,6,7}\do{%
+    \expandafter\let\expandafter\tca\csname tcbaseline\tccompareslot\endcsname
+    \expandafter\let\expandafter\tcb\csname tcchanged\tccompareslot\endcsname
+    \ifx\tca\tcb\else\PackageError{M02}{Unexpected difference in slot \tccompareslot}{}\fi}}
+\newcommand{\tcassertarrowunchanged}[1]{%
+  \expandafter\let\expandafter\tca\csname tcarrowbaseline#1\endcsname
+  \expandafter\let\expandafter\tcb\csname tcarrowchanged#1\endcsname
+  \ifx\tca\tcb\else\PackageError{M02}{Label-only control moved slot #1 arrow}{}\fi}
+\newcommand{\tcassertvalue}[2]{%
+  \pgfmathsetmacro{\tcdelta}{abs((#1)-(#2))}%
+  \ifdim\tcdelta pt<0.0001pt\else\PackageError{M02}{Explicit grouped setting ignored: #1 vs #2}{}\fi}
+\makeatother
+
+\newcommand{\tccell}[2]{\begin{minipage}[t][2.8in][t]{0.48\linewidth}
+  \textbf{#1}\par\vspace{9pt}\centering
+  \begin{adjustbox}{max width=\linewidth,max totalheight=2.45in}#2\end{adjustbox}
+  \end{minipage}}
+\newcommand{\tcdiagram}[1]{\TriangleContactCorr[field={},central={},leg-labels={,,,},
+  line=plain,show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},#1]}
+
+\begin{document}
+\makeatletter
+% Every logical slot, in every orientation; repeat with unequal edge lengths.
+\@for\tcorientation:={bottom,top,left,right}\do{%
+  \edef\tcgeometry{triangle-contact-orientation=\tcorientation}%
+  \tcmeasure{baseline}{\tcgeometry}\tcassertcount{7}%
+  \edef\tcgeometry{triangle-contact-orientation=\tcorientation,
+    triangle-contact-xspan=0.94,triangle-contact-yspan=1.28,
+    triangle-contact-external-xspan=2.05,triangle-contact-external-yspan=1.95}%
+  \tcmeasure{baseline}{\tcgeometry}\tcassertcount{7}%
+  \@for\tcslot:={1,2,3,4,5,6,7}\do{%
+    \edef\tcoptions{\tcgeometry,triangle-contact-momentum-\tcslot={start=0.15,end=0.85,
+      offset=15pt,label-fraction=0.43,label-gap=0.05,label-offset=2pt,
+      label-xshift=1pt,label-yshift=2pt,label-anchor=south}}%
+    \tcmeasure{changed}{\tcoptions}\tcassertcount{7}\tccompare{\tcslot}%
+  }%
+  % Fresh call must reset all options from the preceding diagram.
+  \tcmeasure{changed}{\tcgeometry}\tcassertsame
+}
+% Each field works independently, including the historically hard-coded slots.
+\@for\tcorientation:={bottom,top,left,right}\do{%
+  \@for\tcscale:={0.72,1.2}\do{%
+    \edef\tcoptions{triangle-contact-orientation=\tcorientation,scale=\tcscale}%
+    \tcmeasure{scaled}{\tcoptions}\tcassertcount{7}%
+  }%
+}
+\tcmeasure{baseline}{}%
+\@for\tcfield:={label-offset=4pt,label-xshift=3pt,label-yshift=-3pt,label-anchor=north}\do{%
+  \edef\tcoptions{triangle-contact-momentum-2={\tcfield}}%
+  \tcmeasure{changed}{\tcoptions}\tcassertarrowunchanged{2}%
+}
+\@for\tcslot:={2,6}\do{%
+  \@for\tcfield:={start=0.18,end=0.86,offset=16pt,label-fraction=0.43,label-gap=0.04,
+    label-offset=4pt,label-xshift=3pt,label-yshift=-3pt,label-anchor=north}\do{%
+    \edef\tcoptions{triangle-contact-momentum-\tcslot={\tcfield}}%
+    \tcmeasure{changed}{\tcoptions}\tccompare{\tcslot}%
+  }%
+}
+% Grouped values apply to all external/internal edges, including slots 2/4/5-7.
+\let\tcresolveddraw\corr@trianglecontactdrawannotation
+\renewcommand{\corr@trianglecontactdrawannotation}[3]{%
+  \tcresolveddraw{#1}{#2}{#3}%
+  \tcassertvalue{\corr@tcstart}{0.21}\tcassertvalue{\corr@tcend}{0.81}%
+  \tcassertvalue{\corr@tcfrac}{0.44}\tcassertvalue{\corr@tcgap}{0.07}}
+\tcmeasure{group}{triangle-contact-momentum-start=0.21,triangle-contact-momentum-end=0.81,
+  triangle-contact-momentum-label-fraction=0.44,triangle-contact-momentum-label-gap=0.07,
+  triangle-contact-internal-momentum-start=0.21,triangle-contact-internal-momentum-end=0.81,
+  triangle-contact-internal-momentum-label-fraction=0.44,triangle-contact-internal-momentum-label-gap=0.07}
+\let\corr@trianglecontactdrawannotation\tcresolveddraw
+% Per-slot overrides win over later group keys; the short aliases are real keys.
+\tcmeasure{baseline}{triangle-contact-momentum-start=0.21,triangle-contact-momentum-2={start=0.15}}
+\tcmeasure{changed}{trianglecontact-momentum-2={start=0.15},trianglecontact-momentum-start=0.21}\tcassertsame
+% Reverse changes arrow direction only; geometry and side do not flip.
+\tcmeasure{baseline}{}
+\tcmeasure{changed}{triangle-contact-internal-momentum-directions={reverse,forward,forward}}\tccompare{5}
+\tcassertarrowunchanged{5}
+\tcmeasure{changed}{triangle-contact-lower-left-momentum-direction=out}\tccompare{2}
+% Explicit side and visibility/off semantics.
+\def\tccheckoutside{no}
+\tcmeasure{changed}{triangle-contact-momentum-6={side=inside}}\tccompare{6}
+\tcmeasure{changed}{triangle-contact-momentum-6={side=left}}\tccompare{6}
+\tcmeasure{hidden}{external-momentum-hide={1,4},triangle-contact-internal-momentum-directions={none,forward,forward}}\tcassertcount{4}
+\tcmeasure{off}{show-momenta=false}\tcassertcount{0}
+\typeout{PASS M02: seven independent slots; four orientations; unequal lengths; grouped settings; label-only controls; reversal; visibility; state reset}
+\typeout{PASS M02: \the\tcdiagramchecks\space complete public diagrams checked automatically}
+% A blank external label retains an arrow; internal blank entries are omitted.
+% The capture helper only reads gap nodes in labeled cases.
+\let\corr@trianglecontactdrawannotation\tcoriginaldraw
+\makeatother
+
+\section*{M02: outside-facing labels in all four orientations}
+Plain lines and interaction vertices; no endcaps or circ decorations.
+\par\vspace{12pt}
+\tccell{Contact bottom}{\tcdiagram{triangle-contact-orientation=bottom}}\hfill
+\tccell{Contact top}{\tcdiagram{triangle-contact-orientation=top}}\par
+\tccell{Contact left}{\tcdiagram{triangle-contact-orientation=left}}\hfill
+\tccell{Contact right}{\tcdiagram{triangle-contact-orientation=right}}
+
+\newpage
+\section*{Unequal lengths and mixed propagator styles}
+Logical external and internal momentum slots retain their identity.
+\par\vspace{12pt}
+\tccell{Bottom, tall}{\tcdiagram{triangle-contact-xspan=0.8,triangle-contact-yspan=1.28,
+  triangle-contact-external-xspan=1.7,triangle-contact-external-yspan=2.1,
+  leg-styles={ewboson,plain,ewboson,plain},triangle-contact-internal-lines={proca,ewboson,proca}}}\hfill
+\tccell{Top, wide}{\tcdiagram{triangle-contact-orientation=top,
+  triangle-contact-xspan=1.35,triangle-contact-yspan=0.75,
+  triangle-contact-external-xspan=2.4,triangle-contact-external-yspan=1.55,
+  triangle-contact-internal-lines={ewboson,proca,ewboson}}}\par
+\tccell{Left, tall}{\tcdiagram{triangle-contact-orientation=left,
+  triangle-contact-xspan=0.8,triangle-contact-yspan=1.28,
+  triangle-contact-external-xspan=1.7,triangle-contact-external-yspan=2.1,
+  triangle-contact-internal-lines={proca,ewboson,proca}}}\hfill
+\tccell{Right, wide}{\tcdiagram{triangle-contact-orientation=right,
+  triangle-contact-xspan=1.35,triangle-contact-yspan=0.75,
+  triangle-contact-external-xspan=2.4,triangle-contact-external-yspan=1.55,
+  triangle-contact-internal-lines={ewboson,proca,ewboson}}}
+
+\newpage
+\section*{Independent controls, external slots 1--4}
+Each example changes only the named annotation. Compare with the baseline page.
+\par\vspace{12pt}
+\tccell{Slot 1: range and label fraction}{\tcdiagram{triangle-contact-momentum-1={start=0.12,end=0.88,label-fraction=0.42,label-gap=0.08}}}\hfill
+\tccell{Slot 2: arrow clearance}{\tcdiagram{triangle-contact-momentum-2={offset=19pt}}}\par
+\tccell{Slot 3: label only}{\tcdiagram{triangle-contact-momentum-3={label-offset=6pt,label-yshift=2pt}}}\hfill
+\tccell{Slot 4: anchor and label shift}{\tcdiagram{triangle-contact-momentum-4={label-anchor=north,label-yshift=-3pt}}}
+
+\newpage
+\section*{Independent controls, internal slots 5--7}
+Arrow reversal keeps the same slot, label position, and outside-facing side.
+\par\vspace{12pt}
+\tccell{Slot 5: range and reverse}{\tcdiagram{triangle-contact-internal-momentum-directions={reverse,forward,forward},
+  triangle-contact-momentum-5={start=0.12,end=0.88,label-fraction=0.42}}}\hfill
+\tccell{Slot 6: independent label}{\tcdiagram{triangle-contact-momentum-6={label-offset=6pt,label-xshift=-2pt}}}\par
+\tccell{Slot 7: arrow clearance}{\tcdiagram{triangle-contact-momentum-7={offset=18pt}}}\hfill
+\tccell{Hidden and blank entries}{\tcdiagram{momentum-labels={p_1,,p_3,p_4},external-momentum-hide={3},
+  triangle-contact-internal-momenta={k_5,,k_7}}}
+\end{document}
