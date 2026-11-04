@@ -1,0 +1,195 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{feynman-fun}
+
+\newcommand{\insertcell}[2]{%
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \texttt{#1}\par\medskip
+    #2
+  \end{minipage}%
+}
+
+\begin{document}
+
+\section*{Seagull Insertion Regression}
+
+Prototype seagull insertions on \verb|\TTreeChannelCorr| external slot 1.
+
+\[
+\begin{array}{cc}
+  \insertcell{baseline t-tree}{
+    \TTreeChannelCorr[
+      field={},
+      show-momenta=true,
+      momentum-labels={q_1,q_2,q_3,q_4,p}
+    ]
+  }&
+  \insertcell{default seagull}{
+    \TTreeChannelCorr[
+      field={},
+      insertion=seagull,
+      insertion-slot=1
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \insertcell{bubble comparison}{
+    \TTreeChannelCorr[
+      field={},
+      show-momenta=true,
+      insertion=bubble,
+      insertion-slot=1,
+      leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}},
+      channel-line={ewboson},
+      bubble-top-line={ewboson},
+      bubble-bottom-line={ewboson},
+      momentum-labels={q_1,q_2,q_3,q_4,p},
+      bubble-momenta={\ell,k}
+    ]
+  }&
+  \insertcell{ew host seagull}{
+    \TTreeChannelCorr[
+      field={},
+      show-momenta=true,
+      insertion=seagull,
+      insertion-slot=1,
+      leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}},
+      insertion-pre-line={ewboson,endcap,circ=W,circ scale=0.64,circ position=0.44},
+      insertion-post-line={ewboson,circ=Z,circ scale=0.60,circ position=0.55},
+      channel-line={ewboson,magenta!85!red},
+      seagull-loop-line={ewboson},
+      seagull-loop-momentum=\ell,
+      momentum-labels={q_1,q_2,q_3,q_4,p}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \insertcell{clockwise loop momentum}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.08,
+      show-momenta=true,
+      insertion=seagull,
+      insertion-slot=1,
+      line=ewboson,
+      seagull-loop-line={proca,magenta!85!red},
+      seagull-loop-momentum=k,
+      seagull-loop-momentum-direction=clockwise,
+      seagull-loop-momentum-start=0.16,
+      seagull-loop-momentum-end=0.58,
+      seagull-loop-momentum-label-fraction=0.28,
+      seagull-loop-momentum-offset=8pt,
+      momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3}
+    ]
+  }&
+  \insertcell{counterclockwise loop momentum}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.08,
+      show-momenta=true,
+      insertion=seagull,
+      insertion-slot=1,
+      line=ewboson,
+      seagull-loop-line={proca,magenta!85!red},
+      seagull-loop-momentum=k,
+      seagull-loop-momentum-direction=counterclockwise,
+      seagull-loop-momentum-start=0.16,
+      seagull-loop-momentum-end=0.58,
+      seagull-loop-momentum-label-fraction=0.28,
+      seagull-loop-momentum-offset=8pt,
+      momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \insertcell{proca two vertex-aware markers}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.02,
+      insertion=seagull,
+      insertion-slot=1,
+      line=ewboson,
+      seagull-loop-line={proca,magenta!85!red},
+      propagator-arrow-sizes={,,7pt}
+    ]
+  }&
+  \insertcell{spolin one vertex-aware marker}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.02,
+      insertion=seagull,
+      insertion-slot=1,
+      line=ewboson,
+      seagull-loop-line={spolin,magenta!85!red},
+      propagator-arrow-sizes={,,7pt}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
+  \insertcell{spolout one vertex-aware marker}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.02,
+      insertion=seagull,
+      insertion-slot=1,
+      line=ewboson,
+      seagull-loop-line={spolout,magenta!85!red},
+      propagator-arrow-sizes={,,7pt}
+    ]
+  }&
+  \insertcell{large marker touches vertex edge}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.02,
+      insertion=seagull,
+      insertion-slot=1,
+      line=ewboson,
+      seagull-loop-line={spolout,magenta!85!red},
+      seagull-loop-marker-distance=auto,
+      propagator-arrow-sizes={,,11pt}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{c}
+  \insertcell{vertex index stress}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.08,
+      show-momenta=true,
+      insertion=seagull,
+      insertion-slot=1,
+      insertion-scale=0.82,
+      line=ewboson,
+      seagull-loop-line={ewboson},
+      seagull-loop-momentum=\ell,
+      seagull-loop-momentum-start=0.16,
+      seagull-loop-momentum-end=0.68,
+      seagull-loop-momentum-label-fraction=0.48,
+      seagull-vertex-indices={\alpha,\rho,\lambda,\sigma},
+      momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3},
+      insertion-pre-momentum-label-yshift=1pt,
+      insertion-post-momentum-label-xshift=-1pt
+    ]
+  }
+\end{array}
+\]
+
+\end{document}

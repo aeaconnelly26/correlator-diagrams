@@ -1,3 +1,20 @@
+# Current integrated inventory verification - 2026-11-03
+
+Current atlas: nine pages and 43 recipes, all compiled against the combined
+checkout from parents `1b85ef8` and `5a657cd`. There is no branch-only package
+extraction or PDF inclusion. U01/U02 are now current-capability recipes;
+S01-S03 demonstrate loop endpoint selection, and F01-F03 demonstrate the
+integrated annotation controls. Earlier branch-only artifacts are archived.
+
+The expanded endpoint audit has 26 pages and 600 automatic contacts; all
+34 maintained regression/example documents pass. See
+[integration verification](../planning/integration-verification.md) for the
+marker reconciliation and geometry-check method.
+
+The sections below are historical M00/M01 records, including their original
+page counts and source-state statements. They do not override the current
+integrated status above.
+
 # Latest inventory branch review - 2026-11-03
 
 The current atlas has eight pages: the original seven pages of current-checkout

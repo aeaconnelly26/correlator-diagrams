@@ -1,5 +1,5 @@
 {
-  "baseline": "0dbf733 + M01",
+  "baseline": "integration of 1b85ef8 + 5a657cd",
   "date": "2026-11-03",
   "base_options": [
     "field={}",
@@ -138,7 +138,7 @@
             "channel-line=plain"
           ],
           "description": "Two trivalent vertices joined by one exchange edge.",
-          "limitation": "Insertion support is narrower than ordinary tree support."
+          "limitation": "Bubble/seagull insertions: t-tree leg 1 only."
         },
         {
           "id": "I12",
@@ -148,7 +148,7 @@
             "channel-line=plain"
           ],
           "description": "Two trivalent vertices joined by one exchange edge.",
-          "limitation": "Insertion support is narrower than ordinary tree support."
+          "limitation": "Bubble/seagull insertions: t-tree leg 1 only."
         },
         {
           "id": "I13",
@@ -158,7 +158,7 @@
             "channel-line=plain"
           ],
           "description": "Two trivalent vertices joined by one exchange edge.",
-          "limitation": "Insertion support is narrower than ordinary tree support."
+          "limitation": "Bubble/seagull insertions: t-tree leg 1 only."
         },
         {
           "id": "I14",
@@ -332,11 +332,11 @@
     {
       "section": "06 / SELF-ENERGY AND INSERTION",
       "title": "Loops and the insertion prototype",
-      "subtitle": "Only the insertion pictured here is currently supported. Unsupported insertion settings can be silently ignored.",
+      "subtitle": "Bubble and seagull insertions currently support t-tree external slot 1 only. Seagull examples appear on page 8.",
       "entries": [
         {
           "id": "I27",
-          "title": "Standalone self-energy bubble",
+          "title": "Self-energy bubble",
           "macro": "BubbleCorr",
           "options": [
             "bubble-external-line=plain",
@@ -393,7 +393,7 @@
             "loop-channel-right-line={proca,magenta!85!red}"
           ],
           "description": "Four double-capped EW legs and two pink Proca internals.",
-          "limitation": "M01 verifies automatic contact; custom legacy distances retain their tuning."
+          "limitation": "Integrated endpoint checks cover visible contact and legacy overrides."
         },
         {
           "id": "A02",
@@ -473,61 +473,163 @@
           "limitation": "Crossing stays unconnected; no internal momenta or indices claimed."
         }
       ]
+    },
+    {
+      "section": "08 / SEAGULL INSERTIONS",
+      "title": "Seagull insertion examples",
+      "subtitle": "Now supported in this integrated checkout. Only t-tree external slot 1 is implemented; the other legs and s-channel remain future work.",
+      "entries": [
+        {
+          "id": "U01",
+          "title": "Seagull: bare structure",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "field={}",
+            "leg-labels={,,,}",
+            "central={}",
+            "show-momenta=false",
+            "blob=false",
+            "center-vertex=true",
+            "external-vertices=false",
+            "scale=0.85",
+            "insertion=seagull",
+            "insertion-slot=1",
+            "line=plain",
+            "channel-line=plain",
+            "seagull-loop-line=plain",
+            "insertion-pre-line=plain",
+            "insertion-post-line=plain"
+          ],
+          "description": "One quartic point on an external leg carries a self-loop.",
+          "limitation": "Supported here: t-tree leg 1 only; other placements remain future work.",
+          "omit_base_options": [
+            "line=plain"
+          ]
+        },
+        {
+          "id": "U02",
+          "title": "Seagull: EW line style",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "field={}",
+            "leg-labels={,,,}",
+            "central={}",
+            "show-momenta=false",
+            "blob=false",
+            "center-vertex=true",
+            "external-vertices=false",
+            "scale=0.85",
+            "insertion=seagull",
+            "insertion-slot=1",
+            "line=ewboson",
+            "channel-line=ewboson",
+            "seagull-loop-line=ewboson",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line=ewboson"
+          ],
+          "description": "The same supported graph with wavy EW propagators.",
+          "limitation": "Supported here: t-tree leg 1 only; other placements remain future work.",
+          "omit_base_options": [
+            "line=plain"
+          ]
+        },
+        {
+          "id": "S01",
+          "title": "One endpoint marker",
+          "macro": "TTreeChannelCorr",
+          "omit_base_options": [
+            "line=plain"
+          ],
+          "options": [
+            "line=ewboson",
+            "insertion=seagull",
+            "insertion-slot=1",
+            "seagull-loop-line={proca start,magenta!85!red}"
+          ],
+          "description": "Select proca start on the pink seagull loop.",
+          "limitation": "Loop endpoint selection follows the directed loop path; no caps or circles."
+        },
+        {
+          "id": "S02",
+          "title": "Opposite endpoint marker",
+          "macro": "TTreeChannelCorr",
+          "omit_base_options": [
+            "line=plain"
+          ],
+          "options": [
+            "line=ewboson",
+            "insertion=seagull",
+            "insertion-slot=1",
+            "seagull-loop-line={proca end,magenta!85!red}"
+          ],
+          "description": "Select proca end on the pink seagull loop.",
+          "limitation": "Loop endpoint selection follows the directed loop path; no caps or circles."
+        },
+        {
+          "id": "S03",
+          "title": "Both endpoint markers",
+          "macro": "TTreeChannelCorr",
+          "omit_base_options": [
+            "line=plain"
+          ],
+          "options": [
+            "line=ewboson",
+            "insertion=seagull",
+            "insertion-slot=1",
+            "seagull-loop-line={proca,magenta!85!red}"
+          ],
+          "description": "Select proca on the pink seagull loop.",
+          "limitation": "Loop endpoint selection follows the directed loop path; no caps or circles."
+        }
+      ]
+    },
+    {
+      "section": "09 / LABEL AND MOMENTUM CONTROLS",
+      "title": "Integrated annotation controls",
+      "subtitle": "These controls came from the seagull branch. Examples show only the annotation feature being demonstrated.",
+      "entries": [
+        {
+          "id": "F01",
+          "title": "Compact external indices",
+          "macro": "FourPointCorr",
+          "options": [
+            "indices={\\alpha,\\beta,\\gamma,\\delta}",
+            "index-placement=mini"
+          ],
+          "description": "Compact indices on an empty field base.",
+          "limitation": "Explicit leg labels take precedence over field/index formatting.",
+          "omit_base_options": [
+            "leg-labels={,,,}"
+          ]
+        },
+        {
+          "id": "F02",
+          "title": "Hide external momenta",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "channel-line=plain",
+            "show-momenta=true",
+            "momentum-labels={q_1,q_2,q_3,q_4,p}",
+            "external-momentum-hide={1,2,3,4}",
+            "channel-momentum-label-position=right"
+          ],
+          "description": "Only the exchange momentum remains; its side label leaves a continuous arrow.",
+          "limitation": "Visibility acts on logical external slots and preserves internal flow."
+        },
+        {
+          "id": "F03",
+          "title": "Blank label versus hidden arrow",
+          "macro": "ThreePointCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={,q,r}",
+            "external-momentum-hide={3}"
+          ],
+          "description": "Slot 1 has an unlabeled arrow, slot 2 has q, and slot 3 has no arrow.",
+          "limitation": "An empty entry hides text; external-momentum-hide hides the whole arrow."
+        }
+      ]
     }
   ],
-  "branch": "codex/proca-endpoint-audit",
-  "branch_preview": {
-    "branch": "codex/seagull-insertion",
-    "revision": "5a657cd8d7c84dde751927963de8488bfb98cb33",
-    "entries": [
-      {
-        "id": "U01",
-        "title": "Seagull: bare structure",
-        "macro": "TTreeChannelCorr",
-        "options": [
-          "field={}",
-          "leg-labels={,,,}",
-          "central={}",
-          "show-momenta=false",
-          "blob=false",
-          "center-vertex=true",
-          "external-vertices=false",
-          "scale=0.85",
-          "insertion=seagull",
-          "insertion-slot=1",
-          "line=plain",
-          "channel-line=plain",
-          "seagull-loop-line=plain",
-          "insertion-pre-line=plain",
-          "insertion-post-line=plain"
-        ],
-        "description": "One quartic point on an external leg carries a self-loop.",
-        "limitation": "Unmerged prototype: t-tree leg 1 only; all other placements remain future work."
-      },
-      {
-        "id": "U02",
-        "title": "Seagull: EW line style",
-        "macro": "TTreeChannelCorr",
-        "options": [
-          "field={}",
-          "leg-labels={,,,}",
-          "central={}",
-          "show-momenta=false",
-          "blob=false",
-          "center-vertex=true",
-          "external-vertices=false",
-          "scale=0.85",
-          "insertion=seagull",
-          "insertion-slot=1",
-          "line=ewboson",
-          "channel-line=ewboson",
-          "seagull-loop-line=ewboson",
-          "insertion-pre-line=ewboson",
-          "insertion-post-line=ewboson"
-        ],
-        "description": "The same supported graph with wavy EW propagators.",
-        "limitation": "No caps, circles, labels, or momenta; requires the unmerged branch."
-      }
-    ]
-  }
+  "branch": "codex/integrate-seagull-and-proca"
 }

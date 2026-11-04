@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[a4paper,margin=0.65in]{geometry}
+\usepackage{amsmath}
+\usepackage{feynman-fun}
+
+% Validate triangles actually emitted by complete diagrams, including their
+% physical side length. Counting selections alone misses collapsed triangles.
+\newcount\startmarkers
+\newcount\endmarkers
+\newbox\markercheckbox
+\makeatletter
+\let\originalcurvemarker\corr@drawsemanticopenendpointmarkerfromsidecoords
+\renewcommand{\corr@drawsemanticopenendpointmarkerfromsidecoords}[5]{%
+  \edef\markerprobe{\noexpand\in@{MarkerStart}{#2}}\markerprobe
+  \ifin@\global\advance\startmarkers by 1\else
+    \global\advance\endmarkers by 1\fi
+  \corr@resolveproparrowsize{#1}%
+  \path let \p1=($(#3)-(#4)$),\p2=($(#2)-(#3)$),\p3=($(#2)-(#4)$)
+    in \pgfextra{%
+      \pgfmathsetlengthmacro{\markererror}{abs(veclen(\x1,\y1)-\corr@resolvedproparrowsize)}%
+      \ifdim\markererror>0.05pt
+        \PackageError{one-sided-loop-markers}{Triangle does not match configured arrow size}{}%
+      \fi
+      \pgfmathsetlengthmacro{\markererror}{abs(veclen(\x2,\y2)-veclen(\x1,\y1))}%
+      \ifdim\markererror>0.05pt
+        \PackageError{one-sided-loop-markers}{Triangle is not equilateral}{}%
+      \fi
+      \pgfmathsetlengthmacro{\markererror}{abs(veclen(\x3,\y3)-veclen(\x1,\y1))}%
+      \ifdim\markererror>0.05pt
+        \PackageError{one-sided-loop-markers}{Triangle is not equilateral}{}%
+      \fi
+    };
+  \originalcurvemarker{#1}{#2}{#3}{#4}{#5}}
+\makeatother
+\newcommand{\checkmarkers}[3]{%
+  \global\startmarkers=0 \global\endmarkers=0
+  \setbox\markercheckbox=\hbox{$#3$}%
+  \ifnum\startmarkers=#1\relax\else
+    \PackageError{one-sided-loop-markers}{Wrong number of start markers}{}\fi
+  \ifnum\endmarkers=#2\relax\else
+    \PackageError{one-sided-loop-markers}{Wrong number of end markers}{}\fi}
+
+% Exact user styling; the argument changes only the loop endpoint selection.
+\newcommand{\userseagull}[1]{%
+\TTreeChannelCorr[
+  field={},scale=0.95,insertion=seagull,line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.6,circ position=0.54},
+  seagull-loop-line={#1,magenta!85!red},
+  seagull-loop-momentum=k,
+  seagull-loop-momentum-direction=counterclockwise,
+  seagull-loop-momentum-start=0.16,
+  seagull-loop-momentum-end=0.58,
+  seagull-loop-momentum-label-fraction=0.28,
+  seagull-loop-momentum-offset=8pt,
+  seagull-loop-momentum-label-distance=1pt,
+  momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3},
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.8},
+  leg-styles={{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp}},
+  insertion-pre-momentum-start=0.2]}
+
+\begin{document}
+\checkmarkers{1}{0}{\userseagull{proca start}}
+\checkmarkers{0}{1}{\userseagull{proca end}}
+\checkmarkers{1}{1}{\userseagull{proca}}
+\checkmarkers{0}{0}{\userseagull{plain}}
+\checkmarkers{1}{0}{\TTreeChannelCorr[insertion=seagull,seagull-loop-line={proca start},seagull-loop-size=1.0,propagator-arrow-sizes={6pt,6pt,3pt,6pt}]}
+\checkmarkers{0}{1}{\TTreeChannelCorr[insertion=seagull,seagull-loop-line={proca end},seagull-loop-size=2.2,propagator-arrow-sizes={6pt,6pt,10pt,6pt}]}
+\checkmarkers{1}{0}{\BubbleCorr[bubble-top-line={proca start,magenta!85!red},bubble-bottom-line=plain]}
+\checkmarkers{0}{1}{\BubbleCorr[bubble-top-line={proca end,magenta!85!red},bubble-bottom-line=plain]}
+\checkmarkers{1}{1}{\BubbleCorr[bubble-top-line=proca,bubble-bottom-line=plain]}
+\checkmarkers{1}{0}{\TTreeChannelCorr[insertion=bubble,bubble-top-line={proca start,magenta!85!red},bubble-bottom-line=ewboson]}
+\checkmarkers{0}{1}{\TTreeChannelCorr[insertion=bubble,bubble-top-line={proca end,magenta!85!red},bubble-bottom-line=ewboson]}
+\checkmarkers{1}{1}{\TTreeChannelCorr[insertion=bubble,bubble-top-line=proca,bubble-bottom-line=ewboson]}
+
+\section*{Seagull loop endpoint selection}
+\noindent Exact reported example: \texttt{proca start} (one triangle, right branch).
+\[\userseagull{proca start}\]
+\noindent Same settings with \texttt{proca end} (one triangle, left branch).
+\[\userseagull{proca end}\]
+\noindent Same settings with \texttt{proca} (both triangles).
+\[\userseagull{proca}\]
+
+\newpage
+\section*{Bubble endpoint selection}
+\noindent Standalone bubble, upper propagator: start only (left), end only (right).
+\[
+\BubbleCorr[scale=0.9,bubble-top-line={proca start,magenta!85!red},bubble-bottom-line=ewboson,show-momenta=false]
+\qquad
+\BubbleCorr[scale=0.9,bubble-top-line={proca end,magenta!85!red},bubble-bottom-line=ewboson,show-momenta=false]
+\]
+\noindent Inserted bubble, upper propagator: start only (left), end only (right).
+\[
+\TTreeChannelCorr[field={},scale=0.8,insertion=bubble,line=ewboson,show-momenta=false,bubble-top-line={proca start,magenta!85!red},bubble-bottom-line=ewboson]
+\qquad
+\TTreeChannelCorr[field={},scale=0.8,insertion=bubble,line=ewboson,show-momenta=false,bubble-top-line={proca end,magenta!85!red},bubble-bottom-line=ewboson]
+\]
+\noindent Small and large markers retain their requested size on different loop radii.
+\[
+\TTreeChannelCorr[field={},scale=0.8,insertion=seagull,line=ewboson,show-momenta=false,seagull-loop-size=1.0,seagull-loop-line={proca start,magenta!85!red},propagator-arrow-sizes={6pt,6pt,3pt,6pt}]
+\qquad
+\TTreeChannelCorr[field={},scale=0.8,insertion=seagull,line=ewboson,show-momenta=false,seagull-loop-size=2.2,seagull-loop-line={proca end,magenta!85!red},propagator-arrow-sizes={6pt,6pt,10pt,6pt}]
+\]
+\end{document}

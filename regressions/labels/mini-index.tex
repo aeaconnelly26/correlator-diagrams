@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{feynman-fun}
+\begin{document}
+\section*{Mini external indices}
+\noindent With an empty field, mini indices use an empty math base:
+\( {}_{\alpha},{}_{\nu},{}_{\sigma},{}_{\tau} \).
+No horizontal spacer is required.
+
+\medskip
+\noindent Normal labels (left), mini indices (right).
+Both run counterclockwise from the upper left: \(\alpha,\nu,\sigma,\tau\).
+\[
+\FourPointCorr[
+  field={},show-momenta=false,scale=0.8,
+  fourpoint-xspan=1.55,fourpoint-yspan=1.55,
+  indices={\alpha,\nu,\tau,\sigma},
+  leg-styles={{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp}}
+]
+\qquad
+\FourPointCorr[
+  field={},index-placement=mini,show-momenta=false,scale=0.8,
+  fourpoint-xspan=1.55,fourpoint-yspan=1.55,
+  indices={\alpha,\nu,\tau,\sigma},
+  leg-styles={{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp}}
+]
+\]
+\noindent With a field, mini retains ordinary field subscripts.
+Explicit leg labels override index formatting (right).
+\[
+\FourPointCorr[field=A,index-placement=mini,show-momenta=false,scale=0.7,
+  indices={\alpha,\nu,\tau,\sigma}]
+\qquad
+\FourPointCorr[field={},index-placement=mini,show-momenta=false,scale=0.7,
+  indices={\alpha,\nu,\tau,\sigma},leg-labels={X,Y,Z,W}]
+\]
+\noindent Mini formatting follows logical slots under rotation (left).
+The next diagram returns to normal empty-field labels (right).
+\[
+\ThreePointCorr[field={},index-placement=mini,three-point-orientation=up,
+  indices={\alpha,\nu,\sigma},show-momenta=false,scale=0.7]
+\qquad
+\FourPointCorr[field={},indices={\alpha,\nu,\tau,\sigma},show-momenta=false,scale=0.7]
+\]
+\end{document}

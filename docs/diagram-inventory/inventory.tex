@@ -1,11 +1,11 @@
 % Generated from catalog.json by build.py; uses the public package macros.
 \documentclass[10pt,letterpaper]{article}
 \usepackage[margin=0.62in]{geometry}
-\usepackage{amsmath,xcolor,graphicx,adjustbox,fancyhdr,pdfpages}
+\usepackage{amsmath,xcolor,graphicx,adjustbox,fancyhdr}
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline 0dbf733 + M01 | 2026-11-03}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline integration of 1b85ef8 + 5a657cd | 2026-11-03}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -182,7 +182,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{Insertion support is narrower than ordinary tree support.}\hfill
+}{Two trivalent vertices joined by one exchange edge.}{Bubble/seagull insertions: t-tree leg 1 only.}\hfill
 \atlascell{I12  t-channel tree}{\TTreeChannelCorr}{%
 \TTreeChannelCorr[
   field={},
@@ -196,7 +196,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{Insertion support is narrower than ordinary tree support.}\par\vspace{4pt}
+}{Two trivalent vertices joined by one exchange edge.}{Bubble/seagull insertions: t-tree leg 1 only.}\par\vspace{4pt}
 \atlascell{I13  u-channel tree}{\UTreeChannelCorr}{%
 \UTreeChannelCorr[
   field={},
@@ -210,7 +210,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{Insertion support is narrower than ordinary tree support.}\hfill
+}{Two trivalent vertices joined by one exchange edge.}{Bubble/seagull insertions: t-tree leg 1 only.}\hfill
 \atlascell{I14  s-channel bubble}{\SChannelCorr}{%
 \SChannelCorr[
   field={},
@@ -421,8 +421,8 @@
 ]
 }{The quartic/contact vertex lies on the right side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\par\vspace{4pt}
 \newpage
-\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and the insertion prototype}{Only the insertion pictured here is currently supported. Unsupported insertion settings can be silently ignored.}
-\atlascell{I27  Standalone self-energy bubble}{\BubbleCorr}{%
+\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and the insertion prototype}{Bubble and seagull insertions currently support t-tree external slot 1 only. Seagull examples appear on page 8.}
+\atlascell{I27  Self-energy bubble}{\BubbleCorr}{%
 \BubbleCorr[
   field={},
   leg-labels={,,,},
@@ -493,7 +493,7 @@
   loop-channel-left-line={proca,magenta!85!red},
   loop-channel-right-line={proca,magenta!85!red}
 ]
-}{Four double-capped EW legs and two pink Proca internals.}{M01 verifies automatic contact; custom legacy distances retain their tuning.}\hfill
+}{Four double-capped EW legs and two pink Proca internals.}{Integrated endpoint checks cover visible contact and legacy overrides.}\hfill
 \atlascell{A02  Polarization and mixed legs}{\ThreePointCorr}{%
 \ThreePointCorr[
   field={},
@@ -587,5 +587,158 @@
   cross-box-down-line={ewboson,circ=Z}
 ]
 }{A blank circle on one pink diagonal and a Z on the other.}{Crossing stays unconnected; no internal momenta or indices claimed.}\par\vspace{4pt}
-\includepdf[pages=-]{seagull-branch-examples.pdf}
+\newpage
+\atlaspage{08 / SEAGULL INSERTIONS}{Seagull insertion examples}{Now supported in this integrated checkout. Only t-tree external slot 1 is implemented; the other legs and s-channel remain future work.}
+\atlascell{U01  Seagull: bare structure}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=0.85,
+  insertion=seagull,
+  insertion-slot=1,
+  line=plain,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  insertion-pre-line=plain,
+  insertion-post-line=plain
+]
+}{One quartic point on an external leg carries a self-loop.}{Supported here: t-tree leg 1 only; other placements remain future work.}\hfill
+\atlascell{U02  Seagull: EW line style}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=0.85,
+  insertion=seagull,
+  insertion-slot=1,
+  line=ewboson,
+  channel-line=ewboson,
+  seagull-loop-line=ewboson,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson
+]
+}{The same supported graph with wavy EW propagators.}{Supported here: t-tree leg 1 only; other placements remain future work.}\par\vspace{4pt}
+\atlascell{S01  One endpoint marker}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  line=ewboson,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line={proca start,magenta!85!red}
+]
+}{Select proca start on the pink seagull loop.}{Loop endpoint selection follows the directed loop path; no caps or circles.}\hfill
+\atlascell{S02  Opposite endpoint marker}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  line=ewboson,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line={proca end,magenta!85!red}
+]
+}{Select proca end on the pink seagull loop.}{Loop endpoint selection follows the directed loop path; no caps or circles.}\par\vspace{4pt}
+\atlascell{S03  Both endpoint markers}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  line=ewboson,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line={proca,magenta!85!red}
+]
+}{Select proca on the pink seagull loop.}{Loop endpoint selection follows the directed loop path; no caps or circles.}\par\vspace{4pt}
+\newpage
+\atlaspage{09 / LABEL AND MOMENTUM CONTROLS}{Integrated annotation controls}{These controls came from the seagull branch. Examples show only the annotation feature being demonstrated.}
+\atlascell{F01  Compact external indices}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  indices={\alpha,\beta,\gamma,\delta},
+  index-placement=mini
+]
+}{Compact indices on an empty field base.}{Explicit leg labels take precedence over field/index formatting.}\hfill
+\atlascell{F02  Hide external momenta}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  channel-line=plain,
+  show-momenta=true,
+  momentum-labels={q_1,q_2,q_3,q_4,p},
+  external-momentum-hide={1,2,3,4},
+  channel-momentum-label-position=right
+]
+}{Only the exchange momentum remains; its side label leaves a continuous arrow.}{Visibility acts on logical external slots and preserves internal flow.}\par\vspace{4pt}
+\atlascell{F03  Blank label versus hidden arrow}{\ThreePointCorr}{%
+\ThreePointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={,q,r},
+  external-momentum-hide={3}
+]
+}{Slot 1 has an unlabeled arrow, slot 2 has q, and slot 3 has no arrow.}{An empty entry hides text; external-momentum-hide hides the whole arrow.}\par\vspace{4pt}
 \end{document}

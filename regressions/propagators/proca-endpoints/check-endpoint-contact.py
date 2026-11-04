@@ -9,8 +9,8 @@ from pypdf import PdfReader
 from pypdf.generic import ContentStream
 
 # Graph endpoint counts, not counts of helper invocations. Six diagrams/page.
-EXPECTED_TRIANGLES = [12] * 5 + [36] + [12] * 3 + [24] * 3 + [48, 48, 12] + [36] * 4 + [24, 36, 36, 12, 9]
-EXPECTED_DOTS = [12] * 5 + [24] + [12] * 6 + [24, 24, 12] + [18] * 4 + [12, 12, 24, 12, 12]
+EXPECTED_TRIANGLES = [12] * 5 + [36] + [12] * 3 + [24] * 3 + [48, 48, 12] + [36] * 4 + [24, 36, 36, 12, 9, 12, 24]
+EXPECTED_DOTS = [12] * 5 + [24] + [12] * 6 + [24, 24, 12] + [18] * 4 + [12, 12, 24, 12, 12, 12, 18]
 
 
 def multiply(t, u):
@@ -23,7 +23,7 @@ def inspect(pdf):
     reader = PdfReader(pdf)
     reports = []
     for page_number, page in enumerate(reader.pages, 1):
-        state = {'ctm': (1, 0, 0, 1, 0, 0), 'stroke': (0, 0, 0), 'fill': (0, 0, 0)}
+        state = {'ctm': (1, 0, 0, 1, 0, 0), 'stroke': (0, 0, 0), 'fill': (0, 0, 0), 'width': 1.0}
         stack, points, triangles, dots = [], [], [], []
         curved = False
 
@@ -33,13 +33,15 @@ def inspect(pdf):
 
         for args, op in ContentStream(page.get_contents(), reader).operations:
             numbers = [float(n) for n in args] if op in (
-                b'cm', b'm', b'l', b'c', b'RG', b'rg', b'G', b'g', b'k', b'K') else []
+                b'cm', b'm', b'l', b'c', b'RG', b'rg', b'G', b'g', b'k', b'K', b'w') else []
             if op == b'q':
                 stack.append(state.copy())
             elif op == b'Q':
                 state = stack.pop()
             elif op == b'cm':
                 state['ctm'] = multiply(state['ctm'], numbers)
+            elif op == b'w':
+                state['width'] = numbers[0]
             elif op in (b'k', b'K'):
                 c, m, y, k = numbers
                 state['stroke' if op == b'K' else 'fill'] = (
@@ -61,51 +63,59 @@ def inspect(pdf):
                 if not curved and len(unique) == 3 and max(state['stroke']) > 0.1:
                     if min(state['fill']) < 0.99:
                         raise ValueError(f'Page {page_number}: triangle lost white fill')
-                    triangles.append((unique, state['stroke']))
+                    half_outline = state['width'] * hypot(*state['ctm'][:2]) / 2
+                    triangles.append((unique, state['stroke'], half_outline))
                 if curved and points and op in (b'f', b'F', b'f*', b'B', b'B*', b'b', b'b*') and max(state['fill']) < 0.1:
                     xs, ys = zip(*points)
                     width, height = max(xs)-min(xs), max(ys)-min(ys)
                     if abs(width-height) < 0.01 and 1 < width < 15:
-                        dots.append(((min(xs)+max(xs))/2, (min(ys)+max(ys))/2, width/2))
+                        half_outline = state['width'] * hypot(*state['ctm'][:2]) / 2
+                        dots.append(((min(xs)+max(xs))/2, (min(ys)+max(ys))/2, width/2, half_outline))
                 points, curved = [], False
 
-        gaps = []
-        for vertices, color in triangles:
+        gaps, visible_gaps = [], []
+        for vertices, color, triangle_outline in triangles:
             # The tip is the triangle vertex nearest a dot boundary. Other
             # corners stay further inside the edge in these isolated cases.
-            distances = [hypot(px-x, py-y)-radius
-                         for px, py in vertices for x, y, radius in dots]
-            gaps.append(min(distances, key=abs))
+            distances = [(hypot(px-x, py-y)-radius, triangle_outline+dot_outline)
+                         for px, py in vertices for x, y, radius, dot_outline in dots]
+            gap, outlines = min(distances, key=lambda pair: abs(pair[0]))
+            gaps.append(gap)
+            visible_gaps.append(gap-outlines)
         reports.append({'page': page_number, 'triangles': len(triangles), 'dots': len(dots),
-                        'gaps_pt': gaps, 'colors': [c for _, c in triangles]})
+                        'gaps_pt': gaps, 'visible_gaps_pt': visible_gaps,
+                        'colors': [c for _, c, _ in triangles]})
     return reports
 
 
 def validate(reports, baseline=None):
     if len(reports) != len(EXPECTED_TRIANGLES):
-        raise ValueError('Expected the complete 24-page diagnostic')
+        raise ValueError('Expected the complete 26-page integrated diagnostic')
     for i, report in enumerate(reports):
         if (report['triangles'], report['dots']) != (EXPECTED_TRIANGLES[i], EXPECTED_DOTS[i]):
             raise ValueError(f'Page {i+1}: unexpected triangle/dot count: {report}')
         # Last page's lower row deliberately exercises the legacy distance
         # and generic add-on; it must match baseline, not automatic contact.
-        automatic = report['gaps_pt'][:4] if i == 23 else report['gaps_pt']
-        # The standard dot has a 0.4pt outline: its visible boundary extends
-        # 0.2pt beyond the circle path. Include PDF/PGF transform rounding.
-        if any(abs(gap) > 0.21 for gap in automatic):
-            raise ValueError(f'Page {i+1}: visible endpoint gap/overlap: {automatic}')
+        count = 4 if i == 23 else 8 if i == 24 else len(report['gaps_pt'])
+        automatic = report['gaps_pt'][:count]
+        visible = report['visible_gaps_pt'][:count]
+        # Measure both visible stroke outlines from PDF w/cm operators.
+        # Managed markers deliberately retain a 0.25pt tip clearance; accepting
+        # a real ink gap is still a failure. Reject deeply buried tips too.
+        if any(gap < -0.21 for gap in automatic) or any(gap > 0.02 for gap in visible):
+            raise ValueError(f'Page {i+1}: visible endpoint gap/overlap: {automatic}; ink gaps: {visible}')
     colors = reports[22]['colors']
     if not all(c[2] > c[0] and c[2] > c[1] for c in colors[6:10]):
         raise ValueError('Blue style-order controls lost their inherited color')
     if baseline:
-        if len(baseline) != len(reports):
-            raise ValueError('Baseline page count differs')
+        if len(baseline) != 24:
+            raise ValueError('Expected the archived 24-page pre-M01 baseline')
         old, new = baseline[23]['gaps_pt'][4:], reports[23]['gaps_pt'][4:]
         if len(old) != 5 or any(abs(a-b) > 0.001 for a, b in zip(old, new)):
             raise ValueError('Explicit legacy-distance / generic-arrow placement changed')
-        for i in (19,):
-            if baseline[i]['gaps_pt'] != reports[i]['gaps_pt']:
-                raise ValueError('Managed standalone bubble helper changed')
+        managed_legacy = reports[24]['gaps_pt'][8:]
+        if any(abs(a-b) > 0.001 for a, b in zip(old[:4], managed_legacy)):
+            raise ValueError('Managed legacy override does not match the raw legacy control')
 
 
 def main():
@@ -119,11 +129,13 @@ def main():
     validate(reports, baseline)
     if args.report:
         args.report.write_text(json.dumps(reports, indent=2)+'\n')
-    gaps = [g for i, r in enumerate(reports) for g in (r['gaps_pt'][:4] if i == 23 else r['gaps_pt'])]
+    gaps = [g for i, r in enumerate(reports) for g in r['gaps_pt'][:(4 if i == 23 else 8 if i == 24 else len(r['gaps_pt']))]]
+    visible = [g for i, r in enumerate(reports) for g in r['visible_gaps_pt'][:(4 if i == 23 else 8 if i == 24 else len(r['gaps_pt']))]]
     print(f'PASS: {len(reports)} pages; {sum(r["triangles"] for r in reports)} endpoint triangles; '
-          f'{len(gaps)} automatic contacts; maximum absolute path-boundary error {max(map(abs, gaps)):.4f} PDF pt')
+          f'{len(gaps)} automatic contacts; maximum circle-path gap {max(gaps):.4f} PDF pt; '
+          f'maximum visible ink gap {max(visible):.4f} PDF pt')
     if baseline:
-        print('PASS: explicit legacy distances, generic open-arrow add-on, and managed bubble placement unchanged')
+        print('PASS: raw and managed legacy overrides and the generic open-arrow add-on retain baseline placement')
 
 
 if __name__ == '__main__':

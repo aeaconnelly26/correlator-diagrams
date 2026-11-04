@@ -1,3 +1,17 @@
+# Current integration result - 2026-11-03
+
+The combined `codex/integrate-seagull-and-proca` checkout preserves the M01
+raw fix, the seagull branch's managed clearance/one-sided sizing, and both
+legacy distance keys. Current audit: 156 diagrams, 26 pages, 609 triangles,
+600 automatic visible contacts. The nine-page inventory has 43 current recipes.
+See [integration verification](../../../docs/planning/integration-verification.md)
+for the reconciliation, full 34-document run, outline-aware measurement, and
+managed override tests. The historical 24-page baseline PDF remains unchanged.
+
+The remaining sections are the original M01 record and its subsequent
+branch-discovery note; their earlier counts and pending-integration statements
+are historical, not the current status.
+
 # M01 results - 2026-11-03
 
 Completed locally on `codex/proca-endpoint-audit`, based on `0dbf733` plus the

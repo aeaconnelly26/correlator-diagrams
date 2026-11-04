@@ -294,7 +294,29 @@ Upper row: automatic contact. Lower row: explicit legacy distances / generic add
 \auditcell{optional circle}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red,circ=Z] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
 \par\vspace{10pt}
 \auditcell{legacy 7pt / 6pt arrow}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red,endpoint marker distance=7pt] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
-\auditcell{legacy 7pt / 10pt arrow}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red,endpoint marker distance=7pt,arrow size=10pt] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{legacy 7pt / 10pt arrow}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red,open arrow marker distance=7pt,arrow size=10pt] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
 \auditcell{generic open arrow unchanged}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[scalar,magenta!85!red,openarrowin] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
 \par\vspace{10pt}
+
+\newpage
+\section*{Managed Proca override compatibility}
+\noindent Per-line M01 settings and semantic vertex controls must survive integration.\par\medskip
+\makeatletter
+\newcommand{\corr@vertex@auditlargepoint}[1]{\filldraw[black] (#1) circle[radius=4pt];}
+\makeatother
+\auditcell{radius after style / 0.72}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=0.72,center-vertex=true,center-vertex-style=auditlargepoint,line=ewboson,channel-line={proca,magenta!85!red,proca vertex radius=4pt}]}\hfill
+\auditcell{radius before style / 1.2}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.2,center-vertex=true,center-vertex-style=auditlargepoint,line=ewboson,channel-line={proca vertex radius=4pt,proca,magenta!85!red}]}\hfill
+\auditcell{semantic radius / zero clearance}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,center-vertex-style=auditlargepoint,semantic-marker-vertex-radius=4pt,semantic-marker-tip-clearance=0pt,line=ewboson,channel-line={proca,magenta!85!red}]}\par\vspace{10pt}
+\auditcell{semantic defaults reset}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\auditcell{legacy 7pt / 6pt arrow}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red,endpoint marker distance=7pt}]}\hfill
+\auditcell{legacy 7pt / 10pt arrow}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red,open arrow marker distance=7pt,arrow size=10pt}]}\par
+\newpage
+\section*{Integrated seagull and exchange endpoints}
+\noindent Bare EW host legs; pink Proca self-loop and exchange. No independent decorations.\par\medskip
+\auditcell{normal; scale 0.72}{\TTreeChannelCorr[field={},central={},show-momenta=false,center-vertex=true,scale=0.72,insertion=seagull,insertion-slot=1,line=ewboson,channel-line={proca,magenta!85!red},seagull-loop-line={proca,magenta!85!red},seagull-loop-size=1.55]}\hfill
+\auditcell{normal; scale 1.0}{\TTreeChannelCorr[field={},central={},show-momenta=false,center-vertex=true,scale=1.0,insertion=seagull,insertion-slot=1,line=ewboson,channel-line={proca,magenta!85!red},seagull-loop-line={proca,magenta!85!red},seagull-loop-size=1.55]}\hfill
+\auditcell{normal; scale 1.2}{\TTreeChannelCorr[field={},central={},show-momenta=false,center-vertex=true,scale=1.2,insertion=seagull,insertion-slot=1,line=ewboson,channel-line={proca,magenta!85!red},seagull-loop-line={proca,magenta!85!red},seagull-loop-size=1.55]}\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TTreeChannelCorr[field={},central={},show-momenta=false,center-vertex=true,scale=0.72,insertion=seagull,insertion-slot=1,line=ewboson,channel-line={proca,magenta!85!red},seagull-loop-line={proca,magenta!85!red},seagull-loop-size=0.9]}\hfill
+\auditcell{short; scale 1.0}{\TTreeChannelCorr[field={},central={},show-momenta=false,center-vertex=true,scale=1.0,insertion=seagull,insertion-slot=1,line=ewboson,channel-line={proca,magenta!85!red},seagull-loop-line={proca,magenta!85!red},seagull-loop-size=0.9]}\hfill
+\auditcell{short; scale 1.2}{\TTreeChannelCorr[field={},central={},show-momenta=false,center-vertex=true,scale=1.2,insertion=seagull,insertion-slot=1,line=ewboson,channel-line={proca,magenta!85!red},seagull-loop-line={proca,magenta!85!red},seagull-loop-size=0.9]}\par\vspace{10pt}
 \end{document}

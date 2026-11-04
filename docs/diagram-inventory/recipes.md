@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `0dbf733 + M01`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `integration of 1b85ef8 + 5a657cd`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -227,7 +227,7 @@ One quartic vertex with a flat upper pair.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** Insertion support is narrower than ordinary tree support.
+**Limit:** Bubble/seagull insertions: t-tree leg 1 only.
 
 ```tex
 \STreeChannelCorr[
@@ -248,7 +248,7 @@ Two trivalent vertices joined by one exchange edge.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** Insertion support is narrower than ordinary tree support.
+**Limit:** Bubble/seagull insertions: t-tree leg 1 only.
 
 ```tex
 \TTreeChannelCorr[
@@ -269,7 +269,7 @@ Two trivalent vertices joined by one exchange edge.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** Insertion support is narrower than ordinary tree support.
+**Limit:** Bubble/seagull insertions: t-tree leg 1 only.
 
 ```tex
 \UTreeChannelCorr[
@@ -588,7 +588,7 @@ The quartic/contact vertex lies on the right side.
 
 ## Loops and the insertion prototype
 
-### I27 - Standalone self-energy bubble
+### I27 - Self-energy bubble
 
 Two trivalent vertices and two internal arcs; one loop.
 
@@ -669,7 +669,7 @@ A self-energy bubble splits the upper-left external leg.
 
 Four double-capped EW legs and two pink Proca internals.
 
-**Limit:** M01 verifies automatic contact; custom legacy distances retain their tuning.
+**Limit:** Integrated endpoint checks cover visible contact and legacy overrides.
 
 ```tex
 \TChannelCorr[
@@ -816,22 +816,24 @@ A blank circle on one pink diagonal and a Z on the other.
 ]
 ```
 
-## Unmerged branch: seagull examples
-
-**Branch-only:** `codex/seagull-insertion` at `5a657cd8d7c84dde751927963de8488bfb98cb33`.
-
-These recipes require that revision. They are not supported by the current checkout.
-
-See [branch integration](../planning/branch-integration.md) before using them.
+## Seagull insertion examples
 
 ### U01 - Seagull: bare structure
 
 One quartic point on an external leg carries a self-loop.
 
-**Limit:** Unmerged prototype: t-tree leg 1 only; all other placements remain future work.
+**Limit:** Supported here: t-tree leg 1 only; other placements remain future work.
 
 ```tex
 \TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
   field={},
   leg-labels={,,,},
   central={},
@@ -854,10 +856,18 @@ One quartic point on an external leg carries a self-loop.
 
 The same supported graph with wavy EW propagators.
 
-**Limit:** No caps, circles, labels, or momenta; requires the unmerged branch.
+**Limit:** Supported here: t-tree leg 1 only; other placements remain future work.
 
 ```tex
 \TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
   field={},
   leg-labels={,,,},
   central={},
@@ -873,5 +883,145 @@ The same supported graph with wavy EW propagators.
   seagull-loop-line=ewboson,
   insertion-pre-line=ewboson,
   insertion-post-line=ewboson
+]
+```
+
+### S01 - One endpoint marker
+
+Select proca start on the pink seagull loop.
+
+**Limit:** Loop endpoint selection follows the directed loop path; no caps or circles.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  line=ewboson,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line={proca start,magenta!85!red}
+]
+```
+
+### S02 - Opposite endpoint marker
+
+Select proca end on the pink seagull loop.
+
+**Limit:** Loop endpoint selection follows the directed loop path; no caps or circles.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  line=ewboson,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line={proca end,magenta!85!red}
+]
+```
+
+### S03 - Both endpoint markers
+
+Select proca on the pink seagull loop.
+
+**Limit:** Loop endpoint selection follows the directed loop path; no caps or circles.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  line=ewboson,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line={proca,magenta!85!red}
+]
+```
+
+## Integrated annotation controls
+
+### F01 - Compact external indices
+
+Compact indices on an empty field base.
+
+**Limit:** Explicit leg labels take precedence over field/index formatting.
+
+```tex
+\FourPointCorr[
+  field={},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  indices={\alpha,\beta,\gamma,\delta},
+  index-placement=mini
+]
+```
+
+### F02 - Hide external momenta
+
+Only the exchange momentum remains; its side label leaves a continuous arrow.
+
+**Limit:** Visibility acts on logical external slots and preserves internal flow.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  channel-line=plain,
+  show-momenta=true,
+  momentum-labels={q_1,q_2,q_3,q_4,p},
+  external-momentum-hide={1,2,3,4},
+  channel-momentum-label-position=right
+]
+```
+
+### F03 - Blank label versus hidden arrow
+
+Slot 1 has an unlabeled arrow, slot 2 has q, and slot 3 has no arrow.
+
+**Limit:** An empty entry hides text; external-momentum-hide hides the whole arrow.
+
+```tex
+\ThreePointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={,q,r},
+  external-momentum-hide={3}
 ]
 ```

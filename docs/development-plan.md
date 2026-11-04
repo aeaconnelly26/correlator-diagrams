@@ -6,14 +6,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/proca-endpoint-audit`; base `0dbf733` plus local M00/M01 work.
-- M01 endpoint audit is complete for the documented matrix. Next priority:
-  reconcile the existing seagull branch with M01 before starting M02.
+- Current branch: `codex/integrate-seagull-and-proca`; combined parents `1b85ef8` and `5a657cd`.
+- Integration is complete and verified. M02 independent triangle-contact
+  annotations is the next coding milestone, based on this integrated branch.
 - M00 produced the inventory and roadmap. M01 now corrects generic Proca tip
   contact; it adds a low-level custom-radius line option and no new topology.
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
   triangle-contact orientations are already implemented.
-- Semantic bubble insertion is implemented only on external slot 1 of t trees.
+- Semantic bubble and seagull insertions are implemented only on external slot 1 of t trees.
   Accepted keys for other insertion combinations can silently do nothing.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
   the repository or delete branches.
@@ -22,7 +22,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Eight pages: 35 current examples plus two clearly labeled unmerged seagull examples. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Nine pages: 43 current examples, including seagulls and integrated annotation controls. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -34,12 +34,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Milestone | Work | State |
 | --- | --- | --- |
-| M00 | Archive sources; audit capacity; publish repository atlas and roadmap | Complete locally; no commit/push made |
+| M00 | Archive sources; audit capacity; publish repository atlas and roadmap | Complete; included in checkpoint `1b85ef8` |
 | M01 | Audit and correct demonstrated Proca endpoint failures | Complete locally; diagnostic and vector checks passed |
-| Integration | Reconcile unmerged seagull/endpoint work with M01 | Next checkpoint before M02 |
-| M02 | Independent triangle-contact annotations, four orientations | After branch reconciliation |
+| Integration | Reconcile seagull/endpoint work with M01 | Complete locally; combined tests pass |
+| M02 | Independent triangle-contact annotations, four orientations | Next coding target on the integrated baseline |
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | Slot-1 t prototype exists; expansion planned |
-| M04 | External seagulls on s/t trees | Slot-1 prototype exists on unmerged branch; integrate, then expand |
+| M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
 | M05 | External swordfish on s/t trees | Planned |
 | M06 | Regular tree-attached triangle corrections, four placements | Planned |
 | M07 | Complementary crossed box, crossed external layouts, source routing questions | Planned; square defaults already verified |
@@ -50,15 +50,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-Read [branch integration](planning/branch-integration.md). The unmerged
-`codex/seagull-insertion` branch already contains seagull and endpoint work
-that the original current-checkout inventory missed. Reconcile that branch
-with the M01 checkpoint, run the combined tests, and rebuild the inventory
-before beginning M02. Do not reimplement its prototype or overwrite overlapping
-helpers wholesale. M02 remains the next feature milestone after integration.
+Read M02 in [milestones](planning/milestones.md) and R06 in
+[requirements](planning/requirements.md). Start from this integration branch
+or a new branch based on its merge commit, not the older `main`. Begin with
+independent external-slot annotation controls, then internal-edge controls and
+all four orientations. Preserve the integrated marker and momentum/index behavior.
 
-M01 evidence: [results](../regressions/propagators/proca-endpoints/results.md)
-and [diagnostic PDF](../regressions/propagators/proca-endpoints/proca-endpoint-audit.pdf).
+See [integration verification](planning/integration-verification.md) and
+[branch state](planning/branch-integration.md) for the completed reconciliation.
 
 ## Session protocol
 
@@ -99,7 +98,7 @@ Before closing a feature slice:
   recorded in the inventory verification file.
 - No package implementation changed. No commit, push, or merge was performed.
 
-## Latest session update - M01, 2026-11-03
+## Historical M01 session update - 2026-11-03
 
 - Created `codex/proca-endpoint-audit`, retaining all local M00 files.
 - Reproduced fixed-distance generic marker gaps while managed bubble tips
@@ -114,7 +113,7 @@ Before closing a feature slice:
   topology added. M02 is next.
 - Work remains local and uncommitted; no push or merge performed.
 
-## Latest handoff - branch review and focused examples
+## Historical handoff - branch review and focused examples
 
 - Identified the unmerged `codex/seagull-insertion` branch through `5a657cd`,
   including a t-tree external-slot-1 seagull and earlier endpoint fixes. The
@@ -127,3 +126,18 @@ Before closing a feature slice:
   No branch was pushed or merged. Reconcile branches before M02.
 - Future closeouts include a local commit, inventory update, verification record,
   and explicit push/merge status. See the branch-integration workflow.
+
+## Latest session update - integration, 2026-11-03
+
+- Combined `1b85ef8` and `5a657cd` on `codex/integrate-seagull-and-proca`,
+  preserving both parent branches. Resolved package, runner, and plan conflicts.
+- Kept managed seagull/one-sided marker sizing and semantic controls, M01 raw
+  tip anchoring, per-line radius overrides, and both legacy distance keys.
+- All 34 regression/example documents and 600 automatic visible-contact checks
+  pass. New managed override and actual seagull cases are in the 26-page audit.
+- Inventory: nine pages, 43 current recipes. Seagulls now compile in this checkout;
+  their historical branch-only page and old seagull plan are archived.
+- Integrated external momentum hiding, continuous blank-label arrows, mini
+  indices, channel side-label fixes, and the Compton example remain covered.
+- M02 is next. Slot-1-only insertion limits remain; no additional topology was
+  implemented as part of integration. `main` is unchanged; no push or PR.

@@ -1,0 +1,17 @@
+{
+  "parents": [
+    "1b85ef8",
+    "5a657cd"
+  ],
+  "current_branch": "codex/integrate-seagull-and-proca",
+  "atlas_examples": 43,
+  "atlas_pages": 9,
+  "regression_documents": 34,
+  "audit_diagrams": 156,
+  "audit_pages": 26,
+  "endpoint_triangles": 609,
+  "automatic_contacts": 600,
+  "maximum_visible_gap_pt": -0.0664,
+  "negative_control_pre_m01_raw_visible_gap_pt": 0.953479999999992,
+  "negative_control_rejected": true
+}

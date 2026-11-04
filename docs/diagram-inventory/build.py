@@ -21,7 +21,7 @@ def render_sources(catalog):
     head = r'''% Generated from catalog.json by build.py; uses the public package macros.
 \documentclass[10pt,letterpaper]{article}
 \usepackage[margin=0.62in]{geometry}
-\usepackage{amsmath,xcolor,graphicx,adjustbox,fancyhdr,pdfpages}
+\usepackage{amsmath,xcolor,graphicx,adjustbox,fancyhdr}
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
@@ -70,53 +70,9 @@ def render_sources(catalog):
             recipes += ['### ' + entry['id'] + ' - ' + entry['title'], '',
                         entry['description'], '', '**Limit:** ' + entry['limitation'], '',
                         '```tex', call, '```', '']
-    preview = catalog.get('branch_preview')
-    if preview:
-        chunks.append('\\includepdf[pages=-]{seagull-branch-examples.pdf}\n')
-        recipes += ['## Unmerged branch: seagull examples', '',
-                    '**Branch-only:** `' + preview['branch'] + '` at `' + preview['revision'] + '`.', '',
-                    'These recipes require that revision. They are not supported by the current checkout.', '',
-                    'See [branch integration](../planning/branch-integration.md) before using them.', '']
-        for entry in preview['entries']:
-            call = '\\' + entry['macro'] + '[\n  ' + ',\n  '.join(entry['options']) + '\n]'
-            recipes += ['### ' + entry['id'] + ' - ' + entry['title'], '',
-                        entry['description'], '', '**Limit:** ' + entry['limitation'], '',
-                        '```tex', call, '```', '']
     chunks.append('\\end{document}\n')
     (HERE / 'inventory.tex').write_text(''.join(chunks))
     (HERE / 'recipes.md').write_text('\n'.join(recipes))
-    if preview:
-        # Build this page in isolation: its macros must not accidentally load
-        # the current checkout's package. The complete atlas embeds the PDF.
-        branch_head = head.replace('baseline ' + tex(catalog['baseline']),
-                                   'unmerged seagull branch ' + preview['revision'][:7])
-        branch_chunks = [branch_head, '\\setcounter{page}{8}\n',
-            '\\atlaspage{08 / UNMERGED BRANCH}{Seagull insertion examples}{'
-            'Rendered from ' + tex(preview['branch']) + ' at ' + preview['revision'][:7] +
-            '. Not yet merged into main or the current checkout. Only t-tree external slot 1 is supported.}\n']
-        for i, entry in enumerate(preview['entries']):
-            call = '\\' + entry['macro'] + '[' + ','.join(entry['options']) + ']'
-            branch_chunks.append('\\atlascell{' + tex(entry['id'] + '  ' + entry['title']) +
-                '}{\\' + entry['macro'] + '}{' + call + '}{' + tex(entry['description']) +
-                '}{' + tex(entry['limitation']) + '}' + ('\\hfill\n' if i == 0 else '\\par\n'))
-        branch_chunks.append('\\end{document}\n')
-        (HERE / 'seagull-branch-examples.tex').write_text(''.join(branch_chunks))
-
-
-def compile_branch_preview(preview):
-    with tempfile.TemporaryDirectory(prefix='feynmanfun-branch-atlas-') as tmp:
-        source = subprocess.check_output(
-            ['git', 'show', preview['revision'] + ':feynman-fun.sty'], cwd=ROOT)
-        (Path(tmp) / 'feynman-fun.sty').write_bytes(source)
-        env = os.environ.copy()
-        env['TEXINPUTS'] = tmp + '//:' + str(ROOT) + '//:' + env.get('TEXINPUTS', '')
-        result = subprocess.run(['pdflatex', '-interaction=nonstopmode', '-halt-on-error',
-            '-output-directory=' + tmp, str(HERE / 'seagull-branch-examples.tex')],
-            cwd=tmp, env=env, capture_output=True, text=True)
-        if result.returncode:
-            raise RuntimeError(result.stdout[-6000:])
-        shutil.copyfile(Path(tmp) / 'seagull-branch-examples.pdf', HERE / 'seagull-branch-examples.pdf')
-
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -129,8 +85,6 @@ def main():
     render_sources(catalog)
     if args.sources_only:
         return
-    if catalog.get('branch_preview'):
-        compile_branch_preview(catalog['branch_preview'])
     env = os.environ.copy()
     env['TEXINPUTS'] = str(ROOT) + '//:' + env.get('TEXINPUTS', '')
     with tempfile.TemporaryDirectory(prefix='feynmanfun-atlas-') as tmp:
@@ -145,8 +99,7 @@ def main():
         if issues:
             print('\n'.join(issues))
         shutil.copyfile(Path(tmp) / 'inventory.pdf', HERE / 'inventory.pdf')
-    extra = len(catalog.get('branch_preview', {}).get('entries', []))
-    print(f'Built {len(ids)} current examples plus {extra} unmerged-branch examples: {HERE / "inventory.pdf"}')
+    print(f'Built {len(ids)} current examples on {len(catalog["pages"])} pages: {HERE / "inventory.pdf"}')
 
 
 if __name__ == '__main__':

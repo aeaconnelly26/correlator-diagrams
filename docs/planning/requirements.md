@@ -97,11 +97,11 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 ## R11 - Seagull on external tree legs
 
 - **Status:** Existing with limitations.
-- **Existing construction / evidence:** Unmerged codex/seagull-insertion at 5a657cd implements a seagull on t-tree external slot 1. Inventory U01/U02 are rendered with that pinned revision. The current M01 checkout does not contain the implementation.
-- **Remaining target / limitation:** Reconcile and integrate the existing prototype first, then expand to the remaining t-tree legs and all four s-tree legs. Do not implement the prototype again. One insertion at a time.
-- **Milestone:** Branch integration before M02; M04 expands the existing prototype. **Dependencies:** Branch reconciliation, then M03 host-slot conventions.
+- **Existing construction / evidence:** Integrated t-tree external-slot-1 seagull from 5a657cd. Current inventory U01/U02 and S01-S03 show plain/EW and one-/two-sided Proca loops, compiled against the combined checkout.
+- **Remaining target / limitation:** Expand the remaining t-tree external legs and all four s-tree external legs. Preserve the existing prototype and one-insertion-at-a-time contract.
+- **Milestone:** M04 expands the integrated prototype. **Dependencies:** M03 host-slot conventions; prototype integration completed.
 - **Acceptance:** Eight placements preserve one quartic insertion point, two host segments, and one self-loop; do not draw a two-vertex self-energy bubble instead.
-- **Sources:** S05-C1, S05-R1, S06-C1, S06-C2, S07-C1, S07-C2, S08-C1, S08-R1, S20-TL, S20-TR, S20-BL, S20-BR, S21-TL, S21-TR, S21-BL, S21-BR. See [branch integration](branch-integration.md).
+- **Sources:** P2-05, P3-03, S05-C1, S05-R1, S06-C1, S06-C2, S07-C1, S07-C2, S08-C1, S08-R1, S20-TL, S20-TR, S20-BL, S20-BR, S21-TL, S21-TR, S21-BL, S21-BR. See [integration verification](integration-verification.md).
 
 ## R12 - Swordfish on external tree legs
 
@@ -133,11 +133,11 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 ## R15 - Proca marker contact across topology families
 
 - **Status:** Verified existing.
-- **Existing construction / evidence:** M01 diagnostic: 144 diagrams on 24 pages, 573 triangles including 568 automatic contacts; independent PDF-vector checks and visual review. Generic Proca tips now track the standard dot boundary under uniform picture scale; the managed bubble helper is unchanged.
-- **Remaining target / limitation:** Current families are verified at scales 0.72, 1.0, 1.2 with short/normal paths, larger arrows, reversed paths, alias/color order, custom radius and split crossings. Repeat checks for new families. Arbitrary anisotropic transforms and unknown vertex shapes remain outside the certification.
-- **Milestone:** M01 complete for current audited families; repeat endpoint checks in later milestones. **Dependencies:** None.
-- **Acceptance:** Passed: automatic tip contact within the visible dot outline, inward white-filled colored markers, expected endpoint counts, no markers at crossing gaps, unchanged explicit legacy distances and generic open-arrow controls.
-- **Sources:** P4-03. See [M01 results](../../regressions/propagators/proca-endpoints/results.md).
+- **Existing construction / evidence:** Integrated 26-page audit: 156 diagrams, 609 triangles, and 600 automatic visible contacts; actual PDF-stroke measurements, visual review, and one-sided equilateral-size assertions pass.
+- **Remaining target / limitation:** Current families include the seagull loop and managed override controls. Preserve raw and managed radius/distance APIs, repeat checks for new families, and retain the documented exclusions for arbitrary anisotropic transforms or unknown vertex shapes.
+- **Milestone:** M01 and branch reconciliation complete for the audited current families; repeat endpoint checks later. **Dependencies:** None.
+- **Acceptance:** Passed: visible dot/triangle outlines touch; tips are not buried; inward white-filled color and expected endpoint counts are preserved. Both legacy distance keys and managed overrides retain intended placement.
+- **Sources:** P4-03. See [integration verification](integration-verification.md).
 
 ## R16 - Reference and GitHub documentation refresh
 
@@ -207,3 +207,10 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 R14 and R22 are intentionally unresolved references, not promises that existing macros reproduce those drawings. They have explicit specification gates. Stemmed contact-host attachments in R20 also need their attachment valences recorded before implementation. None of these uncertainties blocks the current inventory.
 
 Feature gaps found while constructing recipes: a global explicit `line=...` overrides the half-box bridge-specific style, so A04 omits the global setting. Blank external bubble momentum text still leaves arrows when `show-momenta=true`; A05 uses explicit external momenta rather than implying that blanks suppress arrows. These are existing behaviors recorded for later review, not package changes.
+
+## Additional integrated capabilities
+
+External momentum hiding, continuous unlabeled arrows for empty entries,
+compact external indices, and channel side-label gap fixes are already available
+and illustrated by inventory F01-F03. The Compton example is preserved as a
+reusable application of existing tree/contact primitives, not an extra topology.

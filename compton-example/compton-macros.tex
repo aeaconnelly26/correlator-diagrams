@@ -1,0 +1,72 @@
+% Paste into your preamble after loading amsmath and feynman-fun.
+% Process: gamma(k) + phi(p) -> gamma(k') + phi(p').
+% Slots: upper left, lower left, upper right, lower right.
+\pgfkeys{/corrdiag/sqed-compton/.style={
+  scale=0.70,
+  field={},
+  blob=false,
+  external-legs=true,
+  external-vertices=false,
+  center-vertex=true,
+  center-vertex-style=dot,
+  fourpoint-xspan=1.60,
+  fourpoint-yspan=1.10,
+  leg-styles={pho,chasca,pho,antsca},
+  propagator-arrow-size=4pt,
+  leg-labels={\epsilon_\mu^{\mathrm{in}}(k),\phi(p),
+              {\epsilon_\nu^{\mathrm{out}}}^{*}(k'),\phi(p')},
+  show-momenta=true,
+  momentum-label-size=\scriptsize,
+  momentum-label-fill=none,
+  momentum-label-inner-sep=0.5pt,
+  momentum-arrow-size=2pt,
+  external-momentum-start=0.22,
+  external-momentum-end=0.58,
+  external-momentum-label-fraction=0.38,
+  momentum-label-gap=0,
+  % Empty labels retain continuous external momentum arrows.
+  momentum-labels={,,,},
+  external-momentum-flow=left-in-right-out
+}}
+
+% s-channel: scalar momentum p+k flows from left to right.
+\newcommand{\ComptonS}[1][]{%
+  \STreeChannelCorr[
+    sqed-compton,
+    channel-vertex-xspan=0.65,
+    channel-internal-line=chasca,
+    channel-momentum=p+k,
+    channel-momentum-angle=90,
+    channel-momentum-distance=9pt,
+    channel-momentum-label-position=above,
+    channel-momentum-label-yshift=2pt,
+    #1
+  ]%
+}
+
+% u-channel: scalar momentum p-k' flows from bottom to top.
+% Reversing start/end reverses the separate momentum arrow.
+\newcommand{\ComptonU}[1][]{%
+  \UTreeChannelCorr[
+    sqed-compton,
+    channel-vertex-yspan=0.72,
+    channel-internal-line=antsca,
+    channel-momentum=p-k',
+    channel-momentum-start=0.76,
+    channel-momentum-end=0.24,
+    channel-momentum-angle=-90,
+    channel-momentum-distance=10pt,
+    channel-momentum-label-position=left,
+    #1
+  ]%
+}
+
+% Local two-photon/two-scalar (seagull) vertex.
+\newcommand{\ComptonContact}[1][]{%
+  \FourPointCorr[
+    sqed-compton,
+    topology=contact,
+    contact-pairing=central,
+    #1
+  ]%
+}

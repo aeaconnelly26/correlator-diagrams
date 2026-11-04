@@ -4,13 +4,13 @@ Baseline: `0dbf733`, inventoried on 2026-11-03. These are future feature
 sessions, not changes made by the inventory work. R IDs refer to
 [requirements](requirements.md); S IDs refer to [reference panels](source-coverage.md).
 
-## Integration correction - before the next coding milestone
+## Integration baseline - completed before M02
 
-The unmerged `codex/seagull-insertion` branch already contains the slot-1
-seagull prototype and earlier endpoint/momentum/index work. See
-[branch integration](branch-integration.md). Reconcile that branch with M01
-before M02; then reassess this queue against the integrated package. M04 is
-an expansion of an existing prototype, not a fresh implementation.
+`codex/integrate-seagull-and-proca` now combines `1b85ef8` and `5a657cd`.
+The seagull slot-1 prototype, prior marker/momentum/index work, and M01 raw
+Proca fixes are reconciled. See [integration verification](integration-verification.md).
+M04 expands the existing prototype; M02 remains the next feature milestone.
+Start it from the integration commit rather than the older `main` baseline.
 
 ## Common session contract
 
@@ -60,7 +60,7 @@ specified host/slot matrix is demonstrated.
 
 **Requirements:** R15. **Dependency:** M00.
 
-Completed on `codex/proca-endpoint-audit`; see [results](../../regressions/propagators/proca-endpoints/results.md). The requirements below remain the endpoint gate for future families.
+Completed and reconciled on `codex/integrate-seagull-and-proca`; see [integration verification](integration-verification.md). The requirements below remain the endpoint gate for future families.
 
 - Start with a diagnostic sheet, not an assumed universal fix. Include the
   atlas families with internal propagators and representative external styles:
@@ -109,8 +109,8 @@ Completed on `codex/proca-endpoint-audit`; see [results](../../regressions/propa
 
 - Specify the direct self-loop at a quartic point on a host propagator.
   This has one insertion vertex, unlike the two-vertex self-energy bubble.
-- Integrate and verify the existing t-tree leg-1 prototype first; then expand
-  the remaining t-tree legs and all s-tree legs. Keep one insertion per diagram.
+- The t-tree leg-1 prototype is integrated and verified. Expand the remaining
+  t-tree legs and all s-tree legs. Keep one insertion per diagram.
 - Gate: eight placements with the correct valence and host continuity;
   independent loop/host styles, loop momentum, and endpoint indices where
   defined by the contract; no new caps on the internal split points.

@@ -1,50 +1,52 @@
-# Branch state and coding-session closeout
+# Integrated branch state and coding-session closeout
 
-Updated 2026-11-03. Branches are separate lines of development: a feature
-existing on one branch does not put it in another branch or in `main`.
+Updated 2026-11-03. The seagull and M01 lines are now combined on
+`codex/integrate-seagull-and-proca`, with merge parents `1b85ef8` and `5a657cd`.
+The original feature branches are retained. `main` is still `0dbf733`; nothing
+was pushed and no pull request was created or merged.
 
-## Current integration state
+## What is integrated
 
-| Line of work | Local state | Present in main? |
-| --- | --- | --- |
-| `main` | Last inspected at `0dbf733`, merge of bubble-on-leg PR #27 | Baseline |
-| `codex/proca-endpoint-audit` | M00 inventory/roadmap, M01 audit/fix, and this documentation cleanup; checkpointed locally | No |
-| `codex/seagull-insertion` | Five additional commits through `5a657cd`; local tracking ref points to the same commit | No |
+- Seagull insertion on **t-tree external slot 1**, including directed one-sided
+  Proca loop markers and the branch's equilateral marker-size repair.
+- External momentum visibility, continuous unlabeled arrows for empty entries,
+  tree-channel side-label gap fixes, and compact external indices.
+- The reusable scalar-QED Compton example and the broader regression runner.
+- M01 raw Proca tip anchoring, custom per-line radius, and legacy overrides.
+- The archived source record, requirements map, roadmap, minimal diagnostic
+  preference, and inventory generation tooling.
 
-The seagull branch contains more than seagulls: vertex-aware endpoint work,
-external momentum visibility, channel label-gap changes, mini external indices,
-a Compton example, and broader regression coverage. Its seagull prototype
-supports **t-tree external slot 1 only**. It does not complete all four legs
-or s-channel support. The inventory now includes two clearly marked examples
-rendered against that branch's pinned revision, without merging its code.
+Seagulls are rendered with the current integrated package, not an extracted
+unmerged package. The atlas has nine pages and 43 current recipes. The earlier
+branch-only page and seagull development plan are preserved in `history/`.
 
-The initial inventory audited the checked-out `main` lineage and did not inspect
-the unmerged seagull branch. This omitted existing branch-only work and allowed
-the M01 endpoint investigation to overlap older endpoint work. Before M02,
-review the overlapping fixes and integrate deliberately. Do not treat either
-branch's entire package file as the winner during conflict resolution.
+## Reconciliation decisions
 
-Tracking-ref statements above are local observations; they are not a claim
-that a fresh remote fetch has been performed.
+The marker implementations address different paths. Keep M01 for raw Proca
+paths and keep the seagull branch's managed straight/curved marker helpers,
+including the configurable semantic radius and 0.25pt clearance. Explicit
+per-line M01 radius or legacy-distance options still select the corresponding
+raw geometry inside managed straight helpers, in either option order.
+Both legacy distance key names are honored; the M01 endpoint-distance key takes
+precedence when both are explicitly non-default. No duplicate markers are queued.
 
-## Next integration checkpoint
+The combined audit measures actual visible stroke outlines: a 0.25pt semantic
+clearance is not a visible gap when the dot and triangle outlines touch. It also
+rejects buried tips, lost fill/color, and unexpected endpoint counts. This is
+verified in addition to the original one-sided triangle-dimension assertions.
+See [integration verification](integration-verification.md) for the evidence.
 
-1. Start from a clean local checkpoint; inspect all relevant branch histories.
-2. Compare the seagull branch's endpoint helpers with M01's tip-anchor change.
-   Preserve its one-sided markers and existing APIs; resolve overlaps in the
-   helper code rather than dropping a whole branch's implementation.
-3. On an integration branch, reconcile code and documentation, retaining the
-   archived source requirements and current branch provenance.
-4. Run the combined regression set, endpoint vector checks, seagull-specific
-   cases, and the existing momentum/index behavioral assertions. Visually
-   inspect affected examples before declaring the integration complete.
-5. Rebuild the inventory from the integrated package. Move seagulls from the
-   unmerged appendix into the current-capability pages only after they actually
-   work in that checkout. Reassess remaining milestones against the integrated
-   source, especially M01 and M04, before starting M02.
+## Next coding session
 
-This document records the integration work needed; this cleanup does **not**
-perform the merge, push branches, or create/merge a pull request.
+M02 can now start from this integration branch (or a new branch based on its
+merge commit). No manual Git preparation is needed from the user. Do not start
+from the older `main` baseline until it contains this integration. M04 remains
+an expansion of the existing single-leg seagull prototype, not a new prototype.
+The other t-tree legs, s-tree support, swordfish, and regular triangles remain
+future requirements.
+
+Local tracking refs were inspected without a fresh remote fetch; this record
+does not claim to have checked for newer remote commits.
 
 ## Session workflow going forward
 
@@ -82,5 +84,5 @@ can retain a circle because that particular example tests circ compatibility.
 
 The inventory's main pages show minimal structure. Dedicated style examples
 may demonstrate caps or circles when that is their stated purpose, including
-the user's explicitly requested capped t-channel example. Seagull branch
+the user's explicitly requested capped t-channel example. Seagull
 examples have no caps, circs, labels, or momenta.

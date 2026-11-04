@@ -2,33 +2,41 @@
 
 [Open the atlas](inventory.pdf) or [copy a recipe](recipes.md).
 
-Inventoried from `main` at `0dbf733` on 2026-11-03 and refreshed with M01 on
-`codex/proca-endpoint-audit`. The eight-page atlas contains **29
-structural/layout examples and 6 styled examples** on seven current-capability pages, plus **two unmerged-branch seagull examples** on page eight. These are
-not 35 distinct graph topologies: aliases, rotations, pairings, and marker
-presets are identified as such. M01 corrects generic Proca endpoint placement;
-it adds no topology. See the [endpoint audit](../../regressions/propagators/proca-endpoints/README.md).
+Built against the combined `codex/integrate-seagull-and-proca` checkout,
+from parents `1b85ef8` and `5a657cd`, on 2026-11-03. There are **43 current
+examples on nine pages**, including the original structural/style gallery,
+five seagull examples, and three integrated annotation controls. These are not
+43 distinct graph topologies: aliases, orientations, and style variants are
+identified separately.
 
 ## How to read it
 
-The first six pages use plain lines with annotations hidden. Page seven shows
-selected existing styles, including the requested t-channel bubble with pink
-Proca internals and four double-capped EW external legs. Each example has a
-stable ID and a complete recipe in the recipe index. The caption names any
-important limitation. Page eight is explicitly branch-only: its seagull recipes require `codex/seagull-insertion` at the pinned revision; they do not work in the current checkout.
+- Pages 1-6 show minimal structures with fields and momentum annotations hidden.
+- Page 7 demonstrates named style/annotation features, including the explicitly
+  requested pink Proca t-bubble with four double-capped EW legs.
+- Page 8 shows the supported seagull prototype and one-/two-sided Proca loop
+  markers, without caps, circles, labels, or momenta. U01/U02 retain their stable
+  identifiers from the former branch-only preview; they now work here.
+- Page 9 demonstrates compact indices, logical-slot momentum hiding, unlabeled
+  arrows, and the tree-channel side-label fix.
 
-- Horizontal and vertical contact pairings are disconnected pairs, not tree
-  exchanges with a hidden bridge.
-- The existing crossed box fixes its side edges and crosses its diagonals.
-  A crossing is not a vertex; internal momentum/index coverage is incomplete.
-- The four triangle-contact orientations already exist. A regular triangle
-  attached to a tree is a different graph and remains future work.
+Important limits:
+
+- Bubble and seagull insertions support **t-tree external slot 1 only**. Other
+  accepted insertion settings can silently do nothing.
+- Horizontal/vertical contact pairings are disconnected pairs, not tree exchanges.
+- The existing crossed box fixes its side edges and crosses its diagonals;
+  internal momentum/index coverage remains incomplete.
+- All four triangle-contact orientations exist; independent annotation placement
+  remains M02. A regular triangle attached to a tree is a different missing graph.
 - `SunsetDiagram` is a two-loop graph.
-- Bubble insertion currently works only on t-tree external slot 1.
-  Accepted insertion keys for other combinations can be silently ignored.
-- Plain-line coverage does not certify every decorated or densely labeled
-  combination. M01 verifies standard-dot endpoint contact in its diagnostic
-  matrix; triangle labels remain M02 work, and new families must repeat endpoint checks.
+- The integrated endpoint matrix certifies its documented circular vertices,
+  scales, and settings, not every arbitrary custom transform or vertex shape.
+
+The original unmerged seagull preview is preserved in
+[history](../planning/history/seagull-branch-examples-5a657cd.pdf). It is not
+embedded in the current atlas. The Compton example uses existing package tree
+and contact primitives; see `compton-example/` for its reusable example macros.
 
 ## Rebuild
 
@@ -38,13 +46,13 @@ From the repository root:
 python3 docs/diagram-inventory/build.py
 ```
 
-Requires Python 3, Git (to read the pinned branch package), `pdflatex`, `feynman-fun`'s normal TeX dependencies, `adjustbox`, and `pdfpages`. The builder uses a temporary directory for compiler output and
-keeps only the PDF, generated TeX, and Markdown recipes here. `catalog.json`
-is the single source for the example metadata and options, including the
-branch-preview revision. The builder compiles the branch page in a temporary
-directory with that revision's package, then embeds its PDF in the atlas; it
-never switches or merges the working branch. Edit it, then
-rebuild; do not edit the generated files independently.
+Requires Python 3, `pdflatex`, the package's normal TeX dependencies, and
+`adjustbox`. All examples are compiled against the current checkout in one
+build; the builder no longer extracts a package from another Git revision or
+embeds a branch-only PDF. Compiler products stay in a temporary directory.
+
+`catalog.json` is the source for example metadata/options. Edit it and rebuild;
+do not edit the generated TeX or recipe index independently.
 
 To compile the checked-in TeX without regenerating the catalog outputs:
 

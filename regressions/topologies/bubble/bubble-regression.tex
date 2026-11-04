@@ -156,6 +156,34 @@ Package-level standalone self-energy bubbles. These examples use the public
 
 \[
 \begin{array}{cc}
+  \bubblecell{vertex split curve-aligned}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p,p},
+      bubble-momenta={\ell,k},
+      bubble-momentum-rotation=clockwise,
+      bubble-momentum-layout=vertex-split
+    ]
+  }&
+  \bubblecell{vertex split offset tuning}{
+    \BubbleCorr[
+      show-momenta=true,
+      bubble-external-line={ewboson,endcap},
+      momentum-labels={p,p},
+      bubble-momenta={\ell,k},
+      bubble-momentum-rotation=counterclockwise,
+      bubble-momentum-layout=vertex-split,
+      bubble-vertex-split-left={0.16,0.38,0.24},
+      bubble-vertex-split-right={0.62,0.84,0.76},
+      bubble-vertex-split-offset-scale=0.55
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{cc}
   \bubblecell{shorter arrows farther out}{
     \BubbleCorr[
       show-momenta=true,
@@ -231,6 +259,25 @@ Package-level standalone self-energy bubbles. These examples use the public
       bubble-external-line={ewboson,endcap},
       propagator-arrow-sizes={,,,5.5pt},
       bubble-endpoint-indices={\alpha,\beta,\rho,\sigma}
+    ]
+  }
+\end{array}
+\]
+
+\[
+\begin{array}{c}
+  \bubblecell{curved marker tangent stress}{
+    \BubbleCorr[
+      show-momenta=true,
+      momentum-labels={p,p},
+      bubble-momenta={\ell,k},
+      bubble-momentum-layout=vertex-split,
+      bubble-momentum-rotation=clockwise,
+      bubble-top-line={proca,fieldA},
+      bubble-bottom-line={spolout,magenta!85!red},
+      bubble-external-line={ewboson,endcap},
+      propagator-arrow-sizes={,,7pt,7pt},
+      bubble-endpoint-indices={a,b,c,d}
     ]
   }
 \end{array}

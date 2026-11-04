@@ -35,8 +35,10 @@ The baseline keeps the existing tree-channel geometry unchanged.
       insertion=bubble,
       insertion-slot=1,
       leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}},
+      insertion-pre-line={ewboson,endcap,circ=W,circ scale=0.68,circ position=0.44},
+      insertion-post-line={ewboson,circ=Z,circ scale=0.62,circ position=0.56},
       channel-line={ewboson},
-      bubble-top-line={ewboson},
+      bubble-top-line={ewboson,circ=W,circ scale=0.85},
       bubble-bottom-line={ewboson}
     ]
   }
@@ -78,6 +80,7 @@ The baseline keeps the existing tree-channel geometry unchanged.
 	      bubble-momenta={\ell,q_1-\ell},
 	      bubble-momentum-rotation=clockwise,
 	      bubble-momentum-layout=vertex-split,
+	      bubble-vertex-split-offset-scale=0.75,
 	      channel-line={ewboson,magenta!85!red},
 	      bubble-top-line={ewboson,circ=Z,black},
 	      bubble-bottom-line={proca,magenta!85!red},
@@ -93,14 +96,15 @@ The baseline keeps the existing tree-channel geometry unchanged.
 \]
 
 \[
-\begin{array}{c}
-  \insertcell{momentum and index stress}{
+\begin{array}{cc}
+  \insertcell{extended pre momentum stress}{
     \TTreeChannelCorr[
       field={},
       scale=1.08,
       show-momenta=true,
       insertion=bubble,
       insertion-slot=1,
+      insertion-position=0.46,
       line=ewboson,
       momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3},
       bubble-momenta={\ell,q_1-\ell},
@@ -114,6 +118,23 @@ The baseline keeps the existing tree-channel geometry unchanged.
       insertion-middle-momentum-xshift=34pt,
       insertion-middle-momentum-label-xshift=36pt,
       insertion-middle-momentum-label-distance=4pt
+    ]
+  }&
+  \insertcell{seagull compact pre circ}{
+    \TTreeChannelCorr[
+      field={},
+      scale=1.02,
+      show-momenta=true,
+      insertion=seagull,
+      insertion-slot=1,
+      leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}},
+      insertion-pre-line={ewboson,endcap,circ=W,circ scale=0.62,circ position=0.45},
+      insertion-post-line={ewboson,circ=Z,circ scale=0.58,circ position=0.54},
+      channel-line={ewboson,magenta!85!red},
+      seagull-loop-line={proca,magenta!85!red},
+      seagull-loop-momentum=k,
+      seagull-loop-momentum-direction=counterclockwise,
+      momentum-labels={q_1,q_2,q_3,q_4,q_1-q_3}
     ]
   }
 \end{array}
