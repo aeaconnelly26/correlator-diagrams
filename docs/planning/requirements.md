@@ -97,7 +97,7 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 ## R11 - Seagull on external tree legs
 
 - **Status:** Verified existing.
-- **Existing construction / evidence:** M04 implements all eight s/t-tree external placements. Atlas G01-G04/G11-G14 and the six-page seagull-slots gallery expose the single quartic self-loop; actual PDF graph extraction verifies seven edges and valences for all eight. Focused controls and 24 pink Proca/scalar marker contacts are checked independently.
+- **Existing construction / evidence:** M04 implements all eight s/t-tree external placements. Atlas G01-G04/G11-G14 and the six-page seagull-slots gallery expose the single quartic self-loop; actual PDF graph extraction verifies seven edges and valences for all eight. Focused controls and 24 pink Proca/scalar marker contacts are checked independently. Nov 4 review verifies inward T/outward S defaults, scattering flow, compact guides and measured label clearance; explicit overrides remain supported.
 - **Remaining target / limitation:** One selected s/t-tree external leg at a time. Internal slot 5, u-tree/contact hosts and simultaneous insertions remain unsupported. Index placement is deferred to D01; seagull vertex index values/order are preserved.
 - **Milestone:** M04 complete. **Dependencies:** M03; prototype integration completed.
 - **Acceptance:** Eight placements preserve one quartic insertion point, two host segments, and one self-loop; do not draw a two-vertex self-energy bubble instead.

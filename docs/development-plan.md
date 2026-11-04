@@ -1,13 +1,15 @@
 # Feynman Fun Development Plan
 
-Current roadmap and session handoff, refreshed 2026-11-03. The original plan
+Current roadmap and session handoff, refreshed 2026-11-04. The original plan
 is preserved in [the history archive](planning/history/development-plan-before-2026-11-03.md).
 
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
 - Current branch: `codex/m04-seagull-expansion`, based on published main `b4a6ad8`.
-- M04 is complete locally: seagulls on all eight s/t-tree external placements.
+- M04 is complete locally, including the Nov 4 review: seagulls on all eight
+  s/t-tree external placements, inward T/outward S defaults, 1/2-in and 3/4-out
+  external flow, and shorter insertion arrows with measured label clearance.
   See [M04 verification](planning/m04-verification.md). It is not merged or pushed.
 - M03b is complete, merged and published to GitHub: all four s-tree external
   bubble placements. See [M03b verification](planning/m03b-verification.md).
@@ -38,7 +40,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Fourteen pages: 66 current examples, including eight bubble and eight seagull placements. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Fifteen pages: 70 recipes, including the full insertion matrices and reviewed momentum defaults. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -261,3 +263,26 @@ and reversed arrows. The gallery/inventory are regenerated; no topology changed.
   documented, including bubble-only post-index controls and the stored-only style key.
 - M04 is checkpointed locally, not merged/pushed. Main/GitHub remain at
   `b4a6ad8`. M05 is next after M04 publication.
+
+## M04 screenshot review - 2026-11-04
+
+- Corrected auto seagull sides: all T loops inward, all S loops outward.
+  Explicit orientation values retain their existing meanings.
+- Default momentum symbol is p; external 1/2 enter and 3/4 leave. Preserve this
+  convention in future coding-session examples. Explicit flow overrides remain
+  supported and tested; reversal tests must be identified as such.
+- Shared bubble/seagull host arrows are shorter and stay on their segments.
+  Auto label placement measures the full text rectangle and puts it outside
+  the guide, with 2pt clearance. Explicit tuning keys remain effective.
+- Added a four-page, all-16-placement momentum review; refreshed insertion PDFs
+  and the atlas (70 recipes / 15 pages). Current verification is in M04 verification.
+- Index positions remain D01; no index anchors/offsets/defaults were retuned.
+- Review checkpoint remains local on the M04 branch. Merge/push is still pending;
+  main/GitHub remain at `b4a6ad8`. M05 is next after publication.
+
+The subsequent Nov 4 review makes short bubble host arrows longer where space
+allows (12pt target, capped within the segment), while keeping long seagull
+guides compact. S-tree bubble k/ell labels use measured outward normal placement
+with 4pt clearance; T-tree bubble loop annotations stay unchanged. Explicit
+range and distance controls are preserved. These corrections are included in
+the same local review checkpoint and updated PDFs.

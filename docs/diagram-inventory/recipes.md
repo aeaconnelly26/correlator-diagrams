@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M04 on published main b4a6ad8`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M04 review on 229526e`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1620,5 +1620,115 @@ One quartic self-loop insertion on the lower-right leg.
   insertion-slot=4,
   channel-line=plain,
   seagull-loop-line=plain
+]
+```
+
+## Compact arrows and clear external labels
+
+### H01 - T-tree seagull on leg 1
+
+Inward T loop; compact host arrows.
+
+**Limit:** Default outside labels; explicit placement keys still override.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=1,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
+]
+```
+
+### H02 - T-tree seagull on leg 4
+
+Inward T loop; compact host arrows.
+
+**Limit:** Default outside labels; explicit placement keys still override.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=4,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
+]
+```
+
+### H03 - S-tree seagull on leg 2
+
+Outward S loop; compact host arrows.
+
+**Limit:** Default outside labels; explicit placement keys still override.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=2,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
+]
+```
+
+### H04 - S-tree seagull on leg 3
+
+Outward S loop; compact host arrows.
+
+**Limit:** Default outside labels; explicit placement keys still override.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=3,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
 ]
 ```

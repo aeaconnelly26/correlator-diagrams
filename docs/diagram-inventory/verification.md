@@ -1,4 +1,24 @@
-# M04 inventory verification - 2026-11-03
+# M04 screenshot-review inventory verification - 2026-11-04
+
+Current atlas: **70 recipes / 15 pages**, reviewed on the M04 branch from
+`229526e`. T seagull auto loops face inward; S loops outward. H01-H04 add
+plain momentum examples with 1/2 incoming and 3/4 outgoing, compact host
+arrows and measured text clearance. Short bubble arrows expand for readability;
+S bubble k/ell labels move outward while T loop annotations retain their spacing.
+
+The four-page momentum review shows all 16 insertion placements. Its 84 public
+cases verify emitted flow across the four-point families, 130 text rectangles,
+32 loop directions, adaptive arrow spans, explicit overrides and isolation.
+The S-bubble gallery adds measured loop-text clearance and a distance override.
+All 39 maintained documents and 656 contact checks pass. The existing seagull
+PDF path parser still verifies eight seven-edge quartic self-loop graphs.
+
+All changed PDF pages were rendered and inspected. Index placement is left
+as D01. Current package/source/PDF hashes and detailed reproduction are in
+[M04 verification](../planning/m04-verification.md). M04 remains local;
+main/GitHub remain at `b4a6ad8`. Earlier records below are historical.
+
+# Historical M04 inventory verification - 2026-11-03
 
 Current atlas: **66 public recipes on fourteen pages**, built against
 `codex/m04-seagull-expansion` on published main `b4a6ad8`. G01-G04 and

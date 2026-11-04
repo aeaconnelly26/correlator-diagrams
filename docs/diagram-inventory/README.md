@@ -1,10 +1,12 @@
 # Current diagram inventory
 
-[Open the atlas](inventory.pdf) or [copy a recipe](recipes.md).
+[Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
+[review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Built against `codex/m04-seagull-expansion`, based on published `main` at
-`b4a6ad8`, on 2026-11-03. There are **66 current examples on fourteen pages**.
-These are recipes and meaningful layouts/styles, not 66 distinct graph topologies.
+`b4a6ad8`, reviewed from `229526e` on 2026-11-04. There are **70 current
+examples on fifteen pages**. These are recipes and meaningful layouts/styles,
+not 70 distinct graph topologies.
 
 M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
 on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
@@ -12,7 +14,11 @@ on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
 [dedicated review](../planning/deferred-workflows.md); attachment checks do not
 certify its visual placement. M04 adds all eight seagull placements (G01-G04,
 G11-G14), currently local on its feature branch. G01 repeats U01's structure
-to present the complete t-tree placement matrix.
+to present the complete t-tree placement matrix. T seagulls now default inward,
+S seagulls outward. The shared insertion-arrow review shortens guides, clears
+labels and uses 1/2 incoming, 3/4 outgoing throughout; H01-H04 demonstrate it.
+Short bubble host arrows expand for readability; S bubble k/ell labels move
+outward along the normal, with T loop annotation placement unchanged.
 The loop-spacing review uses closer bubble momentum arrows and labels outward
 from their actual arcs, consistently across left/right placements and reversal.
 
@@ -29,6 +35,8 @@ from their actual arcs, consistently across left/right placements and reversal.
   arrows, and the tree-channel side-label fix.
 - Page 10 demonstrates independent triangle-contact momentum placement in all
   four orientations. T01-T04 have reproducible per-slot recipes.
+- Page 15 demonstrates the reviewed insertion momentum defaults, without
+  caps, circles or index labels.
 - Pages 13-14 show all eight s/t-tree seagull placements with plain lines and
   one marked quartic insertion vertex.
 - Page 12 shows the four s-tree external bubble placements with plain lines,

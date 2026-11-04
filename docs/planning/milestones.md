@@ -29,6 +29,10 @@ intentional tuning. Do not begin with a broad index/momentum rewrite. New
 controls must have documented precedence over existing grouped defaults and
 must reset between diagram calls.
 
+Standard four-leg examples use p1/p2 incoming and p3/p4 outgoing, including
+future milestones. Explicit reversed-flow demonstrations must be identified as
+such; preserve their override coverage in tests.
+
 Diagnostic examples include only the feature being tested. Omit endcaps and
 independent circles unless that particular example is a cap/circle test.
 
@@ -133,6 +137,9 @@ retune positions or turn visual index polish into a current acceptance gate.
 
 M04 is complete locally on `codex/m04-seagull-expansion`, based on `b4a6ad8`.
 All eight external s/t-tree placements preserve one quartic self-loop vertex.
+The Nov 4 review makes T loops face inward and S loops outward; default external
+flow is 1/2 in and 3/4 out. Compact guides and measured label clearance apply
+to both bubble and seagull insertions; explicit overrides remain supported.
 See [M04 verification](m04-verification.md). Publication remains pending;
 D01 index appearance remains deferred. The following is the regression gate.
 

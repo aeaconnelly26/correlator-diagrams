@@ -426,11 +426,14 @@
 \newif\ifcorr@fourpointxspanexplicit
 \newif\ifcorr@fourpointyspanexplicit
 \newif\ifcorr@channelvertexyspanexplicit
+\newif\ifcorr@insertionprerangeexplicit
+\newif\ifcorr@insertionpostrangeexplicit
+\newif\ifcorr@bubblelabeldistanceexplicit
 
 \def\corr@line{plain}
 \def\corr@color{}
 \def\corr@legstyles{}
-\def\corr@mode{q}
+\def\corr@mode{p}
 \def\corr@momentumstart{1}
 \def\corr@externalmomentumhide{}
 \def\corr@momentumlabels{}
@@ -449,7 +452,7 @@
 \def\corr@orientationvertical{}
 \def\corr@orientationhorizontal{}
 \def\corr@externalleftmomentumdirection{in}
-\def\corr@externalrightmomentumdirection{in}
+\def\corr@externalrightmomentumdirection{out}
 \def\corr@contactulmomentumdirection{}
 \def\corr@contactllmomentumdirection{}
 \def\corr@contacturmomentumdirection{}
@@ -753,21 +756,21 @@
 \def\corr@insertionpostindexfill{none}
 \def\corr@insertionpostindexinnersep{0.4pt}
 \def\corr@insertionpostindexmathstyle{\scriptstyle}
-\def\corr@insertionpremomentumstart{0.04}
+\def\corr@insertionpremomentumstart{0.15}
 \def\corr@insertionpremomentumend{0.65}
 \def\corr@insertionpremomentumlabelfraction{0.4}
-\def\corr@insertionpremomentumguideextension{0.40}
-\def\corr@insertionpremomentumoffset{6pt}
+\def\corr@insertionpremomentumguideextension{0}
+\def\corr@insertionpremomentumoffset{8pt}
 \def\corr@insertionpremomentumlabelposition{auto}
-\def\corr@insertionpremomentumlabeldistance{1pt}
+\def\corr@insertionpremomentumlabeldistance{2pt}
 \def\corr@insertionpremomentumlabelxshift{0pt}
 \def\corr@insertionpremomentumlabelyshift{0pt}
-\def\corr@insertionpostmomentumstart{0.2}
-\def\corr@insertionpostmomentumend{0.8}
-\def\corr@insertionpostmomentumlabelfraction{0.54}
-\def\corr@insertionpostmomentumoffset{5pt}
+\def\corr@insertionpostmomentumstart{0.25}
+\def\corr@insertionpostmomentumend{0.75}
+\def\corr@insertionpostmomentumlabelfraction{0.5}
+\def\corr@insertionpostmomentumoffset{8pt}
 \def\corr@insertionpostmomentumlabelposition{auto}
-\def\corr@insertionpostmomentumlabeldistance{1pt}
+\def\corr@insertionpostmomentumlabeldistance{2pt}
 \def\corr@insertionpostmomentumlabelxshift{0pt}
 \def\corr@insertionpostmomentumlabelyshift{0pt}
 \def\corr@seagullloopline{ewboson}
@@ -1965,6 +1968,7 @@
 }
 
 \newcommand{\corr@resetbubbledefaults}{%
+  \corr@bubblelabeldistanceexplicitfalse
   \corr@topologysetdefault\corr@field{}%
   \corr@topologysetdefault\corr@indices{}%
   \corr@topologysetdefault\corr@leglabels{}%
@@ -2033,6 +2037,7 @@
 }
 
 \newcommand{\corr@resetinsertedbubbledefaults}{%
+  \corr@bubblelabeldistanceexplicitfalse
   \corr@topologysetdefault\corr@bubblevertexspan{0.74}%
   \corr@topologysetdefault\corr@bubbleexternallength{0.8}%
   \corr@topologysetdefault\corr@bubblelooplooseness{1.45}%
@@ -2096,6 +2101,8 @@
 }
 
 \newcommand{\corr@resetinsertiondefaults}{%
+  \corr@insertionprerangeexplicitfalse
+  \corr@insertionpostrangeexplicitfalse
   \def\corr@insertion{none}%
   \def\corr@insertionslot{1}%
   \def\corr@insertionposition{0.50}%
@@ -2118,21 +2125,21 @@
   \def\corr@insertionpostindexfill{none}%
   \def\corr@insertionpostindexinnersep{0.4pt}%
   \def\corr@insertionpostindexmathstyle{\scriptstyle}%
-  \def\corr@insertionpremomentumstart{0.04}%
+  \def\corr@insertionpremomentumstart{0.15}%
   \def\corr@insertionpremomentumend{0.65}%
   \def\corr@insertionpremomentumlabelfraction{0.4}%
-  \def\corr@insertionpremomentumguideextension{0.40}%
-  \def\corr@insertionpremomentumoffset{6pt}%
+  \def\corr@insertionpremomentumguideextension{0}%
+  \def\corr@insertionpremomentumoffset{8pt}%
   \def\corr@insertionpremomentumlabelposition{auto}%
-  \def\corr@insertionpremomentumlabeldistance{1pt}%
+  \def\corr@insertionpremomentumlabeldistance{2pt}%
   \def\corr@insertionpremomentumlabelxshift{0pt}%
   \def\corr@insertionpremomentumlabelyshift{0pt}%
-  \def\corr@insertionpostmomentumstart{0.2}%
-  \def\corr@insertionpostmomentumend{0.8}%
-  \def\corr@insertionpostmomentumlabelfraction{0.54}%
-  \def\corr@insertionpostmomentumoffset{5pt}%
+  \def\corr@insertionpostmomentumstart{0.25}%
+  \def\corr@insertionpostmomentumend{0.75}%
+  \def\corr@insertionpostmomentumlabelfraction{0.5}%
+  \def\corr@insertionpostmomentumoffset{8pt}%
   \def\corr@insertionpostmomentumlabelposition{auto}%
-  \def\corr@insertionpostmomentumlabeldistance{1pt}%
+  \def\corr@insertionpostmomentumlabeldistance{2pt}%
   \def\corr@insertionpostmomentumlabelxshift{0pt}%
   \def\corr@insertionpostmomentumlabelyshift{0pt}%
   \def\corr@insertionmiddlemomentumxshift{8pt}%
@@ -2743,7 +2750,7 @@
     \def\corr@externalleftmomentumdirection{out}%
     \def\corr@externalrightmomentumdirection{out}%
   },
-  external-momentum-flow/default/.style={external-momentum-flow=all-in},
+  external-momentum-flow/default/.style={external-momentum-flow=left-in-right-out},
   momentum-flow/.style={external-momentum-flow={#1}},
   propagator-arrow-size/.store in=\corr@propagatorarrowsize,
   propagator-arrow-sizes/.store in=\corr@propagatorarrowsizes,
@@ -3819,7 +3826,7 @@
   bubble-momentum-end/.store in=\corr@bubblemomentumend,
   bubble-momentum-offset/.store in=\corr@bubblemomentumoffset,
   bubble-momentum-style-clearance/.store in=\corr@bubblemomentumstyleclearance,
-  bubble-momentum-label-distance/.store in=\corr@bubblemomentumlabeldistance,
+  bubble-momentum-label-distance/.code={\def\corr@bubblemomentumlabeldistance{#1}\corr@bubblelabeldistanceexplicittrue},
   bubble-momentum-label-fraction/.store in=\corr@bubblemomentumlabelfraction,
   bubble-external-momentum-start/.store in=\corr@bubbleexternalmomentumstart,
   bubble-external-momentum-end/.store in=\corr@bubbleexternalmomentumend,
@@ -3916,17 +3923,17 @@
   insertion-post-index-size/script/.code={\def\corr@insertionpostindexmathstyle{\scriptstyle}},
   insertion-post-index-size/scriptscript/.code={\def\corr@insertionpostindexmathstyle{\scriptscriptstyle}},
   insertion-post-index-size/default/.style={insertion-post-index-size=script},
-  insertion-pre-momentum-start/.store in=\corr@insertionpremomentumstart,
-  insertion-pre-momentum-end/.store in=\corr@insertionpremomentumend,
+  insertion-pre-momentum-start/.code={\def\corr@insertionpremomentumstart{#1}\corr@insertionprerangeexplicittrue},
+  insertion-pre-momentum-end/.code={\def\corr@insertionpremomentumend{#1}\corr@insertionprerangeexplicittrue},
   insertion-pre-momentum-label-fraction/.store in=\corr@insertionpremomentumlabelfraction,
-  insertion-pre-momentum-guide-extension/.store in=\corr@insertionpremomentumguideextension,
+  insertion-pre-momentum-guide-extension/.code={\def\corr@insertionpremomentumguideextension{#1}\corr@insertionprerangeexplicittrue},
   insertion-pre-momentum-offset/.store in=\corr@insertionpremomentumoffset,
   insertion-pre-momentum-label-position/.code={\corr@storesunsetanchor{corr@insertionpremomentumlabelposition}{#1}},
   insertion-pre-momentum-label-distance/.store in=\corr@insertionpremomentumlabeldistance,
   insertion-pre-momentum-label-xshift/.store in=\corr@insertionpremomentumlabelxshift,
   insertion-pre-momentum-label-yshift/.store in=\corr@insertionpremomentumlabelyshift,
-  insertion-post-momentum-start/.store in=\corr@insertionpostmomentumstart,
-  insertion-post-momentum-end/.store in=\corr@insertionpostmomentumend,
+  insertion-post-momentum-start/.code={\def\corr@insertionpostmomentumstart{#1}\corr@insertionpostrangeexplicittrue},
+  insertion-post-momentum-end/.code={\def\corr@insertionpostmomentumend{#1}\corr@insertionpostrangeexplicittrue},
   insertion-post-momentum-label-fraction/.store in=\corr@insertionpostmomentumlabelfraction,
   insertion-post-momentum-offset/.store in=\corr@insertionpostmomentumoffset,
   insertion-post-momentum-label-position/.code={\corr@storesunsetanchor{corr@insertionpostmomentumlabelposition}{#1}},
@@ -6702,9 +6709,7 @@
   \ifnum\corr@insertionhostslot=2 \def\corr@insertionmomentumangle{-90}\fi
   \ifnum\corr@insertionhostslot=3 \def\corr@insertionmomentumangle{-90}\fi
   \edef\corr@insertionhostmomentumdirection{\corr@externalmomentumdirectionfor{\corr@insertionhostslot}}%
-  \def\corr@insertiondefaultlabelposition{above}%
-  \ifnum\corr@insertionhostslot=2 \def\corr@insertiondefaultlabelposition{below}\fi
-  \ifnum\corr@insertionhostslot=4 \def\corr@insertiondefaultlabelposition{below}\fi
+  \def\corr@insertiondefaultlabelposition{outside}%
   \corr@ifstringeq{\corr@insertionpremomentumlabelposition}{auto}{\let\corr@insertionpremomentumlabelposition\corr@insertiondefaultlabelposition}{}%
   \corr@ifstringeq{\corr@insertionpostmomentumlabelposition}{auto}{\let\corr@insertionpostmomentumlabelposition\corr@insertiondefaultlabelposition}{}%
 }
@@ -6775,6 +6780,13 @@
 
 \newcommand{\corr@resolveseagullorientation}{%
   \xdef\corr@seagullloopangle{\corr@insertionbottomangle}%
+  % T loops face the exchange (upper legs down, lower legs up).
+  % S loops face away from it (left legs left, right legs right).
+  % Both choices select +90 on slots 2/3, -90 on slots 1/4.
+  \corr@ifstringeq{\corr@insertionorientation}{auto}{%
+    \ifnum\corr@insertionhostslot=2 \xdef\corr@seagullloopangle{\corr@insertiontopangle}\fi
+    \ifnum\corr@insertionhostslot=3 \xdef\corr@seagullloopangle{\corr@insertiontopangle}\fi
+  }{}%
   \xdef\corr@seagullloopmomentumlabelposition{below}%
   \corr@ifstringeq{\corr@insertionorientation}{top}{%
     \xdef\corr@seagullloopangle{\corr@insertiontopangle}%
@@ -7152,11 +7164,58 @@
   }%
 }
 
+% Side labels clear the complete text rectangle, not just its center.
+\newcommand{\corr@putnormalmomentumlabel}[6]{%
+  \node[anchor=center,inner sep=\corr@momentumlabelinnersep,outer sep=0pt,
+    \corr@momentumlabelstyle,opacity=0] (corrNormalMeasureLabel) at #1
+    {\hbox{\corr@momentumlabelsize $#6$}};
+  \pgfpointdiff{\pgfpointanchor{corrNormalMeasureLabel}{west}}{\pgfpointanchor{corrNormalMeasureLabel}{east}}%
+  \edef\corr@normallabelwidth{\the\pgf@x}%
+  \pgfpointdiff{\pgfpointanchor{corrNormalMeasureLabel}{south}}{\pgfpointanchor{corrNormalMeasureLabel}{north}}%
+  \edef\corr@normallabelheight{\the\pgf@y}%
+  \pgfmathsetlengthmacro{\corr@normallabelclearance}{0.5*(abs(cos(#2))*\corr@normallabelwidth+abs(sin(#2))*\corr@normallabelheight)+#3}%
+  \path #1 coordinate (corrNormalArrowLabel);
+  \coordinate (corrNormalMomentumLabel) at ([shift=(#2:\corr@normallabelclearance)]corrNormalArrowLabel);
+  \corr@putmomentumlabelwithdistance{(corrNormalMomentumLabel)}{center}{0pt}{#4}{#5}{#6}%
+}
+
+\newcommand{\corr@putinsertionmomentumlabel}[6]{%
+  \corr@ifstringeq{#2}{outside}{%
+    \pgfmathsetmacro{\corr@insertionlabelnormal}{\corr@insertionangle+\corr@insertionmomentumangle}%
+    \corr@putnormalmomentumlabel{#1}{\corr@insertionlabelnormal}{#3}{#4}{#5}{#6}%
+  }{\corr@putmomentumlabelwithdistance{#1}{#2}{#3}{#4}{#5}{#6}}%
+}
+
+% Short bubble host pieces need readable arrows; long pieces retain compact
+% half-segment guides. Never extend the automatic guide beyond the segment.
+\newcommand{\corr@resolveinsertionmomentumrange}[3]{%
+  \corr@iftreebubbleinsertion{%
+    \corr@ifstringeq{#1}{pre}{%
+      \ifcorr@insertionprerangeexplicit\else\corr@adaptinsertionmomentumrange{#1}{#2}{#3}\fi
+    }{%
+      \ifcorr@insertionpostrangeexplicit\else\corr@adaptinsertionmomentumrange{#1}{#2}{#3}\fi
+    }%
+  }{}%
+}
+
+\newcommand{\corr@adaptinsertionmomentumrange}[3]{%
+  \pgfpointdiff{\pgfpointanchor{#2}{center}}{\pgfpointanchor{#3}{center}}%
+  \pgfmathsetlengthmacro{\corr@insertionsegmentlength}{veclen(\pgf@x,\pgf@y)}%
+  \ifdim\corr@insertionsegmentlength>0.1pt
+    \ifdim\corr@insertionsegmentlength<24pt
+      \pgfmathsetmacro{\corr@insertionarrowhalf}{min(0.45,6pt/\corr@insertionsegmentlength)}%
+      \expandafter\pgfmathsetmacro\csname corr@insertion#1momentumstart\endcsname{0.5-\corr@insertionarrowhalf}%
+      \expandafter\pgfmathsetmacro\csname corr@insertion#1momentumend\endcsname{0.5+\corr@insertionarrowhalf}%
+    \fi
+  \fi
+}
+
 \newcommand{\corr@drawttreeinsertionoutermomentum}{%
   \corr@ifexternalmomentumvisible{\corr@insertionhostslot}{%
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{\corr@insertionhostslot}}%
   \coordinate (corrttreeinsertionoutermomguideorigin) at ($(corrInsertionOuter)!-\corr@insertionpremomentumguideextension!(corrInsertionA)$);
+  \corr@resolveinsertionmomentumrange{pre}{corrttreeinsertionoutermomguideorigin}{corrInsertionA}%
   \coordinate (corrttreeinsertionoutermomstart) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumstart!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
   \coordinate (corrttreeinsertionoutermomend) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumend!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
   \coordinate (corrttreeinsertionoutermomlabel) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumlabelfraction!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
@@ -7168,7 +7227,7 @@
       (corrttreeinsertionoutermomstart) -- (corrttreeinsertionoutermomend);
   }%
   \corr@ifemptymomentumlabel{\corr@insertionhostslot}{}{%
-  \corr@putmomentumlabelwithdistance
+  \corr@putinsertionmomentumlabel
     {(corrttreeinsertionoutermomlabel)}
     {\corr@insertionpremomentumlabelposition}
     {\corr@insertionpremomentumlabeldistance}
@@ -7184,6 +7243,7 @@
   \corr@ifexternalmomentumvisible{\corr@insertionhostslot}{%
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{\corr@insertionhostslot}}%
+  \corr@resolveinsertionmomentumrange{post}{corrInsertionB}{corrInsertionHost}%
   \coordinate (corrttreeinsertioninnermomstart) at ($(corrInsertionB)!\corr@insertionpostmomentumstart!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
   \coordinate (corrttreeinsertioninnermomend) at ($(corrInsertionB)!\corr@insertionpostmomentumend!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
   \coordinate (corrttreeinsertioninnermomlabel) at ($(corrInsertionB)!\corr@insertionpostmomentumlabelfraction!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
@@ -7195,7 +7255,7 @@
       (corrttreeinsertioninnermomstart) -- (corrttreeinsertioninnermomend);
   }%
   \corr@ifemptymomentumlabel{\corr@insertionhostslot}{}{%
-  \corr@putmomentumlabelwithdistance
+  \corr@putinsertionmomentumlabel
     {(corrttreeinsertioninnermomlabel)}
     {\corr@insertionpostmomentumlabelposition}
     {\corr@insertionpostmomentumlabeldistance}
@@ -7581,6 +7641,14 @@
         (corrbubblemompseven) --
         (corrbubblemomend);%
     }%
+    \corr@ifstreebubbleinsertion{%
+      \def\corr@bubbleresolvedlabeldistance{4pt}%
+      \ifcorr@bubblelabeldistanceexplicit
+        \let\corr@bubbleresolvedlabeldistance\corr@bubblemomentumlabeldistance
+      \fi
+      \corr@putnormalmomentumlabel{(corrmomentumlabelcoord)}{#6}
+        {\corr@bubbleresolvedlabeldistance}{0pt}{0pt}{\corr@bubblemomlabel}%
+    }{%
     \corr@putmomentumlabelwithdistance
       {(corrmomentumlabelcoord)}
       {\corr@bubblemomlabelposition}
@@ -7588,6 +7656,7 @@
       {0pt}
       {0pt}
       {\corr@bubblemomlabel}%
+    }%
   }%
   }%
 }

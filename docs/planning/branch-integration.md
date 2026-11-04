@@ -8,7 +8,9 @@ on main. The branch `codex/m03b-s-tree-bubbles` is retained. It preserves index
 behavior without polishing positions; see [M03b verification](m03b-verification.md).
 M04 is now complete locally on `codex/m04-seagull-expansion`, based on
 published main `b4a6ad8`; see [M04 verification](m04-verification.md). It has not
-been merged or pushed. The main/M02 record below preserves earlier history.
+been merged or pushed. The Nov 4 screenshot review is also local: inward T /
+outward S loops, scattering flow defaults and compact, clear host annotations.
+The main/M02 record below preserves earlier history.
 
 The published integration baseline was `6657735`. M02 checkpoint `8f95755`
 is now merged into main and published to GitHub. The feature branch

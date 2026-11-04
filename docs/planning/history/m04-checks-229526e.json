@@ -1,0 +1,73 @@
+{
+  "milestone": "M04",
+  "date": "2026-11-03",
+  "baseline": "b4a6ad8",
+  "branch": "codex/m04-seagull-expansion",
+  "published": false,
+  "s_tree_external_seagull_slots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "t_tree_external_seagull_slots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "insertion_vertices": 1,
+  "insertion_vertex_valence": 4,
+  "graph_propagator_edges": 7,
+  "graph_interaction_vertices": 3,
+  "graph_self_loops": 1,
+  "regression_documents": 38,
+  "focused_diagram_cases": 206,
+  "outward_loop_label_checks": 72,
+  "incremental_stage_cases": {
+    "t1": 24,
+    "t2": 48,
+    "t3": 72,
+    "t4": 96,
+    "s1": 120,
+    "s2": 144,
+    "s3": 168,
+    "s4": 192
+  },
+  "independent_pdf_graph_checks": 8,
+  "existing_endpoint_contacts": 600,
+  "t_bubble_endpoint_contacts": 16,
+  "s_bubble_endpoint_contacts": 16,
+  "new_proca_contacts": 16,
+  "new_scalar_contacts": 8,
+  "total_endpoint_contacts": 656,
+  "baseline_control_pages_identical": 14,
+  "gallery_pages": 6,
+  "gallery_examples": 32,
+  "atlas_pages": 14,
+  "atlas_recipes": 66,
+  "new_atlas_ids": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G11",
+    "G12",
+    "G13",
+    "G14"
+  ],
+  "alias_coordinate_tolerance_tex_pt": 0.03,
+  "default_seagull_momentum_offset_pt": 9,
+  "loop_marker_size_logical_slot": 3,
+  "index_placement_deferred": "D01",
+  "next_milestone": "M05",
+  "sha256": {
+    "feynman-fun.sty": "f7fcd338630575e7675c1952c6ac5fdb6c61d44160f72ef94df118193935b3c0",
+    "regressions/topologies/insertion/seagull-slots.tex": "28c193b31b8d346e1c34945bb8f90484c4d47d5a528179b56195d7e694fb8876",
+    "regressions/topologies/insertion/seagull-slots.pdf": "4be5474103c596b92df2fe8fd9fbc236c73c8e92ebf0a82ac1c922d02dd623de",
+    "regressions/topologies/insertion/check-seagull-contact.py": "810146d92ad7f55f06f526bc88e025392d95ee4d0a4bddb96f77239a3236d3c9",
+    "regressions/topologies/insertion/seagull-contact.json": "f3202109df5074364f90001e95391e8c14433d203d97f9fdd5203f03aee68656",
+    "docs/diagram-inventory/catalog.json": "6b14d36931366f5c9ab2457d371f10c50c12d95a96cb57cd88c48afcfc2a2bfe",
+    "docs/diagram-inventory/inventory.pdf": "f2fc6da18afbd84b91dfca106ce3edd7da774b005b3cfe8692e26cd37bef133b"
+  }
+}

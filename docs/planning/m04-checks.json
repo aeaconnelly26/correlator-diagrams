@@ -1,6 +1,6 @@
 {
   "milestone": "M04",
-  "date": "2026-11-03",
+  "date": "2026-11-04",
   "baseline": "b4a6ad8",
   "branch": "codex/m04-seagull-expansion",
   "published": false,
@@ -21,7 +21,7 @@
   "graph_propagator_edges": 7,
   "graph_interaction_vertices": 3,
   "graph_self_loops": 1,
-  "regression_documents": 38,
+  "regression_documents": 39,
   "focused_diagram_cases": 206,
   "outward_loop_label_checks": 72,
   "incremental_stage_cases": {
@@ -41,11 +41,10 @@
   "new_proca_contacts": 16,
   "new_scalar_contacts": 8,
   "total_endpoint_contacts": 656,
-  "baseline_control_pages_identical": 14,
   "gallery_pages": 6,
   "gallery_examples": 32,
-  "atlas_pages": 14,
-  "atlas_recipes": 66,
+  "atlas_pages": 15,
+  "atlas_recipes": 70,
   "new_atlas_ids": [
     "G01",
     "G02",
@@ -54,7 +53,11 @@
     "G11",
     "G12",
     "G13",
-    "G14"
+    "G14",
+    "H01",
+    "H02",
+    "H03",
+    "H04"
   ],
   "alias_coordinate_tolerance_tex_pt": 0.03,
   "default_seagull_momentum_offset_pt": 9,
@@ -62,12 +65,42 @@
   "index_placement_deferred": "D01",
   "next_milestone": "M05",
   "sha256": {
-    "feynman-fun.sty": "f7fcd338630575e7675c1952c6ac5fdb6c61d44160f72ef94df118193935b3c0",
-    "regressions/topologies/insertion/seagull-slots.tex": "28c193b31b8d346e1c34945bb8f90484c4d47d5a528179b56195d7e694fb8876",
-    "regressions/topologies/insertion/seagull-slots.pdf": "4be5474103c596b92df2fe8fd9fbc236c73c8e92ebf0a82ac1c922d02dd623de",
+    "feynman-fun.sty": "c7bdfe3cf147d47e5555047b380cfc6597bbca324bd25d15d1c13fc96574390c",
+    "regressions/topologies/insertion/seagull-slots.tex": "68d1b8f4bc8dd8233c7e073d8a709ccda0ec3b0939517ae41c0663d90e7960af",
+    "regressions/topologies/insertion/seagull-slots.pdf": "36518353b36db88baeef3c6d4b8394428e2e3f2c390eb771c5d4b45629f3df91",
+    "regressions/topologies/insertion/insertion-momentum-review.tex": "04c61fbaf4d5ae571a65fe089ac364eb1d5f6d08bc902758e9830b4a24df1b5e",
+    "regressions/topologies/insertion/insertion-momentum-review.pdf": "8fc3e5375b1bc1275b10695e00d84fa7da1625d759e26a9140737e5373a158fc",
+    "regressions/topologies/insertion/t-tree-bubble-slots.tex": "a993fea65e9a291cca2984a8e019e10d04a991cadb8101de4bc80f57938bcae9",
+    "regressions/topologies/insertion/s-tree-bubble-slots.tex": "32d6262cbd97ef2db63174e3813073d5699dbc1738052da8371ec8ccc58f96a2",
+    "regressions/topologies/insertion/s-tree-bubble-slots.pdf": "0a3971eb5610ece48abca8fe2b22482fb9fbc381d6947d001194b089b681cca6",
     "regressions/topologies/insertion/check-seagull-contact.py": "810146d92ad7f55f06f526bc88e025392d95ee4d0a4bddb96f77239a3236d3c9",
-    "regressions/topologies/insertion/seagull-contact.json": "f3202109df5074364f90001e95391e8c14433d203d97f9fdd5203f03aee68656",
-    "docs/diagram-inventory/catalog.json": "6b14d36931366f5c9ab2457d371f10c50c12d95a96cb57cd88c48afcfc2a2bfe",
-    "docs/diagram-inventory/inventory.pdf": "f2fc6da18afbd84b91dfca106ce3edd7da774b005b3cfe8692e26cd37bef133b"
-  }
+    "regressions/topologies/insertion/seagull-contact.json": "376045d191ddff295874b223b88a54b89fadf8f454412ea45ae965fc27e77d25",
+    "docs/diagram-inventory/catalog.json": "62cd5e53fb7fb1507d3d0ad49bed646da139f299527592af54526ed17e3f4483",
+    "docs/diagram-inventory/inventory.pdf": "e1b851bee5d94abb3ac51b21cb202084487c2373dc985cde30195dac4cc6b8b6"
+  },
+  "review_baseline": "229526e",
+  "review_public_cases": 84,
+  "host_label_rectangle_checks": 130,
+  "review_auto_loop_direction_checks": 32,
+  "s_bubble_focused_cases": 64,
+  "s_bubble_loop_label_checks": 38,
+  "review_pdf_pages": 4,
+  "review_pdf_examples": 16,
+  "default_momentum_symbol": "p",
+  "default_external_flow": [
+    "in",
+    "in",
+    "out",
+    "out"
+  ],
+  "t_seagull_auto_side": "inward",
+  "s_seagull_auto_side": "outward",
+  "default_host_arrow_offset_pt": 8,
+  "default_host_text_rectangle_clearance_pt": 2,
+  "short_bubble_arrow_target_tex_pt": 12,
+  "short_bubble_arrow_maximum_segment_fraction": 0.9,
+  "s_bubble_loop_text_rectangle_clearance_pt": 4,
+  "t_bubble_loop_label_distance_pt": 2,
+  "t_bubble_loop_arrow_offset_pt": 8,
+  "initial_baseline_identity_record": "history/m04-checks-229526e.json"
 }

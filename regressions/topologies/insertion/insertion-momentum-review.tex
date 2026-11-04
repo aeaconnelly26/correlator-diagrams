@@ -1,0 +1,158 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,graphicx,adjustbox,fancyhdr}
+\usepackage{feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M04 review: inward T loops, outward S loops; 1/2 in, 3/4 out}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}\setlength{\parindent}{0pt}
+\newbox\rvbox \newcount\rvcases \newcount\rvlabels \newcount\rvloops
+\makeatletter
+\def\rvgeometry{yes}\def\rvexpectedleft{in}\def\rvexpectedright{out}
+\newcommand{\rvrecord}[2]{\ifnum#1<5\relax\expandafter\xdef\csname rvdir#1\endcsname{#2}\fi}
+\let\rvoldrange\corr@drawmomentumrange
+\renewcommand{\corr@drawmomentumrange}[8]{\rvrecord{#1}{#8}\rvoldrange{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
+\let\rvoldoffset\corr@drawmomentumrangeoffset
+\renewcommand{\corr@drawmomentumrangeoffset}[9]{\rvrecord{#1}{in}\rvoldoffset{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+\let\rvoldoffsetout\corr@drawmomentumrangeoffsetout
+\renewcommand{\corr@drawmomentumrangeoffsetout}[9]{\rvrecord{#1}{out}\rvoldoffsetout{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+\let\rvoldtc\corr@trianglecontactdrawannotation
+\renewcommand{\corr@trianglecontactdrawannotation}[3]{%
+  \ifnum#1<5\relax
+    \corr@ifstringeq{\corr@tcdirection}{reverse}{\rvrecord{#1}{out}}{\rvrecord{#1}{in}}%
+  \fi\rvoldtc{#1}{#2}{#3}}
+\let\rvoldouter\corr@drawttreeinsertionoutermomentum
+\renewcommand{\corr@drawttreeinsertionoutermomentum}{\begingroup\def\rvpart{outer}\rvoldouter\endgroup}
+\let\rvoldinner\corr@drawttreeinsertioninnermomentum
+\renewcommand{\corr@drawttreeinsertioninnermomentum}{\begingroup\def\rvpart{inner}\rvoldinner\endgroup}
+\let\rvoldlabel\corr@putinsertionmomentumlabel
+\renewcommand{\corr@putinsertionmomentumlabel}[6]{%
+  \rvrecord{\corr@insertionhostslot}{\corr@insertionhostmomentumdirection}%
+  \corr@ifstringeq{\rvpart}{outer}{\xdef\rvprestart{\corr@insertionpremomentumstart}\xdef\rvpreend{\corr@insertionpremomentumend}}{\xdef\rvpoststart{\corr@insertionpostmomentumstart}\xdef\rvpostend{\corr@insertionpostmomentumend}}%
+  \begingroup
+    \tikzset{every node/.append style={alias=rvHostLabel}}%
+    \rvoldlabel{#1}{#2}{#3}{#4}{#5}{#6}%
+  \endgroup
+  \corr@ifstringeq{#2}{outside}{%
+    \pgfmathsetmacro{\rvnormal}{\corr@insertionangle+\corr@insertionmomentumangle}%
+    \pgfpointdiff{\pgfpointanchor{rvHostLabel}{west}}{\pgfpointanchor{rvHostLabel}{east}}\edef\rvwidth{\the\pgf@x}%
+    \pgfpointdiff{\pgfpointanchor{rvHostLabel}{south}}{\pgfpointanchor{rvHostLabel}{north}}\edef\rvheight{\the\pgf@y}%
+    \path #1 coordinate (rvArrowLabel);
+    \pgfpointdiff{\pgfpointanchor{rvArrowLabel}{center}}{\pgfpointanchor{rvHostLabel}{center}}%
+    \edef\rvdx{\the\pgf@x}\edef\rvdy{\the\pgf@y}%
+    \pgfmathsetlengthmacro{\rvgap}{\rvdx*cos(\rvnormal)+\rvdy*sin(\rvnormal)-0.5*(abs(cos(\rvnormal))*\rvwidth+abs(sin(\rvnormal))*\rvheight)}%
+    \ifdim\rvgap<1.9pt\PackageError{M04-review}{Label rectangle overlaps arrow: gap=\rvgap}{}\fi
+    \global\advance\rvlabels by 1
+  }{}%
+  \corr@ifstringeq{\rvgeometry}{yes}{%
+    \pgfpointdiff{\pgfpointanchor{corrttreeinsertion\rvpart momstart}{center}}{\pgfpointanchor{corrttreeinsertion\rvpart momend}{center}}%
+    \pgfmathsetlengthmacro{\rvarrowlength}{veclen(\pgf@x,\pgf@y)}%
+    \corr@ifstringeq{\rvpart}{outer}{%
+      \pgfpointdiff{\pgfpointanchor{corrInsertionOuter}{center}}{\pgfpointanchor{corrInsertionA}{center}}%
+    }{\pgfpointdiff{\pgfpointanchor{corrInsertionB}{center}}{\pgfpointanchor{corrInsertionHost}{center}}}%
+    \pgfmathsetlengthmacro{\rvsegmentlength}{veclen(\pgf@x,\pgf@y)}%
+    \corr@iftreebubbleinsertion{%
+      \pgfmathsetlengthmacro{\rvmaxlength}{max(0.52*\rvsegmentlength,min(12.1pt,0.91*\rvsegmentlength))}%
+      \pgfmathsetlengthmacro{\rvminlength}{min(11.9pt,0.89*\rvsegmentlength)}%
+      \ifdim\rvarrowlength<\rvminlength\PackageError{M04-review}{Short bubble arrow remains unreadable}{}\fi
+    }{\pgfmathsetlengthmacro{\rvmaxlength}{0.52*\rvsegmentlength}}%
+    \ifdim\rvarrowlength>\rvmaxlength\PackageError{M04-review}{Insertion arrow too long}{}\fi
+  }{}%
+}
+\let\rvoldloop\corr@drawseagullloop
+\renewcommand{\corr@drawseagullloop}{%
+  \rvoldloop
+  \corr@ifstringeq{\corr@insertionorientation}{auto}{%
+    \pgfpointdiff{\pgfpointanchor{corrInsertionV}{center}}{\pgfpointanchor{corrSeagullLoopFar}{center}}%
+    \edef\rvdx{\the\pgf@x}\edef\rvdy{\the\pgf@y}%
+    \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+      \ifodd\corr@insertionhostslot\ifdim\rvdy<0pt\else\PackageError{M04-review}{Upper T loop must face inward}{}\fi
+      \else\ifdim\rvdy>0pt\else\PackageError{M04-review}{Lower T loop must face inward}{}\fi\fi
+    }{%
+      \ifnum\corr@insertionhostslot<3\ifdim\rvdx<0pt\else\PackageError{M04-review}{Left S loop must face outward}{}\fi
+      \else\ifdim\rvdx>0pt\else\PackageError{M04-review}{Right S loop must face outward}{}\fi\fi}%
+    \global\advance\rvloops by 1
+  }{}%
+}
+\newcommand{\rvmeasure}[2]{%
+  \global\advance\rvcases by 1
+  \@for\rvidx:={1,2,3,4}\do{\expandafter\gdef\csname rvdir\rvidx\endcsname{missing}}%
+  \setbox\rvbox=\hbox{#1[field={},central={},leg-labels={,,,},line=plain,channel-line=plain,
+    show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},#2]}%
+  \@for\rvidx:={1,2,3,4}\do{%
+    \ifnum\rvidx<3\let\rvwanted\rvexpectedleft\else\let\rvwanted\rvexpectedright\fi
+    \edef\rvactual{\csname rvdir\rvidx\endcsname}%
+    \ifx\rvactual\rvwanted\else\PackageError{M04-review}{Slot \rvidx: got \rvactual; expected \rvwanted}{}\fi}%
+}
+\begin{document}
+\def\rvwanted{p}\ifx\corr@mode\rvwanted\else\PackageError{M04-review}{Default momentum symbol must be p}{}\fi
+% Default external directions must reach the emitted arrow helper in each family.
+\rvmeasure{\FourPointCorr}{}
+\rvmeasure{\STreeChannelCorr}{}\rvmeasure{\TTreeChannelCorr}{}\rvmeasure{\UTreeChannelCorr}{}
+\rvmeasure{\SChannelCorr}{}\rvmeasure{\TChannelCorr}{}\rvmeasure{\UChannelCorr}{}
+\rvmeasure{\BoxLoopCorr}{}\rvmeasure{\CrossBoxCorr}{}
+\rvmeasure{\HalfBoxCorr}{}\rvmeasure{\FlatContactCorr}{}
+\@for\rvorientation:={top,bottom,left,right}\do{\rvmeasure{\TriangleContactCorr}{triangle-contact-orientation=\rvorientation}}%
+\@for\rvpublic:={\TTreeChannelCorr,\STreeChannelCorr}\do{%
+  \@for\rvkind:={seagull,bubble}\do{\@for\rvslot:={1,2,3,4}\do{%
+    \@for\rvscale:={0.72,1,1.2}\do{\rvmeasure{\rvpublic}{insertion=\rvkind,insertion-slot=\rvslot,scale=\rvscale,seagull-loop-line=plain}}%
+    \rvmeasure{\rvpublic}{insertion=\rvkind,insertion-slot=\rvslot,seagull-loop-line=plain,line=ewboson,momentum-labels={\frac{p_1+p_2}{2},p_2,p_3,p_4,P}}%
+  }}%
+}
+% Explicit flow and placement controls remain usable and scoped.
+\def\rvexpectedright{in}\rvmeasure{\TTreeChannelCorr}{external-momentum-flow=all-in}
+\def\rvexpectedright{out}\rvmeasure{\STreeChannelCorr}{external-momentum-flow=default}
+\def\rvgeometry{no}
+\rvmeasure{\STreeChannelCorr}{insertion=seagull,insertion-slot=1,insertion-orientation=right,
+ insertion-pre-momentum-start=0.05,insertion-pre-momentum-end=0.9,insertion-pre-momentum-guide-extension=0.3,
+ insertion-pre-momentum-label-position=above,insertion-post-momentum-label-position=right}
+\rvmeasure{\STreeChannelCorr}{insertion=bubble,insertion-slot=3,insertion-pre-momentum-start=0.2,insertion-pre-momentum-end=0.6,insertion-post-momentum-start=0.1,insertion-post-momentum-end=0.8}
+\ifdim\rvprestart pt=0.2pt\else\PackageError{M04-review}{Explicit pre start lost}{}\fi
+\ifdim\rvpreend pt=0.6pt\else\PackageError{M04-review}{Explicit pre end lost}{}\fi
+\ifdim\rvpoststart pt=0.1pt\else\PackageError{M04-review}{Explicit post start lost}{}\fi
+\ifdim\rvpostend pt=0.8pt\else\PackageError{M04-review}{Explicit post end lost}{}\fi
+\rvmeasure{\STreeChannelCorr}{}
+\typeout{PASS M04 review: \the\rvcases\space public diagrams; external flow, compact arrows and override/reset controls}
+\typeout{PASS M04 review: \the\rvlabels\space text rectangles clear arrows; \the\rvloops\space loops face requested channel side}
+% The gallery uses uninstrumented package interfaces.
+\let\corr@drawmomentumrange\rvoldrange\let\corr@drawmomentumrangeoffset\rvoldoffset
+\let\corr@drawmomentumrangeoffsetout\rvoldoffsetout\let\corr@trianglecontactdrawannotation\rvoldtc
+\let\corr@drawttreeinsertionoutermomentum\rvoldouter\let\corr@drawttreeinsertioninnermomentum\rvoldinner
+\let\corr@putinsertionmomentumlabel\rvoldlabel\let\corr@drawseagullloop\rvoldloop
+\makeatother
+\newcommand{\rvcell}[2]{\begin{minipage}[t][2.9in][t]{0.48\linewidth}\textbf{#1}\par\vspace{9pt}\centering
+\begin{adjustbox}{max width=\linewidth,max totalheight=2.4in}#2\end{adjustbox}\end{minipage}}
+\newcommand{\rvdiagram}[3]{#1[field={},central={},leg-labels={,,,},show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},line=plain,channel-line=plain,
+ insertion=#2,insertion-slot=#3,seagull-loop-line=plain,bubble-top-line=plain,bubble-bottom-line=plain,
+ seagull-loop-momentum=k,bubble-momenta={k,\ell}]}
+\section*{T-channel seagull insertions: momentum review}
+Seagull loops face inward. $p_1,p_2$ enter; $p_3,p_4$ leave. No caps, circles or indices.
+\par\vspace{12pt}
+\rvcell{Slot 1: upper left}{\rvdiagram{\TTreeChannelCorr}{seagull}{1}}\hfill
+\rvcell{Slot 2: lower left}{\rvdiagram{\TTreeChannelCorr}{seagull}{2}}\par
+\rvcell{Slot 3: upper right}{\rvdiagram{\TTreeChannelCorr}{seagull}{3}}\hfill
+\rvcell{Slot 4: lower right}{\rvdiagram{\TTreeChannelCorr}{seagull}{4}}\par
+\newpage
+\section*{S-channel seagull insertions: momentum review}
+Seagull loops face outward. $p_1,p_2$ enter; $p_3,p_4$ leave. No caps, circles or indices.
+\par\vspace{12pt}
+\rvcell{Slot 1: upper left}{\rvdiagram{\STreeChannelCorr}{seagull}{1}}\hfill
+\rvcell{Slot 2: lower left}{\rvdiagram{\STreeChannelCorr}{seagull}{2}}\par
+\rvcell{Slot 3: upper right}{\rvdiagram{\STreeChannelCorr}{seagull}{3}}\hfill
+\rvcell{Slot 4: lower right}{\rvdiagram{\STreeChannelCorr}{seagull}{4}}\par
+\newpage
+\section*{T-channel bubble insertions: momentum review}
+Bubble geometry is unchanged. $p_1,p_2$ enter; $p_3,p_4$ leave. No caps, circles or indices.
+\par\vspace{12pt}
+\rvcell{Slot 1: upper left}{\rvdiagram{\TTreeChannelCorr}{bubble}{1}}\hfill
+\rvcell{Slot 2: lower left}{\rvdiagram{\TTreeChannelCorr}{bubble}{2}}\par
+\rvcell{Slot 3: upper right}{\rvdiagram{\TTreeChannelCorr}{bubble}{3}}\hfill
+\rvcell{Slot 4: lower right}{\rvdiagram{\TTreeChannelCorr}{bubble}{4}}\par
+\newpage
+\section*{S-channel bubble insertions: momentum review}
+Bubble geometry is unchanged. $p_1,p_2$ enter; $p_3,p_4$ leave. No caps, circles or indices.
+\par\vspace{12pt}
+\rvcell{Slot 1: upper left}{\rvdiagram{\STreeChannelCorr}{bubble}{1}}\hfill
+\rvcell{Slot 2: lower left}{\rvdiagram{\STreeChannelCorr}{bubble}{2}}\par
+\rvcell{Slot 3: upper right}{\rvdiagram{\STreeChannelCorr}{bubble}{3}}\hfill
+\rvcell{Slot 4: lower right}{\rvdiagram{\STreeChannelCorr}{bubble}{4}}\par
+\end{document}

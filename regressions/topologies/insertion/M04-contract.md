@@ -24,7 +24,8 @@ loop momentum, existing endpoint/index controls and consecutive-call isolation.
 Loop marker sizing remains local slot 3. Keep the existing 9pt seagull momentum
 offset; bubble offsets remain unchanged.
 
-`auto` retains the prototype's -90-degree host-relative loop side.
+`auto` now faces all T loops inward and all S loops outward (user review,
+2026-11-04): +90 for logical slots 2/3, -90 for 1/4.
 `top` selects +90, `bottom` selects -90 relative to outer-to-host direction;
 `left`/`right` select absolute page angles 180/0. Preserve those meanings.
 Momentum-label side follows the physical loop normal, including reversal.
@@ -43,3 +44,20 @@ hide/blank/reversed flow; outer caps only; index attachment; fresh calls.
 Compile focused public-interface checks before enabling the next slot. Inspect
 the rendered gallery/atlas, run the maintained suite, update R11/reference/
 recipes/handoff and save a local checkpoint. Publication is a separate step.
+
+## User review acceptance - 2026-11-04
+
+Default external flow is 1/2 in, 3/4 out, with default symbol p. Keep explicit
+flow overrides and reversed-flow tests, but visible standard examples use the
+requested flow. Shorten pre/post guides without extending past the outer end;
+measure outside label clearance perpendicular to the edge, including the full
+text rectangle. Apply this shared correction to bubble and seagull insertions.
+Preserve the explicit range, extension, offsets, anchors and page-axis shifts.
+D01 remains excluded. Refresh the atlas and focused insertion PDFs.
+
+Second screenshot review: short bubble host pieces expand automatically toward
+12pt arrows, capped at 90% of available segment length; long seagull guides
+stay compact. Explicit ranges/extensions win. Only S-tree bubble loop labels
+move to measured normal placement (4pt text-rectangle clearance); T bubble
+loop placement and arrow offsets remain unchanged. Preserve explicit label
+distance controls. Verify both the minimum readable span and compact maximum.

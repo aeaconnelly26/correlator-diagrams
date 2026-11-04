@@ -354,6 +354,10 @@ Internal segments:
 
 ### Automatic `q_i`, `k_i`, or `p_i` labels
 
+The default is `mode=p`, starting at 1. Four-leg external momenta default to
+`p_1,p_2` incoming and `p_3,p_4` outgoing. Use `mode=q` or `mode=k` to
+change the symbol. Explicit labels and direction overrides remain available.
+
 ```tex
 \[
   \FourPointCorr[
@@ -526,9 +530,14 @@ That is the quickest way to read the API.
 
 For simple diagrams you can rely on:
 
-- `mode=q|k|p`
+- `mode=p|q|k` (default `p`)
 - `momentum-start=<integer>`
 - `momentum-labels={...}`
+
+The default grouped external flow is `external-momentum-flow=left-in-right-out`,
+also selected by `external-momentum-flow=default`. The explicit `all-in`,
+`all-out`, and `left-out-right-in` presets remain available, as do per-leg keys.
+Three-point vertices retain their separate one-in/two-out convention.
 
 Momentum labels use a normal-sized math label by default so they remain
 readable when figures are reproduced smaller. There is no white box behind
@@ -2278,16 +2287,26 @@ The inserted bubble reuses the `bubble-*` key family for internal styles,
 loop momenta, endpoint indices, vertex-side external indices, and Proca /
 scalar-polarized endpoint markers. The selected external momentum is drawn on the
 outer pre-insertion host segment so it does not collide with the bubble.
-By default, that pre-insertion momentum uses a virtual guide that begins
-`0.40` pre-segment lengths before the true external endpoint; tune it with
-`insertion-pre-momentum-guide-extension=...` or set it to `0` for the old
-segment-local behavior:
+By default, the pre-insertion arrow stays on its real host segment, spans
+fractions 0.15 to 0.65, and places its label at fraction 0.40. It no longer
+extends past the outer endpoint. The post arrow normally spans 0.25 to 0.75,
+with its label at 0.50. Short bubble host pieces automatically expand the range
+toward a readable 12pt arrow (before diagram scaling), capped at 90% of the
+available segment. Long segments retain compact half-segment arrows. Explicit
+start/end settings or an explicit pre-guide extension retain their selected
+fraction ranges. Both guides default to an 8pt normal offset from the propagator.
+Explicit range, guide extension, offset and label-fraction keys still win:
 
 ```tex
-insertion-pre-momentum-guide-extension=0.40,
-insertion-pre-momentum-start=0.04,
+insertion-pre-momentum-guide-extension=0,
+insertion-pre-momentum-start=0.15,
 insertion-pre-momentum-end=0.65,
 insertion-pre-momentum-label-fraction=0.40,
+insertion-pre-momentum-offset=8pt,
+insertion-post-momentum-start=0.25,
+insertion-post-momentum-end=0.75,
+insertion-post-momentum-label-fraction=0.50,
+insertion-post-momentum-offset=8pt,
 ```
 
 Use `insertion-pre-line=...` and `insertion-post-line=...` to style the two
@@ -2305,18 +2324,28 @@ be page-top/page-bottom on right-hand legs. Bubble-local arrow-size slots remain
 Host pre/post momentum labels, visibility, directions and marker sizes follow
 the selected external slot. Hiding that slot hides both host momentum annotations
 without hiding the loop momenta. Blank host labels keep their arrows. Pre/post
-label-position defaults are now `auto`: above upper legs (1/3), below lower legs
-(2/4); explicit above/below/etc. settings still win. Label/index x/y shifts remain
+label-position defaults are `auto`: measured outside placement perpendicular
+to each guide. The full text rectangle clears its arrow by 2pt, keeping the
+label clear of the propagator as well. This is a continuous arrow with a side
+label, without an empty gap. Explicit above/below/anchor settings still win.
+The normal placement can also be selected explicitly as `outside`. Label/index x/y shifts remain
 page-axis values. `insertion-orientation` continues to control seagulls; bubble
 arcs follow the selected host direction rather than that option.
 The seagull insertion draws one quartic/contact insertion vertex on the host
 leg with a single package-styled self-loop propagator that starts and ends at
-that insertion vertex. `insertion-orientation=auto` and `bottom` choose
-the -90-degree normal to the selected outer-to-tree host direction; `top`
-chooses +90 degrees. These are host-relative sides, so `top` need not be
+that insertion vertex. With `insertion-orientation=auto`, T-tree loops face
+inward toward the exchange: upper-leg loops down, lower-leg loops up. S-tree
+loops face outward: left-leg loops left, right-leg loops right. This selects
++90 degrees for logical slots 2/3 and -90 degrees for slots 1/4. Explicit
+`bottom` still selects -90 degrees and `top` selects +90 degrees from the
+outer-to-tree host direction. These are host-relative sides, so `top` need not be
 page-up on a right-hand leg. `left` and `right` instead select absolute page
-angles 180 and 0. The original t-tree slot-1 default is preserved.
+angles 180 and 0. The t-tree slot-1 default is preserved.
 Loop momentum labels face the physical loop side regardless of arrow reversal.
+S-tree bubble loop labels use measured normal placement with 4pt text-rectangle
+clearance from their arrows. `bubble-momentum-label-distance` still overrides
+that distance. T-tree bubble loop labels retain their prior placement and 2pt
+label distance; their 8pt arrow offset (plus style allowance) is unchanged.
 The default seagull momentum offset remains `9pt`; use
 `seagull-loop-momentum-offset` to override it. The default
 `seagull-loop-looseness=1.0` uses a true oval loop, and the seagull momentum
@@ -2395,6 +2424,9 @@ Focused visual QA lives in
 M04 adds `regressions/topologies/insertion/seagull-slots.tex/pdf`: all eight
 placements and the independent `check-seagull-contact.py` PDF graph/marker
 checker. Atlas recipes G01-G04 and G11-G14 show the plain seagull matrix.
+`insertion-momentum-review.tex/pdf` checks external flow across four-point
+families, all 16 insertion placements, shorter arrows, label-rectangle clearance,
+and explicit overrides. H01-H04 show the new defaults in the atlas.
 The all-slot t-tree gallery and graph/style/cap/momentum checks are in
 `regressions/topologies/insertion/t-tree-bubble-slots.tex` and its PDF. Its
 isolated Proca page has an independent 16-tip vector check in

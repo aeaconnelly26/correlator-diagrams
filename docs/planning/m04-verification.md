@@ -1,4 +1,82 @@
-# M04 verification - external seagull expansion
+# M04 screenshot review - 2026-11-04
+
+Branch: `codex/m04-seagull-expansion`. Review baseline: local checkpoint
+`229526e`; published main remains `b4a6ad8`. The corrections and updated
+artifacts are local, not merged or pushed. D01 index appearance stays deferred.
+
+## Reviewed behavior
+
+- Auto seagull loops face inward on T trees (upper legs down, lower legs up)
+  and outward on S trees (left legs left, right legs right). Explicit top,
+  bottom, left and right options retain their original meanings.
+- Default momentum symbol is p. Four-point external slots 1/2 enter, 3/4
+  leave, including the `external-momentum-flow=default` preset. Explicit
+  presets/per-leg directions remain supported. Standard visible insertion
+  examples use this convention; hidden reversed-flow tests remain intentional.
+- Default pre guides stay on the real segment, fractions 0.15-0.65; post
+  guides use 0.25-0.75. Both default to 8pt transverse offset. Short bubble
+  pieces adapt toward 12pt readable arrows, capped at 90% of segment length;
+  longer seagull pieces retain compact guides. Explicit fractions/extensions
+  win and reset correctly between calls.
+- Auto host labels clear the full text rectangle perpendicular to the guide,
+  with 2pt clearance from the arrow. This applies to bubbles and seagulls.
+  Explicit anchors, label fractions, distances and page-axis shifts remain.
+- Only S-tree bubble k/ell labels move to measured normal placement with 4pt
+  rectangle clearance. The explicit bubble label-distance key still wins.
+  T-tree bubble loop label placement, 2pt distance and 8pt base arrow offset
+  remain unchanged, as requested in the second screenshot review.
+- No index positions, anchors, offsets or defaults were retuned.
+
+## Current verification
+
+All **39 maintained documents** and **656 endpoint contacts** pass after the
+final corrections. The existing seven-edge/self-loop graph and marker parser
+continues to pass for all eight seagulls.
+
+`insertion-momentum-review.tex` adds **84 public-diagram cases**. It observes
+actual arrow-helper directions across contact, s/t/u tree and loop channels,
+box/crossed box, half-box, flat contact and all four triangle-contact layouts.
+It tests all 16 bubble/seagull placements at scales 0.72/1/1.2, mixed host
+styles and longer labels. **130 actual text rectangles** clear their host
+arrows; short bubble arrows meet the readable target or the available-length
+cap, while long guides remain compact. **32 rendered loops** satisfy the
+requested inward/outward sign. Explicit all-in flow, default reset, orientation,
+pre/post ranges, extended guides and fixed anchors remain usable.
+
+The S-bubble focused source now has **64 cases and 38 emitted loop-label
+checks**, measuring rectangle clearance as well as actual arrow offset and
+outward label side. A 3pt explicit label-distance control proves that the new
+4pt default does not override an explicit value. Existing T-bubble loop-spacing
+checks still use the unchanged 8pt base offset and previous label placement.
+
+Rendered/inspected all four pages of the new momentum review and refreshed
+insertion galleries; the new review shows every s/t bubble/seagull placement
+with standard external flow and no caps/circles/indices. The atlas now has
+**70 recipes on 15 pages**, adding H01-H04 as annotation examples. Structural
+seagull matrices show the corrected auto sides. These add recipes, not topologies.
+
+The original 14-page baseline-identity result below belongs to `229526e`.
+The reviewed defaults intentionally change that output; it is no longer a
+current identity requirement. Initial hashes/results are preserved in
+[the initial checkpoint record](history/m04-checks-229526e.json).
+Current hashes/results are in [m04-checks.json](m04-checks.json).
+
+Reproduce the review with:
+
+```sh
+mkdir -p /tmp/feynmanfun-m04-review
+TEXINPUTS="$PWD//:" pdflatex -interaction=batchmode -halt-on-error \
+  -output-directory=/tmp/feynmanfun-m04-review \
+  regressions/topologies/insertion/insertion-momentum-review.tex
+FEYNMANFUN_PDF_PYTHON=python3 sh scripts/check-regressions.sh
+python3 docs/diagram-inventory/build.py
+```
+
+# Historical M04 implementation verification - 2026-11-03
+
+The original implementation record follows. Its defaults/counts describe
+checkpoint `229526e`; the screenshot-review contract above supersedes them.
+
 
 Date: 2026-11-03. Branch: `codex/m04-seagull-expansion`.
 Baseline: synchronized main `b4a6ad8`, including published M03a/M03b.

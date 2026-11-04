@@ -75,6 +75,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - standalone self-energy bubbles via `\BubbleCorr`, bubble insertions on any one of the four external legs of s/t trees, and seagull insertions on any one of the four external legs of s/t trees
+- default `p_1,p_2` incoming / `p_3,p_4` outgoing momentum flow; compact insertion arrows with labels clear of their lines
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
 - quick cleanup switches like `show-momenta=false`

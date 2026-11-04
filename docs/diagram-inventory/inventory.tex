@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M04 on published main b4a6ad8 | 2026-11-03}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M04 review on 229526e | 2026-11-04}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -1038,7 +1038,7 @@
 ]
 }{Self-energy correction on the lower-right external leg.}{One insertion; internal-slot and u-tree support remain missing.}\par\vspace{4pt}
 \newpage
-\atlaspage{13 / T-TREE SEAGULL INSERTIONS}{External t-tree seagulls}{Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.}
+\atlaspage{13 / T-TREE SEAGULL INSERTIONS}{External t-tree seagulls}{All t-tree seagull loops face inward by default. Explicit orientation controls remain available.}
 \atlascell{G01  Seagull on t-tree leg 1}{\TTreeChannelCorr}{%
 \TTreeChannelCorr[
   field={},
@@ -1108,7 +1108,7 @@
 ]
 }{One quartic self-loop insertion on the lower-right leg.}{External slots 1-4 only; one insertion.}\par\vspace{4pt}
 \newpage
-\atlaspage{14 / S-TREE SEAGULL INSERTIONS}{External s-tree seagulls}{Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.}
+\atlaspage{14 / S-TREE SEAGULL INSERTIONS}{External s-tree seagulls}{All s-tree seagull loops face outward by default. Each has one quartic insertion vertex and one self-loop.}
 \atlascell{G11  Seagull on s-tree leg 1}{\STreeChannelCorr}{%
 \STreeChannelCorr[
   field={},
@@ -1177,4 +1177,86 @@
   seagull-loop-line=plain
 ]
 }{One quartic self-loop insertion on the lower-right leg.}{External slots 1-4 only; one insertion.}\par\vspace{4pt}
+\newpage
+\atlaspage{15 / INSERTION MOMENTUM DEFAULTS}{Compact arrows and clear external labels}{External momenta 1/2 enter and 3/4 leave. Labels clear their arrows and propagators; no caps, circles or indices.}
+\atlascell{H01  T-tree seagull on leg 1}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=1,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
+]
+}{Inward T loop; compact host arrows.}{Default outside labels; explicit placement keys still override.}\hfill
+\atlascell{H02  T-tree seagull on leg 4}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=4,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
+]
+}{Inward T loop; compact host arrows.}{Default outside labels; explicit placement keys still override.}\par\vspace{4pt}
+\atlascell{H03  S-tree seagull on leg 2}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=2,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
+]
+}{Outward S loop; compact host arrows.}{Default outside labels; explicit placement keys still override.}\hfill
+\atlascell{H04  S-tree seagull on leg 3}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  insertion=seagull,
+  insertion-slot=3,
+  channel-line=plain,
+  seagull-loop-line=plain,
+  seagull-loop-momentum=k
+]
+}{Outward S loop; compact host arrows.}{Default outside labels; explicit placement keys still override.}\par\vspace{4pt}
 \end{document}

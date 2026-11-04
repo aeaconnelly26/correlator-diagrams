@@ -47,10 +47,11 @@ def render_sources(catalog):
 \begin{document}
 '''
     head = head.replace('baseline 0dbf733', 'baseline ' + tex(catalog['baseline']))
+    head = head.replace('2026-11-03', tex(catalog['date']))
     chunks = [head]
     recipes = ['# Current diagram recipes', '',
                'Generated from `catalog.json`. These are existing capabilities, not proposed APIs.', '',
-               'Baseline: `' + catalog['baseline'] + '`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).', '',
+               'Baseline: `' + catalog['baseline'] + '`, audited ' + catalog['date'] + '. Atlas: [PDF](inventory.pdf).', '',
                'Use `\\usepackage{feynman-fun}`. Paste a recipe inside `\\[ ... \\]`.', '',
                'The main atlas hides annotations. The appendix demonstrates selected annotation and style features.', '']
     for pi, page in enumerate(catalog['pages']):

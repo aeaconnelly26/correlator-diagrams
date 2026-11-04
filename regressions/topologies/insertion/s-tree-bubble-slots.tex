@@ -63,7 +63,7 @@
       \tikzset{every node/.append style={alias=mLoopLabelNode}}%
       \moldlabel{#1}{#2}{#3}{#4}{#5}{#6}%
     \endgroup
-    \path #1 coordinate (mLoopArrowLabel);
+    \path (corrmomentumlabelcoord) coordinate (mLoopArrowLabel);
     \pgfpointdiff{\pgfpointanchor{mLoopArrowLabel}{center}}{\pgfpointanchor{mLoopLabelNode}{center}}%
     \edef\mloopdx{\the\pgf@x}\edef\mloopdy{\the\pgf@y}%
     \pgfmathsetlengthmacro{\mloopoutward}{\mloopdx*cos(\mloopnormal)+\mloopdy*sin(\mloopnormal)}%
@@ -72,6 +72,11 @@
     \pgfmathsetlengthmacro{\mloopdistance}{veclen(\pgf@x,\pgf@y)}%
     \pgfmathsetlengthmacro{\mlooperror}{abs(\mloopdistance-\mloopexpectedoffset)}%
     \ifdim\mlooperror>0.03pt\PackageError{M03b}{Loop arrow clearance differs from requested value}{}\fi
+    \pgfpointdiff{\pgfpointanchor{mLoopLabelNode}{west}}{\pgfpointanchor{mLoopLabelNode}{east}}\edef\mloopwidth{\the\pgf@x}%
+    \pgfpointdiff{\pgfpointanchor{mLoopLabelNode}{south}}{\pgfpointanchor{mLoopLabelNode}{north}}\edef\mloopheight{\the\pgf@y}%
+    \pgfmathsetlengthmacro{\mlooptextgap}{\mloopoutward-0.5*(abs(cos(\mloopnormal))*\mloopwidth+abs(sin(\mloopnormal))*\mloopheight)}%
+    \pgfmathsetlengthmacro{\mloopmingap}{\corr@bubbleresolvedlabeldistance-0.05pt}%
+    \ifdim\mlooptextgap<\mloopmingap\PackageError{M03b}{S-loop text rectangle overlaps its arrow}{}\fi
     \global\advance\mloopchecked by 1
   }{\moldlabel{#1}{#2}{#3}{#4}{#5}{#6}}}
 \let\moldcap\corr@drawexternalendcap
@@ -215,7 +220,9 @@
 \massert\medges{5}{Unsupported u-tree unchanged}\massert\marcs{0}{No u-tree bubble claimed}
 \def\mexpected{bubble}\def\mexpectedbaseoffset{12pt}
 \mmeasure{1}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB},bubble-momentum-offset=12pt}
-\massert\mloopchecked{36}{Outward loop labels and measured arrow clearance}
+\def\mexpectedbaseoffset{8pt}
+\mmeasure{3}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB},bubble-momentum-label-distance=3pt}
+\massert\mloopchecked{38}{Outward loop labels and measured arrow clearance}
 \typeout{PASS M03b: \the\mcases\space complete diagram cases; topology, slots, styles, momenta, caps and state reset}
 \typeout{PASS M03b: \the\mloopchecked\space rendered loop labels point outward with measured default/explicit clearance}
 % The visible gallery uses original public renderers without instrumentation.
@@ -239,8 +246,8 @@ Only the selected host leg is split; bubble arcs retain their own labels.
 \mcell{Slot 2}{\mdiagram{2}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell}}}\par
 \mcell{Slot 3: EW and Proca}{\mdiagram{3}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell},
   bubble-top-line={proca,magenta},bubble-bottom-line=ewboson}}\hfill
-\mcell{Slot 4: reversed}{\mdiagram{4}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell},
-  external-right-momentum-direction=in,bubble-momentum-rotation=counterclockwise}}
+\mcell{Slot 4: reversed loop}{\mdiagram{4}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell},
+  bubble-momentum-rotation=counterclockwise}}
 \newpage\section*{Separate controls and compatibility}
 Caps and indices appear only in their dedicated checks. Index placement is deferred (D01).
 \par\vspace{12pt}

@@ -1,6 +1,6 @@
 {
-  "baseline": "M04 on published main b4a6ad8",
-  "date": "2026-11-03",
+  "baseline": "M04 review on 229526e",
+  "date": "2026-11-04",
   "base_options": [
     "field={}",
     "leg-labels={,,,}",
@@ -884,7 +884,7 @@
     {
       "section": "13 / T-TREE SEAGULL INSERTIONS",
       "title": "External t-tree seagulls",
-      "subtitle": "Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.",
+      "subtitle": "All t-tree seagull loops face inward by default. Explicit orientation controls remain available.",
       "entries": [
         {
           "id": "G01",
@@ -943,7 +943,7 @@
     {
       "section": "14 / S-TREE SEAGULL INSERTIONS",
       "title": "External s-tree seagulls",
-      "subtitle": "Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.",
+      "subtitle": "All s-tree seagull loops face outward by default. Each has one quartic insertion vertex and one self-loop.",
       "entries": [
         {
           "id": "G11",
@@ -996,6 +996,77 @@
           ],
           "description": "One quartic self-loop insertion on the lower-right leg.",
           "limitation": "External slots 1-4 only; one insertion."
+        }
+      ]
+    },
+    {
+      "section": "15 / INSERTION MOMENTUM DEFAULTS",
+      "title": "Compact arrows and clear external labels",
+      "subtitle": "External momenta 1/2 enter and 3/4 leave. Labels clear their arrows and propagators; no caps, circles or indices.",
+      "entries": [
+        {
+          "id": "H01",
+          "title": "T-tree seagull on leg 1",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "insertion=seagull",
+            "insertion-slot=1",
+            "channel-line=plain",
+            "seagull-loop-line=plain",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Inward T loop; compact host arrows.",
+          "limitation": "Default outside labels; explicit placement keys still override."
+        },
+        {
+          "id": "H02",
+          "title": "T-tree seagull on leg 4",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "insertion=seagull",
+            "insertion-slot=4",
+            "channel-line=plain",
+            "seagull-loop-line=plain",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Inward T loop; compact host arrows.",
+          "limitation": "Default outside labels; explicit placement keys still override."
+        },
+        {
+          "id": "H03",
+          "title": "S-tree seagull on leg 2",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "insertion=seagull",
+            "insertion-slot=2",
+            "channel-line=plain",
+            "seagull-loop-line=plain",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Outward S loop; compact host arrows.",
+          "limitation": "Default outside labels; explicit placement keys still override."
+        },
+        {
+          "id": "H04",
+          "title": "S-tree seagull on leg 3",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "insertion=seagull",
+            "insertion-slot=3",
+            "channel-line=plain",
+            "seagull-loop-line=plain",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Outward S loop; compact host arrows.",
+          "limitation": "Default outside labels; explicit placement keys still override."
         }
       ]
     }
