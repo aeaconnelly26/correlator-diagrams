@@ -10,7 +10,8 @@ feature implementation belongs in later coding sessions.
 - [Branch integration and session workflow](branch-integration.md): integrated state and closeout policy.
 - [Integration verification](integration-verification.md): combined test, PDF, and compatibility evidence.
 - [M02 verification](m02-verification.md): independent triangle-contact annotations and current handoff.
-- [M03a verification](m03a-verification.md): all four t-tree bubble placements and next s-tree slice.
+- [M03a verification](m03a-verification.md): all four t-tree bubble placements and their publication.
+- [M03b verification](m03b-verification.md): all four s-tree bubbles, current local checkpoint and next seagull slice.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
 - [Deferred workflows](deferred-workflows.md): later reviews, including the explicitly deferred index-placement cleanup.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.

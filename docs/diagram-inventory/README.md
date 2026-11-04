@@ -2,16 +2,13 @@
 
 [Open the atlas](inventory.pdf) or [copy a recipe](recipes.md).
 
-Built against `codex/m03a-t-tree-bubbles`, based on synchronized
-`main` at `b917ed2`, on 2026-11-03. There are **54 current examples on eleven
-pages**, including the structural/style gallery, five seagull examples, three
-integrated annotation controls, and eight M02 annotation examples. These are not
-54 distinct graph topologies: aliases, orientations, and style variants are
-identified separately.
+Built against `codex/m03b-s-tree-bubbles`, based on published `main` at
+`6549efa`, on 2026-11-03. There are **58 current examples on twelve pages**.
+These are recipes and meaningful layouts/styles, not 58 distinct graph topologies.
 
-M03a adds lower-left, upper-right and lower-right t-tree bubble placements.
-I29 retains slot 1; B02-B04 show the other legs. Verified checkpoint `2c3b467`
-is now included in published main. Index positioning is known to need a later
+M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
+on main. M03b adds all four s-tree placements (C01-C04), currently local on its
+feature branch. Index positioning remains a later
 [dedicated review](../planning/deferred-workflows.md); attachment checks do not
 certify its visual placement.
 The loop-spacing review uses closer bubble momentum arrows and labels outward
@@ -30,13 +27,15 @@ from their actual arcs, consistently across left/right placements and reversal.
   arrows, and the tree-channel side-label fix.
 - Page 10 demonstrates independent triangle-contact momentum placement in all
   four orientations. T01-T04 have reproducible per-slot recipes.
+- Page 12 shows the four s-tree external bubble placements with plain lines,
+  visible interaction vertices and no labels/caps/circles.
 - Page 11 shows continuous arrows with outward labels in all four orientations
   (T05-T08), selected globally or per annotation with `layout=side`.
 
 Important limits:
 
-- Bubble insertions support **t-tree external slots 1-4**, one at a time.
-  Seagulls remain **t-tree external slot 1 only**. S/u hosts and internal
+- Bubble insertions support **s/t-tree external slots 1-4**, one at a time.
+  Seagulls remain **t-tree external slot 1 only**. U-tree hosts and internal
   bubble insertions are unsupported; accepted keys can still do nothing there.
 - Horizontal/vertical contact pairings are disconnected pairs, not tree exchanges.
 - The existing crossed box fixes its side edges and crosses its diagonals;

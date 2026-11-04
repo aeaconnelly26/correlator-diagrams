@@ -10,6 +10,10 @@ is explicitly deferred to a separate later workflow, [D01](deferred-workflows.md
 not the s-channel implementation sessions. The index checks below establish
 attachment/controls, not publication-quality positioning.
 
+This record describes the M03a checkpoint. M03b subsequently completes S-tree
+external bubbles; see [current verification](m03b-verification.md) for the updated
+handoff and inventory. Historical counts and scope below are retained.
+
 ## Connectivity and interface
 
 Use the existing public interface:

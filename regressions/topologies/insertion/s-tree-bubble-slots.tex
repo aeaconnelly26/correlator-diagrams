@@ -1,0 +1,258 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,graphicx,adjustbox,fancyhdr}
+\usepackage{feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M03b external s-tree self-energy bubbles}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}\setlength{\parindent}{0pt}
+\newbox\mboxdiagram
+\newcount\medges \newcount\mvertices \newcount\mposts \newcount\marcs
+\newcount\marcindices \newcount\mpostindices \newcount\mouterindices
+\newcount\mlabels \newcount\mcaps \newcount\mdoublecaps \newcount\mcases
+\newcount\mloopchecked
+\makeatletter
+\def\mslots{1,2,3,4}
+\let\mpublic\STreeChannelCorr
+\def\mloopchecking{no}\def\mexpectedbaseoffset{8pt}
+\let\moldloopmomentum\corr@drawbubblemomentumslot
+\renewcommand{\corr@drawbubblemomentumslot}[6]{%
+  \begingroup
+  \def\mloopchecking{yes}\edef\mloopnormal{#6}%
+  \corr@resolvebubblemomentumslot{#1}\corr@resolvebubblemomentumfractions{#1}%
+  \edef\mloopexpectedoffset{\the\dimexpr\mexpectedbaseoffset+\corr@bubbleresolvedstyleclearance\relax}%
+  \corr@ifstringeq{\corr@bubblemomentumlayout}{vertex-split}{%
+    \corr@clampbubblevertexsplitfractions
+    \pgfmathsetlengthmacro{\mloopexpectedoffset}{\mloopexpectedoffset*\corr@bubblevertexsplitoffsetscale}%
+  }{}%
+  \path (#3) to [#5] coordinate[pos=\corr@bubblemomlabelfraction] (mLoopRawCoord) (#4);
+  \moldloopmomentum{#1}{#2}{#3}{#4}{#5}{#6}%
+  \endgroup
+}
+\def\mexpected{none}\def\mrecord{no}
+\newcommand{\massert}[3]{\ifnum#1=#2\relax\else\PackageError{M03b}{#3: got \the#1, expected #2}{}\fi}
+\let\moldprop\corr@drawchannelprop
+\renewcommand{\corr@drawchannelprop}[5]{%
+  \global\advance\medges by 1
+  \moldprop{#1}{#2}{#3}{#4}{#5}%
+  \expandafter\xdef\csname mstyle#1\endcsname{\corr@propoptions}%
+  \expandafter\xdef\csname mstart#1\endcsname{#3}%
+  \expandafter\xdef\csname mend#1\endcsname{#4}}
+\let\moldpost\corr@drawchannelpropnoendcaps
+\renewcommand{\corr@drawchannelpropnoendcaps}[5]{%
+  \global\advance\medges by 1\global\advance\mposts by 1
+  \xdef\mpostslot{#1}\xdef\mpoststart{#3}\xdef\mpostend{#4}%
+  \moldpost{#1}{#2}{#3}{#4}{#5}\xdef\mpoststyle{\corr@propoptions}}
+\let\moldarc\corr@drawbubbleinternalprop
+\renewcommand{\corr@drawbubbleinternalprop}[5]{%
+  \global\advance\medges by 1\global\advance\marcs by 1
+  \def\ma{#3}\def\mb{corrInsertionA}\ifx\ma\mb\else\PackageError{M03b}{Arc start disconnected}{}\fi
+  \def\ma{#4}\def\mb{corrInsertionB}\ifx\ma\mb\else\PackageError{M03b}{Arc end disconnected}{}\fi
+  \moldarc{#1}{#2}{#3}{#4}{#5}}
+\let\moldvertex\corr@putvertex
+\renewcommand{\corr@putvertex}[2]{\global\advance\mvertices by 1\moldvertex{#1}{#2}}
+\let\moldlabel\corr@putmomentumlabelwithdistance
+\renewcommand{\corr@putmomentumlabelwithdistance}[6]{%
+  \global\advance\mlabels by 1
+  \edef\mtext{#6}%
+  \@for\midx:={1,2,3,4}\do{%
+    \edef\mtest{L\midx}%
+    \ifx\mtext\mtest
+      \expandafter\xdef\csname mlabel\midx\endcsname{\number\numexpr\csname mlabel\midx\endcsname+1\relax}%
+    \fi}%
+  \corr@ifstringeq{\mloopchecking}{yes}{%
+    \begingroup
+      \tikzset{every node/.append style={alias=mLoopLabelNode}}%
+      \moldlabel{#1}{#2}{#3}{#4}{#5}{#6}%
+    \endgroup
+    \path #1 coordinate (mLoopArrowLabel);
+    \pgfpointdiff{\pgfpointanchor{mLoopArrowLabel}{center}}{\pgfpointanchor{mLoopLabelNode}{center}}%
+    \edef\mloopdx{\the\pgf@x}\edef\mloopdy{\the\pgf@y}%
+    \pgfmathsetlengthmacro{\mloopoutward}{\mloopdx*cos(\mloopnormal)+\mloopdy*sin(\mloopnormal)}%
+    \ifdim\mloopoutward>0pt\else\PackageError{M03b}{Loop label lies inward of its arrow}{}\fi
+    \pgfpointdiff{\pgfpointanchor{mLoopRawCoord}{center}}{\pgfpointanchor{mLoopArrowLabel}{center}}%
+    \pgfmathsetlengthmacro{\mloopdistance}{veclen(\pgf@x,\pgf@y)}%
+    \pgfmathsetlengthmacro{\mlooperror}{abs(\mloopdistance-\mloopexpectedoffset)}%
+    \ifdim\mlooperror>0.03pt\PackageError{M03b}{Loop arrow clearance differs from requested value}{}\fi
+    \global\advance\mloopchecked by 1
+  }{\moldlabel{#1}{#2}{#3}{#4}{#5}{#6}}}
+\let\moldcap\corr@drawexternalendcap
+\renewcommand{\corr@drawexternalendcap}[2]{%
+  \global\advance\mcaps by 1
+  \def\mcapfound{no}%
+  \@for\mouter:={corrUL,corrLL,corrUR,corrLR}\do{%
+    \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{\mouter}{center}}%
+    \pgfmathsetlengthmacro{\mdistance}{veclen(\pgf@x,\pgf@y)}%
+    \ifdim\mdistance<0.01pt\def\mcapfound{yes}\fi}%
+  \corr@ifstringeq{\mcapfound}{yes}{}{\PackageError{M03b}{Cap placed at an internal endpoint}{}}%
+  \moldcap{#1}{#2}}
+\let\moldcapp\corr@drawexternalendcapp
+\renewcommand{\corr@drawexternalendcapp}[2]{\global\advance\mdoublecaps by 1\moldcapp{#1}{#2}}
+\let\moldarcindex\corr@putbubbleinternalindexcurve
+\renewcommand{\corr@putbubbleinternalindexcurve}[9]{%
+  \edef\marg{#8}\ifdefempty{\marg}{}{\global\advance\marcindices by 1}%
+  \moldarcindex{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+\let\moldpostindex\corr@putttreeinsertionpostindex
+\renewcommand{\corr@putttreeinsertionpostindex}[6]{%
+  \edef\marg{#6}\ifdefempty{\marg}{}{\global\advance\mpostindices by 1}%
+  \moldpostindex{#1}{#2}{#3}{#4}{#5}{#6}}
+\let\moldouterindex\corr@putbubbleexternalindex
+\renewcommand{\corr@putbubbleexternalindex}[4]{%
+  \edef\marg{#4}\ifdefempty{\marg}{}{\global\advance\mouterindices by 1}%
+  \moldouterindex{#1}{#2}{#3}{#4}}
+\let\moldtree\corr@drawfourpointstreeschannel
+\renewcommand{\corr@drawfourpointstreeschannel}{%
+  \moldtree
+  \xdef\mchannelangle{\corr@channelmomangle}\xdef\mchanneldistance{\corr@channelmomdist}%
+  \xdef\mchannelposition{\corr@channelmomlabelposition}%
+  \corr@ifstringeq{\mexpected}{bubble}{%
+    \massert\medges{8}{Propagator count}\massert\mvertices{4}{Interaction vertices}%
+    \massert\mposts{1}{Split post segment}\massert\marcs{2}{Parallel bubble arcs}%
+    \ifnum\mpostslot=\mselected\relax\else\PackageError{M03b}{Wrong post logical slot}{}\fi
+    \ifcase\mselected\relax
+    \or\def\mexpectedouter{corrUL}\def\mexpectedhost{corrVL}%
+    \or\def\mexpectedouter{corrLL}\def\mexpectedhost{corrVL}%
+    \or\def\mexpectedouter{corrUR}\def\mexpectedhost{corrVR}%
+    \or\def\mexpectedouter{corrLR}\def\mexpectedhost{corrVR}\fi
+    \@for\malias:={Outer,Host}\do{%
+      \corr@ifstringeq{\malias}{Outer}{\let\mactualnode\mexpectedouter}{\let\mactualnode\mexpectedhost}%
+      \pgfpointdiff{\pgfpointanchor{corrInsertion\malias}{center}}{\pgfpointanchor{\mactualnode}{center}}%
+      \ifdim\pgf@x<0pt\pgf@x=-\pgf@x\fi\ifdim\pgf@y<0pt\pgf@y=-\pgf@y\fi
+      \ifdim\pgf@x>0.03pt\PackageError{M03b}{Selected host x mismatch}{}\fi
+      \ifdim\pgf@y>0.03pt\PackageError{M03b}{Selected host y mismatch}{}\fi}%
+    \def\ma{corrInsertionB}\ifx\ma\mpoststart\else\PackageError{M03b}{Post start disconnected}{}\fi
+    \def\ma{corrInsertionHost}\ifx\ma\mpostend\else\PackageError{M03b}{Post end disconnected}{}\fi
+    \pgfpointdiff{\pgfpointanchor{\mexpectedouter}{center}}{\pgfpointanchor{\mexpectedhost}{center}}%
+    \pgfmathsetmacro{\mdx}{\pgf@x/1cm}\pgfmathsetmacro{\mdy}{\pgf@y/1cm}%
+    \pgfmathsetmacro{\mlengthsquared}{\mdx*\mdx+\mdy*\mdy}%
+    \@for\mnode:={corrInsertionA,corrInsertionB}\do{%
+      \pgfpointdiff{\pgfpointanchor{\mexpectedouter}{center}}{\pgfpointanchor{\mnode}{center}}%
+      \pgfmathsetmacro{\mox}{\pgf@x/1cm}\pgfmathsetmacro{\moy}{\pgf@y/1cm}%
+      \pgfmathsetmacro{\mcross}{abs(\mox*\mdy-\moy*\mdx)}%
+      \pgfmathsetlengthmacro{\moffdistance}{\mcross/sqrt(\mlengthsquared)*1cm}%
+      \ifdim\moffdistance>0.03pt\PackageError{M03b}{Slot \mselected\space off leg: cross=\mcross; dx=\mdx,dy=\mdy,ox=\mox,oy=\moy}{}\fi
+      \pgfmathsetmacro{\mfraction}{(\mox*\mdx+\moy*\mdy)/\mlengthsquared}%
+      \ifdim\mfraction pt>0pt\else\PackageError{M03b}{Insertion before external endpoint}{}\fi
+      \ifdim\mfraction pt<1pt\else\PackageError{M03b}{Insertion beyond tree vertex}{}\fi
+      \expandafter\edef\csname mfraction\mnode\endcsname{\mfraction}}
+    \ifdim\mfractioncorrInsertionA pt<\mfractioncorrInsertionB pt\else\PackageError{M03b}{Insertion endpoints reversed}{}\fi
+    \@for\midx:={1,2,3,4}\do{%
+      \ifnum\midx=\mselected\relax
+        \edef\ma{\csname mstart\midx\endcsname}\def\mb{corrInsertionOuter}%
+        \ifx\ma\mb\else\PackageError{M03b}{Selected pre endpoint wrong}{}\fi
+      \else
+        \ifcase\midx\relax\or\def\ma{corrUL}\or\def\ma{corrLL}\or\def\ma{corrUR}\or\def\ma{corrLR}\fi
+        \edef\mb{\csname mstart\midx\endcsname}%
+        \ifx\ma\mb\else\PackageError{M03b}{Unselected leg changed}{}\fi
+      \fi}%
+  }{\massert\medges{5}{Baseline edge count}\massert\mvertices{2}{Baseline vertices}}%
+}
+\newcommand{\mmeasure}[2]{%
+  \global\advance\mcases by 1
+  \global\medges=0\global\mvertices=0\global\mposts=0\global\marcs=0
+  \global\marcindices=0\global\mpostindices=0\global\mouterindices=0
+  \global\mlabels=0\global\mcaps=0\global\mdoublecaps=0
+  \@for\midx:={1,2,3,4}\do{\expandafter\gdef\csname mlabel\midx\endcsname{0}}%
+  \edef\moptions{field={},central={},leg-labels={,,,},line=plain,channel-line=plain,
+    show-momenta=false,center-vertex=true,external-vertices=false,insertion=bubble,insertion-slot=#1,#2}%
+  \edef\mselected{#1}%
+  \setbox\mboxdiagram=\hbox{\expandafter\mpublic\expandafter[\moptions]}}
+\makeatother
+\newcommand{\mcell}[2]{\begin{minipage}[t][2.9in][t]{0.48\linewidth}\textbf{#1}\par\vspace{9pt}\centering
+\begin{adjustbox}{max width=\linewidth,max totalheight=2.45in}#2\end{adjustbox}\end{minipage}}
+\newcommand{\mdiagram}[2]{\STreeChannelCorr[field={},central={},leg-labels={,,,},line=plain,channel-line=plain,
+  show-momenta=false,insertion=bubble,insertion-slot=#1,#2]}
+\begin{document}
+\makeatletter
+\def\mexpected{bubble}
+\@for\mslot:=\mslots\do{%
+  \@for\mscale:={0.72,1,1.2}\do{\mmeasure{\mslot}{scale=\mscale}}%
+  \mmeasure{\mslot}{insertion-position=0.46,insertion-scale=0.55,channel-vertex-xspan=0.8}%
+  \mmeasure{\mslot}{leg-styles={{plain,endcapp},{plain,endcapp},{plain,endcapp},{plain,endcapp}},insertion-post-line={plain,endcapp}}%
+  \massert\mcaps{4}{Outer caps}\massert\mdoublecaps{4}{Outer double caps}%
+  \mmeasure{\mslot}{leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}}}%
+  \massert\mcaps{4}{Outer single caps}\massert\mdoublecaps{0}{Single cap mode}%
+  \mmeasure{\mslot}{line=red,insertion-pre-line=green,insertion-post-line=blue}%
+  \edef\mprobe{\noexpand\in@{green}{\csname mstyle\mslot\endcsname}}\mprobe
+  \ifin@\else\PackageError{M03b}{Pre style override lost}{}\fi
+  \edef\mprobe{\noexpand\in@{blue}{\mpoststyle}}\mprobe
+  \ifin@\else\PackageError{M03b}{Post style override lost}{}\fi
+  \mmeasure{\mslot}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB}}%
+  \massert\mlabels{8}{All momentum labels}%
+  \@for\midx:={1,2,3,4}\do{%
+    \ifnum\midx=\mslot\relax\def\mwanted{2}\else\def\mwanted{1}\fi
+    \ifnum\csname mlabel\midx\endcsname=\mwanted\relax\else\PackageError{M03b}{Wrong logical external momentum label}{}\fi}%
+  \mmeasure{\mslot}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB},external-momentum-hide={\mslot}}%
+  \massert\mlabels{6}{Selected external momentum hidden}%
+  \ifcase\mslot\relax
+  \or\def\mblanks{,L2,L3,L4,P}\or\def\mblanks{L1,,L3,L4,P}%
+  \or\def\mblanks{L1,L2,,L4,P}\or\def\mblanks{L1,L2,L3,,P}\fi
+  \mmeasure{\mslot}{show-momenta=true,momentum-labels={\mblanks},bubble-momenta={KA,KB}}%
+  \massert\mlabels{6}{Blank host momentum retains independent loop labels}%
+  \mmeasure{\mslot}{bubble-endpoint-indices={a,b,c,d},bubble-external-indices={i,j},insertion-post-indices={r,s}}%
+  \massert\marcindices{4}{Bubble endpoint indices}\massert\mpostindices{2}{Independent post indices}\massert\mouterindices{1}{Outer pre index}%
+
+  \mmeasure{\mslot}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB},
+    external-left-momentum-direction=out,external-right-momentum-direction=in,bubble-momentum-rotation=counterclockwise}%
+  \massert\mlabels{8}{Reversed momentum labels}%
+  \mmeasure{\mslot}{leg-styles={red,blue,green,orange},bubble-top-line=proca,bubble-bottom-line=ewboson}%
+  \ifcase\mslot\relax\or\def\mwanted{red}\or\def\mwanted{blue}\or\def\mwanted{green}\or\def\mwanted{orange}\fi
+  \edef\mactual{\csname mstyle\mslot\endcsname}%
+  \edef\mprobe{\noexpand\in@{\mwanted}{\mactual}}\mprobe
+  \ifin@\else\PackageError{M03b}{Host style did not inherit selected slot}{}\fi
+  \def\mexpected{none}\mmeasure{\mslot}{insertion=none}\def\mexpected{bubble}%
+}
+% Verify the generic public dispatcher and explicit horizontal-exchange controls.
+\let\mpublic\FourPointCorr
+\mmeasure{3}{topology=s-tree}
+\let\mpublic\STreeChannelCorr
+\mmeasure{4}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB},channel-momentum-angle=-90,channel-momentum-distance=13pt,channel-momentum-label-position=below}
+\ifdim\mchannelangle pt=-90pt\else\PackageError{M03b}{Explicit channel angle lost}{}\fi
+\ifdim\mchanneldistance=13pt\else\PackageError{M03b}{Explicit channel distance lost}{}\fi
+\def\mwanted{below}\ifx\mchannelposition\mwanted\else\PackageError{M03b}{Explicit channel label position lost}{}\fi
+\def\mexpected{none}\mmeasure{5}{}\mmeasure{1}{insertion=seagull}\mmeasure{2}{insertion=seagull}
+\global\medges=0\global\mvertices=0\global\marcs=0\global\advance\mcases by 1
+\setbox\mboxdiagram=\hbox{\UTreeChannelCorr[field={},central={},leg-labels={,,,},line=plain,
+  show-momenta=false,insertion=bubble,insertion-slot=2]}
+\massert\medges{5}{Unsupported u-tree unchanged}\massert\marcs{0}{No u-tree bubble claimed}
+\def\mexpected{bubble}\def\mexpectedbaseoffset{12pt}
+\mmeasure{1}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB},bubble-momentum-offset=12pt}
+\massert\mloopchecked{36}{Outward loop labels and measured arrow clearance}
+\typeout{PASS M03b: \the\mcases\space complete diagram cases; topology, slots, styles, momenta, caps and state reset}
+\typeout{PASS M03b: \the\mloopchecked\space rendered loop labels point outward with measured default/explicit clearance}
+% The visible gallery uses original public renderers without instrumentation.
+\let\corr@drawchannelprop\moldprop\let\corr@drawchannelpropnoendcaps\moldpost
+\let\corr@drawbubbleinternalprop\moldarc\let\corr@putvertex\moldvertex
+\let\corr@putmomentumlabelwithdistance\moldlabel\let\corr@drawfourpointstreeschannel\moldtree
+\let\corr@drawbubblemomentumslot\moldloopmomentum
+\let\corr@putbubbleinternalindexcurve\moldarcindex\let\corr@putttreeinsertionpostindex\moldpostindex
+\let\corr@putbubbleexternalindex\moldouterindex
+\let\corr@drawexternalendcap\moldcap\let\corr@drawexternalendcapp\moldcapp
+\makeatother
+\section*{External s-tree bubbles: one selected leg}
+Plain lines and interaction vertices; no momentum labels, caps or circles.
+\par\vspace{12pt}
+\mcell{Slot 1: upper left}{\mdiagram{1}{}}\hfill\mcell{Slot 2: lower left}{\mdiagram{2}{}}\par
+\mcell{Slot 3: upper right}{\mdiagram{3}{}}\hfill\mcell{Slot 4: lower right}{\mdiagram{4}{}}
+\newpage\section*{Logical momentum labels and mixed lines}
+Only the selected host leg is split; bubble arcs retain their own labels.
+\par\vspace{12pt}
+\mcell{Slot 1}{\mdiagram{1}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell}}}\hfill
+\mcell{Slot 2}{\mdiagram{2}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell}}}\par
+\mcell{Slot 3: EW and Proca}{\mdiagram{3}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell},
+  bubble-top-line={proca,magenta},bubble-bottom-line=ewboson}}\hfill
+\mcell{Slot 4: reversed}{\mdiagram{4}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},bubble-momenta={k,\ell},
+  external-right-momentum-direction=in,bubble-momentum-rotation=counterclockwise}}
+\newpage\section*{Separate controls and compatibility}
+Caps and indices appear only in their dedicated checks. Index placement is deferred (D01).
+\par\vspace{12pt}
+\mcell{Slot 2: outer caps only}{\mdiagram{2}{leg-styles={{plain,endcapp},{plain,endcapp},{plain,endcapp},{plain,endcapp}}}}\hfill
+\mcell{Slot 3: independent indices}{\mdiagram{3}{bubble-endpoint-indices={a,b,c,d},bubble-external-indices={i,j},insertion-post-indices={r,s}}}\par
+\mcell{Slot 4: shifted insertion}{\mdiagram{4}{insertion-position=0.46,insertion-scale=0.55}}\hfill
+\mcell{Slot 1: mixed bubble}{\mdiagram{1}{bubble-top-line={proca,magenta},bubble-bottom-line=plain}}
+\newpage\section*{Proca endpoint contact on all four placements}
+Only the two bubble arcs are pink Proca lines. No momentum, caps or circles.
+\par\vspace{12pt}
+\mcell{Slot 1; scale 0.72}{\mdiagram{1}{scale=0.72,bubble-top-line={proca,magenta},bubble-bottom-line={proca,magenta}}}\hfill
+\mcell{Slot 2; scale 1.0}{\mdiagram{2}{bubble-top-line={proca,magenta},bubble-bottom-line={proca,magenta}}}\par
+\mcell{Slot 3; scale 1.2}{\mdiagram{3}{scale=1.2,bubble-top-line={proca,magenta},bubble-bottom-line={proca,magenta}}}\hfill
+\mcell{Slot 4; scale 0.9}{\mdiagram{4}{scale=0.9,bubble-top-line={proca,magenta},bubble-bottom-line={proca,magenta}}}
+\end{document}

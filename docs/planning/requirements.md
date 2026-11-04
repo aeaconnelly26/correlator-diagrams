@@ -79,18 +79,18 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 ## R09 - Bubble insertion on all t-tree external legs
 
 - **Status:** Verified existing.
-- **Existing construction / evidence:** M03a: I29 and B02-B04 render all four external slots. `t-tree-bubble-slots.tex/pdf` checks connectivity, styles, logical momenta, indices, outer caps and state reset; the isolated Proca page has 16 vector-checked tips.
-- **Remaining target / limitation:** Implemented for one selected t-tree external leg at a time. S/u hosts, internal slot 5 and simultaneous insertions are unsupported.
+- **Existing construction / evidence:** M03a: I29 and B02-B04 render bubbles on t-tree external slots 1-4. Focused t-tree-bubble-slots.tex/pdf checks graph connectivity, selected-leg styles/momenta, outer caps, indices and state reset; 16 Proca tips are checked from rendered vectors.
+- **Remaining target / limitation:** Implemented for one selected t-tree external leg at a time. S-tree external slots 1-4 are also implemented by M03b. U-tree hosts, internal slot 5 and simultaneous insertions remain unsupported.
 - **Milestone:** M03a complete. **Dependencies:** M01, M02.
 - **Acceptance:** Four t-tree external slots render the bubble; each retains host style, caps, pre/post momentum, and endpoint indices without state leakage.
 - **Sources:** P2-04; S05-C2, S05-R2, S08-C2, S08-R2.
 
 ## R10 - Bubble insertion on all s-tree external legs
 
-- **Status:** Missing.
-- **Existing construction / evidence:** I11 is a supported s-tree baseline, but semantic bubble insertion rendering now covers t-tree external slots 1-4; s-tree insertions are still missing.
-- **Remaining target / limitation:** Same self-energy construction on s-tree external slots 1,2,3,4.
-- **Milestone:** M03b. **Dependencies:** M03a.
+- **Status:** Verified existing.
+- **Existing construction / evidence:** M03b: C01-C04 render s-tree external slots 1-4. s-tree-bubble-slots.tex/pdf verifies selected-edge connectivity, logical styles/momenta, outer caps, index attachment/controls and state reset; 16 pink Proca tips are checked from rendered vectors.
+- **Remaining target / limitation:** Implemented for one selected external s-tree leg at a time. Index-placement polish is expressly deferred to D01; u-tree, internal slot 5 and simultaneous insertions remain unsupported.
+- **Milestone:** M03b complete. **Dependencies:** M03a.
 - **Acceptance:** Four s-tree recipes work with one selected leg at a time; logical data remain attached after translation/reflection.
 - **Sources:** P3-02; S06-R1, S06-R2, S07-R1, S07-R2.
 
@@ -115,7 +115,7 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 ## R13 - Self-energy bubble on contact external legs
 
 - **Status:** Missing.
-- **Existing construction / evidence:** I06 is a contact host; insertion dispatch is limited to t-tree slot 1.
+- **Existing construction / evidence:** I06 is a contact host; semantic bubble insertion dispatch covers s/t-tree external slots 1-4 but not contact hosts.
 - **Remaining target / limitation:** A four-leg contact with a self-energy bubble splitting one external leg. Cover four choices shown on S10.
 - **Milestone:** M08a. **Dependencies:** M03; M02 annotation conventions.
 - **Acceptance:** Four contact-host recipes retain the quartic host vertex, two trivalent insertion vertices, caps, styles, momenta, and indices.

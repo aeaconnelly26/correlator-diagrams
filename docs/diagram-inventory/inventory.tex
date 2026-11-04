@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M03a loop review on 04f3913 | 2026-11-03}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M03b on published main 6549efa | 2026-11-03}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -421,7 +421,7 @@
 ]
 }{The quartic/contact vertex lies on the right side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\par\vspace{4pt}
 \newpage
-\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and external bubble insertions}{Bubble insertions support all four t-tree external legs. Seagulls remain t-tree slot 1 only (page 8).}
+\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and external bubble insertions}{All four t-tree external legs support bubbles. S-tree placements: page 12. Seagulls: t-tree slot 1 (page 8).}
 \atlascell{I27  Self-energy bubble}{\BubbleCorr}{%
 \BubbleCorr[
   field={},
@@ -963,4 +963,78 @@
   triangle-contact-momentum-layout=side
 ]
 }{Continuous arrows; labels sit outward from each edge.}{Use layout=gap in an individual slot to mix both modes.}\par\vspace{4pt}
+\newpage
+\atlaspage{12 / S-TREE BUBBLE INSERTIONS}{External s-tree self-energy bubbles}{One selected external edge is split by two trivalent vertices and two parallel arcs. Plain lines; no extra annotations.}
+\atlascell{C01  Bubble on s-tree leg 1}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=1,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Self-energy correction on the upper-left external leg.}{One insertion; internal-slot and u-tree support remain missing.}\hfill
+\atlascell{C02  Bubble on s-tree leg 2}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Self-energy correction on the lower-left external leg.}{One insertion; internal-slot and u-tree support remain missing.}\par\vspace{4pt}
+\atlascell{C03  Bubble on s-tree leg 3}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Self-energy correction on the upper-right external leg.}{One insertion; internal-slot and u-tree support remain missing.}\hfill
+\atlascell{C04  Bubble on s-tree leg 4}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Self-energy correction on the lower-right external leg.}{One insertion; internal-slot and u-tree support remain missing.}\par\vspace{4pt}
 \end{document}

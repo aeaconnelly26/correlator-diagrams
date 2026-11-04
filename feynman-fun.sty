@@ -1384,6 +1384,13 @@
 }
 
 \newcommand{\corr@resolvechanneldefaults}{%
+  % New s-tree insertions need a transverse exchange-arrow offset. Keep the
+  % ordinary-tree defaults and every index-position default unchanged.
+  \corr@ifstreebubbleinsertion{%
+    \corr@resolvechannelauto{\corr@channelmomdist}{\def\corr@channelmomdist{10pt}}{}%
+    \corr@resolvechannelauto{\corr@channelmomangle}{\def\corr@channelmomangle{90}}{}%
+    \corr@resolvechannelauto{\corr@channelmomlabelposition}{\def\corr@channelmomlabelposition{above}}{}%
+  }{}%
   \corr@ifstringeq{\corr@fourpointtopology}{s}{%
     \corr@resolvechannelauto{\corr@channelmomdist}{\def\corr@channelmomdist{10pt}}{}%
     \corr@resolvechannelauto{\corr@channelmomangle}{\def\corr@channelmomangle{90}}{}%
@@ -6638,6 +6645,18 @@
   }{#2}%
 }
 
+\newcommand{\corr@ifstreebubbleinsertion}[2]{%
+  \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+    \corr@ifstringeq{\corr@insertion}{bubble}{%
+      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{\corr@ifstringeq{\corr@insertionslot}{2}{#1}{\corr@ifstringeq{\corr@insertionslot}{3}{#1}{\corr@ifstringeq{\corr@insertionslot}{4}{#1}{#2}}}}%
+    }{#2}%
+  }{#2}%
+}
+
+\newcommand{\corr@iftreebubbleinsertion}[2]{%
+  \corr@ifttreebubbleinsertion{#1}{\corr@ifstreebubbleinsertion{#1}{#2}}%
+}
+
 \newcommand{\corr@ifttreeslotoneseagullinsertion}[2]{%
   \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
     \corr@ifstringeq{\corr@insertion}{seagull}{%
@@ -6676,7 +6695,7 @@
 }
 
 \newcommand{\corr@drawttreeexternalprop}[3]{%
-  \corr@ifttreebubbleinsertion{%
+  \corr@iftreebubbleinsertion{%
     \ifnum#1=\corr@insertionslot\relax
       \corr@drawttreebubbleinsertion
     \else \corr@drawchannelprop{#1}{}{#2}{#3}{}%
@@ -6690,12 +6709,16 @@
 }
 
 \newcommand{\corr@drawttreeexternalmomentum}[4]{%
-  \corr@ifttreeinsertion{%
+  \corr@iftreebubbleinsertion{\corr@drawtreeinsertionexternalmomentum{#1}{#2}{#3}{#4}}{%
+    \corr@ifttreeslotoneseagullinsertion{\corr@drawtreeinsertionexternalmomentum{#1}{#2}{#3}{#4}}{%
+      \corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}}}%
+}
+
+\newcommand{\corr@drawtreeinsertionexternalmomentum}[4]{%
     \ifnum#1=\corr@insertionslot\relax
       \corr@drawttreeinsertionoutermomentum
       \corr@drawttreeinsertioninnermomentum
     \else \corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}\fi
-  }{\corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}}%
 }
 
 \newcommand{\corr@setttreebubbleinsertioncoords}{%
@@ -8430,7 +8453,17 @@
   }%
 }
 
+\newcommand{\corr@setstreeinsertionhost}{%
+  \ifcase\corr@insertionhostslot\relax
+  \or \coordinate (corrInsertionOuter) at (corrUL);\coordinate (corrInsertionHost) at (corrVL);%
+  \or \coordinate (corrInsertionOuter) at (corrLL);\coordinate (corrInsertionHost) at (corrVL);%
+  \or \coordinate (corrInsertionOuter) at (corrUR);\coordinate (corrInsertionHost) at (corrVR);%
+  \or \coordinate (corrInsertionOuter) at (corrLR);\coordinate (corrInsertionHost) at (corrVR);%
+  \fi
+}
+
 \newcommand{\corr@drawfourpointstreeschannel}{%
+  \corr@ifstreebubbleinsertion{\corr@resolvettreeinsertionhost}{}%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
     \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
@@ -8439,27 +8472,34 @@
     \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
     \vertex (corrVL) at (-\corr@channelvertexxspan,0);
     \vertex (corrVR) at (\corr@channelvertexxspan,0);
+    \corr@ifstreebubbleinsertion{\corr@setstreeinsertionhost}{}%
     \corr@ifexternallegs{%
-      \corr@drawchannelprop{1}{}{corrUL}{corrVL}{}%
-      \corr@drawchannelprop{2}{}{corrLL}{corrVL}{}%
-      \corr@drawchannelprop{3}{}{corrUR}{corrVR}{}%
-      \corr@drawchannelprop{4}{}{corrLR}{corrVR}{}%
+      \corr@drawttreeexternalprop{1}{corrUL}{corrVL}%
+      \corr@drawttreeexternalprop{2}{corrLL}{corrVL}%
+      \corr@drawttreeexternalprop{3}{corrUR}{corrVR}%
+      \corr@drawttreeexternalprop{4}{corrLR}{corrVR}%
     }%
     \corr@drawchannelprop{5}{\corr@channelinternalline}{corrVL}{corrVR}{}
   \end{feynhand}
   \ifcorr@centervertex
     \corr@putvertex{corrVL}{\corr@centervertexstyle}
     \corr@putvertex{corrVR}{\corr@centervertexstyle}
+    \corr@ifstreebubbleinsertion{%
+      \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}
+      \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}
+    }{}%
   \fi
   \corr@fourpointplaceexternalvertices
   \ifcorr@showmomenta
-    \corr@drawexternalmomentumul{1}{corrUL}{corrVL}
-    \corr@drawexternalmomentumll{2}{corrLL}{corrVL}
-    \corr@drawexternalmomentumur{3}{corrUR}{corrVR}
-    \corr@drawexternalmomentumlr{4}{corrLR}{corrVR}
+    \corr@drawttreeexternalmomentum{1}{corrUL}{corrVL}{90}%
+    \corr@drawttreeexternalmomentum{2}{corrLL}{corrVL}{-90}%
+    \corr@drawttreeexternalmomentum{3}{corrUR}{corrVR}{-90}%
+    \corr@drawttreeexternalmomentum{4}{corrLR}{corrVR}{90}%
     \corr@drawchannelmomentum{corrVL}{corrVR}
+    \corr@ifstreebubbleinsertion{\corr@drawttreeinsertionbubblemomenta}{}%
   \fi
   \corr@fourpointchannelindices{corrVL}{corrVR}
+  \corr@ifstreebubbleinsertion{\corr@putttreeinsertionbubbleindices}{}%
   \corr@fourpointplaceexternallabels
   \corr@putchannelcentral{corrC}
 }

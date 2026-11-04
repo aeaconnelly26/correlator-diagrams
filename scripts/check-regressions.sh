@@ -53,6 +53,7 @@ run_tex "regressions/propagators/scalar-polarization/scalar-polarization-check.t
 run_tex "regressions/topologies/bubble/bubble-regression.tex"
 run_tex "regressions/topologies/insertion/insertion-regression.tex"
 run_tex "regressions/topologies/insertion/t-tree-bubble-slots.tex"
+run_tex "regressions/topologies/insertion/s-tree-bubble-slots.tex"
 run_tex "regressions/topologies/insertion/seagull-insertion-regression.tex"
 run_tex "regressions/topologies/loop-audit/loop-momentum-audit.tex"
 run_tex "regressions/topologies/loop-audit/self-energy-bubble-mockups.tex"
@@ -79,6 +80,9 @@ if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/topologies/insertion/check-t-tree-bubble-contact.py" \
     "$build_root/regressions/topologies/insertion/t-tree-bubble-slots.pdf"
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/topologies/insertion/check-s-tree-bubble-contact.py" \
+    "$build_root/regressions/topologies/insertion/s-tree-bubble-slots.pdf"
 fi
 
 printf 'PASS  all %s regression and example documents\n' "$check_count"

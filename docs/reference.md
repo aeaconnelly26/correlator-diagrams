@@ -2155,7 +2155,7 @@ Focused visual QA lives in
 Semantic insertions attach a package-owned object to a logical propagator slot.
 The user chooses what and where; the topology owns the geometry.
 
-Current v1 support is intentionally narrow:
+Current semantic insertion hosts:
 
 ```tex
 \[
@@ -2215,11 +2215,14 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
-`insertion=bubble` supports external slots `1,2,3,4` of `topology=t-tree`:
+`insertion=bubble` supports external slots `1,2,3,4` of both
+`topology=t-tree` and `topology=s-tree`:
 upper-left, lower-left, upper-right, lower-right. One selected leg is replaced
 by outer--A, two distinct A--B arcs, then B--tree-vertex. The two new vertices
-are trivalent. `insertion=seagull` remains external slot `1` only. S-tree,
-u-tree and internal slot `5` bubble insertions are unsupported and retain their
+are trivalent. For s-tree, slots 1/2 attach to the left tree vertex, 3/4 to
+the right, with the horizontal exchange unchanged. `insertion=seagull` remains
+t-tree external slot `1` only. U-tree and internal slot `5` bubble insertions
+are unsupported and retain their
 existing no-op behavior. Simultaneous insertions are not supported.
 
 ```tex
@@ -2230,6 +2233,30 @@ existing no-op behavior. Simultaneous insertions are not supported.
   bubble-top-line=plain,bubble-bottom-line=plain
 ]
 ```
+
+Use the same options with `\STreeChannelCorr` for an s-tree insertion:
+
+```tex
+\STreeChannelCorr[
+  field={},central={},leg-labels={,,,},show-momenta=false,
+  line=plain,channel-line=plain,
+  insertion=bubble,insertion-slot=3,
+  bubble-top-line=plain,bubble-bottom-line=plain
+]
+```
+
+For s-tree insertions the exchange momentum uses the normal
+`channel-momentum-*` controls. Its automatic distance/angle/label-position
+are `10pt`, `90` and `above`; explicit values win. The
+`insertion-middle-momentum-*` vertical-guide keys remain t-tree controls.
+The s-tree geometry keeps its existing spans; it does not inherit the t-tree
+insertion-specific span defaults.
+
+Index positions are known to need a separate later workflow, D01. M03b
+preserves their attachment, values and existing positioning controls without
+retuning their appearance. See [deferred workflows](planning/deferred-workflows.md).
+Focused evidence: `regressions/topologies/insertion/s-tree-bubble-slots.tex/pdf`;
+plain inventory recipes C01-C04.
 
 The inserted bubble reuses the `bubble-*` key family for internal styles,
 loop momenta, endpoint indices, vertex-side external indices, and Proca /
@@ -2285,7 +2312,7 @@ values still override those insertion-friendly defaults.
 
 For the short host segment after the inserted bubble, use
 `insertion-post-indices={j,m}` to place two labels on the segment from the
-bubble-side insertion vertex to the main t-channel vertex. Tune those labels
+bubble-side insertion vertex to the selected main tree vertex. Tune those labels
 with `insertion-post-index-fractions={...,...}`,
 `insertion-post-index-position=...`, `insertion-post-index-yshift=...`, or the
 per-side keys `insertion-post-bubble-index-*` and

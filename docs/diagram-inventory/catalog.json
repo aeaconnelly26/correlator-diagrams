@@ -1,5 +1,5 @@
 {
-  "baseline": "M03a loop review on 04f3913",
+  "baseline": "M03b on published main 6549efa",
   "date": "2026-11-03",
   "base_options": [
     "field={}",
@@ -332,7 +332,7 @@
     {
       "section": "06 / SELF-ENERGY AND INSERTION",
       "title": "Loops and external bubble insertions",
-      "subtitle": "Bubble insertions support all four t-tree external legs. Seagulls remain t-tree slot 1 only (page 8).",
+      "subtitle": "All four t-tree external legs support bubbles. S-tree placements: page 12. Seagulls: t-tree slot 1 (page 8).",
       "entries": [
         {
           "id": "I27",
@@ -815,6 +815,69 @@
           ],
           "description": "Continuous arrows; labels sit outward from each edge.",
           "limitation": "Use layout=gap in an individual slot to mix both modes."
+        }
+      ]
+    },
+    {
+      "section": "12 / S-TREE BUBBLE INSERTIONS",
+      "title": "External s-tree self-energy bubbles",
+      "subtitle": "One selected external edge is split by two trivalent vertices and two parallel arcs. Plain lines; no extra annotations.",
+      "entries": [
+        {
+          "id": "C01",
+          "title": "Bubble on s-tree leg 1",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=1",
+            "channel-line=plain",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "Self-energy correction on the upper-left external leg.",
+          "limitation": "One insertion; internal-slot and u-tree support remain missing."
+        },
+        {
+          "id": "C02",
+          "title": "Bubble on s-tree leg 2",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=2",
+            "channel-line=plain",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "Self-energy correction on the lower-left external leg.",
+          "limitation": "One insertion; internal-slot and u-tree support remain missing."
+        },
+        {
+          "id": "C03",
+          "title": "Bubble on s-tree leg 3",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=3",
+            "channel-line=plain",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "Self-energy correction on the upper-right external leg.",
+          "limitation": "One insertion; internal-slot and u-tree support remain missing."
+        },
+        {
+          "id": "C04",
+          "title": "Bubble on s-tree leg 4",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=4",
+            "channel-line=plain",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "Self-energy correction on the lower-right external leg.",
+          "limitation": "One insertion; internal-slot and u-tree support remain missing."
         }
       ]
     }

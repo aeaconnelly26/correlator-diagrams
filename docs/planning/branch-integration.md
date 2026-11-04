@@ -3,8 +3,9 @@
 M03a checkpoint `2c3b467` is now merged and published on main; see
 [M03a verification](m03a-verification.md) and the current development plan.
 Index placement is deferred to a separate later workflow, [D01](deferred-workflows.md).
-M03b starts from this published baseline and preserves index behavior without
-polishing positions. The main/M02 record below preserves earlier history.
+M03b is complete locally on `codex/m03b-s-tree-bubbles`, based on published
+main `6549efa`. It preserves index behavior without polishing positions.
+See [M03b verification](m03b-verification.md). It has not been merged or pushed. The main/M02 record below preserves earlier history.
 
 The published integration baseline was `6657735`. M02 checkpoint `8f95755`
 is now merged into main and published to GitHub. The feature branch
@@ -60,13 +61,14 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M03b is next, based on synchronized main containing M03a checkpoint `2c3b467`.
-No manual Git preparation is needed from the user.
-M04 remains the seagull expansion; swordfish and regular triangles are future work.
+M04 is next after M03b integration/publication. M03b is complete locally;
+main and GitHub remain at `6549efa`, including M03a. No manual Git preparation
+is needed from the user. Swordfish and regular triangles remain future work.
 
 Remote state was refreshed with `git fetch origin` for this synchronization.
-At closeout, verify that `git ls-remote origin refs/heads/main` matches local
-`HEAD`, and that `git status --short --branch` shows a clean, synchronized main.
+When publishing main, verify `git ls-remote origin refs/heads/main` matches
+local main. A later feature-branch HEAD may intentionally be ahead of main;
+report its separate publication state and verify a clean working tree.
 
 ## Session workflow going forward
 

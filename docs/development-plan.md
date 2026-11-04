@@ -6,7 +6,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: main, including verified M03a checkpoint `2c3b467`.
+- Current branch: `codex/m03b-s-tree-bubbles`, based on published main `6549efa`.
+- M03b is complete locally: all four s-tree external bubble placements; see
+  [M03b verification](planning/m03b-verification.md). It is not merged or pushed.
 - M03a, including loop-arrow spacing/label-side fixes, is merged and published
   to GitHub. The implementation branch is retained.
 - M03a is complete: bubble insertion on any one t-tree external leg.
@@ -23,8 +25,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   contact; it adds a low-level custom-radius line option and no new topology.
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
   triangle-contact orientations are already implemented.
-- Semantic bubbles support t-tree external slots 1-4. Seagulls remain slot 1
-  only. S/u and internal bubble insertions are unsupported and can be no-ops.
+- Semantic bubbles support s/t-tree external slots 1-4. Seagulls remain t-tree
+  slot 1 only. U-tree and internal bubble insertions are unsupported and can be no-ops.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
   the repository or delete branches.
 
@@ -32,7 +34,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Eleven pages: 54 current examples, including all four t-tree bubble placements. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twelve pages: 58 current examples, including all eight s/t-tree bubble placements. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -48,7 +50,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M01 | Audit and correct demonstrated Proca endpoint failures | Complete on published main; diagnostic and vector checks passed |
 | Integration | Reconcile seagull/endpoint work with M01 | Complete; reconciled on local/GitHub `main`; combined tests pass |
 | M02 | Independent triangle-contact annotations, four orientations | Complete on published main; 35 regression documents and 600 endpoint contacts pass |
-| M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a complete locally; M03b (s-tree) next |
+| M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a published; M03b complete locally, awaiting publication |
 | M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
 | M05 | External swordfish on s/t trees | Planned |
 | M06 | Regular tree-attached triangle corrections, four placements | Planned |
@@ -60,13 +62,13 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M03b is next: external self-energy bubbles on s-tree slots 1-4, one placement
-at a time. Read R10 and M03 in
-[requirements](planning/requirements.md) and [milestones](planning/milestones.md).
-Create its feature branch from synchronized main, which includes M03a checkpoint
-`2c3b467`. Freeze the s-tree slot-1 graph and preserve styles, momentum, index
-attachment/controls and outer caps. Index-placement polish is deferred (D01).
-M03b has not started.
+M04 is next: expand the existing t-tree slot-1 seagull to the remaining t-tree
+legs, then the four s-tree legs, one insertion at a time. First integrate and
+publish the verified M03b checkpoint from `codex/m03b-s-tree-bubbles` when
+publication is authorized. The user needs no manual Git preparation.
+Freeze the direct self-loop at one quartic host vertex; it is distinct from
+the two-vertex self-energy bubbles. Read R11 and M04. Keep D01 deferred to a
+separate later workflow; do not tidy index positions during the feature sessions.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -194,7 +196,7 @@ are preserved. No topology or slot layout changed.
 - Published through a normal push and verified local/remote main equality.
 - Ready to switch tasks. M03a is the next roadmap item; it has not started.
 
-## Latest session - M03a t-tree bubble expansion
+## Historical session - M03a t-tree bubble expansion
 
 - Preserved the slot-1 baseline, then verified slots 2, 3 and 4 in sequence.
 - Shared selected-leg aliases route host geometry, style, momentum labels,
@@ -215,3 +217,16 @@ style clearance and explicit overrides. Loop labels now sit outward from their
 actual arcs, so the right-hand a/b swap cannot invert above/below placement.
 The focused tests measure 34 rendered label sides/clearances across four slots
 and reversed arrows. The gallery/inventory are regenerated; no topology changed.
+
+## M03b implementation record - 2026-11-03
+
+- Published M03a and its arrow-spacing/label-side fixes to main; `6549efa`
+  records publication and the explicitly deferred D01 index workflow.
+- Created `codex/m03b-s-tree-bubbles` from that synchronized baseline.
+- Added external s-tree bubbles in slots 1-4 sequentially, reusing semantic
+  host-relative geometry and the existing public insertion controls.
+- Preserved index values/attachment/controls without changing index positions.
+- Added the focused four-page gallery and atlas recipes C01-C04. Verification,
+  measured contact results and reproduction commands are in M03b verification.
+- M03b is checkpointed locally; main/GitHub still contain M03a, not M03b.
+  M04 is the next feature milestone after M03b publication.

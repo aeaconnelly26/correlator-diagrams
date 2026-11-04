@@ -11,8 +11,8 @@ The seagull slot-1 prototype, prior marker/momentum/index work, and M01 raw
 Proca fixes are reconciled. See [integration verification](integration-verification.md).
 M04 expands the existing prototype. Integration commit `4584aff` is included
 in published `main` at `6657735`. M02 checkpoint `8f95755` is now also merged
-and published on main. M03a is complete locally on its feature branch; M03b
-is next and must use that checkpoint or its descendant.
+and published on main. M03a is published through `6549efa`; M03b is complete
+locally on `codex/m03b-s-tree-bubbles`. M04 follows after M03b publication.
 
 ## Common session contract
 
@@ -86,7 +86,7 @@ Final checkpoint `8f95755` is merged into main and published to GitHub.
 Sessions A-C are covered by the new slot option blocks and the focused
 five-page gallery. All seven logical slots, four orientations, unequal spans,
 grouped compatibility, scale, reversal, visibility and isolation are verified.
-See [M02 verification](m02-verification.md). M03a is the next feature slice;
+See [M02 verification](m02-verification.md). M03 has subsequently completed;
 the acceptance contract below remains a regression gate.
 
 - Session A: external slots 1-4, independent arrow ranges and label positions.
@@ -107,7 +107,10 @@ M03a is complete on `codex/m03a-t-tree-bubbles`, based on `b917ed2`;
 verified checkpoint `2c3b467` is merged and published on main.
 All four t-tree external slots are checked, including actual graph/caps/momentum
 and style/index coverage. See [M03a verification](m03a-verification.md).
-M03b (s-tree) remains future work. Keep the following contract for that expansion.
+M03b is complete locally on `codex/m03b-s-tree-bubbles`, based on published
+main `6549efa`: all four s-tree placements, with existing t-tree output retained.
+See [M03b verification](m03b-verification.md). Its merge/push remains pending.
+The following contract remains the regression gate for both families.
 Index-placement appearance is expressly deferred to a later separate workflow,
 [D01](deferred-workflows.md). Preserve attachment/controls during M03b; do not
 retune positions or turn visual index polish into a current acceptance gate.

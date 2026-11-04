@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M03a loop review on 04f3913`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M03b on published main 6549efa`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1322,5 +1322,107 @@ Continuous arrows; labels sit outward from each edge.
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
   triangle-contact-momentum-layout=side
+]
+```
+
+## External s-tree self-energy bubbles
+
+### C01 - Bubble on s-tree leg 1
+
+Self-energy correction on the upper-left external leg.
+
+**Limit:** One insertion; internal-slot and u-tree support remain missing.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=1,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### C02 - Bubble on s-tree leg 2
+
+Self-energy correction on the lower-left external leg.
+
+**Limit:** One insertion; internal-slot and u-tree support remain missing.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### C03 - Bubble on s-tree leg 3
+
+Self-energy correction on the upper-right external leg.
+
+**Limit:** One insertion; internal-slot and u-tree support remain missing.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### C04 - Bubble on s-tree leg 4
+
+Self-energy correction on the lower-right external leg.
+
+**Limit:** One insertion; internal-slot and u-tree support remain missing.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4,
+  channel-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
 ]
 ```

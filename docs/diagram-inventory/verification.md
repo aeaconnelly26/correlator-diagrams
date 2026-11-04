@@ -1,4 +1,25 @@
-# M03a inventory verification - 2026-11-03
+# M03b inventory verification - 2026-11-03
+
+Current atlas: **58 public recipes on twelve pages**, compiled against
+`codex/m03b-s-tree-bubbles`, based on published main `6549efa`. New C01-C04
+show the four s-tree external self-energy bubble placements, plain and unlabeled.
+All previous IDs and seagull examples remain. Page 6 cross-references the new
+page 12. Pages 1-5 and 7-11 are pixel-identical above the updated baseline
+footer to the M03a rendering. All pages were rendered and inspected; changed
+pages were reviewed at readable size.
+
+Focused S gallery: four pages, 16 examples, 63 automatic diagram cases and 36
+measured outward-label/arrow-clearance checks. All 37 maintained documents and
+632 endpoint-contact checks pass (600 existing, 16 T-bubble, 16 S-bubble).
+Twelve ordinary s/t/u tree controls have identical decoded drawing streams to
+published main. The dedicated index panel records current placement as a known
+limitation, explicitly deferred to D01; M03b did not retune index positioning.
+
+See [M03b verification](../planning/m03b-verification.md) for scope, controls,
+limits and reproduction. M03b remains local; M03a is published on main.
+Historical records follow and retain their original counts/limitations.
+
+# Historical M03a inventory verification - 2026-11-03
 
 Current atlas: **54 recipes on eleven pages**, built against
 `codex/m03a-t-tree-bubbles` on baseline `b917ed2`. I29 retains slot 1;
