@@ -15,6 +15,9 @@ and consecutive diagrams. Further checks require actual label centers inside
 default breaks, compact external arrows/gaps, the correct quartic-side slots,
 and one continuous stroke per side-label annotation. No unnecessary endcaps
 or circ decorations are used.
+Both edges connecting the quartic vertex to a trivalent vertex now point toward
+the trivalent vertex by default. Connectivity-based checks cover all four
+orientations in both momentum layouts; explicit direction overrides remain.
 
 All **35 maintained regression/example documents** pass; the independent Proca
 PDF check still passes **600 automatic contacts**. The final atlas and M02 gallery

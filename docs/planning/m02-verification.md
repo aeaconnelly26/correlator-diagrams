@@ -47,7 +47,7 @@ and [reference](../reference.md#triangle-contact-topology).
 - **35 maintained regression/example documents pass**, including old triangle
   recipes, momentum direction/visibility and blank-label assertions, indices,
   one-sided markers, insertions, and the new focused regression.
-- **96 complete public diagrams** in the focused regression have automatic
+- **97 complete public diagrams** in the focused regression have automatic
   geometry/behavior checks. All seven slots are altered independently in all
   four orientations with unequal spans. Unselected annotations stay identical.
 - Outside-side checks observe emitted arrow coordinates relative to edge and
@@ -61,6 +61,10 @@ and [reference](../reference.md#triangle-contact-topology).
   arrows to 24.01pt, and verify quartic-side fractions by vertex endpoints.
   Stroke counts require two strokes for a gap and one continuous stroke for
   side labels/off-axis labels. Global/per-slot layout mixing and aliases pass.
+- Default internal direction checks compare against actual vertex connectivity
+  in all four orientations, in both layouts: both quartic-incident edges point
+  toward their trivalent endpoints. The third internal direction is unchanged.
+  Explicit direction overrides remain effective; `auto` selects the default.
 
 Reproduce the maintained suite with a Python interpreter containing `pypdf`:
 

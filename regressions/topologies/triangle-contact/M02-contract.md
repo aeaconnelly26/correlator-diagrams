@@ -29,6 +29,11 @@ key order. Unspecified per-slot fields inherit the group. Each macro call resets
 its overrides. Existing direction, visibility, style, index, and momentum-off
 controls retain their logical slots. Blank external labels keep a continuous
 unlabeled arrow; blank internal entries keep their existing omission behavior.
+Default internal directions are `{auto,auto,auto}`. The two edges incident on
+the quartic vertex point toward the trivalent vertices in every orientation;
+the third internal edge retains its forward direction. Explicit forward/reverse/
+none choices remain authoritative, and blank direction entries retain the legacy
+forward fallback. Both gap and side layouts use the same directions.
 
 Acceptance: all four orientations, unequal spans, mixed EW/Proca lines,
 individual changes to each of seven slots, reversed directions, grouped keys,

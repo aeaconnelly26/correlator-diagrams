@@ -983,7 +983,7 @@
 \def\corr@trianglecontactmomentumlayout{gap}
 \def\corr@trianglecontactmomentumslots{1,2,3,4}
 \def\corr@trianglecontactinternalmomenta{}
-\def\corr@trianglecontactinternalmomentumdirections{forward,forward,forward}
+\def\corr@trianglecontactinternalmomentumdirections{auto,auto,auto}
 \def\corr@trianglecontactinternalmomentumslots{5,6,7}
 \def\corr@trianglecontactinternalmomentumstart{auto}
 \def\corr@trianglecontactinternalmomentumend{auto}
@@ -2397,7 +2397,7 @@
   \corr@topologysetdefault\corr@trianglecontactmomentumlayout{gap}%
   \corr@topologysetdefault\corr@trianglecontactmomentumslots{1,2,3,4}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomenta{}%
-  \corr@topologysetdefault\corr@trianglecontactinternalmomentumdirections{forward,forward,forward}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumdirections{auto,auto,auto}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumslots{5,6,7}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumstart{auto}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumend{auto}%
@@ -5933,6 +5933,17 @@
   \edef\corr@trianglecontactthisinternalmomentumdirection{\corr@currentlistitem}%
   \ifdefempty{\corr@trianglecontactthisinternalmomentumdirection}{%
     \def\corr@trianglecontactthisinternalmomentumdirection{forward}%
+  }{}%
+  % The two quartic-to-trivalent edges default away from the quartic vertex.
+  % Keep the edge joining the two trivalent vertices in its forward direction.
+  \corr@ifstringeq{\corr@trianglecontactthisinternalmomentumdirection}{auto}{%
+    \def\corr@trianglecontactthisinternalmomentumdirection{forward}%
+    \def\corr@trianglecontactreverseautoslot{6}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{top}{\def\corr@trianglecontactreverseautoslot{7}}{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{left}{\def\corr@trianglecontactreverseautoslot{7}}{}%
+    \ifnum#1=\corr@trianglecontactreverseautoslot\relax
+      \def\corr@trianglecontactthisinternalmomentumdirection{reverse}%
+    \fi
   }{}%
 }
 

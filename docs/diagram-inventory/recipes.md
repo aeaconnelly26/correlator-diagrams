@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M02 review on b795f7f`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M02 directions on 99c9d07`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1058,7 +1058,7 @@ Slot 2 arrow clearance and slot 6 side label are independent.
 
 ### T02 - Annotations: contact top
 
-Slot 5 has its own range and reversed arrow.
+Slot 5 has its own range; middle arrows face trivalent vertices.
 
 **Limit:** Compact quartic-side defaults sit nearer the outer endpoints.
 
@@ -1079,8 +1079,7 @@ Slot 5 has its own range and reversed arrow.
   triangle-contact-orientation=top,
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
-  triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.50},
-  triangle-contact-internal-momentum-directions={reverse,forward,forward}
+  triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.50}
 ]
 ```
 

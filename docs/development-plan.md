@@ -168,5 +168,10 @@ The first checkpoint `b795f7f` left empty arrow gaps below displaced labels and
 used unnecessarily long quartic-side arrows. The reviewed version replaces
 those defaults with measured inline gaps, compact external arrows, orientation-
 aware quartic placement, and explicit continuous-arrow/side-label mode. All 35
-regression documents, 96 focused public-diagram checks and 600 endpoint contacts
+regression documents, 97 focused public-diagram checks and 600 endpoint contacts
 pass. The gallery has five pages/20 examples; the atlas has eleven pages/51 recipes.
+
+The subsequent direction-default request makes both quartic-to-trivalent middle
+arrows point toward their trivalent endpoints in all four orientations, in gap
+and side layouts. The third internal edge and all explicit direction controls
+are preserved. No topology or slot layout changed.

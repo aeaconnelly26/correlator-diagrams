@@ -16,6 +16,7 @@
 \def\tcphase{baseline}
 \def\tccheckoutside{yes}
 \def\tcchecklayout{none}
+\def\tccheckdirections{no}
 \apptocmd{\tikz@installcommands}{%
   \def\draw{\global\advance\tcstrokes by 1\path[draw]}%
 }{}{\PackageError{M02}{Cannot count actual momentum strokes}{}}
@@ -54,6 +55,20 @@
   \corr@ifstringeq{\tcchecklayout}{side}{%
     \ifnum\numexpr\tcstrokes-\tcbefore\relax=1\else
       \PackageError{M02}{Side-label slot #1 must emit one continuous stroke}{}\fi
+  }{}%
+  \corr@ifstringeq{\tccheckdirections}{yes}{%
+    \ifnum#1>4
+      % Check default direction against real endpoint connectivity, independently
+      % of the orientation/slot lookup used by the implementation.
+      \pgfpointdiff{\pgfpointanchor{#3}{center}}{\pgfpointanchor{corrTriContact}{center}}%
+      \pgfmathsetlengthmacro{\tcendcontactdistance}{veclen(\pgf@x,\pgf@y)}%
+      \def\tcexpecteddirection{forward}%
+      \ifdim\tcendcontactdistance<0.01pt \def\tcexpecteddirection{reverse}\fi
+      \edef\tcactualdirection{\corr@tcdirection}%
+      \ifx\tcactualdirection\tcexpecteddirection\else
+        \PackageError{M02}{Slot #1 does not point toward its trivalent endpoint}{}%
+      \fi
+    \fi
   }{}%
   \global\advance\tccount by 1
   \def\tcsignature{}%
@@ -123,6 +138,7 @@
 \makeatletter
 % Review correction: actual rendered labels must be centered in their breaks;
 % quartic-side defaults are compact and nearer the outer endpoint in all layouts.
+\def\tccheckdirections{yes}
 \def\tcchecklayout{gap}
 \@for\tcorientation:={bottom,top,left,right}\do{%
   \edef\tcoptions{triangle-contact-orientation=\tcorientation}%
@@ -133,6 +149,7 @@
   \edef\tcoptions{triangle-contact-orientation=\tcorientation,triangle-contact-momentum-layout=side}%
   \tcmeasure{side}{\tcoptions}\tcassertcount{7}%
 }
+\def\tccheckdirections{no}
 \tcmeasure{side}{triangle-contact-momentum-layout=side,triangle-contact-internal-momentum-directions={reverse,reverse,reverse}}
 \tcmeasure{offaxis}{triangle-contact-momentum-1={label-offset=20pt},triangle-contact-momentum-2={label-offset=20pt},
   triangle-contact-momentum-3={label-offset=20pt},triangle-contact-momentum-4={label-offset=20pt},
@@ -191,8 +208,9 @@
 \tcmeasure{changed}{trianglecontact-momentum-2={start=0.15},trianglecontact-momentum-start=0.21}\tcassertsame
 % Reverse changes arrow direction only; geometry and side do not flip.
 \tcmeasure{baseline}{}
-\tcmeasure{changed}{triangle-contact-internal-momentum-directions={reverse,forward,forward}}\tccompare{5}
+\tcmeasure{changed}{triangle-contact-internal-momentum-directions={reverse,auto,auto}}\tccompare{5}
 \tcassertarrowunchanged{5}
+\tcmeasure{changed}{triangle-contact-internal-momentum-directions={auto,forward,auto}}\tccompare{6}
 \tcmeasure{changed}{triangle-contact-lower-left-momentum-direction=out}\tccompare{2}
 \tcmeasure{changed}{triangle-contact-momentum-2={layout=side}}\tccompare{2}
 \tcassertarrowunchanged{2}
@@ -204,7 +222,7 @@
 \def\tccheckoutside{no}
 \tcmeasure{changed}{triangle-contact-momentum-6={side=inside}}\tccompare{6}
 \tcmeasure{changed}{triangle-contact-momentum-6={side=left}}\tccompare{6}
-\tcmeasure{hidden}{external-momentum-hide={1,4},triangle-contact-internal-momentum-directions={none,forward,forward}}\tcassertcount{4}
+\tcmeasure{hidden}{external-momentum-hide={1,4},triangle-contact-internal-momentum-directions={none,auto,auto}}\tcassertcount{4}
 \tcmeasure{off}{show-momenta=false}\tcassertcount{0}
 \typeout{PASS M02: seven independent slots; four orientations; unequal lengths; grouped settings; label-only controls; reversal; visibility; state reset}
 \typeout{PASS M02: \the\tcdiagramchecks\space complete public diagrams checked automatically}
@@ -263,7 +281,7 @@ Each example changes only the named annotation. Compare with the baseline page.
 \section*{Independent controls, internal slots 5--7}
 Arrow reversal keeps the same slot, label position, and outside-facing side.
 \par\vspace{12pt}
-\tccell{Slot 5: reversed gap arrow}{\tcdiagram{triangle-contact-internal-momentum-directions={reverse,forward,forward},
+\tccell{Slot 5: reversed gap arrow}{\tcdiagram{triangle-contact-internal-momentum-directions={reverse,auto,auto},
   triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.5}}}\hfill
 \tccell{Slot 6: independent label}{\tcdiagram{triangle-contact-momentum-6={layout=side,label-offset=4pt,label-xshift=-2pt}}}\par
 \tccell{Slot 7: arrow clearance}{\tcdiagram{triangle-contact-momentum-7={offset=18pt}}}\hfill

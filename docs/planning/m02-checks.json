@@ -2,9 +2,9 @@
   "milestone": "M02",
   "baseline": "6657735",
   "branch": "codex/m02-triangle-contact-annotations",
-  "package_sha256": "f49ce316f01d9d7236c2695ac17e80d0f59db21b12a76490e10366ea4322347b",
+  "package_sha256": "ea5e5907b4f0a2fe24cc0ec6ce7fc1eae7591bb1af030bd60325c665d0df2a5d",
   "regression_documents": 35,
-  "automatic_public_diagrams": 96,
+  "automatic_public_diagrams": 97,
   "focused_gallery_pages": 5,
   "focused_gallery_examples": 20,
   "atlas_pages": 11,
@@ -17,5 +17,8 @@
   "continuous_strokes_checked": true,
   "default_gap_max_pt": 18,
   "default_external_arrow_max_pt": 24.01,
-  "quartic_external_label_fraction": 0.3
+  "quartic_external_label_fraction": 0.3,
+  "direction_baseline": "99c9d07",
+  "default_middle_arrows_to_trivalent": true,
+  "direction_connectivity_checked_both_layouts": true
 }

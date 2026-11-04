@@ -1848,6 +1848,14 @@ A/B are the upper/lower trivalent vertices. The four external slots remain
 upper-left, lower-left, upper-right, lower-right. Directions, momentum visibility,
 styles, and indices keep their existing interfaces. Blank external labels
 keep a continuous unlabeled arrow; blank internal labels omit the annotation.
+Internal directions now default to `{auto,auto,auto}`: both edges touching
+the quartic vertex point toward their trivalent endpoint in every orientation.
+The edge between the two trivalent vertices keeps its forward direction.
+In bottom/right layouts this resolves to `{forward,reverse,forward}`; in
+top/left layouts it resolves to `{forward,forward,reverse}`. Explicit `forward`,
+`reverse`, and `none` entries still override defaults; `auto` inherits the
+orientation-aware default for that slot. Blank/missing list entries retain
+the legacy `forward` fallback. Directions do not move labels or change gaps.
 See `regressions/topologies/triangle-contact/triangle-contact-annotations.tex`
 and its PDF for the five-page gallery and automated geometry/isolation checks.
 

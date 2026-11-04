@@ -1,5 +1,5 @@
 {
-  "baseline": "M02 review on b795f7f",
+  "baseline": "M02 directions on 99c9d07",
   "date": "2026-11-03",
   "base_options": [
     "field={}",
@@ -663,10 +663,9 @@
             "triangle-contact-orientation=top",
             "triangle-contact-external-line=plain",
             "triangle-contact-internal-line=plain",
-            "triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.50}",
-            "triangle-contact-internal-momentum-directions={reverse,forward,forward}"
+            "triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.50}"
           ],
-          "description": "Slot 5 has its own range and reversed arrow.",
+          "description": "Slot 5 has its own range; middle arrows face trivalent vertices.",
           "limitation": "Compact quartic-side defaults sit nearer the outer endpoints."
         },
         {
