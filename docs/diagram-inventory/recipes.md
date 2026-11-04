@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M03a on b917ed2`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M03a loop review on 04f3913`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 

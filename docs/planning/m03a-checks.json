@@ -3,7 +3,7 @@
   "baseline": "b917ed2",
   "branch": "codex/m03a-t-tree-bubbles",
   "published": false,
-  "package_sha256": "ea479a1a87737d8310166267833a800ddc7b2fa3b1927f9839386d49ab68ab7e",
+  "package_sha256": "e0a7cc39adacc7361eb9e321d0b025a03ffcc1b3f8e8ecbd595780f2f6ff9e0b",
   "t_tree_external_bubble_slots": [
     1,
     2,
@@ -11,7 +11,7 @@
     4
   ],
   "regression_documents": 36,
-  "focused_diagram_cases": 51,
+  "focused_diagram_cases": 52,
   "gallery_pages": 4,
   "gallery_examples": 16,
   "atlas_pages": 11,
@@ -21,5 +21,10 @@
   "slot_one_max_text_displacement_pdf_pt": 0.014,
   "graph_propagators": 8,
   "graph_interaction_vertices": 4,
-  "collinearity_tolerance_tex_pt": 0.03
+  "collinearity_tolerance_tex_pt": 0.03,
+  "loop_spacing_review_baseline": "04f3913",
+  "slot_one_comparison_checkpoint": "04f3913",
+  "loop_label_geometry_checks": 34,
+  "default_loop_arrow_offset_pt": 8,
+  "loop_style_clearance_pt": 2
 }

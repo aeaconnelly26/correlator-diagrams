@@ -2133,9 +2133,16 @@ With `bubble-endpoint-marker-distance=auto`, the target point is the
 explicit distance only when you want the tip target moved inward or outward.
 Loop momentum arrows are opt-in through
 `bubble-momenta` or the per-slot momentum keys. Internal momentum arrows use
-`bubble-momentum-offset`, and add
+`bubble-momentum-offset` (default `8pt`, reduced from `12pt`), and add
 `bubble-momentum-style-clearance` automatically when the corresponding internal
 line is structurally wider, such as `ewboson`, `photon`, `proca`, or `circ=...`.
+The existing style clearance defaults to `2pt`, so standard wide-style arrows
+sit at a total offset of `10pt`. Explicit offset/clearance values still win.
+Loop labels sit outward from their actual arc: above upper arrows, below lower
+arrows, or left/right for near-vertical placements. This is independent of local
+a/b identity and arrow direction, including right-hand tree insertions where
+a/b exchange their page-top/page-bottom roles. `bubble-momentum-label-distance`
+still controls the gap from the arrow to its label (default `2pt`).
 `momentum-labels={...,...}` labels the two external momentum arrows. The bare
 bubble is quiet by default, while explicit `field=...`, `indices={...}`, or
 `leg-labels={...}` restores ordinary outer field labels.

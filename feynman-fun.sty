@@ -694,7 +694,7 @@
 \def\corr@bubblevertexsplitoffsetscale{0.75}
 \def\corr@bubblemomentumstart{0.30}
 \def\corr@bubblemomentumend{0.70}
-\def\corr@bubblemomentumoffset{12pt}
+\def\corr@bubblemomentumoffset{8pt}
 \def\corr@bubblemomentumstyleclearance{2pt}
 \def\corr@bubblemomentumlabeldistance{2pt}
 \def\corr@bubblemomentumlabelfraction{0.50}
@@ -1986,7 +1986,7 @@
   \corr@topologysetdefault\corr@bubblevertexsplitoffsetscale{0.75}%
   \corr@topologysetdefault\corr@bubblemomentumstart{0.30}%
   \corr@topologysetdefault\corr@bubblemomentumend{0.70}%
-  \corr@topologysetdefault\corr@bubblemomentumoffset{12pt}%
+  \corr@topologysetdefault\corr@bubblemomentumoffset{8pt}%
   \corr@topologysetdefault\corr@bubblemomentumstyleclearance{2pt}%
   \corr@topologysetdefault\corr@bubblemomentumlabeldistance{2pt}%
   \corr@topologysetdefault\corr@bubblemomentumlabelfraction{0.50}%
@@ -2049,7 +2049,7 @@
   \corr@topologysetdefault\corr@bubblevertexsplitoffsetscale{0.75}%
   \corr@topologysetdefault\corr@bubblemomentumstart{0.30}%
   \corr@topologysetdefault\corr@bubblemomentumend{0.70}%
-  \corr@topologysetdefault\corr@bubblemomentumoffset{12pt}%
+  \corr@topologysetdefault\corr@bubblemomentumoffset{8pt}%
   \corr@topologysetdefault\corr@bubblemomentumstyleclearance{2pt}%
   \corr@topologysetdefault\corr@bubblemomentumlabeldistance{2pt}%
   \corr@topologysetdefault\corr@bubblemomentumlabelfraction{0.50}%
@@ -7417,19 +7417,30 @@
     \def\corr@bubblemomdir{\corr@bubbleadir}%
     \corr@resolvebubblemomentumstyleclearance{\corr@bubblealine}%
     \def\corr@bubblemomoffset{\dimexpr\corr@bubblemomentumoffset+\corr@bubbleresolvedstyleclearance\relax}%
-    \def\corr@bubblemomlabelposition{above}%
     \let\corr@bubblemomlabel\corr@bubbleamomentum
   }{%
     \def\corr@bubblemomdir{\corr@bubblebdir}%
     \corr@resolvebubblemomentumstyleclearance{\corr@bubblebline}%
     \def\corr@bubblemomoffset{\dimexpr\corr@bubblemomentumoffset+\corr@bubbleresolvedstyleclearance\relax}%
-    \def\corr@bubblemomlabelposition{below}%
     \let\corr@bubblemomlabel\corr@bubblebmomentum
   }%
 }
 
 \newcommand{\corr@drawbubblemomentumslot}[6]{%
   \corr@resolvebubblemomentumslot{#1}%
+  % a/b are local to the directed host, so their page-top/page-bottom roles
+  % exchange on right-hand legs. Choose the label side from the actual normal,
+  % independently of arc identity or momentum direction.
+  \pgfmathsetmacro{\corr@bubblelabelnormalx}{cos(#6)}%
+  \pgfmathsetmacro{\corr@bubblelabelnormaly}{sin(#6)}%
+  \pgfmathparse{abs(\corr@bubblelabelnormaly)>=abs(\corr@bubblelabelnormalx)}%
+  \ifdim\pgfmathresult pt>0pt
+    \def\corr@bubblemomlabelposition{above}%
+    \ifdim\corr@bubblelabelnormaly pt<0pt \def\corr@bubblemomlabelposition{below}\fi
+  \else
+    \def\corr@bubblemomlabelposition{right}%
+    \ifdim\corr@bubblelabelnormalx pt<0pt \def\corr@bubblemomlabelposition{left}\fi
+  \fi
   \corr@resolvebubblemomentumfractions{#1}%
   \corr@ifstringeq{\corr@bubblemomentumlayout}{vertex-split}{%
     \corr@clampbubblevertexsplitfractions

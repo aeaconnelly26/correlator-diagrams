@@ -30,3 +30,9 @@ indices and momenta, reversed directions, hidden/blank momenta, scales, explicit
 geometry/position settings, and fresh consecutive calls. Compare slot-1 output
 with baseline, run the maintained suite and endpoint audit, inspect the focused
 PDF, and update the public recipe inventory and requirement status.
+
+Loop-spacing review: the default base arrow offset is 8pt (plus the existing
+style clearance). Label side follows the actual outward arc normal, not a/b or
+arrow direction: page-upper labels above, lower labels below. Measure emitted
+label positions and default/explicit clearance for all four placements, including
+reversed directions. Explicit user offsets must remain effective.

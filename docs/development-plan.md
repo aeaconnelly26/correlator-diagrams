@@ -197,8 +197,16 @@ are preserved. No topology or slot layout changed.
 - The graph has eight propagators, four interaction vertices and one loop;
   exactly one external leg is replaced. Lower-leg host momentum labels default
   below their legs; explicit positions still take precedence.
-- All 36 maintained documents pass. The focused source checks 51 complete
+- All 36 maintained documents pass. The focused source checks 52 complete
   graphs; its isolated page verifies 16 Proca tips, alongside the existing
   600-contact audit. The four-page gallery has 16 examples; atlas has 54 recipes.
 - Only M03a is complete. Seagulls remain t-tree slot 1; s-tree bubbles are M03b.
 - Work is checkpointed locally on `codex/m03a-t-tree-bubbles`; no merge or push.
+
+### M03a loop-spacing review
+
+Reduced default bubble momentum offset from 12pt to 8pt, preserving the existing
+style clearance and explicit overrides. Loop labels now sit outward from their
+actual arcs, so the right-hand a/b swap cannot invert above/below placement.
+The focused tests measure 34 rendered label sides/clearances across four slots
+and reversed arrows. The gallery/inventory are regenerated; no topology changed.

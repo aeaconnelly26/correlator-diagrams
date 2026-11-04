@@ -5,7 +5,7 @@ Current atlas: **54 recipes on eleven pages**, built against
 B02-B04 add the lower-left, upper-right and lower-right external bubble placements.
 The main topology pages remain plain and unlabeled. Seagulls remain t-tree slot 1.
 
-The four-page focused gallery has 16 examples and 51 automatic public-diagram
+The four-page focused gallery has 16 examples and 52 automatic public-diagram
 checks: actual graph/vertex/selected-leg geometry, pre/post style inheritance,
 logical momentum labels and visibility, blank/reversed momenta, independent
 indices, outer-only caps, scale/position changes and state reset. Its isolated
@@ -13,6 +13,10 @@ Proca page has 16 vector-checked white-filled pink endpoint tips. All 36 maintai
 documents and the existing 600-contact endpoint audit pass. Slot 1 was compared
 with baseline: text is identical, with maximum PDF text displacement 0.014pt
 from coordinate-copy/polar rounding; rendered connectivity and styling are retained.
+That baseline comparison belongs to the initial `04f3913` checkpoint. The later
+user-requested review intentionally reduces default loop-arrow spacing and fixes
+label sides. It checks 34 rendered labels for outward placement and measured
+default/explicit arrow clearance, in addition to the topology matrix.
 
 All new gallery pages and changed atlas pages were rendered and reviewed.
 See [M03a verification](../planning/m03a-verification.md) for scope, recipe and

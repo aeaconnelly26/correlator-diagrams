@@ -8,8 +8,24 @@
 \newcount\medges \newcount\mvertices \newcount\mposts \newcount\marcs
 \newcount\marcindices \newcount\mpostindices \newcount\mouterindices
 \newcount\mlabels \newcount\mcaps \newcount\mdoublecaps \newcount\mcases
+\newcount\mloopchecked
 \makeatletter
 \def\mslots{1,2,3,4}
+\def\mloopchecking{no}\def\mexpectedbaseoffset{8pt}
+\let\moldloopmomentum\corr@drawbubblemomentumslot
+\renewcommand{\corr@drawbubblemomentumslot}[6]{%
+  \begingroup
+  \def\mloopchecking{yes}\edef\mloopnormal{#6}%
+  \corr@resolvebubblemomentumslot{#1}\corr@resolvebubblemomentumfractions{#1}%
+  \edef\mloopexpectedoffset{\the\dimexpr\mexpectedbaseoffset+\corr@bubbleresolvedstyleclearance\relax}%
+  \corr@ifstringeq{\corr@bubblemomentumlayout}{vertex-split}{%
+    \corr@clampbubblevertexsplitfractions
+    \pgfmathsetlengthmacro{\mloopexpectedoffset}{\mloopexpectedoffset*\corr@bubblevertexsplitoffsetscale}%
+  }{}%
+  \path (#3) to [#5] coordinate[pos=\corr@bubblemomlabelfraction] (mLoopRawCoord) (#4);
+  \moldloopmomentum{#1}{#2}{#3}{#4}{#5}{#6}%
+  \endgroup
+}
 \def\mexpected{none}\def\mrecord{no}
 \newcommand{\massert}[3]{\ifnum#1=#2\relax\else\PackageError{M03a}{#3: got \the#1, expected #2}{}\fi}
 \let\moldprop\corr@drawchannelprop
@@ -41,7 +57,22 @@
     \ifx\mtext\mtest
       \expandafter\xdef\csname mlabel\midx\endcsname{\number\numexpr\csname mlabel\midx\endcsname+1\relax}%
     \fi}%
-  \moldlabel{#1}{#2}{#3}{#4}{#5}{#6}}
+  \corr@ifstringeq{\mloopchecking}{yes}{%
+    \begingroup
+      \tikzset{every node/.append style={alias=mLoopLabelNode}}%
+      \moldlabel{#1}{#2}{#3}{#4}{#5}{#6}%
+    \endgroup
+    \path #1 coordinate (mLoopArrowLabel);
+    \pgfpointdiff{\pgfpointanchor{mLoopArrowLabel}{center}}{\pgfpointanchor{mLoopLabelNode}{center}}%
+    \edef\mloopdx{\the\pgf@x}\edef\mloopdy{\the\pgf@y}%
+    \pgfmathsetlengthmacro{\mloopoutward}{\mloopdx*cos(\mloopnormal)+\mloopdy*sin(\mloopnormal)}%
+    \ifdim\mloopoutward>0pt\else\PackageError{M03a}{Loop label lies inward of its arrow}{}\fi
+    \pgfpointdiff{\pgfpointanchor{mLoopRawCoord}{center}}{\pgfpointanchor{mLoopArrowLabel}{center}}%
+    \pgfmathsetlengthmacro{\mloopdistance}{veclen(\pgf@x,\pgf@y)}%
+    \pgfmathsetlengthmacro{\mlooperror}{abs(\mloopdistance-\mloopexpectedoffset)}%
+    \ifdim\mlooperror>0.03pt\PackageError{M03a}{Loop arrow clearance differs from requested value}{}\fi
+    \global\advance\mloopchecked by 1
+  }{\moldlabel{#1}{#2}{#3}{#4}{#5}{#6}}}
 \let\moldcap\corr@drawexternalendcap
 \renewcommand{\corr@drawexternalendcap}[2]{%
   \global\advance\mcaps by 1
@@ -156,11 +187,16 @@
 \setbox\mboxdiagram=\hbox{\STreeChannelCorr[field={},central={},leg-labels={,,,},line=plain,
   show-momenta=false,insertion=bubble,insertion-slot=2]}
 \massert\medges{5}{Unsupported s-tree unchanged}\massert\marcs{0}{No s-tree bubble claimed}
-\typeout{PASS M03a: \the\mcases\space complete t-tree diagrams; topology, slots, styles, momenta, caps and state reset}
+\def\mexpected{bubble}\def\mexpectedbaseoffset{12pt}
+\mmeasure{2}{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={KA,KB},bubble-momentum-offset=12pt}
+\massert\mloopchecked{34}{Outward loop labels and measured arrow clearance}
+\typeout{PASS M03a: \the\mcases\space complete diagram cases; topology, slots, styles, momenta, caps and state reset}
+\typeout{PASS M03a: \the\mloopchecked\space rendered loop labels point outward with measured default/explicit clearance}
 % The visible gallery uses original public renderers without instrumentation.
 \let\corr@drawchannelprop\moldprop\let\corr@drawchannelpropnoendcaps\moldpost
 \let\corr@drawbubbleinternalprop\moldarc\let\corr@putvertex\moldvertex
 \let\corr@putmomentumlabelwithdistance\moldlabel\let\corr@drawfourpointtreetchannel\moldtree
+\let\corr@drawbubblemomentumslot\moldloopmomentum
 \let\corr@putbubbleinternalindexcurve\moldarcindex\let\corr@putttreeinsertionpostindex\moldpostindex
 \let\corr@putbubbleexternalindex\moldouterindex
 \let\corr@drawexternalendcap\moldcap\let\corr@drawexternalendcapp\moldcapp

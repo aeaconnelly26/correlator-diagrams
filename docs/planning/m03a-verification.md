@@ -38,7 +38,8 @@ and [public reference](../reference.md).
 ## Verification
 
 - Preserved the slot-1 baseline, then enabled and checked slot 2 (22 focused
-  cases), slot 3 (32 cases), and all four slots (51 final cases).
+  cases), slot 3 (32 cases), and all four slots (51 initial full-matrix cases).
+  The loop-spacing review adds an explicit-offset case: 52 cases total.
 - The focused public-diagram checks count actual propagator/vertex rendering
   calls, verify selected pre/post and both arc endpoints, verify that A/B are
   ordered on the intended host leg, and preserve the other legs. Collinearity
@@ -52,9 +53,31 @@ and [public reference](../reference.md).
   **600 automatic endpoint contacts** pass unchanged. The new isolated page
   passes **16 Proca contacts** across all four placements, including white fill,
   pink color, vertex counts and visible ink contact at representative scales.
-- The original slot-1 regression was compiled before and after. Text content
+- At checkpoint `04f3913`, the original slot-1 regression was compiled before and after. Text content
   matches; maximum PDF text displacement is 0.014pt from coordinate-copy/polar
   rounding. Side-by-side renders retain connectivity, styles and tuned placement.
+
+## Loop-spacing review
+
+The user's screenshots exposed a separate label-side error: local arc a was
+always labeled above and b below, which faces inward when those arcs swap
+page sides on right-hand legs. Label placement now uses the actual arc normal,
+independent of identity and clockwise/counterclockwise direction. Upper labels
+sit above their arrows, lower labels below; near-vertical placements use the
+appropriate left/right side. This shared bubble renderer also covers standalone
+bubbles. No arc identities, propagator styles, momentum directions or geometry
+are changed by this review.
+
+Base default arrow offset is reduced from 12pt to 8pt; the existing 2pt clearance
+for standard wider line styles remains. Explicit offsets/distances still work.
+The current gallery intentionally differs from the pre-review slot-1 default
+momentum spacing. The earlier baseline comparison above records the initial
+expansion checkpoint, not a promise to retain the old spacing after this request.
+
+The focused test now checks 34 actually rendered loop labels against their
+outward normals and measures arrow clearance from the unshifted curve. It covers
+all four placements, reversed directions, default spacing and an explicit 12pt
+override. All 36 maintained documents and both contact checks still pass.
 
 Reproduce the full suite, including both vector checks, with Python containing
 `pypdf`:

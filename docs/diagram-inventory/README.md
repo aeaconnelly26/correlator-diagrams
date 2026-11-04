@@ -12,6 +12,8 @@ identified separately.
 M03a adds lower-left, upper-right and lower-right t-tree bubble placements.
 I29 retains slot 1; B02-B04 show the other legs. This branch is checkpointed
 locally and has not yet been merged or pushed.
+The loop-spacing review uses closer bubble momentum arrows and labels outward
+from their actual arcs, consistently across left/right placements and reversal.
 
 ## How to read it
 
