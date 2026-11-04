@@ -215,6 +215,36 @@
     },
   },
   endpoint marker distance/.initial=5.4pt,
+  proca vertex radius/.initial=2.15pt,
+  % Decorations measure positions in canvas units. Remember the uniform
+  % picture scale before the marking decoration resets the path transform.
+  proca endpoint scale/.code={%
+    \pgfgettransformentries{\corr@procamatrixa}{\corr@procamatrixb}%
+      {\corr@procamatrixc}{\corr@procamatrixd}{\corr@procamatrixx}{\corr@procamatrixy}%
+    \pgfmathsetmacro{\corr@procamarkerscale}{sqrt((\corr@procamatrixa)^2+(\corr@procamatrixb)^2)}%
+  },
+  with proca endpoint/.code 2 args={%
+    \edef\corr@procadistance{\pgfkeysvalueof{/tikzfeynhand/endpoint marker distance}}%
+    \def\corr@procadefaultdistance{5.4pt}%
+    \ifx\corr@procadistance\corr@procadefaultdistance
+      % Anchor the actual triangle tip, independently of its requested size.
+      % Resolve the radius here so a per-line override works in either order.
+      \pgfmathsetlengthmacro{\corr@procatipposition}{#1*(\pgfkeysvalueof{/tikzfeynhand/proca vertex radius})*\corr@procamarkerscale}%
+      \tikzset{decoration={markings,mark=at position \corr@procatipposition\space with {%
+        \node[transform shape,anchor=corner 1,rotate=#2,fill=white,draw,
+          line width=0.7\feynhandlinesize,inner sep=0pt,outer sep=0pt,
+          minimum size=\tikzfeynhand@arrow@size,regular polygon,
+          regular polygon sides=3,shape border rotate=-90] {};%
+      }},postaction={decorate=true}}%
+    \else
+      % Retain an explicitly tuned non-default legacy marker distance.
+      \ifnum#1=1
+        \tikzfeynhandset{with reversed white open arrow=\corr@procadistance}%
+      \else
+        \tikzfeynhandset{with white open arrow=-\corr@procadistance}%
+      \fi
+    \fi
+  },
   endpoint cap length/.initial=0.66,
   endpoint double cap inner length/.initial=0.92,
   endpoint double cap gap/.initial=3.0pt,
@@ -2439,16 +2469,19 @@
     },
     proca base/.style={
       /tikzfeynhand/proca line,
-      /tikzfeynhand/open arrow to start,
-      /tikzfeynhand/open arrow to end,
+      /tikzfeynhand/proca endpoint scale,
+      /tikz/postaction={/tikzfeynhand/with proca endpoint={1}{180}},
+      /tikz/postaction={/tikzfeynhand/with proca endpoint={-1}{0}},
     },
     proca start/.style={
       /tikzfeynhand/proca line,
-      /tikzfeynhand/open arrow to start,
+      /tikzfeynhand/proca endpoint scale,
+      /tikz/postaction={/tikzfeynhand/with proca endpoint={1}{180}},
     },
     proca end/.style={
       /tikzfeynhand/proca line,
-      /tikzfeynhand/open arrow to end,
+      /tikzfeynhand/proca endpoint scale,
+      /tikz/postaction={/tikzfeynhand/with proca endpoint={-1}{0}},
     },
     proca/.style={
       /tikzfeynhand/proca base,

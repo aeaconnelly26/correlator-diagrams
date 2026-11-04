@@ -1,0 +1,1067 @@
+{
+  "slides": 23,
+  "panels": [
+    {
+      "panel": "S02-left",
+      "slide": 2,
+      "position": "left",
+      "description": "Triangle-contact, quartic vertex at top",
+      "requirements": [
+        "R07"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S02-center",
+      "slide": 2,
+      "position": "center",
+      "description": "Box with crossed upper external pair",
+      "requirements": [
+        "R03"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S02-right",
+      "slide": 2,
+      "position": "right",
+      "description": "Ordinary box, side Z / horizontal W styling",
+      "requirements": [
+        "R01"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S03-left",
+      "slide": 3,
+      "position": "left",
+      "description": "Ordinary box, side W / horizontal Z styling",
+      "requirements": [
+        "R01"
+      ],
+      "relation": "Styling variant of S02-right"
+    },
+    {
+      "panel": "S03-center",
+      "slide": 3,
+      "position": "center",
+      "description": "Box with crossed right external pair",
+      "requirements": [
+        "R04"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S03-right",
+      "slide": 3,
+      "position": "right",
+      "description": "Triangle-contact, quartic vertex at right",
+      "requirements": [
+        "R07"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S04-TL",
+      "slide": 4,
+      "position": "TL",
+      "description": "Triangle-contact, quartic vertex at bottom",
+      "requirements": [
+        "R07"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S04-TR",
+      "slide": 4,
+      "position": "TR",
+      "description": "Four-legged s-channel bubble",
+      "requirements": [
+        "R05"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S04-BL",
+      "slide": 4,
+      "position": "BL",
+      "description": "Triangle-contact, quartic vertex at left",
+      "requirements": [
+        "R07"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S04-BR",
+      "slide": 4,
+      "position": "BR",
+      "description": "Four-legged t-channel bubble",
+      "requirements": [
+        "R05"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S05-L1",
+      "slide": 5,
+      "position": "L1",
+      "description": "Lower-left t-tree swordfish",
+      "requirements": [
+        "R12"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S05-L2",
+      "slide": 5,
+      "position": "L2",
+      "description": "Bottom t-tree regular triangle",
+      "requirements": [
+        "R08"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S05-L3",
+      "slide": 5,
+      "position": "L3",
+      "description": "Lower-right t-tree swordfish",
+      "requirements": [
+        "R12"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S05-C1",
+      "slide": 5,
+      "position": "C1",
+      "description": "Lower-right t-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S05-C2",
+      "slide": 5,
+      "position": "C2",
+      "description": "Lower-right t-tree self-energy",
+      "requirements": [
+        "R09"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S05-R1",
+      "slide": 5,
+      "position": "R1",
+      "description": "Lower-left t-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S05-R2",
+      "slide": 5,
+      "position": "R2",
+      "description": "Lower-left t-tree self-energy",
+      "requirements": [
+        "R09"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S06-L1",
+      "slide": 6,
+      "position": "L1",
+      "description": "Left s-tree shared inner-vertex bubble",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S06-L2",
+      "slide": 6,
+      "position": "L2",
+      "description": "Left s-tree regular triangle",
+      "requirements": [
+        "R08"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S06-L3",
+      "slide": 6,
+      "position": "L3",
+      "description": "Left s-tree shared inner-vertex bubble, alternate species",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Styling variant of S06-L1"
+    },
+    {
+      "panel": "S06-C1",
+      "slide": 6,
+      "position": "C1",
+      "description": "Upper-left s-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S06-C2",
+      "slide": 6,
+      "position": "C2",
+      "description": "Lower-left s-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S06-R1",
+      "slide": 6,
+      "position": "R1",
+      "description": "Upper-left s-tree self-energy",
+      "requirements": [
+        "R10"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S06-R2",
+      "slide": 6,
+      "position": "R2",
+      "description": "Lower-left s-tree self-energy",
+      "requirements": [
+        "R10"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S07-L1",
+      "slide": 7,
+      "position": "L1",
+      "description": "Right s-tree shared inner-vertex bubble",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S07-L2",
+      "slide": 7,
+      "position": "L2",
+      "description": "Right s-tree regular triangle",
+      "requirements": [
+        "R08"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S07-L3",
+      "slide": 7,
+      "position": "L3",
+      "description": "Right s-tree shared inner-vertex bubble, alternate species",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Styling variant of S07-L1"
+    },
+    {
+      "panel": "S07-C1",
+      "slide": 7,
+      "position": "C1",
+      "description": "Lower-right s-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S07-C2",
+      "slide": 7,
+      "position": "C2",
+      "description": "Upper-right s-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S07-R1",
+      "slide": 7,
+      "position": "R1",
+      "description": "Lower-right s-tree self-energy",
+      "requirements": [
+        "R10"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S07-R2",
+      "slide": 7,
+      "position": "R2",
+      "description": "Upper-right s-tree self-energy",
+      "requirements": [
+        "R10"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S08-L1",
+      "slide": 8,
+      "position": "L1",
+      "description": "Upper-left t-tree swordfish",
+      "requirements": [
+        "R12"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S08-L2",
+      "slide": 8,
+      "position": "L2",
+      "description": "Top t-tree regular triangle",
+      "requirements": [
+        "R08"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S08-L3",
+      "slide": 8,
+      "position": "L3",
+      "description": "Upper-right t-tree swordfish",
+      "requirements": [
+        "R12"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S08-C1",
+      "slide": 8,
+      "position": "C1",
+      "description": "Upper-right t-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S08-C2",
+      "slide": 8,
+      "position": "C2",
+      "description": "Upper-right t-tree self-energy",
+      "requirements": [
+        "R09"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S08-R1",
+      "slide": 8,
+      "position": "R1",
+      "description": "Upper-left t-tree seagull",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S08-R2",
+      "slide": 8,
+      "position": "R2",
+      "description": "Upper-left t-tree self-energy; current prototype subset",
+      "requirements": [
+        "R09"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S10-TL",
+      "slide": 10,
+      "position": "TL",
+      "description": "Contact self-energy on upper-left leg",
+      "requirements": [
+        "R13"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S10-TR",
+      "slide": 10,
+      "position": "TR",
+      "description": "Contact self-energy on upper-right leg",
+      "requirements": [
+        "R13"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S10-BL",
+      "slide": 10,
+      "position": "BL",
+      "description": "Contact self-energy on lower-left leg",
+      "requirements": [
+        "R13"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S10-BR",
+      "slide": 10,
+      "position": "BR",
+      "description": "Contact self-energy on lower-right leg",
+      "requirements": [
+        "R13"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S11-T1",
+      "slide": 11,
+      "position": "T1",
+      "description": "Contact seagull on lower-right leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S11-T2",
+      "slide": 11,
+      "position": "T2",
+      "description": "Contact seagull on lower-right leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Species/flow variant of S11-T1"
+    },
+    {
+      "panel": "S11-T3",
+      "slide": 11,
+      "position": "T3",
+      "description": "Contact seagull on upper-right leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S11-T4",
+      "slide": 11,
+      "position": "T4",
+      "description": "Contact seagull on upper-right leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Species/flow variant of S11-T3"
+    },
+    {
+      "panel": "S11-B1",
+      "slide": 11,
+      "position": "B1",
+      "description": "Contact seagull on lower-left leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S11-B2",
+      "slide": 11,
+      "position": "B2",
+      "description": "Contact seagull on lower-left leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Species/flow variant of S11-B1"
+    },
+    {
+      "panel": "S11-B3",
+      "slide": 11,
+      "position": "B3",
+      "description": "Contact seagull on upper-left leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S11-B4",
+      "slide": 11,
+      "position": "B4",
+      "description": "Contact seagull on upper-left leg",
+      "requirements": [
+        "R21"
+      ],
+      "relation": "Species/flow variant of S11-B3"
+    },
+    {
+      "panel": "S12-left",
+      "slide": 12,
+      "position": "left",
+      "description": "Four-legged s-channel bubble",
+      "requirements": [
+        "R05"
+      ],
+      "relation": "Repeated graph: S04-TR"
+    },
+    {
+      "panel": "S12-right",
+      "slide": 12,
+      "position": "right",
+      "description": "Triangle-contact, quartic vertex at right",
+      "requirements": [
+        "R07"
+      ],
+      "relation": "Repeated graph: S03-right"
+    },
+    {
+      "panel": "S13-left",
+      "slide": 13,
+      "position": "left",
+      "description": "Triangle-shaped crossed drawing, first embedding",
+      "requirements": [
+        "R22"
+      ],
+      "relation": "Unclear reference: endpoint tracing required"
+    },
+    {
+      "panel": "S13-right",
+      "slide": 13,
+      "position": "right",
+      "description": "Triangle-shaped crossed drawing, second embedding",
+      "requirements": [
+        "R22"
+      ],
+      "relation": "Unclear reference: endpoint tracing required"
+    },
+    {
+      "panel": "S14-left",
+      "slide": 14,
+      "position": "left",
+      "description": "Four-legged t-channel bubble",
+      "requirements": [
+        "R05"
+      ],
+      "relation": "Species/flow variant of S04-BR"
+    },
+    {
+      "panel": "S14-right",
+      "slide": 14,
+      "position": "right",
+      "description": "Four-legged bubble with crossed right external pair",
+      "requirements": [
+        "R05"
+      ],
+      "relation": "u-channel layout: compare I16; species/flow variant"
+    },
+    {
+      "panel": "S15-left",
+      "slide": 15,
+      "position": "left",
+      "description": "Four-legged s-channel bubble",
+      "requirements": [
+        "R05"
+      ],
+      "relation": "Species/flow variant of S04-TR"
+    },
+    {
+      "panel": "S15-right",
+      "slide": 15,
+      "position": "right",
+      "description": "Triangle-contact, quartic vertex at right",
+      "requirements": [
+        "R07"
+      ],
+      "relation": "Repeated graph: S03-right"
+    },
+    {
+      "panel": "S16-TL",
+      "slide": 16,
+      "position": "TL",
+      "description": "Stemmed loop on upper t-tree vertex",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S16-TR",
+      "slide": 16,
+      "position": "TR",
+      "description": "Stemmed loop on left s-tree vertex",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S16-BL",
+      "slide": 16,
+      "position": "BL",
+      "description": "Stemmed loop on lower t-tree vertex",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S16-BR",
+      "slide": 16,
+      "position": "BR",
+      "description": "Stemmed loop on right s-tree vertex",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S17-TL",
+      "slide": 17,
+      "position": "TL",
+      "description": "Stemmed loop on contact upper-right leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S17-TR",
+      "slide": 17,
+      "position": "TR",
+      "description": "Stemmed loop on contact upper-left leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S17-BL",
+      "slide": 17,
+      "position": "BL",
+      "description": "Stemmed loop on contact lower-right leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S17-BR",
+      "slide": 17,
+      "position": "BR",
+      "description": "Stemmed loop on contact lower-left leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S18-TL",
+      "slide": 18,
+      "position": "TL",
+      "description": "Stemmed loop on s-tree upper-right leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S18-TR",
+      "slide": 18,
+      "position": "TR",
+      "description": "Stemmed loop on s-tree upper-left leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S18-BL",
+      "slide": 18,
+      "position": "BL",
+      "description": "Stemmed loop on s-tree lower-right leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S18-BR",
+      "slide": 18,
+      "position": "BR",
+      "description": "Stemmed loop on s-tree lower-left leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S19-TL",
+      "slide": 19,
+      "position": "TL",
+      "description": "Stemmed loop on t-tree upper-left leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S19-TR",
+      "slide": 19,
+      "position": "TR",
+      "description": "Stemmed loop on t-tree upper-right leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S19-BL",
+      "slide": 19,
+      "position": "BL",
+      "description": "Stemmed loop on t-tree lower-left leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S19-BR",
+      "slide": 19,
+      "position": "BR",
+      "description": "Stemmed loop on t-tree lower-right leg",
+      "requirements": [
+        "R20"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S20-TL",
+      "slide": 20,
+      "position": "TL",
+      "description": "s-tree seagull on lower-right leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S07-C1"
+    },
+    {
+      "panel": "S20-TR",
+      "slide": 20,
+      "position": "TR",
+      "description": "s-tree seagull on upper-right leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S07-C2"
+    },
+    {
+      "panel": "S20-BL",
+      "slide": 20,
+      "position": "BL",
+      "description": "s-tree seagull on upper-left leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S06-C1"
+    },
+    {
+      "panel": "S20-BR",
+      "slide": 20,
+      "position": "BR",
+      "description": "s-tree seagull on lower-left leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S06-C2"
+    },
+    {
+      "panel": "S21-TL",
+      "slide": 21,
+      "position": "TL",
+      "description": "t-tree seagull on upper-right leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S08-C1"
+    },
+    {
+      "panel": "S21-TR",
+      "slide": 21,
+      "position": "TR",
+      "description": "t-tree seagull on upper-left leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S08-R1"
+    },
+    {
+      "panel": "S21-BL",
+      "slide": 21,
+      "position": "BL",
+      "description": "t-tree seagull on lower-right leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S05-C1"
+    },
+    {
+      "panel": "S21-BR",
+      "slide": 21,
+      "position": "BR",
+      "description": "t-tree seagull on lower-left leg",
+      "requirements": [
+        "R11"
+      ],
+      "relation": "Repeated graph / species variant: S05-R1"
+    },
+    {
+      "panel": "S22-TL",
+      "slide": 22,
+      "position": "TL",
+      "description": "Left s-tree shared inner-vertex bubble",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Repeated graph: S06-L1"
+    },
+    {
+      "panel": "S22-TR",
+      "slide": 22,
+      "position": "TR",
+      "description": "Top t-tree shared inner-vertex bubble",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S22-BL",
+      "slide": 22,
+      "position": "BL",
+      "description": "Right s-tree shared inner-vertex bubble",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Repeated graph: S07-L1"
+    },
+    {
+      "panel": "S22-BR",
+      "slide": 22,
+      "position": "BR",
+      "description": "Bottom t-tree shared inner-vertex bubble",
+      "requirements": [
+        "R19"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S23-TL",
+      "slide": 23,
+      "position": "TL",
+      "description": "t-tree internal exchange self-energy",
+      "requirements": [
+        "R17"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S23-TR",
+      "slide": 23,
+      "position": "TR",
+      "description": "s-tree internal exchange self-energy",
+      "requirements": [
+        "R17"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S23-BL",
+      "slide": 23,
+      "position": "BL",
+      "description": "t-tree internal exchange seagull",
+      "requirements": [
+        "R18"
+      ],
+      "relation": "Target"
+    },
+    {
+      "panel": "S23-BR",
+      "slide": 23,
+      "position": "BR",
+      "description": "s-tree internal exchange seagull",
+      "requirements": [
+        "R18"
+      ],
+      "relation": "Target"
+    }
+  ],
+  "pdf_items": [
+    {
+      "id": "P1-01",
+      "page": 1,
+      "description": "Square box defaults",
+      "requirement": "R01"
+    },
+    {
+      "id": "P1-02",
+      "page": 1,
+      "description": "Complementary internal crossing",
+      "requirement": "R02"
+    },
+    {
+      "id": "P1-03",
+      "page": 1,
+      "description": "First crossed-box image: upper external pair",
+      "requirement": "R03"
+    },
+    {
+      "id": "P1-04",
+      "page": 1,
+      "description": "Second crossed-box image: right external pair",
+      "requirement": "R04"
+    },
+    {
+      "id": "P1-05",
+      "page": 1,
+      "description": "Four-legged bubble request",
+      "requirement": "R05"
+    },
+    {
+      "id": "P1-06",
+      "page": 1,
+      "description": "Independent label positions and outside defaults",
+      "requirement": "R06"
+    },
+    {
+      "id": "P1-07",
+      "page": 1,
+      "description": "Independent momentum sizing on unequal edges",
+      "requirement": "R06"
+    },
+    {
+      "id": "P2-01",
+      "page": 2,
+      "description": "Pink triangle-contact image and label placement",
+      "requirement": "R06"
+    },
+    {
+      "id": "P2-02",
+      "page": 2,
+      "description": "All four triangle-contact orientations",
+      "requirement": "R07"
+    },
+    {
+      "id": "P2-03",
+      "page": 2,
+      "description": "Regular triangle correction, four tree placements",
+      "requirement": "R08"
+    },
+    {
+      "id": "P2-04",
+      "page": 2,
+      "description": "t-tree self-energy on all external legs",
+      "requirement": "R09"
+    },
+    {
+      "id": "P2-05",
+      "page": 2,
+      "description": "t-tree seagull on all external legs",
+      "requirement": "R11"
+    },
+    {
+      "id": "P2-06",
+      "page": 2,
+      "description": "Swordfish, all legs in t and s; one insertion at a time",
+      "requirement": "R12"
+    },
+    {
+      "id": "P3-01",
+      "page": 3,
+      "description": "Swordfish shared-vertex geometry, t example",
+      "requirement": "R12"
+    },
+    {
+      "id": "P3-02",
+      "page": 3,
+      "description": "s-tree self-energy on all external legs",
+      "requirement": "R10"
+    },
+    {
+      "id": "P3-03",
+      "page": 3,
+      "description": "s-tree seagull on all external legs",
+      "requirement": "R11"
+    },
+    {
+      "id": "P3-04",
+      "page": 3,
+      "description": "s-tree swordfish example",
+      "requirement": "R12"
+    },
+    {
+      "id": "P3-05",
+      "page": 3,
+      "description": "Diagonal Z connection q1-q4 / q3-q2",
+      "requirement": "R14"
+    },
+    {
+      "id": "P3-06",
+      "page": 3,
+      "description": "Prefer square-shaped vertex-correction layout",
+      "requirement": "R14"
+    },
+    {
+      "id": "P4-01",
+      "page": 4,
+      "description": "Contact external self-energy example",
+      "requirement": "R13"
+    },
+    {
+      "id": "P4-02",
+      "page": 4,
+      "description": "Vertex-correction labeling heading",
+      "requirement": "R06"
+    },
+    {
+      "id": "P4-03",
+      "page": 4,
+      "description": "Proca arrows reach vertices in every topology",
+      "requirement": "R15"
+    },
+    {
+      "id": "P4-04",
+      "page": 4,
+      "description": "Reference, landing page, and visuals refresh",
+      "requirement": "R16"
+    }
+  ],
+  "context": [
+    {
+      "id": "S01",
+      "description": "Cover, title, author names; no diagram requirement."
+    },
+    {
+      "id": "S08-context",
+      "description": "ResearchGate screenshot and swordfish commentary: terminology context for R12, not an instruction or a new graph. The seven actual diagram panels are listed separately."
+    },
+    {
+      "id": "S09",
+      "description": "Photographed handwritten swordfish/momentum notes: context for R12 and its annotation review. No independent additional supported topology is inferred."
+    },
+    {
+      "id": "S11-context",
+      "description": "Editing tooltip and composite-image boundaries: UI/context, not diagram requirements."
+    },
+    {
+      "id": "PDF-P3-context",
+      "description": "The unfinished \u201cWe also need\u201d / trailing bullet has no accompanying distinct target; no extra capability is inferred."
+    }
+  ]
+}

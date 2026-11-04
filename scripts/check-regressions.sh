@@ -54,5 +54,11 @@ run_tex "regressions/topologies/insertion/insertion-regression.tex"
 run_tex "regressions/topologies/loop-audit/loop-momentum-audit.tex"
 run_tex "regressions/topologies/loop-audit/self-energy-bubble-mockups.tex"
 run_tex "regressions/topologies/box/box-topology-regression.tex"
+run_tex "regressions/propagators/proca/proca-regression.tex"
+run_tex "regressions/propagators/proca-endpoints/proca-endpoint-audit.tex"
+run_tex "regressions/propagators/endpoint-markers/endpoint-marker-regression.tex"
+run_tex "regressions/topologies/cross-box/cross-box-regression.tex"
+run_tex "regressions/topologies/channel/channel-topology-regression.tex"
+run_tex "regressions/topologies/sunset/sunset-index-regression.tex"
 
 cleanup_latex_scratch

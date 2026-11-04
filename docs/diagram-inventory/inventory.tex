@@ -1,0 +1,591 @@
+% Generated from catalog.json by build.py; uses the public package macros.
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.62in]{geometry}
+\usepackage{amsmath,xcolor,graphicx,adjustbox,fancyhdr,pdfpages}
+\usepackage{feynman-fun}
+\definecolor{atlasink}{HTML}{20394B}
+\pagestyle{fancy}\fancyhf{}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline 0dbf733 + M01 | 2026-11-03}
+\fancyfoot[R]{\scriptsize\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\newcommand{\atlaspage}[3]{%
+  {\sffamily\color{atlasink}\small CURRENT CAPABILITIES / #1\par}
+  \vspace{5pt}{\sffamily\bfseries\Large #2\par}
+  \vspace{5pt}{\small #3\par}\vspace{13pt}}
+\newcommand{\atlascell}[5]{%
+  \begin{minipage}[t][2.38in][t]{0.475\linewidth}
+  {\sffamily\bfseries\color{atlasink}#1\par}
+  \vspace{3pt}{\ttfamily\footnotesize\detokenize{#2}\par}
+  \vspace{4pt}\begin{minipage}[c][1.57in][c]{\linewidth}\centering
+  \begin{adjustbox}{max width=\linewidth,max totalheight=1.52in}#3\end{adjustbox}
+  \end{minipage}\par
+  {\footnotesize #4\par}\vspace{2pt}
+  {\scriptsize\color{black!65}#5\par}
+  \end{minipage}}
+\begin{document}
+\atlaspage{01 / FUNDAMENTALS}{Two- and three-point objects}{Plain lines expose connectivity. IDs identify recipes; rotated layouts are not extra graph topologies.}
+\atlascell{I01  Two-point object}{\TwoPointCorr}{%
+\TwoPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0
+]
+}{Two external segments meet at one marked point.}{A central point or optional blob, not a loop correction.}\hfill
+\atlascell{I02  Three-point: upper left}{\ThreePointCorr}{%
+\ThreePointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  orientation={top,left}
+]
+}{One trivalent vertex; logical slot 1 points upper left.}{Four orientations retain the same three logical slots.}\par\vspace{4pt}
+\atlascell{I03  Three-point: upper right}{\ThreePointCorr}{%
+\ThreePointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  orientation={top,right}
+]
+}{One trivalent vertex; logical slot 1 points upper right.}{Four orientations retain the same three logical slots.}\hfill
+\atlascell{I04  Three-point: lower left}{\ThreePointCorr}{%
+\ThreePointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  orientation={bottom,left}
+]
+}{One trivalent vertex; logical slot 1 points lower left.}{Four orientations retain the same three logical slots.}\par\vspace{4pt}
+\atlascell{I05  Three-point: lower right}{\ThreePointCorr}{%
+\ThreePointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  orientation={bottom,right}
+]
+}{One trivalent vertex; logical slot 1 points lower right.}{Four orientations retain the same three logical slots.}\par\vspace{4pt}
+\newpage
+\atlaspage{02 / CONTACT LAYOUTS}{Contact and pairing layouts}{Pairing presets are shown as implemented. A missing bridge is meaningful, not an omitted annotation.}
+\atlascell{I06  Central contact}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  contact-pairing=central
+]
+}{Four external edges meet at one quartic vertex.}{Connected four-point contact.}\hfill
+\atlascell{I07  Horizontal pairing}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  contact-pairing=horizontal
+]
+}{Top pair and bottom pair each meet separately.}{Disconnected pairs; there is no vertical exchange edge.}\par\vspace{4pt}
+\atlascell{I08  Vertical pairing}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  contact-pairing=vertical
+]
+}{Left pair and right pair each meet separately.}{Disconnected pairs; there is no horizontal exchange edge.}\hfill
+\atlascell{I09  Crossed contact layout}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  contact-pairing=crossed
+]
+}{Curved and straight external edges meet at a central point.}{The central dot is an interaction, not an over/under crossing.}\par\vspace{4pt}
+\atlascell{I10  Flat contact}{\FlatContactCorr}{%
+\FlatContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  flat-contact-line=plain
+]
+}{One quartic vertex with a flat upper pair.}{A contact layout, not an additional loop topology.}\par\vspace{4pt}
+\newpage
+\atlaspage{03 / CHANNELS}{Tree exchanges and four-legged bubbles}{External slot order: 1 upper left, 2 lower left, 3 upper right, 4 lower right. No momentum annotations.}
+\atlascell{I11  s-channel tree}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  channel-line=plain
+]
+}{Two trivalent vertices joined by one exchange edge.}{Insertion support is narrower than ordinary tree support.}\hfill
+\atlascell{I12  t-channel tree}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  channel-line=plain
+]
+}{Two trivalent vertices joined by one exchange edge.}{Insertion support is narrower than ordinary tree support.}\par\vspace{4pt}
+\atlascell{I13  u-channel tree}{\UTreeChannelCorr}{%
+\UTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  channel-line=plain
+]
+}{Two trivalent vertices joined by one exchange edge.}{Insertion support is narrower than ordinary tree support.}\hfill
+\atlascell{I14  s-channel bubble}{\SChannelCorr}{%
+\SChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  loop-channel-a-line=plain,
+  loop-channel-b-line=plain
+]
+}{Two quartic vertices joined by two internal edges.}{Four-legged bubble already exists; unlike a self-energy insertion.}\par\vspace{4pt}
+\atlascell{I15  t-channel bubble}{\TChannelCorr}{%
+\TChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  loop-channel-a-line=plain,
+  loop-channel-b-line=plain
+]
+}{Two quartic vertices joined by two internal edges.}{Four-legged bubble already exists; unlike a self-energy insertion.}\hfill
+\atlascell{I16  u-channel bubble}{\UChannelCorr}{%
+\UChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  loop-channel-a-line=plain,
+  loop-channel-b-line=plain
+]
+}{Two quartic vertices joined by two internal edges.}{Four-legged bubble already exists; unlike a self-energy insertion.}\par\vspace{4pt}
+\newpage
+\atlaspage{04 / BOX AND IDENTITY HELPERS}{Boxes and half-box layouts}{The ordinary box already defaults to a square. Half-box presets include identity-specific marker variants.}
+\atlascell{I17  Square box}{\BoxLoopCorr}{%
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain
+]
+}{Four trivalent vertices around a single loop.}{Default inner spans are both 1.34; explicit overrides remain possible.}\hfill
+\atlascell{I18  Existing crossed box}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain
+]
+}{Fixed left/right edges plus two crossing diagonals.}{No interaction at crossing; internal momentum/index pass is incomplete.}\par\vspace{4pt}
+\atlascell{I19  Straight half-box}{\HalfBoxCorr}{%
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  half-box-line=plain,
+  half-box-bridge-line=plain,
+  half-box-style=straight
+]
+}{Two trivalent vertices with a horizontal bridge.}{An open tree helper, despite the half-box name.}\hfill
+\atlascell{I20  Angled half-propagator}{\HalfBoxCorr}{%
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  half-box-style=halfpropagator,
+  half-box-line=plain,
+  half-box-bridge-line=plain
+]
+}{Angled upper stubs on the same two-vertex graph.}{A layout variant of the half-box, not a new loop.}\par\vspace{4pt}
+\atlascell{I21  Left half-propagator marker}{\HalfBoxCorr}{%
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  half-box-style=halfpropleft,
+  half-box-line=plain,
+  half-box-bridge-line=plain,
+  half-box-left-lower-circ={}
+]
+}{Angled half-box with the left lower-leg circle preset.}{Blank circle retained to show the preset; same underlying graph.}\hfill
+\atlascell{I22  Right half-propagator marker}{\HalfBoxCorr}{%
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  half-box-style=halfpropright,
+  half-box-line=plain,
+  half-box-bridge-line=plain,
+  half-box-right-lower-circ={}
+]
+}{Angled half-box with the right lower-leg circle preset.}{Blank circle retained to show the preset; same underlying graph.}\par\vspace{4pt}
+\newpage
+\atlaspage{05 / TRIANGLE-CONTACT}{Four triangle-contact orientations}{Two trivalent vertices and one quartic vertex. These orientations already exist; label independence remains future work.}
+\atlascell{I23  Quartic contact: bottom}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=bottom,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain
+]
+}{The quartic/contact vertex lies on the bottom side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\hfill
+\atlascell{I24  Quartic contact: top}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=top,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain
+]
+}{The quartic/contact vertex lies on the top side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\par\vspace{4pt}
+\atlascell{I25  Quartic contact: left}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=left,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain
+]
+}{The quartic/contact vertex lies on the left side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\hfill
+\atlascell{I26  Quartic contact: right}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=right,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain
+]
+}{The quartic/contact vertex lies on the right side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\par\vspace{4pt}
+\newpage
+\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and the insertion prototype}{Only the insertion pictured here is currently supported. Unsupported insertion settings can be silently ignored.}
+\atlascell{I27  Standalone self-energy bubble}{\BubbleCorr}{%
+\BubbleCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  bubble-external-line=plain,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{Two trivalent vertices and two internal arcs; one loop.}{Two external legs; distinct from a four-legged channel bubble.}\hfill
+\atlascell{I28  Sunset}{\SunsetDiagram}{%
+\SunsetDiagram[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  sunset-left-line=plain,
+  sunset-right-line=plain,
+  sunset-top-line=plain,
+  sunset-middle-line=plain,
+  sunset-bottom-line=plain,
+  sunset-central-label={}
+]
+}{Two quartic vertices joined by three internal edges.}{Two loops, not a one-loop self-energy bubble.}\par\vspace{4pt}
+\atlascell{I29  Bubble on t-tree leg 1}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  scale=0.82,
+  channel-line=plain,
+  insertion=bubble,
+  insertion-slot=1,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+}{A self-energy bubble splits the upper-left external leg.}{Only t-tree external slot 1 is implemented; other slots are no-ops.}\par\vspace{4pt}
+\newpage
+\atlaspage{07 / STYLE APPENDIX}{Existing styles and annotations}{Representative combinations, not a promise of every style on every topology. Recipes include all displayed options.}
+\atlascell{A01  Your pink Proca t-bubble}{\TChannelCorr}{%
+\TChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  loop-channel-left-line={proca,magenta!85!red},
+  loop-channel-right-line={proca,magenta!85!red}
+]
+}{Four double-capped EW legs and two pink Proca internals.}{M01 verifies automatic contact; custom legacy distances retain their tuning.}\hfill
+\atlascell{A02  Polarization and mixed legs}{\ThreePointCorr}{%
+\ThreePointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  leg-styles={{ewboson,endcapp},{ewboson,endcap},{spol,magenta!85!red,endcap}}
+]
+}{Double cap, single cap, and a pink scalar-polarized leg.}{Scalar polarization is a style, not another topology.}\par\vspace{4pt}
+\atlascell{A03  EW circles and single caps}{\BoxLoopCorr}{%
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-line={ewboson,endcap},
+  box-left-line={ewboson,circ=Z},
+  box-top-line={ewboson,circ=W},
+  box-right-line={ewboson,circ=Z},
+  box-bottom-line={ewboson,circ=W}
+]
+}{Independent internal particle circles and external endcaps.}{Species labels decorate the existing square loop.}\hfill
+\atlascell{A04  Bridge momentum and indices}{\HalfBoxCorr}{%
+\HalfBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  scale=1.0,
+  half-box-line=ewboson,
+  half-box-bridge-line={proca,magenta!85!red},
+  show-momenta=true,
+  momentum-labels={,,,},
+  half-box-momentum-slots={},
+  half-box-bridge-momentum=p,
+  half-box-propagator-left-indices={,,,,a},
+  half-box-propagator-right-indices={,,,,b},
+  half-box-xspan=1.0
+]
+}{A pink bridge with one momentum and endpoint indices.}{Omit global line=plain: it overrides the bridge-specific style.}\par\vspace{4pt}
+\atlascell{A05  Curved momentum and indices}{\BubbleCorr}{%
+\BubbleCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  bubble-external-line={ewboson,endcap},
+  bubble-top-line={ewboson,circ=Z},
+  bubble-bottom-line={proca,magenta!85!red},
+  show-momenta=true,
+  bubble-momenta={k,p-k},
+  bubble-momentum-rotation=clockwise,
+  bubble-endpoint-indices={a,b,c,d},
+  bubble-momentum-label-distance=5pt,
+  momentum-labels={p,p},
+  bubble-external-length=1.35
+]
+}{External flow, curved loop momenta, and four endpoint indices.}{Representative annotation layout; crowded cases need dedicated checks.}\hfill
+\atlascell{A06  Crossing and Proca circles}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=ewboson,
+  box-external-line={ewboson,endcapp},
+  cross-box-up-line={proca,magenta!85!red,circ={}},
+  cross-box-down-line={ewboson,circ=Z}
+]
+}{A blank circle on one pink diagonal and a Z on the other.}{Crossing stays unconnected; no internal momenta or indices claimed.}\par\vspace{4pt}
+\includepdf[pages=-]{seagull-branch-examples.pdf}
+\end{document}

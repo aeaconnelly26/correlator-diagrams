@@ -1,0 +1,412 @@
+[
+  {
+    "id": "R01",
+    "title": "Square box defaults",
+    "status": "Verified existing",
+    "evidence": "I17; BoxLoopCorr resets box-xspan and box-yspan to 1.34; rendered square in the atlas.",
+    "target": "Already implemented for defaults. Preserve explicit user dimension overrides. Do not add another square-box macro solely to satisfy this request.",
+    "milestone": "M07 / verification only",
+    "dependencies": "None",
+    "acceptance": "Default box and crossed-box vertex spans agree horizontally and vertically; no regression to rectangular defaults.",
+    "source_panels": [
+      "S02-right",
+      "S03-left"
+    ],
+    "pdf_items": [
+      "P1-01"
+    ]
+  },
+  {
+    "id": "R02",
+    "title": "Complementary internal crossed box",
+    "status": "Missing",
+    "evidence": "I18/CrossBoxCorr provides fixed left/right sides and crossed diagonals only.",
+    "target": "Keep top/bottom internal edges fixed and cross the other pair. Preserve four trivalent vertices and an unconnected over/under crossing.",
+    "milestone": "M07",
+    "dependencies": "M01; M07 connectivity specification",
+    "acceptance": "Both internal-crossing layouts have matching slot maps, style controls, correct endpoint markers, and explicit crossing gaps.",
+    "source_panels": [],
+    "pdf_items": [
+      "P1-02"
+    ]
+  },
+  {
+    "id": "R03",
+    "title": "Box with crossed upper external legs",
+    "status": "Missing",
+    "evidence": "I17 is an ordinary square box; existing box macros do not expose this external routing.",
+    "target": "Cross the two upper external legs without turning their crossing into a vertex. This is not the same as crossing internal edges.",
+    "milestone": "M07",
+    "dependencies": "M01; source-panel routing specification",
+    "acceptance": "Reproduce S02-center with square loop geometry and unchanged external slot identity.",
+    "source_panels": [
+      "S02-center"
+    ],
+    "pdf_items": [
+      "P1-03"
+    ]
+  },
+  {
+    "id": "R04",
+    "title": "Box with crossed right external legs",
+    "status": "Missing",
+    "evidence": "I17/I18 cannot independently cross the right external pair.",
+    "target": "Preserve the square loop and cross the right external pair.",
+    "milestone": "M07",
+    "dependencies": "M01; source-panel routing specification",
+    "acceptance": "Reproduce S03-center; species, caps, labels, and slot identity follow the routed legs.",
+    "source_panels": [
+      "S03-center"
+    ],
+    "pdf_items": [
+      "P1-04"
+    ]
+  },
+  {
+    "id": "R05",
+    "title": "Four-legged channel bubbles",
+    "status": "Verified existing",
+    "evidence": "I14-I16: SChannelCorr, TChannelCorr, UChannelCorr. A01 demonstrates two pink Proca internal lines and four double-capped EW external legs.",
+    "target": "Two quartic vertices joined by two internal lines, with four external legs. Existing topology; decorated endpoint and label quality are separate R15/R06 checks.",
+    "milestone": "M00 complete; retain in M11",
+    "dependencies": "None",
+    "acceptance": "Keep three channel recipes and the exact requested styled t-channel example in the atlas; do not reimplement this family.",
+    "source_panels": [
+      "S04-TR",
+      "S04-BR",
+      "S12-left",
+      "S14-left",
+      "S14-right",
+      "S15-left"
+    ],
+    "pdf_items": [
+      "P1-05"
+    ]
+  },
+  {
+    "id": "R06",
+    "title": "Independent triangle-contact labeling",
+    "status": "Existing with limitations",
+    "evidence": "I23-I26 verify shapes. Existing triangle-contact regression and internal-momentum source demonstrate annotations; code shares offsets/fractions and includes hard-coded slot adjustments.",
+    "target": "Control each external/internal momentum label and arrow independently. Defaults stay outside the triangle for all orientations. Unequal edge lengths must not force linked label/arrow sizing.",
+    "milestone": "M02",
+    "dependencies": "M01 baseline endpoint audit",
+    "acceptance": "All four orientations pass a labeled mixed-Proca/EW example; changing one annotation does not move another; old public keys still work.",
+    "source_panels": [],
+    "pdf_items": [
+      "P1-06",
+      "P1-07",
+      "P2-01",
+      "P4-02"
+    ]
+  },
+  {
+    "id": "R07",
+    "title": "Four triangle-contact orientations",
+    "status": "Verified existing",
+    "evidence": "I23-I26: TriangleContactCorr with bottom/top/left/right orientation.",
+    "target": "Already implemented: two trivalent and one quartic vertex. Label quality remains R06.",
+    "milestone": "M00 complete; retain in M02",
+    "dependencies": "None",
+    "acceptance": "Retain four plain recipes and extend their labeled coverage during M02.",
+    "source_panels": [
+      "S02-left",
+      "S03-right",
+      "S04-TL",
+      "S04-BL",
+      "S12-right",
+      "S15-right"
+    ],
+    "pdf_items": [
+      "P2-02"
+    ]
+  },
+  {
+    "id": "R08",
+    "title": "Regular tree-attached triangle correction",
+    "status": "Missing",
+    "evidence": "ThreePointCorr is a single vertex; TriangleContactCorr has a quartic vertex. Neither is the requested triangle plus an exchange bridge and a second tree vertex.",
+    "target": "Three trivalent vertices form the loop; a bridge connects one to the other tree interaction. Top/bottom t-channel and left/right s-channel variants.",
+    "milestone": "M06",
+    "dependencies": "M01, M02, insertion-slot conventions from M03",
+    "acceptance": "Four required placements preserve graph connectivity, line styles, outer caps, independent momentum flow, and endpoint indices.",
+    "source_panels": [
+      "S05-L2",
+      "S06-L2",
+      "S07-L2",
+      "S08-L2"
+    ],
+    "pdf_items": [
+      "P2-03"
+    ]
+  },
+  {
+    "id": "R09",
+    "title": "Bubble insertion on all t-tree external legs",
+    "status": "Existing with limitations",
+    "evidence": "I29/TTreeChannelCorr[insertion=bubble,insertion-slot=1] works. Only slot 1 is drawn; accepted slots 2-5 do not establish support.",
+    "target": "Expand self-energy insertion to external slots 1,2,3,4; each loop has two new trivalent vertices and pre/post host segments.",
+    "milestone": "M03a",
+    "dependencies": "M01, M02",
+    "acceptance": "Four t-tree external slots render the bubble; each retains host style, caps, pre/post momentum, and endpoint indices without state leakage.",
+    "source_panels": [
+      "S05-C2",
+      "S05-R2",
+      "S08-C2",
+      "S08-R2"
+    ],
+    "pdf_items": [
+      "P2-04"
+    ]
+  },
+  {
+    "id": "R10",
+    "title": "Bubble insertion on all s-tree external legs",
+    "status": "Missing",
+    "evidence": "I11 is a supported s-tree baseline, but semantic insertion rendering is implemented only in t-tree slot 1.",
+    "target": "Same self-energy construction on s-tree external slots 1,2,3,4.",
+    "milestone": "M03b",
+    "dependencies": "M03a",
+    "acceptance": "Four s-tree recipes work with one selected leg at a time; logical data remain attached after translation/reflection.",
+    "source_panels": [
+      "S06-R1",
+      "S06-R2",
+      "S07-R1",
+      "S07-R2"
+    ],
+    "pdf_items": [
+      "P3-02"
+    ]
+  },
+  {
+    "id": "R11",
+    "title": "Seagull on external tree legs",
+    "status": "Existing with limitations",
+    "evidence": "Unmerged codex/seagull-insertion at 5a657cd implements a seagull on t-tree external slot 1. Inventory U01/U02 are rendered with that pinned revision. The current M01 checkout does not contain the implementation.",
+    "target": "Reconcile and integrate the existing prototype first, then expand to the remaining t-tree legs and all four s-tree legs. Do not implement the prototype again. One insertion at a time.",
+    "milestone": "Branch integration before M02; M04 expands the existing prototype",
+    "dependencies": "Branch reconciliation, then M03 host-slot conventions",
+    "acceptance": "Eight placements preserve one quartic insertion point, two host segments, and one self-loop; do not draw a two-vertex self-energy bubble instead.",
+    "source_panels": [
+      "S05-C1",
+      "S05-R1",
+      "S06-C1",
+      "S06-C2",
+      "S07-C1",
+      "S07-C2",
+      "S08-C1",
+      "S08-R1",
+      "S20-TL",
+      "S20-TR",
+      "S20-BL",
+      "S20-BR",
+      "S21-TL",
+      "S21-TR",
+      "S21-BL",
+      "S21-BR"
+    ],
+    "pdf_items": [
+      "P2-05",
+      "P3-03"
+    ]
+  },
+  {
+    "id": "R12",
+    "title": "Swordfish on external tree legs",
+    "status": "Missing",
+    "evidence": "I29 is a bubble separated from the host vertex, not the reference swordfish.",
+    "target": "A two-edge loop directly shares the relevant host interaction: one loop vertex is quartic and the other trivalent. Cover each external-leg choice on t/s trees.",
+    "milestone": "M05",
+    "dependencies": "M03, M04",
+    "acceptance": "Eight placements match the reference connections and vertex valences; there is no artificial extra bridge or overlapping pair of vertices.",
+    "source_panels": [
+      "S05-L1",
+      "S05-L3",
+      "S08-L1",
+      "S08-L3"
+    ],
+    "pdf_items": [
+      "P2-06",
+      "P3-01",
+      "P3-04"
+    ]
+  },
+  {
+    "id": "R13",
+    "title": "Self-energy bubble on contact external legs",
+    "status": "Missing",
+    "evidence": "I06 is a contact host; insertion dispatch is limited to t-tree slot 1.",
+    "target": "A four-leg contact with a self-energy bubble splitting one external leg. Cover four choices shown on S10.",
+    "milestone": "M08a",
+    "dependencies": "M03; M02 annotation conventions",
+    "acceptance": "Four contact-host recipes retain the quartic host vertex, two trivalent insertion vertices, caps, styles, momenta, and indices.",
+    "source_panels": [
+      "S10-TL",
+      "S10-TR",
+      "S10-BL",
+      "S10-BR"
+    ],
+    "pdf_items": [
+      "P4-01"
+    ]
+  },
+  {
+    "id": "R14",
+    "title": "Crossed diagonal/vertex-correction routing",
+    "status": "Unclear reference",
+    "evidence": "The PDF asks for a Z edge connecting q1-q4 or q3-q2, but does not fix a complete endpoint/vertex map. Existing I23-I26 cover unpermuted triangle-contact placements.",
+    "target": "Record actual external slot permutation and internal endpoints before deciding whether existing triangle-contact geometry suffices or new routing is needed.",
+    "milestone": "M07 specification gate",
+    "dependencies": "M02; resolve Q01 in milestones.md",
+    "acceptance": "Produce a labeled endpoint sketch and exact public recipe or a defined new layout; identify every crossing as connected or unconnected.",
+    "source_panels": [],
+    "pdf_items": [
+      "P3-05",
+      "P3-06"
+    ]
+  },
+  {
+    "id": "R15",
+    "title": "Proca marker contact across topology families",
+    "status": "Verified existing",
+    "evidence": "M01 diagnostic: 144 diagrams on 24 pages, 573 triangles including 568 automatic contacts; independent PDF-vector checks and visual review. Generic Proca tips now track the standard dot boundary under uniform picture scale; the managed bubble helper is unchanged.",
+    "target": "Current families are verified at scales 0.72, 1.0, 1.2 with short/normal paths, larger arrows, reversed paths, alias/color order, custom radius and split crossings. Repeat checks for new families. Arbitrary anisotropic transforms and unknown vertex shapes remain outside the certification.",
+    "milestone": "M01 complete for current audited families; repeat endpoint checks in later milestones",
+    "dependencies": "None",
+    "acceptance": "Passed: automatic tip contact within the visible dot outline, inward white-filled colored markers, expected endpoint counts, no markers at crossing gaps, unchanged explicit legacy distances and generic open-arrow controls.",
+    "source_panels": [],
+    "pdf_items": [
+      "P4-03"
+    ]
+  },
+  {
+    "id": "R16",
+    "title": "Reference and GitHub documentation refresh",
+    "status": "Existing with limitations",
+    "evidence": "README.md and docs/reference.md exist; historical development plan predates merged bubble-on-leg work.",
+    "target": "Current roadmap/atlas now; full API examples and GitHub visuals updated as milestones land; final reconciliation at M11.",
+    "milestone": "M00 now; M11 closeout",
+    "dependencies": "All accepted capability milestones",
+    "acceptance": "All public capabilities have current examples, limitations are stated, roadmap statuses match evidence, and README graphics use the current package.",
+    "source_panels": [],
+    "pdf_items": [
+      "P4-04"
+    ]
+  },
+  {
+    "id": "R17",
+    "title": "Self-energy on internal exchange propagator",
+    "status": "Missing",
+    "evidence": "Existing tree exchange slot 5 is an edge, but bubble insertion slot 5 is not rendered.",
+    "target": "A bubble with two trivalent insertion vertices and two bridge segments on the s/t internal exchange edge.",
+    "milestone": "M09a",
+    "dependencies": "M03, M04",
+    "acceptance": "Both channels reproduce S23 top panels with host slot 5 data intact; no external-slot relabeling workaround.",
+    "source_panels": [
+      "S23-TL",
+      "S23-TR"
+    ],
+    "pdf_items": []
+  },
+  {
+    "id": "R18",
+    "title": "Seagull on internal exchange propagator",
+    "status": "Missing",
+    "evidence": "No quartic self-loop insertion exists on tree slot 5.",
+    "target": "A quartic self-loop point splits the s/t exchange propagator; both adjacent exchange segments remain connected.",
+    "milestone": "M09b",
+    "dependencies": "M04, M09a",
+    "acceptance": "Both S23 lower panels match the vertex/edge graph with independent loop and exchange styling.",
+    "source_panels": [
+      "S23-BL",
+      "S23-BR"
+    ],
+    "pdf_items": []
+  },
+  {
+    "id": "R19",
+    "title": "Bubble sharing a tree vertex on the internal side",
+    "status": "Missing",
+    "evidence": "Four-legged channel bubbles I14/I15 have two quartic ends; self-energy I27 has two trivalent ends. Neither is this mixed-valence attached graph.",
+    "target": "Two loop edges join one quartic vertex carrying two external legs to one trivalent vertex attached by a bridge to the opposite tree vertex. Four s/t placements.",
+    "milestone": "M09c",
+    "dependencies": "M05 shared-vertex model; M09a",
+    "acceptance": "Match all four S22 panels and species variants from S06/S07; do not replace with an external-leg swordfish or a free internal bubble.",
+    "source_panels": [
+      "S06-L1",
+      "S06-L3",
+      "S07-L1",
+      "S07-L3",
+      "S22-TL",
+      "S22-TR",
+      "S22-BL",
+      "S22-BR"
+    ],
+    "pdf_items": []
+  },
+  {
+    "id": "R20",
+    "title": "Stem-attached tadpole structures",
+    "status": "Missing",
+    "evidence": "No supported standalone tadpole/stem insertion family found. A stemmed appendage is distinct from a direct seagull on the host edge.",
+    "target": "A loop returns to a vertex at the end of a separate stem. References attach the stem at tree vertices or external-leg points; retain these as separate subcases.",
+    "milestone": "M10",
+    "dependencies": "M04; M08 for contact hosts; freeze vertex valence case by case",
+    "acceptance": "Cover S16 tree-vertex appendages and S17-S19 external-leg appendages; preserve both stem endpoint vertices and explicitly document the valence of contact-host attachment points.",
+    "source_panels": [
+      "S16-TL",
+      "S16-TR",
+      "S16-BL",
+      "S16-BR",
+      "S17-TL",
+      "S17-TR",
+      "S17-BL",
+      "S17-BR",
+      "S18-TL",
+      "S18-TR",
+      "S18-BL",
+      "S18-BR",
+      "S19-TL",
+      "S19-TR",
+      "S19-BL",
+      "S19-BR"
+    ],
+    "pdf_items": []
+  },
+  {
+    "id": "R21",
+    "title": "Seagull on contact external legs",
+    "status": "Missing",
+    "evidence": "Contact baseline I06 exists; there is no quartic self-loop insertion on its external legs.",
+    "target": "Four external-leg seagull placements; species/loop-arrow variants are examples, not extra graph topologies.",
+    "milestone": "M08b",
+    "dependencies": "M04, M08a",
+    "acceptance": "Reproduce S11 four placements, retain one quartic host and one quartic insertion point, and verify the displayed species/flow variants.",
+    "source_panels": [
+      "S11-T1",
+      "S11-T2",
+      "S11-T3",
+      "S11-T4",
+      "S11-B1",
+      "S11-B2",
+      "S11-B3",
+      "S11-B4"
+    ],
+    "pdf_items": []
+  },
+  {
+    "id": "R22",
+    "title": "Triangle-shaped crossed drawings",
+    "status": "Unclear reference",
+    "evidence": "S13 contains two dense triangle-like drawings with crossings/overlapping paths. No unsupported topology is asserted to be reproduced by I18 or I23-I26.",
+    "target": "Trace every endpoint from the original images before classifying these as crossed boxes, triangle corrections, or another graph. Preserve both panel references.",
+    "milestone": "M07 specification gate; M10 only if a distinct family is established",
+    "dependencies": "Resolve Q02 in milestones.md",
+    "acceptance": "Save an unambiguous vertex/edge sketch for each panel, map to a reproducible recipe or a precisely scoped missing requirement, and then implement only the demonstrated gap.",
+    "source_panels": [
+      "S13-left",
+      "S13-right"
+    ],
+    "pdf_items": []
+  }
+]

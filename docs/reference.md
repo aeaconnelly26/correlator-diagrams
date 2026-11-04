@@ -1003,6 +1003,23 @@ use the same size as the scalar-polarized arrow markers; their outlines follow
 the propagator color while their interiors stay white. `Proca` is accepted as
 an alias. Add `circ={}` explicitly when a blank midpoint circle is wanted.
 
+Generic Proca markers anchor their actual tips at the standard 2.15pt dot
+boundary, accounting for uniform picture scale independently of arrow size.
+For a different circular vertex radius, include the low-level line option
+`proca vertex radius=...`, for example
+`channel-line={proca,proca vertex radius=2.5pt}` with a ring-dot vertex.
+This option works before or after `proca` in a composed line style. A
+non-default explicit `endpoint marker distance` retains the legacy
+center-distance placement instead of automatic tip contact; its effect is
+intentionally unchanged. Generic `openarrowin/out` add-ons are unchanged too.
+Standalone and inserted bubbles retain their dedicated managed endpoint
+helper: use `bubble-vertex-radius` / `bubble-endpoint-marker-distance` there.
+
+The [M01 diagnostic and results](../regressions/propagators/proca-endpoints/README.md)
+cover short/normal paths, three uniform scales, all current internal topology
+families, custom radius, alias/color order, and split crossings. Arbitrary
+anisotropic transforms and custom non-circular vertex shapes are not certified.
+
 Endpoint marker add-ons can be combined with any propagator style:
 
 - `arrowin` / `arrowout`: filled arrowhead pointing toward or away from the

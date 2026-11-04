@@ -1,0 +1,209 @@
+# Remaining requirements and existing capacity
+
+Baseline: `main` / `0dbf733`, 2026-11-03. See [atlas recipes](../diagram-inventory/recipes.md), [source panels](source-coverage.md), and [milestone gates](milestones.md). This record distinguishes geometry from annotation/style completeness.
+
+Machine-readable counterpart: `requirements.json`. Update both representations together. Existing-capability claims below refer to the specific inspected recipes, not arbitrary feature combinations.
+
+## R01 - Square box defaults
+
+- **Status:** Verified existing.
+- **Existing construction / evidence:** I17; BoxLoopCorr resets box-xspan and box-yspan to 1.34; rendered square in the atlas.
+- **Remaining target / limitation:** Already implemented for defaults. Preserve explicit user dimension overrides. Do not add another square-box macro solely to satisfy this request.
+- **Milestone:** M07 / verification only. **Dependencies:** None.
+- **Acceptance:** Default box and crossed-box vertex spans agree horizontally and vertically; no regression to rectangular defaults.
+- **Sources:** P1-01; S02-right, S03-left.
+
+## R02 - Complementary internal crossed box
+
+- **Status:** Missing.
+- **Existing construction / evidence:** I18/CrossBoxCorr provides fixed left/right sides and crossed diagonals only.
+- **Remaining target / limitation:** Keep top/bottom internal edges fixed and cross the other pair. Preserve four trivalent vertices and an unconnected over/under crossing.
+- **Milestone:** M07. **Dependencies:** M01; M07 connectivity specification.
+- **Acceptance:** Both internal-crossing layouts have matching slot maps, style controls, correct endpoint markers, and explicit crossing gaps.
+- **Sources:** P1-02.
+
+## R03 - Box with crossed upper external legs
+
+- **Status:** Missing.
+- **Existing construction / evidence:** I17 is an ordinary square box; existing box macros do not expose this external routing.
+- **Remaining target / limitation:** Cross the two upper external legs without turning their crossing into a vertex. This is not the same as crossing internal edges.
+- **Milestone:** M07. **Dependencies:** M01; source-panel routing specification.
+- **Acceptance:** Reproduce S02-center with square loop geometry and unchanged external slot identity.
+- **Sources:** P1-03; S02-center.
+
+## R04 - Box with crossed right external legs
+
+- **Status:** Missing.
+- **Existing construction / evidence:** I17/I18 cannot independently cross the right external pair.
+- **Remaining target / limitation:** Preserve the square loop and cross the right external pair.
+- **Milestone:** M07. **Dependencies:** M01; source-panel routing specification.
+- **Acceptance:** Reproduce S03-center; species, caps, labels, and slot identity follow the routed legs.
+- **Sources:** P1-04; S03-center.
+
+## R05 - Four-legged channel bubbles
+
+- **Status:** Verified existing.
+- **Existing construction / evidence:** I14-I16: SChannelCorr, TChannelCorr, UChannelCorr. A01 demonstrates two pink Proca internal lines and four double-capped EW external legs.
+- **Remaining target / limitation:** Two quartic vertices joined by two internal lines, with four external legs. Existing topology; decorated endpoint and label quality are separate R15/R06 checks.
+- **Milestone:** M00 complete; retain in M11. **Dependencies:** None.
+- **Acceptance:** Keep three channel recipes and the exact requested styled t-channel example in the atlas; do not reimplement this family.
+- **Sources:** P1-05; S04-TR, S04-BR, S12-left, S14-left, S14-right, S15-left.
+
+## R06 - Independent triangle-contact labeling
+
+- **Status:** Existing with limitations.
+- **Existing construction / evidence:** I23-I26 verify shapes. Existing triangle-contact regression and internal-momentum source demonstrate annotations; code shares offsets/fractions and includes hard-coded slot adjustments.
+- **Remaining target / limitation:** Control each external/internal momentum label and arrow independently. Defaults stay outside the triangle for all orientations. Unequal edge lengths must not force linked label/arrow sizing.
+- **Milestone:** M02. **Dependencies:** M01 baseline endpoint audit.
+- **Acceptance:** All four orientations pass a labeled mixed-Proca/EW example; changing one annotation does not move another; old public keys still work.
+- **Sources:** P1-06, P1-07, P2-01, P4-02.
+
+## R07 - Four triangle-contact orientations
+
+- **Status:** Verified existing.
+- **Existing construction / evidence:** I23-I26: TriangleContactCorr with bottom/top/left/right orientation.
+- **Remaining target / limitation:** Already implemented: two trivalent and one quartic vertex. Label quality remains R06.
+- **Milestone:** M00 complete; retain in M02. **Dependencies:** None.
+- **Acceptance:** Retain four plain recipes and extend their labeled coverage during M02.
+- **Sources:** P2-02; S02-left, S03-right, S04-TL, S04-BL, S12-right, S15-right.
+
+## R08 - Regular tree-attached triangle correction
+
+- **Status:** Missing.
+- **Existing construction / evidence:** ThreePointCorr is a single vertex; TriangleContactCorr has a quartic vertex. Neither is the requested triangle plus an exchange bridge and a second tree vertex.
+- **Remaining target / limitation:** Three trivalent vertices form the loop; a bridge connects one to the other tree interaction. Top/bottom t-channel and left/right s-channel variants.
+- **Milestone:** M06. **Dependencies:** M01, M02, insertion-slot conventions from M03.
+- **Acceptance:** Four required placements preserve graph connectivity, line styles, outer caps, independent momentum flow, and endpoint indices.
+- **Sources:** P2-03; S05-L2, S06-L2, S07-L2, S08-L2.
+
+## R09 - Bubble insertion on all t-tree external legs
+
+- **Status:** Existing with limitations.
+- **Existing construction / evidence:** I29/TTreeChannelCorr[insertion=bubble,insertion-slot=1] works. Only slot 1 is drawn; accepted slots 2-5 do not establish support.
+- **Remaining target / limitation:** Expand self-energy insertion to external slots 1,2,3,4; each loop has two new trivalent vertices and pre/post host segments.
+- **Milestone:** M03a. **Dependencies:** M01, M02.
+- **Acceptance:** Four t-tree external slots render the bubble; each retains host style, caps, pre/post momentum, and endpoint indices without state leakage.
+- **Sources:** P2-04; S05-C2, S05-R2, S08-C2, S08-R2.
+
+## R10 - Bubble insertion on all s-tree external legs
+
+- **Status:** Missing.
+- **Existing construction / evidence:** I11 is a supported s-tree baseline, but semantic insertion rendering is implemented only in t-tree slot 1.
+- **Remaining target / limitation:** Same self-energy construction on s-tree external slots 1,2,3,4.
+- **Milestone:** M03b. **Dependencies:** M03a.
+- **Acceptance:** Four s-tree recipes work with one selected leg at a time; logical data remain attached after translation/reflection.
+- **Sources:** P3-02; S06-R1, S06-R2, S07-R1, S07-R2.
+
+## R11 - Seagull on external tree legs
+
+- **Status:** Existing with limitations.
+- **Existing construction / evidence:** Unmerged codex/seagull-insertion at 5a657cd implements a seagull on t-tree external slot 1. Inventory U01/U02 are rendered with that pinned revision. The current M01 checkout does not contain the implementation.
+- **Remaining target / limitation:** Reconcile and integrate the existing prototype first, then expand to the remaining t-tree legs and all four s-tree legs. Do not implement the prototype again. One insertion at a time.
+- **Milestone:** Branch integration before M02; M04 expands the existing prototype. **Dependencies:** Branch reconciliation, then M03 host-slot conventions.
+- **Acceptance:** Eight placements preserve one quartic insertion point, two host segments, and one self-loop; do not draw a two-vertex self-energy bubble instead.
+- **Sources:** S05-C1, S05-R1, S06-C1, S06-C2, S07-C1, S07-C2, S08-C1, S08-R1, S20-TL, S20-TR, S20-BL, S20-BR, S21-TL, S21-TR, S21-BL, S21-BR. See [branch integration](branch-integration.md).
+
+## R12 - Swordfish on external tree legs
+
+- **Status:** Missing.
+- **Existing construction / evidence:** I29 is a bubble separated from the host vertex, not the reference swordfish.
+- **Remaining target / limitation:** A two-edge loop directly shares the relevant host interaction: one loop vertex is quartic and the other trivalent. Cover each external-leg choice on t/s trees.
+- **Milestone:** M05. **Dependencies:** M03, M04.
+- **Acceptance:** Eight placements match the reference connections and vertex valences; there is no artificial extra bridge or overlapping pair of vertices.
+- **Sources:** P2-06, P3-01, P3-04; S05-L1, S05-L3, S08-L1, S08-L3.
+
+## R13 - Self-energy bubble on contact external legs
+
+- **Status:** Missing.
+- **Existing construction / evidence:** I06 is a contact host; insertion dispatch is limited to t-tree slot 1.
+- **Remaining target / limitation:** A four-leg contact with a self-energy bubble splitting one external leg. Cover four choices shown on S10.
+- **Milestone:** M08a. **Dependencies:** M03; M02 annotation conventions.
+- **Acceptance:** Four contact-host recipes retain the quartic host vertex, two trivalent insertion vertices, caps, styles, momenta, and indices.
+- **Sources:** P4-01; S10-TL, S10-TR, S10-BL, S10-BR.
+
+## R14 - Crossed diagonal/vertex-correction routing
+
+- **Status:** Unclear reference.
+- **Existing construction / evidence:** The PDF asks for a Z edge connecting q1-q4 or q3-q2, but does not fix a complete endpoint/vertex map. Existing I23-I26 cover unpermuted triangle-contact placements.
+- **Remaining target / limitation:** Record actual external slot permutation and internal endpoints before deciding whether existing triangle-contact geometry suffices or new routing is needed.
+- **Milestone:** M07 specification gate. **Dependencies:** M02; resolve Q01 in milestones.md.
+- **Acceptance:** Produce a labeled endpoint sketch and exact public recipe or a defined new layout; identify every crossing as connected or unconnected.
+- **Sources:** P3-05, P3-06.
+
+## R15 - Proca marker contact across topology families
+
+- **Status:** Verified existing.
+- **Existing construction / evidence:** M01 diagnostic: 144 diagrams on 24 pages, 573 triangles including 568 automatic contacts; independent PDF-vector checks and visual review. Generic Proca tips now track the standard dot boundary under uniform picture scale; the managed bubble helper is unchanged.
+- **Remaining target / limitation:** Current families are verified at scales 0.72, 1.0, 1.2 with short/normal paths, larger arrows, reversed paths, alias/color order, custom radius and split crossings. Repeat checks for new families. Arbitrary anisotropic transforms and unknown vertex shapes remain outside the certification.
+- **Milestone:** M01 complete for current audited families; repeat endpoint checks in later milestones. **Dependencies:** None.
+- **Acceptance:** Passed: automatic tip contact within the visible dot outline, inward white-filled colored markers, expected endpoint counts, no markers at crossing gaps, unchanged explicit legacy distances and generic open-arrow controls.
+- **Sources:** P4-03. See [M01 results](../../regressions/propagators/proca-endpoints/results.md).
+
+## R16 - Reference and GitHub documentation refresh
+
+- **Status:** Existing with limitations.
+- **Existing construction / evidence:** README.md and docs/reference.md exist; historical development plan predates merged bubble-on-leg work.
+- **Remaining target / limitation:** Current roadmap/atlas now; full API examples and GitHub visuals updated as milestones land; final reconciliation at M11.
+- **Milestone:** M00 now; M11 closeout. **Dependencies:** All accepted capability milestones.
+- **Acceptance:** All public capabilities have current examples, limitations are stated, roadmap statuses match evidence, and README graphics use the current package.
+- **Sources:** P4-04.
+
+## R17 - Self-energy on internal exchange propagator
+
+- **Status:** Missing.
+- **Existing construction / evidence:** Existing tree exchange slot 5 is an edge, but bubble insertion slot 5 is not rendered.
+- **Remaining target / limitation:** A bubble with two trivalent insertion vertices and two bridge segments on the s/t internal exchange edge.
+- **Milestone:** M09a. **Dependencies:** M03, M04.
+- **Acceptance:** Both channels reproduce S23 top panels with host slot 5 data intact; no external-slot relabeling workaround.
+- **Sources:** S23-TL, S23-TR.
+
+## R18 - Seagull on internal exchange propagator
+
+- **Status:** Missing.
+- **Existing construction / evidence:** No quartic self-loop insertion exists on tree slot 5.
+- **Remaining target / limitation:** A quartic self-loop point splits the s/t exchange propagator; both adjacent exchange segments remain connected.
+- **Milestone:** M09b. **Dependencies:** M04, M09a.
+- **Acceptance:** Both S23 lower panels match the vertex/edge graph with independent loop and exchange styling.
+- **Sources:** S23-BL, S23-BR.
+
+## R19 - Bubble sharing a tree vertex on the internal side
+
+- **Status:** Missing.
+- **Existing construction / evidence:** Four-legged channel bubbles I14/I15 have two quartic ends; self-energy I27 has two trivalent ends. Neither is this mixed-valence attached graph.
+- **Remaining target / limitation:** Two loop edges join one quartic vertex carrying two external legs to one trivalent vertex attached by a bridge to the opposite tree vertex. Four s/t placements.
+- **Milestone:** M09c. **Dependencies:** M05 shared-vertex model; M09a.
+- **Acceptance:** Match all four S22 panels and species variants from S06/S07; do not replace with an external-leg swordfish or a free internal bubble.
+- **Sources:** S06-L1, S06-L3, S07-L1, S07-L3, S22-TL, S22-TR, S22-BL, S22-BR.
+
+## R20 - Stem-attached tadpole structures
+
+- **Status:** Missing.
+- **Existing construction / evidence:** No supported standalone tadpole/stem insertion family found. A stemmed appendage is distinct from a direct seagull on the host edge.
+- **Remaining target / limitation:** A loop returns to a vertex at the end of a separate stem. References attach the stem at tree vertices or external-leg points; retain these as separate subcases.
+- **Milestone:** M10. **Dependencies:** M04; M08 for contact hosts; freeze vertex valence case by case.
+- **Acceptance:** Cover S16 tree-vertex appendages and S17-S19 external-leg appendages; preserve both stem endpoint vertices and explicitly document the valence of contact-host attachment points.
+- **Sources:** S16-TL, S16-TR, S16-BL, S16-BR, S17-TL, S17-TR, S17-BL, S17-BR, S18-TL, S18-TR, S18-BL, S18-BR, S19-TL, S19-TR, S19-BL, S19-BR.
+
+## R21 - Seagull on contact external legs
+
+- **Status:** Missing.
+- **Existing construction / evidence:** Contact baseline I06 exists; there is no quartic self-loop insertion on its external legs.
+- **Remaining target / limitation:** Four external-leg seagull placements; species/loop-arrow variants are examples, not extra graph topologies.
+- **Milestone:** M08b. **Dependencies:** M04, M08a.
+- **Acceptance:** Reproduce S11 four placements, retain one quartic host and one quartic insertion point, and verify the displayed species/flow variants.
+- **Sources:** S11-T1, S11-T2, S11-T3, S11-T4, S11-B1, S11-B2, S11-B3, S11-B4.
+
+## R22 - Triangle-shaped crossed drawings
+
+- **Status:** Unclear reference.
+- **Existing construction / evidence:** S13 contains two dense triangle-like drawings with crossings/overlapping paths. No unsupported topology is asserted to be reproduced by I18 or I23-I26.
+- **Remaining target / limitation:** Trace every endpoint from the original images before classifying these as crossed boxes, triangle corrections, or another graph. Preserve both panel references.
+- **Milestone:** M07 specification gate; M10 only if a distinct family is established. **Dependencies:** Resolve Q02 in milestones.md.
+- **Acceptance:** Save an unambiguous vertex/edge sketch for each panel, map to a reproducible recipe or a precisely scoped missing requirement, and then implement only the demonstrated gap.
+- **Sources:** S13-left, S13-right.
+
+## Audit boundaries
+
+R14 and R22 are intentionally unresolved references, not promises that existing macros reproduce those drawings. They have explicit specification gates. Stemmed contact-host attachments in R20 also need their attachment valences recorded before implementation. None of these uncertainties blocks the current inventory.
+
+Feature gaps found while constructing recipes: a global explicit `line=...` overrides the half-box bridge-specific style, so A04 omits the global setting. Blank external bubble momentum text still leaves arrows when `show-momenta=true`; A05 uses explicit external momenta rather than implying that blanks suppress arrows. These are existing behaviors recorded for later review, not package changes.

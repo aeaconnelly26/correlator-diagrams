@@ -1,0 +1,533 @@
+{
+  "baseline": "0dbf733 + M01",
+  "date": "2026-11-03",
+  "base_options": [
+    "field={}",
+    "leg-labels={,,,}",
+    "central={}",
+    "show-momenta=false",
+    "blob=false",
+    "center-vertex=true",
+    "external-vertices=false",
+    "line=plain",
+    "scale=1.0"
+  ],
+  "pages": [
+    {
+      "section": "01 / FUNDAMENTALS",
+      "title": "Two- and three-point objects",
+      "subtitle": "Plain lines expose connectivity. IDs identify recipes; rotated layouts are not extra graph topologies.",
+      "entries": [
+        {
+          "id": "I01",
+          "title": "Two-point object",
+          "macro": "TwoPointCorr",
+          "options": [],
+          "description": "Two external segments meet at one marked point.",
+          "limitation": "A central point or optional blob, not a loop correction."
+        },
+        {
+          "id": "I02",
+          "title": "Three-point: upper left",
+          "macro": "ThreePointCorr",
+          "options": [
+            "orientation={top,left}"
+          ],
+          "description": "One trivalent vertex; logical slot 1 points upper left.",
+          "limitation": "Four orientations retain the same three logical slots."
+        },
+        {
+          "id": "I03",
+          "title": "Three-point: upper right",
+          "macro": "ThreePointCorr",
+          "options": [
+            "orientation={top,right}"
+          ],
+          "description": "One trivalent vertex; logical slot 1 points upper right.",
+          "limitation": "Four orientations retain the same three logical slots."
+        },
+        {
+          "id": "I04",
+          "title": "Three-point: lower left",
+          "macro": "ThreePointCorr",
+          "options": [
+            "orientation={bottom,left}"
+          ],
+          "description": "One trivalent vertex; logical slot 1 points lower left.",
+          "limitation": "Four orientations retain the same three logical slots."
+        },
+        {
+          "id": "I05",
+          "title": "Three-point: lower right",
+          "macro": "ThreePointCorr",
+          "options": [
+            "orientation={bottom,right}"
+          ],
+          "description": "One trivalent vertex; logical slot 1 points lower right.",
+          "limitation": "Four orientations retain the same three logical slots."
+        }
+      ]
+    },
+    {
+      "section": "02 / CONTACT LAYOUTS",
+      "title": "Contact and pairing layouts",
+      "subtitle": "Pairing presets are shown as implemented. A missing bridge is meaningful, not an omitted annotation.",
+      "entries": [
+        {
+          "id": "I06",
+          "title": "Central contact",
+          "macro": "FourPointCorr",
+          "options": [
+            "contact-pairing=central"
+          ],
+          "description": "Four external edges meet at one quartic vertex.",
+          "limitation": "Connected four-point contact."
+        },
+        {
+          "id": "I07",
+          "title": "Horizontal pairing",
+          "macro": "FourPointCorr",
+          "options": [
+            "contact-pairing=horizontal"
+          ],
+          "description": "Top pair and bottom pair each meet separately.",
+          "limitation": "Disconnected pairs; there is no vertical exchange edge."
+        },
+        {
+          "id": "I08",
+          "title": "Vertical pairing",
+          "macro": "FourPointCorr",
+          "options": [
+            "contact-pairing=vertical"
+          ],
+          "description": "Left pair and right pair each meet separately.",
+          "limitation": "Disconnected pairs; there is no horizontal exchange edge."
+        },
+        {
+          "id": "I09",
+          "title": "Crossed contact layout",
+          "macro": "FourPointCorr",
+          "options": [
+            "contact-pairing=crossed"
+          ],
+          "description": "Curved and straight external edges meet at a central point.",
+          "limitation": "The central dot is an interaction, not an over/under crossing."
+        },
+        {
+          "id": "I10",
+          "title": "Flat contact",
+          "macro": "FlatContactCorr",
+          "options": [
+            "flat-contact-line=plain"
+          ],
+          "description": "One quartic vertex with a flat upper pair.",
+          "limitation": "A contact layout, not an additional loop topology."
+        }
+      ]
+    },
+    {
+      "section": "03 / CHANNELS",
+      "title": "Tree exchanges and four-legged bubbles",
+      "subtitle": "External slot order: 1 upper left, 2 lower left, 3 upper right, 4 lower right. No momentum annotations.",
+      "entries": [
+        {
+          "id": "I11",
+          "title": "s-channel tree",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "channel-line=plain"
+          ],
+          "description": "Two trivalent vertices joined by one exchange edge.",
+          "limitation": "Insertion support is narrower than ordinary tree support."
+        },
+        {
+          "id": "I12",
+          "title": "t-channel tree",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "channel-line=plain"
+          ],
+          "description": "Two trivalent vertices joined by one exchange edge.",
+          "limitation": "Insertion support is narrower than ordinary tree support."
+        },
+        {
+          "id": "I13",
+          "title": "u-channel tree",
+          "macro": "UTreeChannelCorr",
+          "options": [
+            "channel-line=plain"
+          ],
+          "description": "Two trivalent vertices joined by one exchange edge.",
+          "limitation": "Insertion support is narrower than ordinary tree support."
+        },
+        {
+          "id": "I14",
+          "title": "s-channel bubble",
+          "macro": "SChannelCorr",
+          "options": [
+            "loop-channel-a-line=plain",
+            "loop-channel-b-line=plain"
+          ],
+          "description": "Two quartic vertices joined by two internal edges.",
+          "limitation": "Four-legged bubble already exists; unlike a self-energy insertion."
+        },
+        {
+          "id": "I15",
+          "title": "t-channel bubble",
+          "macro": "TChannelCorr",
+          "options": [
+            "loop-channel-a-line=plain",
+            "loop-channel-b-line=plain"
+          ],
+          "description": "Two quartic vertices joined by two internal edges.",
+          "limitation": "Four-legged bubble already exists; unlike a self-energy insertion."
+        },
+        {
+          "id": "I16",
+          "title": "u-channel bubble",
+          "macro": "UChannelCorr",
+          "options": [
+            "loop-channel-a-line=plain",
+            "loop-channel-b-line=plain"
+          ],
+          "description": "Two quartic vertices joined by two internal edges.",
+          "limitation": "Four-legged bubble already exists; unlike a self-energy insertion."
+        }
+      ]
+    },
+    {
+      "section": "04 / BOX AND IDENTITY HELPERS",
+      "title": "Boxes and half-box layouts",
+      "subtitle": "The ordinary box already defaults to a square. Half-box presets include identity-specific marker variants.",
+      "entries": [
+        {
+          "id": "I17",
+          "title": "Square box",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain"
+          ],
+          "description": "Four trivalent vertices around a single loop.",
+          "limitation": "Default inner spans are both 1.34; explicit overrides remain possible."
+        },
+        {
+          "id": "I18",
+          "title": "Existing crossed box",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain"
+          ],
+          "description": "Fixed left/right edges plus two crossing diagonals.",
+          "limitation": "No interaction at crossing; internal momentum/index pass is incomplete."
+        },
+        {
+          "id": "I19",
+          "title": "Straight half-box",
+          "macro": "HalfBoxCorr",
+          "options": [
+            "half-box-line=plain",
+            "half-box-bridge-line=plain",
+            "half-box-style=straight"
+          ],
+          "description": "Two trivalent vertices with a horizontal bridge.",
+          "limitation": "An open tree helper, despite the half-box name."
+        },
+        {
+          "id": "I20",
+          "title": "Angled half-propagator",
+          "macro": "HalfBoxCorr",
+          "options": [
+            "half-box-style=halfpropagator",
+            "half-box-line=plain",
+            "half-box-bridge-line=plain"
+          ],
+          "description": "Angled upper stubs on the same two-vertex graph.",
+          "limitation": "A layout variant of the half-box, not a new loop."
+        },
+        {
+          "id": "I21",
+          "title": "Left half-propagator marker",
+          "macro": "HalfBoxCorr",
+          "options": [
+            "half-box-style=halfpropleft",
+            "half-box-line=plain",
+            "half-box-bridge-line=plain",
+            "half-box-left-lower-circ={}"
+          ],
+          "description": "Angled half-box with the left lower-leg circle preset.",
+          "limitation": "Blank circle retained to show the preset; same underlying graph."
+        },
+        {
+          "id": "I22",
+          "title": "Right half-propagator marker",
+          "macro": "HalfBoxCorr",
+          "options": [
+            "half-box-style=halfpropright",
+            "half-box-line=plain",
+            "half-box-bridge-line=plain",
+            "half-box-right-lower-circ={}"
+          ],
+          "description": "Angled half-box with the right lower-leg circle preset.",
+          "limitation": "Blank circle retained to show the preset; same underlying graph."
+        }
+      ]
+    },
+    {
+      "section": "05 / TRIANGLE-CONTACT",
+      "title": "Four triangle-contact orientations",
+      "subtitle": "Two trivalent vertices and one quartic vertex. These orientations already exist; label independence remains future work.",
+      "entries": [
+        {
+          "id": "I23",
+          "title": "Quartic contact: bottom",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=bottom",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain"
+          ],
+          "description": "The quartic/contact vertex lies on the bottom side.",
+          "limitation": "Not the regular three-trivalent-vertex triangle attached to a tree."
+        },
+        {
+          "id": "I24",
+          "title": "Quartic contact: top",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=top",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain"
+          ],
+          "description": "The quartic/contact vertex lies on the top side.",
+          "limitation": "Not the regular three-trivalent-vertex triangle attached to a tree."
+        },
+        {
+          "id": "I25",
+          "title": "Quartic contact: left",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=left",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain"
+          ],
+          "description": "The quartic/contact vertex lies on the left side.",
+          "limitation": "Not the regular three-trivalent-vertex triangle attached to a tree."
+        },
+        {
+          "id": "I26",
+          "title": "Quartic contact: right",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=right",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain"
+          ],
+          "description": "The quartic/contact vertex lies on the right side.",
+          "limitation": "Not the regular three-trivalent-vertex triangle attached to a tree."
+        }
+      ]
+    },
+    {
+      "section": "06 / SELF-ENERGY AND INSERTION",
+      "title": "Loops and the insertion prototype",
+      "subtitle": "Only the insertion pictured here is currently supported. Unsupported insertion settings can be silently ignored.",
+      "entries": [
+        {
+          "id": "I27",
+          "title": "Standalone self-energy bubble",
+          "macro": "BubbleCorr",
+          "options": [
+            "bubble-external-line=plain",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "Two trivalent vertices and two internal arcs; one loop.",
+          "limitation": "Two external legs; distinct from a four-legged channel bubble."
+        },
+        {
+          "id": "I28",
+          "title": "Sunset",
+          "macro": "SunsetDiagram",
+          "options": [
+            "sunset-left-line=plain",
+            "sunset-right-line=plain",
+            "sunset-top-line=plain",
+            "sunset-middle-line=plain",
+            "sunset-bottom-line=plain",
+            "sunset-central-label={}"
+          ],
+          "description": "Two quartic vertices joined by three internal edges.",
+          "limitation": "Two loops, not a one-loop self-energy bubble."
+        },
+        {
+          "id": "I29",
+          "title": "Bubble on t-tree leg 1",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "scale=0.82",
+            "channel-line=plain",
+            "insertion=bubble",
+            "insertion-slot=1",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "A self-energy bubble splits the upper-left external leg.",
+          "limitation": "Only t-tree external slot 1 is implemented; other slots are no-ops."
+        }
+      ]
+    },
+    {
+      "section": "07 / STYLE APPENDIX",
+      "title": "Existing styles and annotations",
+      "subtitle": "Representative combinations, not a promise of every style on every topology. Recipes include all displayed options.",
+      "entries": [
+        {
+          "id": "A01",
+          "title": "Your pink Proca t-bubble",
+          "macro": "TChannelCorr",
+          "options": [
+            "line={ewboson,endcapp}",
+            "loop-channel-left-line={proca,magenta!85!red}",
+            "loop-channel-right-line={proca,magenta!85!red}"
+          ],
+          "description": "Four double-capped EW legs and two pink Proca internals.",
+          "limitation": "M01 verifies automatic contact; custom legacy distances retain their tuning."
+        },
+        {
+          "id": "A02",
+          "title": "Polarization and mixed legs",
+          "macro": "ThreePointCorr",
+          "options": [
+            "leg-styles={{ewboson,endcapp},{ewboson,endcap},{spol,magenta!85!red,endcap}}"
+          ],
+          "description": "Double cap, single cap, and a pink scalar-polarized leg.",
+          "limitation": "Scalar polarization is a style, not another topology."
+        },
+        {
+          "id": "A03",
+          "title": "EW circles and single caps",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-external-line={ewboson,endcap}",
+            "box-left-line={ewboson,circ=Z}",
+            "box-top-line={ewboson,circ=W}",
+            "box-right-line={ewboson,circ=Z}",
+            "box-bottom-line={ewboson,circ=W}"
+          ],
+          "description": "Independent internal particle circles and external endcaps.",
+          "limitation": "Species labels decorate the existing square loop."
+        },
+        {
+          "id": "A04",
+          "title": "Bridge momentum and indices",
+          "macro": "HalfBoxCorr",
+          "options": [
+            "half-box-line=ewboson",
+            "half-box-bridge-line={proca,magenta!85!red}",
+            "show-momenta=true",
+            "momentum-labels={,,,}",
+            "half-box-momentum-slots={}",
+            "half-box-bridge-momentum=p",
+            "half-box-propagator-left-indices={,,,,a}",
+            "half-box-propagator-right-indices={,,,,b}",
+            "half-box-xspan=1.0"
+          ],
+          "description": "A pink bridge with one momentum and endpoint indices.",
+          "limitation": "Omit global line=plain: it overrides the bridge-specific style.",
+          "omit_base_options": [
+            "line=plain"
+          ]
+        },
+        {
+          "id": "A05",
+          "title": "Curved momentum and indices",
+          "macro": "BubbleCorr",
+          "options": [
+            "bubble-external-line={ewboson,endcap}",
+            "bubble-top-line={ewboson,circ=Z}",
+            "bubble-bottom-line={proca,magenta!85!red}",
+            "show-momenta=true",
+            "bubble-momenta={k,p-k}",
+            "bubble-momentum-rotation=clockwise",
+            "bubble-endpoint-indices={a,b,c,d}",
+            "bubble-momentum-label-distance=5pt",
+            "momentum-labels={p,p}",
+            "bubble-external-length=1.35"
+          ],
+          "description": "External flow, curved loop momenta, and four endpoint indices.",
+          "limitation": "Representative annotation layout; crowded cases need dedicated checks."
+        },
+        {
+          "id": "A06",
+          "title": "Crossing and Proca circles",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=ewboson",
+            "box-external-line={ewboson,endcapp}",
+            "cross-box-up-line={proca,magenta!85!red,circ={}}",
+            "cross-box-down-line={ewboson,circ=Z}"
+          ],
+          "description": "A blank circle on one pink diagonal and a Z on the other.",
+          "limitation": "Crossing stays unconnected; no internal momenta or indices claimed."
+        }
+      ]
+    }
+  ],
+  "branch": "codex/proca-endpoint-audit",
+  "branch_preview": {
+    "branch": "codex/seagull-insertion",
+    "revision": "5a657cd8d7c84dde751927963de8488bfb98cb33",
+    "entries": [
+      {
+        "id": "U01",
+        "title": "Seagull: bare structure",
+        "macro": "TTreeChannelCorr",
+        "options": [
+          "field={}",
+          "leg-labels={,,,}",
+          "central={}",
+          "show-momenta=false",
+          "blob=false",
+          "center-vertex=true",
+          "external-vertices=false",
+          "scale=0.85",
+          "insertion=seagull",
+          "insertion-slot=1",
+          "line=plain",
+          "channel-line=plain",
+          "seagull-loop-line=plain",
+          "insertion-pre-line=plain",
+          "insertion-post-line=plain"
+        ],
+        "description": "One quartic point on an external leg carries a self-loop.",
+        "limitation": "Unmerged prototype: t-tree leg 1 only; all other placements remain future work."
+      },
+      {
+        "id": "U02",
+        "title": "Seagull: EW line style",
+        "macro": "TTreeChannelCorr",
+        "options": [
+          "field={}",
+          "leg-labels={,,,}",
+          "central={}",
+          "show-momenta=false",
+          "blob=false",
+          "center-vertex=true",
+          "external-vertices=false",
+          "scale=0.85",
+          "insertion=seagull",
+          "insertion-slot=1",
+          "line=ewboson",
+          "channel-line=ewboson",
+          "seagull-loop-line=ewboson",
+          "insertion-pre-line=ewboson",
+          "insertion-post-line=ewboson"
+        ],
+        "description": "The same supported graph with wavy EW propagators.",
+        "limitation": "No caps, circles, labels, or momenta; requires the unmerged branch."
+      }
+    ]
+  }
+}

@@ -158,6 +158,8 @@ Common wrappers and aliases:
 
 ## Documentation
 
+- Open the [current diagram atlas](docs/diagram-inventory/inventory.pdf) for a visual inventory of existing shapes, with [copy/paste recipes](docs/diagram-inventory/recipes.md).
+- Use the [development roadmap](docs/development-plan.md) and [reference coverage map](docs/planning/source-coverage.md) for remaining diagram and feature work.
 - Start with [`example.tex`](example.tex) if you want copy-paste examples.
 - Use [`docs/reference.md`](docs/reference.md) for the full macro and tuning reference.
 - Use [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex) for the compact vertex-identity sketch.

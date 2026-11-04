@@ -1,513 +1,129 @@
 # Feynman Fun Development Plan
 
-Living plan for the next phase of `feynman-fun`. This document should be
-updated at the start and end of each work session so a future session can pick
-up quickly without spending credits reconstructing context.
-
-## Current State
-
-- Date created: 2026-09-06
-- Active branch: `codex/adopt-feynman-fun`
-- Recovery baseline: `2253c64 Adopt feynman-fun package`
-- Regression checkpoint: `057bfbd Add feynman-fun regression checks`
-- Push status: pushed by Codex as review branch after 2026-09-11 adoption
-  closeout
-- Remote repository: do not rename
-- Branch cleanup: do not delete branches
-- Current priority: confidence and maintainability before new diagram features
-- Visual tuning in `feynman-fun.sty`: assume intentional unless it is dead
-  commented scratch text
-
-## Session Protocol
-
-At the start of each session:
-
-1. Run `git status --short --branch`.
-2. Confirm the branch is `codex/adopt-feynman-fun` unless the user says
-   otherwise.
-3. Read this file, especially `Last Session Update`, `Today`, and
-   `Open Questions`.
-4. Run `scripts/check-regressions.sh` before risky edits when enough credits
-   remain.
-5. Pick one narrow implementation target and one narrow documentation or
-   regression target.
-
-Before ending each session:
-
-1. Update `Last Session Update` with what was actually completed.
-2. Update `Today` and `Next Session`.
-3. Move finished items from `Planned Work` to `Completed`.
-4. Add any uncertainty to `Open Questions`.
-5. Run `scripts/check-regressions.sh` if code changed and credits/time allow.
-6. Record whether tests passed, failed, or were skipped.
-
-## Today
-
-Goal for 2026-09-11:
-
-- Finish the adoption branch, then start one focused topology-foundation slice.
-- Use `\ThreePointCorr` to prove the logical-slot translation model before
-  adding new bubble, seagull, or swordfish topologies.
-- Add a focused regression for rotated labels, indices, styles, and momenta.
-- Keep public APIs stable unless a narrow bug fix requires a change.
-- Do not rename the remote repository.
-- Do not delete branches.
-
-Usage checkpoints:
-
-- Start of adoption closeout: 5-hour window 6% used, weekly window 1% used.
-- Start of translation-safe topology slice: 5-hour window 35% used, weekly
-  window 5% used.
-- End of translation-safe topology slice: 5-hour window 72% used, weekly
-  window 11% used.
-- Available reset credits: 3 full Codex resets.
-- Maintained regression suite passed during adoption closeout.
-- Maintained regression suite passed after the translation-safe topology slice.
-
-## Next Session
-
-Recommended first technical session:
-
-- Focus area: audit and modernize the older loop-channel and sunset momentum
-  systems before using them as precedent for new bubble-leg topologies.
-- Treat `loop-channel` and `sunset` as partly abandoned QFT-I-era systems:
-  useful for structure, but not visually authoritative.
-- Compare old defaults, documented fix-it recipes, index-heavy cases, and
-  direction/style variants in one audit PDF.
-- Use the audit to decide which momentum helpers/defaults should be kept,
-  revised, or discarded before implementing bubble-on-leg diagrams.
-
-Likely deliverable:
-
-- A loop momentum audit regression PDF, roadmap updates, and then a first
-  bubble-on-leg prototype plan/implementation that does not inherit ugly old
-  defaults by accident.
-
-## Implementation Inventory
-
-Current helper map from the 2026-09-06 inspection:
-
-- Public topology selection is handled by `/corrdiag/topology` keys in
-  `feynman-fun.sty`, with `\FourPointCorr` dispatching to contact, loop
-  channels, tree channels, box, cross-box, half-box, flat-contact, and
-  triangle-contact draw macros.
-- The newer topology framework starts near the internal comment "Internal
-  topology framework." It includes reusable wrappers for drawing propagators,
-  placing external labels/vertices, selecting momentum slots, and placing
-  propagator endpoint indices.
-- `\propag` from `tikz-feynhand` is already the primitive behind most line
-  drawing. Higher-level helpers usually set `\corr@propoptions`, append
-  arrow-size/color/endcap options, then call `\propag`.
-- `\corr@drawprop` is the basic external-leg wrapper. `\corr@drawchannelprop`,
-  `\corr@drawsunsetprop`, `\corr@drawboxinternalprop`,
-  `\corr@drawhalfboxprop`, and triangle-contact draw helpers are specialized
-  variants around the same primitive.
-- Shared momentum drawing exists in `\corr@drawmomentumrange`,
-  `\corr@drawmomentumrangeoffset`, `\corr@drawmomentumrangeoffsetout`, and
-  `\corr@drawcustommomentumrangeoffset`. These should be reused for bridge and
-  triple-vertex arrows.
-- External momentum direction is still mostly slot based: slots 1 and 2 inherit
-  left direction, slots 3 and 4 inherit right direction. Contact, box, and
-  half-box add per-slot overrides on top of that.
-- General list helpers include `\corr@getlistitemorblank`,
-  `\corr@selectmomentumslot`, and topology-specific list setters for box,
-  cross-box, triangle-contact, loop-channel, and sunset structures.
-- The most reusable index helper is `\corr@putpropagatorindiceslot`, which
-  reads `<topology>propagatorleftindices` and
-  `<topology>propagatorrightindices` lists and places endpoint labels at fixed
-  0.18 and 0.82 fractions on a named line segment.
-- `box`, `half-box`, `flat-contact`, and `triangle-contact` already use
-  `\corr@putpropagatorindiceslot`; this is the best pattern for the next
-  general internal index rework.
-- `channel`, `loop-channel`, and `sunset` have older, more specialized index
-  systems with start/prop/end triplets, auto placement, and curve-aware label
-  placement. Do not rewrite these first; mine them for behavior after the newer
-  slot-list pattern is made explicit.
-- Three-point orientation is handled by coordinate setup helpers for right,
-  left, up, and down orientations. Momentum angles and label offsets are
-  orientation-specific, while momentum labels still use slots 1, 2, and 3.
-- Half-box already has a bridge line and bridge label. It also already places
-  propagator endpoint indices on slot 5 for the bridge, but it does not yet
-  have bridge momentum arrows. This makes half-box bridge momentum the cleanest
-  first feature slice.
-- Single propagator macros should not be prioritized as a public feature now.
-  If used, they should be a tiny infrastructure probe that exercises the same
-  `\propag` plus slot/index/momentum helper path planned for larger topologies.
-
-Design direction from this inventory:
-
-- Standardize around "slot metadata plus drawing primitive": each topology
-  should declare stable slot numbers and named endpoint coordinates, then call
-  shared helpers for labels, indices, and momentum where possible.
-- Keep geometry local to each topology. The helper layer should know about
-  slot lists, labels, directions, and index placement, not the physics shape.
-- Migrate incrementally. First extend half-box bridge momentum using existing
-  slot 5, then use that as the model for triple-vertex and future loop topology
-  metadata.
-
-Translation model for the next topology family:
-
-- Public keys should address logical slots. Orientation changes should
-  translate coordinates, label offsets, momentum offsets, and index anchors
-  without changing which label, style, momentum, or index belongs to a slot.
-- `\ThreePointCorr` is the current proving ground for this rule. Its slot 1,
-  slot 2, and slot 3 data should remain attached to the same logical legs in
-  right, left, up, and down orientations.
-- Sunset remains useful as a record of the hard cases for parallel curved and
-  straight internal-line indices, especially clearance between labels and
-  endpoint/index triplets. It should not be copied wholesale for the new
-  two-line bubble structures.
-- The one-loop `s/t/u` channel topology is archival for future public API work.
-  Its slot 5/6 curved-line machinery can still inform private helpers, but new
-  diagram families should prefer the newer slot-list pattern used by half-box,
-  box, flat-contact, and triangle-contact.
-- Tree-level `s/t/u` channels remain useful as the structural precedent for two
-  vertices joined by one internal propagator. Future bubble-on-leg diagrams can
-  be thought of as tree exchange structures with one logical leg replaced by a
-  translated bubble subdiagram.
-
-## Planned Work
-
-### Phase 1: Stabilize The Base
-
-Target window: first 1 to 2 sessions.
-
-- Keep the regression script maintained and easy to run.
-- Add any missing high-value regression files to `scripts/check-regressions.sh`.
-- Make sure compatibility through `correlator-diagrams.sty` remains covered.
-- Remove only genuinely dead commented scratch text, not intentional visual
-  tuning.
-- Document the current macro families and slot order well enough that future
-  work does not require rediscovery.
-
-Completion test:
-
-- `scripts/check-regressions.sh` passes.
-- Current behavior is documented before broad topology changes begin.
-
-### Phase 2: Helper Rework For Index And Momentum Reuse
-
-Target window: sessions 2 to 4.
-
-Main goal:
-
-- Create or clarify a helper layer that can remember the index and momentum
-  structure of smaller subdiagrams, especially tree-level diagrams, and reuse
-  that logic when loop diagrams create keys, slots, positions, and labels.
-
-Likely tasks:
-
-- Inventory current key families for `momentum-labels`, `momentum-directions`,
-  `leg-styles`, `internal-indices`, and line styles.
-- Separate topology geometry from slot metadata where practical.
-- Define a reusable slot map for external legs and internal propagators.
-- Decide how tree-level channel conventions feed loop channel conventions.
-- Add regression examples that verify copied or inherited momentum/index
-  behavior.
-
-Risks:
-
-- TeX macro state can become fragile if the helper tries to be too generic too
-  early.
-- A too-broad rework could break carefully tuned diagrams.
-
-Preferred approach:
-
-- Extract only the patterns that are already repeated.
-- Keep topology-specific visual placement local when it is genuinely unique.
-- Add one helper, migrate one existing topology to it, test, then continue.
-
-### Phase 3: Near-Term Feature Slices
-
-Target window: sessions 4 to 7.
-
-Implement in this order unless new information changes the risk:
-
-1. Momentum arrows for half-box bridges.
-2. Triple vertex momentum implementation for the main orientations.
-3. Single propagator macros only if useful as an infrastructure probe.
-4. Option for an extended leg.
-
-Why this order:
-
-- Half-box bridge momentum is close to existing helper behavior and already has
-  a natural slot 5 through the propagator-index path.
-- Triple vertex momentum probably touches orientation conventions, so it should
-  happen after the helper inventory.
-- Single propagator macros can lean on `feynhand`'s existing `\propag`
-  primitive, so they do not need to lead the feature queue unless they clarify
-  the slot/index model.
-- Extended legs may be simple visually, but the option shape should be decided
-  after the propagator and vertex momentum conventions are clearer.
-
-Expected regressions:
-
-- A focused propagator-leg regression.
-- A focused half-box bridge momentum regression.
-- A triple-vertex orientation gallery.
-- One README or reference example only after the API feels stable.
-
-### Phase 4: New And Corrected Topologies
-
-Target window: sessions 7 to 12.
-
-Candidate order:
-
-1. Bubble-on-leg prototype using two 3-point vertices, reusing the standalone
-   bubble slot and momentum conventions.
-2. Tadpole.
-3. Seagull.
-4. Extended triangle.
-5. Corrected cross-box.
-
-Notes:
-
-- The bubble-on-leg topology is not the same as the sunset: it should use two
-  3-point vertices to form the bubble on a leg, while sunset has two 4-point
-  vertices.
-- Future bubble-on-leg variants should include `s` and `t` versions, so the
-  implementation should preserve logical bubble slots and translate geometry.
-- Tadpole should benefit directly from the helper work.
-- The standalone `\BubbleCorr` self-energy macro is now the first real package
-  version of the bubble system; future bubble-on-leg work should reuse its
-  `bubble-a` / `bubble-b` slot naming, endpoint-index convention, and curved
-  momentum defaults.
-- Seagull may be conceptually small but needs careful labeling conventions.
-- Extended triangle should wait until triangle-contact and triple-vertex
-  momentum are more robust.
-- Corrected cross-box should happen after the desired correction is pinned down
-  visually, because cross-box geometry is easy to misread from text alone.
-
-Expected regressions:
-
-- One `.tex` file per topology under `regressions/topologies/<name>/`.
-- Include both default output and at least one momentum/index-labeled variant.
-- Add each stable regression to `scripts/check-regressions.sh`.
-
-### Phase 5: General Internal Index Rework
-
-Target window: after the topology/helper pattern is proven.
-
-Main goal:
-
-- Make internal index placement and naming predictable across old and new
-  topologies.
-
-Likely tasks:
-
-- Define canonical slot naming for internal lines.
-- Preserve backwards-compatible keys where possible.
-- Add explicit docs for how external and internal slots are counted.
-- Add regression sheets that compare slot behavior across tree, loop, triangle,
-  box, and self-energy families.
-
-Risk:
-
-- This is probably the highest-blast-radius item. It should happen only after
-  regression coverage is broad enough to catch visual and compile regressions.
-
-## Open Questions
-
-- For "single propagator legs", should this mean standalone one-line diagrams,
-  optional replacement of external legs with single propagator stubs, or both?
-- For "extended leg", should the option be global, per-leg, or both?
-- For half-box bridge momentum arrows, which bridge segments need arrows by
-  default, and should their direction inherit from existing half-box momentum
-  flow?
-- For triple vertex momentum, which orientations matter first: all-in/all-out,
-  rotated geometric variants, or the vertex-identity use cases?
-- For seagull, what is the preferred visual convention: two external legs plus a
-  loop at one vertex, or a contact-like vertex with an attached loop?
-- For corrected cross-box, what specifically is wrong in the current version:
-  geometry, momentum direction, internal index order, crossing style, or API?
-- Should future topology names follow physics names only, or include aliases
-  like `self-energy`, `bubble`, and `two-point-loop`?
-
-## Loop Momentum Audit Notes
-
-2026-09-12 audit target:
-
-- The old `loop-channel` and `sunset` systems should be treated as
-  partially-finished visual systems, not as final defaults to inherit.
-- `regressions/topologies/loop-audit/loop-momentum-audit.tex` compares current
-  defaults, documented manual relief settings, reversed flow, mixed internal
-  styles, crossed-channel crowding, and sunset momentum/index presets.
-
-Initial findings from the rendered audit:
-
-- Keep the logical idea of two internal loop slots (`a/b`, with visual
-  top/bottom or left/right aliases) and per-line momentum text/direction.
-- Keep per-line style overrides; they are useful for future bubble-on-leg
-  diagrams where the two bubble propagators may differ.
-- Revise loop-channel defaults before reusing them: the raw labels can ride too
-  close to arrows/curves, while the documented relief settings sometimes feel
-  too detached or large.
-- Revise crossed-channel defaults separately; the `u` channel has different
-  crowding because crossed external momenta compete with the right loop label.
-- Avoid copying the sunset approach directly into bubble-on-leg work. Sunset is
-  useful for multi-line momentum/index stress, but its two 4-point vertices and
-  older y-shift-heavy controls are not the geometry model for a bubble made
-  from two 3-point vertices.
-
-Next implementation rule:
-
-- Build a private modern curved-momentum helper for bubble-on-leg diagrams
-  using the audited concepts, then backport improvements to `loop-channel` or
-  `sunset` only after the new helper proves its defaults visually.
-
-## Generic Insertion Architecture Notes
-
-2026-09-12 planning target:
-
-- Treat this branch as the standalone bubble and loop-audit groundwork branch;
-  do not add public insertion keys here.
-- Future bubble-on-leg, seagull, counterterm, and related diagrams should use a
-  shared insertion model instead of one-off topology hacks.
-- Research reference: TikZ-Feynman/FeynHand model `insertion` as an
-  edge-attached object with position, size, and style. For this package, keep
-  the same conceptual shape, but expose semantic keys and let each topology
-  translate them into concrete geometry.
-
-Planned first insertion API direction:
-
-- Start with one insertion per diagram.
-- Prefer semantic public keys such as `insertion=none|bubble|seagull|counterterm`,
-  `insertion-slot=...`, `insertion-position=...`,
-  `insertion-orientation=auto|top|bottom|left|right`, `insertion-style=...`,
-  and `insertion-scale=...`.
-- Do not make users pass arbitrary TikZ drawing code in the first public API.
-  Advanced custom hooks can wait until semantic presets are stable.
-- Topology macros should own the geometry: split the chosen host propagator,
-  place the insertion object, preserve host momentum/label behavior, and route
-  insertion-specific momenta/indices through the package's existing slot model.
-- The first prototype should reuse `\BubbleCorr` conventions: `bubble-a` /
-  `bubble-b` slots, two endpoint indices per internal propagator,
-  vertex-side external indices, curved momentum defaults, and white-filled
-  equilateral `spol`/Proca endpoint markers.
-
-2026-09-12 implementation start:
-
-- The first prototype branch is `codex/bubble-on-leg`.
-- The first supported host is `TTreeChannelCorr` / `topology=t-tree`.
-- The first supported insertion is `insertion=bubble` on external slot `1`.
-- The prototype splits the slot-1 host leg into pre-insertion and
-  post-insertion segments, places two insertion vertices on that leg, and draws
-  the bubble internals with the standalone `\BubbleCorr` style conventions.
-- Unsupported insertion slots and types remain no-ops for now.
-- Next expansion target after visual approval: add an internal slot-5 insertion
-  case or a second external slot, then decide whether seagull should share the
-  same host-splitting helper.
-
-2026-09-12 branch closeout:
-
-- `codex/bubble-on-leg` now contains the first semantic insertion prototype:
-  `insertion=bubble` on `TTreeChannelCorr` / `topology=t-tree` external slot
-  `1`.
-- The insertion implementation owns the host split into pre-insertion and
-  post-insertion segments, reuses the standalone bubble visual conventions, and
-  exposes tuning keys for bubble endpoint indices, pre/post slot-1 momentum,
-  and the detached middle-channel momentum annotation.
-- The branch intentionally stops at one insertion type on one host slot. This
-  keeps the mergeable slice focused while proving the public semantic API
-  shape.
-- Follow-up order after merge:
-  1. Quartic/seagull leg insertion using the same semantic insertion model.
-  2. Swordfish-style insertion, reusing the host-split and momentum/index
-     lessons from bubble and seagull.
-  3. Triangle insertion/topology work after the lower-order insertion cases are
-     visually stable.
-- The next branch should avoid broadening arbitrary user draw hooks. Continue
-  with package-owned insertion objects, semantic slot keys, and focused
-  regressions for each new insertion family.
-
-## Completed
-
-- 2026-09-06: Confirmed the previous regression-check commit had not yet been
-  made. Created commit `057bfbd Add feynman-fun regression checks` on
-  `codex/adopt-feynman-fun` without pushing.
-- 2026-09-06: Added this development plan.
-- 2026-09-06: Committed the initial planning roadmap as
-  `8ab5737 Add development planning roadmap`.
-- 2026-09-06: Inspected the current helper structure and documented the
-  implementation inventory in this file.
-- 2026-09-06: Added opt-in half-box bridge momentum arrows, reference docs, and
-  a focused regression.
-- 2026-09-06: Made box and cross-box geometry square by default by matching
-  `box-yspan` to `box-xspan` and `box-external-yspan` to
-  `box-external-xspan`.
-- 2026-09-11: Closed the adoption audit for branch review: restored the
-  accidental `Icon\r` deletion, tracked the generated half-box bridge momentum
-  regression PDF, confirmed maintained regressions pass, and pushed
-  `codex/adopt-feynman-fun`.
-- 2026-09-11: Started the translation-safe topology foundation on
-  `codex/translation-safe-topology`, using `\ThreePointCorr` as the first
-  controlled test for logical slots under rotated geometry.
-- 2026-09-11: Added a three-point translation regression, simplified private
-  three-point label/momentum helper calls, and confirmed focused plus full
-  regressions pass.
-
-## Last Session Update
-
-2026-09-11:
-
-- Verified branch: `codex/adopt-feynman-fun`.
-- Audited branch contents against `main`; local adoption commits are
-  `2253c64`, `057bfbd`, `8ab5737`, `ae00ab2`, `dd56536`, and `d195189`.
-- Confirmed current usage at start of closeout: 5-hour window 6% used, weekly
-  window 1% used, with 3 full reset credits available.
-- Ran `scripts/check-regressions.sh`; all maintained checks passed.
-- Restored the accidental tracked `Icon\r` deletion.
-- Added the generated
-  `regressions/topologies/vertex-identity/half-box-bridge-momentum.pdf` so the
-  new regression follows the existing source-plus-rendered-PDF pattern.
-- Updated this roadmap so the branch no longer looks like an abandoned
-  adoption session.
-- Pushed `codex/adopt-feynman-fun` to `origin/codex/adopt-feynman-fun` as a
-  reviewable checkpoint.
-- Switched to `main` after the adoption branch was merged, then created
-  `codex/translation-safe-topology` for the next focused slice.
-- Recorded the translation model for future bubble, seagull, and swordfish
-  work: public keys bind to logical slots while orientation translates
-  geometry, anchors, offsets, and momentum/index placement.
-- Added
-  `regressions/topologies/three-point/three-point-translation-check.tex` to
-  make logical slot translation visible across right, left, up, and down
-  orientations.
-- Simplified `\ThreePointCorr` label placement and momentum drawing through
-  private helper calls that use the orientation-resolved slot metadata.
-- Usage checkpoint: 5-hour window 35% used, weekly window 5% used, with 3 full
-  reset credits available at the start of this slice.
-- Focused compile passed for
-  `regressions/topologies/three-point/three-point-translation-check.tex`.
-- Visually inspected both rendered translation-check pages. Logical slot data
-  remains attached under right, left, up, and down rotations; the dense
-  horizontal momentum-label cases expose crowding to consider in the deeper
-  helper design.
-- Ran `scripts/check-regressions.sh`; all maintained checks passed, including
-  the new translation regression.
-- Usage checkpoint after implementation and checks: 5-hour window 72% used,
-  weekly window 11% used, with 3 full reset credits still available.
-- Did not rename the remote repository.
-- Did not delete branches.
-- 2026-09-11: Added the next orientation slice: a generic `orientation` key
-  that resolves corner pairs such as `{top,left}` and `{bottom,right}` for
-  diagram families that opt into it. `\ThreePointCorr` now uses this resolver,
-  while legacy `three-point-orientation` values remain aliases.
-- Tuned three-point default momentum label clearance and added the missing
-  reset for `three-point-momentum-label-gap`, so rotated diagrams do not depend
-  on stale or too-tight defaults.
-- Corrected the up/down three-point momentum-angle metadata so rotated
-  momentum labels offset perpendicular to their propagator lines instead of
-  riding the wavy line.
-- 2026-09-12: Added the first package-level self-energy bubble,
-  `\BubbleCorr`, with `\SelfEnergyCorr` and `\SelfEnergyBubbleCorr` aliases,
-  standalone bubble keys, opt-in curved loop momenta, two-endpoint internal
-  indices, managed amputated external endcaps, reference docs, and a focused
-  bubble regression.
-
-Next planned action:
-
-- Merge `codex/bubble-on-leg`, then create the quartic/seagull insertion
-  branch. Start with one seagull insertion on the same t-tree host context so
-  it can reuse the bubble-on-leg split-segment controls before expanding to
-  swordfish and triangle cases.
+Current roadmap and session handoff, refreshed 2026-11-03. The original plan
+is preserved in [the history archive](planning/history/development-plan-before-2026-11-03.md).
+
+## Current state
+
+- Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
+- Current branch: `codex/proca-endpoint-audit`; base `0dbf733` plus local M00/M01 work.
+- M01 endpoint audit is complete for the documented matrix. Next priority:
+  reconcile the existing seagull branch with M01 before starting M02.
+- M00 produced the inventory and roadmap. M01 now corrects generic Proca tip
+  contact; it adds a low-level custom-radius line option and no new topology.
+- Existing square box defaults, four-legged s/t/u bubbles, and all four
+  triangle-contact orientations are already implemented.
+- Semantic bubble insertion is implemented only on external slot 1 of t trees.
+  Accepted keys for other insertion combinations can silently do nothing.
+- Preserve existing public APIs and intentional visual tuning. Do not rename
+  the repository or delete branches.
+
+## Start here
+
+| Record | Purpose |
+| --- | --- |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Eight pages: 35 current examples plus two clearly labeled unmerged seagull examples. |
+| [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
+| [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
+| [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
+| [Coding milestones](planning/milestones.md) | Small implementation slices, completion checkpoints, and unresolved source questions. |
+| [Source record](planning/README.md) | Unchanged originals, checksums, previews, and historical plan. |
+| [Inventory verification](diagram-inventory/verification.md) | What was compiled, visually inspected, and left unaudited. |
+
+## Milestone queue
+
+| Milestone | Work | State |
+| --- | --- | --- |
+| M00 | Archive sources; audit capacity; publish repository atlas and roadmap | Complete locally; no commit/push made |
+| M01 | Audit and correct demonstrated Proca endpoint failures | Complete locally; diagnostic and vector checks passed |
+| Integration | Reconcile unmerged seagull/endpoint work with M01 | Next checkpoint before M02 |
+| M02 | Independent triangle-contact annotations, four orientations | After branch reconciliation |
+| M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | Slot-1 t prototype exists; expansion planned |
+| M04 | External seagulls on s/t trees | Slot-1 prototype exists on unmerged branch; integrate, then expand |
+| M05 | External swordfish on s/t trees | Planned |
+| M06 | Regular tree-attached triangle corrections, four placements | Planned |
+| M07 | Complementary crossed box, crossed external layouts, source routing questions | Planned; square defaults already verified |
+| M08a / M08b | Contact external self-energy / seagull | Planned |
+| M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
+| M10 | Stemmed tadpoles; any separately established residual graph | Planned |
+| M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
+
+## Next coding session
+
+Read [branch integration](planning/branch-integration.md). The unmerged
+`codex/seagull-insertion` branch already contains seagull and endpoint work
+that the original current-checkout inventory missed. Reconcile that branch
+with the M01 checkpoint, run the combined tests, and rebuild the inventory
+before beginning M02. Do not reimplement its prototype or overwrite overlapping
+helpers wholesale. M02 remains the next feature milestone after integration.
+
+M01 evidence: [results](../regressions/propagators/proca-endpoints/results.md)
+and [diagnostic PDF](../regressions/propagators/proca-endpoints/proca-endpoint-audit.pdf).
+
+## Session protocol
+
+At the start:
+
+1. Inspect branch and working tree; confirm the actual baseline rather than
+   assuming an old branch named in historical notes.
+2. Read this handoff and inspect relevant unmerged branches before assuming a
+   capability is missing. Read the selected milestone, requirement IDs, and source panels.
+3. Preserve unrelated local work. Create a `codex/` branch when starting a
+   feature slice; avoid destructive branch cleanup.
+4. Freeze the target graph, slots, compatibility rules, and acceptance examples.
+5. Run relevant baseline checks before risky package edits.
+
+Before closing a feature slice:
+
+1. Compile the focused regression and inspect its rendered PDF, including
+   endpoint and annotation detail. Successful compilation alone is insufficient.
+2. Run the maintained regression suite and register stable new coverage.
+3. Update the reference, recipe, atlas/PDF, requirement status, and milestone handoff.
+4. Record tested revision, passes/failures, remaining limits, and next slice.
+5. Do not mark a host/slot family complete until its stated matrix is demonstrated.
+6. Create a local checkpoint commit and report its branch/commit, inventory
+   update, test state, and separate push/merge status.
+
+## M00 session record - 2026-11-03
+
+- Archived the two supplied originals unchanged with SHA-256 checksums.
+- Preserved the previous development plan in full before refreshing this entry point.
+- Mapped all 23 PowerPoint slides: 90 diagram panels, with repeats and contextual
+  material distinguished; transcribed 23 PDF checklist/figure items into 22 requirements.
+- Built a seven-page atlas using existing public macros; supplied the catalog,
+  generated LaTeX, recipes, and a temporary-output rebuild command.
+- Recorded already-supported capabilities, incomplete annotation/marker coverage,
+  missing insertion families, and two references requiring future endpoint tracing.
+- All 27 pre-existing example/regression documents passed compilation during
+  baseline inspection. Atlas compilation and final visual/coverage checks are
+  recorded in the inventory verification file.
+- No package implementation changed. No commit, push, or merge was performed.
+
+## Latest session update - M01, 2026-11-03
+
+- Created `codex/proca-endpoint-audit`, retaining all local M00 files.
+- Reproduced fixed-distance generic marker gaps while managed bubble tips
+  already met their vertices; recorded the user's observation that many
+  document examples looked correct.
+- Corrected only the generic Proca marker family: triangle-tip anchoring with
+  uniform scale and a default 2.15pt target radius. Preserved explicit legacy
+  marker distances, generic open-arrow add-ons, and managed bubble placement.
+- Saved before/after 24-page PDFs, the 144-case source, independent vector
+  checker and results. 568 automatic contacts pass; no crossing-gap markers.
+- All 21 registered regression documents pass; atlas updated, with no new
+  topology added. M02 is next.
+- Work remains local and uncommitted; no push or merge performed.
+
+## Latest handoff - branch review and focused examples
+
+- Identified the unmerged `codex/seagull-insertion` branch through `5a657cd`,
+  including a t-tree external-slot-1 seagull and earlier endpoint fixes. The
+  original inventory was checkout-scoped and missed that work.
+- Added two branch-only seagull examples to atlas page eight, compiled against
+  the pinned branch package without merging or copying its code into this checkout.
+- Removed unnecessary caps and crossed-box circ decorations from the M01
+  diagnostics; retained only the dedicated circ compatibility control.
+- Saved the local M00/M01/cleanup checkpoint on `codex/proca-endpoint-audit`.
+  No branch was pushed or merged. Reconcile branches before M02.
+- Future closeouts include a local commit, inventory update, verification record,
+  and explicit push/merge status. See the branch-integration workflow.

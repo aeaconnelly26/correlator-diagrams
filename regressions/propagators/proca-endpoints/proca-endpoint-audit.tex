@@ -1,0 +1,300 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.4in,bottom=0.65in]{geometry}
+\usepackage{amsmath,graphicx,xcolor,fancyhdr}
+\usepackage{feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M01 Proca endpoint diagnostic}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}\setlength{\parindent}{0pt}
+\newcommand{\auditcell}[2]{\begin{minipage}[t][2.9in][t]{0.32\linewidth}\centering
+ {\bfseries #1\par}\vspace{10pt}#2\end{minipage}}
+\newcommand{\rawcase}[4]{\begin{tikzpicture}[scale=#1]
+ \begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (#2,0);
+ \propag[proca,magenta!85!red,arrow size=#4] (a) to [#3] (b);\end{feynhand}
+ \filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}
+% Diagnostic-only: omit the independent optional crossing-circle pass.
+\makeatletter
+\let\corr@placecrossboxcircs\relax
+\makeatother
+\begin{document}
+\section*{Raw Proca: straight}
+Pink triangles and black dots; only scale, length, and arrow size vary.\par
+\medskip
+\auditcell{normal / 6pt; 0.72}{\rawcase{0.72}{2.0}{}{6pt}}\hfill
+\auditcell{normal / 6pt; 1.0}{\rawcase{1.0}{2.0}{}{6pt}}\hfill
+\auditcell{normal / 6pt; 1.2}{\rawcase{1.2}{2.0}{}{6pt}}\hfill
+\par\vspace{10pt}
+\auditcell{short / 6pt; 0.72}{\rawcase{0.72}{0.85}{}{6pt}}\hfill
+\auditcell{short / 6pt; 1.0}{\rawcase{1.0}{0.85}{}{6pt}}\hfill
+\auditcell{short / 6pt; 1.2}{\rawcase{1.2}{0.85}{}{6pt}}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Raw Proca: curved upper}
+Pink triangles and black dots; only scale, length, and arrow size vary.\par
+\medskip
+\auditcell{normal / 6pt; 0.72}{\rawcase{0.72}{2.0}{bend left=35}{6pt}}\hfill
+\auditcell{normal / 6pt; 1.0}{\rawcase{1.0}{2.0}{bend left=35}{6pt}}\hfill
+\auditcell{normal / 6pt; 1.2}{\rawcase{1.2}{2.0}{bend left=35}{6pt}}\hfill
+\par\vspace{10pt}
+\auditcell{short / 6pt; 0.72}{\rawcase{0.72}{0.85}{bend left=35}{6pt}}\hfill
+\auditcell{short / 6pt; 1.0}{\rawcase{1.0}{0.85}{bend left=35}{6pt}}\hfill
+\auditcell{short / 6pt; 1.2}{\rawcase{1.2}{0.85}{bend left=35}{6pt}}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Raw Proca: curved lower}
+Pink triangles and black dots; only scale, length, and arrow size vary.\par
+\medskip
+\auditcell{normal / 6pt; 0.72}{\rawcase{0.72}{2.0}{bend right=35}{6pt}}\hfill
+\auditcell{normal / 6pt; 1.0}{\rawcase{1.0}{2.0}{bend right=35}{6pt}}\hfill
+\auditcell{normal / 6pt; 1.2}{\rawcase{1.2}{2.0}{bend right=35}{6pt}}\hfill
+\par\vspace{10pt}
+\auditcell{short / 6pt; 0.72}{\rawcase{0.72}{0.85}{bend right=35}{6pt}}\hfill
+\auditcell{short / 6pt; 1.0}{\rawcase{1.0}{0.85}{bend right=35}{6pt}}\hfill
+\auditcell{short / 6pt; 1.2}{\rawcase{1.2}{0.85}{bend right=35}{6pt}}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Raw Proca: diagonal and reversed endpoints}
+\auditcell{forward; 0.72}{\begin{tikzpicture}[scale=0.72]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (1.7,0.85);\propag[proca,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{forward; 1.0}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (1.7,0.85);\propag[proca,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{forward; 1.2}{\begin{tikzpicture}[scale=1.2]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (1.7,0.85);\propag[proca,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\par\vspace{10pt}
+\auditcell{reversed; 0.72}{\begin{tikzpicture}[scale=0.72]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (1.7,0.85);\propag[proca,magenta!85!red] (b) to (a);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{reversed; 1.0}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (1.7,0.85);\propag[proca,magenta!85!red] (b) to (a);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{reversed; 1.2}{\begin{tikzpicture}[scale=1.2]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (1.7,0.85);\propag[proca,magenta!85!red] (b) to (a);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Raw Proca: independent arrow-size changes}
+Length is fixed at 2 cm; only arrow size and picture scale vary.\par\medskip
+\auditcell{10pt; scale 0.72}{\rawcase{0.72}{2.0}{}{10pt}}\hfill
+\auditcell{10pt; scale 1.0}{\rawcase{1.0}{2.0}{}{10pt}}\hfill
+\auditcell{10pt; scale 1.2}{\rawcase{1.2}{2.0}{}{10pt}}\hfill
+\par\vspace{10pt}
+\auditcell{12pt; scale 0.72}{\rawcase{0.72}{2.0}{}{12pt}}\hfill
+\auditcell{12pt; scale 1.0}{\rawcase{1.0}{2.0}{}{12pt}}\hfill
+\auditcell{12pt; scale 1.2}{\rawcase{1.2}{2.0}{}{12pt}}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Three-point external Proca}
+\texttt{\string\ThreePointCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\ThreePointCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={proca,magenta!85!red},external-vertices=true,external-vertex-style=dot]}\hfill
+\auditcell{normal; scale 1.0}{\ThreePointCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={proca,magenta!85!red},external-vertices=true,external-vertex-style=dot]}\hfill
+\auditcell{normal; scale 1.2}{\ThreePointCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={proca,magenta!85!red},external-vertices=true,external-vertex-style=dot]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\ThreePointCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={proca,magenta!85!red},external-vertices=true,external-vertex-style=dot,three-point-external-length=0.8,three-point-right-xspan=0.8,three-point-bottom-yspan=0.8]}\hfill
+\auditcell{short; scale 1.0}{\ThreePointCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={proca,magenta!85!red},external-vertices=true,external-vertex-style=dot,three-point-external-length=0.8,three-point-right-xspan=0.8,three-point-bottom-yspan=0.8]}\hfill
+\auditcell{short; scale 1.2}{\ThreePointCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={proca,magenta!85!red},external-vertices=true,external-vertex-style=dot,three-point-external-length=0.8,three-point-right-xspan=0.8,three-point-bottom-yspan=0.8]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{S tree exchange}
+\texttt{\string\STreeChannelCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\STreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\STreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\STreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\STreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\auditcell{short; scale 1.0}{\STreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\auditcell{short; scale 1.2}{\STreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{T tree exchange}
+\texttt{\string\TTreeChannelCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\auditcell{short; scale 1.0}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\auditcell{short; scale 1.2}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{U tree exchange}
+\texttt{\string\UTreeChannelCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\UTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\UTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\UTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\UTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\auditcell{short; scale 1.0}{\UTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\auditcell{short; scale 1.2}{\UTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line=ewboson,channel-line={proca,magenta!85!red},channel-vertex-xspan=0.35,channel-vertex-yspan=0.35]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{S four-legged loop}
+\texttt{\string\SChannelCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\SChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\SChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\SChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\SChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\auditcell{short; scale 1.0}{\SChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\auditcell{short; scale 1.2}{\SChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{T four-legged loop}
+\texttt{\string\TChannelCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\TChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\TChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\TChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\auditcell{short; scale 1.0}{\TChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\auditcell{short; scale 1.2}{\TChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{U four-legged loop}
+\texttt{\string\UChannelCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\UChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\UChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\UChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\UChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\auditcell{short; scale 1.0}{\UChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\auditcell{short; scale 1.2}{\UChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},loop-channel-a-line={proca,magenta!85!red},loop-channel-b-line={proca,magenta!85!red},loop-channel-vertex-xspan=0.4,loop-channel-vertex-yspan=0.4]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Square box}
+\texttt{\string\BoxLoopCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\BoxLoopCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,box-line={proca,magenta!85!red},box-external-line={ewboson}]}\hfill
+\auditcell{normal; scale 1.0}{\BoxLoopCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,box-line={proca,magenta!85!red},box-external-line={ewboson}]}\hfill
+\auditcell{normal; scale 1.2}{\BoxLoopCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,box-line={proca,magenta!85!red},box-external-line={ewboson}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\BoxLoopCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,box-line={proca,magenta!85!red},box-external-line={ewboson},box-xspan=0.6,box-yspan=0.6,box-external-xspan=1.0,box-external-yspan=1.0]}\hfill
+\auditcell{short; scale 1.0}{\BoxLoopCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,box-line={proca,magenta!85!red},box-external-line={ewboson},box-xspan=0.6,box-yspan=0.6,box-external-xspan=1.0,box-external-yspan=1.0]}\hfill
+\auditcell{short; scale 1.2}{\BoxLoopCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,box-line={proca,magenta!85!red},box-external-line={ewboson},box-xspan=0.6,box-yspan=0.6,box-external-xspan=1.0,box-external-yspan=1.0]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Crossed box: split and continuous diagonals}
+\texttt{\string\CrossBoxCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\CrossBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,box-line={proca,magenta!85!red},box-external-line={ewboson},cross-box-up-line={proca,magenta!85!red},cross-box-down-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\CrossBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,box-line={proca,magenta!85!red},box-external-line={ewboson},cross-box-up-line={proca,magenta!85!red},cross-box-down-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\CrossBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,box-line={proca,magenta!85!red},box-external-line={ewboson},cross-box-up-line={proca,magenta!85!red},cross-box-down-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\CrossBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,box-line={proca,magenta!85!red},box-external-line={ewboson},box-xspan=0.6,box-yspan=0.6,box-external-xspan=1.0,box-external-yspan=1.0,cross-box-up-line={proca,magenta!85!red},cross-box-down-line={proca,magenta!85!red}]}\hfill
+\auditcell{short; scale 1.0}{\CrossBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,box-line={proca,magenta!85!red},box-external-line={ewboson},box-xspan=0.6,box-yspan=0.6,box-external-xspan=1.0,box-external-yspan=1.0,cross-box-up-line={proca,magenta!85!red},cross-box-down-line={proca,magenta!85!red}]}\hfill
+\auditcell{short; scale 1.2}{\CrossBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,box-line={proca,magenta!85!red},box-external-line={ewboson},box-xspan=0.6,box-yspan=0.6,box-external-xspan=1.0,box-external-yspan=1.0,cross-box-up-line={proca,magenta!85!red},cross-box-down-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Half-box bridge}
+\texttt{\string\HalfBoxCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\HalfBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,half-box-line=ewboson,half-box-bridge-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\HalfBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,half-box-line=ewboson,half-box-bridge-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\HalfBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,half-box-line=ewboson,half-box-bridge-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\HalfBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,half-box-line=ewboson,half-box-bridge-line={proca,magenta!85!red},half-box-xspan=0.32]}\hfill
+\auditcell{short; scale 1.0}{\HalfBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,half-box-line=ewboson,half-box-bridge-line={proca,magenta!85!red},half-box-xspan=0.32]}\hfill
+\auditcell{short; scale 1.2}{\HalfBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,half-box-line=ewboson,half-box-bridge-line={proca,magenta!85!red},half-box-xspan=0.32]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Triangle contact: bottom}
+\texttt{\string\TriangleContactCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=bottom,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=bottom,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=bottom,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=bottom,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=bottom,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=bottom,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Triangle contact: top}
+\texttt{\string\TriangleContactCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=top,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=top,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=top,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=top,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=top,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=top,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Triangle contact: left}
+\texttt{\string\TriangleContactCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=left,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=left,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=left,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=left,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=left,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=left,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Triangle contact: right}
+\texttt{\string\TriangleContactCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=right,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=right,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=right,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,triangle-contact-orientation=right,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.0}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,triangle-contact-orientation=right,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\auditcell{short; scale 1.2}{\TriangleContactCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,triangle-contact-orientation=right,triangle-contact-external-line={ewboson},triangle-contact-internal-line={proca,magenta!85!red},triangle-contact-xspan=0.5,triangle-contact-yspan=0.45,triangle-contact-external-xspan=1.0,triangle-contact-external-yspan=0.95]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Standalone bubble: managed endpoint helper}
+\texttt{\string\BubbleCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\BubbleCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,bubble-external-line={ewboson},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\BubbleCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,bubble-external-line={ewboson},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\BubbleCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,bubble-external-line={ewboson},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\BubbleCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,bubble-external-line={ewboson},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red},bubble-vertex-span=0.35,bubble-external-length=0.4]}\hfill
+\auditcell{short; scale 1.0}{\BubbleCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,bubble-external-line={ewboson},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red},bubble-vertex-span=0.35,bubble-external-length=0.4]}\hfill
+\auditcell{short; scale 1.2}{\BubbleCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,bubble-external-line={ewboson},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red},bubble-vertex-span=0.35,bubble-external-length=0.4]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Sunset: straight and curved internals}
+\texttt{\string\SunsetDiagram} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\SunsetDiagram[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,sunset-outer-span=0.45,sunset-central-label={},sunset-left-line=ewboson,sunset-right-line=ewboson,sunset-top-line={proca,magenta!85!red},sunset-middle-line={proca,magenta!85!red},sunset-bottom-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\SunsetDiagram[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,sunset-outer-span=0.45,sunset-central-label={},sunset-left-line=ewboson,sunset-right-line=ewboson,sunset-top-line={proca,magenta!85!red},sunset-middle-line={proca,magenta!85!red},sunset-bottom-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\SunsetDiagram[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,sunset-outer-span=0.45,sunset-central-label={},sunset-left-line=ewboson,sunset-right-line=ewboson,sunset-top-line={proca,magenta!85!red},sunset-middle-line={proca,magenta!85!red},sunset-bottom-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\SunsetDiagram[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,sunset-outer-span=0.45,sunset-central-label={},sunset-left-line=ewboson,sunset-right-line=ewboson,sunset-top-line={proca,magenta!85!red},sunset-middle-line={proca,magenta!85!red},sunset-bottom-line={proca,magenta!85!red},sunset-inner-span=0.4]}\hfill
+\auditcell{short; scale 1.0}{\SunsetDiagram[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,sunset-outer-span=0.45,sunset-central-label={},sunset-left-line=ewboson,sunset-right-line=ewboson,sunset-top-line={proca,magenta!85!red},sunset-middle-line={proca,magenta!85!red},sunset-bottom-line={proca,magenta!85!red},sunset-inner-span=0.4]}\hfill
+\auditcell{short; scale 1.2}{\SunsetDiagram[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,sunset-outer-span=0.45,sunset-central-label={},sunset-left-line=ewboson,sunset-right-line=ewboson,sunset-top-line={proca,magenta!85!red},sunset-middle-line={proca,magenta!85!red},sunset-bottom-line={proca,magenta!85!red},sunset-inner-span=0.4]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Inserted bubble and host exchange}
+\texttt{\string\TTreeChannelCorr} | EW external legs, pink Proca test paths.\par
+\medskip
+\auditcell{normal; scale 0.72}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},insertion=bubble,insertion-slot=1,channel-line={proca,magenta!85!red},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.0}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},insertion=bubble,insertion-slot=1,channel-line={proca,magenta!85!red},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}]}\hfill
+\auditcell{normal; scale 1.2}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},insertion=bubble,insertion-slot=1,channel-line={proca,magenta!85!red},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}]}\hfill
+\par\vspace{10pt}
+\auditcell{short; scale 0.72}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=0.72,line={ewboson},insertion=bubble,insertion-slot=1,channel-line={proca,magenta!85!red},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red},insertion-scale=0.7]}\hfill
+\auditcell{short; scale 1.0}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.0,line={ewboson},insertion=bubble,insertion-slot=1,channel-line={proca,magenta!85!red},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red},insertion-scale=0.7]}\hfill
+\auditcell{short; scale 1.2}{\TTreeChannelCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,center-vertex=true,external-vertices=false,scale=1.2,line={ewboson},insertion=bubble,insertion-slot=1,channel-line={proca,magenta!85!red},bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red},insertion-scale=0.7]}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Per-line radius, alias, and color controls}
+\pgfkeysifdefined{/tikzfeynhand/proca vertex radius}{}{\tikzfeynhandset{proca vertex radius/.initial=2.15pt}}
+\auditcell{radius after style / 0.72}{\begin{tikzpicture}[scale=0.72]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,proca vertex radius=4pt,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=4pt];\filldraw[black] (b) circle[radius=4pt];\end{tikzpicture}}\hfill
+\auditcell{radius before style / 1.2}{\begin{tikzpicture}[scale=1.2]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca vertex radius=4pt,proca,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=4pt];\filldraw[black] (b) circle[radius=4pt];\end{tikzpicture}}\hfill
+\auditcell{Alias Proca / 1.0}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[Proca,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\par\vspace{10pt}
+\auditcell{blue after style}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,fieldA] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{blue before style}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[fieldA,proca] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{pink reset after custom radius}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\par\vspace{10pt}
+\newpage
+\section*{Split endpoints and legacy controls}
+Upper row: automatic contact. Lower row: explicit legacy distances / generic add-on, intentionally unchanged.\par\medskip
+\auditcell{start marker only}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca start,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{end marker only}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca end,magenta!85!red] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{optional circle}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red,circ=Z] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\par\vspace{10pt}
+\auditcell{legacy 7pt / 6pt arrow}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red,endpoint marker distance=7pt] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{legacy 7pt / 10pt arrow}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[proca,magenta!85!red,endpoint marker distance=7pt,arrow size=10pt] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\auditcell{generic open arrow unchanged}{\begin{tikzpicture}[scale=1.0]\begin{feynhand}\vertex (a) at (0,0);\vertex (b) at (2.0,0);\propag[scalar,magenta!85!red,openarrowin] (a) to (b);\end{feynhand}\filldraw[black] (a) circle[radius=2.15pt];\filldraw[black] (b) circle[radius=2.15pt];\end{tikzpicture}}\hfill
+\par\vspace{10pt}
+\end{document}
