@@ -6,7 +6,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/integrate-seagull-and-proca`; combined parents `1b85ef8` and `5a657cd`.
+- Current branch: `main`, fast-forwarded to verified integration `4584aff`
+  on 2026-11-03; combined parents `1b85ef8` and `5a657cd`. Not pushed.
 - Integration is complete and verified. M02 independent triangle-contact
   annotations is the next coding milestone, based on this integrated branch.
 - M00 produced the inventory and roadmap. M01 now corrects generic Proca tip
@@ -36,7 +37,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | --- | --- | --- |
 | M00 | Archive sources; audit capacity; publish repository atlas and roadmap | Complete; included in checkpoint `1b85ef8` |
 | M01 | Audit and correct demonstrated Proca endpoint failures | Complete locally; diagnostic and vector checks passed |
-| Integration | Reconcile seagull/endpoint work with M01 | Complete locally; combined tests pass |
+| Integration | Reconcile seagull/endpoint work with M01 | Complete; merged into local `main` at `4584aff`; combined tests pass |
 | M02 | Independent triangle-contact annotations, four orientations | Next coding target on the integrated baseline |
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | Slot-1 t prototype exists; expansion planned |
 | M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
@@ -51,8 +52,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Next coding session
 
 Read M02 in [milestones](planning/milestones.md) and R06 in
-[requirements](planning/requirements.md). Start from this integration branch
-or a new branch based on its merge commit, not the older `main`. Begin with
+[requirements](planning/requirements.md). Create the M02 branch from current
+local `main`, which now includes integration commit `4584aff`. Begin with
 independent external-slot annotation controls, then internal-edge controls and
 all four orientations. Preserve the integrated marker and momentum/index behavior.
 

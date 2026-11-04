@@ -2,8 +2,10 @@
 
 Updated 2026-11-03. The seagull and M01 lines are now combined on
 `codex/integrate-seagull-and-proca`, with merge parents `1b85ef8` and `5a657cd`.
-The original feature branches are retained. `main` is still `0dbf733`; nothing
-was pushed and no pull request was created or merged.
+The original feature branches are retained. On 2026-11-03, local `main` was
+fast-forwarded from `0dbf733` to verified integration commit `4584aff` at the
+user's request. The current checkout is `main`. Nothing was pushed and no pull
+request was created or merged. A documentation-only follow-up records this state.
 
 ## What is integrated
 
@@ -38,9 +40,8 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M02 can now start from this integration branch (or a new branch based on its
-merge commit). No manual Git preparation is needed from the user. Do not start
-from the older `main` baseline until it contains this integration. M04 remains
+M02 can now start on a new branch based on current local `main`, which includes
+integration commit `4584aff`. No manual Git preparation is needed from the user. M04 remains
 an expansion of the existing single-leg seagull prototype, not a new prototype.
 The other t-tree legs, s-tree support, swordfish, and regular triangles remain
 future requirements.

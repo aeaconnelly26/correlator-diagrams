@@ -2,8 +2,10 @@
 
 Local integration branch: `codex/integrate-seagull-and-proca`.
 Merge parents: `1b85ef8` (M00/M01 checkpoint) and `5a657cd` (seagull branch).
-`main` remains at `0dbf733`. The original branches are retained; no remote
-push, pull request, or main-branch merge was performed.
+These checks verified integration commit `4584aff`. Local `main` was subsequently
+fast-forwarded to that commit on 2026-11-03 at the user's request; package code
+and generated PDFs are identical to the verified integration. The original
+branches are retained. No remote push or pull request was performed.
 
 ## Conflict resolution
 
@@ -79,5 +81,5 @@ Triangle-contact independent placement is still M02; this integration does
 not claim to implement it. Arbitrary nonuniform transforms/custom non-circular
 vertices remain outside the endpoint audit's certification.
 
-M02 should start from this integration commit (or its descendant), not the
-older `main` checkout. The user does not need to merge branches manually.
+M02 should start on a new branch from current local `main`, which now contains
+this integration. The user does not need to merge branches manually.
