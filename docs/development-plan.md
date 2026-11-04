@@ -25,7 +25,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Ten pages: 47 current examples, including seagulls and independent triangle-contact annotations. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Ten pages: 51 current examples, including seagulls and independent triangle-contact annotations. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -151,11 +151,22 @@ Before closing a feature slice:
 - Added `triangle-contact-momentum-1` through `-7` option blocks and aliases;
   grouped options remain fallbacks, independent of key order.
 - Explicit grouped ranges/fractions now work on every slot. Tuned ranges
-  remain defaults through `auto`. Outside directions follow the triangle
-  centroid, and external labels receive clearance from short arrows.
+  use `auto`. Outside directions follow the triangle centroid. The subsequent
+  review correction fits gaps to actual labels, shortens external arrows, and
+  places quartic-side defaults nearer outer endpoints. Continuous side-label
+  layout is now a separate global/per-slot choice.
 - Label shifts/anchors move only the label; reversal keeps the same geometric
   side and fractions. Slot numbering, styles, indices, and visibility remain.
 - All 35 maintained documents and 600 automatic endpoint contacts pass.
-  Saved the four-page focused gallery; atlas updated to ten pages/47 recipes.
+  Saved the five-page focused gallery; atlas updated to eleven pages/51 recipes.
 - No new topology or insertion placement was added. M03a is next.
 - Work is checkpointed on the M02 branch; no main merge or push for this slice.
+
+### M02 screenshot review correction
+
+The first checkpoint `b795f7f` left empty arrow gaps below displaced labels and
+used unnecessarily long quartic-side arrows. The reviewed version replaces
+those defaults with measured inline gaps, compact external arrows, orientation-
+aware quartic placement, and explicit continuous-arrow/side-label mode. All 35
+regression documents, 96 focused public-diagram checks and 600 endpoint contacts
+pass. The gallery has five pages/20 examples; the atlas has eleven pages/51 recipes.

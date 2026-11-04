@@ -3,10 +3,10 @@
 [Open the atlas](inventory.pdf) or [copy a recipe](recipes.md).
 
 Built against `codex/m02-triangle-contact-annotations`, based on synchronized
-`main` at `6657735`, on 2026-11-03. There are **47 current examples on ten
+`main` at `6657735`, on 2026-11-03. There are **51 current examples on eleven
 pages**, including the structural/style gallery, five seagull examples, three
-integrated annotation controls, and four M02 annotation examples. These are not
-47 distinct graph topologies: aliases, orientations, and style variants are
+integrated annotation controls, and eight M02 annotation examples. These are not
+51 distinct graph topologies: aliases, orientations, and style variants are
 identified separately.
 
 ## How to read it
@@ -21,6 +21,8 @@ identified separately.
   arrows, and the tree-channel side-label fix.
 - Page 10 demonstrates independent triangle-contact momentum placement in all
   four orientations. T01-T04 have reproducible per-slot recipes.
+- Page 11 shows continuous arrows with outward labels in all four orientations
+  (T05-T08), selected globally or per annotation with `layout=side`.
 
 Important limits:
 

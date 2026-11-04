@@ -1,5 +1,5 @@
 {
-  "baseline": "M02 on 6657735",
+  "baseline": "M02 review on b795f7f",
   "date": "2026-11-03",
   "base_options": [
     "field={}",
@@ -647,10 +647,10 @@
             "triangle-contact-external-line=plain",
             "triangle-contact-internal-line=plain",
             "triangle-contact-momentum-2={offset=16pt}",
-            "triangle-contact-momentum-6={label-offset=4pt}"
+            "triangle-contact-momentum-6={layout=side,label-offset=3pt}"
           ],
-          "description": "Slot 2 arrow and slot 6 label move independently.",
-          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+          "description": "Slot 2 arrow clearance and slot 6 side label are independent.",
+          "limitation": "Compact quartic-side defaults sit nearer the outer endpoints."
         },
         {
           "id": "T02",
@@ -663,11 +663,11 @@
             "triangle-contact-orientation=top",
             "triangle-contact-external-line=plain",
             "triangle-contact-internal-line=plain",
-            "triangle-contact-momentum-5={start=0.15,end=0.85,label-fraction=0.43}",
+            "triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.50}",
             "triangle-contact-internal-momentum-directions={reverse,forward,forward}"
           ],
           "description": "Slot 5 has its own range and reversed arrow.",
-          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+          "limitation": "Compact quartic-side defaults sit nearer the outer endpoints."
         },
         {
           "id": "T03",
@@ -680,11 +680,11 @@
             "triangle-contact-orientation=left",
             "triangle-contact-external-line=plain",
             "triangle-contact-internal-line=plain",
-            "triangle-contact-momentum-3={label-xshift=2pt,label-anchor=south}",
+            "triangle-contact-momentum-3={layout=side,label-xshift=2pt}",
             "triangle-contact-yspan=1.15"
           ],
-          "description": "Slot 3 has its own label shift and anchor.",
-          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+          "description": "Slot 3 uses a continuous arrow with its own side label.",
+          "limitation": "Compact quartic-side defaults sit nearer the outer endpoints."
         },
         {
           "id": "T04",
@@ -702,7 +702,78 @@
             "triangle-contact-yspan=0.80"
           ],
           "description": "Unequal edges retain mixed styles and logical slots.",
-          "limitation": "Labels face outside by default; slots 1-7 can be tuned separately."
+          "limitation": "Compact quartic-side defaults sit nearer the outer endpoints."
+        }
+      ]
+    },
+    {
+      "section": "11 / CONTINUOUS MOMENTUM ARROWS",
+      "title": "Continuous arrows with outside labels",
+      "subtitle": "Choose triangle-contact-momentum-layout=side globally, or layout=side for an individual slot.",
+      "entries": [
+        {
+          "id": "T05",
+          "title": "Side labels: contact bottom",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=bottom",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-momentum-layout=side"
+          ],
+          "description": "Continuous arrows; labels sit outward from each edge.",
+          "limitation": "Use layout=gap in an individual slot to mix both modes."
+        },
+        {
+          "id": "T06",
+          "title": "Side labels: contact top",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=top",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-momentum-layout=side"
+          ],
+          "description": "Continuous arrows; labels sit outward from each edge.",
+          "limitation": "Use layout=gap in an individual slot to mix both modes."
+        },
+        {
+          "id": "T07",
+          "title": "Side labels: contact left",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=left",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-momentum-layout=side"
+          ],
+          "description": "Continuous arrows; labels sit outward from each edge.",
+          "limitation": "Use layout=gap in an individual slot to mix both modes."
+        },
+        {
+          "id": "T08",
+          "title": "Side labels: contact right",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4}",
+            "triangle-contact-internal-momenta={k_5,k_6,k_7}",
+            "triangle-contact-orientation=right",
+            "triangle-contact-external-line=plain",
+            "triangle-contact-internal-line=plain",
+            "triangle-contact-momentum-layout=side"
+          ],
+          "description": "Continuous arrows; labels sit outward from each edge.",
+          "limitation": "Use layout=gap in an individual slot to mix both modes."
         }
       ]
     }

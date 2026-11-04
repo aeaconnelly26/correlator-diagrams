@@ -978,8 +978,9 @@
 \def\corr@trianglecontactmomentumstart{auto}
 \def\corr@trianglecontactmomentumend{auto}
 \def\corr@trianglecontactmomentumoffset{10pt}
-\def\corr@trianglecontactmomentumlabelfraction{0.5}
+\def\corr@trianglecontactmomentumlabelfraction{auto}
 \def\corr@trianglecontactmomentumlabelgap{auto}
+\def\corr@trianglecontactmomentumlayout{gap}
 \def\corr@trianglecontactmomentumslots{1,2,3,4}
 \def\corr@trianglecontactinternalmomenta{}
 \def\corr@trianglecontactinternalmomentumdirections{forward,forward,forward}
@@ -988,7 +989,7 @@
 \def\corr@trianglecontactinternalmomentumend{auto}
 \def\corr@trianglecontactinternalmomentumoffset{10pt}
 \def\corr@trianglecontactinternalmomentumlabelfraction{0.50}
-\def\corr@trianglecontactinternalmomentumlabelgap{0.10}
+\def\corr@trianglecontactinternalmomentumlabelgap{auto}
 \def\corr@trianglecontactpropagatorleftindices{}
 \def\corr@trianglecontactpropagatorrightindices{}
 \def\corr@trianglecontactindexleftposition{above}
@@ -2391,8 +2392,9 @@
   \corr@topologysetdefault\corr@trianglecontactmomentumstart{auto}%
   \corr@topologysetdefault\corr@trianglecontactmomentumend{auto}%
   \corr@topologysetdefault\corr@trianglecontactmomentumoffset{10pt}%
-  \corr@topologysetdefault\corr@trianglecontactmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumlabelfraction{auto}%
   \corr@topologysetdefault\corr@trianglecontactmomentumlabelgap{auto}%
+  \corr@topologysetdefault\corr@trianglecontactmomentumlayout{gap}%
   \corr@topologysetdefault\corr@trianglecontactmomentumslots{1,2,3,4}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomenta{}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumdirections{forward,forward,forward}%
@@ -2401,7 +2403,7 @@
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumend{auto}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumoffset{10pt}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelfraction{0.50}%
-  \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelgap{0.10}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelgap{auto}%
   \corr@topologysetdefault\corr@trianglecontactpropagatorleftindices{}%
   \corr@topologysetdefault\corr@trianglecontactpropagatorrightindices{}%
   \corr@topologysetdefault\corr@trianglecontactindexleftposition{above}%
@@ -3220,6 +3222,10 @@
   triangle-contact-color/.store in=\corr@trianglecontactcolor,
   triangle-contact-external-color/.store in=\corr@trianglecontactexternalcolor,
   triangle-contact-internal-color/.store in=\corr@trianglecontactinternalcolor,
+  triangle-contact-momentum-layout/.is choice,
+  triangle-contact-momentum-layout/gap/.code={\def\corr@trianglecontactmomentumlayout{gap}},
+  triangle-contact-momentum-layout/side/.code={\def\corr@trianglecontactmomentumlayout{side}},
+  trianglecontact-momentum-layout/.style={triangle-contact-momentum-layout={#1}},
   triangle-contact-momentum-start/.store in=\corr@trianglecontactmomentumstart,
   triangle-contact-momentum-end/.store in=\corr@trianglecontactmomentumend,
   triangle-contact-momentum-offset/.store in=\corr@trianglecontactmomentumoffset,
@@ -5715,6 +5721,9 @@
 % Triangle-contact annotation options are resolved per logical slot, after all
 % public keys have been read. Other topology momentum helpers are unchanged.
 \pgfkeys{/corrdiag/tc-momentum/.is family,/corrdiag/tc-momentum,
+  layout/.is choice,
+  layout/gap/.code={\def\corr@tclayout{gap}},
+  layout/side/.code={\def\corr@tclayout{side}},
   start/.store in=\corr@tcstart,
   end/.store in=\corr@tcend,
   offset/.store in=\corr@tcoffset,
@@ -5738,15 +5747,27 @@
 
 \newcommand{\corr@trianglecontactresolveannotation}[1]{%
   \ifnum#1<5
-    \def\corr@tcdefaultstart{0.30}%
-    \def\corr@tcdefaultend{0.70}%
-    \def\corr@tcdefaultgap{0.10}%
-    \ifnum#1=2 \def\corr@tcdefaultstart{0.12}\def\corr@tcdefaultend{0.90}\def\corr@tcdefaultgap{0.2pt}\fi
-    \ifnum#1=4 \def\corr@tcdefaultstart{0.12}\def\corr@tcdefaultend{0.90}\def\corr@tcdefaultgap{0.2pt}\fi
-    \corr@tcinherit\corr@tcstart{\corr@trianglecontactmomentumstart}{\corr@tcdefaultstart}%
-    \corr@tcinherit\corr@tcend{\corr@trianglecontactmomentumend}{\corr@tcdefaultend}%
-    \corr@tcinherit\corr@tcgap{\corr@trianglecontactmomentumlabelgap}{\corr@tcdefaultgap}%
-    \edef\corr@tcfrac{\corr@trianglecontactmomentumlabelfraction}%
+    % External fractions are measured from the outer endpoint to the vertex.
+    % Quartic-side defaults sit nearer that outer endpoint in every orientation.
+    \def\corr@tcdefaultfrac{0.50}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{bottom}{%
+      \ifnum#1=2 \def\corr@tcdefaultfrac{0.30}\fi
+      \ifnum#1=4 \def\corr@tcdefaultfrac{0.30}\fi
+    }{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{top}{%
+      \ifnum#1=1 \def\corr@tcdefaultfrac{0.30}\fi
+      \ifnum#1=3 \def\corr@tcdefaultfrac{0.30}\fi
+    }{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{left}{%
+      \ifnum#1<3 \def\corr@tcdefaultfrac{0.30}\fi
+    }{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{right}{%
+      \ifnum#1>2 \def\corr@tcdefaultfrac{0.30}\fi
+    }{}%
+    \edef\corr@tcstart{\corr@trianglecontactmomentumstart}%
+    \edef\corr@tcend{\corr@trianglecontactmomentumend}%
+    \edef\corr@tcgap{\corr@trianglecontactmomentumlabelgap}%
+    \corr@tcinherit\corr@tcfrac{\corr@trianglecontactmomentumlabelfraction}{\corr@tcdefaultfrac}%
     \edef\corr@tcoffset{\corr@trianglecontactmomentumoffset}%
   \else
     \ifcase\numexpr#1-4\relax
@@ -5760,13 +5781,11 @@
     \edef\corr@tcfrac{\corr@trianglecontactinternalmomentumlabelfraction}%
     \edef\corr@tcoffset{\corr@trianglecontactinternalmomentumoffset}%
   \fi
-  % Short external legs cannot fit a complete math label inside the small
-  % fractional arrow gap. Place those labels outside the arrow by default.
-  \def\corr@tclabeloffset{0pt}%
-  \ifnum#1<5 \def\corr@tclabeloffset{6pt}\fi
+  \edef\corr@tclayout{\corr@trianglecontactmomentumlayout}%
+  \def\corr@tclabeloffset{auto}%
   \def\corr@tclabelxshift{0pt}%
   \def\corr@tclabelyshift{0pt}%
-  \def\corr@tclabelanchor{center}%
+  \def\corr@tclabelanchor{auto}%
   \def\corr@tcside{outside}%
   \edef\corr@tcoptions{\csname corr@tcslotoptions#1\endcsname}%
   \ifdefempty{\corr@tcoptions}{}{%
@@ -5795,19 +5814,74 @@
 \newcommand{\corr@trianglecontactdrawannotation}[3]{%
   \corr@trianglecontactresolveannotation{#1}%
   \corr@trianglecontactannotationside{#2}{#3}%
+  \pgfmathsetmacro{\corr@tcedgelength}{veclen(\corr@tcdx,\corr@tcdy)}%
+  \ifnum#1<5
+    % Compact 24pt default arrows, shortened when necessary to stay on the leg.
+    % Keep the default range independent of explicit label-only movement.
+    \pgfmathsetmacro{\corr@tchalfspan}{min(12pt/(\corr@tcedgelength*1cm),\corr@tcdefaultfrac-0.04,0.96-\corr@tcdefaultfrac)}%
+    \corr@ifstringeq{\corr@tcstart}{auto}{\pgfmathsetmacro{\corr@tcstart}{\corr@tcdefaultfrac-\corr@tchalfspan}}{}%
+    \corr@ifstringeq{\corr@tcend}{auto}{\pgfmathsetmacro{\corr@tcend}{\corr@tcdefaultfrac+\corr@tchalfspan}}{}%
+  \fi
+  \corr@ifstringeq{\corr@tclabeloffset}{auto}{%
+    \def\corr@tclabeloffset{0pt}%
+    \corr@ifstringeq{\corr@tclayout}{side}{\def\corr@tclabeloffset{3pt}}{}%
+  }{}%
+  \corr@ifstringeq{\corr@tclabelanchor}{auto}{%
+    \def\corr@tclabelanchor{center}%
+    \corr@ifstringeq{\corr@tclayout}{side}{%
+      \pgfmathanglebetweenpoints{\pgfpointanchor{#2}{center}}{\pgfpointanchor{#3}{center}}%
+      \pgfmathsetmacro{\corr@tclabelanchor}{\pgfmathresult+\corr@tcangle+180}%
+    }{}%
+  }{}%
   \coordinate (corrTCArrowStart) at ($(#2)!\corr@tcstart!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
   \coordinate (corrTCArrowEnd) at ($(#2)!\corr@tcend!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
   \coordinate (corrTCArrowLabel) at ($(#2)!\corr@tcfrac!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
   \pgfmathsetlengthmacro{\corr@tclabeldistance}{\corr@tcoffset+\corr@tclabeloffset}%
   \coordinate (corrTCLabel) at ($(#2)!\corr@tcfrac!(#3)!\corr@tclabeldistance!\corr@tcangle:(#3)$);
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
+  % Define these even in continuous mode for diagnostics; they are not strokes.
+  \coordinate (corrTCGapStart) at (corrTCArrowLabel);
+  \coordinate (corrTCGapEnd) at (corrTCArrowLabel);
   \ifdefempty{\corr@tclabel}{%
     \corr@trianglecontactdrawarrow{corrTCArrowStart}{corrTCArrowEnd}%
   }{%
-    \pgfmathsetmacro{\corr@tcgapstart}{min(\corr@tcend,max(\corr@tcstart,\corr@tcfrac-\corr@tcgap))}%
-    \pgfmathsetmacro{\corr@tcgapend}{max(\corr@tcstart,min(\corr@tcend,\corr@tcfrac+\corr@tcgap))}%
-    \coordinate (corrTCGapStart) at ($(#2)!\corr@tcgapstart!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
-    \coordinate (corrTCGapEnd) at ($(#2)!\corr@tcgapend!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
+    % Measure the actual rendered node, including font/style and diagram scale.
+    \begingroup
+      \tikzset{every node/.append style={alias=corrTCLabelNode}}%
+      \corr@putmomentumlabelwithdistance{(corrTCLabel)}{\corr@tclabelanchor}{0pt}%
+        {\corr@tclabelxshift}{\corr@tclabelyshift}{\corr@tclabel}%
+    \endgroup
+    \corr@ifstringeq{\corr@tclayout}{side}{%
+      \corr@trianglecontactdrawarrow{corrTCArrowStart}{corrTCArrowEnd}%
+    }{%
+      \corr@trianglecontactdrawgappedannotation{#2}{#3}%
+    }%
+  }%
+}
+
+\newcommand{\corr@trianglecontactdrawgappedannotation}[2]{%
+  \pgfpointdiff{\pgfpointanchor{corrTCLabelNode}{west}}{\pgfpointanchor{corrTCLabelNode}{east}}%
+  \edef\corr@tclabelwidth{\the\pgf@x}%
+  \pgfpointdiff{\pgfpointanchor{corrTCLabelNode}{south}}{\pgfpointanchor{corrTCLabelNode}{north}}%
+  \edef\corr@tclabelheight{\the\pgf@y}%
+  \pgfmathsetlengthmacro{\corr@tcprojectedhalf}{0.5*(abs(\corr@tcdx)*\corr@tclabelwidth+abs(\corr@tcdy)*\corr@tclabelheight)/\corr@tcedgelength}%
+  \corr@ifstringeq{\corr@tcgap}{auto}{%
+    \pgfmathsetmacro{\corr@tcgap}{(\corr@tcprojectedhalf+0.8pt)/(\corr@tcedgelength*1cm)}%
+  }{}%
+  % Anchor/shift overrides can move the label along the line. Center the break
+  % on the actual node, and never leave an empty break if it is off the line.
+  \pgfpointdiff{\pgfpointanchor{corrTCArrowLabel}{center}}{\pgfpointanchor{corrTCLabelNode}{center}}%
+  \edef\corr@tclabeldx{\the\pgf@x}\edef\corr@tclabeldy{\the\pgf@y}%
+  \pgfmathsetmacro{\corr@tcgapcenter}{\corr@tcfrac+(\corr@tcdx*\corr@tclabeldx+\corr@tcdy*\corr@tclabeldy)/(\corr@tcedgelength*\corr@tcedgelength*1cm)}%
+  \pgfmathsetlengthmacro{\corr@tcnormaldistance}{abs(\corr@tcdx*\corr@tclabeldy-\corr@tcdy*\corr@tclabeldx)/\corr@tcedgelength}%
+  \pgfmathsetlengthmacro{\corr@tcnormalhalf}{0.5*(abs(\corr@tcdy)*\corr@tclabelwidth+abs(\corr@tcdx)*\corr@tclabelheight)/\corr@tcedgelength}%
+  \ifdim\corr@tcnormaldistance>\corr@tcnormalhalf
+    \corr@trianglecontactdrawarrow{corrTCArrowStart}{corrTCArrowEnd}%
+  \else
+    \pgfmathsetmacro{\corr@tcgapstart}{min(\corr@tcend,max(\corr@tcstart,\corr@tcgapcenter-\corr@tcgap))}%
+    \pgfmathsetmacro{\corr@tcgapend}{max(\corr@tcstart,min(\corr@tcend,\corr@tcgapcenter+\corr@tcgap))}%
+    \coordinate (corrTCGapStart) at ($(#1)!\corr@tcgapstart!(#2)!\corr@tcoffset!\corr@tcangle:(#2)$);
+    \coordinate (corrTCGapEnd) at ($(#1)!\corr@tcgapend!(#2)!\corr@tcoffset!\corr@tcangle:(#2)$);
     \corr@ifstringeq{\corr@tcdirection}{reverse}{%
       \draw[line width=\corr@momentumlinewidth] (corrTCArrowEnd) -- (corrTCGapEnd);
       \corr@trianglecontactdrawarrow{corrTCArrowStart}{corrTCGapStart}%
@@ -5815,9 +5889,7 @@
       \draw[line width=\corr@momentumlinewidth] (corrTCArrowStart) -- (corrTCGapStart);
       \corr@trianglecontactdrawarrow{corrTCGapEnd}{corrTCArrowEnd}%
     }%
-    \corr@putmomentumlabelwithdistance{(corrTCLabel)}{\corr@tclabelanchor}{0pt}%
-      {\corr@tclabelxshift}{\corr@tclabelyshift}{\corr@tclabel}%
-  }%
+  \fi
 }
 
 \newcommand{\corr@trianglecontactdrawarrow}[2]{%

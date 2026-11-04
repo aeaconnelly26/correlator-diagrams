@@ -52,7 +52,7 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 ## R06 - Independent triangle-contact labeling
 
 - **Status:** Verified existing.
-- **Existing construction / evidence:** M02: T01-T04 and `triangle-contact-annotations.tex/pdf` demonstrate independent controls for slots 1-7, outside-facing defaults in four orientations, unequal spans and mixed EW/Proca styles. Emitted-coordinate isolation, grouped fallbacks, reversal, label-only movement, scale, visibility and state-reset checks pass.
+- **Existing construction / evidence:** M02: T01-T08 and `triangle-contact-annotations.tex/pdf` demonstrate independent controls for slots 1-7, outside-facing defaults in four orientations, unequal spans and mixed EW/Proca styles. Emitted-coordinate isolation, grouped fallbacks, reversal, label-only movement, scale, visibility and state-reset checks pass. Review checks cover actual gap centers, compact defaults, quartic-side placement, and continuous side-label layouts.
 - **Remaining target / limitation:** Implemented. Long labels or unusually short legs can still require explicit per-slot tuning. No new topology was added.
 - **Milestone:** M02 complete. **Dependencies:** M01 baseline endpoint audit.
 - **Acceptance:** All four orientations pass a labeled mixed-Proca/EW example; changing one annotation does not move another; old public keys still work.

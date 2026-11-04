@@ -14,13 +14,24 @@ aliases are retained and extended. Grouped settings supply unspecified fields;
 slot fields win regardless of key order. Options reset for each diagram.
 
 The former hard-coded assignments overwrote explicit grouped settings on
-external slots 2/4 and internal slots 5-7. These now act only as `auto` defaults;
-explicit settings really affect all selected slots. The tuned default ranges
-remain. Some earlier internal labels faced inside the triangle; sides now use
-the actual centroid and directed edge. Reversing an arrow retains its side
-and label coordinate frame. External labels default to 6pt additional outward
-clearance to avoid crowding short arrows; set `label-offset=0pt` for inline
-labels. Internal labels remain inline by default.
+external slots 2/4 and internal slots 5-7. Explicit settings now really affect
+all selected slots. Some earlier internal labels faced inside the triangle;
+sides now use the actual centroid and directed edge. Reversing an arrow retains
+its side and label coordinate frame.
+
+The first M02 checkpoint `b795f7f` moved external labels off-axis while leaving
+wide fractional breaks behind. The user's screenshot review demonstrated that
+this was incorrect. Reviewed defaults now put labels in their gaps and measure
+the actual rendered node to size each break, with 0.8pt padding per side. External
+arrows are compact (up to 24pt in diagram units), with the two quartic-side centers
+at 0.30 from their outer endpoints and other external centers at 0.50. This follows
+orientation rather than hard-coding slots 2/4. Internal default ranges remain.
+
+`triangle-contact-momentum-layout=side` draws continuous arrows with outward
+labels, using automatic boundary anchors and 3pt clearance. Slots can override
+the global layout independently. Gap mode centers its break on the actual node;
+an intentionally shifted off-axis label no longer leaves an empty break. Very
+wide labels/short legs can still need explicit ranges or side layout.
 
 Other topology momentum renderers are unchanged. Triangle-contact uses the
 existing momentum font/fill/style, arrow-size, direction, visibility, and label
@@ -36,7 +47,7 @@ and [reference](../reference.md#triangle-contact-topology).
 - **35 maintained regression/example documents pass**, including old triangle
   recipes, momentum direction/visibility and blank-label assertions, indices,
   one-sided markers, insertions, and the new focused regression.
-- **81 complete public diagrams** in the focused regression have automatic
+- **96 complete public diagrams** in the focused regression have automatic
   geometry/behavior checks. All seven slots are altered independently in all
   four orientations with unequal spans. Unselected annotations stay identical.
 - Outside-side checks observe emitted arrow coordinates relative to edge and
@@ -45,6 +56,11 @@ and [reference](../reference.md#triangle-contact-topology).
   side flips, selected/hidden annotations, momentum off, and state reset.
 - The independent PDF-vector audit still passes **600 automatic Proca endpoint
   contacts**. M02 does not relax or modify its checker.
+- Review checks compare actual node centers with default gap midpoints to
+  0.01pt, bound default breaks for the standard p/k labels to 18pt and external
+  arrows to 24.01pt, and verify quartic-side fractions by vertex endpoints.
+  Stroke counts require two strokes for a gap and one continuous stroke for
+  side labels/off-axis labels. Global/per-slot layout mixing and aliases pass.
 
 Reproduce the maintained suite with a Python interpreter containing `pypdf`:
 
@@ -52,18 +68,18 @@ Reproduce the maintained suite with a Python interpreter containing `pypdf`:
 FEYNMANFUN_PDF_PYTHON=python3 scripts/check-regressions.sh
 ```
 
-The final full suite passed after the final package change. Eight scale cases
-and explicit label-only arrow-invariance checks are also included in the focused
-regression, which was recompiled successfully during closeout. The package hash
+The final full suite passed after the final package change. The focused regression
+was additionally recompiled with the final break-width guard and revised examples.
+The package hash
 and counts are in [the check record](m02-checks.json).
 
 ## Rendered evidence and inventory
 
 - [Focused gallery](../../regressions/topologies/triangle-contact/triangle-contact-annotations.pdf):
-  four pages, 16 minimal examples; all orientations, unequal geometry/mixed
+  five pages, 20 minimal examples; all orientations, unequal geometry/mixed
   lines, individual external/internal controls, and hidden/blank entries.
-- [Current atlas](../diagram-inventory/inventory.pdf): ten pages, 47 recipes;
-  T01-T04 demonstrate the new controls in four orientations.
+- [Current atlas](../diagram-inventory/inventory.pdf): eleven pages, 51 recipes;
+  T01-T04 demonstrate independent controls; T05-T08 demonstrate side layout.
 - [Recipes](../diagram-inventory/recipes.md): generated copy/paste examples.
 
 All pages were rendered and inspected for labels, arrow directions, vertex

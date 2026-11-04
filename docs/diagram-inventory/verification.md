@@ -1,15 +1,20 @@
 # M02 inventory verification - 2026-11-03
 
-Current atlas: **47 recipes on ten pages**, compiled against M02 on baseline
+Current atlas: **51 recipes on eleven pages**, compiled against M02 on baseline
 `6657735`. Existing structural IDs and seagull examples remain intact. T01-T04
 add one annotation example for each triangle-contact orientation; they are style
-and annotation variants, not new topologies. All examples use current public APIs.
+and annotation variants, not new topologies. T05-T08 add the continuous-arrow
+alternative. All examples use current public APIs. The review corrections replace
+the earlier displaced-label and fixed fractional-gap defaults.
 
-The four-page M02 diagnostic includes 16 minimal rendered examples and automated
+The five-page M02 diagnostic includes 20 minimal rendered examples and automated
 checks on complete public diagrams. These observe emitted coordinates, verify
 all seven slots independently, preserve the other six, check outside half-planes,
 label-only movement, grouped keys, aliases, reversed arrows, scales, visibility,
-and consecutive diagrams. No unnecessary endcaps or circ decorations are used.
+and consecutive diagrams. Further checks require actual label centers inside
+default breaks, compact external arrows/gaps, the correct quartic-side slots,
+and one continuous stroke per side-label annotation. No unnecessary endcaps
+or circ decorations are used.
 
 All **35 maintained regression/example documents** pass; the independent Proca
 PDF check still passes **600 automatic contacts**. The final atlas and M02 gallery

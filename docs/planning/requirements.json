@@ -87,7 +87,7 @@
     "id": "R06",
     "title": "Independent triangle-contact labeling",
     "status": "Verified existing",
-    "evidence": "M02: T01-T04 and triangle-contact-annotations.tex/pdf demonstrate independent momentum controls for all seven logical slots, outside defaults in four orientations, unequal spans and mixed EW/Proca styles. Automated emitted-coordinate isolation, grouped fallbacks, reversal, label-only movement, scale, visibility and state-reset checks pass.",
+    "evidence": "M02: T01-T08 and triangle-contact-annotations.tex/pdf demonstrate independent momentum controls for all seven logical slots, outside defaults in four orientations, unequal spans and mixed EW/Proca styles. Automated emitted-coordinate isolation, grouped fallbacks, reversal, label-only movement, scale, visibility and state-reset checks pass. Reviewed gap centers, compact default arrows/breaks, orientation-aware quartic-side placement, and continuous global/per-slot side-label layout are checked.",
     "target": "Implemented. Long labels or unusually short legs can still need explicit per-slot ranges, clearance, anchor or label shifts. This adds annotation controls, not a topology.",
     "milestone": "M02",
     "dependencies": "M01 baseline endpoint audit",

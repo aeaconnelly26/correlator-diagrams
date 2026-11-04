@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M02 on 6657735`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M02 review on b795f7f`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1030,9 +1030,9 @@ Slot 1 has an unlabeled arrow, slot 2 has q, and slot 3 has no arrow.
 
 ### T01 - Annotations: contact bottom
 
-Slot 2 arrow and slot 6 label move independently.
+Slot 2 arrow clearance and slot 6 side label are independent.
 
-**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+**Limit:** Compact quartic-side defaults sit nearer the outer endpoints.
 
 ```tex
 \TriangleContactCorr[
@@ -1052,7 +1052,7 @@ Slot 2 arrow and slot 6 label move independently.
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
   triangle-contact-momentum-2={offset=16pt},
-  triangle-contact-momentum-6={label-offset=4pt}
+  triangle-contact-momentum-6={layout=side,label-offset=3pt}
 ]
 ```
 
@@ -1060,7 +1060,7 @@ Slot 2 arrow and slot 6 label move independently.
 
 Slot 5 has its own range and reversed arrow.
 
-**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+**Limit:** Compact quartic-side defaults sit nearer the outer endpoints.
 
 ```tex
 \TriangleContactCorr[
@@ -1079,16 +1079,16 @@ Slot 5 has its own range and reversed arrow.
   triangle-contact-orientation=top,
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
-  triangle-contact-momentum-5={start=0.15,end=0.85,label-fraction=0.43},
+  triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.50},
   triangle-contact-internal-momentum-directions={reverse,forward,forward}
 ]
 ```
 
 ### T03 - Annotations: contact left
 
-Slot 3 has its own label shift and anchor.
+Slot 3 uses a continuous arrow with its own side label.
 
-**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+**Limit:** Compact quartic-side defaults sit nearer the outer endpoints.
 
 ```tex
 \TriangleContactCorr[
@@ -1107,7 +1107,7 @@ Slot 3 has its own label shift and anchor.
   triangle-contact-orientation=left,
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
-  triangle-contact-momentum-3={label-xshift=2pt,label-anchor=south},
+  triangle-contact-momentum-3={layout=side,label-xshift=2pt},
   triangle-contact-yspan=1.15
 ]
 ```
@@ -1116,7 +1116,7 @@ Slot 3 has its own label shift and anchor.
 
 Unequal edges retain mixed styles and logical slots.
 
-**Limit:** Labels face outside by default; slots 1-7 can be tuned separately.
+**Limit:** Compact quartic-side defaults sit nearer the outer endpoints.
 
 ```tex
 \TriangleContactCorr[
@@ -1138,5 +1138,115 @@ Unequal edges retain mixed styles and logical slots.
   triangle-contact-internal-lines={proca,ewboson,proca},
   triangle-contact-xspan=1.20,
   triangle-contact-yspan=0.80
+]
+```
+
+## Continuous arrows with outside labels
+
+### T05 - Side labels: contact bottom
+
+Continuous arrows; labels sit outward from each edge.
+
+**Limit:** Use layout=gap in an individual slot to mix both modes.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=bottom,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
+]
+```
+
+### T06 - Side labels: contact top
+
+Continuous arrows; labels sit outward from each edge.
+
+**Limit:** Use layout=gap in an individual slot to mix both modes.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=top,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
+]
+```
+
+### T07 - Side labels: contact left
+
+Continuous arrows; labels sit outward from each edge.
+
+**Limit:** Use layout=gap in an individual slot to mix both modes.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=left,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
+]
+```
+
+### T08 - Side labels: contact right
+
+Continuous arrows; labels sit outward from each edge.
+
+**Limit:** Use layout=gap in an individual slot to mix both modes.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=right,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
 ]
 ```

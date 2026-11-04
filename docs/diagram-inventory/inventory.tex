@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M02 on 6657735 | 2026-11-03}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M02 review on b795f7f | 2026-11-03}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -761,9 +761,9 @@
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
   triangle-contact-momentum-2={offset=16pt},
-  triangle-contact-momentum-6={label-offset=4pt}
+  triangle-contact-momentum-6={layout=side,label-offset=3pt}
 ]
-}{Slot 2 arrow and slot 6 label move independently.}{Labels face outside by default; slots 1-7 can be tuned separately.}\hfill
+}{Slot 2 arrow clearance and slot 6 side label are independent.}{Compact quartic-side defaults sit nearer the outer endpoints.}\hfill
 \atlascell{T02  Annotations: contact top}{\TriangleContactCorr}{%
 \TriangleContactCorr[
   field={},
@@ -781,10 +781,10 @@
   triangle-contact-orientation=top,
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
-  triangle-contact-momentum-5={start=0.15,end=0.85,label-fraction=0.43},
+  triangle-contact-momentum-5={start=0.28,end=0.72,label-fraction=0.50},
   triangle-contact-internal-momentum-directions={reverse,forward,forward}
 ]
-}{Slot 5 has its own range and reversed arrow.}{Labels face outside by default; slots 1-7 can be tuned separately.}\par\vspace{4pt}
+}{Slot 5 has its own range and reversed arrow.}{Compact quartic-side defaults sit nearer the outer endpoints.}\par\vspace{4pt}
 \atlascell{T03  Annotations: contact left}{\TriangleContactCorr}{%
 \TriangleContactCorr[
   field={},
@@ -802,10 +802,10 @@
   triangle-contact-orientation=left,
   triangle-contact-external-line=plain,
   triangle-contact-internal-line=plain,
-  triangle-contact-momentum-3={label-xshift=2pt,label-anchor=south},
+  triangle-contact-momentum-3={layout=side,label-xshift=2pt},
   triangle-contact-yspan=1.15
 ]
-}{Slot 3 has its own label shift and anchor.}{Labels face outside by default; slots 1-7 can be tuned separately.}\hfill
+}{Slot 3 uses a continuous arrow with its own side label.}{Compact quartic-side defaults sit nearer the outer endpoints.}\hfill
 \atlascell{T04  Annotations: contact right}{\TriangleContactCorr}{%
 \TriangleContactCorr[
   field={},
@@ -827,5 +827,87 @@
   triangle-contact-xspan=1.20,
   triangle-contact-yspan=0.80
 ]
-}{Unequal edges retain mixed styles and logical slots.}{Labels face outside by default; slots 1-7 can be tuned separately.}\par\vspace{4pt}
+}{Unequal edges retain mixed styles and logical slots.}{Compact quartic-side defaults sit nearer the outer endpoints.}\par\vspace{4pt}
+\newpage
+\atlaspage{11 / CONTINUOUS MOMENTUM ARROWS}{Continuous arrows with outside labels}{Choose triangle-contact-momentum-layout=side globally, or layout=side for an individual slot.}
+\atlascell{T05  Side labels: contact bottom}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=bottom,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
+]
+}{Continuous arrows; labels sit outward from each edge.}{Use layout=gap in an individual slot to mix both modes.}\hfill
+\atlascell{T06  Side labels: contact top}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=top,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
+]
+}{Continuous arrows; labels sit outward from each edge.}{Use layout=gap in an individual slot to mix both modes.}\par\vspace{4pt}
+\atlascell{T07  Side labels: contact left}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=left,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
+]
+}{Continuous arrows; labels sit outward from each edge.}{Use layout=gap in an individual slot to mix both modes.}\hfill
+\atlascell{T08  Side labels: contact right}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4},
+  triangle-contact-internal-momenta={k_5,k_6,k_7},
+  triangle-contact-orientation=right,
+  triangle-contact-external-line=plain,
+  triangle-contact-internal-line=plain,
+  triangle-contact-momentum-layout=side
+]
+}{Continuous arrows; labels sit outward from each edge.}{Use layout=gap in an individual slot to mix both modes.}\par\vspace{4pt}
 \end{document}

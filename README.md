@@ -71,7 +71,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - 3-point vertices via `\ThreePointCorr`, including per-leg styles, custom labels, and all-in/all-out momentum flow
 - one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`
 - crossed-box diagrams via `\CrossBoxCorr` or `\FourPointCorr[topology=cross-box]`
-- triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations, split color controls, and independent momentum placement for all seven slots
+- triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations, split color controls, independent momentum placement for all seven slots, and a choice of gapped or continuous momentum arrows
 - vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - standalone self-energy bubbles via `\BubbleCorr`, and bubble/seagull insertions on t-tree external slot 1

@@ -82,7 +82,7 @@ Completed and reconciled on `codex/integrate-seagull-and-proca`; see [integratio
 
 Completed on `codex/m02-triangle-contact-annotations`, based on `6657735`.
 Sessions A-C are covered by the new slot option blocks and the focused
-four-page gallery. All seven logical slots, four orientations, unequal spans,
+five-page gallery. All seven logical slots, four orientations, unequal spans,
 grouped compatibility, scale, reversal, visibility and isolation are verified.
 See [M02 verification](m02-verification.md). M03a is the next feature slice;
 the acceptance contract below remains a regression gate.
