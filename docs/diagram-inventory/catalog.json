@@ -1,5 +1,5 @@
 {
-  "baseline": "M03b on published main 6549efa",
+  "baseline": "M04 on published main b4a6ad8",
   "date": "2026-11-03",
   "base_options": [
     "field={}",
@@ -332,7 +332,7 @@
     {
       "section": "06 / SELF-ENERGY AND INSERTION",
       "title": "Loops and external bubble insertions",
-      "subtitle": "All four t-tree external legs support bubbles. S-tree placements: page 12. Seagulls: t-tree slot 1 (page 8).",
+      "subtitle": "S/t external bubbles: all four legs (S page 12). External seagulls: all four legs (pages 8, 13-14).",
       "entries": [
         {
           "id": "I27",
@@ -519,7 +519,7 @@
     {
       "section": "08 / SEAGULL INSERTIONS",
       "title": "Seagull insertion examples",
-      "subtitle": "Now supported in this integrated checkout. Only t-tree external slot 1 is implemented; the other legs and s-channel remain future work.",
+      "subtitle": "Seagulls now support every external s/t-tree leg. These examples retain the original t-slot-1 styles; full placements: pages 13-14.",
       "entries": [
         {
           "id": "U01",
@@ -543,7 +543,7 @@
             "insertion-post-line=plain"
           ],
           "description": "One quartic point on an external leg carries a self-loop.",
-          "limitation": "Supported here: t-tree leg 1 only; other placements remain future work.",
+          "limitation": "Original t-slot-1 example; all s/t external slots 1-4 now supported.",
           "omit_base_options": [
             "line=plain"
           ]
@@ -570,7 +570,7 @@
             "insertion-post-line=ewboson"
           ],
           "description": "The same supported graph with wavy EW propagators.",
-          "limitation": "Supported here: t-tree leg 1 only; other placements remain future work.",
+          "limitation": "Original t-slot-1 example; all s/t external slots 1-4 now supported.",
           "omit_base_options": [
             "line=plain"
           ]
@@ -878,6 +878,124 @@
           ],
           "description": "Self-energy correction on the lower-right external leg.",
           "limitation": "One insertion; internal-slot and u-tree support remain missing."
+        }
+      ]
+    },
+    {
+      "section": "13 / T-TREE SEAGULL INSERTIONS",
+      "title": "External t-tree seagulls",
+      "subtitle": "Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.",
+      "entries": [
+        {
+          "id": "G01",
+          "title": "Seagull on t-tree leg 1",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=1",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the upper-left leg.",
+          "limitation": "Same graph as U01; repeated here to show the full four-leg matrix."
+        },
+        {
+          "id": "G02",
+          "title": "Seagull on t-tree leg 2",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=2",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the lower-left leg.",
+          "limitation": "External slots 1-4 only; one insertion."
+        },
+        {
+          "id": "G03",
+          "title": "Seagull on t-tree leg 3",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=3",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the upper-right leg.",
+          "limitation": "External slots 1-4 only; one insertion."
+        },
+        {
+          "id": "G04",
+          "title": "Seagull on t-tree leg 4",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=4",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the lower-right leg.",
+          "limitation": "External slots 1-4 only; one insertion."
+        }
+      ]
+    },
+    {
+      "section": "14 / S-TREE SEAGULL INSERTIONS",
+      "title": "External s-tree seagulls",
+      "subtitle": "Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.",
+      "entries": [
+        {
+          "id": "G11",
+          "title": "Seagull on s-tree leg 1",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=1",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the upper-left leg.",
+          "limitation": "External slots 1-4 only; one insertion."
+        },
+        {
+          "id": "G12",
+          "title": "Seagull on s-tree leg 2",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=2",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the lower-left leg.",
+          "limitation": "External slots 1-4 only; one insertion."
+        },
+        {
+          "id": "G13",
+          "title": "Seagull on s-tree leg 3",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=3",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the upper-right leg.",
+          "limitation": "External slots 1-4 only; one insertion."
+        },
+        {
+          "id": "G14",
+          "title": "Seagull on s-tree leg 4",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=4",
+            "channel-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "One quartic self-loop insertion on the lower-right leg.",
+          "limitation": "External slots 1-4 only; one insertion."
         }
       ]
     }

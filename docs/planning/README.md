@@ -12,6 +12,7 @@ feature implementation belongs in later coding sessions.
 - [M02 verification](m02-verification.md): independent triangle-contact annotations and current handoff.
 - [M03a verification](m03a-verification.md): all four t-tree bubble placements and their publication.
 - [M03b verification](m03b-verification.md): all four s-tree bubbles, published checkpoint and next seagull slice.
+- [M04 verification](m04-verification.md): all eight external seagulls, PDF graph/contact checks and next swordfish slice.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
 - [Deferred workflows](deferred-workflows.md): later reviews, including the explicitly deferred index-placement cleanup.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.

@@ -6,7 +6,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`, including verified M03b checkpoint `97495ba`.
+- Current branch: `codex/m04-seagull-expansion`, based on published main `b4a6ad8`.
+- M04 is complete locally: seagulls on all eight s/t-tree external placements.
+  See [M04 verification](planning/m04-verification.md). It is not merged or pushed.
 - M03b is complete, merged and published to GitHub: all four s-tree external
   bubble placements. See [M03b verification](planning/m03b-verification.md).
   The implementation branch is retained.
@@ -26,8 +28,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   contact; it adds a low-level custom-radius line option and no new topology.
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
   triangle-contact orientations are already implemented.
-- Semantic bubbles support s/t-tree external slots 1-4. Seagulls remain t-tree
-  slot 1 only. U-tree and internal bubble insertions are unsupported and can be no-ops.
+- Semantic bubbles and seagulls support s/t-tree external slots 1-4, one at
+  a time. U-tree/contact hosts and internal insertions remain unsupported and
+  can be no-ops. Seagulls have one quartic self-loop vertex, distinct from bubbles.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
   the repository or delete branches.
 
@@ -35,7 +38,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twelve pages: 58 current examples, including all eight s/t-tree bubble placements. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Fourteen pages: 66 current examples, including eight bubble and eight seagull placements. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -52,7 +55,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | Integration | Reconcile seagull/endpoint work with M01 | Complete; reconciled on local/GitHub `main`; combined tests pass |
 | M02 | Independent triangle-contact annotations, four orientations | Complete on published main; 35 regression documents and 600 endpoint contacts pass |
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a and M03b complete on published main |
-| M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
+| M04 | External seagulls on s/t trees | Complete locally on M04 branch; publication pending |
 | M05 | External swordfish on s/t trees | Planned |
 | M06 | Regular tree-attached triangle corrections, four placements | Planned |
 | M07 | Complementary crossed box, crossed external layouts, source routing questions | Planned; square defaults already verified |
@@ -63,13 +66,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M04 is next: expand the existing t-tree slot-1 seagull to the remaining t-tree
-legs, then the four s-tree legs, one insertion at a time. Start from synchronized
-main, which includes verified M03b checkpoint `97495ba`. No M03b merge/push or
-manual Git preparation remains for the user.
-Freeze the direct self-loop at one quartic host vertex; it is distinct from
-the two-vertex self-energy bubbles. Read R11 and M04. Keep D01 deferred to a
-separate later workflow; do not tidy index positions during the feature sessions.
+M05 is next: external swordfish diagrams on s/t trees. First integrate/publish
+the verified M04 checkpoint when authorized; no manual Git preparation is
+needed from the user. Read R12 and freeze the shared-tree-vertex graph from
+S08-L1 before coding. A swordfish has two parallel loop edges sharing the tree
+interaction vertex, unlike the separate quartic self-loop of a seagull. Cover
+one external placement at a time, preserving logical styles and annotation controls.
+D01 remains a separate later workflow; do not polish index positions during
+these feature sessions.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -232,7 +236,7 @@ and reversed arrows. The gallery/inventory are regenerated; no topology changed.
 - M03b is checkpointed locally; main/GitHub still contain M03a, not M03b.
   M04 is the next feature milestone after M03b publication.
 
-## M03b publication - 2026-11-03
+## Historical M03b publication - 2026-11-03
 
 - Fetched GitHub before merging; its main remained at `6549efa`.
 - Fast-forwarded local main to verified M03b checkpoint `97495ba` and published
@@ -242,3 +246,18 @@ and reversed arrows. The gallery/inventory are regenerated; no topology changed.
   publication changed only handoff documentation.
 - Current checkout is clean main, synchronized with GitHub. M04 is next.
   D01 remains deferred to a separate later workflow.
+
+## M04 implementation record - 2026-11-03
+
+- Started from synchronized main `b4a6ad8` on `codex/m04-seagull-expansion`.
+- Preserved the t-tree slot-1 prototype and extended its host-relative mapping
+  to T2/T3/T4, then S1/S2/S3/S4, verifying each step before enabling the next.
+- Each selected leg gets one quartic insertion point, two host segments and
+  one closed self-loop. Existing styles, caps, logical momentum and index
+  values/order are preserved; loop labels follow the physical loop side.
+- Added the six-page focused gallery, independent PDF graph/contact checker,
+  and eight atlas recipes. Verification details and reproduction are in M04 verification.
+- Index appearance is unchanged and remains D01. Unsupported hosts/slots are
+  documented, including bubble-only post-index controls and the stored-only style key.
+- M04 is checkpointed locally, not merged/pushed. Main/GitHub remain at
+  `b4a6ad8`. M05 is next after M04 publication.

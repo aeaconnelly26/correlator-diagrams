@@ -181,11 +181,11 @@
   {
     "id": "R11",
     "title": "Seagull on external tree legs",
-    "status": "Existing with limitations",
-    "evidence": "Integrated t-tree external-slot-1 seagull from 5a657cd. Current inventory U01/U02 and S01-S03 show plain/EW and one-/two-sided Proca loops, compiled against the combined checkout.",
-    "target": "Expand the remaining t-tree external legs and all four s-tree external legs. Preserve the existing prototype and one-insertion-at-a-time contract.",
-    "milestone": "M04 expands the integrated prototype",
-    "dependencies": "M03 host-slot conventions; prototype integration completed",
+    "status": "Verified existing",
+    "evidence": "M04 implements all eight s/t-tree external placements. Atlas G01-G04/G11-G14 and the six-page seagull-slots gallery expose the single quartic self-loop; actual PDF graph extraction verifies seven edges and valences for all eight. Focused controls and 24 pink Proca/scalar marker contacts are checked independently.",
+    "target": "One selected s/t-tree external leg at a time. Internal slot 5, u-tree/contact hosts and simultaneous insertions remain unsupported. Index placement is deferred to D01; seagull vertex index values/order are preserved.",
+    "milestone": "M04 complete",
+    "dependencies": "M03; prototype integration completed",
     "acceptance": "Eight placements preserve one quartic insertion point, two host segments, and one self-loop; do not draw a two-vertex self-energy bubble instead.",
     "source_panels": [
       "S05-C1",

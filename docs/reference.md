@@ -501,8 +501,8 @@ The hide key applies to external slots across two-, three-, and four-point
 families, including bubble and sunset. Slots follow the family's logical
 external label order, so they stay attached when a three-point diagram rotates.
 Bubble and sunset external momentum slots are 1 (left) and 2 (right).
-For bubble/seagull insertions on external slot 1, hiding slot 1 suppresses
-both pre- and post-insertion momentum annotations. Channel, bridge, box-edge,
+For bubble/seagull insertions on s/t-tree external slots 1-4, hiding the
+selected slot suppresses both pre- and post-insertion momentum annotations. Channel, bridge, box-edge,
 and loop momenta retain their existing controls; this key does not hide them.
 The setting is scoped to the current diagram.
 
@@ -2220,10 +2220,10 @@ Supported insertion keys:
 upper-left, lower-left, upper-right, lower-right. One selected leg is replaced
 by outer--A, two distinct A--B arcs, then B--tree-vertex. The two new vertices
 are trivalent. For s-tree, slots 1/2 attach to the left tree vertex, 3/4 to
-the right, with the horizontal exchange unchanged. `insertion=seagull` remains
-t-tree external slot `1` only. U-tree and internal slot `5` bubble insertions
-are unsupported and retain their
-existing no-op behavior. Simultaneous insertions are not supported.
+the right, with the horizontal exchange unchanged. `insertion=seagull` also
+supports all four external slots of both trees, with one quartic vertex and
+a self-loop instead of the bubble's two new vertices. U-tree, contact-host and
+internal slot `5` insertions remain unsupported and retain their no-op behavior. Simultaneous insertions are not supported.
 
 ```tex
 \TTreeChannelCorr[
@@ -2245,6 +2245,22 @@ Use the same options with `\STreeChannelCorr` for an s-tree insertion:
 ]
 ```
 
+A minimal seagull on the lower-right s-tree leg:
+
+```tex
+\STreeChannelCorr[
+  field={},central={},leg-labels={,,,},show-momenta=false,
+  line=plain,channel-line=plain,
+  insertion=seagull,insertion-slot=4,seagull-loop-line=plain
+]
+```
+
+Choose `insertion=seagull` with `\TTreeChannelCorr` for the same logical slot
+on a t-tree. The graph has seven propagator edges, three interaction vertices
+(two trivalent tree vertices and one quartic insertion vertex), and one loop.
+Both loop ends meet that single insertion point; there is no stem and no
+separate pair of bubble vertices. The other three external edges stay intact.
+
 For s-tree insertions the exchange momentum uses the normal
 `channel-momentum-*` controls. Its automatic distance/angle/label-position
 are `10pt`, `90` and `above`; explicit values win. The
@@ -2252,8 +2268,8 @@ are `10pt`, `90` and `above`; explicit values win. The
 The s-tree geometry keeps its existing spans; it does not inherit the t-tree
 insertion-specific span defaults.
 
-Index positions are known to need a separate later workflow, D01. M03b
-preserves their attachment, values and existing positioning controls without
+Index positions are known to need a separate later workflow, D01. M03/M04
+preserve their attachment, values and existing positioning controls without
 retuning their appearance. See [deferred workflows](planning/deferred-workflows.md).
 Focused evidence: `regressions/topologies/insertion/s-tree-bubble-slots.tex/pdf`;
 plain inventory recipes C01-C04.
@@ -2295,9 +2311,14 @@ page-axis values. `insertion-orientation` continues to control seagulls; bubble
 arcs follow the selected host direction rather than that option.
 The seagull insertion draws one quartic/contact insertion vertex on the host
 leg with a single package-styled self-loop propagator that starts and ends at
-that insertion vertex. On t-tree slot `1`, `insertion-orientation=auto`
-places the seagull loop under the host edge; use
-`insertion-orientation=top` for the opposite side. The default
+that insertion vertex. `insertion-orientation=auto` and `bottom` choose
+the -90-degree normal to the selected outer-to-tree host direction; `top`
+chooses +90 degrees. These are host-relative sides, so `top` need not be
+page-up on a right-hand leg. `left` and `right` instead select absolute page
+angles 180 and 0. The original t-tree slot-1 default is preserved.
+Loop momentum labels face the physical loop side regardless of arrow reversal.
+The default seagull momentum offset remains `9pt`; use
+`seagull-loop-momentum-offset` to override it. The default
 `seagull-loop-looseness=1.0` uses a true oval loop, and the seagull momentum
 arc is sampled from the same loop geometry. Scalar-polarized and Proca-style
 seagull loops use vertex-aware white-filled triangular markers; the default
@@ -2309,6 +2330,15 @@ default geometry with steeper external
 legs and a shorter middle channel leg; explicit
 `fourpoint-xspan=...`, `fourpoint-yspan=...`, and `channel-vertex-yspan=...`
 values still override those insertion-friendly defaults.
+
+Seagull vertex indices use `seagull-vertex-indices={host-left,host-right,
+loop-left,loop-right}` in the original logical order. Their placement defaults
+are deliberately unchanged (D01). `insertion-post-indices` remains a bubble
+control; it does not create additional seagull segment indices. Loop marker
+sizes still use slot 3 of the existing size list, shared with external slot 3.
+`insertion-style` is currently stored but is not consumed by these renderers;
+use explicit pre/post/loop line keys. Short host segments and arbitrary custom
+spans can require the existing momentum position/offset controls.
 
 For the short host segment after the inserted bubble, use
 `insertion-post-indices={j,m}` to place two labels on the segment from the
@@ -2362,6 +2392,9 @@ insertion-middle-momentum-label-distance=4pt,
 Focused visual QA lives in
 `regressions/topologies/insertion/insertion-regression.tex` and
 `regressions/topologies/insertion/seagull-insertion-regression.tex`.
+M04 adds `regressions/topologies/insertion/seagull-slots.tex/pdf`: all eight
+placements and the independent `check-seagull-contact.py` PDF graph/marker
+checker. Atlas recipes G01-G04 and G11-G14 show the plain seagull matrix.
 The all-slot t-tree gallery and graph/style/cap/momentum checks are in
 `regressions/topologies/insertion/t-tree-bubble-slots.tex` and its PDF. Its
 isolated Proca page has an independent 16-tip vector check in

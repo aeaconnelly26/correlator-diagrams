@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M03b on published main 6549efa | 2026-11-03}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M04 on published main b4a6ad8 | 2026-11-03}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -421,7 +421,7 @@
 ]
 }{The quartic/contact vertex lies on the right side.}{Not the regular three-trivalent-vertex triangle attached to a tree.}\par\vspace{4pt}
 \newpage
-\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and external bubble insertions}{All four t-tree external legs support bubbles. S-tree placements: page 12. Seagulls: t-tree slot 1 (page 8).}
+\atlaspage{06 / SELF-ENERGY AND INSERTION}{Loops and external bubble insertions}{S/t external bubbles: all four legs (S page 12). External seagulls: all four legs (pages 8, 13-14).}
 \atlascell{I27  Self-energy bubble}{\BubbleCorr}{%
 \BubbleCorr[
   field={},
@@ -642,7 +642,7 @@
 ]
 }{A blank circle on one pink diagonal and a Z on the other.}{Crossing stays unconnected; no internal momenta or indices claimed.}\par\vspace{4pt}
 \newpage
-\atlaspage{08 / SEAGULL INSERTIONS}{Seagull insertion examples}{Now supported in this integrated checkout. Only t-tree external slot 1 is implemented; the other legs and s-channel remain future work.}
+\atlaspage{08 / SEAGULL INSERTIONS}{Seagull insertion examples}{Seagulls now support every external s/t-tree leg. These examples retain the original t-slot-1 styles; full placements: pages 13-14.}
 \atlascell{U01  Seagull: bare structure}{\TTreeChannelCorr}{%
 \TTreeChannelCorr[
   field={},
@@ -669,7 +669,7 @@
   insertion-pre-line=plain,
   insertion-post-line=plain
 ]
-}{One quartic point on an external leg carries a self-loop.}{Supported here: t-tree leg 1 only; other placements remain future work.}\hfill
+}{One quartic point on an external leg carries a self-loop.}{Original t-slot-1 example; all s/t external slots 1-4 now supported.}\hfill
 \atlascell{U02  Seagull: EW line style}{\TTreeChannelCorr}{%
 \TTreeChannelCorr[
   field={},
@@ -696,7 +696,7 @@
   insertion-pre-line=ewboson,
   insertion-post-line=ewboson
 ]
-}{The same supported graph with wavy EW propagators.}{Supported here: t-tree leg 1 only; other placements remain future work.}\par\vspace{4pt}
+}{The same supported graph with wavy EW propagators.}{Original t-slot-1 example; all s/t external slots 1-4 now supported.}\par\vspace{4pt}
 \atlascell{S01  One endpoint marker}{\TTreeChannelCorr}{%
 \TTreeChannelCorr[
   field={},
@@ -1037,4 +1037,144 @@
   bubble-bottom-line=plain
 ]
 }{Self-energy correction on the lower-right external leg.}{One insertion; internal-slot and u-tree support remain missing.}\par\vspace{4pt}
+\newpage
+\atlaspage{13 / T-TREE SEAGULL INSERTIONS}{External t-tree seagulls}{Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.}
+\atlascell{G01  Seagull on t-tree leg 1}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the upper-left leg.}{Same graph as U01; repeated here to show the full four-leg matrix.}\hfill
+\atlascell{G02  Seagull on t-tree leg 2}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the lower-left leg.}{External slots 1-4 only; one insertion.}\par\vspace{4pt}
+\atlascell{G03  Seagull on t-tree leg 3}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the upper-right leg.}{External slots 1-4 only; one insertion.}\hfill
+\atlascell{G04  Seagull on t-tree leg 4}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the lower-right leg.}{External slots 1-4 only; one insertion.}\par\vspace{4pt}
+\newpage
+\atlaspage{14 / S-TREE SEAGULL INSERTIONS}{External s-tree seagulls}{Each selected edge has one quartic insertion vertex, two host segments and a self-loop. No stem or separate bubble vertices.}
+\atlascell{G11  Seagull on s-tree leg 1}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the upper-left leg.}{External slots 1-4 only; one insertion.}\hfill
+\atlascell{G12  Seagull on s-tree leg 2}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the lower-left leg.}{External slots 1-4 only; one insertion.}\par\vspace{4pt}
+\atlascell{G13  Seagull on s-tree leg 3}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the upper-right leg.}{External slots 1-4 only; one insertion.}\hfill
+\atlascell{G14  Seagull on s-tree leg 4}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+}{One quartic self-loop insertion on the lower-right leg.}{External slots 1-4 only; one insertion.}\par\vspace{4pt}
 \end{document}

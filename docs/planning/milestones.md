@@ -12,7 +12,8 @@ Proca fixes are reconciled. See [integration verification](integration-verificat
 M04 expands the existing prototype. Integration commit `4584aff` is included
 in published `main` at `6657735`. M02 checkpoint `8f95755` is now also merged
 and published on main. M03a is published through `6549efa`; M03b checkpoint
-`97495ba` is also merged and published on main. M04 is next.
+`97495ba` is also merged and published on main. M04 is complete locally on
+`codex/m04-seagull-expansion`, based on `b4a6ad8`; M05 is next after publication.
 
 ## Common session contract
 
@@ -130,10 +131,15 @@ retune positions or turn visual index polish into a current acceptance gate.
 
 **Requirement:** R11. **Dependency:** M03.
 
+M04 is complete locally on `codex/m04-seagull-expansion`, based on `b4a6ad8`.
+All eight external s/t-tree placements preserve one quartic self-loop vertex.
+See [M04 verification](m04-verification.md). Publication remains pending;
+D01 index appearance remains deferred. The following is the regression gate.
+
 - Specify the direct self-loop at a quartic point on a host propagator.
   This has one insertion vertex, unlike the two-vertex self-energy bubble.
-- The t-tree leg-1 prototype is integrated and verified. Expand the remaining
-  t-tree legs and all s-tree legs. Keep one insertion per diagram.
+- The t-tree leg-1 prototype is preserved; the remaining t-tree legs and all
+  s-tree legs are implemented. Keep one insertion per diagram.
 - Gate: eight placements with the correct valence and host continuity;
   independent loop/host styles, loop momentum, and endpoint indices where
   defined by the contract; no new caps on the internal split points.

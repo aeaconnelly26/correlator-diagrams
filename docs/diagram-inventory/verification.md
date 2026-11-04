@@ -1,4 +1,30 @@
-# M03b inventory verification - 2026-11-03
+# M04 inventory verification - 2026-11-03
+
+Current atlas: **66 public recipes on fourteen pages**, built against
+`codex/m04-seagull-expansion` on published main `b4a6ad8`. G01-G04 and
+G11-G14 add the complete external s/t-tree seagull placement matrix. G01
+repeats U01's graph explicitly; style/layout variants are recipes, not distinct
+topologies. Existing IDs and prototype style examples remain unchanged.
+
+The six-page focused gallery has 32 examples, 206 complete public-diagram
+checks and 72 measured outward-facing loop labels. Independent PDF path
+extraction verifies all eight plain seagull graphs: seven edges, one quartic
+self-loop and two trivalent tree vertices. The isolated Proca/scalar pages
+verify 24 pink, white-filled endpoint contacts. All 38 maintained documents
+and 656 total endpoint contacts pass.
+
+All pages were rendered and inspected; changed pages 6/8 and new 13/14 were
+reviewed at readable size. Pages 1-5, 7, 9-11 are pixel-identical above the
+updated footer to the previous atlas. Fourteen original seagull/tree/bubble
+control pages retain identical decoded drawing streams to the baseline.
+The index panel records D01; no index appearance was retuned. M04 remains
+local, with main/GitHub at `b4a6ad8`.
+
+See [M04 verification](../planning/m04-verification.md) for recipes, exact scope,
+unsupported controls, reproduction and next-session handoff. Historical records
+below retain their original counts and support boundaries.
+
+# Historical M03b inventory verification - 2026-11-03
 
 Current atlas: **58 public recipes on twelve pages**, compiled against
 `codex/m03b-s-tree-bubbles`, based on published main `6549efa`. New C01-C04

@@ -208,7 +208,7 @@
 \ifdim\mchannelangle pt=-90pt\else\PackageError{M03b}{Explicit channel angle lost}{}\fi
 \ifdim\mchanneldistance=13pt\else\PackageError{M03b}{Explicit channel distance lost}{}\fi
 \def\mwanted{below}\ifx\mchannelposition\mwanted\else\PackageError{M03b}{Explicit channel label position lost}{}\fi
-\def\mexpected{none}\mmeasure{5}{}\mmeasure{1}{insertion=seagull}\mmeasure{2}{insertion=seagull}
+\def\mexpected{none}\mmeasure{5}{}\mmeasure{5}{insertion=seagull}\mmeasure{5}{insertion=seagull,insertion-orientation=top}
 \global\medges=0\global\mvertices=0\global\marcs=0\global\advance\mcases by 1
 \setbox\mboxdiagram=\hbox{\UTreeChannelCorr[field={},central={},leg-labels={,,,},line=plain,
   show-momenta=false,insertion=bubble,insertion-slot=2]}

@@ -1386,7 +1386,7 @@
 \newcommand{\corr@resolvechanneldefaults}{%
   % New s-tree insertions need a transverse exchange-arrow offset. Keep the
   % ordinary-tree defaults and every index-position default unchanged.
-  \corr@ifstreebubbleinsertion{%
+  \corr@ifstreeinsertion{%
     \corr@resolvechannelauto{\corr@channelmomdist}{\def\corr@channelmomdist{10pt}}{}%
     \corr@resolvechannelauto{\corr@channelmomangle}{\def\corr@channelmomangle{90}}{}%
     \corr@resolvechannelauto{\corr@channelmomlabelposition}{\def\corr@channelmomlabelposition{above}}{}%
@@ -6665,9 +6665,33 @@
   }{#2}%
 }
 
+\newcommand{\corr@ifttreeseagullinsertion}[2]{%
+  \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+    \corr@ifstringeq{\corr@insertion}{seagull}{%
+      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{\corr@ifstringeq{\corr@insertionslot}{2}{#1}{\corr@ifstringeq{\corr@insertionslot}{3}{#1}{\corr@ifstringeq{\corr@insertionslot}{4}{#1}{#2}}}}%
+    }{#2}%
+  }{#2}%
+}
+
+\newcommand{\corr@ifstreeseagullinsertion}[2]{%
+  \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+    \corr@ifstringeq{\corr@insertion}{seagull}{%
+      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{\corr@ifstringeq{\corr@insertionslot}{2}{#1}{\corr@ifstringeq{\corr@insertionslot}{3}{#1}{\corr@ifstringeq{\corr@insertionslot}{4}{#1}{#2}}}}%
+    }{#2}%
+  }{#2}%
+}
+
+\newcommand{\corr@iftreeseagullinsertion}[2]{%
+  \corr@ifttreeseagullinsertion{#1}{\corr@ifstreeseagullinsertion{#1}{#2}}%
+}
+
+\newcommand{\corr@ifstreeinsertion}[2]{%
+  \corr@ifstreebubbleinsertion{#1}{\corr@ifstreeseagullinsertion{#1}{#2}}%
+}
+
 \newcommand{\corr@ifttreeinsertion}[2]{%
   \corr@ifttreebubbleinsertion{#1}{%
-    \corr@ifttreeslotoneseagullinsertion{#1}{#2}%
+    \corr@ifttreeseagullinsertion{#1}{#2}%
   }%
 }
 
@@ -6701,8 +6725,8 @@
     \else \corr@drawchannelprop{#1}{}{#2}{#3}{}%
     \fi
   }{%
-    \corr@ifttreeslotoneseagullinsertion{%
-      \ifnum#1=1 \corr@drawttreeslotoneseagullinsertion
+    \corr@iftreeseagullinsertion{%
+      \ifnum#1=\corr@insertionslot\relax \corr@drawttreeslotoneseagullinsertion
       \else \corr@drawchannelprop{#1}{}{#2}{#3}{}\fi
     }{\corr@drawchannelprop{#1}{}{#2}{#3}{}}%
   }%
@@ -6710,7 +6734,7 @@
 
 \newcommand{\corr@drawttreeexternalmomentum}[4]{%
   \corr@iftreebubbleinsertion{\corr@drawtreeinsertionexternalmomentum{#1}{#2}{#3}{#4}}{%
-    \corr@ifttreeslotoneseagullinsertion{\corr@drawtreeinsertionexternalmomentum{#1}{#2}{#3}{#4}}{%
+    \corr@iftreeseagullinsertion{\corr@drawtreeinsertionexternalmomentum{#1}{#2}{#3}{#4}}{%
       \corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}}}%
 }
 
@@ -6768,13 +6792,26 @@
     \xdef\corr@seagullloopangle{0}%
     \xdef\corr@seagullloopmomentumlabelposition{right}%
   }{}%
+  \pgfmathsetmacro{\corr@seagullnormalx}{cos(\corr@seagullloopangle)}%
+  \pgfmathsetmacro{\corr@seagullnormaly}{sin(\corr@seagullloopangle)}%
+  \pgfmathparse{abs(\corr@seagullnormaly)>=abs(\corr@seagullnormalx)}%
+  \ifdim\pgfmathresult pt>0pt
+    \ifdim\corr@seagullnormaly pt>0pt
+      \xdef\corr@seagullloopmomentumlabelposition{above}%
+    \else \xdef\corr@seagullloopmomentumlabelposition{below}\fi
+  \else
+    \ifdim\corr@seagullnormalx pt>0pt
+      \xdef\corr@seagullloopmomentumlabelposition{right}%
+    \else \xdef\corr@seagullloopmomentumlabelposition{left}\fi
+  \fi
+
 }
 
 \newcommand{\corr@setttreeslotoneseagullcoords}{%
-  \coordinate (corrInsertionV) at ($(corrUL)!\corr@insertionposition!(corrVT)$);
+  \coordinate (corrInsertionV) at ($(corrInsertionOuter)!\corr@insertionposition!(corrInsertionHost)$);
   \coordinate (corrInsertionA) at (corrInsertionV);
   \coordinate (corrInsertionB) at (corrInsertionV);
-  \pgfmathanglebetweenpoints{\pgfpointanchor{corrUL}{center}}{\pgfpointanchor{corrVT}{center}}%
+  \pgfmathanglebetweenpoints{\pgfpointanchor{corrInsertionOuter}{center}}{\pgfpointanchor{corrInsertionHost}{center}}%
   \xdef\corr@insertionangle{\pgfmathresult}%
   \pgfmathsetmacro{\corr@insertiontopangle}{\corr@insertionangle+90}%
   \xdef\corr@insertiontopangle{\corr@insertiontopangle}%
@@ -7019,8 +7056,8 @@
 
 \newcommand{\corr@drawttreeslotoneseagullinsertion}{%
   \corr@setttreeslotoneseagullcoords
-  \corr@drawchannelprop{1}{\corr@insertionpreline}{corrUL}{corrInsertionV}{}%
-  \corr@drawchannelpropnoendcaps{1}{\corr@insertionpostline}{corrInsertionV}{corrVT}{}%
+  \corr@drawchannelprop{\corr@insertionhostslot}{\corr@insertionpreline}{corrInsertionOuter}{corrInsertionV}{}%
+  \corr@drawchannelpropnoendcaps{\corr@insertionhostslot}{\corr@insertionpostline}{corrInsertionV}{corrInsertionHost}{}%
   \corr@drawseagullloop
 }
 
@@ -8463,7 +8500,7 @@
 }
 
 \newcommand{\corr@drawfourpointstreeschannel}{%
-  \corr@ifstreebubbleinsertion{\corr@resolvettreeinsertionhost}{}%
+  \corr@ifstreeinsertion{\corr@resolvettreeinsertionhost}{}%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
     \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
@@ -8472,7 +8509,7 @@
     \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
     \vertex (corrVL) at (-\corr@channelvertexxspan,0);
     \vertex (corrVR) at (\corr@channelvertexxspan,0);
-    \corr@ifstreebubbleinsertion{\corr@setstreeinsertionhost}{}%
+    \corr@ifstreeinsertion{\corr@setstreeinsertionhost}{}%
     \corr@ifexternallegs{%
       \corr@drawttreeexternalprop{1}{corrUL}{corrVL}%
       \corr@drawttreeexternalprop{2}{corrLL}{corrVL}%
@@ -8488,6 +8525,7 @@
       \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}
       \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}
     }{}%
+    \corr@ifstreeseagullinsertion{\corr@putvertex{corrInsertionV}{\corr@centervertexstyle}}{}%
   \fi
   \corr@fourpointplaceexternalvertices
   \ifcorr@showmomenta
@@ -8497,9 +8535,11 @@
     \corr@drawttreeexternalmomentum{4}{corrLR}{corrVR}{90}%
     \corr@drawchannelmomentum{corrVL}{corrVR}
     \corr@ifstreebubbleinsertion{\corr@drawttreeinsertionbubblemomenta}{}%
+    \corr@ifstreeseagullinsertion{\corr@drawttreeinsertionseagullmomentum}{}%
   \fi
   \corr@fourpointchannelindices{corrVL}{corrVR}
   \corr@ifstreebubbleinsertion{\corr@putttreeinsertionbubbleindices}{}%
+  \corr@ifstreeseagullinsertion{\corr@putttreeinsertionseagullindices}{}%
   \corr@fourpointplaceexternallabels
   \corr@putchannelcentral{corrC}
 }
@@ -8530,7 +8570,7 @@
       \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}
       \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}
     }{}%
-    \corr@ifttreeslotoneseagullinsertion{%
+    \corr@ifttreeseagullinsertion{%
       \corr@putvertex{corrInsertionV}{\corr@centervertexstyle}
     }{}%
   \fi
@@ -8548,7 +8588,7 @@
     \corr@ifttreebubbleinsertion{%
       \corr@drawttreeinsertionbubblemomenta
     }{}%
-    \corr@ifttreeslotoneseagullinsertion{%
+    \corr@ifttreeseagullinsertion{%
       \corr@drawttreeinsertionseagullmomentum
     }{}%
   \fi
@@ -8556,7 +8596,7 @@
   \corr@ifttreebubbleinsertion{%
     \corr@putttreeinsertionbubbleindices
   }{}%
-  \corr@ifttreeslotoneseagullinsertion{%
+  \corr@ifttreeseagullinsertion{%
     \corr@putttreeinsertionseagullindices
   }{}%
   \corr@fourpointplaceexternallabels

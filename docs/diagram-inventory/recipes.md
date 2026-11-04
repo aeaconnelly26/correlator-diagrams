@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M03b on published main 6549efa`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
+Baseline: `M04 on published main b4a6ad8`, audited 2026-11-03. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -897,7 +897,7 @@ A blank circle on one pink diagonal and a Z on the other.
 
 One quartic point on an external leg carries a self-loop.
 
-**Limit:** Supported here: t-tree leg 1 only; other placements remain future work.
+**Limit:** Original t-slot-1 example; all s/t external slots 1-4 now supported.
 
 ```tex
 \TTreeChannelCorr[
@@ -931,7 +931,7 @@ One quartic point on an external leg carries a self-loop.
 
 The same supported graph with wavy EW propagators.
 
-**Limit:** Supported here: t-tree leg 1 only; other placements remain future work.
+**Limit:** Original t-slot-1 example; all s/t external slots 1-4 now supported.
 
 ```tex
 \TTreeChannelCorr[
@@ -1424,5 +1424,201 @@ Self-energy correction on the lower-right external leg.
   channel-line=plain,
   bubble-top-line=plain,
   bubble-bottom-line=plain
+]
+```
+
+## External t-tree seagulls
+
+### G01 - Seagull on t-tree leg 1
+
+One quartic self-loop insertion on the upper-left leg.
+
+**Limit:** Same graph as U01; repeated here to show the full four-leg matrix.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### G02 - Seagull on t-tree leg 2
+
+One quartic self-loop insertion on the lower-left leg.
+
+**Limit:** External slots 1-4 only; one insertion.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### G03 - Seagull on t-tree leg 3
+
+One quartic self-loop insertion on the upper-right leg.
+
+**Limit:** External slots 1-4 only; one insertion.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### G04 - Seagull on t-tree leg 4
+
+One quartic self-loop insertion on the lower-right leg.
+
+**Limit:** External slots 1-4 only; one insertion.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+## External s-tree seagulls
+
+### G11 - Seagull on s-tree leg 1
+
+One quartic self-loop insertion on the upper-left leg.
+
+**Limit:** External slots 1-4 only; one insertion.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### G12 - Seagull on s-tree leg 2
+
+One quartic self-loop insertion on the lower-left leg.
+
+**Limit:** External slots 1-4 only; one insertion.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### G13 - Seagull on s-tree leg 3
+
+One quartic self-loop insertion on the upper-right leg.
+
+**Limit:** External slots 1-4 only; one insertion.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  channel-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### G14 - Seagull on s-tree leg 4
+
+One quartic self-loop insertion on the lower-right leg.
+
+**Limit:** External slots 1-4 only; one insertion.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  channel-line=plain,
+  seagull-loop-line=plain
 ]
 ```

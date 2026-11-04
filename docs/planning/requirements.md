@@ -96,12 +96,12 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R11 - Seagull on external tree legs
 
-- **Status:** Existing with limitations.
-- **Existing construction / evidence:** Integrated t-tree external-slot-1 seagull from 5a657cd. Current inventory U01/U02 and S01-S03 show plain/EW and one-/two-sided Proca loops, compiled against the combined checkout.
-- **Remaining target / limitation:** Expand the remaining t-tree external legs and all four s-tree external legs. Preserve the existing prototype and one-insertion-at-a-time contract.
-- **Milestone:** M04 expands the integrated prototype. **Dependencies:** M03 host-slot conventions; prototype integration completed.
+- **Status:** Verified existing.
+- **Existing construction / evidence:** M04 implements all eight s/t-tree external placements. Atlas G01-G04/G11-G14 and the six-page seagull-slots gallery expose the single quartic self-loop; actual PDF graph extraction verifies seven edges and valences for all eight. Focused controls and 24 pink Proca/scalar marker contacts are checked independently.
+- **Remaining target / limitation:** One selected s/t-tree external leg at a time. Internal slot 5, u-tree/contact hosts and simultaneous insertions remain unsupported. Index placement is deferred to D01; seagull vertex index values/order are preserved.
+- **Milestone:** M04 complete. **Dependencies:** M03; prototype integration completed.
 - **Acceptance:** Eight placements preserve one quartic insertion point, two host segments, and one self-loop; do not draw a two-vertex self-energy bubble instead.
-- **Sources:** P2-05, P3-03, S05-C1, S05-R1, S06-C1, S06-C2, S07-C1, S07-C2, S08-C1, S08-R1, S20-TL, S20-TR, S20-BL, S20-BR, S21-TL, S21-TR, S21-BL, S21-BR. See [integration verification](integration-verification.md).
+- **Sources:** P2-05, P3-03, S05-C1, S05-R1, S06-C1, S06-C2, S07-C1, S07-C2, S08-C1, S08-R1, S20-TL, S20-TR, S20-BL, S20-BR, S21-TL, S21-TR, S21-BL, S21-BR. See [M04 verification](m04-verification.md).
 
 ## R12 - Swordfish on external tree legs
 
