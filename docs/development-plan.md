@@ -6,10 +6,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Published baseline: synchronized main at `b917ed2`, including M02.
-- Current branch: `codex/m03a-t-tree-bubbles`, based on `b917ed2`.
-- M03a is complete locally: bubble insertion on any one t-tree external leg.
-  See [M03a verification](planning/m03a-verification.md). Not merged or pushed.
+- Current branch: main, including verified M03a checkpoint `2c3b467`.
+- M03a, including loop-arrow spacing/label-side fixes, is merged and published
+  to GitHub. The implementation branch is retained.
+- M03a is complete: bubble insertion on any one t-tree external leg.
+  See [M03a verification](planning/m03a-verification.md).
+- Index-label positions are a known deferred workflow item, D01. Do not retune
+  their appearance during M03b or the current feature sessions; preserve their
+  attachment and controls. See [deferred workflows](planning/deferred-workflows.md).
 - M02 was fast-forwarded into main and published to GitHub on 2026-11-03;
   that published baseline is retained. The implementation branch is retained.
 - M02 is complete: independent controls for all seven triangle-contact
@@ -59,9 +63,10 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 M03b is next: external self-energy bubbles on s-tree slots 1-4, one placement
 at a time. Read R10 and M03 in
 [requirements](planning/requirements.md) and [milestones](planning/milestones.md).
-Use the M03a checkpoint or its descendant; merge/publish it before starting
-from main. Begin by freezing the s-tree slot-1 graph and preserved styles,
-momentum, indices and outer endpoint behavior. M03b has not started.
+Create its feature branch from synchronized main, which includes M03a checkpoint
+`2c3b467`. Freeze the s-tree slot-1 graph and preserve styles, momentum, index
+attachment/controls and outer caps. Index-placement polish is deferred (D01).
+M03b has not started.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.

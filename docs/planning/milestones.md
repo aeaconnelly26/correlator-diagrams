@@ -103,10 +103,14 @@ the acceptance contract below remains a regression gate.
 
 **Requirements:** R09, R10. **Dependencies:** M01, M02.
 
-M03a is complete on `codex/m03a-t-tree-bubbles`, based on `b917ed2`.
+M03a is complete on `codex/m03a-t-tree-bubbles`, based on `b917ed2`;
+verified checkpoint `2c3b467` is merged and published on main.
 All four t-tree external slots are checked, including actual graph/caps/momentum
 and style/index coverage. See [M03a verification](m03a-verification.md).
 M03b (s-tree) remains future work. Keep the following contract for that expansion.
+Index-placement appearance is expressly deferred to a later separate workflow,
+[D01](deferred-workflows.md). Preserve attachment/controls during M03b; do not
+retune positions or turn visual index polish into a current acceptance gate.
 
 - M03a: preserve the t-tree slot-1 baseline and add slots 2-4 through a shared
   translated/reflected host-splitting model. Keep bubble a/b slot conventions.

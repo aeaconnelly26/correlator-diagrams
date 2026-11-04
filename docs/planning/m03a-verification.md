@@ -2,7 +2,13 @@
 
 Baseline: synchronized main at `b917ed2`. Implementation branch:
 `codex/m03a-t-tree-bubbles`. R09 is complete; R10 remains M03b.
-This slice is checkpointed locally, not merged or pushed.
+Verified checkpoint `2c3b467` is merged into main and published to GitHub.
+Closeout changes only documentation; package code and PDFs match verification.
+
+The user accepts the current index appearance temporarily. Its messy positioning
+is explicitly deferred to a separate later workflow, [D01](deferred-workflows.md),
+not the s-channel implementation sessions. The index checks below establish
+attachment/controls, not publication-quality positioning.
 
 ## Connectivity and interface
 
@@ -119,5 +125,5 @@ no-ops; they are not counted as capabilities. Bubble a/b follow the host directi
 host segments or large manually shifted labels/indices may need explicit tuning.
 
 M03b is next: the corresponding s-tree slots, one placement at a time, beginning
-with a frozen slot-1 contract. Use this M03a checkpoint or its descendant;
-merge/publish it before beginning from main. M03b has not started.
+with a frozen slot-1 contract. Use synchronized main, which includes this M03a
+checkpoint. Preserve index behavior without retuning appearance; D01 is later.

@@ -10,8 +10,10 @@ integrated annotation controls, and eight M02 annotation examples. These are not
 identified separately.
 
 M03a adds lower-left, upper-right and lower-right t-tree bubble placements.
-I29 retains slot 1; B02-B04 show the other legs. This branch is checkpointed
-locally and has not yet been merged or pushed.
+I29 retains slot 1; B02-B04 show the other legs. Verified checkpoint `2c3b467`
+is now included in published main. Index positioning is known to need a later
+[dedicated review](../planning/deferred-workflows.md); attachment checks do not
+certify its visual placement.
 The loop-spacing review uses closer bubble momentum arrows and labels outward
 from their actual arcs, consistently across left/right placements and reversal.
 

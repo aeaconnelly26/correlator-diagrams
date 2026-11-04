@@ -2,7 +2,7 @@
   "milestone": "M03a",
   "baseline": "b917ed2",
   "branch": "codex/m03a-t-tree-bubbles",
-  "published": false,
+  "published": true,
   "package_sha256": "e0a7cc39adacc7361eb9e321d0b025a03ffcc1b3f8e8ecbd595780f2f6ff9e0b",
   "t_tree_external_bubble_slots": [
     1,
@@ -26,5 +26,8 @@
   "slot_one_comparison_checkpoint": "04f3913",
   "loop_label_geometry_checks": 34,
   "default_loop_arrow_offset_pt": 8,
-  "loop_style_clearance_pt": 2
+  "loop_style_clearance_pt": 2,
+  "published_branch": "main",
+  "verified_code_checkpoint": "2c3b467",
+  "index_placement_deferred": "D01"
 }

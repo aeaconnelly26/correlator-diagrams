@@ -12,6 +12,7 @@ feature implementation belongs in later coding sessions.
 - [M02 verification](m02-verification.md): independent triangle-contact annotations and current handoff.
 - [M03a verification](m03a-verification.md): all four t-tree bubble placements and next s-tree slice.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
+- [Deferred workflows](deferred-workflows.md): later reviews, including the explicitly deferred index-placement cleanup.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.
 - [Historical plan](history/development-plan-before-2026-11-03.md): the complete previous plan, preserved before refresh.
 - [Current development plan](../development-plan.md): the entry point for the next session.

@@ -1,9 +1,10 @@
 # Integrated branch state and coding-session closeout
 
-Current work is M03a on `codex/m03a-t-tree-bubbles`, based on published main
-`b917ed2`. It is complete locally and is not merged or pushed; see
+M03a checkpoint `2c3b467` is now merged and published on main; see
 [M03a verification](m03a-verification.md) and the current development plan.
-The main/M02 publication record below describes the baseline, not this new slice.
+Index placement is deferred to a separate later workflow, [D01](deferred-workflows.md).
+M03b starts from this published baseline and preserves index behavior without
+polishing positions. The main/M02 record below preserves earlier history.
 
 The published integration baseline was `6657735`. M02 checkpoint `8f95755`
 is now merged into main and published to GitHub. The feature branch
@@ -59,8 +60,8 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M03b is next, based on the M03a checkpoint or its descendant. Publish/merge M03a
-before starting from main. No manual Git preparation is needed from the user.
+M03b is next, based on synchronized main containing M03a checkpoint `2c3b467`.
+No manual Git preparation is needed from the user.
 M04 remains the seagull expansion; swordfish and regular triangles are future work.
 
 Remote state was refreshed with `git fetch origin` for this synchronization.
