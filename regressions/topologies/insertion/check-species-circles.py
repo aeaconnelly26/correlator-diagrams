@@ -71,6 +71,7 @@ def main():
     args = parser.parse_args()
     reader = PdfReader(args.pdf)
     assert len(reader.pages) == 4, 'Expected the complete sixteen-example species gallery'
+    endpoint_reports = contact.inspect(args.pdf)
     reports = []
     for i, page in enumerate(reader.pages):
         circles, dots = inspect_circles(page, reader)
@@ -90,13 +91,18 @@ def main():
         gaps = [hypot(x-u, y-v)-r-s-o-p
                 for (x, y, r, o), color in circles for u, v, s, p in dots]
         assert min(gaps) > .2, f'Page {i+1}: species circle crowds an interaction vertex'
-        reports.append({'page': i+1, 'ew_circles': len(circles), 'pink_stem_circles': len(pink),
+        endpoints = endpoint_reports[i]
+        assert endpoints['triangles'] == 8, f'Page {i+1}: expected two endpoint arrows on each pink loop'
+        assert min(endpoints['gaps_pt']) >= -.21 and max(endpoints['visible_gaps_pt']) <= .02, \
+            f'Page {i+1}: pink endpoint arrows miss their interaction vertices'
+        reports.append({'page': i+1, 'pink_endpoint_arrows': endpoints['triangles'],
+                        'maximum_visible_endpoint_ink_gap_pdf_pt': max(endpoints['visible_gaps_pt']), 'ew_circles': len(circles), 'pink_stem_circles': len(pink),
                         'black_w_circles': len(black),
                         'minimum_circle_vertex_ink_clearance_pdf_pt': min(gaps)})
     if args.report:
         args.report.write_text(json.dumps(reports, indent=2)+'\n')
     minimum = min(r['minimum_circle_vertex_ink_clearance_pdf_pt'] for r in reports)
-    print(f'PASS: 40 EW species circles (16 pink Z stems, 24 black W); minimum circle/vertex ink clearance {minimum:.3f} PDF pt')
+    print(f'PASS: 40 EW circles (16 pink Z stems, 24 black W); 32 contacting pink endpoint arrows; circle/vertex clearance {minimum:.3f} PDF pt')
 
 
 if __name__ == '__main__':

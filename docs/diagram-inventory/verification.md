@@ -1,3 +1,23 @@
+# Two-ended pink loop clarification - 2026-11-04
+
+From local `fd42a61`, J01-J04 and the sixteen-example styled gallery now use
+`{proca,magenta!85!red}` for the pink Z loop lines. That existing style supplies
+two open endpoint arrows without adding a circle. `spol` normally supplies only
+one endpoint arrow; `circ=...` is independent of either style. Pink EW Z stems,
+bare outer segments, inner W circles and k-only loop annotation are retained.
+No package source or defaults changed.
+
+Recompiled the 56-case/16-example focused gallery and the 74-recipe/16-page
+atlas; rendered and inspected the changed page and every styled example.
+The independent PDF check still verifies 40 EW circles (16 pink stem Z / 24
+black W), now also requiring 32 contacting pink endpoint arrows, two per loop.
+These are additional to the unchanged 656 contacts of the preceding full-suite
+run, for 688 contacts across the maintained checks. The maintained suite remains
+40 documents; this follow-up reruns the changed gallery and PDF checker only.
+The earlier full-suite result belongs to `fd42a61`. Current hashes are recorded
+in ../planning/m04-checks.json; the preceding record is archived as
+../planning/history/m04-checks-fd42a61.json. M04 remains local; D01 is deferred.
+
 # Smaller bubbles and species sampling - 2026-11-04
 
 Current atlas: **74 recipes / 16 pages**, reviewed from `33551c6` on the local

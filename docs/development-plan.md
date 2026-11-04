@@ -321,3 +321,13 @@ loop line has a k momentum guide/label; the W arc has neither. The all-slot
 styled gallery has sixteen examples and 56 focused size/override/reset probes.
 The maintained suite now has 40 documents; D01 remains deferred. This remains
 local on the M04 branch, pending authorized publication before M05.
+
+## Two-ended pink loop clarification - 2026-11-04
+
+J01-J04 and the sixteen-example styled gallery now use `proca` for the pink
+Z loop lines: two open endpoint arrows, no circle. `spol` normally has only
+one arrow; neither style adds a circ automatically. The pink EW Z stems and
+black W circles remain as requested. Only pink loop lines have k momentum.
+This is an example/recipe change using existing APIs; package code is unchanged.
+The focused gallery and PDF checks pass, including 32 actual endpoint contacts.
+M04 remains local and D01 remains deferred.

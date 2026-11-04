@@ -1,6 +1,8 @@
 [
   {
     "page": 1,
+    "pink_endpoint_arrows": 8,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12465011595378817,
     "ew_circles": 8,
     "pink_stem_circles": 4,
     "black_w_circles": 4,
@@ -8,6 +10,8 @@
   },
   {
     "page": 2,
+    "pink_endpoint_arrows": 8,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12457343679275812,
     "ew_circles": 12,
     "pink_stem_circles": 4,
     "black_w_circles": 8,
@@ -15,6 +19,8 @@
   },
   {
     "page": 3,
+    "pink_endpoint_arrows": 8,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12467681424950239,
     "ew_circles": 8,
     "pink_stem_circles": 4,
     "black_w_circles": 4,
@@ -22,6 +28,8 @@
   },
   {
     "page": 4,
+    "pink_endpoint_arrows": 8,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12457769776357075,
     "ew_circles": 12,
     "pink_stem_circles": 4,
     "black_w_circles": 8,

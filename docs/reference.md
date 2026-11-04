@@ -1075,7 +1075,9 @@ package-managed topologies, the package strips those markers from the raw line
 style and redraws them as endpoint-aware triangles whose tips kiss the semantic
 vertex boundary. The arrows use the same size as scalar-polarized markers;
 their outlines follow simple propagator color tokens while their interiors stay
-white. `Proca` is accepted as an alias. Add `circ={}` explicitly when a blank
+white. `Proca` is accepted as an alias. Neither `proca` nor `spol` adds a
+circle automatically: `proca` supplies both endpoint arrows, while `spol`
+normally supplies one. Add `circ={}` explicitly when a blank
 midpoint circle is wanted.
 Use `proca start` or `proca end` instead of `proca` for a single triangle
 at the drawn path's start or end. This also applies to bubble internal lines
@@ -2445,8 +2447,9 @@ families, all 16 insertion placements, shorter arrows, label-rectangle clearance
 and explicit overrides. H01-H04 show the new defaults in the atlas.
 Atlas page 16 (J01-J04) samples species styling: the central EW Z stem,
 its `circ=Z` and its Z text are all pink. The split external leg uses a bare
-EW outer segment and an EW `circ=W` inner segment. Pink `spol` loops have no
-circles. Mixed bubbles use an EW `circ=W` arc and a pink scalar-polarization
+EW outer segment and an EW `circ=W` inner segment. Pink loop lines use
+`{proca,magenta!85!red}` for two endpoint arrows and no circles.
+Mixed bubbles use an EW `circ=W` arc and a pink scalar-polarization
 Z arc; `bubble-momenta={,k}` leaves the W arc without a momentum guide or
 label and draws k only on the pink arc. Seagulls use
 `seagull-loop-momentum=k`. The full all-slot styled sampling is
@@ -2455,6 +2458,7 @@ Its 56 public-diagram probes verify shorter bubbles, recovered host space,
 explicit former/custom sizes, unchanged seagull defaults and size-state reset.
 `check-species-circles.py` independently checks the 40 actual PDF circles:
 16 pink circles on central Z stems, 24 black W circles, and vertex clearance.
+It also verifies all 32 pink loop endpoint arrows contact their vertices.
 
 The all-slot t-tree gallery and graph/style/cap/momentum checks are in
 `regressions/topologies/insertion/t-tree-bubble-slots.tex` and its PDF. Its

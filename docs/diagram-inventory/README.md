@@ -4,7 +4,7 @@
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Built against `codex/m04-seagull-expansion`, based on published `main` at
-`b4a6ad8`, size/style review from `33551c6` on 2026-11-04. There are **74 current
+`b4a6ad8`, two-ended loop review from `fd42a61` on 2026-11-04. There are **74 current
 examples on sixteen pages**. These are recipes and meaningful layouts/styles,
 not 74 distinct graph topologies.
 
@@ -30,7 +30,8 @@ Default bubble insertions now use scale 0.50 (about 24% smaller); seagulls
 remain 0.66. Explicit `insertion-scale=0.66` restores the previous bubble size.
 Page 16 samples pink EW Z stems (including the circle and Z text), bare
 outer host segments, inner EW W circles, pink scalar-polarization loops
-without circles, and mixed EW W / scalar-polarization Z bubbles. Only the pink
+without circles, and mixed EW W / scalar-polarization Z bubbles. The pink loop
+recipes use `proca` for two endpoint arrows; `circ` is a separate option. Only the pink
 loop arc carries k; the W arc has no momentum guide or label. See the
 [all-slot styled gallery](../../regressions/topologies/insertion/insertion-species-samples.pdf)
 for all sixteen placements.

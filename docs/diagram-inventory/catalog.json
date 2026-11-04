@@ -1,5 +1,5 @@
 {
-  "baseline": "M04 size/style review on 33551c6",
+  "baseline": "M04 two-ended loop review on fd42a61",
   "date": "2026-11-04",
   "base_options": [
     "field={}",
@@ -1073,7 +1073,7 @@
     {
       "section": "16 / SPECIES-LABELED INSERTIONS",
       "title": "Pink Z stems, scalar-polarized loops and W host segments",
-      "subtitle": "Outer host segments have no circles; inner segments carry W. Pink Z stems retain their Z circles; pink loop lines carry k.",
+      "subtitle": "Pink Z stems and inner W circles; bare outer segments. Pink loop lines have two endpoint arrows, no circles and k momentum.",
       "entries": [
         {
           "id": "J01",
@@ -1088,11 +1088,11 @@
             "insertion-slot=1",
             "insertion-pre-line=ewboson",
             "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
-            "seagull-loop-line={spol,magenta!85!red}",
+            "seagull-loop-line={proca,magenta!85!red}",
             "seagull-loop-momentum=k"
           ],
-          "description": "Pink Z stem; inner W; scalar-polarization loop with k.",
-          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
+          "description": "Pink Z stem; inner W; two-ended pink loop with k.",
+          "limitation": "Proca supplies both endpoint arrows; circles are separate. No W-loop guide."
         },
         {
           "id": "J02",
@@ -1108,11 +1108,11 @@
             "insertion-pre-line=ewboson",
             "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
             "bubble-top-line={ewboson,circ=W,circ scale=0.65}",
-            "bubble-bottom-line={spol,magenta!85!red}",
+            "bubble-bottom-line={proca,magenta!85!red}",
             "bubble-momenta={,k}"
           ],
-          "description": "Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).",
-          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
+          "description": "Pink Z stem; inner W; EW W arc and two-ended pink arc (k).",
+          "limitation": "Proca supplies both endpoint arrows; circles are separate. No W-loop guide."
         },
         {
           "id": "J03",
@@ -1127,11 +1127,11 @@
             "insertion-slot=2",
             "insertion-pre-line=ewboson",
             "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
-            "seagull-loop-line={spol,magenta!85!red}",
+            "seagull-loop-line={proca,magenta!85!red}",
             "seagull-loop-momentum=k"
           ],
-          "description": "Pink Z stem; inner W; scalar-polarization loop with k.",
-          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
+          "description": "Pink Z stem; inner W; two-ended pink loop with k.",
+          "limitation": "Proca supplies both endpoint arrows; circles are separate. No W-loop guide."
         },
         {
           "id": "J04",
@@ -1147,11 +1147,11 @@
             "insertion-pre-line=ewboson",
             "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
             "bubble-top-line={ewboson,circ=W,circ scale=0.65}",
-            "bubble-bottom-line={spol,magenta!85!red}",
+            "bubble-bottom-line={proca,magenta!85!red}",
             "bubble-momenta={,k}"
           ],
-          "description": "Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).",
-          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
+          "description": "Pink Z stem; inner W; EW W arc and two-ended pink arc (k).",
+          "limitation": "Proca supplies both endpoint arrows; circles are separate. No W-loop guide."
         }
       ]
     }
