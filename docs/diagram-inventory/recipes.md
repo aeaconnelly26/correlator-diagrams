@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M04 seagull position review on d64ab3d`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
+Baseline: `M04 optical circle review on ddf9d0e`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1739,7 +1739,7 @@ Outward S loop; compact host arrows.
 
 Pink Z stem; inner W; two-ended pink loop with k.
 
-**Limit:** Central/W-loop guides hidden; no loop circles.
+**Limit:** W centered in the visible arrow-to-vertex gap; central momentum hidden.
 
 ```tex
 \TTreeChannelCorr[
@@ -1759,7 +1759,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion=seagull,
   insertion-slot=1,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.588,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false
@@ -1802,7 +1802,7 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
 
 Pink Z stem; inner W; two-ended pink loop with k.
 
-**Limit:** Central/W-loop guides hidden; inner-label gap 4pt.
+**Limit:** W centered in the visible arrow-to-vertex gap; central momentum hidden.
 
 ```tex
 \STreeChannelCorr[
@@ -1822,7 +1822,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion=seagull,
   insertion-slot=2,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.599,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false,

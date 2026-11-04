@@ -7,8 +7,27 @@
     "pink_stem_circles": 4,
     "black_w_circles": 4,
     "centered_inner_w_circles": 4,
-    "maximum_inner_w_midpoint_error_pdf_pt": 0.0019693098410272923,
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 10.615905866667024
+    "inner_w_centering_reference": "visible arrow-to-tree gap",
+    "maximum_inner_w_centering_error_pdf_pt": 0.002370980308272319,
+    "visible_arrow_circle_tree_gaps_pdf_pt": [
+      [
+        7.620149338580875,
+        7.624891299197391
+      ],
+      [
+        7.6201493385808465,
+        7.624891299197391
+      ],
+      [
+        7.620149338580873,
+        7.624891299197388
+      ],
+      [
+        7.6201493385808305,
+        7.624891299197373
+      ]
+    ],
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 7.624891305549385
   },
   {
     "page": 2,
@@ -18,7 +37,9 @@
     "pink_stem_circles": 4,
     "black_w_circles": 8,
     "centered_inner_w_circles": 4,
-    "maximum_inner_w_midpoint_error_pdf_pt": 0.0011311968219830351,
+    "inner_w_centering_reference": "vertex-to-vertex midpoint",
+    "maximum_inner_w_centering_error_pdf_pt": 0.0011311968219830351,
+    "visible_arrow_circle_tree_gaps_pdf_pt": [],
     "minimum_circle_vertex_ink_clearance_pdf_pt": 2.536167874718794
   },
   {
@@ -29,8 +50,27 @@
     "pink_stem_circles": 4,
     "black_w_circles": 4,
     "centered_inner_w_circles": 4,
-    "maximum_inner_w_midpoint_error_pdf_pt": 0.013581752694303487,
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 8.777599061337872
+    "inner_w_centering_reference": "visible arrow-to-tree gap",
+    "maximum_inner_w_centering_error_pdf_pt": 0.003633022643024564,
+    "visible_arrow_circle_tree_gaps_pdf_pt": [
+      [
+        5.792157555122987,
+        5.799423600409029
+      ],
+      [
+        5.792157555122969,
+        5.799423600408997
+      ],
+      [
+        5.79215755512298,
+        5.799423600409029
+      ],
+      [
+        5.792157555122971,
+        5.799423600408994
+      ]
+    ],
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 5.799423600631444
   },
   {
     "page": 4,
@@ -40,7 +80,9 @@
     "pink_stem_circles": 4,
     "black_w_circles": 8,
     "centered_inner_w_circles": 4,
-    "maximum_inner_w_midpoint_error_pdf_pt": 0.0031349840509738835,
+    "inner_w_centering_reference": "vertex-to-vertex midpoint",
+    "maximum_inner_w_centering_error_pdf_pt": 0.0031349840509738835,
+    "visible_arrow_circle_tree_gaps_pdf_pt": [],
     "minimum_circle_vertex_ink_clearance_pdf_pt": 1.0119987482049206
   }
 ]

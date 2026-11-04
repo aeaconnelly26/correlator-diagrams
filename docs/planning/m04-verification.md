@@ -1,3 +1,36 @@
+# Optical W-circle centering correction - 2026-11-04
+
+The screenshot following `ddf9d0e` exposed a flaw in the previous verification
+criterion: a circle halfway between vertex centers leaves unequal visible
+space because the pink triangle occupies more of the segment than the black
+dot. The old midpoint test therefore did not establish the requested visual
+balance. The seagull default position remains 0.40.
+
+The styled seagull recipes now shift W about 3pt toward the tree vertex using
+existing `circ position`: **0.588 on T** and **0.599 on S**, shared across each
+channel's four slots. The values are measured for the standard 6pt endpoint
+arrows and default sample geometry/scale. Other arrow sizes or geometries may
+need their own circle position. No package source/defaults change here.
+
+The PDF checker now extracts the actual pink triangles as well as circles and
+dots. It projects their visible stroke extents onto each inner segment and
+requires equal free space on the two sides of W (center error below 0.05 PDF pt).
+All eight seagulls pass: approximately **7.62pt / 7.62pt** free gaps on T and
+**5.80pt / 5.80pt** on S; maximum center error is below 0.004 PDF pt. The eight
+bubble-host W circles retain their vertex-midpoint check. The 40 species circles
+and 32 endpoint-contact checks also pass.
+
+Recompiled the styled gallery (56 size probes plus 41 visibility probes) and
+the atlas (74 recipes / 16 pages), rendered and inspected the changed examples,
+and compared a zoomed before/after crop. Both styled bubble pages have identical
+drawing streams to ddf9d0e. The package and other maintained sources are unchanged;
+the full 40-document/688-contact suite last passed at ddf9d0e, and this follow-up
+reruns the changed focused gallery/checker. M04 remains local and D01 deferred.
+
+Current results/hashes are in [m04-checks.json](m04-checks.json); the preceding
+record is in [history](history/m04-checks-ddf9d0e.json). Earlier midpoint claims
+below retain their historical meaning and are superseded for seagull styling.
+
 # Seagull position and centered inner W circles - 2026-11-04
 
 From local `d64ab3d`, supported s/t-tree seagulls default to

@@ -1,5 +1,5 @@
 {
-  "baseline": "M04 seagull position review on d64ab3d",
+  "baseline": "M04 optical circle review on ddf9d0e",
   "date": "2026-11-04",
   "base_options": [
     "field={}",
@@ -1087,13 +1087,13 @@
             "insertion=seagull",
             "insertion-slot=1",
             "insertion-pre-line=ewboson",
-            "insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65}",
+            "insertion-post-line={ewboson,circ=W,circ position=0.588,circ scale=0.65}",
             "seagull-loop-line={proca,magenta!85!red}",
             "seagull-loop-momentum=k",
             "show-channel-momentum=false"
           ],
           "description": "Pink Z stem; inner W; two-ended pink loop with k.",
-          "limitation": "Central/W-loop guides hidden; no loop circles."
+          "limitation": "W centered in the visible arrow-to-vertex gap; central momentum hidden."
         },
         {
           "id": "J02",
@@ -1128,14 +1128,14 @@
             "insertion=seagull",
             "insertion-slot=2",
             "insertion-pre-line=ewboson",
-            "insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65}",
+            "insertion-post-line={ewboson,circ=W,circ position=0.599,circ scale=0.65}",
             "seagull-loop-line={proca,magenta!85!red}",
             "seagull-loop-momentum=k",
             "show-channel-momentum=false",
             "insertion-post-momentum-label-distance=4pt"
           ],
           "description": "Pink Z stem; inner W; two-ended pink loop with k.",
-          "limitation": "Central/W-loop guides hidden; inner-label gap 4pt."
+          "limitation": "W centered in the visible arrow-to-vertex gap; central momentum hidden."
         },
         {
           "id": "J04",

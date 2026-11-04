@@ -365,3 +365,14 @@ along their own segments. All eight seagull placements are refreshed in the
 atlas and focused PDFs. The focused matrix has 254 public cases; PDF checks
 verify all 16 inner W centers, alongside the existing graph/marker checks.
 M04 remains local, D01 remains deferred, and M05 follows authorized publication.
+
+## Optical centering correction - 2026-11-04
+
+The previous circle check measured vertex-to-vertex midpoints, which missed the
+unequal visible space caused by the pink endpoint triangle. Styled seagull W
+circles now move about 3pt toward the tree vertex: existing `circ position`
+values 0.588 (T) and 0.599 (S), shared across each channel's four slots. The
+independent PDF check now compares visible arrow/circle/dot ink gaps for all
+eight seagulls; bubble-host circles keep their geometric midpoint checks.
+These are tuned recipes for the standard marker size and geometry, using
+existing public APIs. Package source/defaults are unchanged from ddf9d0e.

@@ -2256,9 +2256,12 @@ Default `insertion-position` is **0.40 for supported s/t-tree seagulls** and
 tree vertex. The seagull default leaves 60% of the leg for the inner host
 segment, 20% more length than the former midpoint placement. Explicit positions
 remain effective; `insertion-position=0.50` restores the old seagull placement.
-The styled inner W circles explicitly use `circ position=0.5`, halfway between
-the insertion vertex and the tree vertex. Circle centering was already the
-normal behavior; the longer segment gives the centered circle more clearance.
+The styled seagull W circles use optical centering between the visible pink
+endpoint arrow and the black tree vertex: `circ position=0.588` on T trees and
+`circ position=0.599` on S trees. These values account for the arrow occupying
+more of the segment than the dot, using the samples' standard 6pt arrows and
+default geometry/scale. Retune `circ position` for other marker sizes or geometry.
+Ordinary circles and the styled bubble-host circles retain the geometric 0.5.
 
 Default `insertion-scale` is **0.50 for supported s/t-tree bubble insertions**
 (previously 0.66), so the bubble footprint is about 24% shorter and each host

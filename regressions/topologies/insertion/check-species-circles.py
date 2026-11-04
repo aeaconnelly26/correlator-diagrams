@@ -17,11 +17,12 @@ contact = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(contact)
 
 
-def inspect_circles(page, reader):
+def inspect_circles(page, reader, *, include_triangles=False):
     state = {'ctm': (1, 0, 0, 1, 0, 0), 'fill': (0, 0, 0),
              'stroke': (0, 0, 0), 'width': 1.0}
     stack, points, circles, dots = [], [], [], []
     curves = 0
+    triangles = []
 
     def transform(x, y):
         a, b, c, d, e, f = state['ctm']
@@ -60,8 +61,42 @@ def inspect_circles(page, reader):
                         circles.append((ring, state['stroke']))
                     elif max(state['fill']) < .01:
                         dots.append(ring)
+            if curves == 0 and points and min(state['fill']) > .99 and max(state['stroke']) > .1:
+                unique = []
+                for point in points:
+                    if not any(hypot(point[0]-other[0], point[1]-other[1]) < .001 for other in unique):
+                        unique.append(point)
+                if len(unique) == 3:
+                    triangles.append((unique, state['width']*hypot(*state['ctm'][:2])/2))
             points, curves = [], 0
-    return circles, dots
+    return (circles, dots, triangles) if include_triangles else (circles, dots)
+
+
+def optical_gaps(ring, dots, triangles):
+    """Measure free space between the triangle ink and the tree-dot ink."""
+    x, y, radius, outline = ring
+    first, last = min(((u, v) for n, u in enumerate(dots) for v in dots[n+1:]),
+                      key=lambda pair: hypot(x-(pair[0][0]+pair[1][0])/2,
+                                             y-(pair[0][1]+pair[1][1])/2))
+
+    def attached(dot):
+        return [(points, width) for points, width in triangles
+                if min(abs(hypot(px-dot[0], py-dot[1])-dot[2]) for px, py in points) < .6]
+
+    if not attached(first):
+        first, last = last, first
+    arrows = attached(first)
+    assert len(arrows) == 2 and not attached(last), 'Cannot identify the seagull and tree endpoints'
+    length = hypot(last[0]-first[0], last[1]-first[1])
+    axis = ((last[0]-first[0])/length, (last[1]-first[1])/length)
+    arrow_edge = max((px-first[0])*axis[0]+(py-first[1])*axis[1]+width
+                     for points, width in arrows for px, py in points)
+    dot_edge = length-last[2]-last[3]
+    center = (x-first[0])*axis[0]+(y-first[1])*axis[1]
+    normal_error = abs((x-first[0])*axis[1]-(y-first[1])*axis[0])
+    assert normal_error < .03, 'W circle left the host segment axis'
+    return center-radius-outline-arrow_edge, dot_edge-center-radius-outline
+
 
 
 def main():
@@ -74,7 +109,7 @@ def main():
     endpoint_reports = contact.inspect(args.pdf)
     reports = []
     for i, page in enumerate(reader.pages):
-        circles, dots = inspect_circles(page, reader)
+        circles, dots, triangles = inspect_circles(page, reader, include_triangles=True)
         assert len(circles) == [8, 12, 8, 12][i], f'Page {i+1}: missing/extra species circles'
         assert len(dots) == [12, 16, 12, 16][i], f'Page {i+1}: wrong interaction vertex count'
         pink = [ring for ring, color in circles if color[0] > .9 and color[1] < .1 and color[2] > .5]
@@ -88,13 +123,22 @@ def main():
                           and abs(u[0]-v[0] if i < 2 else u[1]-v[1]) < .03]
             assert any(hypot(x-(u[0]+v[0])/2, y-(u[1]+v[1])/2) < .03
                        for u, v in candidates), 'Pink Z circle left its central stem'
-        # Exactly one black W per diagram belongs to the straight inner host
-        # segment; the optional bubble W circle lies on an arc instead.
-        midpoint_errors = [min(hypot(x-(u[0]+v[0])/2, y-(u[1]+v[1])/2)
-                               for n, u in enumerate(dots) for v in dots[n+1:])
-                           for x, y, _, _ in black]
-        centered_errors = [error for error in midpoint_errors if error < .03]
-        assert len(centered_errors) == 4, f'Page {i+1}: inner W circle left its segment midpoint'
+        # Seagulls have an extended pink arrow footprint on the inner host
+        # side. Center in the remaining visible gap; bubble hosts retain .5.
+        if i in (0, 2):
+            visible_gaps = [optical_gaps(ring, dots, triangles) for ring in black]
+            assert len(visible_gaps) == 4 and min(min(pair) for pair in visible_gaps) > 0
+            centered_errors = [abs(left-right)/2 for left, right in visible_gaps]
+            assert max(centered_errors) < .05, f'Page {i+1}: W has unequal visible gaps'
+            centering_reference = 'visible arrow-to-tree gap'
+        else:
+            midpoint_errors = [min(hypot(x-(u[0]+v[0])/2, y-(u[1]+v[1])/2)
+                                   for n, u in enumerate(dots) for v in dots[n+1:])
+                               for x, y, _, _ in black]
+            centered_errors = [error for error in midpoint_errors if error < .03]
+            assert len(centered_errors) == 4, f'Page {i+1}: inner bubble-host W left its midpoint'
+            centering_reference = 'vertex-to-vertex midpoint'
+            visible_gaps = []
         gaps = [hypot(x-u, y-v)-r-s-o-p
                 for (x, y, r, o), color in circles for u, v, s, p in dots]
         assert min(gaps) > .2, f'Page {i+1}: species circle crowds an interaction vertex'
@@ -105,12 +149,14 @@ def main():
         reports.append({'page': i+1, 'pink_endpoint_arrows': endpoints['triangles'],
                         'maximum_visible_endpoint_ink_gap_pdf_pt': max(endpoints['visible_gaps_pt']), 'ew_circles': len(circles), 'pink_stem_circles': len(pink),
                         'black_w_circles': len(black), 'centered_inner_w_circles': len(centered_errors),
-                        'maximum_inner_w_midpoint_error_pdf_pt': max(centered_errors),
+                        'inner_w_centering_reference': centering_reference,
+                        'maximum_inner_w_centering_error_pdf_pt': max(centered_errors),
+                        'visible_arrow_circle_tree_gaps_pdf_pt': visible_gaps,
                         'minimum_circle_vertex_ink_clearance_pdf_pt': min(gaps)})
     if args.report:
         args.report.write_text(json.dumps(reports, indent=2)+'\n')
     minimum = min(r['minimum_circle_vertex_ink_clearance_pdf_pt'] for r in reports)
-    print(f'PASS: 40 EW circles (16 pink Z stems, 24 black W); 32 contacting pink endpoint arrows; 16 centered inner W circles; circle/vertex clearance {minimum:.3f} PDF pt')
+    print(f'PASS: 40 EW circles (16 pink Z stems, 24 black W); 32 contacting pink endpoint arrows; 8 optically centered seagull W circles; 8 midpoint bubble-host W circles; circle/vertex clearance {minimum:.3f} PDF pt')
 
 
 if __name__ == '__main__':
