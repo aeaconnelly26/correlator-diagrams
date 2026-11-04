@@ -69,15 +69,15 @@
   "index_placement_deferred": "D01",
   "next_milestone": "M05",
   "sha256": {
-    "docs/diagram-inventory/catalog.json": "82d6b9e121a7142b4de1fefdd64cbf48b5923ab5b49e356ba2ad63e02b5db6af",
-    "docs/diagram-inventory/inventory.pdf": "3746adb1712f27dc0c61ea9d07cfefa363a18088eff0aba3f25deef79b3bf15f",
-    "feynman-fun.sty": "cb9bab9c3c086515cd447050d001a8941b8dbd324221263c3365a11614c0071b",
+    "docs/diagram-inventory/catalog.json": "8a4464de31133d7db68c0a560b62b699289e173325b71b5f4f653e940241b238",
+    "docs/diagram-inventory/inventory.pdf": "51d34806fe02775c7b5992949111758bc5df4e7378a03bddf17c7ede737cb4e5",
+    "feynman-fun.sty": "a016f4d07cbb4a85f93d79d923a76ee6f9f24d2425d172dcb56b5b77beabc477",
     "regressions/topologies/insertion/check-seagull-contact.py": "810146d92ad7f55f06f526bc88e025392d95ee4d0a4bddb96f77239a3236d3c9",
     "regressions/topologies/insertion/check-species-circles.py": "1f0316821e847a17170c67b9d47d9ada5a29d6c1db088ef4e1ec18b689ed7c11",
     "regressions/topologies/insertion/insertion-momentum-review.pdf": "3fc85c0cf09263b50f59bda5c33dfe849ccb9187be393aa2a021bc32729d082a",
     "regressions/topologies/insertion/insertion-momentum-review.tex": "397bb629508316de86955318ae2c29e922fc20bda88d19e109c5d7ff52718d3c",
-    "regressions/topologies/insertion/insertion-species-samples.pdf": "15986c6108e08c74c28c9b3174ffc6c1f91aa3a5db66a406c5138f4ddb8ef50c",
-    "regressions/topologies/insertion/insertion-species-samples.tex": "bb5dc731d99ff602a4e155e90655f10791f146564bc854aafc78034f3d5655fe",
+    "regressions/topologies/insertion/insertion-species-samples.pdf": "40fb4e25cad878f57c9a1478bac62f8598a6d84285f617462e91732af58d9a5a",
+    "regressions/topologies/insertion/insertion-species-samples.tex": "bd294dc5a4798e95bdd07ad44010775b43bcbb78f815240dc7723e28937aabf3",
     "regressions/topologies/insertion/s-tree-bubble-slots.pdf": "1380f2b4c26157f09e6038ced442fec950a9dfb60cb3e0ccf2568894dbd08346",
     "regressions/topologies/insertion/s-tree-bubble-slots.tex": "32d6262cbd97ef2db63174e3813073d5699dbc1738052da8371ec8ccc58f96a2",
     "regressions/topologies/insertion/seagull-contact.json": "376045d191ddff295874b223b88a54b89fadf8f454412ea45ae965fc27e77d25",
@@ -88,7 +88,7 @@
     "regressions/topologies/insertion/t-tree-bubble-slots.tex": "a993fea65e9a291cca2984a8e019e10d04a991cadb8101de4bc80f57938bcae9",
     "scripts/check-regressions.sh": "e17cb3e9d718e7728288eb1a8e0310659f0af5c3d2aefdbba388f8d06decde10"
   },
-  "review_baseline": "fd42a61",
+  "review_baseline": "347fd37",
   "review_public_cases": 84,
   "host_label_rectangle_checks": 130,
   "review_auto_loop_direction_checks": 32,
@@ -113,7 +113,7 @@
   "t_bubble_loop_label_distance_pt": 2,
   "t_bubble_loop_arrow_offset_pt": 8,
   "initial_baseline_identity_record": "history/m04-checks-229526e.json",
-  "latest_review_baseline": "fd42a61",
+  "latest_review_baseline": "347fd37",
   "seagull_curve_sample_checks": 800,
   "seagull_default_label_fraction": "auto: arrow-range midpoint",
   "seagull_label_placement": "local outward curve normal; measured text rectangle",
@@ -133,7 +133,7 @@
   "species_ew_circles": 40,
   "species_pink_stem_z_circles": 16,
   "species_black_w_circles": 24,
-  "preceding_checkpoint_record": "history/m04-checks-fd42a61.json",
+  "preceding_checkpoint_record": "history/m04-checks-347fd37.json",
   "species_circle_minimum_vertex_ink_clearance_pdf_pt": 1.0119987482049206,
   "species_sampling": {
     "central_stem": "ewboson, magenta!85!red, circ=Z",
@@ -144,6 +144,11 @@
     "bubble_b": "proca, magenta!85!red; both endpoint arrows; no circle; k momentum"
   },
   "species_endpoint_contacts": 32,
-  "two_ended_followup_validation": "Changed focused gallery and PDF checker rerun; package unchanged; full 40-document/656-contact suite passed at fd42a61",
-  "preceding_size_review_unchanged_atlas_page_bodies": 13
+  "preceding_size_review_unchanged_atlas_page_bodies": 13,
+  "central_momentum_visibility_public_cases": 41,
+  "default_show_channel_momentum": true,
+  "styled_samples_show_channel_momentum": false,
+  "styled_s_inner_label_clearance_tex_pt": 4,
+  "unchanged_atlas_page_bodies": 15,
+  "latest_validation": "Full 40-document suite and 688 endpoint contacts pass; 41 visibility/reset probes; 56 size probes; changed PDF pages rendered/inspected"
 }

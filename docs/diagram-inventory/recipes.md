@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M04 two-ended loop review on fd42a61`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
+Baseline: `M04 styled stem review on 347fd37`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1739,7 +1739,7 @@ Outward S loop; compact host arrows.
 
 Pink Z stem; inner W; two-ended pink loop with k.
 
-**Limit:** Proca supplies both endpoint arrows; circles are separate. No W-loop guide.
+**Limit:** Central/W-loop guides hidden; no loop circles.
 
 ```tex
 \TTreeChannelCorr[
@@ -1761,7 +1761,8 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion-pre-line=ewboson,
   insertion-post-line={ewboson,circ=W,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
-  seagull-loop-momentum=k
+  seagull-loop-momentum=k,
+  show-channel-momentum=false
 ]
 ```
 
@@ -1769,7 +1770,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
 
 Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
 
-**Limit:** Proca supplies both endpoint arrows; circles are separate. No W-loop guide.
+**Limit:** Central/W-loop guides hidden; no loop circles.
 
 ```tex
 \TTreeChannelCorr[
@@ -1792,7 +1793,8 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
   insertion-post-line={ewboson,circ=W,circ scale=0.65},
   bubble-top-line={ewboson,circ=W,circ scale=0.65},
   bubble-bottom-line={proca,magenta!85!red},
-  bubble-momenta={,k}
+  bubble-momenta={,k},
+  show-channel-momentum=false
 ]
 ```
 
@@ -1800,7 +1802,7 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
 
 Pink Z stem; inner W; two-ended pink loop with k.
 
-**Limit:** Proca supplies both endpoint arrows; circles are separate. No W-loop guide.
+**Limit:** Central/W-loop guides hidden; inner-label gap 4pt.
 
 ```tex
 \STreeChannelCorr[
@@ -1822,7 +1824,9 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion-pre-line=ewboson,
   insertion-post-line={ewboson,circ=W,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
-  seagull-loop-momentum=k
+  seagull-loop-momentum=k,
+  show-channel-momentum=false,
+  insertion-post-momentum-label-distance=4pt
 ]
 ```
 
@@ -1830,7 +1834,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
 
 Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
 
-**Limit:** Proca supplies both endpoint arrows; circles are separate. No W-loop guide.
+**Limit:** Central/W-loop guides hidden; inner-label gap 4pt.
 
 ```tex
 \STreeChannelCorr[
@@ -1853,6 +1857,8 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
   insertion-post-line={ewboson,circ=W,circ scale=0.65},
   bubble-top-line={ewboson,circ=W,circ scale=0.65},
   bubble-bottom-line={proca,magenta!85!red},
-  bubble-momenta={,k}
+  bubble-momenta={,k},
+  show-channel-momentum=false,
+  insertion-post-momentum-label-distance=4pt
 ]
 ```

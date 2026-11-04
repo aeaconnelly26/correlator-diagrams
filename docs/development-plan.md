@@ -331,3 +331,14 @@ black W circles remain as requested. Only pink loop lines have k momentum.
 This is an example/recipe change using existing APIs; package code is unchanged.
 The focused gallery and PDF checks pass, including 32 actual endpoint contacts.
 M04 remains local and D01 remains deferred.
+
+## Quiet styled stems and S inner labels - 2026-11-04
+
+The styled examples hide central momentum arrows/P labels using the additive
+`show-channel-momentum=false` option, keeping their pink Z stems and circles.
+The option defaults true per call and supports s/t/u tree exchanges plus s/t
+insertions; external/loop momenta remain independent. S styled examples use
+`insertion-post-momentum-label-distance=4pt`; global label-gap defaults are
+unchanged. The focused gallery adds 41 public visibility/reset cases. Atlas
+page 16 and the all-slot gallery are regenerated. M04 remains local; D01 is
+still deferred, and M05 follows authorized publication.

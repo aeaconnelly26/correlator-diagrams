@@ -1,3 +1,35 @@
+# Quiet styled stems and S inner-label spacing - 2026-11-04
+
+From local `347fd37`, the styled samples now omit the central exchange momentum
+arrow and its P label. Pink EW Z stems and their Z species circles remain.
+All eight S styled examples set the inner host-label gap to 4pt instead of 2pt,
+including the slot-2 p2 label shown in the screenshot; T sample gaps and the
+ordinary package label-spacing defaults remain unchanged.
+
+An additive public key, `show-channel-momentum=false`, hides the complete
+central tree-exchange annotation. Its default is true on each call, preserving
+existing behavior. It supports s/t/u trees, including s/t bubble/seagull
+insertions, and preserves external/loop annotations and all propagator styles.
+The global `show-momenta=false` switch still suppresses all annotations.
+There is no change to the four-legged loop-channel momentum helpers.
+
+The styled gallery adds **41 complete public-diagram visibility probes**:
+central on/off across all sixteen insertions, defaults restored on consecutive
+calls, ordinary s/t/u exchanges and an explicit true override after false.
+Emitted label counts verify external and loop labels are retained. The earlier
+56 size probes, 40 species-circle checks and 32 endpoint-contact checks remain.
+The atlas (74 recipes / 16 pages) and all-slot styled gallery are rebuilt,
+rendered and visually inspected. All 40 maintained documents and 688 endpoint
+contacts pass. All first 15 atlas page bodies are pixel-identical above the
+footer to `347fd37`, confirming unchanged default rendering; styled gallery
+PDF text contains no central P labels. The package change is limited to
+independent visibility; index
+placement remains D01. M04 remains local, pending authorized publication.
+
+Current hashes/results are in [m04-checks.json](../planning/m04-checks.json); the preceding record is preserved
+in [history](../planning/history/m04-checks-347fd37.json). Earlier sections retain their historical
+scope and validation counts.
+
 # Two-ended pink loop clarification - 2026-11-04
 
 From local `fd42a61`, J01-J04 and the sixteen-example styled gallery now use

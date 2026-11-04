@@ -1023,6 +1023,7 @@ The tree-level exchange topologies use the older `channel-*` family instead of `
 
 The most important motion keys there are:
 
+- `show-channel-momentum=true|false` (default `true` per diagram)
 - `channel-momentum-start=...`
 - `channel-momentum-end=...`
 - `channel-momentum-distance=...`
@@ -1032,6 +1033,13 @@ The most important motion keys there are:
   label in an intentional arrow gap controlled by `momentum-label-gap`.
 - `channel-momentum-label-xshift=...`
 - `channel-momentum-label-yshift=...`
+
+Use `show-channel-momentum=false` to hide both the central tree-exchange
+momentum arrow and its momentum label while retaining external and insertion-loop
+momenta. It works on s/t/u trees, including the s/t bubble/seagull insertions;
+it does not hide the central propagator, its species circle, or its indices.
+`show-momenta=false` still disables all momenta. Four-legged loop channels keep
+their separate `loop-channel-*` controls.
 
 The logic is:
 
@@ -2459,6 +2467,13 @@ explicit former/custom sizes, unchanged seagull defaults and size-state reset.
 `check-species-circles.py` independently checks the 40 actual PDF circles:
 16 pink circles on central Z stems, 24 black W circles, and vertex clearance.
 It also verifies all 32 pink loop endpoint arrows contact their vertices.
+The styled samples set `show-channel-momentum=false`, leaving the pink Z stem
+and its species circle without a central momentum guide or P label. S samples
+also set `insertion-post-momentum-label-distance=4pt` (instead of the ordinary
+2pt) to separate the selected inner external-leg label from its arrow. These
+are explicit sample choices; ordinary tree momentum visibility and label-gap
+defaults are preserved. A further 41 public-diagram probes verify independent
+central visibility, retained external/loop labels, explicit true and per-call reset.
 
 The all-slot t-tree gallery and graph/style/cap/momentum checks are in
 `regressions/topologies/insertion/t-tree-bubble-slots.tex` and its PDF. Its

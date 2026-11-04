@@ -56,6 +56,35 @@
   }}%
 \typeout{PASS insertion size: \the\speciescases\space public diagrams; shorter bubble span, longer host segments, explicit sizes and state reset}%
 \let\corr@setttreebubbleinsertioncoords\speciesoldbubblecoords
+% Verify emitted central labels disappear independently of external/loop labels,
+% and the next public diagram returns to the compatible visible default.
+\newcount\speciesvisibilitycases \newcount\specieslabels
+\let\speciesoldlabel\corr@putmomentumlabelwithdistance
+\renewcommand{\corr@putmomentumlabelwithdistance}[6]{%
+  \global\advance\specieslabels by 1
+  \speciesoldlabel{#1}{#2}{#3}{#4}{#5}{#6}}
+\newcommand{\speciesvisibility}[3]{%
+  \global\advance\speciesvisibilitycases by 1\global\specieslabels=0
+  \edef\speciesalloptions{field={},central={},leg-labels={,,,},line=plain,
+    show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},#2}%
+  \setbox\speciesprobe=\hbox{\expandafter#1\expandafter[\speciesalloptions]}%
+  \ifnum\specieslabels=#3\relax\else
+    \PackageError{Central momentum visibility}{Emitted label count \the\specieslabels, expected #3}{}\fi}
+\@for\speciesmacro:={\STreeChannelCorr,\TTreeChannelCorr}\do{%
+  \@for\specieskind:={bubble,seagull}\do{%
+    \@for\speciesslot:={1,2,3,4}\do{%
+      \edef\speciesoptions{insertion=\specieskind,insertion-slot=\speciesslot,
+        bubble-momenta={,k},seagull-loop-momentum=k}%
+      \speciesvisibility\speciesmacro{\speciesoptions,show-channel-momentum=false}{6}%
+      \speciesvisibility\speciesmacro{\speciesoptions}{7}%
+    }}}
+\@for\speciesmacro:={\STreeChannelCorr,\TTreeChannelCorr,\UTreeChannelCorr}\do{%
+  \speciesvisibility\speciesmacro{show-channel-momentum=false}{4}%
+  \speciesvisibility\speciesmacro{}{5}%
+  \speciesvisibility\speciesmacro{show-channel-momentum=false,show-channel-momentum=true}{5}%
+}
+\let\corr@putmomentumlabelwithdistance\speciesoldlabel
+\typeout{PASS central momentum visibility: \the\speciesvisibilitycases\space public diagrams; external/loop labels retained; visible defaults and explicit override reset}
 \makeatother
 \section*{T-tree seagull: species-labeled propagators}
 Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca), no circle, k.
@@ -65,6 +94,7 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -80,6 +110,7 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -95,6 +126,7 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -110,6 +142,7 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -129,6 +162,7 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -145,6 +179,7 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -161,6 +196,7 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -177,6 +213,7 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -197,6 +234,8 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -212,6 +251,8 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -227,6 +268,8 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -242,6 +285,8 @@ Pink EW Z stem; inner W segment, bare outer segment; pink two-ended loop (proca)
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -261,6 +306,8 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -277,6 +324,8 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -293,6 +342,8 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
@@ -309,6 +360,8 @@ Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink two-en
  central={},
  leg-labels={,,,},
  show-momenta=true,
+ show-channel-momentum=false,
+ insertion-post-momentum-label-distance=4pt,
  momentum-labels={p_1,p_2,p_3,p_4,P},
  line=ewboson,
  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},

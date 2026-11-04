@@ -397,6 +397,7 @@
 
 \newif\ifcorr@blob
 \newif\ifcorr@showmomenta
+\newif\ifcorr@showchannelmomentum
 \newif\ifcorr@centervertex
 \newif\ifcorr@externallegs
 \newif\ifcorr@externalvertices
@@ -1010,6 +1011,7 @@
 \corr@blobtrue
 \def\corr@blobstyle{blob}
 \corr@showmomentatrue
+\corr@showchannelmomentumtrue
 \corr@centervertextrue
 \corr@externallegstrue
 \corr@externalverticesfalse
@@ -1841,6 +1843,7 @@
 }
 
 \newcommand{\corr@resetchanneldefaults}{%
+  \corr@showchannelmomentumtrue
   \def\corr@fourpointtopology{contact}%
   \def\corr@contactpairing{central}%
   \def\corr@fourpointxspan{1.95}%
@@ -4001,6 +4004,7 @@
   blob/.is if=corr@blob,
   blob-style/.store in=\corr@blobstyle,
   show-momenta/.is if=corr@showmomenta,
+  show-channel-momentum/.is if=corr@showchannelmomentum,
   center-vertex/.is if=corr@centervertex,
   central-vertex/.style={center-vertex=#1},
   center-vertex-style/.store in=\corr@centervertexstyle,
@@ -7284,6 +7288,7 @@
 }
 
 \newcommand{\corr@drawttreeinsertionmiddlemomentum}{%
+  \ifcorr@showchannelmomentum
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{5}}%
   \coordinate (corrttreeinsertionmiddlemomstart) at ([xshift=\corr@insertionmiddlemomentumxshift,yshift=\corr@insertionmiddlemomentumstartyshift]corrC);
@@ -7299,6 +7304,7 @@
     {0pt}
     {\corr@channelmomentumlabel}%
   \endgroup
+  \fi
 }
 
 \newcommand{\corr@ifinsertionpostindicesempty}[2]{%
@@ -7414,6 +7420,7 @@
 }
 
 \newcommand{\corr@drawchannelmomentum}[2]{%
+  \ifcorr@showchannelmomentum
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{5}}%
   \pgfmathsetmacro{\corr@channelmomlabelfraction}{0.5*(\corr@channelmomstart+\corr@channelmomend)}%
   \pgfmathsetmacro{\corr@channelmomgapstart}{max(\corr@channelmomstart,\corr@channelmomlabelfraction-\corr@momentumlabelgap)}%
@@ -7442,6 +7449,7 @@
     {\corr@channelmomlabelxshift}
     {\corr@channelmomlabelyshift}
     {\corr@channelmomentumlabel}%
+  \fi
 }
 
 \newcommand{\corr@loopchannelmomentumlabel}[1]{%

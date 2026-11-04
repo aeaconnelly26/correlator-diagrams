@@ -4,7 +4,7 @@
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Built against `codex/m04-seagull-expansion`, based on published `main` at
-`b4a6ad8`, two-ended loop review from `fd42a61` on 2026-11-04. There are **74 current
+`b4a6ad8`, styled stem review from `347fd37` on 2026-11-04. There are **74 current
 examples on sixteen pages**. These are recipes and meaningful layouts/styles,
 not 74 distinct graph topologies.
 
@@ -34,7 +34,10 @@ without circles, and mixed EW W / scalar-polarization Z bubbles. The pink loop
 recipes use `proca` for two endpoint arrows; `circ` is a separate option. Only the pink
 loop arc carries k; the W arc has no momentum guide or label. See the
 [all-slot styled gallery](../../regressions/topologies/insertion/insertion-species-samples.pdf)
-for all sixteen placements.
+for all sixteen placements. The styled samples now hide central momentum
+arrows and P labels with `show-channel-momentum=false`, while retaining Z
+species circles. S samples use a 4pt inner-label gap; ordinary defaults remain
+unchanged. The new visibility control is also available on plain s/t/u trees.
 
 ## How to read it
 
