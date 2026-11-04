@@ -4,6 +4,35 @@ Branch: `codex/m04-seagull-expansion`. Review baseline: local checkpoint
 `229526e`; published main remains `b4a6ad8`. The corrections and updated
 artifacts are local, not merged or pushed. D01 index appearance stays deferred.
 
+## Seagull curve/label consistency follow-up
+
+The user's follow-up screenshot identified inconsistent k placement in the S
+seagull examples. Baseline for this correction: local `9124a0b`. The earlier
+helper translated a copy of the loop and selected above/below/left/right from
+the whole loop axis. That was shared code, but it did not give consistent local
+curve placement across rotations.
+
+The corrected helper samples a concentric outer curve from the same center as
+the loop. Radius is loop radius plus the existing 9pt offset. `auto` label
+fraction now means midpoint of the selected arrow interval; explicit numeric
+fractions are retained. The label follows the actual tangent-derived outward
+normal at that point, with measured text-rectangle clearance. Reversing flow
+changes only the arrow direction. Explicit range, offset, fraction, looseness
+and label-distance controls remain available.
+
+The seagull focused regression now covers **222 public cases**, **88 actual
+label rectangles** and **800 paired curve samples** across all eight host/slot
+placements, orientation choices, reversal and custom loop geometry. It also
+checks automatic midpoint placement and explicit numeric fraction/looseness.
+Both bubble review pages retain **identical decoded PDF drawing streams** to
+`9124a0b`; bubble k/ell placement and the prior host-arrow fixes are untouched.
+The loop propagator, vertices, markers, caps and index placement are untouched.
+
+The new results supersede the original 206-case/72-label seagull counts below.
+Earlier evidence is preserved in [the preceding review record](history/m04-checks-9124a0b.json).
+Current hashes/results remain in m04-checks.json. The full suite remains 39
+registered documents and 656 endpoint contacts; no topology was added.
+
 ## Reviewed behavior
 
 - Auto seagull loops face inward on T trees (upper legs down, lower legs up)

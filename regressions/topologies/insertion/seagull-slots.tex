@@ -7,7 +7,7 @@
 \newbox\sgbox
 \newcount\sgedges \newcount\sgvertices \newcount\sgloops \newcount\sgposts
 \newcount\sglabels \newcount\sgcaps \newcount\sgdoublecaps \newcount\sgindices
-\newcount\sgforward \newcount\sgreverse \newcount\sgcases \newcount\sglabelchecks
+\newcount\sgforward \newcount\sgreverse \newcount\sgcases \newcount\sglabelchecks \newcount\sgcurvechecks
 \makeatletter
 \def\sgplacements{t1,t2,t3,t4,s1,s2,s3,s4}
 \def\sgexpected{seagull}\def\sgloopchecking{no}
@@ -54,11 +54,37 @@
     \expandafter\xdef\csname sglabel\sgidx\endcsname{\number\numexpr\csname sglabel\sgidx\endcsname+1\relax}\fi}%
   \corr@ifstringeq{\sgloopchecking}{yes}{%
     \begingroup\tikzset{every node/.append style={alias=sgLoopLabel}}\sgoldlabel{#1}{#2}{#3}{#4}{#5}{#6}\endgroup
-    \path #1 coordinate (sgArrowLabel);
+    \path (corrseagullmomlabel) coordinate (sgArrowLabel);
     \pgfpointdiff{\pgfpointanchor{sgArrowLabel}{center}}{\pgfpointanchor{sgLoopLabel}{center}}%
     \edef\sgdx{\the\pgf@x}\edef\sgdy{\the\pgf@y}%
-    \pgfmathsetlengthmacro{\sgoutward}{\sgdx*cos(\corr@seagullloopangle)+\sgdy*sin(\corr@seagullloopangle)}%
+    \pgfmathsetlengthmacro{\sgoutward}{\sgdx*cos(\corr@seagulllabelnormal)+\sgdy*sin(\corr@seagulllabelnormal)}%
     \ifdim\sgoutward>0pt\else\PackageError{M04}{Loop label faces inward}{}\fi
+    \pgfpointdiff{\pgfpointanchor{sgLoopLabel}{west}}{\pgfpointanchor{sgLoopLabel}{east}}\edef\sglabelwidth{\the\pgf@x}%
+    \pgfpointdiff{\pgfpointanchor{sgLoopLabel}{south}}{\pgfpointanchor{sgLoopLabel}{north}}\edef\sglabelheight{\the\pgf@y}%
+    \pgfmathsetlengthmacro{\sglabelgap}{\sgoutward-0.5*(abs(cos(\corr@seagulllabelnormal))*\sglabelwidth+abs(sin(\corr@seagulllabelnormal))*\sglabelheight)}%
+    \pgfmathsetlengthmacro{\sgminimumgap}{\corr@seagullloopmomentumlabeldistance-0.05pt}%
+    \ifdim\sglabelgap<\sgminimumgap\PackageError{M04}{Seagull text rectangle overlaps its arrow}{}\fi
+    \corr@ifstringeq{\corr@seagullloopmomentumlabelfraction}{auto}{%
+      \pgfmathsetmacro{\sgfractionerror}{abs(\corr@seagullresolvedlabelfraction-0.5*(\corr@seagullloopmomentumstart+\corr@seagullloopmomentumend))}%
+      \ifdim\sgfractionerror pt>0.0001pt\PackageError{M04}{Default loop label is not at arrow midpoint}{}\fi
+    }{}%
+    % Uniformly scaled curves must share the loop center at every sampled
+    % fraction, even when loop looseness differs from a circle.
+    \ifdim\corr@seagullloopmomentumlooseness pt=1pt
+      \@for\sgfraction:={\corr@seagullloopmomentumstart,\corr@seagullmomponefraction,\corr@seagullmomptwofraction,\corr@seagullmompthreefraction,\corr@seagullmompfourfraction,\corr@seagullmompfivefraction,\corr@seagullmompsixfraction,\corr@seagullmompsevenfraction,\corr@seagullloopmomentumend,\corr@seagullresolvedlabelfraction}\do{%
+        \corr@setseagulloutercoord{corrSeagullLoop}{\corr@seagullloopcontrol}{\sgfraction}{sgLoopReference}%
+        \corr@setseagullmomentumcoord{\sgfraction}{sgMomentumReference}%
+        \pgfpointdiff{\pgfpointanchor{corrSeagullLoopCenter}{center}}{\pgfpointanchor{sgLoopReference}{center}}%
+        \edef\sgloopdx{\the\pgf@x}\edef\sgloopdy{\the\pgf@y}%
+        \pgfpointdiff{\pgfpointanchor{corrSeagullLoopCenter}{center}}{\pgfpointanchor{sgMomentumReference}{center}}%
+        \edef\sgarrowdx{\the\pgf@x}\edef\sgarrowdy{\the\pgf@y}%
+        \pgfmathsetlengthmacro{\sgcurveerrorx}{abs(\sgarrowdx-\sgloopdx*\corr@seagullmomentumradius/\corr@seagullloopradius)}%
+        \pgfmathsetlengthmacro{\sgcurveerrory}{abs(\sgarrowdy-\sgloopdy*\corr@seagullmomentumradius/\corr@seagullloopradius)}%
+        \ifdim\sgcurveerrorx>0.05pt\PackageError{M04}{Loop/arrow centers disagree in x}{}\fi
+        \ifdim\sgcurveerrory>0.05pt\PackageError{M04}{Loop/arrow centers disagree in y}{}\fi
+        \global\advance\sgcurvechecks by 1
+      }%
+    \fi
     \global\advance\sglabelchecks by 1
   }{\sgoldlabel{#1}{#2}{#3}{#4}{#5}{#6}}}
 \let\sgoldcap\corr@drawexternalendcap
@@ -154,6 +180,8 @@
   \ifx\sgdirection\sgwanted\else\PackageError{M04}{Wrong logical host direction}{}\fi
   \@for\sgorientation:={auto,top,bottom,left,right}\do{%
     \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,insertion-orientation=\sgorientation}}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,seagull-loop-size=1.8,seagull-loop-looseness=1.15}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,seagull-loop-momentum-offset=6pt,seagull-loop-momentum-start=0.1,seagull-loop-momentum-end=0.8,seagull-loop-momentum-label-fraction=0.7,seagull-loop-momentum-looseness=1.2,seagull-loop-momentum-direction=counterclockwise}%
   \sgmeasure{seagull-vertex-indices={a,b,c,d}}\sgassert\sgindices{4}{Four vertex indices}%
   \def\sgwanted{/a/b/c/d}\ifx\sgindexvalues\sgwanted\else\PackageError{M04}{Index values changed}{}\fi
   \sgmeasure{seagull-loop-line={proca,magenta},propagator-arrow-sizes={4pt,5pt,7pt,8pt}}%
@@ -174,7 +202,8 @@
 \let\sgpublic\FourPointCorr\sgmeasure{topology=contact}
 \sgassert\sgvertices{1}{Unsupported contact unchanged}\sgassert\sgloops{0}{No contact seagull}
 \typeout{PASS M04: \the\sgcases\space public diagram cases; seven edges, quartic valence, slots, styles, caps, momenta, indices and state reset}
-\typeout{PASS M04: \the\sglabelchecks\space rendered loop labels face outward}
+\typeout{PASS M04: \the\sglabelchecks\space rendered loop label rectangles clear their local curve normals}
+\typeout{PASS M04: \the\sgcurvechecks\space samples share concentric loop and momentum geometry}
 % Restore package renderers for the visible public-interface gallery.
 \let\corr@drawchannelprop\sgoldprop\let\corr@drawchannelpropnoendcaps\sgoldpost
 \let\corr@drawseagullloop\sgoldloop\let\corr@putvertex\sgoldvertex

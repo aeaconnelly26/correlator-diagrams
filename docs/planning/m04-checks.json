@@ -22,8 +22,8 @@
   "graph_interaction_vertices": 3,
   "graph_self_loops": 1,
   "regression_documents": 39,
-  "focused_diagram_cases": 206,
-  "outward_loop_label_checks": 72,
+  "focused_diagram_cases": 222,
+  "outward_loop_label_checks": 88,
   "incremental_stage_cases": {
     "t1": 24,
     "t2": 48,
@@ -65,18 +65,18 @@
   "index_placement_deferred": "D01",
   "next_milestone": "M05",
   "sha256": {
-    "feynman-fun.sty": "c7bdfe3cf147d47e5555047b380cfc6597bbca324bd25d15d1c13fc96574390c",
-    "regressions/topologies/insertion/seagull-slots.tex": "68d1b8f4bc8dd8233c7e073d8a709ccda0ec3b0939517ae41c0663d90e7960af",
-    "regressions/topologies/insertion/seagull-slots.pdf": "36518353b36db88baeef3c6d4b8394428e2e3f2c390eb771c5d4b45629f3df91",
+    "feynman-fun.sty": "590f98abbdcce5f6b95ce9d56bfa028de225f63342394a901cabea676062513b",
+    "regressions/topologies/insertion/seagull-slots.tex": "b0b78b81487bd789d1461874385ad5fa8693f2e2cdf5eaeca291167ff8086e6e",
+    "regressions/topologies/insertion/seagull-slots.pdf": "950f0b4ea8968880a5ae4bbfbdf842b50b3ab059facfd5eca3de43e2610a961e",
     "regressions/topologies/insertion/insertion-momentum-review.tex": "04c61fbaf4d5ae571a65fe089ac364eb1d5f6d08bc902758e9830b4a24df1b5e",
-    "regressions/topologies/insertion/insertion-momentum-review.pdf": "8fc3e5375b1bc1275b10695e00d84fa7da1625d759e26a9140737e5373a158fc",
+    "regressions/topologies/insertion/insertion-momentum-review.pdf": "417a0175317c8549d029616438d2bf55c7dd4cf63934f703a0d8360156e4baf3",
     "regressions/topologies/insertion/t-tree-bubble-slots.tex": "a993fea65e9a291cca2984a8e019e10d04a991cadb8101de4bc80f57938bcae9",
     "regressions/topologies/insertion/s-tree-bubble-slots.tex": "32d6262cbd97ef2db63174e3813073d5699dbc1738052da8371ec8ccc58f96a2",
     "regressions/topologies/insertion/s-tree-bubble-slots.pdf": "0a3971eb5610ece48abca8fe2b22482fb9fbc381d6947d001194b089b681cca6",
     "regressions/topologies/insertion/check-seagull-contact.py": "810146d92ad7f55f06f526bc88e025392d95ee4d0a4bddb96f77239a3236d3c9",
     "regressions/topologies/insertion/seagull-contact.json": "376045d191ddff295874b223b88a54b89fadf8f454412ea45ae965fc27e77d25",
     "docs/diagram-inventory/catalog.json": "62cd5e53fb7fb1507d3d0ad49bed646da139f299527592af54526ed17e3f4483",
-    "docs/diagram-inventory/inventory.pdf": "e1b851bee5d94abb3ac51b21cb202084487c2373dc985cde30195dac4cc6b8b6"
+    "docs/diagram-inventory/inventory.pdf": "fe2d42ab691e728c1f39049a08c002fb86dcb9a0cd2cc6f356608afc64dfab3b"
   },
   "review_baseline": "229526e",
   "review_public_cases": 84,
@@ -102,5 +102,11 @@
   "s_bubble_loop_text_rectangle_clearance_pt": 4,
   "t_bubble_loop_label_distance_pt": 2,
   "t_bubble_loop_arrow_offset_pt": 8,
-  "initial_baseline_identity_record": "history/m04-checks-229526e.json"
+  "initial_baseline_identity_record": "history/m04-checks-229526e.json",
+  "latest_review_baseline": "9124a0b",
+  "seagull_curve_sample_checks": 800,
+  "seagull_default_label_fraction": "auto: arrow-range midpoint",
+  "seagull_label_placement": "local outward curve normal; measured text rectangle",
+  "seagull_arrow_geometry": "shared-center scaled outer curve",
+  "unchanged_bubble_review_pages": 2
 }

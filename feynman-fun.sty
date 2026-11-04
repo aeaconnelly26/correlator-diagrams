@@ -781,7 +781,7 @@
 \def\corr@seagullloopmomentumstart{0.20}
 \def\corr@seagullloopmomentumend{0.62}
 \def\corr@seagullloopmomentumoffset{9pt}
-\def\corr@seagullloopmomentumlabelfraction{0.42}
+\def\corr@seagullloopmomentumlabelfraction{auto}
 \def\corr@seagullloopmomentumlabeldistance{4pt}
 \def\corr@seagullloopmomentumlooseness{1.0}
 \def\corr@seagullloopmarkerdistance{auto}
@@ -2160,7 +2160,7 @@
   \corr@topologysetdefault\corr@seagullloopmomentumstart{0.20}%
   \corr@topologysetdefault\corr@seagullloopmomentumend{0.62}%
   \corr@topologysetdefault\corr@seagullloopmomentumoffset{9pt}%
-  \corr@topologysetdefault\corr@seagullloopmomentumlabelfraction{0.42}%
+  \corr@topologysetdefault\corr@seagullloopmomentumlabelfraction{auto}%
   \corr@topologysetdefault\corr@seagullloopmomentumlabeldistance{4pt}%
   \corr@topologysetdefault\corr@seagullloopmomentumlooseness{1.0}%
   \corr@topologysetdefault\corr@seagullloopmarkerdistance{auto}%
@@ -7073,23 +7073,25 @@
   \corr@drawseagullloop
 }
 
-\newcommand{\corr@setseagullmomentumcoord}[2]{%
-  \pgfmathsetmacro{\corr@seagullouterfractiontmp}{#1}%
+\newcommand{\corr@setseagulloutercoord}[4]{%
+  \pgfmathsetmacro{\corr@seagullouterfractiontmp}{#3}%
   \ifdim\corr@seagullouterfractiontmp pt<0.5pt
-    \pgfmathsetmacro{\corr@seagullouterlocalfraction}{2*(#1)}%
-    \path (corrSeagullMomentumLeft)
-      .. controls +(\corr@seagullloopangle:\corr@seagullmomentumcontrol)
-        and +(\corr@seagulllooplefttangent:\corr@seagullmomentumcontrol) ..
-      coordinate[pos=\corr@seagullouterlocalfraction] (#2)
-      (corrSeagullMomentumFar);
+    \pgfmathsetmacro{\corr@seagullouterlocalfraction}{2*(#3)}%
+    \path (#1Left)
+      .. controls +(\corr@seagullloopangle:#2)
+        and +(\corr@seagulllooplefttangent:#2) ..
+      coordinate[pos=\corr@seagullouterlocalfraction] (#4) (#1Far);
   \else
-    \pgfmathsetmacro{\corr@seagullouterlocalfraction}{2*(#1)-1}%
-    \path (corrSeagullMomentumFar)
-      .. controls +(\corr@seagulllooprighttangent:\corr@seagullmomentumcontrol)
-        and +(\corr@seagullloopangle:\corr@seagullmomentumcontrol) ..
-      coordinate[pos=\corr@seagullouterlocalfraction] (#2)
-      (corrSeagullMomentumRight);
+    \pgfmathsetmacro{\corr@seagullouterlocalfraction}{2*(#3)-1}%
+    \path (#1Far)
+      .. controls +(\corr@seagulllooprighttangent:#2)
+        and +(\corr@seagullloopangle:#2) ..
+      coordinate[pos=\corr@seagullouterlocalfraction] (#4) (#1Right);
   \fi
+}
+
+\newcommand{\corr@setseagullmomentumcoord}[2]{%
+  \corr@setseagulloutercoord{corrSeagullMomentum}{\corr@seagullmomentumcontrol}{#1}{#2}%
 }
 
 \newcommand{\corr@drawseagullmomentumforward}{%
@@ -7123,8 +7125,14 @@
     \corr@ifstringeq{\corr@seagullloopmomentumdirection}{none}{}{%
       \begingroup
       \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{3}}%
-      \pgfmathsetlengthmacro{\corr@seagullmomentumcontroltmp}{\corr@seagullloopmomentumlooseness*\corr@seagullloopcontrol}%
-      \xdef\corr@seagullmomentumcontrol{\corr@seagullmomentumcontroltmp}%
+      % Concentric scaled geometry: rotate the same curve around the same
+      % center rather than translate an unrelated copy along a page direction.
+      \coordinate (corrSeagullLoopCenter) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius)]corrInsertionV);
+      \pgfmathsetlengthmacro{\corr@seagullmomentumradius}{\corr@seagullloopradius+\corr@seagullloopmomentumoffset}%
+      \pgfmathsetlengthmacro{\corr@seagullmomentumcontrol}{\corr@seagullloopmomentumlooseness*\corr@seagullloopcontrol*\corr@seagullmomentumradius/\corr@seagullloopradius}%
+      \corr@ifstringeq{\corr@seagullloopmomentumlabelfraction}{auto}{%
+        \pgfmathsetmacro{\corr@seagullresolvedlabelfraction}{0.5*(\corr@seagullloopmomentumstart+\corr@seagullloopmomentumend)}%
+      }{\let\corr@seagullresolvedlabelfraction\corr@seagullloopmomentumlabelfraction}%
       \pgfmathsetmacro{\corr@seagullmomstep}{(\corr@seagullloopmomentumend-\corr@seagullloopmomentumstart)/8}%
       \pgfmathsetmacro{\corr@seagullmomponefraction}{\corr@seagullloopmomentumstart+\corr@seagullmomstep}%
       \pgfmathsetmacro{\corr@seagullmomptwofraction}{\corr@seagullloopmomentumstart+2*\corr@seagullmomstep}%
@@ -7133,10 +7141,10 @@
       \pgfmathsetmacro{\corr@seagullmompfivefraction}{\corr@seagullloopmomentumstart+5*\corr@seagullmomstep}%
       \pgfmathsetmacro{\corr@seagullmompsixfraction}{\corr@seagullloopmomentumstart+6*\corr@seagullmomstep}%
       \pgfmathsetmacro{\corr@seagullmompsevenfraction}{\corr@seagullloopmomentumstart+7*\corr@seagullmomstep}%
-      \coordinate (corrSeagullMomentumV) at ([shift=(\corr@seagullloopangle:\corr@seagullloopmomentumoffset)]corrInsertionV);
-      \coordinate (corrSeagullMomentumFar) at ([shift=(\corr@seagullloopangle:\corr@seagullloopdiameter)]corrSeagullMomentumV);
-      \coordinate (corrSeagullMomentumLeft) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooplefttangent:\corr@seagullloopradius)]corrSeagullMomentumV);
-      \coordinate (corrSeagullMomentumRight) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooprighttangent:\corr@seagullloopradius)]corrSeagullMomentumV);
+      \coordinate (corrSeagullMomentumV) at ([shift=(\corr@seagullloopbackangle:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
+      \coordinate (corrSeagullMomentumFar) at ([shift=(\corr@seagullloopangle:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
+      \coordinate (corrSeagullMomentumLeft) at ([shift=(\corr@seagulllooplefttangent:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
+      \coordinate (corrSeagullMomentumRight) at ([shift=(\corr@seagulllooprighttangent:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
       \corr@setseagullmomentumcoord{\corr@seagullloopmomentumstart}{corrseagullmomstart}%
       \corr@setseagullmomentumcoord{\corr@seagullmomponefraction}{corrseagullmompone}%
       \corr@setseagullmomentumcoord{\corr@seagullmomptwofraction}{corrseagullmomptwo}%
@@ -7145,20 +7153,23 @@
       \corr@setseagullmomentumcoord{\corr@seagullmompfivefraction}{corrseagullmompfive}%
       \corr@setseagullmomentumcoord{\corr@seagullmompsixfraction}{corrseagullmompsix}%
       \corr@setseagullmomentumcoord{\corr@seagullmompsevenfraction}{corrseagullmompseven}%
-      \corr@setseagullmomentumcoord{\corr@seagullloopmomentumlabelfraction}{corrseagullmomlabel}%
+      \corr@setseagullmomentumcoord{\corr@seagullresolvedlabelfraction}{corrseagullmomlabel}%
       \corr@setseagullmomentumcoord{\corr@seagullloopmomentumend}{corrseagullmomend}%
       \corr@ifstringeq{\corr@seagullloopmomentumdirection}{counterclockwise}{%
         \corr@drawseagullmomentumreverse
       }{%
         \corr@drawseagullmomentumforward
       }%
-      \corr@putmomentumlabelwithdistance
-        {(corrseagullmomlabel)}
-        {\corr@seagullloopmomentumlabelposition}
-        {\corr@seagullloopmomentumlabeldistance}
-        {0pt}
-        {0pt}
-        {\corr@seagullloopmomentum}%
+      % The normal is local to the label's actual curve parameter, and is
+      % independent of arrow reversal. Clear the complete unrotated text box.
+      \pgfmathsetmacro{\corr@seagulllabelbeforefraction}{max(0,\corr@seagullresolvedlabelfraction-0.001)}%
+      \pgfmathsetmacro{\corr@seagulllabelafterfraction}{min(1,\corr@seagullresolvedlabelfraction+0.001)}%
+      \corr@setseagullmomentumcoord{\corr@seagulllabelbeforefraction}{corrSeagullLabelBefore}%
+      \corr@setseagullmomentumcoord{\corr@seagulllabelafterfraction}{corrSeagullLabelAfter}%
+      \pgfmathanglebetweenpoints{\pgfpointanchor{corrSeagullLabelBefore}{center}}{\pgfpointanchor{corrSeagullLabelAfter}{center}}%
+      \pgfmathsetmacro{\corr@seagulllabelnormal}{\pgfmathresult+90}%
+      \corr@putnormalmomentumlabel{(corrseagullmomlabel)}{\corr@seagulllabelnormal}
+        {\corr@seagullloopmomentumlabeldistance}{0pt}{0pt}{\corr@seagullloopmomentum}%
       \endgroup
     }%
   }%

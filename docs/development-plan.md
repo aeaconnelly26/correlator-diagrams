@@ -286,3 +286,16 @@ guides compact. S-tree bubble k/ell labels use measured outward normal placement
 with 4pt clearance; T-tree bubble loop annotations stay unchanged. Explicit
 range and distance controls are preserved. These corrections are included in
 the same local review checkpoint and updated PDFs.
+
+## Seagull curve/label consistency follow-up - 2026-11-04
+
+- Replaced translated momentum curves and four-way label anchors with shared,
+  concentric loop geometry and labels on their actual local outward normals.
+- Auto label fraction now selects the arrow-range midpoint. Explicit fraction,
+  range, offset, looseness, distance and reversal remain supported.
+- The seagull regression has 222 cases, 88 text-rectangle checks and 800 paired
+  curve samples. Both bubble review pages retain identical PDF drawing output
+  to the preceding checkpoint `9124a0b`.
+- Refreshed seagull/review PDFs and atlas. No topology, propagator, vertex,
+  marker or index-placement change. D01 remains deferred. Still local on M04;
+  main/GitHub publication remains pending before M05.

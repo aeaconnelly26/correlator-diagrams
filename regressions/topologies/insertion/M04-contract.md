@@ -61,3 +61,10 @@ stay compact. Explicit ranges/extensions win. Only S-tree bubble loop labels
 move to measured normal placement (4pt text-rectangle clearance); T bubble
 loop placement and arrow offsets remain unchanged. Preserve explicit label
 distance controls. Verify both the minimum readable span and compact maximum.
+
+Seagull-k follow-up: use concentric momentum geometry around the actual loop
+center. Default label fraction auto means the arrow-range midpoint; numeric
+fractions remain explicit overrides. Labels clear the full text rectangle on
+the local tangent normal, independently of rotation and reversal. Verify paired
+loop/arrow samples as well as actual label rectangles. Bubble annotations and
+all loop propagators remain unchanged in this correction.

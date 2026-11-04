@@ -2346,8 +2346,15 @@ S-tree bubble loop labels use measured normal placement with 4pt text-rectangle
 clearance from their arrows. `bubble-momentum-label-distance` still overrides
 that distance. T-tree bubble loop labels retain their prior placement and 2pt
 label distance; their 8pt arrow offset (plus style allowance) is unchanged.
-The default seagull momentum offset remains `9pt`; use
-`seagull-loop-momentum-offset` to override it. The default
+The seagull momentum arrow uses the same loop center and an outer radius equal
+to loop radius plus `seagull-loop-momentum-offset` (default `9pt`). Its curve
+comes from the same outer-half sampler as the loop geometry, scaled about that
+center. Default `seagull-loop-momentum-label-fraction=auto` places the label at
+the midpoint of the selected arrow range. A numeric fraction still overrides it.
+The label clears the actual local outward normal by its full text rectangle
+plus `seagull-loop-momentum-label-distance` (default `4pt`), independent of
+clockwise/counterclockwise reversal. Explicit momentum looseness remains a
+separate curve-shape control. No diagram-specific label positions are used. The default
 `seagull-loop-looseness=1.0` uses a true oval loop, and the seagull momentum
 arc is sampled from the same loop geometry. Scalar-polarized and Proca-style
 seagull loops use vertex-aware white-filled triangular markers; the default

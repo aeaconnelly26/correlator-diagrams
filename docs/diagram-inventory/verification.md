@@ -1,3 +1,15 @@
+# Seagull curve/label consistency follow-up - 2026-11-04
+
+The atlas remains 70 recipes / 15 pages. Seagull momentum curves now share the
+loop center, and labels use the local outward normal at the actual arrow-range
+midpoint. This replaces the former translated curves and four-way anchors.
+The focused seagull checks now cover 222 public cases, 88 text rectangles and
+800 paired geometry samples. Both bubble momentum review pages retain identical
+drawing streams to `9124a0b`. No loop propagator, topology or index placement
+changed. Current evidence and hashes are in M04 verification/checks; earlier
+counts below describe preceding checkpoints. Updated pages were rendered and
+inspected before delivery.
+
 # M04 screenshot-review inventory verification - 2026-11-04
 
 Current atlas: **70 recipes / 15 pages**, reviewed on the M04 branch from
