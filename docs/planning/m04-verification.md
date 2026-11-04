@@ -4,6 +4,22 @@ Branch: `codex/m04-seagull-expansion`. Review baseline: local checkpoint
 `229526e`; published main remains `b4a6ad8`. The corrections and updated
 artifacts are local, not merged or pushed. D01 index appearance stays deferred.
 
+## Compact seagull momentum refinement
+
+The next screenshot showed that the new concentric arrow still occupied too
+much of the small loop and placed k too far away. From `841b93e`, the defaults
+are refined to range **0.30-0.52** (was 0.20-0.62), radial offset **6pt**
+(was 9pt), and label rectangle clearance **2pt** (was 4pt). This roughly halves
+the arrow length for the standard loop while retaining the same midpoint
+parameter 0.41 and local-normal rule. All eight placements inherit the same
+compact proportions. Explicit range, offset and distance options still win.
+The custom-override case deliberately uses the previous 9pt/4pt values.
+
+No propagator, topology, bubble annotation or index placement changes. The
+222-case/88-label/800-sample focused checks and full 39-document/656-contact
+suite pass. Review and inventory PDFs are refreshed; the earlier 9pt/4pt
+values below describe the preceding concentric-geometry checkpoint.
+
 ## Seagull curve/label consistency follow-up
 
 The user's follow-up screenshot identified inconsistent k placement in the S

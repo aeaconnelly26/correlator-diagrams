@@ -20,7 +20,9 @@ labels and uses 1/2 incoming, 3/4 outgoing throughout; H01-H04 demonstrate it.
 Short bubble host arrows expand for readability; S bubble k/ell labels move
 outward along the normal, with T bubble-loop annotation placement unchanged.
 The subsequent seagull-k review uses concentric momentum curves and local-normal
-labels at the arrow midpoint across all eight placements. Counts remain 70/15.
+labels at the arrow midpoint across all eight placements. The compact defaults
+now use range 0.30-0.52, a 6pt radial offset and 2pt text clearance. Counts
+remain 70/15.
 The loop-spacing review uses closer bubble momentum arrows and labels outward
 from their actual arcs, consistently across left/right placements and reversal.
 

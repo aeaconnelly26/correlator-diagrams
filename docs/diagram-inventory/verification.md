@@ -1,3 +1,13 @@
+# Compact seagull momentum refinement - 2026-11-04
+
+The seagull arc is shorter (default 0.30-0.52), closer to the loop (6pt
+radial offset), and has a tighter k label (2pt rectangle clearance). Shared
+geometry and automatic midpoint placement are retained across all eight
+positions; explicit overrides remain effective. The review and atlas PDFs
+are rebuilt and visually inspected. Recipe/page counts remain 70/15; bubble
+review pages and all propagator/index geometry are unchanged. Earlier values
+below belong to the preceding geometry review.
+
 # Seagull curve/label consistency follow-up - 2026-11-04
 
 The atlas remains 70 recipes / 15 pages. Seagull momentum curves now share the

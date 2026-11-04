@@ -68,3 +68,8 @@ fractions remain explicit overrides. Labels clear the full text rectangle on
 the local tangent normal, independently of rotation and reversal. Verify paired
 loop/arrow samples as well as actual label rectangles. Bubble annotations and
 all loop propagators remain unchanged in this correction.
+
+Compact-annotation follow-up from 841b93e: seagull momentum defaults are
+start 0.30, end 0.52, radial offset 6pt, text clearance 2pt. The shared
+midpoint remains 0.41. Preserve concentricity/local normals and explicit
+overrides; do not alter bubble annotations or index placement.

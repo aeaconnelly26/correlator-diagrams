@@ -299,3 +299,12 @@ the same local review checkpoint and updated PDFs.
 - Refreshed seagull/review PDFs and atlas. No topology, propagator, vertex,
   marker or index-placement change. D01 remains deferred. Still local on M04;
   main/GitHub publication remains pending before M05.
+
+## Compact seagull momentum refinement - 2026-11-04
+
+The follow-up from `841b93e` reduces the default seagull momentum range to
+0.30-0.52, radial offset to 6pt and k-to-arrow rectangle clearance to 2pt.
+This keeps the same shared-center geometry and midpoint/local-normal placement
+while making the annotation proportional to the small loop. Explicit overrides
+remain supported; bubble annotations and D01 index placement are untouched.
+The review/atlas PDFs are refreshed on the same local M04 branch.
