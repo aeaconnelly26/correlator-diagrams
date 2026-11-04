@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M04 review on 229526e | 2026-11-04}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M04 size/style review on 33551c6 | 2026-11-04}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -1259,4 +1259,100 @@
   seagull-loop-momentum=k
 ]
 }{Outward S loop; compact host arrows.}{Default outside labels; explicit placement keys still override.}\par\vspace{4pt}
+\newpage
+\atlaspage{16 / SPECIES-LABELED INSERTIONS}{Pink Z stems, scalar-polarized loops and W host segments}{Outer host segments have no circles; inner segments carry W. Pink Z stems retain their Z circles; pink loop lines carry k.}
+\atlascell{J01  T-tree seagull: pink Z stem}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=seagull,
+  insertion-slot=1,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  seagull-loop-line={spol,magenta!85!red},
+  seagull-loop-momentum=k
+]
+}{Pink Z stem; inner W; scalar-polarization loop with k.}{No outer or spol circles; no W-loop guide, caps or indices.}\hfill
+\atlascell{J02  T-tree bubble: pink Z stem}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=bubble,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  bubble-top-line={ewboson,circ=W,circ scale=0.65},
+  bubble-bottom-line={spol,magenta!85!red},
+  bubble-momenta={,k}
+]
+}{Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).}{No outer or spol circles; no W-loop guide, caps or indices.}\par\vspace{4pt}
+\atlascell{J03  S-tree seagull: pink Z stem}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=seagull,
+  insertion-slot=2,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  seagull-loop-line={spol,magenta!85!red},
+  seagull-loop-momentum=k
+]
+}{Pink Z stem; inner W; scalar-polarization loop with k.}{No outer or spol circles; no W-loop guide, caps or indices.}\hfill
+\atlascell{J04  S-tree bubble: pink Z stem}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=bubble,
+  insertion-slot=4,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  bubble-top-line={ewboson,circ=W,circ scale=0.65},
+  bubble-bottom-line={spol,magenta!85!red},
+  bubble-momenta={,k}
+]
+}{Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).}{No outer or spol circles; no W-loop guide, caps or indices.}\par\vspace{4pt}
 \end{document}

@@ -1,0 +1,323 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,graphicx,adjustbox,fancyhdr}
+\usepackage{feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M04 species circles and smaller default bubble insertions}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}\setlength{\parindent}{0pt}
+\newcommand{\speciescell}[2]{\begin{minipage}[t][2.9in][t]{0.48\linewidth}\textbf{#1}\par\vspace{9pt}\centering
+\begin{adjustbox}{max width=\linewidth,max totalheight=2.4in}#2\end{adjustbox}\end{minipage}}
+% Observe emitted insertion endpoints through complete public diagrams. These
+% checks keep user size overrides and per-diagram resets working as defaults change.
+\newbox\speciesprobe
+\newcount\speciescases
+\makeatletter
+\let\speciesoldbubblecoords\corr@setttreebubbleinsertioncoords
+\renewcommand{\corr@setttreebubbleinsertioncoords}{%
+  \speciesoldbubblecoords
+  \pgfpointdiff{\pgfpointanchor{corrInsertionA}{center}}{\pgfpointanchor{corrInsertionB}{center}}%
+  \pgfmathsetlengthmacro{\specieslength}{veclen(\pgf@x,\pgf@y)}\xdef\speciesspan{\specieslength}%
+  \pgfpointdiff{\pgfpointanchor{corrInsertionOuter}{center}}{\pgfpointanchor{corrInsertionA}{center}}%
+  \pgfmathsetlengthmacro{\specieslength}{veclen(\pgf@x,\pgf@y)}\xdef\speciespre{\specieslength}%
+  \pgfpointdiff{\pgfpointanchor{corrInsertionB}{center}}{\pgfpointanchor{corrInsertionHost}{center}}%
+  \pgfmathsetlengthmacro{\specieslength}{veclen(\pgf@x,\pgf@y)}\xdef\speciespost{\specieslength}%
+}
+\newcommand{\speciesmeasure}[4]{%
+  \global\advance\speciescases by 1
+  \setbox\speciesprobe=\hbox{#1[field={},central={},leg-labels={,,,},line=plain,
+    show-momenta=false,insertion=#2,insertion-slot=#3,#4]}}
+\newcommand{\speciesnear}[3]{%
+  \pgfmathsetlengthmacro{\specieserror}{abs(#1-(#2))}%
+  \ifdim\specieserror>0.03pt\PackageError{Insertion size}{#3}{}\fi}
+\makeatother
+\begin{document}
+\makeatletter
+\@for\specieshost:={T,S}\do{%
+  \expandafter\let\expandafter\speciesmacro\csname\specieshost TreeChannelCorr\endcsname
+  \@for\speciesslot:={1,2,3,4}\do{%
+    \speciesmeasure\speciesmacro{bubble}{\speciesslot}{}%
+    \xdef\speciescompactspan{\speciesspan}\xdef\speciescompactpre{\speciespre}\xdef\speciescompactpost{\speciespost}%
+    \speciesmeasure\speciesmacro{bubble}{\speciesslot}{insertion-scale=0.66}%
+    \speciesnear{\speciescompactspan}{\speciesspan*0.50/0.66}{Default bubble did not shrink proportionally}%
+    % The released .66 footprint is recoverable and both host pieces gain room.
+    \speciesnear{\speciesspan}{2*0.74*0.66*1cm}{Explicit former bubble size was overridden}%
+    \pgfmathsetlengthmacro{\speciesgain}{(\speciesspan-\speciescompactspan)/2}%
+    \speciesnear{\speciescompactpre-\speciespre}{\speciesgain}{Outer host segment did not gain the released space}%
+    \speciesnear{\speciescompactpost-\speciespost}{\speciesgain}{Inner host segment did not gain the released space}%
+    \speciesmeasure\speciesmacro{bubble}{\speciesslot}{}%
+    \speciesnear{\speciesspan}{\speciescompactspan}{Former-size override leaked into next bubble}%
+    \speciesmeasure\speciesmacro{bubble}{\speciesslot}{insertion-scale=0.42}%
+    \speciesnear{\speciesspan}{\speciescompactspan*0.42/0.50}{Custom bubble size was overridden}%
+    \speciesmeasure\speciesmacro{seagull}{\speciesslot}{}%
+    \speciesnear{\corr@seagullloopradius}{0.36*1.55*0.66*1cm}{Bubble override changed the default seagull size}%
+    \speciesmeasure\speciesmacro{seagull}{\speciesslot}{insertion-scale=0.42}%
+    \speciesnear{\corr@seagullloopradius}{0.36*1.55*0.42*1cm}{Explicit seagull size was overridden}%
+    \speciesmeasure\speciesmacro{bubble}{\speciesslot}{}%
+    \speciesnear{\speciesspan}{\speciescompactspan}{Seagull override leaked into next bubble}%
+  }}%
+\typeout{PASS insertion size: \the\speciescases\space public diagrams; shorter bubble span, longer host segments, explicit sizes and state reset}%
+\let\corr@setttreebubbleinsertioncoords\speciesoldbubblecoords
+\makeatother
+\section*{T-tree seagull: species-labeled propagators}
+Pink EW Z stem; inner W segment, bare outer segment; pink scalar-polarization loop with k.
+\par\vspace{12pt}
+\speciescell{Slot 1}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=1,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\hfill
+\speciescell{Slot 2}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=2,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\par
+\speciescell{Slot 3}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=3,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\hfill
+\speciescell{Slot 4}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=4,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\par
+\newpage
+\section*{T-tree bubble: species-labeled propagators}
+Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink scalar-polarization arc (k).
+\par\vspace{12pt}
+\speciescell{Slot 1}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=1,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\hfill
+\speciescell{Slot 2}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=2,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\par
+\speciescell{Slot 3}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=3,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\hfill
+\speciescell{Slot 4}{\TTreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=4,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\par
+\newpage
+\section*{S-tree seagull: species-labeled propagators}
+Pink EW Z stem; inner W segment, bare outer segment; pink scalar-polarization loop with k.
+\par\vspace{12pt}
+\speciescell{Slot 1}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=1,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\hfill
+\speciescell{Slot 2}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=2,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\par
+\speciescell{Slot 3}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=3,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\hfill
+\speciescell{Slot 4}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=seagull,
+ insertion-slot=4,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ seagull-loop-line={spol,magenta!85!red},
+ seagull-loop-momentum=k
+]}\par
+\newpage
+\section*{S-tree bubble: species-labeled propagators}
+Pink EW Z stem; inner W, bare outer segment; EW W arc (no momentum), pink scalar-polarization arc (k).
+\par\vspace{12pt}
+\speciescell{Slot 1}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=1,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\hfill
+\speciescell{Slot 2}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=2,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\par
+\speciescell{Slot 3}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=3,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\hfill
+\speciescell{Slot 4}{\STreeChannelCorr[
+ field={},
+ central={},
+ leg-labels={,,,},
+ show-momenta=true,
+ momentum-labels={p_1,p_2,p_3,p_4,P},
+ line=ewboson,
+ channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+ insertion=bubble,
+ insertion-slot=4,
+ insertion-pre-line=ewboson,
+ insertion-post-line={ewboson,circ=W,circ scale=0.65},
+ bubble-top-line={ewboson,circ=W,circ scale=0.65},
+ bubble-bottom-line={spol,magenta!85!red},
+ bubble-momenta={,k}
+]}\par
+\end{document}

@@ -4,9 +4,9 @@
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Built against `codex/m04-seagull-expansion`, based on published `main` at
-`b4a6ad8`, reviewed from `229526e` on 2026-11-04. There are **70 current
-examples on fifteen pages**. These are recipes and meaningful layouts/styles,
-not 70 distinct graph topologies.
+`b4a6ad8`, size/style review from `33551c6` on 2026-11-04. There are **74 current
+examples on sixteen pages**. These are recipes and meaningful layouts/styles,
+not 74 distinct graph topologies.
 
 M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
 on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
@@ -22,9 +22,18 @@ outward along the normal, with T bubble-loop annotation placement unchanged.
 The subsequent seagull-k review uses concentric momentum curves and local-normal
 labels at the arrow midpoint across all eight placements. The compact defaults
 now use range 0.30-0.52, a 6pt radial offset and 2pt text clearance. Counts
-remain 70/15.
+are now 74/16 after the size/style sampling addition.
 The loop-spacing review uses closer bubble momentum arrows and labels outward
 from their actual arcs, consistently across left/right placements and reversal.
+
+Default bubble insertions now use scale 0.50 (about 24% smaller); seagulls
+remain 0.66. Explicit `insertion-scale=0.66` restores the previous bubble size.
+Page 16 samples pink EW Z stems (including the circle and Z text), bare
+outer host segments, inner EW W circles, pink scalar-polarization loops
+without circles, and mixed EW W / scalar-polarization Z bubbles. Only the pink
+loop arc carries k; the W arc has no momentum guide or label. See the
+[all-slot styled gallery](../../regressions/topologies/insertion/insertion-species-samples.pdf)
+for all sixteen placements.
 
 ## How to read it
 
@@ -39,6 +48,7 @@ from their actual arcs, consistently across left/right placements and reversal.
   arrows, and the tree-channel side-label fix.
 - Page 10 demonstrates independent triangle-contact momentum placement in all
   four orientations. T01-T04 have reproducible per-slot recipes.
+- Page 16 shows the species-styling sample (J01-J04), with intentional Z/W circles.
 - Page 15 demonstrates the reviewed insertion momentum defaults, without
   caps, circles or index labels.
 - Pages 13-14 show all eight s/t-tree seagull placements with plain lines and

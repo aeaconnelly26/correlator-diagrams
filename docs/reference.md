@@ -2224,6 +2224,13 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
+Default `insertion-scale` is **0.50 for supported s/t-tree bubble insertions**
+(previously 0.66), so the bubble footprint is about 24% shorter and each host
+piece has more room for a species circle. Seagulls retain **0.66**. An explicit
+`insertion-scale=0.66` restores the former bubble size; other explicit values
+are honored independently on each diagram. Standalone `\BubbleCorr` and the
+four-legged channel bubbles keep their own existing dimensions.
+
 `insertion=bubble` supports external slots `1,2,3,4` of both
 `topology=t-tree` and `topology=s-tree`:
 upper-left, lower-left, upper-right, lower-right. One selected leg is replaced
@@ -2436,6 +2443,19 @@ checker. Atlas recipes G01-G04 and G11-G14 show the plain seagull matrix.
 `insertion-momentum-review.tex/pdf` checks external flow across four-point
 families, all 16 insertion placements, shorter arrows, label-rectangle clearance,
 and explicit overrides. H01-H04 show the new defaults in the atlas.
+Atlas page 16 (J01-J04) samples species styling: the central EW Z stem,
+its `circ=Z` and its Z text are all pink. The split external leg uses a bare
+EW outer segment and an EW `circ=W` inner segment. Pink `spol` loops have no
+circles. Mixed bubbles use an EW `circ=W` arc and a pink scalar-polarization
+Z arc; `bubble-momenta={,k}` leaves the W arc without a momentum guide or
+label and draws k only on the pink arc. Seagulls use
+`seagull-loop-momentum=k`. The full all-slot styled sampling is
+`regressions/topologies/insertion/insertion-species-samples.tex/pdf`.
+Its 56 public-diagram probes verify shorter bubbles, recovered host space,
+explicit former/custom sizes, unchanged seagull defaults and size-state reset.
+`check-species-circles.py` independently checks the 40 actual PDF circles:
+16 pink circles on central Z stems, 24 black W circles, and vertex clearance.
+
 The all-slot t-tree gallery and graph/style/cap/momentum checks are in
 `regressions/topologies/insertion/t-tree-bubble-slots.tex` and its PDF. Its
 isolated Proca page has an independent 16-tip vector check in

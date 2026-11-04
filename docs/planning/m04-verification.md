@@ -1,3 +1,64 @@
+# Smaller bubbles and species sampling - 2026-11-04
+
+This follow-up starts from local `33551c6` on `codex/m04-seagull-expansion`.
+M04 remains local, with main/GitHub at the last published `b4a6ad8`.
+
+Supported external s/t-tree bubble insertions now default to
+`insertion-scale=0.50` instead of 0.66: about **24% smaller**. At default
+geometry their vertex span drops from 0.9768cm to 0.74cm, adding 0.1184cm
+to each host piece. An explicit 0.66 recovers the old footprint, and arbitrary
+explicit scales still win. Seagull scale remains 0.66. Standalone bubbles and
+four-legged channel bubbles keep their existing dimensions. D01 index
+appearance remains deferred.
+
+Atlas page 16 adds J01-J04, bringing the inventory to **74 recipes / 16 pages**.
+The samples use pink EW central stems, including their Z circle and Z text;
+outer host segments are bare EW lines, and inner segments have black W circles.
+Seagull loops and the Z arc of mixed bubbles use pink `spol` without circles.
+The other bubble arc uses EW with a W circle, no momentum arrow and no momentum
+label. Only the scalar-polarization loop line gets k. These choices implement
+the user's two styling corrections; they are explicit recipes, not global
+species/style defaults. No caps or indices are added.
+
+The new four-page all-slot gallery is
+[insertion-species-samples.pdf](../../regressions/topologies/insertion/insertion-species-samples.pdf).
+Its **56 complete public-diagram probes** measure actual insertion endpoints,
+verify both recovered host lengths, the former/custom size overrides, unchanged
+seagull defaults and reset between consecutive bubble/seagull calls.
+`check-species-circles.py` independently reads PDF drawing paths: **40 EW
+circles**, of which **16 pink Z circles** lie at central-stem midpoints and
+**24 black W circles** remain on the EW segments/arcs. The minimum circle-to-
+vertex ink clearance is **1.012 PDF pt**. Counts exclude interaction dots and
+scalar endpoint triangles; the check is limited to this sampling gallery.
+
+The maintained suite now has **40 documents**, retaining the **656 endpoint
+contacts**, eight independent seven-edge/quartic-self-loop graph checks, and
+all existing focused momentum/label checks. The prior six-page seagull gallery
+and both seagull momentum-review pages retain identical decoded drawing streams
+to `33551c6`. Only bubble defaults change package behavior. Refreshed the
+s/t bubble PDFs, momentum review and atlas; rendered and inspected all changed
+panels plus all sixteen styled examples. The other 13 existing atlas page bodies
+are pixel-identical above the footer to `33551c6`; all 16 pages were rendered.
+Current hashes/results are in
+[m04-checks.json](m04-checks.json); the preceding record is preserved in
+[history/m04-checks-33551c6.json](history/m04-checks-33551c6.json).
+
+Reproduce from the repository root:
+
+```sh
+mkdir -p /tmp/feynmanfun-m04-species
+TEXINPUTS="$PWD//:" pdflatex -interaction=batchmode -halt-on-error \
+  -output-directory=/tmp/feynmanfun-m04-species \
+  regressions/topologies/insertion/insertion-species-samples.tex
+python3 regressions/topologies/insertion/check-species-circles.py \
+  /tmp/feynmanfun-m04-species/insertion-species-samples.pdf
+FEYNMANFUN_PDF_PYTHON=python3 sh scripts/check-regressions.sh
+python3 docs/diagram-inventory/build.py
+```
+
+The PDF checker needs `pypdf`. The prior review records below retain their
+original counts and scope; they do not describe this final size/style sampling.
+
 # M04 screenshot review - 2026-11-04
 
 Branch: `codex/m04-seagull-expansion`. Review baseline: local checkpoint

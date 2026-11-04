@@ -1,5 +1,5 @@
 {
-  "baseline": "M04 review on 229526e",
+  "baseline": "M04 size/style review on 33551c6",
   "date": "2026-11-04",
   "base_options": [
     "field={}",
@@ -1067,6 +1067,91 @@
           ],
           "description": "Outward S loop; compact host arrows.",
           "limitation": "Default outside labels; explicit placement keys still override."
+        }
+      ]
+    },
+    {
+      "section": "16 / SPECIES-LABELED INSERTIONS",
+      "title": "Pink Z stems, scalar-polarized loops and W host segments",
+      "subtitle": "Outer host segments have no circles; inner segments carry W. Pink Z stems retain their Z circles; pink loop lines carry k.",
+      "entries": [
+        {
+          "id": "J01",
+          "title": "T-tree seagull: pink Z stem",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7}",
+            "insertion=seagull",
+            "insertion-slot=1",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
+            "seagull-loop-line={spol,magenta!85!red}",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Pink Z stem; inner W; scalar-polarization loop with k.",
+          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
+        },
+        {
+          "id": "J02",
+          "title": "T-tree bubble: pink Z stem",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7}",
+            "insertion=bubble",
+            "insertion-slot=3",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
+            "bubble-top-line={ewboson,circ=W,circ scale=0.65}",
+            "bubble-bottom-line={spol,magenta!85!red}",
+            "bubble-momenta={,k}"
+          ],
+          "description": "Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).",
+          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
+        },
+        {
+          "id": "J03",
+          "title": "S-tree seagull: pink Z stem",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7}",
+            "insertion=seagull",
+            "insertion-slot=2",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
+            "seagull-loop-line={spol,magenta!85!red}",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Pink Z stem; inner W; scalar-polarization loop with k.",
+          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
+        },
+        {
+          "id": "J04",
+          "title": "S-tree bubble: pink Z stem",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "show-momenta=true",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7}",
+            "insertion=bubble",
+            "insertion-slot=4",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
+            "bubble-top-line={ewboson,circ=W,circ scale=0.65}",
+            "bubble-bottom-line={spol,magenta!85!red}",
+            "bubble-momenta={,k}"
+          ],
+          "description": "Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).",
+          "limitation": "No outer or spol circles; no W-loop guide, caps or indices."
         }
       ]
     }

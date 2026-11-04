@@ -1,3 +1,25 @@
+# Smaller bubbles and species sampling - 2026-11-04
+
+Current atlas: **74 recipes / 16 pages**, reviewed from `33551c6` on the local
+M04 branch. Bubble insertions use default scale 0.50 (about 24% smaller), while
+seagulls retain 0.66 and explicit sizes remain effective. J01-J04 sample pink
+EW Z stems/circles/text, bare outer segments, inner W circles, pink scalar-
+polarization loops without circles, and mixed W/spol bubbles. The W arc has no
+momentum guide or label; only the pink loop arc has k. No caps or indices.
+These are styling recipes, not changes to global propagator defaults.
+
+The all-slot styled gallery has 16 visible examples and 56 size/override/reset
+probes. Independent PDF checks find 40 EW circles (16 pink stem Z / 24 black W),
+with minimum circle/vertex ink clearance 1.012 PDF pt. All 40 maintained documents
+and the existing 656 endpoint contacts pass. The previous seagull gallery's six
+pages and the two seagull momentum-review pages have identical drawing streams.
+
+Changed atlas pages 6/12/16 and all styled gallery pages were rendered and
+inspected, alongside the smaller bubble momentum review. M04 remains local;
+D01 remains deferred. The other 13 existing atlas page bodies are pixel-identical
+above the footer to `33551c6`; all 16 pages were rendered. See [M04 verification](../planning/m04-verification.md)
+for exact scope, commands and artifact hashes. Records below are historical.
+
 # Compact seagull momentum refinement - 2026-11-04
 
 The seagull arc is shorter (default 0.30-0.52), closer to the loop (6pt

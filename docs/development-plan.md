@@ -9,7 +9,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Current branch: `codex/m04-seagull-expansion`, based on published main `b4a6ad8`.
 - M04 is complete locally, including the Nov 4 review: seagulls on all eight
   s/t-tree external placements, inward T/outward S defaults, 1/2-in and 3/4-out
-  external flow, and shorter insertion arrows with measured label clearance.
+  external flow, and shorter insertion arrows with measured label clearance. Bubble insertions
+  now default to scale 0.50; the atlas includes the requested Z/W styled sampling.
   See [M04 verification](planning/m04-verification.md). It is not merged or pushed.
 - M03b is complete, merged and published to GitHub: all four s-tree external
   bubble placements. See [M03b verification](planning/m03b-verification.md).
@@ -40,7 +41,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Fifteen pages: 70 recipes, including the full insertion matrices and reviewed momentum defaults. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Sixteen pages: 74 recipes, including the full insertion matrices and reviewed momentum defaults. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -308,3 +309,15 @@ This keeps the same shared-center geometry and midpoint/local-normal placement
 while making the annotation proportional to the small loop. Explicit overrides
 remain supported; bubble annotations and D01 index placement are untouched.
 The review/atlas PDFs are refreshed on the same local M04 branch.
+
+## Smaller bubbles and species styling - 2026-11-04
+
+Bubble insertions now default to scale 0.50, about 24% smaller than 0.66.
+Explicit scales remain effective; seagulls retain 0.66. Atlas page 16 adds
+J01-J04: pink EW Z stems with pink Z circles, bare outer host segments,
+inner W circles, pink scalar-polarization loops without circles, and mixed
+bubbles with an EW W arc and a pink Z arc. Only the pink
+loop line has a k momentum guide/label; the W arc has neither. The all-slot
+styled gallery has sixteen examples and 56 focused size/override/reset probes.
+The maintained suite now has 40 documents; D01 remains deferred. This remains
+local on the M04 branch, pending authorized publication before M05.

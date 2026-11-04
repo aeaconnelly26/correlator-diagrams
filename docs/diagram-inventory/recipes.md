@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M04 review on 229526e`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
+Baseline: `M04 size/style review on 33551c6`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1730,5 +1730,129 @@ Outward S loop; compact host arrows.
   channel-line=plain,
   seagull-loop-line=plain,
   seagull-loop-momentum=k
+]
+```
+
+## Pink Z stems, scalar-polarized loops and W host segments
+
+### J01 - T-tree seagull: pink Z stem
+
+Pink Z stem; inner W; scalar-polarization loop with k.
+
+**Limit:** No outer or spol circles; no W-loop guide, caps or indices.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=seagull,
+  insertion-slot=1,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  seagull-loop-line={spol,magenta!85!red},
+  seagull-loop-momentum=k
+]
+```
+
+### J02 - T-tree bubble: pink Z stem
+
+Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).
+
+**Limit:** No outer or spol circles; no W-loop guide, caps or indices.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=bubble,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  bubble-top-line={ewboson,circ=W,circ scale=0.65},
+  bubble-bottom-line={spol,magenta!85!red},
+  bubble-momenta={,k}
+]
+```
+
+### J03 - S-tree seagull: pink Z stem
+
+Pink Z stem; inner W; scalar-polarization loop with k.
+
+**Limit:** No outer or spol circles; no W-loop guide, caps or indices.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=seagull,
+  insertion-slot=2,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  seagull-loop-line={spol,magenta!85!red},
+  seagull-loop-momentum=k
+]
+```
+
+### J04 - S-tree bubble: pink Z stem
+
+Pink Z stem; inner W; EW W arc and scalar-polarization arc (k).
+
+**Limit:** No outer or spol circles; no W-loop guide, caps or indices.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  show-momenta=true,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=0.7},
+  insertion=bubble,
+  insertion-slot=4,
+  insertion-pre-line=ewboson,
+  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  bubble-top-line={ewboson,circ=W,circ scale=0.65},
+  bubble-bottom-line={spol,magenta!85!red},
+  bubble-momenta={,k}
 ]
 ```
