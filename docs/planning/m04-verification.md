@@ -1,3 +1,35 @@
+# Seagull position and centered inner W circles - 2026-11-04
+
+From local `d64ab3d`, supported s/t-tree seagulls default to
+`insertion-position=0.40`, measured from the outer endpoint toward the tree
+vertex. The inner segment is 60% of the original leg rather than 50%, giving
+20% more length for a W circle. Explicit positions are preserved; 0.50 restores
+the former placement. Bubble insertion positions remain 0.50. Styled host W
+circles explicitly use `circ position=0.5` on the longer inner segment.
+They were already at their nominal midpoints; this change improves the available
+space rather than correcting a displaced circle.
+
+The focused seagull matrix adds 32 independent position-projection cases across
+all eight placements: new defaults, former midpoint override, custom 0.68 and
+reset on the following call. It now has **254 public cases**, retaining **88
+loop-label checks** and **800 concentric geometry samples**. The independent
+styled PDF checker verifies **16 centered inner W circles** within 0.03 PDF pt
+of their vertex-to-vertex segment midpoints. Seagull-page minimum circle/vertex
+ink clearance improves from 7.780 to 10.616 PDF pt on T, and 6.252 to 8.778 on S.
+The global minimum remains 1.012 PDF pt on the unchanged bubble pages.
+
+All 40 maintained documents, 688 endpoint contacts, eight seven-edge quartic
+self-loop graphs and wavelength checks pass. Both bubble pages in each of the
+styled gallery and momentum review retain identical decoded drawing streams.
+Refreshed the atlas (74 recipes / 16 pages), seagull matrix, styled sampling,
+momentum review and insertion prototype PDFs. Changed pages and every seagull
+placement were rendered and inspected. Index controls/appearance tuning remains
+D01; M04 is local, with publication pending before M05.
+
+Current results/hashes are in [m04-checks.json](m04-checks.json); the preceding
+record is preserved in [history](history/m04-checks-d64ab3d.json). Earlier
+sections retain their original scope and measurements.
+
 # Short EW bubble waves - 2026-11-04
 
 From local `d7cde72`, the short W loop arcs in J02/J04 and all eight styled

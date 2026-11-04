@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M04 loop-wave review on d7cde72`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
+Baseline: `M04 seagull position review on d64ab3d`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1759,7 +1759,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion=seagull,
   insertion-slot=1,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false
@@ -1790,7 +1790,7 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
   insertion=bubble,
   insertion-slot=3,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65},
   bubble-top-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W,circ scale=0.65},
   bubble-bottom-line={proca,magenta!85!red},
   bubble-momenta={,k},
@@ -1822,7 +1822,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion=seagull,
   insertion-slot=2,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false,
@@ -1854,7 +1854,7 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
   insertion=bubble,
   insertion-slot=4,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.5,circ scale=0.65},
   bubble-top-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W,circ scale=0.65},
   bubble-bottom-line={proca,magenta!85!red},
   bubble-momenta={,k},

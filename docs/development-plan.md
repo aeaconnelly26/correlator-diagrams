@@ -354,3 +354,14 @@ PDF check measures 24/54/54/24 curve segments on four equal-length controls.
 The original gallery page remains pixel-identical to the compiled baseline.
 Updated atlas page 16 and all eight styled bubble placements. M04 remains local;
 D01 is deferred and M05 follows authorized publication.
+
+## Seagull position and centered W circles - 2026-11-04
+
+Supported s/t-tree seagulls now default to position 0.40 from outer endpoint
+toward the tree vertex, leaving 20% more inner-segment length for a W circle.
+Explicit positions remain effective; 0.50 restores the former placement.
+Bubbles retain position 0.50. Styled inner W circles explicitly stay at 0.5
+along their own segments. All eight seagull placements are refreshed in the
+atlas and focused PDFs. The focused matrix has 254 public cases; PDF checks
+verify all 16 inner W centers, alongside the existing graph/marker checks.
+M04 remains local, D01 remains deferred, and M05 follows authorized publication.

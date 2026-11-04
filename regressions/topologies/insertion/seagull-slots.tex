@@ -124,10 +124,11 @@
     \ifdim\pgf@y>0.03pt\PackageError{M04}{Insertion y position mismatch}{}\fi
     \xdef\sgdirection{\corr@insertionhostmomentumdirection}%
   }{\sgassert\sgedges{5}{Fresh ordinary tree}\sgassert\sgvertices{2}{Fresh vertices}\sgassert\sgloops{0}{No stale loop}}}
+\def\sgexpectedposition{}
 \let\sgoldttree\corr@drawfourpointtreetchannel
-\renewcommand{\corr@drawfourpointtreetchannel}{\sgoldttree\sgfinish}
+\renewcommand{\corr@drawfourpointtreetchannel}{\sgoldttree\sgfinish\ifdefempty{\sgexpectedposition}{}{\sgassertposition{\sgexpectedposition}}}
 \let\sgoldstree\corr@drawfourpointstreeschannel
-\renewcommand{\corr@drawfourpointstreeschannel}{\sgoldstree\sgfinish}
+\renewcommand{\corr@drawfourpointstreeschannel}{\sgoldstree\sgfinish\ifdefempty{\sgexpectedposition}{}{\sgassertposition{\sgexpectedposition}}}
 \def\sgselect#1#2\sgstop{%
   \def\sgchannel{#1}\def\sgslot{#2}%
   \ifcase\sgslot\relax\or\def\sgouter{corrUL}\or\def\sgouter{corrLL}\or\def\sgouter{corrUR}\or\def\sgouter{corrLR}\fi
@@ -137,6 +138,13 @@
   }{%
     \let\sgpublic\STreeChannelCorr\def\sgtreevertices{corrVL,corrVR}%
     \ifnum\sgslot<3\def\sghost{corrVL}\else\def\sghost{corrVR}\fi}}
+% Measure actual vertex projections, independently of the configured value.
+\newcommand{\sgassertposition}[1]{%
+  \pgfpointdiff{\pgfpointanchor{\sgouter}{center}}{\pgfpointanchor{\sghost}{center}}%
+  \edef\sglegdx{\the\pgf@x}\edef\sglegdy{\the\pgf@y}%
+  \pgfpointdiff{\pgfpointanchor{\sgouter}{center}}{\pgfpointanchor{corrInsertionV}{center}}%
+  \pgfmathsetmacro{\sgpositionerror}{abs((\pgf@x*\sglegdx+\pgf@y*\sglegdy)/(\sglegdx*\sglegdx+\sglegdy*\sglegdy)-#1)}%
+  \ifdim\sgpositionerror pt>0.001pt\PackageError{M04}{Seagull position differs from default or explicit request}{}\fi}
 \newcommand{\sgmeasure}[1]{%
   \global\advance\sgcases by 1
   \global\sgedges=0\global\sgvertices=0\global\sgloops=0\global\sgposts=0
@@ -150,6 +158,11 @@
 \begin{document}
 \@for\sgentry:=\sgplacements\do{%
   \expandafter\sgselect\sgentry\sgstop
+  \def\sgexpectedposition{0.40}\sgmeasure{}%
+  \def\sgexpectedposition{0.50}\sgmeasure{insertion-position=0.50}%
+  \def\sgexpectedposition{0.68}\sgmeasure{insertion-position=0.68}%
+  \def\sgexpectedposition{0.40}\sgmeasure{}%
+  \def\sgexpectedposition{}%
   \@for\sgscale:={0.72,1,1.2}\do{\sgmeasure{scale=\sgscale}}%
   \sgmeasure{insertion-position=0.35,insertion-scale=0.5,seagull-loop-size=1.2}%
   \sgmeasure{insertion-position=0.68,seagull-loop-looseness=1.15}%

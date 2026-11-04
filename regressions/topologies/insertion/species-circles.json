@@ -2,11 +2,13 @@
   {
     "page": 1,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12465011595378817,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12463954862422832,
     "ew_circles": 8,
     "pink_stem_circles": 4,
     "black_w_circles": 4,
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 7.779612617811782
+    "centered_inner_w_circles": 4,
+    "maximum_inner_w_midpoint_error_pdf_pt": 0.0019693098410272923,
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 10.615905866667024
   },
   {
     "page": 2,
@@ -15,16 +17,20 @@
     "ew_circles": 12,
     "pink_stem_circles": 4,
     "black_w_circles": 8,
+    "centered_inner_w_circles": 4,
+    "maximum_inner_w_midpoint_error_pdf_pt": 0.0011311968219830351,
     "minimum_circle_vertex_ink_clearance_pdf_pt": 2.536167874718794
   },
   {
     "page": 3,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12467681424950239,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.124662430712977,
     "ew_circles": 8,
     "pink_stem_circles": 4,
     "black_w_circles": 4,
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 6.251645290745065
+    "centered_inner_w_circles": 4,
+    "maximum_inner_w_midpoint_error_pdf_pt": 0.013581752694303487,
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 8.777599061337872
   },
   {
     "page": 4,
@@ -33,6 +39,8 @@
     "ew_circles": 12,
     "pink_stem_circles": 4,
     "black_w_circles": 8,
+    "centered_inner_w_circles": 4,
+    "maximum_inner_w_midpoint_error_pdf_pt": 0.0031349840509738835,
     "minimum_circle_vertex_ink_clearance_pdf_pt": 1.0119987482049206
   }
 ]

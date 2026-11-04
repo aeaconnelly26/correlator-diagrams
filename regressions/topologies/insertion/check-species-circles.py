@@ -88,6 +88,13 @@ def main():
                           and abs(u[0]-v[0] if i < 2 else u[1]-v[1]) < .03]
             assert any(hypot(x-(u[0]+v[0])/2, y-(u[1]+v[1])/2) < .03
                        for u, v in candidates), 'Pink Z circle left its central stem'
+        # Exactly one black W per diagram belongs to the straight inner host
+        # segment; the optional bubble W circle lies on an arc instead.
+        midpoint_errors = [min(hypot(x-(u[0]+v[0])/2, y-(u[1]+v[1])/2)
+                               for n, u in enumerate(dots) for v in dots[n+1:])
+                           for x, y, _, _ in black]
+        centered_errors = [error for error in midpoint_errors if error < .03]
+        assert len(centered_errors) == 4, f'Page {i+1}: inner W circle left its segment midpoint'
         gaps = [hypot(x-u, y-v)-r-s-o-p
                 for (x, y, r, o), color in circles for u, v, s, p in dots]
         assert min(gaps) > .2, f'Page {i+1}: species circle crowds an interaction vertex'
@@ -97,12 +104,13 @@ def main():
             f'Page {i+1}: pink endpoint arrows miss their interaction vertices'
         reports.append({'page': i+1, 'pink_endpoint_arrows': endpoints['triangles'],
                         'maximum_visible_endpoint_ink_gap_pdf_pt': max(endpoints['visible_gaps_pt']), 'ew_circles': len(circles), 'pink_stem_circles': len(pink),
-                        'black_w_circles': len(black),
+                        'black_w_circles': len(black), 'centered_inner_w_circles': len(centered_errors),
+                        'maximum_inner_w_midpoint_error_pdf_pt': max(centered_errors),
                         'minimum_circle_vertex_ink_clearance_pdf_pt': min(gaps)})
     if args.report:
         args.report.write_text(json.dumps(reports, indent=2)+'\n')
     minimum = min(r['minimum_circle_vertex_ink_clearance_pdf_pt'] for r in reports)
-    print(f'PASS: 40 EW circles (16 pink Z stems, 24 black W); 32 contacting pink endpoint arrows; circle/vertex clearance {minimum:.3f} PDF pt')
+    print(f'PASS: 40 EW circles (16 pink Z stems, 24 black W); 32 contacting pink endpoint arrows; 16 centered inner W circles; circle/vertex clearance {minimum:.3f} PDF pt')
 
 
 if __name__ == '__main__':

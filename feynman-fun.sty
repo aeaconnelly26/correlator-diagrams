@@ -429,6 +429,7 @@
 \newif\ifcorr@fourpointyspanexplicit
 \newif\ifcorr@channelvertexyspanexplicit
 \newif\ifcorr@insertionscaleexplicit
+\newif\ifcorr@insertionpositionexplicit
 \newif\ifcorr@insertionprerangeexplicit
 \newif\ifcorr@insertionpostrangeexplicit
 \newif\ifcorr@bubblelabeldistanceexplicit
@@ -1889,6 +1890,9 @@
 }
 
 \newcommand{\corr@applyinsertionhostdefaults}{%
+  \corr@iftreeseagullinsertion{%
+    \ifcorr@insertionpositionexplicit\else\def\corr@insertionposition{0.40}\fi
+  }{}%
   \corr@iftreebubbleinsertion{%
     \ifcorr@insertionscaleexplicit\else\def\corr@insertionscale{0.50}\fi
   }{}%
@@ -2109,6 +2113,7 @@
 }
 
 \newcommand{\corr@resetinsertiondefaults}{%
+  \corr@insertionpositionexplicitfalse
   \corr@insertionscaleexplicitfalse
   \corr@insertionprerangeexplicitfalse
   \corr@insertionpostrangeexplicitfalse
@@ -3891,7 +3896,7 @@
   bubble-external-index-size/default/.style={bubble-external-index-size=script},
   insertion/.store in=\corr@insertion,
   insertion-slot/.store in=\corr@insertionslot,
-  insertion-position/.store in=\corr@insertionposition,
+  insertion-position/.code={\def\corr@insertionposition{#1}\corr@insertionpositionexplicittrue},
   insertion-orientation/.store in=\corr@insertionorientation,
   insertion-scale/.code={\def\corr@insertionscale{#1}\corr@insertionscaleexplicittrue},
   insertion-style/.store in=\corr@insertionstyle,

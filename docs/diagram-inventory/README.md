@@ -4,7 +4,7 @@
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Built against `codex/m04-seagull-expansion`, based on published `main` at
-`b4a6ad8`, loop-wave review from `d7cde72` on 2026-11-04. There are **74 current
+`b4a6ad8`, seagull-position review from `d64ab3d` on 2026-11-04. There are **74 current
 examples on sixteen pages**. These are recipes and meaningful layouts/styles,
 not 74 distinct graph topologies.
 
@@ -25,6 +25,11 @@ now use range 0.30-0.52, a 6pt radial offset and 2pt text clearance. Counts
 are now 74/16 after the size/style sampling addition.
 The loop-spacing review uses closer bubble momentum arrows and labels outward
 from their actual arcs, consistently across left/right placements and reversal.
+
+Seagulls now default to `insertion-position=0.40` (outer endpoint toward tree
+vertex), giving the inner segment 20% more length. Styled W circles stay at
+its midpoint, explicitly `circ position=0.5`. Set `insertion-position=0.50`
+to recover the former seagull placement; bubble positions remain 0.50.
 
 Default bubble insertions now use scale 0.50 (about 24% smaller); seagulls
 remain 0.66. Explicit `insertion-scale=0.66` restores the previous bubble size.

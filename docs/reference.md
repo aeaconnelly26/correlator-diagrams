@@ -2251,6 +2251,15 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
+Default `insertion-position` is **0.40 for supported s/t-tree seagulls** and
+**0.50 for bubble insertions**, measured from the external endpoint toward the
+tree vertex. The seagull default leaves 60% of the leg for the inner host
+segment, 20% more length than the former midpoint placement. Explicit positions
+remain effective; `insertion-position=0.50` restores the old seagull placement.
+The styled inner W circles explicitly use `circ position=0.5`, halfway between
+the insertion vertex and the tree vertex. Circle centering was already the
+normal behavior; the longer segment gives the centered circle more clearance.
+
 Default `insertion-scale` is **0.50 for supported s/t-tree bubble insertions**
 (previously 0.66), so the bubble footprint is about 24% shorter and each host
 piece has more room for a species circle. Seagulls retain **0.66**. An explicit
