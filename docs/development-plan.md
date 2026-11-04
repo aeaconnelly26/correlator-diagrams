@@ -342,3 +342,15 @@ insertions; external/loop momenta remain independent. S styled examples use
 unchanged. The focused gallery adds 41 public visibility/reset cases. Atlas
 page 16 and the all-slot gallery are regenerated. M04 remains local; D01 is
 still deferred, and M05 follows authorized publication.
+
+## Short EW bubble waves - 2026-11-04
+
+Added a per-line `ewboson wavelength` control, defaulting to the former
+22 line widths. The styled W bubble arcs use 10 line widths, making them
+visibly wavier around the W circle. External/central wave defaults are unchanged;
+pink loop markers and momentum choices are retained. The EW frequency gallery
+adds local-control, alias/order/reset and short-loop comparisons; its independent
+PDF check measures 24/54/54/24 curve segments on four equal-length controls.
+The original gallery page remains pixel-identical to the compiled baseline.
+Updated atlas page 16 and all eight styled bubble placements. M04 remains local;
+D01 is deferred and M05 follows authorized publication.

@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M04 styled stem review on 347fd37`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
+Baseline: `M04 loop-wave review on d7cde72`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1770,7 +1770,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
 
 Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
 
-**Limit:** Central/W-loop guides hidden; no loop circles.
+**Limit:** Central/W-loop guides hidden; no loop circles. Shorter W-loop wavelength.
 
 ```tex
 \TTreeChannelCorr[
@@ -1791,7 +1791,7 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
   insertion-slot=3,
   insertion-pre-line=ewboson,
   insertion-post-line={ewboson,circ=W,circ scale=0.65},
-  bubble-top-line={ewboson,circ=W,circ scale=0.65},
+  bubble-top-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W,circ scale=0.65},
   bubble-bottom-line={proca,magenta!85!red},
   bubble-momenta={,k},
   show-channel-momentum=false
@@ -1834,7 +1834,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
 
 Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
 
-**Limit:** Central/W-loop guides hidden; inner-label gap 4pt.
+**Limit:** Central/W-loop guides hidden; inner-label gap 4pt. Shorter W-loop wavelength.
 
 ```tex
 \STreeChannelCorr[
@@ -1855,7 +1855,7 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
   insertion-slot=4,
   insertion-pre-line=ewboson,
   insertion-post-line={ewboson,circ=W,circ scale=0.65},
-  bubble-top-line={ewboson,circ=W,circ scale=0.65},
+  bubble-top-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W,circ scale=0.65},
   bubble-bottom-line={proca,magenta!85!red},
   bubble-momenta={,k},
   show-channel-momentum=false,

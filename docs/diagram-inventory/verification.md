@@ -1,3 +1,28 @@
+# Short EW bubble waves - 2026-11-04
+
+From local `d7cde72`, the short W loop arcs in J02/J04 and all eight styled
+bubble samples use a shorter wavelength: `10\feynhandlinesize` instead of
+the ordinary 22 line widths. This adds roughly twice as many ripples around
+the W circle. Bubble dimensions, wave amplitude, other line styles, species
+circles, two-ended pink markers and all momentum choices are retained.
+
+The additive line option `ewboson wavelength=...` keeps the former 22-line-width
+default and is shared by EW/photon aliases. The two-page EW frequency regression
+adds four equal-length controls and default/short-wave examples on both tree
+channels. An independent PDF checker observes **24/54/54/24 curve segments**:
+shortening adds visible oscillations, an alias with reversed key order matches,
+and the following default line returns to its original density. The entire
+original gallery page is pixel-identical to `d7cde72` compiled from source.
+
+Rebuilt the atlas (74 recipes / 16 pages), all-slot styled PDF and frequency
+gallery; rendered and inspected the changed pages and all eight W bubble arcs.
+The maintained suite passes all 40 documents, 688 endpoint contacts, species
+circle/graph checks and the new wavelength check. Existing 56 size and 41 central
+visibility probes also pass. M04 remains local; index placement remains D01.
+
+Current hashes/results are in [m04-checks.json](../planning/m04-checks.json); the preceding record is preserved
+in [history](../planning/history/m04-checks-d7cde72.json). Earlier sections retain their original scope.
+
 # Quiet styled stems and S inner-label spacing - 2026-11-04
 
 From local `347fd37`, the styled samples now omit the central exchange momentum

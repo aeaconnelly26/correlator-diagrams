@@ -4,7 +4,7 @@
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Built against `codex/m04-seagull-expansion`, based on published `main` at
-`b4a6ad8`, styled stem review from `347fd37` on 2026-11-04. There are **74 current
+`b4a6ad8`, loop-wave review from `d7cde72` on 2026-11-04. There are **74 current
 examples on sixteen pages**. These are recipes and meaningful layouts/styles,
 not 74 distinct graph topologies.
 
@@ -38,6 +38,8 @@ for all sixteen placements. The styled samples now hide central momentum
 arrows and P labels with `show-channel-momentum=false`, while retaining Z
 species circles. S samples use a 4pt inner-label gap; ordinary defaults remain
 unchanged. The new visibility control is also available on plain s/t/u trees.
+The W bubble arcs now use `ewboson wavelength=10\feynhandlinesize` for clearer
+ripples around the W circle; the ordinary wavelength remains 22 line widths.
 
 ## How to read it
 

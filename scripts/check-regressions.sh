@@ -92,6 +92,9 @@ if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/topologies/insertion/check-species-circles.py" \
     "$build_root/regressions/topologies/insertion/insertion-species-samples.pdf"
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/propagators/ewboson-frequency/check-ewboson-wavelength.py" \
+    "$build_root/regressions/propagators/ewboson-frequency/ewboson-frequency-check.pdf"
 fi
 
 printf 'PASS  all %s regression and example documents\n' "$check_count"

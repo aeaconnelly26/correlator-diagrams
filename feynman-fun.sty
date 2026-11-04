@@ -45,6 +45,7 @@
 }
 
 \tikzfeynhandset{
+  ewboson wavelength/.initial=22\feynhandlinesize,
   circ position/.initial=0.5,
   circ size/.initial=12pt,
   circ fill/.initial=white,
@@ -2575,7 +2576,7 @@
         /tikz/decoration={
           snake,
           amplitude=2.3\feynhandlinesize,
-          segment length=22\feynhandlinesize,
+          segment length=\pgfkeysvalueof{/tikzfeynhand/ewboson wavelength},
         },
         /tikz/decorate=true,
       },

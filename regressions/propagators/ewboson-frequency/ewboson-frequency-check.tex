@@ -99,4 +99,38 @@
 }
 \end{center}
 
+\newpage
+\section*{Local wavelength controls and short circled loops}
+Only the W loop arc uses the shorter wavelength; the other propagators retain their styles.
+
+\begin{tikzpicture}
+  \begin{feynhand}
+    \vertex (d0) at (0,0); \vertex (d1) at (2.4,0);
+    \vertex (t0) at (0,-.55); \vertex (t1) at (2.4,-.55);
+    \vertex (a0) at (0,-1.1); \vertex (a1) at (2.4,-1.1);
+    \vertex (r0) at (0,-1.65); \vertex (r1) at (2.4,-1.65);
+    \propag[ewboson] (d0) to (d1);
+    \propag[ewboson,ewboson wavelength=10\feynhandlinesize] (t0) to (t1);
+    \propag[ewboson wavelength=10\feynhandlinesize,photon] (a0) to (a1);
+    \propag[ewboson] (r0) to (r1);
+  \end{feynhand}
+  \node[anchor=west] at (2.7,0) {Default};
+  \node[anchor=west] at (2.7,-.55) {Shorter wavelength};
+  \node[anchor=west] at (2.7,-1.1) {Key before photon alias};
+  \node[anchor=west] at (2.7,-1.65) {Default restored on next line};
+\end{tikzpicture}
+
+\newcommand{\shortloopcell}[3]{%
+  \begin{minipage}[t]{.47\linewidth}\centering\textbf{#1}\par\vspace{8pt}
+  \FourPointCorr[topology=#2-tree,field={},central={},leg-labels={,,,},show-momenta=false,
+    line=plain,channel-line=plain,insertion=bubble,insertion-slot=3,
+    bubble-top-line={ewboson,#3,circ=W,circ scale=.65},
+    bubble-bottom-line={proca,magenta!85!red}]
+  \end{minipage}}
+\shortloopcell{T / default}{t}{}\hfill
+\shortloopcell{T / shorter waves}{t}{ewboson wavelength=10\feynhandlinesize}
+
+\shortloopcell{S / default}{s}{}\hfill
+\shortloopcell{S / shorter waves}{s}{ewboson wavelength=10\feynhandlinesize}
+
 \end{document}

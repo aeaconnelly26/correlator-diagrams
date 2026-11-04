@@ -1,5 +1,5 @@
 {
-  "baseline": "M04 styled stem review on 347fd37",
+  "baseline": "M04 loop-wave review on d7cde72",
   "date": "2026-11-04",
   "base_options": [
     "field={}",
@@ -1108,13 +1108,13 @@
             "insertion-slot=3",
             "insertion-pre-line=ewboson",
             "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
-            "bubble-top-line={ewboson,circ=W,circ scale=0.65}",
+            "bubble-top-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=W,circ scale=0.65}",
             "bubble-bottom-line={proca,magenta!85!red}",
             "bubble-momenta={,k}",
             "show-channel-momentum=false"
           ],
           "description": "Pink Z stem; inner W; EW W arc and two-ended pink arc (k).",
-          "limitation": "Central/W-loop guides hidden; no loop circles."
+          "limitation": "Central/W-loop guides hidden; no loop circles. Shorter W-loop wavelength."
         },
         {
           "id": "J03",
@@ -1150,14 +1150,14 @@
             "insertion-slot=4",
             "insertion-pre-line=ewboson",
             "insertion-post-line={ewboson,circ=W,circ scale=0.65}",
-            "bubble-top-line={ewboson,circ=W,circ scale=0.65}",
+            "bubble-top-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=W,circ scale=0.65}",
             "bubble-bottom-line={proca,magenta!85!red}",
             "bubble-momenta={,k}",
             "show-channel-momentum=false",
             "insertion-post-momentum-label-distance=4pt"
           ],
           "description": "Pink Z stem; inner W; EW W arc and two-ended pink arc (k).",
-          "limitation": "Central/W-loop guides hidden; inner-label gap 4pt."
+          "limitation": "Central/W-loop guides hidden; inner-label gap 4pt. Shorter W-loop wavelength."
         }
       ]
     }

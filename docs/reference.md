@@ -1077,6 +1077,23 @@ line with fixed-frequency squiggles. The `photon` and legacy `pho` aliases route
 through the same shared style, so changing a leg or internal line to any of
 these styles uses the same visual language in every topology.
 
+Use the per-propagator key `ewboson wavelength=...` to control wave spacing.
+Its default is `22\feynhandlinesize`, preserving the existing EW appearance.
+A shorter value adds more ripples along the same path; amplitude is unchanged.
+For a short bubble arc interrupted by a W circle, the styled examples use:
+
+```tex
+bubble-top-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W,circ scale=0.65}
+```
+
+This setting applies only to that line. Ordinary external legs and central stems
+keep their original wave spacing. `EWboson`, `photon` and `pho` share the same
+wavelength control; it can appear before or after the line-style token.
+`regressions/propagators/ewboson-frequency/ewboson-frequency-check.tex/pdf`
+compares the defaults and shorter waves on straight lines and short s/t loops.
+Its PDF checker verifies increased rendered wave density, alias/key order,
+and reset on the next line.
+
 The `proca` style is a massive-vector convenience style built on a straight
 scalar-style dashed line with two white-filled open arrow markers. In
 package-managed topologies, the package strips those markers from the raw line

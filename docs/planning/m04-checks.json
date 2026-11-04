@@ -69,15 +69,19 @@
   "index_placement_deferred": "D01",
   "next_milestone": "M05",
   "sha256": {
-    "docs/diagram-inventory/catalog.json": "8a4464de31133d7db68c0a560b62b699289e173325b71b5f4f653e940241b238",
-    "docs/diagram-inventory/inventory.pdf": "51d34806fe02775c7b5992949111758bc5df4e7378a03bddf17c7ede737cb4e5",
-    "feynman-fun.sty": "a016f4d07cbb4a85f93d79d923a76ee6f9f24d2425d172dcb56b5b77beabc477",
+    "docs/diagram-inventory/catalog.json": "12279d93d33746c48a32000f7fcfe252596aee306cba07df7053dd1bbaaf7fc3",
+    "docs/diagram-inventory/inventory.pdf": "d593fdc945a15de873f52b6eee39bf2ce18015355ed92de54544157fc4d599bd",
+    "feynman-fun.sty": "cff0e57bdb5d295df82a6f8acb24c71910725f825a840f6b4f051508a3407b44",
+    "regressions/propagators/ewboson-frequency/check-ewboson-wavelength.py": "4fe42852a66557467b98b0cd1e1f5e49da686a1b4f19a90d76a87a61d1e4e60f",
+    "regressions/propagators/ewboson-frequency/ewboson-frequency-check.pdf": "75446f85da2143f1018d7be8031fbce4b5823cf0406c82b110bf6a398e483b63",
+    "regressions/propagators/ewboson-frequency/ewboson-frequency-check.tex": "3b06119559aa2254bcd9e098f701728e507c777be63a2dc53c2c86da20fe8343",
+    "regressions/propagators/ewboson-frequency/wavelength-checks.json": "6c285923036fdca5d2ab452ce65522b1b46757bb84c3c94bc89d772ce1923ef2",
     "regressions/topologies/insertion/check-seagull-contact.py": "810146d92ad7f55f06f526bc88e025392d95ee4d0a4bddb96f77239a3236d3c9",
     "regressions/topologies/insertion/check-species-circles.py": "1f0316821e847a17170c67b9d47d9ada5a29d6c1db088ef4e1ec18b689ed7c11",
     "regressions/topologies/insertion/insertion-momentum-review.pdf": "3fc85c0cf09263b50f59bda5c33dfe849ccb9187be393aa2a021bc32729d082a",
     "regressions/topologies/insertion/insertion-momentum-review.tex": "397bb629508316de86955318ae2c29e922fc20bda88d19e109c5d7ff52718d3c",
-    "regressions/topologies/insertion/insertion-species-samples.pdf": "40fb4e25cad878f57c9a1478bac62f8598a6d84285f617462e91732af58d9a5a",
-    "regressions/topologies/insertion/insertion-species-samples.tex": "bd294dc5a4798e95bdd07ad44010775b43bcbb78f815240dc7723e28937aabf3",
+    "regressions/topologies/insertion/insertion-species-samples.pdf": "c1beee31ab834a0ba608a403c3c9e04dcae3059ca22d929cf47b4027599040df",
+    "regressions/topologies/insertion/insertion-species-samples.tex": "e5815e173b0406e9ca706bd8dcd134059d6e49402be7ff9619dae07df5e6695a",
     "regressions/topologies/insertion/s-tree-bubble-slots.pdf": "1380f2b4c26157f09e6038ced442fec950a9dfb60cb3e0ccf2568894dbd08346",
     "regressions/topologies/insertion/s-tree-bubble-slots.tex": "32d6262cbd97ef2db63174e3813073d5699dbc1738052da8371ec8ccc58f96a2",
     "regressions/topologies/insertion/seagull-contact.json": "376045d191ddff295874b223b88a54b89fadf8f454412ea45ae965fc27e77d25",
@@ -86,9 +90,9 @@
     "regressions/topologies/insertion/species-circles.json": "b999cb57396b7edd394ea4fef359f3ba6a3ec94dd6b1e404b78ba4d5ce246cbc",
     "regressions/topologies/insertion/t-tree-bubble-slots.pdf": "2c9e6f928be4da379b5b90d17bbfa3a0c3727b3a7e270ebfad3ad5b00af208bf",
     "regressions/topologies/insertion/t-tree-bubble-slots.tex": "a993fea65e9a291cca2984a8e019e10d04a991cadb8101de4bc80f57938bcae9",
-    "scripts/check-regressions.sh": "e17cb3e9d718e7728288eb1a8e0310659f0af5c3d2aefdbba388f8d06decde10"
+    "scripts/check-regressions.sh": "9261076be4f427b84f40b4c9c429e5b30cc1c487966169a3f2bba36ffa565504"
   },
-  "review_baseline": "347fd37",
+  "review_baseline": "d7cde72",
   "review_public_cases": 84,
   "host_label_rectangle_checks": 130,
   "review_auto_loop_direction_checks": 32,
@@ -113,7 +117,7 @@
   "t_bubble_loop_label_distance_pt": 2,
   "t_bubble_loop_arrow_offset_pt": 8,
   "initial_baseline_identity_record": "history/m04-checks-229526e.json",
-  "latest_review_baseline": "347fd37",
+  "latest_review_baseline": "d7cde72",
   "seagull_curve_sample_checks": 800,
   "seagull_default_label_fraction": "auto: arrow-range midpoint",
   "seagull_label_placement": "local outward curve normal; measured text rectangle",
@@ -133,14 +137,14 @@
   "species_ew_circles": 40,
   "species_pink_stem_z_circles": 16,
   "species_black_w_circles": 24,
-  "preceding_checkpoint_record": "history/m04-checks-347fd37.json",
+  "preceding_checkpoint_record": "history/m04-checks-d7cde72.json",
   "species_circle_minimum_vertex_ink_clearance_pdf_pt": 1.0119987482049206,
   "species_sampling": {
     "central_stem": "ewboson, magenta!85!red, circ=Z",
     "outer_host_piece": "ewboson; no circle",
     "inner_host_piece": "ewboson, circ=W",
     "seagull_loop": "proca, magenta!85!red; both endpoint arrows; no circle; k momentum",
-    "bubble_a": "ewboson, circ=W; no momentum arrow/label",
+    "bubble_a": "ewboson, ewboson wavelength=10\\feynhandlinesize, circ=W; no momentum arrow/label",
     "bubble_b": "proca, magenta!85!red; both endpoint arrows; no circle; k momentum"
   },
   "species_endpoint_contacts": 32,
@@ -149,6 +153,21 @@
   "default_show_channel_momentum": true,
   "styled_samples_show_channel_momentum": false,
   "styled_s_inner_label_clearance_tex_pt": 4,
-  "unchanged_atlas_page_bodies": 15,
-  "latest_validation": "Full 40-document suite and 688 endpoint contacts pass; 41 visibility/reset probes; 56 size probes; changed PDF pages rendered/inspected"
+  "latest_validation": "Full 40-document suite, 688 endpoint contacts and wavelength PDF checker pass; changed gallery pages rendered/inspected",
+  "ew_default_wavelength_line_widths": 22,
+  "styled_w_loop_wavelength_line_widths": 10,
+  "ew_wavelength_gallery_pages": 2,
+  "default_ew_gallery_page_pixel_identical": true,
+  "wavelength_pdf_checks": {
+    "wave_curve_counts": [
+      24,
+      54,
+      54,
+      24
+    ],
+    "shorter_to_default_curve_ratio": 2.25,
+    "alias_and_key_order_match": true,
+    "default_restored_next_line": true
+  },
+  "preceding_stem_review_unchanged_atlas_page_bodies": 15
 }
