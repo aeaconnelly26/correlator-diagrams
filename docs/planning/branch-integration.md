@@ -4,8 +4,15 @@ Updated 2026-11-03. The seagull and M01 lines are now combined on
 `codex/integrate-seagull-and-proca`, with merge parents `1b85ef8` and `5a657cd`.
 The original feature branches are retained. On 2026-11-03, local `main` was
 fast-forwarded from `0dbf733` to verified integration commit `4584aff` at the
-user's request. The current checkout is `main`. Nothing was pushed and no pull
-request was created or merged. A documentation-only follow-up records this state.
+user's request, then reconciled with live GitHub `main` at `0717abb` and published
+through a normal push. The current checkout is `main`; local and GitHub main
+contain the combined work. No new pull request or force push was needed.
+
+GitHub's `0717abb` records the already-merged PR #28. Its tree exactly matches
+the seagull branch at `5a657cd`, so preserving that merge added no package or
+inventory changes to our verified integration. GitHub reports main as unprotected,
+no active rules, and this account as having push/admin permission. Those settings
+were checked live; future sessions should fetch before reporting remote status.
 
 ## What is integrated
 
@@ -46,8 +53,9 @@ an expansion of the existing single-leg seagull prototype, not a new prototype.
 The other t-tree legs, s-tree support, swordfish, and regular triangles remain
 future requirements.
 
-Local tracking refs were inspected without a fresh remote fetch; this record
-does not claim to have checked for newer remote commits.
+Remote state was refreshed with `git fetch origin` for this synchronization.
+At closeout, verify that `git ls-remote origin refs/heads/main` matches local
+`HEAD`, and that `git status --short --branch` shows a clean, synchronized main.
 
 ## Session workflow going forward
 

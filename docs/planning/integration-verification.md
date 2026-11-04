@@ -5,7 +5,9 @@ Merge parents: `1b85ef8` (M00/M01 checkpoint) and `5a657cd` (seagull branch).
 These checks verified integration commit `4584aff`. Local `main` was subsequently
 fast-forwarded to that commit on 2026-11-03 at the user's request; package code
 and generated PDFs are identical to the verified integration. The original
-branches are retained. No remote push or pull request was performed.
+branches are retained. GitHub's existing PR #28 merge `0717abb` was then reconciled
+and the result pushed to main. That merge changes no package or inventory content;
+only the synchronization records were updated. No new pull request was needed.
 
 ## Conflict resolution
 

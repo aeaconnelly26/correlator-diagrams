@@ -11,7 +11,7 @@ The seagull slot-1 prototype, prior marker/momentum/index work, and M01 raw
 Proca fixes are reconciled. See [integration verification](integration-verification.md).
 M04 expands the existing prototype; M02 remains the next feature milestone.
 Integration commit `4584aff` is now merged into local `main`. Start M02 on
-a new branch from current local `main`; the remote has not been updated.
+a new branch from current `main`, now reconciled and published to GitHub.
 
 ## Common session contract
 
