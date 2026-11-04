@@ -11,7 +11,7 @@
   "atlas_recipes": 51,
   "proca_automatic_contacts": 600,
   "new_topologies": 0,
-  "published": false,
+  "published": true,
   "review_baseline": "b795f7f",
   "gap_centers_checked": true,
   "continuous_strokes_checked": true,
@@ -20,5 +20,7 @@
   "quartic_external_label_fraction": 0.3,
   "direction_baseline": "99c9d07",
   "default_middle_arrows_to_trivalent": true,
-  "direction_connectivity_checked_both_layouts": true
+  "direction_connectivity_checked_both_layouts": true,
+  "published_branch": "main",
+  "verified_code_checkpoint": "8f95755"
 }

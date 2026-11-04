@@ -10,8 +10,8 @@ sessions, not changes made by the inventory work. R IDs refer to
 The seagull slot-1 prototype, prior marker/momentum/index work, and M01 raw
 Proca fixes are reconciled. See [integration verification](integration-verification.md).
 M04 expands the existing prototype. Integration commit `4584aff` is included
-in published `main` at `6657735`. M02 is completed on its own branch; M03a
-is next, based on that checkpoint or its descendant.
+in published `main` at `6657735`. M02 checkpoint `8f95755` is now also merged
+and published on main. M03a is next, on a new branch from synchronized main.
 
 ## Common session contract
 
@@ -81,6 +81,7 @@ Completed and reconciled on `codex/integrate-seagull-and-proca`; see [integratio
 **Requirements:** R06, preserving R07. **Dependency:** M01.
 
 Completed on `codex/m02-triangle-contact-annotations`, based on `6657735`.
+Final checkpoint `8f95755` is merged into main and published to GitHub.
 Sessions A-C are covered by the new slot option blocks and the focused
 five-page gallery. All seven logical slots, four orientations, unequal spans,
 grouped compatibility, scale, reversal, visibility and isolation are verified.

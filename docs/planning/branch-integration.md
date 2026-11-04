@@ -1,9 +1,11 @@
 # Integrated branch state and coding-session closeout
 
-This records the published integration baseline `6657735`. Subsequent M02 work
-is on `codex/m02-triangle-contact-annotations`; see the
+The published integration baseline was `6657735`. M02 checkpoint `8f95755`
+is now merged into main and published to GitHub. The feature branch
+`codex/m02-triangle-contact-annotations` is retained; see the
 [current development plan](../development-plan.md) and [M02 verification](m02-verification.md).
-M02 is checkpointed locally and has not been merged or pushed.
+The current checkout is main, synchronized with GitHub. No M02 merge or push
+is pending; M03a has not started.
 
 Updated 2026-11-03. The seagull and M01 lines are now combined on
 `codex/integrate-seagull-and-proca`, with merge parents `1b85ef8` and `5a657cd`.
@@ -52,9 +54,9 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M02 used published `main` at `6657735` and is complete on its feature branch.
-M03a should use the M02 checkpoint or its descendant; see the current plan for
-publication status. No manual Git preparation is needed from the user. M04 remains
+M02 used published `main` at `6657735`; its final checkpoint `8f95755` is now
+included in published main. M03a should use a new branch from synchronized main.
+No manual Git preparation is needed from the user. M04 remains
 an expansion of the existing single-leg seagull prototype, not a new prototype.
 The other t-tree legs, s-tree support, swordfish, and regular triangles remain
 future requirements.

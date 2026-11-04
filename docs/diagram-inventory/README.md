@@ -9,6 +9,10 @@ integrated annotation controls, and eight M02 annotation examples. These are not
 51 distinct graph topologies: aliases, orientations, and style variants are
 identified separately.
 
+The verified M02 checkpoint `8f95755` is now included in published main. The
+inventory and package are unchanged from that verification; the branch name
+above records where the examples were implemented and checked.
+
 ## How to read it
 
 - Pages 1-6 show minimal structures with fields and momentum annotations hidden.

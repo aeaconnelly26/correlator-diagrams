@@ -3,7 +3,9 @@
 Baseline: synchronized local/GitHub `main` at `6657735`.
 Implementation branch: `codex/m02-triangle-contact-annotations`.
 Requirement: R06; retain R07's four graph layouts. M02 sessions A-C are complete.
-This slice is checkpointed locally; it has not been merged or pushed.
+Verified code checkpoint: `8f95755`. This slice was fast-forwarded into main
+and published to GitHub on 2026-11-03. Code, regression sources and PDFs are
+identical to that checkpoint; closeout changes only publication/handoff records.
 
 ## What changed
 
@@ -103,5 +105,5 @@ inherit grouped settings. A negative offset or explicit side can intentionally
 put annotations inside. No other topology receives these new slot keys.
 
 M03a is next: external self-energy bubbles on the remaining t-tree legs, starting
-with a narrowly defined slot-2 case. Use the M02 checkpoint or its descendant;
-the published main baseline does not yet include this slice.
+with a narrowly defined slot-2 case. Create its feature branch from synchronized
+main, which now includes M02 checkpoint `8f95755`. No manual merge is pending.

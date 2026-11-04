@@ -6,12 +6,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Published baseline: `main` at `6657735`, reconciled with GitHub's PR #28 and
-  synchronized on 2026-11-03.
-- Current branch: `codex/m02-triangle-contact-annotations`, based on `6657735`.
-- M02 is complete locally: independent controls for all seven triangle-contact
+- Current branch: `main`, including verified M02 checkpoint `8f95755`.
+- M02 was fast-forwarded into main and published to GitHub on 2026-11-03;
+  local/GitHub main are synchronized. The implementation branch is retained.
+- M02 is complete: independent controls for all seven triangle-contact
   momentum annotations, with outside-facing defaults. See
-  [M02 verification](planning/m02-verification.md). Not merged or pushed.
+  [M02 verification](planning/m02-verification.md).
 - M00 produced the inventory and roadmap. M01 now corrects generic Proca tip
   contact; it adds a low-level custom-radius line option and no new topology.
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
@@ -25,7 +25,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Ten pages: 51 current examples, including seagulls and independent triangle-contact annotations. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Eleven pages: 51 current examples, including seagulls and independent triangle-contact annotations. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -38,9 +38,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | Milestone | Work | State |
 | --- | --- | --- |
 | M00 | Archive sources; audit capacity; publish repository atlas and roadmap | Complete; included in checkpoint `1b85ef8` |
-| M01 | Audit and correct demonstrated Proca endpoint failures | Complete locally; diagnostic and vector checks passed |
+| M01 | Audit and correct demonstrated Proca endpoint failures | Complete on published main; diagnostic and vector checks passed |
 | Integration | Reconcile seagull/endpoint work with M01 | Complete; reconciled on local/GitHub `main`; combined tests pass |
-| M02 | Independent triangle-contact annotations, four orientations | Complete locally; 35 regression documents and 600 endpoint contacts pass |
+| M02 | Independent triangle-contact annotations, four orientations | Complete on published main; 35 regression documents and 600 endpoint contacts pass |
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | Slot-1 t prototype exists; expansion planned |
 | M04 | External seagulls on s/t trees | Slot-1 prototype integrated; expand to other t/s legs |
 | M05 | External swordfish on s/t trees | Planned |
@@ -56,8 +56,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 M03a is next: expand external self-energy bubbles from t-tree slot 1 to the
 other t-tree legs, one placement at a time. Read R09 and M03 in
 [requirements](planning/requirements.md) and [milestones](planning/milestones.md).
-Use the M02 checkpoint (or its descendant); publish/merge this branch before
-starting from `main`. Begin by freezing the slot-2 graph and preserved
+Create the next feature branch from synchronized `main`, which includes M02
+checkpoint `8f95755`. Begin by freezing the slot-2 graph and preserved
 styles, momentum, indices, and outer endpoint behavior. Do not start M03 here.
 
 See [integration verification](planning/integration-verification.md) and
@@ -146,7 +146,7 @@ Before closing a feature slice:
 - M02 is next. Slot-1-only insertion limits remain; no additional topology was
   implemented as part of integration. `main` is unchanged; no push or PR.
 
-## Latest session update - M02, 2026-11-03
+## M02 implementation and review record - 2026-11-03
 
 - Added `triangle-contact-momentum-1` through `-7` option blocks and aliases;
   grouped options remain fallbacks, independent of key order.
@@ -175,3 +175,13 @@ The subsequent direction-default request makes both quartic-to-trivalent middle
 arrows point toward their trivalent endpoints in all four orientations, in gap
 and side layouts. The third internal edge and all explicit direction controls
 are preserved. No topology or slot layout changed.
+
+## Latest closeout - M02 publication, 2026-11-03
+
+- Fetched GitHub before merging; its main had no new commits beyond `6657735`.
+- Fast-forwarded main to verified M02 checkpoint `8f95755`, preserving all
+  implementation/review commits and the feature branch.
+- Package code, regressions, and generated PDFs match the verified checkpoint;
+  only handoff/publication records changed during closeout.
+- Published through a normal push and verified local/remote main equality.
+- Ready to switch tasks. M03a is the next roadmap item; it has not started.
