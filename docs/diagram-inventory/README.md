@@ -3,8 +3,9 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-Built against `codex/m04-seagull-expansion`, based on published `main` at
-`b4a6ad8`, optical-circle review from `ddf9d0e` on 2026-11-04. There are **74 current
+Published on `main` in verified M04 checkpoint `854293a` (2026-11-04).
+The atlas was built on `codex/m04-seagull-expansion`, with the final optical-
+circle review from `ddf9d0e`. There are **74 current
 examples on sixteen pages**. These are recipes and meaningful layouts/styles,
 not 74 distinct graph topologies.
 
@@ -13,7 +14,7 @@ on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
 `97495ba` is now also merged and published on main. Index positioning remains a later
 [dedicated review](../planning/deferred-workflows.md); attachment checks do not
 certify its visual placement. M04 adds all eight seagull placements (G01-G04,
-G11-G14), currently local on its feature branch. G01 repeats U01's structure
+G11-G14), included in published main. G01 repeats U01's structure
 to present the complete t-tree placement matrix. T seagulls now default inward,
 S seagulls outward. The shared insertion-arrow review shortens guides, clears
 labels and uses 1/2 incoming, 3/4 outgoing throughout; H01-H04 demonstrate it.

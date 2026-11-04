@@ -6,11 +6,12 @@ Index placement is deferred to a separate later workflow, [D01](deferred-workflo
 M03b checkpoint `97495ba`, based on `6549efa`, is now also merged and published
 on main. The branch `codex/m03b-s-tree-bubbles` is retained. It preserves index
 behavior without polishing positions; see [M03b verification](m03b-verification.md).
-M04 is now complete locally on `codex/m04-seagull-expansion`, based on
-published main `b4a6ad8`; see [M04 verification](m04-verification.md). It has not
-been merged or pushed. The Nov 4 screenshot review is also local: inward T /
-outward S loops, scattering flow defaults and compact, clear host annotations.
-The main/M02 record below preserves earlier history.
+M04 checkpoint `854293a` is now merged and published on main, including all
+Nov 4 geometry/style reviews and the final optical W-circle correction. The
+branch `codex/m04-seagull-expansion` is retained. The complete final suite passed
+40 documents and 688 endpoint contacts; see [M04 verification](m04-verification.md).
+The checkout is main, with the publication handoff recorded there. No M04 merge
+or push remains pending. The main/M02 record below preserves earlier history.
 
 The published integration baseline was `6657735`. M02 checkpoint `8f95755`
 is now merged into main and published to GitHub. The feature branch
@@ -66,9 +67,10 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M05 (swordfish) is next after M04 integration/publication. M04 is complete
-locally; main/GitHub remain at `b4a6ad8`. No manual Git preparation is needed
-from the user. Regular triangles remain future work; D01 remains deferred.
+M05 (swordfish/R12) is next. M04 checkpoint `854293a` is already published on
+main, so no manual Git preparation is needed from the user. Fetch and inspect
+main, then create a new feature branch and freeze the S08-L1 shared-vertex graph.
+Regular triangles remain future work; D01 remains deferred.
 
 Remote state was refreshed with `git fetch origin` for this synchronization.
 When publishing main, verify `git ls-remote origin refs/heads/main` matches

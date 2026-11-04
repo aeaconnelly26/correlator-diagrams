@@ -6,12 +6,13 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/m04-seagull-expansion`, based on published main `b4a6ad8`.
-- M04 is complete locally, including the Nov 4 review: seagulls on all eight
-  s/t-tree external placements, inward T/outward S defaults, 1/2-in and 3/4-out
-  external flow, and shorter insertion arrows with measured label clearance. Bubble insertions
-  now default to scale 0.50; the atlas includes the requested Z/W styled sampling.
-  See [M04 verification](planning/m04-verification.md). It is not merged or pushed.
+- Current branch: `main`, synchronized with GitHub after M04 publication.
+- M04 checkpoint `854293a` is merged and published, including all Nov 4 reviews:
+  all eight external s/t-tree seagulls, inward T/outward S defaults, 1/2-in and
+  3/4-out flow, compact annotations, smaller bubbles, shorter W-loop waves and
+  the final optical W-circle placement. Seagulls default to position 0.40;
+  explicit positions remain effective. The feature branch is retained.
+  See [M04 verification](planning/m04-verification.md). No M04 merge/push remains.
 - M03b is complete, merged and published to GitHub: all four s-tree external
   bubble placements. See [M03b verification](planning/m03b-verification.md).
   The implementation branch is retained.
@@ -58,8 +59,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | Integration | Reconcile seagull/endpoint work with M01 | Complete; reconciled on local/GitHub `main`; combined tests pass |
 | M02 | Independent triangle-contact annotations, four orientations | Complete on published main; 35 regression documents and 600 endpoint contacts pass |
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a and M03b complete on published main |
-| M04 | External seagulls on s/t trees | Complete locally on M04 branch; publication pending |
-| M05 | External swordfish on s/t trees | Planned |
+| M04 | External seagulls on s/t trees | Complete on published main; verified checkpoint `854293a` |
+| M05 | External swordfish on s/t trees | Next session; freeze the shared-vertex graph first |
 | M06 | Regular tree-attached triangle corrections, four placements | Planned |
 | M07 | Complementary crossed box, crossed external layouts, source routing questions | Planned; square defaults already verified |
 | M08a / M08b | Contact external self-energy / seagull | Planned |
@@ -69,10 +70,10 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M05 is next: external swordfish diagrams on s/t trees. First integrate/publish
-the verified M04 checkpoint when authorized; no manual Git preparation is
-needed from the user. Read R12 and freeze the shared-tree-vertex graph from
-S08-L1 before coding. A swordfish has two parallel loop edges sharing the tree
+M05 is next: external swordfish diagrams on s/t trees. M04 is already merged
+and published; no manual Git preparation is needed from the user. Start from
+current main, fetch/inspect status and create a new `codex/` feature branch.
+Read R12 and freeze the shared-tree-vertex graph from S08-L1 before coding. A swordfish has two parallel loop edges sharing the tree
 interaction vertex, unlike the separate quartic self-loop of a seagull. Cover
 one external placement at a time, preserving logical styles and annotation controls.
 D01 remains a separate later workflow; do not polish index positions during
@@ -376,3 +377,21 @@ independent PDF check now compares visible arrow/circle/dot ink gaps for all
 eight seagulls; bubble-host circles keep their geometric midpoint checks.
 These are tuned recipes for the standard marker size and geometry, using
 existing public APIs. Package source/defaults are unchanged from ddf9d0e.
+
+## M04 publication and M05 handoff - 2026-11-04
+
+Fetched GitHub before merging; remote main remained at `b4a6ad8`. Re-ran the
+complete maintained suite on final checkpoint `854293a`: all 40 documents,
+688 endpoint contacts, eight independent seagull graphs, species-circle/optical
+spacing checks and EW wavelength checks pass. Fast-forwarded main to that
+checkpoint and published it through a normal push; the first HTTP transport
+attempt failed, then a buffered HTTP/1.1 retry succeeded. GitHub's main ref
+was read back and matched `854293a`. No force push or PR was needed; main is
+unprotected and no repository/inherited rulesets were active at publication.
+The M04 implementation branch is retained, and the 74-recipe/16-page inventory
+and latest styled gallery are included in the published checkpoint.
+
+This closeout updates documentation only. Next session: M05/R12 swordfish,
+starting with the S08-L1 shared interaction vertex and one placement at a time.
+Do not begin M05 during this publication session. D01 index positioning remains
+reserved for its separate workflow.

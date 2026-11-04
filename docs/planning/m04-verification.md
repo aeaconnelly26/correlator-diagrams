@@ -1,3 +1,31 @@
+# M04 published and ready for M05 - 2026-11-04
+
+Final M04 checkpoint **854293a** was fast-forwarded from `b4a6ad8` into main
+and published to GitHub. The remote main ref was read back and matched the
+published checkpoint. The implementation branch is retained. This handoff
+commit changes documentation only; package sources and PDF artifacts remain
+exactly as verified at 854293a.
+
+The full suite was rerun on 854293a: **40 documents**, **688 endpoint contacts**,
+eight actual quartic self-loop graphs, **40 species circles**, **eight optical
+seagull W placements**, **eight geometric bubble-host W placements**, and the
+EW wavelength/order/reset checks pass. Focused coverage includes 254 seagull
+cases, 88 loop labels, 800 curve samples, 56 size probes and 41 central-visibility
+probes. The atlas remains 74 recipes / 16 pages, including the final styled
+samples and optical correction. The prior full-suite statement scoped to
+ddf9d0e is superseded by this complete run on the final checkpoint.
+
+Live GitHub reads showed main unprotected and no repository/inherited rulesets.
+Publication used an ordinary push; an initial HTTP transport failure was resolved
+by a buffered HTTP/1.1 retry. No force push or PR was needed.
+
+Next session: **M05 / R12 external swordfish**. Start from main, create a new
+feature branch, freeze the S08-L1 shared-vertex graph, and implement one placement
+at a time. Index-position appearance remains deferred to D01. No M05 code was
+implemented in this publication session; no M04 merge/push remains for the user.
+
+Earlier sections below are historical implementation/review records.
+
 # Optical W-circle centering correction - 2026-11-04
 
 The screenshot following `ddf9d0e` exposed a flaw in the previous verification

@@ -3,7 +3,7 @@
   "date": "2026-11-04",
   "baseline": "b4a6ad8",
   "branch": "codex/m04-seagull-expansion",
-  "published": false,
+  "published": true,
   "s_tree_external_seagull_slots": [
     1,
     2,
@@ -157,7 +157,7 @@
   "default_show_channel_momentum": true,
   "styled_samples_show_channel_momentum": false,
   "styled_s_inner_label_clearance_tex_pt": 4,
-  "latest_validation": "Package unchanged; focused gallery (56 size + 41 visibility probes), 40 species circles, 32 endpoint contacts, 8 optical and 8 midpoint W checks pass; full 40-document/688-contact suite passed at ddf9d0e",
+  "latest_validation": "Full suite rerun on 854293a: 40 documents, 688 endpoint contacts, 8 seagull graphs, 40 species circles, 8 optical + 8 midpoint W placements, and EW wavelength checks pass",
   "ew_default_wavelength_line_widths": 22,
   "styled_w_loop_wavelength_line_widths": 10,
   "ew_wavelength_gallery_pages": 2,
@@ -191,5 +191,12 @@
   },
   "inner_w_pdf_optical_gap_checks": 8,
   "maximum_seagull_w_optical_center_error_pdf_pt": 0.003633022643024564,
-  "maximum_bubble_host_w_midpoint_error_pdf_pt": 0.0031349840509738835
+  "maximum_bubble_host_w_midpoint_error_pdf_pt": 0.0031349840509738835,
+  "current_branch": "main",
+  "implementation_commit": "854293a94ea6d62acdc53e76f908865b08428a33",
+  "publication_commit": "854293a94ea6d62acdc53e76f908865b08428a33",
+  "publication_previous_main": "b4a6ad83b2642c3f01e897da2c813c589f431dff",
+  "publication_method": "Fast-forward merge and normal push; buffered HTTP/1.1 retry after transport error",
+  "publication_verified_live_github": true,
+  "validation_revision": "854293a94ea6d62acdc53e76f908865b08428a33"
 }

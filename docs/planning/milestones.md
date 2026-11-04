@@ -12,8 +12,9 @@ Proca fixes are reconciled. See [integration verification](integration-verificat
 M04 expands the existing prototype. Integration commit `4584aff` is included
 in published `main` at `6657735`. M02 checkpoint `8f95755` is now also merged
 and published on main. M03a is published through `6549efa`; M03b checkpoint
-`97495ba` is also merged and published on main. M04 is complete locally on
-`codex/m04-seagull-expansion`, based on `b4a6ad8`; M05 is next after publication.
+`97495ba` is also merged and published on main. M04 checkpoint `854293a`,
+implemented on `codex/m04-seagull-expansion` from `b4a6ad8`, is now merged and
+published on main. The branch is retained; M05 is next.
 
 ## Common session contract
 
@@ -135,13 +136,15 @@ retune positions or turn visual index polish into a current acceptance gate.
 
 **Requirement:** R11. **Dependency:** M03.
 
-M04 is complete locally on `codex/m04-seagull-expansion`, based on `b4a6ad8`.
+M04 checkpoint `854293a` is complete, merged and published on main.
+The implementation branch `codex/m04-seagull-expansion` is retained.
 All eight external s/t-tree placements preserve one quartic self-loop vertex.
 The Nov 4 review makes T loops face inward and S loops outward; default external
 flow is 1/2 in and 3/4 out. Compact guides and measured label clearance apply
 to both bubble and seagull insertions; explicit overrides remain supported.
-See [M04 verification](m04-verification.md). Publication remains pending;
-D01 index appearance remains deferred. The following is the regression gate.
+See [M04 verification](m04-verification.md) for the final 40-document /
+688-contact validation and styled reviews. D01 index appearance remains
+deferred. The following is the regression gate.
 
 - Specify the direct self-loop at a quartic point on a host propagator.
   This has one insertion vertex, unlike the two-vertex self-energy bubble.
@@ -153,7 +156,7 @@ D01 index appearance remains deferred. The following is the regression gate.
 
 ## M05 - External swordfish
 
-**Requirement:** R12. **Dependencies:** M03, M04.
+**Requirement:** R12. **Dependencies:** M03, M04 (published; ready to begin).
 
 - Begin from S08-L1 and freeze its shared-vertex graph. Reuse style and slot
   helpers, but model the host vertex directly: do not collapse a nonzero bridge
