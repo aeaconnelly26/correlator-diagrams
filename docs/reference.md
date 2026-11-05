@@ -2196,7 +2196,7 @@ Current semantic insertion hosts:
 ```tex
 \[
   \TTreeChannelCorr[
-    insertion=bubble, % or seagull
+    insertion=bubble, % or seagull or swordfish
     insertion-slot=1
   ]
 \]
@@ -2204,11 +2204,12 @@ Current semantic insertion hosts:
 
 Supported insertion keys:
 
-- `insertion=none|bubble|seagull`
+- `insertion=none|bubble|seagull|swordfish`
 - `insertion-slot=1|2|3|4|5`
 - `insertion-position=...`
 - `insertion-orientation=auto|top|bottom|left|right`
 - `insertion-scale=...`
+- `swordfish-opening-angle=...` (swordfish only; default 60 degrees)
 - `insertion-style=...`
 - `insertion-pre-line=...` / `insertion-outer-line=...`
 - `insertion-post-line=...` / `insertion-inner-line=...`
@@ -2277,7 +2278,11 @@ by outer--A, two distinct A--B arcs, then B--tree-vertex. The two new vertices
 are trivalent. For s-tree, slots 1/2 attach to the left tree vertex, 3/4 to
 the right, with the horizontal exchange unchanged. `insertion=seagull` also
 supports all four external slots of both trees, with one quartic vertex and
-a self-loop instead of the bubble's two new vertices. U-tree, contact-host and
+a self-loop instead of the bubble's two new vertices. `insertion=swordfish`
+supports the same external matrix with one new trivalent vertex and two loop
+arcs meeting the actual tree vertex, now quartic. Its position/scale defaults
+are 0.50/0.66; see the swordfish section for geometry and applicable controls.
+U-tree, contact-host and
 internal slot `5` insertions remain unsupported and retain their no-op behavior. Simultaneous insertions are not supported.
 
 ```tex
@@ -2509,6 +2514,63 @@ The all-slot t-tree gallery and graph/style/cap/momentum checks are in
 isolated Proca page has an independent 16-tip vector check in
 `check-t-tree-bubble-contact.py`, run by the maintained suite when
 `FEYNMANFUN_PDF_PYTHON` is set to a Python interpreter with `pypdf`.
+
+### Swordfish: a loop sharing the tree interaction
+
+`\TTreeChannelCorr` and `\STreeChannelCorr` support
+`insertion=swordfish,insertion-slot=1|2|3|4`, one external leg at a time.
+Slots remain upper-left, lower-left, upper-right, lower-right. For selected
+external endpoint E and tree vertex H, the graph is E--A plus two A--H curves.
+A is new and trivalent; H is the existing tree vertex and becomes quartic.
+There is no inner host segment, extra bridge, duplicated dot or collapsed edge.
+
+```tex
+\TTreeChannelCorr[
+  field={},central={},leg-labels={,,,},show-momenta=false,
+  line=plain,channel-line=plain,
+  insertion=swordfish,insertion-slot=1,
+  bubble-top-line=plain,bubble-bottom-line=plain
+]
+```
+
+Replace the macro with `\STreeChannelCorr` for an S tree. Available controls:
+
+- `insertion-pre-line` styles E--A; it inherits the selected logical leg style
+  if empty. Logical caps remain at the external endpoint only.
+- `bubble-top-line` / `bubble-bottom-line` independently style the two directed
+  A--H curves, including EW waves/circles and one-/two-ended Proca/scalar markers.
+  Arc a/b follow the outer-to-host axis; their page-top/page-bottom roles swap
+  on right-hand legs, as for external bubble insertions.
+- `bubble-momenta={k,\ell}`, per-arc momentum directions, rotation, fractions,
+  offsets and label distance retain their existing meanings. A blank entry or
+  direction `none` hides that loop guide. Selected external momentum appears
+  once, on E--A, with the existing pre/outer guide controls and hide/blank rules.
+- `show-channel-momentum=false` hides only the tree-exchange guide. Default
+  external flow is p1/p2 incoming, p3/p4 outgoing; explicit reversals remain.
+- `insertion-position=0.50` places A halfway from E to H at the standard
+  `insertion-scale=0.66`. Scale changes the loop chord about fixed H: A's fraction
+  from E is `1-(1-position)*scale/0.66`. Choose values keeping A inside E--H.
+- `swordfish-opening-angle=60` controls the two loop tangents; the default keeps
+  distinct incidences visible at the shared quartic point. Upper out/in angles
+  are host-angle+opening / host-angle+180-opening; lower angles are mirrored.
+  `bubble-loop-looseness` remains available.
+- `bubble-endpoint-indices={a_A,a_H,b_A,b_H}` keeps four independent loop-end
+  values attached to the appropriate A/H ends. `bubble-external-indices={i,j}`
+  places two labels on the sole E--A segment at fractions 0.18/0.82. Exchange
+  and other external index controls remain unchanged; visual index polish is D01.
+
+There is no post segment, so `insertion-post-line`, post momentum and post index
+options are inactive for swordfish and are not supported controls for this graph.
+`insertion-orientation` remains a seagull control. U-tree/contact/internal-slot-5
+and simultaneous insertions are unsupported. With `external-legs=false`, the
+external insertion is hidden and the existing outer-placeholder behavior remains.
+
+The frozen contract, six-page gallery and independent graph/endpoint checker are
+in `regressions/topologies/insertion/M05-contract.md`, `swordfish-slots.tex/pdf`
+and `check-swordfish.py`. The 167 public cases verify structure, logical slots,
+geometry, mixed styles, momentum, indices, caps and state reset. Actual PDF paths
+verify all eight shared-quartic graphs and 48 pink, white-filled endpoint contacts.
+Atlas K01-K04/K11-K14 show plain placements; K21-K24 demonstrate mixed loop styles.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 

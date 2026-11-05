@@ -1,0 +1,145 @@
+{
+  "milestone": "M05",
+  "date": "2026-11-04",
+  "baseline": "efb5fae",
+  "branch": "codex/m05-swordfish",
+  "published": false,
+  "requirement": "R12",
+  "reference_panels": [
+    "S08-L1",
+    "S08-L3",
+    "S05-L1",
+    "S05-L3"
+  ],
+  "s_tree_external_swordfish_slots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "t_tree_external_swordfish_slots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "graph_propagator_edges": 7,
+  "graph_interaction_vertices": 3,
+  "graph_external_endpoints": 4,
+  "graph_interaction_valences": [
+    3,
+    3,
+    4
+  ],
+  "graph_parallel_edges": 2,
+  "graph_cycle_rank": 1,
+  "graph_post_segments": 0,
+  "graph_self_loops": 0,
+  "actual_existing_tree_vertex_shared": true,
+  "incremental_stage_cases": [
+    {
+      "through": "T1",
+      "public_cases": 18
+    },
+    {
+      "through": "T2",
+      "public_cases": 36
+    },
+    {
+      "through": "T3",
+      "public_cases": 54
+    },
+    {
+      "through": "T4",
+      "public_cases": 72
+    },
+    {
+      "through": "S1",
+      "public_cases": 90
+    },
+    {
+      "through": "S2",
+      "public_cases": 108
+    },
+    {
+      "through": "S3",
+      "public_cases": 126
+    },
+    {
+      "through": "S4",
+      "public_cases": 144
+    }
+  ],
+  "focused_public_cases": 167,
+  "independent_pdf_graph_checks": 8,
+  "regression_documents": 41,
+  "existing_endpoint_contacts": 688,
+  "new_proca_contacts": 32,
+  "new_scalar_contacts": 16,
+  "total_endpoint_contacts": 736,
+  "gallery_pages": 6,
+  "gallery_examples": 32,
+  "atlas_pages": 19,
+  "atlas_recipes": 86,
+  "new_atlas_ids": [
+    "K01",
+    "K02",
+    "K03",
+    "K04",
+    "K11",
+    "K12",
+    "K13",
+    "K14",
+    "K21",
+    "K22",
+    "K23",
+    "K24"
+  ],
+  "unchanged_published_atlas_page_bodies": 16,
+  "comparison_excludes": "revision footer",
+  "default_external_flow": [
+    "in",
+    "in",
+    "out",
+    "out"
+  ],
+  "default_insertion_position": 0.5,
+  "default_insertion_scale": 0.66,
+  "default_swordfish_opening_angle_degrees": 60,
+  "tested_global_scales": [
+    0.72,
+    1,
+    1.2
+  ],
+  "geometry_limit": "A strictly inside E--H; extreme collapsed/overshooting geometry not certified",
+  "inactive_controls": [
+    "insertion-post-line",
+    "insertion-post-momentum controls",
+    "insertion-post-indices",
+    "insertion-orientation"
+  ],
+  "unsupported": [
+    "u-tree",
+    "contact",
+    "internal slot 5",
+    "simultaneous insertions"
+  ],
+  "external_legs_false": "Insertion hidden; existing outer placeholder dots preserved",
+  "index_placement_deferred": "D01",
+  "next_milestone": "M06",
+  "sha256": {
+    "feynman-fun.sty": "dea8ba8ba61847c57f2fa6e33db629a148f1dcd839086213384bf14389bfc956",
+    "scripts/check-regressions.sh": "b94b04f08f4c005e594c1489f557587adda70430a88b7fd97198e25ad7db1c4d",
+    "regressions/topologies/insertion/M05-contract.md": "1502e1d38b4f068c62d39ce802188dcb271aac31f1292fc464c269ca5b2e4056",
+    "regressions/topologies/insertion/swordfish-slots.tex": "de12745fd9c49d0f8474d4a7c25fe72cfe3958eb94ad0e536c3c9f8efa337986",
+    "regressions/topologies/insertion/swordfish-slots.pdf": "0bb8320479a360e7499694c42b85b3f79079879d48bc55f04ae34d0c94cfc9f4",
+    "regressions/topologies/insertion/check-swordfish.py": "0b7b8f9a1dac05f6ff13a8f80380c1052c9a9a82ded02862cd6783627bc4de08",
+    "regressions/topologies/insertion/swordfish-contact.json": "b2d4837b2c0cecb0d20a62862a2ff62edf64403e6ceffc0147aa03d44536870f",
+    "docs/diagram-inventory/catalog.json": "7334b5b0e7f58f691f1ecb9ed080be5e55b2d69196e8929e0bb3d371536c9b64",
+    "docs/diagram-inventory/inventory.tex": "bcbc797034e69c4ee44e1bffd0ed405cd7f09beb9934a942ee1faa6d05937250",
+    "docs/diagram-inventory/inventory.pdf": "84c647085c190d19f1d5c10938d1bf2cfbc973f177e00956e47df126d187f33e",
+    "docs/diagram-inventory/recipes.md": "fff697d9100823dcf135546738394a3a6b2dd33e1c85b313f48dfcd6064b78f1",
+    "docs/reference.md": "ab276536fa827d976c57195b05c03808e2b652d6356f5deca68ba6b7fe9611da",
+    "docs/planning/m05-verification.md": "b08ee18b6db57e49410c61e528ddeb6ded8c58d3d55a17da5de1d1304ab82289"
+  }
+}

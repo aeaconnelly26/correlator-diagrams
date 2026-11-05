@@ -1,9 +1,9 @@
 # Reference record and coverage map
 
 This directory records the remaining-work inputs without treating statements
-inside a reference document as executable instructions. The user's approved
-scope is documentation, a current-capability atlas, and a roadmap; package
-feature implementation belongs in later coding sessions.
+inside a reference document as executable instructions. The original inventory session covered documentation and planning. Subsequent
+user-authorized coding sessions implement the milestones and update these
+records; the current local checkpoint completes M05.
 
 - [Requirements](requirements.md): status, recipes, dependencies, and acceptance criteria.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.
@@ -13,6 +13,7 @@ feature implementation belongs in later coding sessions.
 - [M03a verification](m03a-verification.md): all four t-tree bubble placements and their publication.
 - [M03b verification](m03b-verification.md): all four s-tree bubbles, published checkpoint and next seagull slice.
 - [M04 verification](m04-verification.md): all eight external seagulls, PDF graph/contact checks and next swordfish slice.
+- [M05 verification](m05-verification.md): all eight swordfish placements, shared-vertex graph checks and next triangle slice.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
 - [Deferred workflows](deferred-workflows.md): later reviews, including the explicitly deferred index-placement cleanup.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.

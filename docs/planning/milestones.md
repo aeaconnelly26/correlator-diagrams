@@ -14,7 +14,9 @@ in published `main` at `6657735`. M02 checkpoint `8f95755` is now also merged
 and published on main. M03a is published through `6549efa`; M03b checkpoint
 `97495ba` is also merged and published on main. M04 checkpoint `854293a`,
 implemented on `codex/m04-seagull-expansion` from `b4a6ad8`, is now merged and
-published on main. The branch is retained; M05 is next.
+published on main. The branch is retained. M05 is complete locally on
+`codex/m05-swordfish`, based on published main `efb5fae`; merge/push remains
+pending. M06 follows publication. See [M05 verification](m05-verification.md).
 
 ## Common session contract
 
@@ -156,7 +158,13 @@ deferred. The following is the regression gate.
 
 ## M05 - External swordfish
 
-**Requirement:** R12. **Dependencies:** M03, M04 (published; ready to begin).
+**Requirement:** R12. **Dependencies:** M03, M04 (published).
+**State:** Complete locally on `codex/m05-swordfish`; not merged/pushed.
+All eight placements pass 167 focused cases and independent actual-PDF graph
+checks. Full suite: 41 documents / 736 endpoint contacts.
+[Contract](../../regressions/topologies/insertion/M05-contract.md),
+[verification](m05-verification.md), [gallery](../../regressions/topologies/insertion/swordfish-slots.pdf).
+The following specification is satisfied within the documented geometry limits.
 
 - Begin from S08-L1 and freeze its shared-vertex graph. Reuse style and slot
   helpers, but model the host vertex directly: do not collapse a nonzero bridge
@@ -169,6 +177,7 @@ deferred. The following is the regression gate.
 ## M06 - Regular tree-attached triangles
 
 **Requirement:** R08. **Dependencies:** M01, M02, M03 slot conventions.
+**State:** Next after M05 merge/push; freeze the reference graph before coding.
 
 - Implement bottom/top on t trees, then left/right on s trees. The loop has
   three trivalent vertices and one bridge to the opposite tree vertex.

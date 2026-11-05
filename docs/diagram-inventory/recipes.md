@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M04 optical circle review on ddf9d0e`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
+Baseline: `M05 local; base efb5fae`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -1860,5 +1860,323 @@ Pink Z stem; inner W; EW W arc and two-ended pink arc (k).
   bubble-momenta={,k},
   show-channel-momentum=false,
   insertion-post-momentum-label-distance=4pt
+]
+```
+
+## External t-tree swordfish diagrams
+
+### K01 - Swordfish on t-tree leg 1
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=1,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### K02 - Swordfish on t-tree leg 2
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=2,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### K03 - Swordfish on t-tree leg 3
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=3,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### K04 - Swordfish on t-tree leg 4
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=4,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+## External s-tree swordfish diagrams
+
+### K11 - Swordfish on s-tree leg 1
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=1,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### K12 - Swordfish on s-tree leg 2
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=2,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### K13 - Swordfish on s-tree leg 3
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=3,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+### K14 - Swordfish on s-tree leg 4
+
+One trivalent loop vertex; two curves meet the actual quartic tree vertex.
+
+**Limit:** One external insertion. No bridge or duplicate shared vertex.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=4,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain
+]
+```
+
+## Independent loop styles at a shared interaction
+
+### K21 - T-tree slot 1: mixed loop
+
+W loop, pink two-ended Z loop (k), pink Z exchange.
+
+**Limit:** Species circles intentional; no central/W guide, caps or indices.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=1,
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},
+  bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},
+  bubble-bottom-line={proca,magenta!85!red},
+  bubble-momenta={,k}
+]
+```
+
+### K22 - T-tree slot 3: mixed loop
+
+W loop, pink two-ended Z loop (k), pink Z exchange.
+
+**Limit:** Species circles intentional; no central/W guide, caps or indices.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=3,
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},
+  bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},
+  bubble-bottom-line={proca,magenta!85!red},
+  bubble-momenta={,k}
+]
+```
+
+### K23 - S-tree slot 2: mixed loop
+
+W loop, pink two-ended Z loop (k), pink Z exchange.
+
+**Limit:** Species circles intentional; no central/W guide, caps or indices.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=2,
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},
+  bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},
+  bubble-bottom-line={proca,magenta!85!red},
+  bubble-momenta={,k}
+]
+```
+
+### K24 - S-tree slot 4: mixed loop
+
+W loop, pink two-ended Z loop (k), pink Z exchange.
+
+**Limit:** Species circles intentional; no central/W guide, caps or indices.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=swordfish,
+  insertion-slot=4,
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},
+  bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},
+  bubble-bottom-line={proca,magenta!85!red},
+  bubble-momenta={,k}
 ]
 ```

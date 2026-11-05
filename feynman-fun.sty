@@ -2122,6 +2122,7 @@
   \def\corr@insertionposition{0.50}%
   \def\corr@insertionorientation{auto}%
   \def\corr@insertionscale{0.66}%
+  \def\corr@swordfishopening{60}%
   \def\corr@insertionstyle{}%
   \def\corr@insertionpreline{}%
   \def\corr@insertionpostline{}%
@@ -3900,6 +3901,7 @@
   insertion-orientation/.store in=\corr@insertionorientation,
   insertion-scale/.code={\def\corr@insertionscale{#1}\corr@insertionscaleexplicittrue},
   insertion-style/.store in=\corr@insertionstyle,
+  swordfish-opening-angle/.store in=\corr@swordfishopening,
   insertion-pre-line/.store in=\corr@insertionpreline,
   insertion-post-line/.store in=\corr@insertionpostline,
   insertion-outer-line/.style={insertion-pre-line={#1}},
@@ -6679,6 +6681,34 @@
   \corr@ifttreebubbleinsertion{#1}{\corr@ifstreebubbleinsertion{#1}{#2}}%
 }
 
+% Swordfish owns one new vertex and shares the existing tree vertex.
+\newcommand{\corr@ifttreeswordfishinsertion}[2]{%
+  \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+    \ifcorr@externallegs
+    \corr@ifstringeq{\corr@insertion}{swordfish}{%
+      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{\corr@ifstringeq{\corr@insertionslot}{2}{#1}{\corr@ifstringeq{\corr@insertionslot}{3}{#1}{\corr@ifstringeq{\corr@insertionslot}{4}{#1}{#2}}}}%
+    }{#2}%
+    \else #2\fi
+  }{#2}%
+}
+
+\newcommand{\corr@ifstreeswordfishinsertion}[2]{%
+  \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+    \ifcorr@externallegs
+    \corr@ifstringeq{\corr@insertion}{swordfish}{%
+      \corr@ifstringeq{\corr@insertionslot}{1}{#1}{\corr@ifstringeq{\corr@insertionslot}{2}{#1}{\corr@ifstringeq{\corr@insertionslot}{3}{#1}{\corr@ifstringeq{\corr@insertionslot}{4}{#1}{#2}}}}%
+    }{#2}%
+    \else #2\fi
+  }{#2}%
+}
+
+\newcommand{\corr@iftreeswordfishinsertion}[2]{%
+  \corr@ifttreeswordfishinsertion{#1}{\corr@ifstreeswordfishinsertion{#1}{#2}}%
+}
+\newcommand{\corr@ifstreecurvedinsertion}[2]{%
+  \corr@ifstreebubbleinsertion{#1}{\corr@ifstreeswordfishinsertion{#1}{#2}}%
+}
+
 \newcommand{\corr@ifttreeslotoneseagullinsertion}[2]{%
   \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
     \corr@ifstringeq{\corr@insertion}{seagull}{%
@@ -6708,12 +6738,12 @@
 }
 
 \newcommand{\corr@ifstreeinsertion}[2]{%
-  \corr@ifstreebubbleinsertion{#1}{\corr@ifstreeseagullinsertion{#1}{#2}}%
+  \corr@ifstreebubbleinsertion{#1}{\corr@ifstreeseagullinsertion{#1}{\corr@ifstreeswordfishinsertion{#1}{#2}}}%
 }
 
 \newcommand{\corr@ifttreeinsertion}[2]{%
   \corr@ifttreebubbleinsertion{#1}{%
-    \corr@ifttreeseagullinsertion{#1}{#2}%
+    \corr@ifttreeseagullinsertion{#1}{\corr@ifttreeswordfishinsertion{#1}{#2}}%
   }%
 }
 
@@ -6748,14 +6778,22 @@
     \corr@iftreeseagullinsertion{%
       \ifnum#1=\corr@insertionslot\relax \corr@drawttreeslotoneseagullinsertion
       \else \corr@drawchannelprop{#1}{}{#2}{#3}{}\fi
-    }{\corr@drawchannelprop{#1}{}{#2}{#3}{}}%
+    }{%
+      \corr@iftreeswordfishinsertion{%
+        \ifnum#1=\corr@insertionslot\relax \corr@drawtreeswordfishinsertion
+        \else \corr@drawchannelprop{#1}{}{#2}{#3}{}\fi
+      }{\corr@drawchannelprop{#1}{}{#2}{#3}{}}%
+    }%
   }%
 }
 
 \newcommand{\corr@drawttreeexternalmomentum}[4]{%
   \corr@iftreebubbleinsertion{\corr@drawtreeinsertionexternalmomentum{#1}{#2}{#3}{#4}}{%
     \corr@iftreeseagullinsertion{\corr@drawtreeinsertionexternalmomentum{#1}{#2}{#3}{#4}}{%
-      \corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}}}%
+      \corr@iftreeswordfishinsertion{%
+        \ifnum#1=\corr@insertionslot\relax \corr@drawttreeinsertionoutermomentum
+        \else \corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}\fi
+      }{\corr@drawexternalmomentumstd{#1}{#2}{#3}{#4}}}}%
 }
 
 \newcommand{\corr@drawtreeinsertionexternalmomentum}[4]{%
@@ -6791,6 +6829,51 @@
     {out=\corr@insertiontopangle,in=\corr@insertiontopangle,looseness=\corr@bubblelooplooseness}{\corr@insertiontopangle}%
   \corr@drawbubblemomentumslot{b}{4}{corrInsertionA}{corrInsertionB}
     {out=\corr@insertionbottomangle,in=\corr@insertionbottomangle,looseness=\corr@bubblelooplooseness}{\corr@insertionbottomangle}%
+}
+
+\newcommand{\corr@settreeswordfishcoords}{%
+  \pgfmathsetmacro{\corr@swordfishfraction}{(1-\corr@insertionposition)*\corr@insertionscale/0.66}%
+  \coordinate (corrInsertionA) at ($(corrInsertionHost)!\corr@swordfishfraction!(corrInsertionOuter)$);
+  % B is an alias only: no second dot and no post/zero-length bridge is drawn.
+  \coordinate (corrInsertionB) at (corrInsertionHost);
+  \pgfmathanglebetweenpoints{\pgfpointanchor{corrInsertionA}{center}}{\pgfpointanchor{corrInsertionHost}{center}}%
+  \xdef\corr@insertionangle{\pgfmathresult}%
+  \pgfmathsetmacro{\corr@tmp}{\corr@insertionangle+\corr@swordfishopening}\xdef\corr@swordfishouta{\corr@tmp}%
+  \pgfmathsetmacro{\corr@tmp}{\corr@insertionangle+180-\corr@swordfishopening}\xdef\corr@swordfishina{\corr@tmp}%
+  \pgfmathsetmacro{\corr@tmp}{\corr@insertionangle-\corr@swordfishopening}\xdef\corr@swordfishoutb{\corr@tmp}%
+  \pgfmathsetmacro{\corr@tmp}{\corr@insertionangle-180+\corr@swordfishopening}\xdef\corr@swordfishinb{\corr@tmp}%
+  \pgfmathsetmacro{\corr@tmp}{\corr@insertionangle+90}\xdef\corr@insertiontopangle{\corr@tmp}%
+  \pgfmathsetmacro{\corr@tmp}{\corr@insertionangle-90}\xdef\corr@insertionbottomangle{\corr@tmp}%
+}
+\newcommand{\corr@drawtreeswordfishinsertion}{%
+  \corr@settreeswordfishcoords
+  \corr@drawchannelprop{\corr@insertionhostslot}{\corr@insertionpreline}{corrInsertionOuter}{corrInsertionA}{}%
+  \corr@drawbubbleinternalprop{3}{\corr@bubblealine}{corrInsertionA}{corrInsertionHost}
+    {out=\corr@swordfishouta,in=\corr@swordfishina,looseness=\corr@bubblelooplooseness}%
+  \corr@drawbubbleinternalprop{4}{\corr@bubblebline}{corrInsertionA}{corrInsertionHost}
+    {out=\corr@swordfishoutb,in=\corr@swordfishinb,looseness=\corr@bubblelooplooseness}%
+}
+\newcommand{\corr@drawtreeswordfishmomenta}{%
+  \corr@drawbubblemomentumslot{a}{3}{corrInsertionA}{corrInsertionHost}
+    {out=\corr@swordfishouta,in=\corr@swordfishina,looseness=\corr@bubblelooplooseness}{\corr@insertiontopangle}%
+  \corr@drawbubblemomentumslot{b}{4}{corrInsertionA}{corrInsertionHost}
+    {out=\corr@swordfishoutb,in=\corr@swordfishinb,looseness=\corr@bubblelooplooseness}{\corr@insertionbottomangle}%
+}
+\newcommand{\corr@puttreeswordfishindices}{%
+  \corr@putbubbleinternalindexcurve{(corrInsertionA)}
+    {out=\corr@swordfishouta,in=\corr@swordfishina,looseness=\corr@bubblelooplooseness}{(corrInsertionHost)}
+    {\corr@bubblealeftindexfraction}{\corr@bubblealeftindexposition}{\corr@bubblealeftindexxshift}{\corr@bubblealeftindexyshift}{\corr@bubblealeftindex}{\corr@bubbleindexmathstyle}%
+  \corr@putbubbleinternalindexcurve{(corrInsertionA)}
+    {out=\corr@swordfishouta,in=\corr@swordfishina,looseness=\corr@bubblelooplooseness}{(corrInsertionHost)}
+    {\corr@bubblearightindexfraction}{\corr@bubblearightindexposition}{\corr@bubblearightindexxshift}{\corr@bubblearightindexyshift}{\corr@bubblearightindex}{\corr@bubbleindexmathstyle}%
+  \corr@putbubbleinternalindexcurve{(corrInsertionA)}
+    {out=\corr@swordfishoutb,in=\corr@swordfishinb,looseness=\corr@bubblelooplooseness}{(corrInsertionHost)}
+    {\corr@bubblebleftindexfraction}{\corr@bubblebleftindexposition}{\corr@bubblebleftindexxshift}{\corr@bubblebleftindexyshift}{\corr@bubblebleftindex}{\corr@bubbleindexmathstyle}%
+  \corr@putbubbleinternalindexcurve{(corrInsertionA)}
+    {out=\corr@swordfishoutb,in=\corr@swordfishinb,looseness=\corr@bubblelooplooseness}{(corrInsertionHost)}
+    {\corr@bubblebrightindexfraction}{\corr@bubblebrightindexposition}{\corr@bubblebrightindexxshift}{\corr@bubblebrightindexyshift}{\corr@bubblebrightindex}{\corr@bubbleindexmathstyle}%
+  \corr@putbubbleexternalindex{corrInsertionOuter}{corrInsertionA}{0.18}{\corr@bubbleleftexternalindex}%
+  \corr@putbubbleexternalindex{corrInsertionOuter}{corrInsertionA}{0.82}{\corr@bubblerightexternalindex}%
 }
 
 \newcommand{\corr@resolveseagullorientation}{%
@@ -7671,7 +7754,7 @@
         (corrbubblemompseven) --
         (corrbubblemomend);%
     }%
-    \corr@ifstreebubbleinsertion{%
+    \corr@ifstreecurvedinsertion{%
       \def\corr@bubbleresolvedlabeldistance{4pt}%
       \ifcorr@bubblelabeldistanceexplicit
         \let\corr@bubbleresolvedlabeldistance\corr@bubblemomentumlabeldistance
@@ -8625,6 +8708,7 @@
       \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}
     }{}%
     \corr@ifstreeseagullinsertion{\corr@putvertex{corrInsertionV}{\corr@centervertexstyle}}{}%
+    \corr@ifstreeswordfishinsertion{\corr@putvertex{corrInsertionA}{\corr@centervertexstyle}}{}%
   \fi
   \corr@fourpointplaceexternalvertices
   \ifcorr@showmomenta
@@ -8635,10 +8719,12 @@
     \corr@drawchannelmomentum{corrVL}{corrVR}
     \corr@ifstreebubbleinsertion{\corr@drawttreeinsertionbubblemomenta}{}%
     \corr@ifstreeseagullinsertion{\corr@drawttreeinsertionseagullmomentum}{}%
+    \corr@ifstreeswordfishinsertion{\corr@drawtreeswordfishmomenta}{}%
   \fi
   \corr@fourpointchannelindices{corrVL}{corrVR}
   \corr@ifstreebubbleinsertion{\corr@putttreeinsertionbubbleindices}{}%
   \corr@ifstreeseagullinsertion{\corr@putttreeinsertionseagullindices}{}%
+  \corr@ifstreeswordfishinsertion{\corr@puttreeswordfishindices}{}%
   \corr@fourpointplaceexternallabels
   \corr@putchannelcentral{corrC}
 }
@@ -8672,6 +8758,7 @@
     \corr@ifttreeseagullinsertion{%
       \corr@putvertex{corrInsertionV}{\corr@centervertexstyle}
     }{}%
+    \corr@ifttreeswordfishinsertion{\corr@putvertex{corrInsertionA}{\corr@centervertexstyle}}{}%
   \fi
   \corr@fourpointplaceexternalvertices
   \ifcorr@showmomenta
@@ -8690,6 +8777,7 @@
     \corr@ifttreeseagullinsertion{%
       \corr@drawttreeinsertionseagullmomentum
     }{}%
+    \corr@ifttreeswordfishinsertion{\corr@drawtreeswordfishmomenta}{}%
   \fi
   \corr@fourpointchannelindices{corrVT}{corrVB}
   \corr@ifttreebubbleinsertion{%
@@ -8698,6 +8786,7 @@
   \corr@ifttreeseagullinsertion{%
     \corr@putttreeinsertionseagullindices
   }{}%
+  \corr@ifttreeswordfishinsertion{\corr@puttreeswordfishindices}{}%
   \corr@fourpointplaceexternallabels
   \corr@putchannelcentral{corrC}
 }

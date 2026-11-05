@@ -3,11 +3,11 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-Published on `main` in verified M04 checkpoint `854293a` (2026-11-04).
-The atlas was built on `codex/m04-seagull-expansion`, with the final optical-
-circle review from `ddf9d0e`. There are **74 current
-examples on sixteen pages**. These are recipes and meaningful layouts/styles,
-not 74 distinct graph topologies.
+Complete locally on `codex/m05-swordfish`, based on published main `efb5fae`
+(2026-11-04). M05 has not been merged/pushed. There are **86 current examples
+on nineteen pages**. These are recipes and meaningful layouts/styles, not
+86 distinct graph topologies. M05 adds all eight swordfish placements and four
+mixed-style samples; see [verification](../planning/m05-verification.md).
 
 M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
 on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
@@ -23,7 +23,7 @@ outward along the normal, with T bubble-loop annotation placement unchanged.
 The subsequent seagull-k review uses concentric momentum curves and local-normal
 labels at the arrow midpoint across all eight placements. The compact defaults
 now use range 0.30-0.52, a 6pt radial offset and 2pt text clearance. Counts
-are now 74/16 after the size/style sampling addition.
+were 74/16 after the M04 size/style sampling addition; M05 expands them to 86/19.
 The loop-spacing review uses closer bubble momentum arrows and labels outward
 from their actual arcs, consistently across left/right placements and reversal.
 
@@ -52,6 +52,12 @@ ripples around the W circle; the ordinary wavelength remains 22 line widths.
 
 ## How to read it
 
+- Pages 17-18 show all eight swordfish placements (K01-K04, K11-K14), with
+  plain lines, visible vertices and no decorations. Each loop meets the actual
+  quartic tree vertex; it has no inner host segment.
+- Page 19 shows four swordfish style samples (K21-K24): EW W loop circle,
+  pink two-ended Proca Z loop with k, and pink EW Z exchange/circle without
+  a central momentum guide. No caps or indices are shown.
 - Pages 1-6 show minimal structures with fields and momentum annotations hidden;
   page 6 now includes all four t-tree self-energy insertion placements.
 - Page 7 demonstrates named style/annotation features, including the explicitly
@@ -76,7 +82,8 @@ ripples around the W circle; the ordinary wavelength remains 22 line widths.
 Important limits:
 
 - Bubble insertions support **s/t-tree external slots 1-4**, one at a time.
-  Seagulls also support **s/t-tree external slots 1-4**, one at a time.
+  Seagulls and swordfish also support **s/t-tree external slots 1-4**, one at a time.
+  Swordfish has no post segment; post style/momentum/index controls are inactive.
   U-tree/contact hosts and internal insertions remain unsupported; accepted
   keys can still do nothing there.
 - Horizontal/vertical contact pairings are disconnected pairs, not tree exchanges.

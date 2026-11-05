@@ -1,5 +1,5 @@
 {
-  "baseline": "M04 optical circle review on ddf9d0e",
+  "baseline": "M05 local; base efb5fae",
   "date": "2026-11-04",
   "base_options": [
     "field={}",
@@ -1160,7 +1160,208 @@
           "limitation": "Central/W-loop guides hidden; inner-label gap 4pt. Shorter W-loop wavelength."
         }
       ]
+    },
+    {
+      "section": "17 / T-TREE SWORDFISH",
+      "title": "External t-tree swordfish diagrams",
+      "subtitle": "All four external slots. Plain lines and interaction vertices; one shared tree vertex, seven propagators, one loop.",
+      "entries": [
+        {
+          "id": "K01",
+          "title": "Swordfish on t-tree leg 1",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=1",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        },
+        {
+          "id": "K02",
+          "title": "Swordfish on t-tree leg 2",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=2",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        },
+        {
+          "id": "K03",
+          "title": "Swordfish on t-tree leg 3",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=3",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        },
+        {
+          "id": "K04",
+          "title": "Swordfish on t-tree leg 4",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=4",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        }
+      ]
+    },
+    {
+      "section": "18 / S-TREE SWORDFISH",
+      "title": "External s-tree swordfish diagrams",
+      "subtitle": "All four external slots. Plain lines and interaction vertices; one shared tree vertex, seven propagators, one loop.",
+      "entries": [
+        {
+          "id": "K11",
+          "title": "Swordfish on s-tree leg 1",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=1",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        },
+        {
+          "id": "K12",
+          "title": "Swordfish on s-tree leg 2",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=2",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        },
+        {
+          "id": "K13",
+          "title": "Swordfish on s-tree leg 3",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=3",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        },
+        {
+          "id": "K14",
+          "title": "Swordfish on s-tree leg 4",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=4",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain"
+          ],
+          "description": "One trivalent loop vertex; two curves meet the actual quartic tree vertex.",
+          "limitation": "One external insertion. No bridge or duplicate shared vertex."
+        }
+      ]
+    },
+    {
+      "section": "19 / SWORDFISH STYLES",
+      "title": "Independent loop styles at a shared interaction",
+      "subtitle": "Selected external momentum appears once; 1/2 incoming and 3/4 outgoing. The swordfish has no inner host segment.",
+      "entries": [
+        {
+          "id": "K21",
+          "title": "T-tree slot 1: mixed loop",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=1",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7}",
+            "bubble-top-line={ewboson,ewboson wavelength=14\\feynhandlinesize,circ=W,circ scale=.65}",
+            "bubble-bottom-line={proca,magenta!85!red}",
+            "bubble-momenta={,k}"
+          ],
+          "description": "W loop, pink two-ended Z loop (k), pink Z exchange.",
+          "limitation": "Species circles intentional; no central/W guide, caps or indices."
+        },
+        {
+          "id": "K22",
+          "title": "T-tree slot 3: mixed loop",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=3",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7}",
+            "bubble-top-line={ewboson,ewboson wavelength=14\\feynhandlinesize,circ=W,circ scale=.65}",
+            "bubble-bottom-line={proca,magenta!85!red}",
+            "bubble-momenta={,k}"
+          ],
+          "description": "W loop, pink two-ended Z loop (k), pink Z exchange.",
+          "limitation": "Species circles intentional; no central/W guide, caps or indices."
+        },
+        {
+          "id": "K23",
+          "title": "S-tree slot 2: mixed loop",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=2",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7}",
+            "bubble-top-line={ewboson,ewboson wavelength=14\\feynhandlinesize,circ=W,circ scale=.65}",
+            "bubble-bottom-line={proca,magenta!85!red}",
+            "bubble-momenta={,k}"
+          ],
+          "description": "W loop, pink two-ended Z loop (k), pink Z exchange.",
+          "limitation": "Species circles intentional; no central/W guide, caps or indices."
+        },
+        {
+          "id": "K24",
+          "title": "S-tree slot 4: mixed loop",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=swordfish",
+            "insertion-slot=4",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7}",
+            "bubble-top-line={ewboson,ewboson wavelength=14\\feynhandlinesize,circ=W,circ scale=.65}",
+            "bubble-bottom-line={proca,magenta!85!red}",
+            "bubble-momenta={,k}"
+          ],
+          "description": "W loop, pink two-ended Z loop (k), pink Z exchange.",
+          "limitation": "Species circles intentional; no central/W guide, caps or indices."
+        }
+      ]
     }
   ],
-  "branch": "codex/m03a-t-tree-bubbles"
+  "branch": "codex/m05-swordfish"
 }

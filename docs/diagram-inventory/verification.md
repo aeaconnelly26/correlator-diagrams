@@ -1,3 +1,24 @@
+# M05 current local inventory - 2026-11-04
+
+The atlas now has **86 public recipes on 19 pages**, built against
+`codex/m05-swordfish` from published main `efb5fae`. M05 remains local only.
+Pages 17-18 show the full T/S swordfish placement matrix; page 19 adds mixed
+EW W/pink Proca Z loop styles and a pink Z exchange. All three new pages and
+the six-page focused gallery were rendered and inspected for connectivity,
+marker contact, annotation placement, clipping and crowding. Both loop momentum
+labels were also inspected on undecorated examples in all eight placements.
+
+Independent actual-PDF checks verify eight seven-edge graphs with three
+interaction vertices, degree pattern 3/3/4 and one pair of parallel edges
+sharing the actual tree vertex. Endpoint diagnostics verify 32 Proca and 16
+scalar contacts. The 167-case focused source and full 41-document/736-contact
+suite pass. The first sixteen atlas page bodies are pixel-identical to
+published main `efb5fae` above their changed revision footer.
+
+See [M05 verification](../planning/m05-verification.md) for reproduction and
+limits. Index-position polish remains D01. The records below are historical
+and do not override this current local M05 status.
+
 # M04 published and ready for M05 - 2026-11-04
 
 Final M04 checkpoint **854293a** was fast-forwarded from `b4a6ad8` into main

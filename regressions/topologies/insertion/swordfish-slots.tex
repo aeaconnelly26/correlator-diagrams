@@ -1,0 +1,210 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,adjustbox,fancyhdr}
+\usepackage{feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M05: swordfish shares the actual tree vertex; one insertion}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}\setlength{\parindent}{0pt}
+\newbox\sfbox
+\newcount\sfedges \newcount\sfdots \newcount\sfarcs \newcount\sfposts
+\newcount\sflabels \newcount\sfcaps \newcount\sfdoublecaps \newcount\sfindices \newcount\sfouterindices \newcount\sfcases
+\makeatletter
+\def\sfplacements{T1,T2,T3,T4,S1,S2,S3,S4}
+\def\sfactive{yes}
+\newcommand{\sfassert}[3]{\ifnum#1=#2\relax\else\PackageError{M05}{#3: got \the#1, expected #2}{}\fi}
+\let\sfoldprop\corr@drawchannelprop
+\renewcommand{\corr@drawchannelprop}[5]{\global\advance\sfedges by 1\sfoldprop{#1}{#2}{#3}{#4}{#5}%
+ \expandafter\xdef\csname sfstyle#1\endcsname{\corr@propoptions}%
+ \expandafter\xdef\csname sfstart#1\endcsname{#3}\expandafter\xdef\csname sfend#1\endcsname{#4}}
+\let\sfoldpost\corr@drawchannelpropnoendcaps
+\renewcommand{\corr@drawchannelpropnoendcaps}[5]{\global\advance\sfposts by 1\sfoldpost{#1}{#2}{#3}{#4}{#5}}
+\let\sfoldarc\corr@drawbubbleinternalprop
+\renewcommand{\corr@drawbubbleinternalprop}[5]{%
+ \global\advance\sfarcs by 1\global\advance\sfedges by 1
+ \corr@ifstringeq{#3}{corrInsertionA}{}{\PackageError{M05}{Loop start is not A}{}}%
+ \corr@ifstringeq{#4}{corrInsertionHost}{}{\PackageError{M05}{Loop does not directly share the real host}{}}%
+ \pgfpointdiff{\pgfpointanchor{#3}{center}}{\pgfpointanchor{#4}{center}}%
+ \pgfmathsetlengthmacro{\sfchord}{veclen(\pgf@x,\pgf@y)}%
+ \ifdim\sfchord>1pt\else\PackageError{M05}{Collapsed loop chord}{}\fi
+ \sfoldarc{#1}{#2}{#3}{#4}{#5}}
+\let\sfoldvertex\corr@putvertex
+\renewcommand{\corr@putvertex}[2]{\global\advance\sfdots by 1\sfoldvertex{#1}{#2}}
+\let\sfoldlabel\corr@putmomentumlabelwithdistance
+\renewcommand{\corr@putmomentumlabelwithdistance}[6]{\global\advance\sflabels by 1\sfoldlabel{#1}{#2}{#3}{#4}{#5}{#6}}
+\let\sfoldcap\corr@drawexternalendcap
+\renewcommand{\corr@drawexternalendcap}[2]{%
+ \global\advance\sfcaps by 1\def\sffound{no}%
+ \@for\sfouter:={corrUL,corrLL,corrUR,corrLR}\do{%
+  \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{\sfouter}{center}}%
+  \pgfmathsetlengthmacro{\sfdistance}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\sfdistance<.03pt\def\sffound{yes}\fi}%
+ \corr@ifstringeq{\sffound}{yes}{}{\PackageError{M05}{Cap on an internal vertex}{}}%
+ \sfoldcap{#1}{#2}}
+\let\sfolddoublecap\corr@drawexternalendcapp
+\renewcommand{\corr@drawexternalendcapp}[2]{\global\advance\sfdoublecaps by 1\sfolddoublecap{#1}{#2}}
+\let\sfoldindex\corr@putbubbleinternalindexcurve
+\renewcommand{\corr@putbubbleinternalindexcurve}[9]{%
+ \edef\sfvalue{#8}\ifdefempty{\sfvalue}{}{\global\advance\sfindices by 1\xdef\sfindexvalues{\sfindexvalues,#8}%
+  \corr@ifstringeq{#1}{(corrInsertionA)}{}{\PackageError{M05}{Index moved from loop vertex A}{}}%
+  \corr@ifstringeq{#3}{(corrInsertionHost)}{}{\PackageError{M05}{Index moved from shared host}{}}}%
+ \sfoldindex{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+\let\sfoldouterindex\corr@putbubbleexternalindex
+\renewcommand{\corr@putbubbleexternalindex}[4]{%
+ \edef\sfvalue{#4}\ifdefempty{\sfvalue}{}{\global\advance\sfouterindices by 1
+  \corr@ifstringeq{#1}{corrInsertionOuter}{}{\PackageError{M05}{External index moved off selected segment}{}}%
+  \corr@ifstringeq{#2}{corrInsertionA}{}{\PackageError{M05}{External index attached to phantom bridge}{}}}%
+ \sfoldouterindex{#1}{#2}{#3}{#4}}
+\newcommand{\sffinish}{%
+ \corr@ifstringeq{\sfactive}{yes}{%
+  \sfassert\sfedges{7}{Propagator count}\sfassert\sfdots{3}{Unique interaction dots}%
+  \sfassert\sfarcs{2}{Parallel loop edges}\sfassert\sfposts{0}{No post/zero-length bridge}%
+  \pgfpointdiff{\pgfpointanchor{corrInsertionHost}{center}}{\pgfpointanchor{\sfhost}{center}}%
+  \pgfmathsetlengthmacro{\sferror}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\sferror>.03pt\PackageError{M05}{Wrong shared tree vertex}{}\fi
+  \pgfpointdiff{\pgfpointanchor{corrInsertionB}{center}}{\pgfpointanchor{\sfhost}{center}}%
+  \pgfmathsetlengthmacro{\sferror}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\sferror>.03pt\PackageError{M05}{B alias is not the real host}{}\fi
+  \pgfmathsetmacro{\sfexpectedfraction}{1-(1-\corr@insertionposition)*\corr@insertionscale/.66}%
+  \path (\sfouter) -- coordinate[pos=\sfexpectedfraction] (sfExpectedA) (\sfhost);
+  \pgfpointdiff{\pgfpointanchor{sfExpectedA}{center}}{\pgfpointanchor{corrInsertionA}{center}}%
+  \pgfmathsetlengthmacro{\sferror}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\sferror>.03pt\PackageError{M05}{Wrong placement/scale}{}\fi
+  \edef\sfdirection{\corr@insertionhostmomentumdirection}%
+  \ifnum\sfslot<3\def\sfwanted{in}\else\def\sfwanted{out}\fi
+  \corr@ifstringeq{\sfreversed}{yes}{\ifnum\sfslot<3\def\sfwanted{out}\else\def\sfwanted{in}\fi}{}%
+  \ifx\sfdirection\sfwanted\else\PackageError{M05}{Wrong selected momentum flow}{}\fi
+ }{\sfassert\sfedges{5}{Fresh ordinary tree}\sfassert\sfdots{2}{Fresh dots}\sfassert\sfarcs{0}{No stale insertion}}}
+\let\sfoldttree\corr@drawfourpointtreetchannel
+\renewcommand{\corr@drawfourpointtreetchannel}{\sfoldttree\sffinish}
+\let\sfoldstree\corr@drawfourpointstreeschannel
+\renewcommand{\corr@drawfourpointstreeschannel}{\sfoldstree\sffinish}
+\def\sfselect#1#2\sfstop{%
+ \def\sfchannel{#1}\def\sfslot{#2}\expandafter\let\expandafter\sfpublic\csname #1TreeChannelCorr\endcsname
+ \ifcase\sfslot\or\def\sfouter{corrUL}\or\def\sfouter{corrLL}\or\def\sfouter{corrUR}\or\def\sfouter{corrLR}\fi
+ \corr@ifstringeq{#1}{T}{\ifodd\sfslot\def\sfhost{corrVT}\else\def\sfhost{corrVB}\fi}{%
+  \ifnum\sfslot<3\def\sfhost{corrVL}\else\def\sfhost{corrVR}\fi}}
+\newcommand{\sfmeasure}[1]{%
+ % Complete public-interface case
+ \global\advance\sfcases by 1
+ \global\sfedges=0\global\sfdots=0\global\sfarcs=0\global\sfposts=0\global\sflabels=0
+ \global\sfcaps=0\global\sfdoublecaps=0\global\sfindices=0\global\sfouterindices=0\gdef\sfindexvalues{}
+ \edef\sfoptions{field={},central={},leg-labels={,,,},show-momenta=false,line=plain,
+  channel-line=plain,insertion=swordfish,insertion-slot=\sfslot,#1}%
+ \setbox\sfbox=\hbox{\expandafter\sfpublic\expandafter[\sfoptions]}}
+\errorcontextlines=50
+\begin{document}
+\@for\sfentry:=\sfplacements\do{%
+ \expandafter\sfselect\sfentry\sfstop\def\sfactive{yes}\def\sfreversed{no}%
+ \@for\sfscale:={.72,1,1.2}\do{\sfmeasure{scale=\sfscale}}%
+ \sfmeasure{insertion-position=.4,insertion-scale=.55,swordfish-opening-angle=55,bubble-loop-looseness=1.2}%
+ \sfmeasure{insertion-position=.6,insertion-scale=.8}%
+ \sfmeasure{line=ewboson,bubble-top-line=proca,bubble-bottom-line=spol}%
+ \sfmeasure{leg-styles={red,blue,green,orange}}%
+ \ifcase\sfslot\or\def\sfcolor{red}\or\def\sfcolor{blue}\or\def\sfcolor{green}\or\def\sfcolor{orange}\fi
+ \edef\sfprobe{\noexpand\in@{\sfcolor}{\csname sfstyle\sfslot\endcsname}}\sfprobe
+ \ifin@\else\PackageError{M05}{Selected host style inheritance lost}{}\fi
+ \sfmeasure{insertion-pre-line={ewboson,magenta!85!red},insertion-post-line=proca}%
+ \sfmeasure{leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}}}%
+ \sfassert\sfcaps{4}{Single outer caps}%
+ \sfmeasure{leg-styles={{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp}}}%
+ \sfassert\sfdoublecaps{4}{Double outer caps}%
+ \sfmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={K,Q}}%
+ \sfassert\sflabels{7}{Independent momenta, no duplicated selected external guide}%
+ \sfmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={K,Q},external-momentum-hide={\sfslot}}%
+ \sfassert\sflabels{6}{Selected external momentum hide}%
+ \ifcase\sfslot\or\def\sfblanks{,L2,L3,L4,P}\or\def\sfblanks{L1,,L3,L4,P}\or\def\sfblanks{L1,L2,,L4,P}\or\def\sfblanks{L1,L2,L3,,P}\fi
+ \sfmeasure{show-momenta=true,momentum-labels={\sfblanks},bubble-momenta={K,Q}}%
+ \sfassert\sflabels{6}{Blank selected external label preserves loop labels}%
+ \sfmeasure{bubble-top-line={ewboson,circ=W},bubble-bottom-line={proca,magenta!85!red}}%
+ \sfmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={K,Q},show-channel-momentum=false}%
+ \sfassert\sflabels{6}{Central guide hide}%
+ \sfmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},bubble-momenta={,Q}}%
+ \sfassert\sflabels{6}{Blank loop label suppresses only its guide}%
+ \def\sfreversed{yes}\sfmeasure{show-momenta=true,bubble-momenta={K,Q},bubble-momentum-rotation=counterclockwise,external-left-momentum-direction=out,external-right-momentum-direction=in}%
+ \def\sfreversed{no}%
+ \sfmeasure{bubble-endpoint-indices={a,b,c,d},bubble-external-indices={i,j},insertion-post-indices={x,y}}%
+ \def\sfwantedindices{,a,b,c,d}\ifx\sfindexvalues\sfwantedindices\else\PackageError{M05}{Loop index values/order changed}{}\fi
+ \sfassert\sfindices{4}{Four loop endpoint values}\sfassert\sfouterindices{2}{Selected external index pair}%
+ \sfmeasure{}%
+ \sfassert\sfindices{0}{No stale loop indices}\sfassert\sflabels{0}{No stale loop labels}\sfassert\sfcaps{0}{No stale caps}%
+ \def\sfactive{no}\sfmeasure{insertion=none}%
+}
+\def\sfactive{no}\def\sfreversed{no}
+\@for\sfentry:={T5,S5,T0,S0}\do{\expandafter\sfselect\sfentry\sfstop\sfmeasure{}}
+% U and contact hosts are outside the new predicates; U remains a five-edge tree.
+\global\sfedges=0\global\sfdots=0\global\sfarcs=0\global\advance\sfcases by 1
+\setbox\sfbox=\hbox{\UTreeChannelCorr[field={},show-momenta=false,insertion=swordfish,insertion-slot=1]}
+\sfassert\sfedges{5}{Unsupported U unchanged}\sfassert\sfdots{2}{No U insertion dot}\sfassert\sfarcs{0}{No U loop}
+% Hiding external legs also hides their insertion; retain only the exchange.
+\let\corr@drawfourpointtreetchannel\sfoldttree\let\corr@drawfourpointstreeschannel\sfoldstree
+\@for\sfpublic:={\TTreeChannelCorr,\STreeChannelCorr}\do{%
+ \global\sfedges=0\global\sfdots=0\global\sfarcs=0\global\advance\sfcases by 1
+ \setbox\sfbox=\hbox{\sfpublic[field={},show-momenta=false,external-legs=false,insertion=swordfish,insertion-slot=1]}%
+ \sfassert\sfedges{1}{Hidden external host}\sfassert\sfdots{6}{Tree and legacy outer placeholder dots}\sfassert\sfarcs{0}{No stale hidden insertion}}
+\typeout{PASS M05: \the\sfcases\space public cases; shared host, slots, geometry, styles, momentum, indices, caps and state reset}
+% Visible examples use the uninstrumented public rendering paths.
+\let\corr@drawchannelprop\sfoldprop\let\corr@drawchannelpropnoendcaps\sfoldpost
+\let\corr@drawbubbleinternalprop\sfoldarc\let\corr@putvertex\sfoldvertex
+\let\corr@putmomentumlabelwithdistance\sfoldlabel\let\corr@drawexternalendcap\sfoldcap
+\let\corr@drawexternalendcapp\sfolddoublecap\let\corr@putbubbleinternalindexcurve\sfoldindex
+\let\corr@putbubbleexternalindex\sfoldouterindex\let\corr@drawfourpointtreetchannel\sfoldttree
+\let\corr@drawfourpointstreeschannel\sfoldstree
+\makeatother
+\newcommand{\sfcell}[2]{\begin{minipage}[t][2.85in][t]{.48\linewidth}\textbf{#1}\par\vspace{10pt}\centering
+ \begin{adjustbox}{max width=\linewidth,max totalheight=2.4in}#2\end{adjustbox}\end{minipage}}
+\newcommand{\sfdiagram}[3]{#1[field={},central={},leg-labels={,,,},line=plain,channel-line=plain,show-momenta=false,insertion=swordfish,insertion-slot=#2,#3]}
+\section*{T-tree swordfish: direct shared vertex}
+Plain lines; no caps, circles, field labels or momenta.\par\vspace{12pt}
+\sfcell{Slot 1}{\sfdiagram{\TTreeChannelCorr}{1}{}}\hfill
+\sfcell{Slot 2}{\sfdiagram{\TTreeChannelCorr}{2}{}}\par
+\sfcell{Slot 3}{\sfdiagram{\TTreeChannelCorr}{3}{}}\hfill
+\sfcell{Slot 4}{\sfdiagram{\TTreeChannelCorr}{4}{}}\par
+\newpage
+\section*{S-tree swordfish: direct shared vertex}
+Plain lines; no caps, circles, field labels or momenta.\par\vspace{12pt}
+\sfcell{Slot 1}{\sfdiagram{\STreeChannelCorr}{1}{}}\hfill
+\sfcell{Slot 2}{\sfdiagram{\STreeChannelCorr}{2}{}}\par
+\sfcell{Slot 3}{\sfdiagram{\STreeChannelCorr}{3}{}}\hfill
+\sfcell{Slot 4}{\sfdiagram{\STreeChannelCorr}{4}{}}\par
+\newpage
+\section*{T-tree swordfish: momentum and mixed styles}
+One selected external guide; two independent loop edges into the actual tree vertex.\par\vspace{12pt}
+\sfcell{Slot 1}{\sfdiagram{\TTreeChannelCorr}{1}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\hfill
+\sfcell{Slot 2}{\sfdiagram{\TTreeChannelCorr}{2}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\par
+\sfcell{Slot 3}{\sfdiagram{\TTreeChannelCorr}{3}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\hfill
+\sfcell{Slot 4}{\sfdiagram{\TTreeChannelCorr}{4}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\par
+\newpage
+\section*{S-tree swordfish: momentum and mixed styles}
+One selected external guide; two independent loop edges into the actual tree vertex.\par\vspace{12pt}
+\sfcell{Slot 1}{\sfdiagram{\STreeChannelCorr}{1}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\hfill
+\sfcell{Slot 2}{\sfdiagram{\STreeChannelCorr}{2}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\par
+\sfcell{Slot 3}{\sfdiagram{\STreeChannelCorr}{3}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\hfill
+\sfcell{Slot 4}{\sfdiagram{\STreeChannelCorr}{4}{show-momenta=true,show-channel-momentum=false,momentum-labels={p_1,p_2,p_3,p_4,P},line=ewboson,channel-line={ewboson,magenta!85!red,circ=Z,circ scale=.7},bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},bubble-bottom-line={proca,magenta!85!red},bubble-momenta={,k}}}\par
+\newpage
+\section*{Proca endpoint contact: all eight placements}
+Only loop endpoint markers; plain host/external lines. No momentum, caps or circles.\par\vspace{12pt}
+\begingroup
+\renewcommand{\sfcell}[2]{\begin{minipage}[t][1.35in][t]{.48\linewidth}\textbf{#1}\par\centering\begin{adjustbox}{max totalheight=1.1in}#2\end{adjustbox}\end{minipage}}
+\sfcell{T slot 1}{\sfdiagram{\TTreeChannelCorr}{1}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\hfill
+\sfcell{S slot 1}{\sfdiagram{\STreeChannelCorr}{1}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\par
+\sfcell{T slot 2}{\sfdiagram{\TTreeChannelCorr}{2}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\hfill
+\sfcell{S slot 2}{\sfdiagram{\STreeChannelCorr}{2}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\par
+\sfcell{T slot 3}{\sfdiagram{\TTreeChannelCorr}{3}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\hfill
+\sfcell{S slot 3}{\sfdiagram{\STreeChannelCorr}{3}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\par
+\sfcell{T slot 4}{\sfdiagram{\TTreeChannelCorr}{4}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\hfill
+\sfcell{S slot 4}{\sfdiagram{\STreeChannelCorr}{4}{scale=.8,bubble-top-line={proca,magenta!85!red},bubble-bottom-line={proca,magenta!85!red}}}\par
+\endgroup
+\newpage
+\section*{Scalar endpoint contact: all eight placements}
+Only loop endpoint markers; plain host/external lines. No momentum, caps or circles.\par\vspace{12pt}
+\begingroup
+\renewcommand{\sfcell}[2]{\begin{minipage}[t][1.35in][t]{.48\linewidth}\textbf{#1}\par\centering\begin{adjustbox}{max totalheight=1.1in}#2\end{adjustbox}\end{minipage}}
+\sfcell{T slot 1}{\sfdiagram{\TTreeChannelCorr}{1}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\hfill
+\sfcell{S slot 1}{\sfdiagram{\STreeChannelCorr}{1}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\par
+\sfcell{T slot 2}{\sfdiagram{\TTreeChannelCorr}{2}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\hfill
+\sfcell{S slot 2}{\sfdiagram{\STreeChannelCorr}{2}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\par
+\sfcell{T slot 3}{\sfdiagram{\TTreeChannelCorr}{3}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\hfill
+\sfcell{S slot 3}{\sfdiagram{\STreeChannelCorr}{3}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\par
+\sfcell{T slot 4}{\sfdiagram{\TTreeChannelCorr}{4}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\hfill
+\sfcell{S slot 4}{\sfdiagram{\STreeChannelCorr}{4}{scale=.8,bubble-top-line={spol,magenta!85!red},bubble-bottom-line={spol,magenta!85!red}}}\par
+\endgroup
+\end{document}

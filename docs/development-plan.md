@@ -6,7 +6,11 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`, synchronized with GitHub after M04 publication.
+- Current branch: `codex/m05-swordfish`, based on published main `efb5fae`.
+- M05 is complete locally: swordfish insertions on all four external legs of
+  both tree channels. The two loop edges meet the actual quartic tree vertex.
+  All 41 maintained documents and 736 endpoint contacts pass. See
+  [M05 verification](planning/m05-verification.md). Merge/push remains pending.
 - M04 checkpoint `854293a` is merged and published, including all Nov 4 reviews:
   all eight external s/t-tree seagulls, inward T/outward S defaults, 1/2-in and
   3/4-out flow, compact annotations, smaller bubbles, shorter W-loop waves and
@@ -32,7 +36,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   contact; it adds a low-level custom-radius line option and no new topology.
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
   triangle-contact orientations are already implemented.
-- Semantic bubbles and seagulls support s/t-tree external slots 1-4, one at
+- Semantic bubbles, seagulls and swordfish support s/t-tree external slots 1-4, one at
   a time. U-tree/contact hosts and internal insertions remain unsupported and
   can be no-ops. Seagulls have one quartic self-loop vertex, distinct from bubbles.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
@@ -42,7 +46,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Sixteen pages: 74 recipes, including the full insertion matrices and reviewed momentum defaults. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Nineteen pages: 86 recipes, including all eight swordfish placements and styled samples. M05 is local only. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -60,8 +64,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M02 | Independent triangle-contact annotations, four orientations | Complete on published main; 35 regression documents and 600 endpoint contacts pass |
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a and M03b complete on published main |
 | M04 | External seagulls on s/t trees | Complete on published main; verified checkpoint `854293a` |
-| M05 | External swordfish on s/t trees | Next session; freeze the shared-vertex graph first |
-| M06 | Regular tree-attached triangle corrections, four placements | Planned |
+| M05 | External swordfish on s/t trees | Complete locally on `codex/m05-swordfish`; merge/push pending |
+| M06 | Regular tree-attached triangle corrections, four placements | Next after M05 publication |
 | M07 | Complementary crossed box, crossed external layouts, source routing questions | Planned; square defaults already verified |
 | M08a / M08b | Contact external self-energy / seagull | Planned |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
@@ -70,12 +74,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M05 is next: external swordfish diagrams on s/t trees. M04 is already merged
-and published; no manual Git preparation is needed from the user. Start from
-current main, fetch/inspect status and create a new `codex/` feature branch.
-Read R12 and freeze the shared-tree-vertex graph from S08-L1 before coding. A swordfish has two parallel loop edges sharing the tree
-interaction vertex, unlike the separate quartic self-loop of a seagull. Cover
-one external placement at a time, preserving logical styles and annotation controls.
+M06 is next: regular tree-attached triangles, R08. First publish the verified
+M05 checkpoint when authorized; the assistant handles that merge/push, with no
+manual Git preparation needed from the user. Fetch/inspect the resulting main
+and create a new `codex/` feature branch. Freeze the source connectivity before
+coding: top/bottom corrections on T trees, then left/right corrections on S
+trees. These have three trivalent loop vertices and a bridge to the opposite
+tree vertex; the existing triangle-contact graph is a different construction.
+Complete one placement at a time and preserve logical styles/annotations.
 D01 remains a separate later workflow; do not polish index positions during
 these feature sessions.
 
@@ -395,3 +401,18 @@ This closeout updates documentation only. Next session: M05/R12 swordfish,
 starting with the S08-L1 shared interaction vertex and one placement at a time.
 Do not begin M05 during this publication session. D01 index positioning remains
 reserved for its separate workflow.
+
+## M05 implementation record - 2026-11-04
+
+- Started from clean published main `efb5fae` on `codex/m05-swordfish`.
+- Froze S08-L1's graph, then enabled T1/T2/T3/T4/S1/S2/S3/S4 in sequence.
+  Each has seven propagators and three interaction vertices: two parallel
+  A--H loop edges meet the actual tree vertex H, with no collapsed bridge.
+- Preserved selected-leg style/caps, independent loop styles and momenta,
+  endpoint-index values/ownership and per-diagram reset. Index polish remains D01.
+- Passed 167 focused public cases, independent PDF checks of all eight graphs,
+  48 new endpoint contacts, and the full 41-document/736-contact suite.
+- Added the six-page focused gallery and atlas pages 17-19 (86 recipes total).
+  The first sixteen atlas page bodies retain their published M04 rendering.
+- Complete locally; main/GitHub remain `efb5fae`. Merge/push is a separate step.
+  M06 follows publication. See [M05 verification](planning/m05-verification.md).
