@@ -4,9 +4,9 @@
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Complete locally on `codex/m06-tree-triangles`, based on published main
-`eb6182c` (2026-11-06). M06 has not been merged/pushed. There are **102 current
-examples on twenty-three pages**. These are recipes and meaningful layouts/styles,
-not 102 distinct graph topologies. M06 adds all four regular tree triangles
+`eb6182c` (2026-11-06). M06 has not been merged/pushed. There are **106 current
+examples on twenty-four pages**. These are recipes and meaningful layouts/styles,
+not 106 distinct graph topologies. M06 adds all four regular tree triangles
 with equilateral defaults and four mixed-style/annotation samples; see
 [verification](../planning/m06-verification.md). M05 remains published on main.
 
@@ -69,6 +69,12 @@ ordinary/corrected trees, box/crossed box and triangle-contact. Explicit
 `fourpoint-xspan/yspan` applies across these families; explicit family external
 spans still override it. Inner box/triangle geometry and graph connectivity
 are preserved. Historical PDFs/checkpoints retain their own default spans.
+
+The endcap fix preserves a logical external leg's cap when
+`insertion-pre-line=...` overrides its line style. Explicit caps on that
+segment take precedence; post segments and loops do not inherit the cap.
+Page 24 adds N01-N04, minimal cap-only examples across bubble, seagull and
+swordfish insertions. See [verification](../planning/insertion-endcaps-verification.md).
 
 ## How to read it
 

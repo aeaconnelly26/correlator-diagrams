@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M06 local; longer S exchange; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
+Baseline: `M06 local; insertion caps fixed; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -2600,5 +2600,123 @@ Same +/-2.10 outer corners as trees, box and crossed box.
   line=plain,
   scale=1.0,
   triangle-contact-orientation=right
+]
+```
+
+## External caps survive segment styling
+
+### N01 - T bubble: double caps
+
+Four outer double caps retained.
+
+**Limit:** Explicit segment caps override logical leg caps.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=bubble,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### N02 - T seagull: double caps
+
+Four outer double caps retained.
+
+**Limit:** Explicit segment caps override logical leg caps.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=seagull,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### N03 - T swordfish: double caps
+
+Four outer double caps retained.
+
+**Limit:** Explicit segment caps override logical leg caps.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=swordfish,
+  insertion-slot=2,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
+]
+```
+
+### N04 - S bubble: double caps
+
+Four outer double caps retained.
+
+**Limit:** Explicit segment caps override logical leg caps.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=bubble,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
 ]
 ```

@@ -9,7 +9,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Current branch: `codex/m06-tree-triangles`, based on published main `eb6182c`.
 - M06 is complete locally: regular triangle corrections on T top/bottom and S
   left/right, with equilateral defaults as requested. Each has four trivalent
-  interactions and an exchange bridge. All 44 documents / 772 endpoint contacts
+  interactions and an exchange bridge. All 45 documents / 772 endpoint contacts
   pass. See [M06 verification](planning/m06-verification.md).
   Merge/push is pending; M05 remains published on main.
 - The package-wide coordinate baseline is now 0.8 times the former size:
@@ -19,6 +19,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Ordinary S-tree exchanges and external bubble/seagull/swordfish variants
   now default to half-span 1.05 (was 0.78), with unchanged outer endpoints.
   Triangle corrections retain 0.78. See [S-exchange review](planning/s-tree-span-verification.md).
+- Explicit outer insertion segment styles now preserve the logical leg cap
+  unless that segment supplies its own cap. All S/T bubble/seagull/swordfish
+  slots are covered; see [endcap verification](planning/insertion-endcaps-verification.md).
 - M05 checkpoint `9daebf9` is merged and published: swordfish insertions on all
   four external legs of both tree channels. The two loop edges meet the actual
   quartic tree vertex. All 41 maintained documents and 736 endpoint contacts
@@ -60,7 +63,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-three pages: 102 recipes, including equilateral tree triangles, styled samples and common-frame comparisons. M06 is local only; M05 is published. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-four pages: 106 recipes, including equilateral tree triangles, styled samples and common-frame comparisons. M06 is local only; M05 is published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |

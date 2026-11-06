@@ -1,5 +1,5 @@
 {
-  "baseline": "M06 local; longer S exchange; base eb6182c",
+  "baseline": "M06 local; insertion caps fixed; base eb6182c",
   "date": "2026-11-06",
   "base_options": [
     "field={}",
@@ -1620,6 +1620,85 @@
           ],
           "description": "Same +/-2.10 outer corners as trees, box and crossed box.",
           "limitation": "Comparison repeat; the quartic vertex and internal spans are unchanged."
+        }
+      ]
+    },
+    {
+      "section": "24 / INSERTION ENDCAPS",
+      "title": "External caps survive segment styling",
+      "subtitle": "The corrected external segment retains its logical leg cap. Internal insertion pieces stay uncapped.",
+      "entries": [
+        {
+          "id": "N01",
+          "title": "T bubble: double caps",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "line={ewboson,endcapp}",
+            "channel-line=plain",
+            "insertion=bubble",
+            "insertion-slot=3",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line=ewboson",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Four outer double caps retained.",
+          "limitation": "Explicit segment caps override logical leg caps."
+        },
+        {
+          "id": "N02",
+          "title": "T seagull: double caps",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "line={ewboson,endcapp}",
+            "channel-line=plain",
+            "insertion=seagull",
+            "insertion-slot=3",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line=ewboson",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Four outer double caps retained.",
+          "limitation": "Explicit segment caps override logical leg caps."
+        },
+        {
+          "id": "N03",
+          "title": "T swordfish: double caps",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "line={ewboson,endcapp}",
+            "channel-line=plain",
+            "insertion=swordfish",
+            "insertion-slot=2",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line=ewboson",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Four outer double caps retained.",
+          "limitation": "Explicit segment caps override logical leg caps."
+        },
+        {
+          "id": "N04",
+          "title": "S bubble: double caps",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "line={ewboson,endcapp}",
+            "channel-line=plain",
+            "insertion=bubble",
+            "insertion-slot=3",
+            "insertion-pre-line=ewboson",
+            "insertion-post-line=ewboson",
+            "bubble-top-line=plain",
+            "bubble-bottom-line=plain",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Four outer double caps retained.",
+          "limitation": "Explicit segment caps override logical leg caps."
         }
       ]
     }

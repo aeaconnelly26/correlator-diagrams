@@ -1,0 +1,65 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,adjustbox,feynman-fun}
+\setlength{\parindent}{0pt}
+\newbox\ecbox\newcount\eccases\newcount\eccaps\newcount\ecdouble
+\makeatletter
+\let\ecoldcap\corr@drawexternalendcap
+\renewcommand{\corr@drawexternalendcap}[2]{%
+ \global\advance\eccaps by1
+ \def\ecfound{no}%
+ \@for\ecouter:={corrUL,corrLL,corrUR,corrLR}\do{%
+  \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{\ecouter}{center}}%
+  \pgfmathsetlengthmacro{\ecerror}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\ecerror<.03pt\def\ecfound{yes}\fi}%
+ \corr@ifstringeq{\ecfound}{yes}{}{\PackageError{Insertion caps}{Cap at an internal vertex}{}}%
+ \ecoldcap{#1}{#2}}
+\let\ecolddouble\corr@drawexternalendcapp
+\renewcommand{\corr@drawexternalendcapp}[2]{\global\advance\ecdouble by1\ecolddouble{#1}{#2}}
+\newcommand{\ecmeasure}[1]{%
+ \global\advance\eccases by1\global\eccaps=0\global\ecdouble=0
+ \edef\eccall{\noexpand\ecmacro[field={},central={},leg-labels={,,,},show-momenta=false,
+  line=plain,channel-line=plain,insertion=\eckind,insertion-slot=\ecslot,#1]}%
+ \setbox\ecbox=\hbox{\eccall}%
+ \ifnum\eccaps=\ecwanted\relax\else
+  \PackageError{Insertion caps}{Outer caps: got \the\eccaps, expected \ecwanted}{}\fi
+ \ifnum\ecdouble=\ecwanteddouble\relax\else
+  \PackageError{Insertion caps}{Double caps: got \the\ecdouble, expected \ecwanteddouble}{}\fi}
+\begin{document}
+\@for\ecmacro:={\TTreeChannelCorr,\STreeChannelCorr}\do{%
+ \@for\eckind:={bubble,seagull,swordfish}\do{%
+  \@for\ecslot:={1,2,3,4}\do{%
+   \@for\ecscale:={.72,1,1.2}\do{%
+    \def\ecwanted{4}\def\ecwanteddouble{4}%
+    \ecmeasure{scale=\ecscale,line={ewboson,endcapp},insertion-pre-line=ewboson,insertion-post-line={ewboson,endcapp}}%
+    \def\ecwanteddouble{0}%
+    \ecmeasure{scale=\ecscale,line={plain,endcap},insertion-pre-line={ewboson,blue},insertion-post-line={ewboson,endcap}}}%
+   % Explicit segment caps win; inheriting the double cap as well would duplicate it.
+   \def\ecwanted{4}\def\ecwanteddouble{3}%
+   \ecmeasure{line={ewboson,endcapp},insertion-pre-line={ewboson,endcap}}%
+   \def\ecwanteddouble{4}%
+   \ecmeasure{line={plain,endcapp},insertion-pre-line={ewboson,endcapp}}%
+   % Per-leg caps and unrelated circles must remain independent of overrides.
+   \ecmeasure{leg-styles={{ewboson,endcapp,circ=Z},{ewboson,endcapp,circ=Z},{ewboson,endcapp,circ=Z},{ewboson,endcapp,circ=Z}},insertion-pre-line=ewboson}%
+   \def\ecwanted{0}\def\ecwanteddouble{0}%
+   \ecmeasure{line=plain,insertion-pre-line=ewboson,insertion-post-line={ewboson,endcapp}}%
+  }}}
+% A following ordinary call must recover its uncapped default.
+\def\ecmacro{\TTreeChannelCorr}\def\eckind{none}\def\ecslot{1}%
+\ecmeasure{}%
+\typeout{PASS insertion caps: \the\eccases\space public cases; all S/T slots, three insertion families, single/double caps, explicit segment precedence, post stripping and reset}
+\let\corr@drawexternalendcap\ecoldcap\let\corr@drawexternalendcapp\ecolddouble
+\makeatother
+\newcommand{\eccell}[3]{\begin{minipage}[t][2.9in][t]{.48\linewidth}\textbf{#1}\par\vspace{10pt}\centering
+ #2[field={},central={},leg-labels={,,,},show-momenta=false,
+ line={ewboson,endcapp},channel-line=plain,insertion-pre-line=ewboson,
+ insertion-post-line=ewboson,bubble-top-line=plain,bubble-bottom-line=plain,
+ seagull-loop-line=plain,#3]\end{minipage}}
+\section*{Double endcaps survive insertion line overrides}
+Only endcaps are under test. No field circles, indices or momentum guides.
+\par\bigskip
+\eccell{T bubble: upper-right leg}{\TTreeChannelCorr}{insertion=bubble,insertion-slot=3}\hfill
+\eccell{T seagull: upper-right leg}{\TTreeChannelCorr}{insertion=seagull,insertion-slot=3}\par
+\eccell{T swordfish: lower-left leg}{\TTreeChannelCorr}{insertion=swordfish,insertion-slot=2}\hfill
+\eccell{S bubble: upper-right leg}{\STreeChannelCorr}{insertion=bubble,insertion-slot=3}
+\end{document}

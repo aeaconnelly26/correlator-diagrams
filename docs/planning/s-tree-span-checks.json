@@ -120,5 +120,8 @@
     "docs/diagram-inventory/README.md": "2e4a057bf9dd464be9d4d6aada9082908b106154f73d8aa02021c0aac8b45a8a",
     "docs/diagram-inventory/verification.md": "091fcd38ded30b415fddc7fdbb77fc493705a143cb2de38001109ffe65718f17",
     "README.md": "b4fd81f0089ddd873e770256bead89fa016374b9fa65440db7edb3fb7031a366"
-  }
+  },
+  "checkpoint": "b1d84eb",
+  "historical": true,
+  "superseded_current_review": "insertion-endcaps-checks.json"
 }

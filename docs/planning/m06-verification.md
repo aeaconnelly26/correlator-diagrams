@@ -7,7 +7,9 @@ this checkpoint. Exact delivered hashes are in [m06-checks.json](m06-checks.json
 The subsequent [compact scale review](scale-baseline-verification.md) applies
 the 0.8 coordinate baseline throughout and refreshes the PDFs. The later
 [S-exchange review](s-tree-span-verification.md) lengthens ordinary S exchanges
-while leaving all seven triangle gallery pages pixel-identical.
+while leaving all seven triangle gallery pages pixel-identical. The
+[endcap fix](insertion-endcaps-verification.md) preserves logical caps across
+outer segment overrides and adds four cap-only atlas recipes.
 
 ## Graph and reference trace
 
@@ -104,7 +106,7 @@ Isolated pages verify **24 Proca + 12 scalar pink, white-filled contacts**.
 Visible tip/dot gaps are approximately -0.1763 to -0.1741 PDF pt, within the
 maintained tolerance. See [actual-PDF results](../../regressions/topologies/insertion/tree-triangle-contact.json).
 
-The final maintained suite passes **44 documents / 772 endpoint contacts**
+The final maintained suite passes **45 documents / 772 endpoint contacts**
 (736 existing + 36 new). Existing legacy-marker, species-circle/optical-W,
 EW-wavelength and state-reset checks pass. The suite also caught a stray
 paragraph in the new reset definitions when used inside math mode; that was
@@ -115,13 +117,13 @@ removed before the final complete run.
 - [Seven-page gallery](../../regressions/topologies/insertion/tree-triangle-slots.pdf):
   28 examples, covering four plain graphs, four default gap examples, four
   continuous-arrow Proca examples, and isolated Proca/scalar contact matrices.
-- [Current atlas](../diagram-inventory/inventory.pdf): **102 recipes / 23 pages**.
+- [Current atlas](../diagram-inventory/inventory.pdf): **106 recipes / 24 pages**.
   Page 20 adds L01-L04 (plain equilateral placements); page 21 adds L11-L14
   (mixed lines and continuous momentum labels, without caps/circles/indices).
 - [Copy/paste recipes](../diagram-inventory/recipes.md) and
   [reference](../reference.md) document supported controls and boundaries.
 
-Every gallery page and all 23 atlas pages were rendered and inspected for
+Every gallery page and all atlas pages were rendered and inspected for
 connectivity, proportions, labels, marker contact, clipping and crowding.
 The cross-family span change intentionally updates earlier default diagrams;
 the previous first-nineteen-pages identity claim applied to checkpoint 2506354.
@@ -156,7 +158,8 @@ its replacement component bound is stricter than the original Euclidean
 The initial M06 record is preserved in [history](history/m06-checks-2506354.json),
 and the pre-rebase shared-frame checkpoint in
 [ad9592b history](history/m06-checks-ad9592b.json). The compact-scale checkpoint
-is preserved in [97ecd10 history](history/m06-checks-97ecd10.json).
+is preserved in [97ecd10 history](history/m06-checks-97ecd10.json), and the pre-endcap-fix
+record in [b1d84eb history](history/m06-checks-b1d84eb.json).
 
 ## Boundaries and next slice
 

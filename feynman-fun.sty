@@ -6887,9 +6887,31 @@
   \coordinate (corrInsertionB) at ([shift=({\corr@insertionangle}:\corr@insertionhalflength)]corrInsertionC);
 }
 
+% A segment appearance override does not replace the logical leg's cap.
+% Copy only cap metadata; explicit caps on the segment retain precedence.
+\newcommand{\corr@drawinsertionouterprop}[1]{%
+  \edef\corr@outersegmentstyle{\corr@insertionpreline}%
+  \ifdefempty{\corr@outersegmentstyle}{}{%
+    \edef\corr@propoptions{\corr@legstylefor{\corr@insertionhostslot}}%
+    \expandafter\corr@stripendcapstyles\expandafter{\corr@propoptions}%
+    \def\corr@inheritedoutercaps{}%
+    \ifcorr@endcapatstart\appto\corr@inheritedoutercaps{,endcapout}\fi
+    \ifcorr@endcapatend\appto\corr@inheritedoutercaps{,endcapin}\fi
+    \ifcorr@endcappatstart\appto\corr@inheritedoutercaps{,endcappout}\fi
+    \ifcorr@endcappend\appto\corr@inheritedoutercaps{,endcappin}\fi
+    \expandafter\corr@stripendcapstyles\expandafter{\corr@outersegmentstyle}%
+    \ifcorr@endcapatstart\let\corr@inheritedoutercaps\@empty\fi
+    \ifcorr@endcapatend\let\corr@inheritedoutercaps\@empty\fi
+    \ifcorr@endcappatstart\let\corr@inheritedoutercaps\@empty\fi
+    \ifcorr@endcappend\let\corr@inheritedoutercaps\@empty\fi
+    \edef\corr@outersegmentstyle{\corr@outersegmentstyle\corr@inheritedoutercaps}%
+  }%
+  \corr@drawchannelprop{\corr@insertionhostslot}{\corr@outersegmentstyle}{corrInsertionOuter}{#1}{}%
+}
+
 \newcommand{\corr@drawttreebubbleinsertion}{%
   \corr@setttreebubbleinsertioncoords
-  \corr@drawchannelprop{\corr@insertionhostslot}{\corr@insertionpreline}{corrInsertionOuter}{corrInsertionA}{}%
+  \corr@drawinsertionouterprop{corrInsertionA}%
   \corr@drawchannelpropnoendcaps{\corr@insertionhostslot}{\corr@insertionpostline}{corrInsertionB}{corrInsertionHost}{}%
   \corr@drawbubbleinternalprop{3}{\corr@bubblealine}{corrInsertionA}{corrInsertionB}{out=\corr@insertiontopangle,in=\corr@insertiontopangle,looseness=\corr@bubblelooplooseness}
   \corr@drawbubbleinternalprop{4}{\corr@bubblebline}{corrInsertionA}{corrInsertionB}{out=\corr@insertionbottomangle,in=\corr@insertionbottomangle,looseness=\corr@bubblelooplooseness}
@@ -6918,7 +6940,7 @@
 }
 \newcommand{\corr@drawtreeswordfishinsertion}{%
   \corr@settreeswordfishcoords
-  \corr@drawchannelprop{\corr@insertionhostslot}{\corr@insertionpreline}{corrInsertionOuter}{corrInsertionA}{}%
+  \corr@drawinsertionouterprop{corrInsertionA}%
   \corr@drawbubbleinternalprop{3}{\corr@bubblealine}{corrInsertionA}{corrInsertionHost}
     {out=\corr@swordfishouta,in=\corr@swordfishina,looseness=\corr@bubblelooplooseness}%
   \corr@drawbubbleinternalprop{4}{\corr@bubblebline}{corrInsertionA}{corrInsertionHost}
@@ -7237,7 +7259,7 @@
 
 \newcommand{\corr@drawttreeslotoneseagullinsertion}{%
   \corr@setttreeslotoneseagullcoords
-  \corr@drawchannelprop{\corr@insertionhostslot}{\corr@insertionpreline}{corrInsertionOuter}{corrInsertionV}{}%
+  \corr@drawinsertionouterprop{corrInsertionV}%
   \corr@drawchannelpropnoendcaps{\corr@insertionhostslot}{\corr@insertionpostline}{corrInsertionV}{corrInsertionHost}{}%
   \corr@drawseagullloop
 }

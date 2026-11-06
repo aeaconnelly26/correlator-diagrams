@@ -53,6 +53,7 @@ run_tex "regressions/topologies/three-point/three-point-translation-check.tex"
 run_tex "regressions/propagators/scalar-polarization/scalar-polarization-check.tex"
 run_tex "regressions/topologies/bubble/bubble-regression.tex"
 run_tex "regressions/topologies/insertion/insertion-regression.tex"
+run_tex "regressions/topologies/insertion/insertion-endcaps.tex"
 run_tex "regressions/topologies/insertion/t-tree-bubble-slots.tex"
 run_tex "regressions/topologies/insertion/s-tree-bubble-slots.tex"
 run_tex "regressions/topologies/insertion/seagull-insertion-regression.tex"
@@ -80,6 +81,9 @@ run_tex "regressions/topologies/three-point/three-point-feature-gallery.tex"
 run_tex "regressions/propagators/proca-endpoints/proca-endpoint-audit.tex"
 
 if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/topologies/insertion/check-insertion-endcaps.py" \
+    "$build_root/regressions/topologies/insertion/insertion-endcaps.pdf"
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/propagators/proca-endpoints/check-endpoint-contact.py" \
     "$build_root/regressions/propagators/proca-endpoints/proca-endpoint-audit.pdf" \

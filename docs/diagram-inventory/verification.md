@@ -1,3 +1,12 @@
+# Insertion endcaps - 2026-11-06
+
+The atlas now has **106 recipes / 24 pages**. N01-N04 demonstrate retained
+outer double caps with explicit segment line overrides. The original 23 page
+bodies remain pixel-identical to `b1d84eb` (footer provenance excluded).
+See [endcap verification](../planning/insertion-endcaps-verification.md) for
+the reproduced failure, 241 public cases and actual-PDF bar/contact checks.
+Earlier sections record their own checkpoints and counts.
+
 # Longer S exchanges - 2026-11-06
 
 The current 102-recipe / 23-page atlas uses S exchange half-span 1.05 for

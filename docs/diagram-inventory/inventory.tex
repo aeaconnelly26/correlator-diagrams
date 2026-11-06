@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M06 local; longer S exchange; base eb6182c | 2026-11-06}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M06 local; insertion caps fixed; base eb6182c | 2026-11-06}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -1901,4 +1901,94 @@
   triangle-contact-orientation=right
 ]
 }{Same +/-2.10 outer corners as trees, box and crossed box.}{Comparison repeat; the quartic vertex and internal spans are unchanged.}\par\vspace{4pt}
+\newpage
+\atlaspage{24 / INSERTION ENDCAPS}{External caps survive segment styling}{The corrected external segment retains its logical leg cap. Internal insertion pieces stay uncapped.}
+\atlascell{N01  T bubble: double caps}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=bubble,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
+]
+}{Four outer double caps retained.}{Explicit segment caps override logical leg caps.}\hfill
+\atlascell{N02  T seagull: double caps}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=seagull,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
+]
+}{Four outer double caps retained.}{Explicit segment caps override logical leg caps.}\par\vspace{4pt}
+\atlascell{N03  T swordfish: double caps}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=swordfish,
+  insertion-slot=2,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
+]
+}{Four outer double caps retained.}{Explicit segment caps override logical leg caps.}\hfill
+\atlascell{N04  S bubble: double caps}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line={ewboson,endcapp},
+  channel-line=plain,
+  insertion=bubble,
+  insertion-slot=3,
+  insertion-pre-line=ewboson,
+  insertion-post-line=ewboson,
+  bubble-top-line=plain,
+  bubble-bottom-line=plain,
+  seagull-loop-line=plain
+]
+}{Four outer double caps retained.}{Explicit segment caps override logical leg caps.}\par\vspace{4pt}
 \end{document}

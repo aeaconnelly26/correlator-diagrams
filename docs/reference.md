@@ -2286,6 +2286,16 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
+For external S/T bubble, seagull and swordfish insertions,
+`insertion-pre-line=...` changes the outer segment's appearance while retaining
+single/double caps from the logical external leg. For example,
+`line={ewboson,endcapp},insertion-pre-line=ewboson` keeps all four outer double
+caps. Only cap metadata is inherited; field circles and polarization styles
+are not added to the override. If the segment explicitly supplies a cap,
+that segment's cap settings take precedence. To remove a cap, omit it from
+the logical leg style. Post segments and loop arcs stay independent of the
+external cap. See [verification](planning/insertion-endcaps-verification.md).
+
 Ordinary S-tree diagrams, including external bubble, seagull and swordfish
 variants, default to `channel-vertex-xspan=1.05`, giving the central exchange
 length 2.10 coordinate units. S regular-triangle corrections retain their

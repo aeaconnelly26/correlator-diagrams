@@ -18,6 +18,7 @@ records; M05 is complete on published main; M06 is complete locally on its featu
 - [Shared four-leg frame](four-leg-frame-verification.md): common defaults and override checks across trees, boxes and triangle-contact.
 - [Compact scale baseline](scale-baseline-verification.md): package-wide 0.8 factor, public scale semantics, rendered equivalence and regression evidence.
 - [Longer S exchanges](s-tree-span-verification.md): ordinary S trees and external corrections; triangle geometry retained.
+- [Insertion endcap fix](insertion-endcaps-verification.md): logical external caps survive outer-segment line overrides; explicit cap precedence and PDF contact checks.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
 - [Deferred workflows](deferred-workflows.md): later reviews, including the explicitly deferred index-placement cleanup.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.

@@ -1,6 +1,6 @@
 # Longer ordinary S exchanges - 2026-11-06
 
-User-directed follow-up to `97ecd10` on `codex/m06-tree-triangles`.
+Historical S-span checkpoint `b1d84eb`, a user-directed follow-up to `97ecd10` on `codex/m06-tree-triangles`.
 Ordinary S trees and their external bubble/seagull/swordfish variants now use
 `channel-vertex-xspan=1.05` by default, up from 0.78. The exchange length is
 2.10 logical units instead of 1.56, approximately **35% longer**. It measures
