@@ -57,6 +57,13 @@
 }
 \let\rtolddraw\corr@drawtreetriangle
 \renewcommand{\corr@drawtreetriangle}{\rtolddraw
+ % A correction must honor the exact same outer frame as an ordinary tree.
+ \coordinate (rtExpectedUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+ \coordinate (rtExpectedLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+ \coordinate (rtExpectedUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+ \coordinate (rtExpectedLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+ \rtclose{corrUL}{rtExpectedUL}\rtclose{corrLL}{rtExpectedLL}%
+ \rtclose{corrUR}{rtExpectedUR}\rtclose{corrLR}{rtExpectedLR}%
  \ifcorr@externallegs\rtassert\rtedges{8}{Eight edges}\else\rtassert\rtedges{4}{Four internal edges}\fi
  \ifcorr@externallegs\rtassert\rtdots{4}{Four distinct interaction vertices}\else\rtassert\rtdots{8}{Interaction and legacy placeholder dots}\fi%
  \rtclose{\csname rtstart6\endcsname}{corrRTA}\rtclose{\csname rtend6\endcsname}{corrRTB}%
@@ -89,6 +96,8 @@
 \@for\rtside:=\rtplacements\do{%
  \def\rtpublic{\TTreeChannelCorr}\corr@ifstringeq{\rtside}{left}{\def\rtpublic{\STreeChannelCorr}}{}\corr@ifstringeq{\rtside}{right}{\def\rtpublic{\STreeChannelCorr}}{}%
  \@for\rtscale:={.72,1,1.2}\do{\rtmeasure{scale=\rtscale}}%
+ \rtmeasure{fourpoint-xspan=2.2,fourpoint-yspan=1.6}% Exact custom outer frame.
+ \rtmeasure{fourpoint-xspan=1.8,fourpoint-yspan=1.2}% Fit inside a tighter frame.
  \rtmeasure{tree-triangle-depth=.65,tree-triangle-outer-shift=.1}% Auto width stays equilateral.
  \rtmeasure{tree-triangle-half-width=.8,tree-triangle-depth=.65,tree-triangle-outer-shift=.1}%
  \rtmeasure{line=ewboson,channel-line={proca,magenta!85!red},tree-triangle-loop-line=proca,tree-triangle-line-7=spol}%
@@ -158,6 +167,7 @@
 \let\corr@drawexternalendcapp\rtolddouble\let\corr@puttopologyindexline\rtoldindex
 \let\corr@trianglecontactdrawannotation\rtoldannotation\let\corr@drawtreetriangle\rtolddraw
 \makeatother
+\input{four-leg-frame-checks.tex}
 \newcommand{\rtcell}[2]{\begin{minipage}[t][2.9in][t]{.48\linewidth}\textbf{#1}\par\vspace{10pt}\centering\begin{adjustbox}{max width=\linewidth,max totalheight=2.4in}#2\end{adjustbox}\end{minipage}}
 \newcommand{\rtdiagram}[3]{#1[field={},central={},leg-labels={,,,},external-vertices=false,line=plain,channel-line=plain,show-momenta=false,insertion=triangle,tree-triangle-side=#2,#3]}
 \section*{Regular tree-attached triangles: all placements}
@@ -194,4 +204,18 @@ Only loop endpoint markers; no momenta, caps or circles.\par\vspace{12pt}
 \rtcell{T top}{\rtdiagram{\TTreeChannelCorr}{top}{tree-triangle-loop-line={spol,magenta!85!red}}}\par
 \rtcell{S left}{\rtdiagram{\STreeChannelCorr}{left}{tree-triangle-loop-line={spol,magenta!85!red}}}\hfill
 \rtcell{S right}{\rtdiagram{\STreeChannelCorr}{right}{tree-triangle-loop-line={spol,magenta!85!red}}}\par
+\newpage
+\section*{One shared outer frame: trees and boxes}
+All four external endpoints use $x,y=\pm2.10$; only internal connectivity changes.\par\vspace{12pt}
+\rtcell{Ordinary T tree}{\TTreeChannelCorr[field={},central={},line=plain,show-momenta=false]}\hfill
+\rtcell{T triangle}{\rtdiagram{\TTreeChannelCorr}{top}{}}\par
+\rtcell{Box}{\BoxLoopCorr[field={},central={},line=plain,box-line=plain,box-external-line=plain,show-momenta=false]}\hfill
+\rtcell{Crossed box}{\CrossBoxCorr[field={},central={},line=plain,box-line=plain,box-external-line=plain,show-momenta=false]}\par
+\newpage
+\section*{The same frame: triangle-contact orientations}
+The shared outer endpoints stay fixed in all four contact orientations.\par\vspace{12pt}
+\rtcell{Contact bottom}{\TriangleContactCorr[field={},central={},line=plain,show-momenta=false,triangle-contact-orientation=bottom]}\hfill
+\rtcell{Contact top}{\TriangleContactCorr[field={},central={},line=plain,show-momenta=false,triangle-contact-orientation=top]}\par
+\rtcell{Contact left}{\TriangleContactCorr[field={},central={},line=plain,show-momenta=false,triangle-contact-orientation=left]}\hfill
+\rtcell{Contact right}{\TriangleContactCorr[field={},central={},line=plain,show-momenta=false,triangle-contact-orientation=right]}\par
 \end{document}

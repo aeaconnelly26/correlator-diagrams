@@ -17,7 +17,9 @@
         44.18720000000002,
         44.18818058504899,
         44.18818058504899
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     },
     {
       "side": "top",
@@ -36,7 +38,9 @@
         44.18719999999996,
         44.188180585048976,
         44.188180585048976
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     },
     {
       "side": "left",
@@ -55,7 +59,9 @@
         44.18719999999996,
         44.188180585048976,
         44.188180585048976
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     },
     {
       "side": "right",
@@ -74,9 +80,12 @@
         44.18719999999996,
         44.18818058504893,
         44.18818058504893
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     }
   ],
+  "shared_frame_comparison_graphs": 8,
   "styled_wavy_exchange_curve_counts": [
     10,
     10,
@@ -359,6 +368,22 @@
           0.85
         ]
       ]
+    },
+    {
+      "page": 6,
+      "triangles": 0,
+      "dots": 14,
+      "gaps_pt": [],
+      "visible_gaps_pt": [],
+      "colors": []
+    },
+    {
+      "page": 7,
+      "triangles": 0,
+      "dots": 12,
+      "gaps_pt": [],
+      "visible_gaps_pt": [],
+      "colors": []
     }
   ]
 }

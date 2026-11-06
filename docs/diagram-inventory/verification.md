@@ -1,22 +1,25 @@
 # M06 current local inventory - 2026-11-06
 
-The atlas now has **94 public recipes / 21 pages**, built on
+The atlas has **102 public recipes / 23 pages**, built on
 `codex/m06-tree-triangles` from published main `eb6182c`. M06 remains local.
-Page 20 shows four plain equilateral tree triangles (L01-L04); page 21 adds
-mixed propagators and independent continuous momentum arrows (L11-L14).
-Both new pages and all five gallery pages were rendered and inspected.
-The first nineteen atlas page bodies are pixel-identical to published main
-above their revision footer; all existing M05/M04 styling is preserved.
+Pages 20-21 show the four larger equilateral triangles and styled examples;
+pages 22-23 compare the shared outer frame across trees, boxes and contact
+orientations. The seven-page gallery has 28 examples.
 
-The full 42-document / 772-contact suite and 183 focused public cases pass.
-Independent actual-PDF checks verify four
-connected eight-edge graphs, a genuine three-edge loop and exchange bridge,
-four trivalent interaction dots, equal triangle sides in every orientation,
-and 24 Proca + 12 scalar pink white-filled endpoint contacts. See
-[M06 verification](../planning/m06-verification.md) for full-suite results,
-reproduction and geometry/index limits. D01 remains deferred.
+The user clarified that the common span may grow when applied consistently.
+The default outer frame is now +/-2.10 on both axes for ordinary/corrected
+trees, channel loops, box/crossed box and triangle-contact. The prior
+first-nineteen-pages pixel-identity result describes checkpoint 2506354;
+these pages intentionally change where they use the new defaults. All 23
+pages and all seven gallery pages were rendered and inspected.
 
-The sections below preserve earlier verification/publication history.
+191 focused triangle cases and 188 cross-family frame cases pass. Actual PDF
+paths independently verify triangle connectivity/equilateral size, the shared
+frame in twelve comparisons, four wavy styled exchanges, and 24 Proca + 12
+scalar contacts. Styled W-circle centering is retuned and measured. See
+[M06 verification](../planning/m06-verification.md) and
+[frame verification](../planning/four-leg-frame-verification.md) for full-suite
+results and limits. D01 remains deferred. Earlier sections preserve history.
 
 # M05 published inventory - 2026-11-06
 

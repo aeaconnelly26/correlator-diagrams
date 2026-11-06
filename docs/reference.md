@@ -2186,6 +2186,26 @@ bubble is quiet by default, while explicit `field=...`, `indices={...}`, or
 Focused visual QA lives in
 `regressions/topologies/bubble/bubble-regression.tex`.
 
+## Shared outer frame for four-leg diagrams
+
+Ordinary contact pairings, s/t/u trees and channel bubbles, supported tree
+insertions/corrections, box, crossed box and all triangle-contact orientations
+use outer corners at **x,y = +/-2.10** by default. The square box loop remains
+1.34 in each inner half-span; this change concerns outer endpoints.
+
+`fourpoint-xspan` and `fourpoint-yspan` set the common frame for these families.
+Box/crossed box inherit it through their external-span defaults; triangle-contact
+inherits it in the same way. An explicit `box-external-xspan/yspan` or
+`triangle-contact-external-xspan/yspan` overrides the corresponding shared axis
+for that diagram, independent of option order. The next call restores defaults.
+Previous endpoint frames can still be requested explicitly. Half-box and flat
+contact identity stubs retain their specialized layouts.
+
+The new defaults intentionally supersede older tree (1.95/1.35) and
+triangle-contact (1.72/1.55) outer spans. Box/crossed-box defaults already used
+2.10/2.10. Shared-frame recipes and plain comparison examples are on atlas pages
+22-23. See [frame verification](planning/four-leg-frame-verification.md).
+
 ## Semantic Insertions
 
 Semantic insertions attach a package-owned object to a logical propagator slot.
@@ -2258,10 +2278,10 @@ tree vertex. The seagull default leaves 60% of the leg for the inner host
 segment, 20% more length than the former midpoint placement. Explicit positions
 remain effective; `insertion-position=0.50` restores the old seagull placement.
 The styled seagull W circles use optical centering between the visible pink
-endpoint arrow and the black tree vertex: `circ position=0.588` on T trees and
-`circ position=0.599` on S trees. These values account for the arrow occupying
+endpoint arrow and the black tree vertex: `circ position=0.57332` on T trees and
+`circ position=0.57159` on S trees. These values account for the arrow occupying
 more of the segment than the dot, using the samples' standard 6pt arrows and
-default geometry/scale. Retune `circ position` for other marker sizes or geometry.
+shared 2.10/2.10 outer frame and default scale. Retune `circ position` for other marker sizes or geometry.
 Ordinary circles and the styled bubble-host circles retain the geometric 0.5.
 
 Default `insertion-scale` is **0.50 for supported s/t-tree bubble insertions**
@@ -2624,11 +2644,14 @@ Defaults are equilateral in every orientation:
   three sides have equal length, including after depth/outer-shift edits.
   An explicit half-width permits other shapes.
 
-The reviewed defaults enlarge each triangle side by 50% while preserving
-its bridge endpoint. Corrected T-channel outer endpoints extend as needed to
-stay at least 0.28 coordinate units beyond the loop base in the axial direction.
-`fourpoint-yspan` remains the minimum outer extent on that corrected side.
-Styled inventory/gallery examples use wavy EW exchange lines.
+The reviewed defaults retain the 50% larger equilateral sides and use the same
+shared square outer frame as ordinary trees, box, crossed box and triangle-contact:
+`fourpoint-xspan=2.10,fourpoint-yspan=2.10`. This gives the default T triangle
+room without shortening its exchange bridge. All four external endpoints stay
+at the requested coordinates. If an explicitly tighter frame needs more room,
+the three T loop vertices translate inward together until the base is at least
+0.28 coordinate units inside the outer edge, preserving side lengths. This
+fallback can shorten the bridge. Styled examples retain wavy EW exchange lines.
 
 Dimensions use TikZ coordinate units and follow the diagram scale. Keep
 vertices separated and the bridge nonzero. Extreme, collapsed or crossing

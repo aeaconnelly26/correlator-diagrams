@@ -77,7 +77,7 @@
       "public_cases": 104
     }
   ],
-  "focused_public_cases": 183,
+  "focused_public_cases": 191,
   "independent_pdf_graph_checks": 4,
   "baseline_regression_documents": 41,
   "baseline_endpoint_contacts": 736,
@@ -103,7 +103,9 @@
         44.18720000000002,
         44.18818058504899,
         44.18818058504899
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     },
     {
       "side": "top",
@@ -122,7 +124,9 @@
         44.18719999999996,
         44.188180585048976,
         44.188180585048976
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     },
     {
       "side": "left",
@@ -141,7 +145,9 @@
         44.18719999999996,
         44.188180585048976,
         44.188180585048976
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     },
     {
       "side": "right",
@@ -160,7 +166,9 @@
         44.18719999999996,
         44.18818058504893,
         44.18818058504893
-      ]
+      ],
+      "outer_frame_width_pdf_pt": 119.05691999999999,
+      "outer_frame_height_pdf_pt": 119.05691999999999
     }
   ],
   "styled_wavy_exchange_curve_counts": [
@@ -169,10 +177,10 @@
     6,
     6
   ],
-  "gallery_pages": 5,
-  "gallery_examples": 20,
-  "atlas_pages": 21,
-  "atlas_recipes": 94,
+  "gallery_pages": 7,
+  "gallery_examples": 28,
+  "atlas_pages": 23,
+  "atlas_recipes": 102,
   "new_atlas_ids": [
     "L01",
     "L02",
@@ -181,10 +189,16 @@
     "L11",
     "L12",
     "L13",
-    "L14"
+    "L14",
+    "L21",
+    "L22",
+    "L23",
+    "L24",
+    "L31",
+    "L32",
+    "L33",
+    "L34"
   ],
-  "unchanged_previous_atlas_page_bodies": 19,
-  "comparison_excludes": "revision footer",
   "tested_scales": [
     0.72,
     1,
@@ -203,18 +217,45 @@
   "geometry_limit": "Separated vertices and a positive bridge; extreme geometry is not clamped",
   "next_milestone": "M07a complementary internal crossing",
   "sha256": {
-    "feynman-fun.sty": "f41d02544b7473404efef87f39f70bf1b6d6e1a14bc55e374a88bbe5dbbaad85",
+    "feynman-fun.sty": "bb4398cfb5e6140685018bde0f4908e6e951cb4909bd6e57f69d7988734a4c30",
     "scripts/check-regressions.sh": "3eb1b2ccf8440ab059bc768ef968bbc4844cf2be81165d132d8492ecbc20b218",
-    "docs/reference.md": "f38e0dad76aef373bfa0a1a77fd1b9b480dd52923e28639194d898d8d240dcb2",
-    "docs/planning/m06-verification.md": "cd989b5ed76de3c1ea99f276e2337ee51615f6e436db1cfff636599f3c0c0314",
-    "regressions/topologies/insertion/M06-contract.md": "f83dc6ea912d2471d67af5bd0251c669e76e17f4a75553a59fc85ea4c107cde4",
-    "regressions/topologies/insertion/tree-triangle-slots.tex": "5509cacbd78a8eeb4b0d2a29046d13009b80df3b97f14fb5a3786a9ecf75f849",
-    "regressions/topologies/insertion/tree-triangle-slots.pdf": "8922e66566a461f58cfc6cfb5f516d6efa5d810a9beee3508c190c6c5048c5de",
-    "regressions/topologies/insertion/check-tree-triangle.py": "ad19efa8fac1be125cb674ca5d761f9b08eee3f8d8d6f428483895a069ee7457",
-    "regressions/topologies/insertion/tree-triangle-contact.json": "d8157e2ae1351609cc415b16e2e0fc10f0b19d4c85373f341d20cd9df570c925",
-    "docs/diagram-inventory/catalog.json": "4c552958110d41f3fbbd9be8b35ee275c6e4c14c31471dbc5a8acaa246a2e865",
-    "docs/diagram-inventory/inventory.tex": "49280202b7d1b713ca5a14be54e1d57db170ba8b15dae05694c4307e026003c8",
-    "docs/diagram-inventory/inventory.pdf": "fcad47c3a0364ae32753229aa30d337f1782e437600dd5fc327d06596e89d140",
-    "docs/diagram-inventory/recipes.md": "7da33680e9e4d2ee1599382b888d702b363f60fe6e7a71d1de94bce8357459de"
-  }
+    "docs/reference.md": "939c9677ac97f23db6772a0262d393087ab21004472d760281229b95587df6f6",
+    "docs/planning/m06-verification.md": "ee07888e6d52b02aa20e819505dc3f20f7ac91fdde542843fb76e547fcb5987c",
+    "regressions/topologies/insertion/M06-contract.md": "82a94e2af00aa231219d6c0048b6a3b7bc0c9954eb4718ae2031e24675f87ffd",
+    "regressions/topologies/insertion/tree-triangle-slots.tex": "f84e1790aaed240ac15057e2167001b524075486672e9fcbf1f27823c2994b63",
+    "regressions/topologies/insertion/tree-triangle-slots.pdf": "9bfeaad607577def0904e11c37b9842c1fa46873a4376f7868eaf39998f20aef",
+    "regressions/topologies/insertion/check-tree-triangle.py": "c4b6b2e90039c381d45dfe178e6bc1761fc3d95da1348f5bf7eef6410595fe66",
+    "regressions/topologies/insertion/tree-triangle-contact.json": "c0ccd7b4b77da45334d370a350b9b8c072e476b3728c23018115d4f11a1c30e4",
+    "docs/diagram-inventory/catalog.json": "09e16237f3c5da73063cc52835e853cf5b7fcec07e00b9f7cfdb51cc9f31149c",
+    "docs/diagram-inventory/inventory.tex": "8527c99263b76b34c6ebe666b0bfd28fc3f0d227581cbb267a5b252f3b93e92d",
+    "docs/diagram-inventory/inventory.pdf": "09c90ed4da92e1af751d496920b384efb3d478d96f5a399024a9e9c319493ef3",
+    "docs/diagram-inventory/recipes.md": "211b9a657c06b07863d88cb878b4b9ffaf44e2bf9194551fd8e9378fed3badd0",
+    "regressions/topologies/insertion/four-leg-frame-checks.tex": "cfae0788f12e72618c2f67c6aa7b43ac69d0574e9c1b9b408095e44514b37c3f",
+    "regressions/topologies/insertion/insertion-species-samples.tex": "262da6227c56ab78b151e9791803dd791a0cb2aed055e5b9040aadc73cd7eec9",
+    "regressions/topologies/insertion/insertion-species-samples.pdf": "a2aafba71ae7482b2ee086369b870474d7400a345d017f040ae114486823b344",
+    "regressions/topologies/insertion/species-circles.json": "31469125b6210166f54f081cadd15ef57d9551465b3b091ea3e5bed50257ec96",
+    "regressions/topologies/triangle-contact/triangle-contact-annotations.tex": "bb90fba71282da24adfe4152f80deff47142d14ec7438ec506e0ce0c3faf1912",
+    "docs/planning/four-leg-frame-verification.md": "677348bcb21ce95e1cd35033e3733640e7b9d04119cc3247b9b8ed6b4e372c4e"
+  },
+  "shared_frame_public_cases": 188,
+  "total_public_cases": 379,
+  "shared_frame_comparison_graphs": 8,
+  "independent_pdf_frame_checks": 12,
+  "default_outer_frame_half_spans": [
+    2.1,
+    2.1
+  ],
+  "default_outer_frame_pdf_pt": [
+    119.05511811023624,
+    119.05511811023624
+  ],
+  "default_frame_changed_intentionally": true,
+  "default_t_triangle_inward_translation": 0,
+  "explicit_tight_t_frame_behavior": "Translate triangle inward as one object, preserve side lengths and outer corners",
+  "previous_checkpoint_record": "history/m06-checks-2506354.json",
+  "styled_seagull_w_circle_position": {
+    "t": 0.57332,
+    "s": 0.57159
+  },
+  "validation": "Full suite: 42 documents / 772 endpoint contacts; 191 triangle and 188 shared-frame public cases; independent frame/shape/wave/contact checks pass"
 }

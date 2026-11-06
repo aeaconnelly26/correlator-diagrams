@@ -125,7 +125,7 @@
     "id": "R08",
     "title": "Regular tree-attached triangle correction",
     "status": "Verified existing",
-    "evidence": "M06: TTreeChannelCorr / STreeChannelCorr with insertion=triangle and tree-triangle-side supports T top/bottom and S left/right. Atlas L01-L04/L11-L14; 183 focused cases, four independent PDF graphs with equal triangle sides and 36 pink white-filled endpoint contacts.",
+    "evidence": "M06: TTreeChannelCorr / STreeChannelCorr with insertion=triangle and tree-triangle-side supports T top/bottom and S left/right. Atlas L01-L04/L11-L14; 191 focused cases, four independent PDF graphs with equal triangle sides and 36 pink white-filled endpoint contacts.",
     "target": "One vertex correction, equilateral defaults; explicit half-width permits other shapes. U/contact/incompatible sides and simultaneous corrections remain unsupported. Extreme geometry is not clamped; index-position polish remains D01.",
     "milestone": "M06 complete locally",
     "dependencies": "M01, M02, insertion-slot conventions from M03",

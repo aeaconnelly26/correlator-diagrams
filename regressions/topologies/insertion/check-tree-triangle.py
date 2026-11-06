@@ -17,7 +17,7 @@ contact = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(contact)
 
 
-def recover(page, reader):
+def plain_components(page, reader):
     matrix = (1, 0, 0, 1, 0, 0)
     stack, points, edges = [], [], []
     def transform(x, y):
@@ -34,7 +34,7 @@ def recover(page, reader):
                 assert hypot(points[0][0]-points[-1][0], points[0][1]-points[-1][1]) > .05, 'Collapsed edge / self-loop'
                 edges.append((points[0], points[-1]))
             points = []
-    assert len(edges) == 32, f'Expected four eight-edge graphs, got {len(edges)}'
+
     nodes, indexed = [], []
     def index(point):
         for n, old in enumerate(nodes):
@@ -55,6 +55,12 @@ def recover(page, reader):
     assert len(groups) == 4
     groups.sort(key=lambda g: -max(nodes[n][1] for n in g))
     groups = sorted(groups[:2], key=lambda g: min(nodes[n][0] for n in g))+sorted(groups[2:], key=lambda g: min(nodes[n][0] for n in g))
+    return nodes, indexed, groups
+
+
+def recover(page, reader):
+    nodes, indexed, groups = plain_components(page, reader)
+    assert len(indexed) == 32, f"Expected four eight-edge graphs, got {len(indexed)}"
     reports = []
     for side, group in zip(['bottom','top','left','right'],groups):
         pairs = Counter(tuple(sorted((a,b))) for a,b in indexed if a in group)
@@ -79,6 +85,12 @@ def recover(page, reader):
         outer = {n for n in group if degree[n] == 1}
         xmin,xmax = min(nodes[n][0] for n in outer),max(nodes[n][0] for n in outer)
         ymin,ymax = min(nodes[n][1] for n in outer),max(nodes[n][1] for n in outer)
+        # The ordinary tree's public default frame is +/-2.10 x +/-2.10 cm.
+        assert abs((xmax-xmin)-4.2*72/2.54) < .03, 'External x frame moved'
+        assert abs((ymax-ymin)-4.2*72/2.54) < .03, 'External y frame moved'
+        assert all(min(abs(nodes[n][0]-xmin),abs(nodes[n][0]-xmax)) < .03 and
+                   min(abs(nodes[n][1]-ymin),abs(nodes[n][1]-ymax)) < .03 for n in outer), 'External corner moved'
+
         for n in triangle-{tip}:
             attached = neighbors[n] & outer
             assert len(attached) == 1
@@ -93,7 +105,7 @@ def recover(page, reader):
         else:
             assert abs(nodes[tip][1]-nodes[opposite][1]) < .03
             assert (nodes[tip][0] > nodes[opposite][0]) == (side == 'right')
-        reports.append({'side':side,'edges':8,'interaction_vertices':4,'interaction_valences':[3,3,3,3],'triangle_edges':3,'exchange_bridges':1,'cycle_rank':1,'triangle_side_lengths_pdf_pt':lengths})
+        reports.append({'side':side,'edges':8,'interaction_vertices':4,'interaction_valences':[3,3,3,3],'triangle_edges':3,'exchange_bridges':1,'cycle_rank':1,'triangle_side_lengths_pdf_pt':lengths,'outer_frame_width_pdf_pt':xmax-xmin,'outer_frame_height_pdf_pt':ymax-ymin})
     return reports
 
 
@@ -117,15 +129,28 @@ def styled_waves(page, reader):
     return found
 
 
+
+def comparison_frames(page, reader):
+    nodes, edges, groups = plain_components(page, reader)
+    for group in groups:
+        xs,ys = zip(*(nodes[n] for n in group))
+        assert abs(max(xs)-min(xs)-4.2*72/2.54) < .03
+        assert abs(max(ys)-min(ys)-4.2*72/2.54) < .03
+        corners = [(x,y) for x in (min(xs),max(xs)) for y in (min(ys),max(ys))]
+        assert all(any(hypot(x-nodes[n][0],y-nodes[n][1]) < .03 for n in group) for x,y in corners)
+    return len(groups)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('pdf', type=Path)
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
     reader = PdfReader(args.pdf)
-    assert len(reader.pages) == 5
+    assert len(reader.pages) == 7
     graphs = recover(reader.pages[0],reader)
     waves = styled_waves(reader.pages[2],reader)
+    comparisons = sum(comparison_frames(reader.pages[i],reader) for i in [5,6])
     endpoints = contact.inspect(args.pdf)
     for page,count in [(0,0),(3,24),(4,12)]:
         assert endpoints[page]['dots'] == 16, 'Extra/missing interaction dot'
@@ -134,8 +159,8 @@ def main():
             assert min(endpoints[page]['gaps_pt']) >= -.21 and max(endpoints[page]['visible_gaps_pt']) <= .02, 'Marker misses actual vertex'
             assert all(c[0] > .9 and c[1] < .1 and c[2] > .5 for c in endpoints[page]['colors'])
     if args.report:
-        args.report.write_text(json.dumps({'graphs':graphs,'styled_wavy_exchange_curve_counts':waves,'proca_contacts':24,'scalar_contacts':12,'endpoint_pages':endpoints[3:]},indent=2)+'\n')
-    print('PASS M06 PDF: four equilateral eight-edge trivalent triangle/bridge graphs; four wavy exchanges; 24 Proca + 12 scalar pink white-filled contacts')
+        args.report.write_text(json.dumps({'graphs':graphs,'shared_frame_comparison_graphs':comparisons,'styled_wavy_exchange_curve_counts':waves,'proca_contacts':24,'scalar_contacts':12,'endpoint_pages':endpoints[3:]},indent=2)+'\n')
+    print('PASS M06 PDF: four equilateral eight-edge graphs with standard outer frames; eight tree/box/contact frame comparisons; four wavy exchanges; 24 Proca + 12 scalar pink white-filled contacts')
 
 
 if __name__ == '__main__': main()

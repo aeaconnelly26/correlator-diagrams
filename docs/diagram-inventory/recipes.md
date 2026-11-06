@@ -227,7 +227,7 @@ One quartic vertex with a flat upper pair.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** External insertions are implemented on t trees; s/u hosts are unsupported.
+**Limit:** External insertions support S/T trees; U/internal hosts remain unsupported.
 
 ```tex
 \STreeChannelCorr[
@@ -248,7 +248,7 @@ Two trivalent vertices joined by one exchange edge.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** Bubbles: any one external leg. Seagull: external leg 1 only.
+**Limit:** External insertions support S/T trees; U/internal hosts remain unsupported.
 
 ```tex
 \TTreeChannelCorr[
@@ -269,7 +269,7 @@ Two trivalent vertices joined by one exchange edge.
 
 Two trivalent vertices joined by one exchange edge.
 
-**Limit:** External insertions are implemented on t trees; s/u hosts are unsupported.
+**Limit:** External insertions support S/T trees; U/internal hosts remain unsupported.
 
 ```tex
 \UTreeChannelCorr[
@@ -1759,7 +1759,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion=seagull,
   insertion-slot=1,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ position=0.588,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.57332,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false
@@ -1822,7 +1822,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion=seagull,
   insertion-slot=2,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ position=0.599,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.57159,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false,
@@ -2422,5 +2422,179 @@ EW base and wavy exchange; pink two-ended loop edges.
   tree-triangle-momentum-6={layout=side},
   tree-triangle-momentum-7={layout=side},
   tree-triangle-momentum-8={layout=side}
+]
+```
+
+## Consistent endpoints across trees and boxes
+
+### L21 - Ordinary T tree
+
+Common outer corners: x and y are both +/-2.10.
+
+**Limit:** Comparison repeat; connectivity and inner geometry remain topology-specific.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0
+]
+```
+
+### L22 - T triangle, same endpoints
+
+Common outer corners: x and y are both +/-2.10.
+
+**Limit:** Comparison repeat; connectivity and inner geometry remain topology-specific.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=top
+]
+```
+
+### L23 - Box, same endpoints
+
+Common outer corners: x and y are both +/-2.10.
+
+**Limit:** Comparison repeat; connectivity and inner geometry remain topology-specific.
+
+```tex
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain
+]
+```
+
+### L24 - Crossed box, same endpoints
+
+Common outer corners: x and y are both +/-2.10.
+
+**Limit:** Comparison repeat; connectivity and inner geometry remain topology-specific.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain
+]
+```
+
+## The same endpoints in all triangle-contact orientations
+
+### L31 - Triangle-contact: bottom
+
+Same +/-2.10 outer corners as trees, box and crossed box.
+
+**Limit:** Comparison repeat; the quartic vertex and internal spans are unchanged.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=bottom
+]
+```
+
+### L32 - Triangle-contact: top
+
+Same +/-2.10 outer corners as trees, box and crossed box.
+
+**Limit:** Comparison repeat; the quartic vertex and internal spans are unchanged.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=top
+]
+```
+
+### L33 - Triangle-contact: left
+
+Same +/-2.10 outer corners as trees, box and crossed box.
+
+**Limit:** Comparison repeat; the quartic vertex and internal spans are unchanged.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=left
+]
+```
+
+### L34 - Triangle-contact: right
+
+Same +/-2.10 outer corners as trees, box and crossed box.
+
+**Limit:** Comparison repeat; the quartic vertex and internal spans are unchanged.
+
+```tex
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=right
 ]
 ```

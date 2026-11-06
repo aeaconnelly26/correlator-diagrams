@@ -70,8 +70,25 @@ equilateral PDF graphs, 24 Proca + 12 scalar contacts, and all 42 maintained
 documents / 772 total endpoint contacts pass. Atlas: 94 recipes / 21 pages;
 the prior nineteen page bodies retain the published rendering.
 
-The subsequent review requests larger loops and wavy styled exchanges. Increase
+Initial size review (superseded for endpoint placement below): larger loops and wavy styled exchanges. Increase
 default outer shift to .60: each equilateral side is 50% larger than the first
 preview, with the bridge tip fixed. On corrected T sides, extend outer endpoints
 when needed to leave .28 axial clearance beyond the base; fourpoint-yspan is
 a minimum extent there. Styled gallery/atlas exchange lines use EW waves.
+
+Endpoint-alignment review: all four external endpoints must exactly match the
+ordinary tree's +/-fourpoint-xspan, +/-fourpoint-yspan coordinates. Keep the
+large equilateral triangle but translate all three T loop vertices inward
+together as needed to leave .28 axial clearance at the base. The opposite
+tree vertex stays fixed and the bridge may shorten. This replaces the earlier
+outer-endpoint extension; the S layout remains unchanged. The focused gate
+now has 191 cases, including explicit narrow/wide outer frames.
+
+Final user clarification: common consistency matters more than preserving the
+old T span. Adopt the existing box frame, +/-2.10 in x and y, across ordinary
+contact/tree/channel families, their supported insertions, boxes/crossed boxes
+and triangle-contact. Generic fourpoint span keys control all these families;
+explicit family external spans override them in either key order. Tight
+explicit T frames can use the inward-fit fallback. Defaults retain the long
+triangle stem. Shared-frame validation adds 188 public cases and eight plain
+comparison graphs; this supersedes the preceding narrow-frame default rule.

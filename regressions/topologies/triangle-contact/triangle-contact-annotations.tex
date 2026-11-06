@@ -34,8 +34,10 @@
     \edef\tcgapx{\the\pgf@x}\edef\tcgapy{\the\pgf@y}%
     \pgfpointanchor{corrTCLabelNode}{center}%
     \edef\tcgapcx{\the\pgf@x}\edef\tcgapcy{\the\pgf@y}%
-    \pgfmathsetlengthmacro{\tcgaperror}{veclen(\tcgapx-\tcgapcx,\tcgapy-\tcgapcy)}%
-    \ifdim\tcgaperror>0.01pt
+    % Component bound avoids PGF reciprocal overflow near zero; this bound
+    % still implies Euclidean error below the original 0.01pt tolerance.
+    \pgfmathsetlengthmacro{\tcgaperror}{max(abs(\tcgapx-\tcgapcx),abs(\tcgapy-\tcgapcy))}%
+    \ifdim\tcgaperror>0.007pt
       \PackageError{M02}{Slot #1 label misses gap center by \tcgaperror}{}\fi
     \pgfpointdiff{\pgfpointanchor{corrTCGapStart}{center}}{\pgfpointanchor{corrTCGapEnd}{center}}%
     \pgfmathsetlengthmacro{\tcbreaklength}{veclen(\pgf@x,\pgf@y)}%

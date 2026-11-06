@@ -53,7 +53,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-one pages: 94 recipes, including four equilateral tree triangles and styled samples. M06 is local only; M05 is published. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-three pages: 102 recipes, including equilateral tree triangles, styled samples and common-frame comparisons. M06 is local only; M05 is published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -449,3 +449,26 @@ reserved for its separate workflow.
   The first nineteen atlas page bodies retain the published M05 rendering.
 - Complete locally; main/GitHub remain `eb6182c`. No M06 merge/push performed.
   M07 follows publication. See [M06 verification](planning/m06-verification.md).
+
+### M06 endpoint-alignment review
+
+The larger T triangles now fit inside the ordinary outer frame. All four
+external endpoints keep their exact default/custom coordinates; the loop
+translates inward while keeping its larger equilateral sides. The exchange
+bridge shortens and styled lines remain wavy. The S layout is unchanged.
+Focused coverage expands to 191 cases, with independent PDF frame checks;
+the gallery/inventory and full-suite verification are refreshed. Still local
+on `codex/m06-tree-triangles`; no M06 merge/push.
+
+### Shared four-leg frame clarification
+
+The user permits larger spans when applied consistently across families.
+The common default is now +/-2.10 on both axes for contact/channel trees,
+loops/insertions, box/crossed box and triangle-contact. Explicit shared spans
+and family overrides remain effective. This fits the large T triangle with
+its original stem; an inward fit is only a fallback for tight explicit frames.
+Added 188 cross-family public cases and eight independent PDF comparisons.
+Atlas: 102 recipes / 23 pages; gallery: seven pages. Earlier first-nineteen-page
+pixel-identity statements describe the initial M06 checkpoint, before this
+authorized default change. Still local; M07 remains next after publication.
+See [shared-frame verification](planning/four-leg-frame-verification.md).

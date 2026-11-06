@@ -180,7 +180,7 @@ The following specification is satisfied within the documented geometry limits.
 
 **Requirement:** R08. **Dependencies:** M01, M02, M03 slot conventions.
 **State:** Complete locally; all four placements have equilateral defaults.
-183 focused public cases and independent PDF graph/shape/contact checks pass.
+191 triangle cases, 188 shared-frame cases and independent PDF graph/shape/contact checks pass.
 [Contract](../../regressions/topologies/insertion/M06-contract.md),
 [verification](m06-verification.md), [gallery](../../regressions/topologies/insertion/tree-triangle-slots.pdf).
 Index-position polish remains D01. Merge/push is pending.

@@ -571,8 +571,8 @@
 \def\corr@sunsetinternalindexinnersep{0.4pt}
 \def\corr@fourpointtopology{contact}
 \def\corr@contactpairing{central}
-\def\corr@fourpointxspan{1.95}
-\def\corr@fourpointyspan{1.35}
+\def\corr@fourpointxspan{2.10}
+\def\corr@fourpointyspan{2.10}
 \def\corr@channelvertexxspan{0.78}
 \def\corr@channelvertexyspan{0.92}
 \def\corr@channelinternalline{}
@@ -796,8 +796,8 @@
 \def\corr@seagullindexmathstyle{\scriptstyle}
 \def\corr@boxxspan{1.34}
 \def\corr@boxyspan{1.04}
-\def\corr@boxexternalxspan{2.10}
-\def\corr@boxexternalyspan{1.70}
+\def\corr@boxexternalxspan{\corr@fourpointxspan}
+\def\corr@boxexternalyspan{\corr@fourpointyspan}
 \def\corr@boxcolor{}
 \def\corr@boxexternalcolor{}
 \def\corr@boxinternalcolor{}
@@ -971,8 +971,8 @@
 \def\corr@trianglecontactorientation{bottom}
 \def\corr@trianglecontactxspan{1.10}
 \def\corr@trianglecontactyspan{0.98}
-\def\corr@trianglecontactexternalxspan{1.72}
-\def\corr@trianglecontactexternalyspan{1.55}
+\def\corr@trianglecontactexternalxspan{\corr@fourpointxspan}
+\def\corr@trianglecontactexternalyspan{\corr@fourpointyspan}
 \def\corr@trianglecontactline{ewboson}
 \def\corr@trianglecontactexternalline{}
 \def\corr@trianglecontactinternalline{}
@@ -1848,8 +1848,8 @@
   \corr@showchannelmomentumtrue
   \def\corr@fourpointtopology{contact}%
   \def\corr@contactpairing{central}%
-  \def\corr@fourpointxspan{1.95}%
-  \def\corr@fourpointyspan{1.35}%
+  \def\corr@fourpointxspan{2.10}%
+  \def\corr@fourpointyspan{2.10}%
   \def\corr@channelvertexxspan{0.78}%
   \def\corr@channelvertexyspan{0.92}%
   \corr@fourpointxspanexplicitfalse
@@ -2241,8 +2241,8 @@
 \newcommand{\corr@resetboxdefaults}{%
   \corr@topologysetdefault\corr@boxxspan{1.34}%
   \corr@topologysetdefault\corr@boxyspan{1.34}%
-  \corr@topologysetdefault\corr@boxexternalxspan{2.10}%
-  \corr@topologysetdefault\corr@boxexternalyspan{2.10}%
+  \corr@topologysetdefault\corr@boxexternalxspan{\corr@fourpointxspan}%
+  \corr@topologysetdefault\corr@boxexternalyspan{\corr@fourpointyspan}%
   \corr@topologysetdefault\corr@boxcolor{}%
   \corr@topologysetdefault\corr@boxexternalcolor{}%
   \corr@topologysetdefault\corr@boxinternalcolor{}%
@@ -2436,8 +2436,8 @@
   \corr@topologysetdefault\corr@trianglecontactorientation{bottom}%
   \corr@topologysetdefault\corr@trianglecontactxspan{1.10}%
   \corr@topologysetdefault\corr@trianglecontactyspan{0.98}%
-  \corr@topologysetdefault\corr@trianglecontactexternalxspan{1.72}%
-  \corr@topologysetdefault\corr@trianglecontactexternalyspan{1.55}%
+  \corr@topologysetdefault\corr@trianglecontactexternalxspan{\corr@fourpointxspan}%
+  \corr@topologysetdefault\corr@trianglecontactexternalyspan{\corr@fourpointyspan}%
   \corr@topologysetdefault\corr@trianglecontactline{ewboson}%
   \corr@topologysetdefault\corr@trianglecontactexternalline{}%
   \corr@topologysetdefault\corr@trianglecontactinternalline{}%
@@ -8806,16 +8806,19 @@
   \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
   \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
   \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+  % Fit the T triangle inside the shared outer frame by translating its three
+  % vertices together. Preserve its side lengths and the opposite tree vertex.
+  \pgfmathsetmacro{\corr@ttfitshift}{max(0,\corr@channelvertexyspan+\corr@treetriangleoutershift+0.28-\corr@fourpointyspan)}%
   \corr@ifstringeq{\corr@ttside}{bottom}{%
-    \vertex (corrRTA) at (-\corr@ttwidth,-\corr@channelvertexyspan-\corr@treetriangleoutershift);
-    \vertex (corrRTB) at (\corr@ttwidth,-\corr@channelvertexyspan-\corr@treetriangleoutershift);
-    \vertex (corrRTC) at (0,-\corr@channelvertexyspan+\corr@treetriangledepth);
+    \vertex (corrRTA) at (-\corr@ttwidth,-\corr@channelvertexyspan-\corr@treetriangleoutershift+\corr@ttfitshift);
+    \vertex (corrRTB) at (\corr@ttwidth,-\corr@channelvertexyspan-\corr@treetriangleoutershift+\corr@ttfitshift);
+    \vertex (corrRTC) at (0,-\corr@channelvertexyspan+\corr@treetriangledepth+\corr@ttfitshift);
     \vertex (corrRTO) at (0,\corr@channelvertexyspan);
   }{}%
   \corr@ifstringeq{\corr@ttside}{top}{%
-    \vertex (corrRTA) at (-\corr@ttwidth,\corr@channelvertexyspan+\corr@treetriangleoutershift);
-    \vertex (corrRTB) at (\corr@ttwidth,\corr@channelvertexyspan+\corr@treetriangleoutershift);
-    \vertex (corrRTC) at (0,\corr@channelvertexyspan-\corr@treetriangledepth);
+    \vertex (corrRTA) at (-\corr@ttwidth,\corr@channelvertexyspan+\corr@treetriangleoutershift-\corr@ttfitshift);
+    \vertex (corrRTB) at (\corr@ttwidth,\corr@channelvertexyspan+\corr@treetriangleoutershift-\corr@ttfitshift);
+    \vertex (corrRTC) at (0,\corr@channelvertexyspan-\corr@treetriangledepth-\corr@ttfitshift);
     \vertex (corrRTO) at (0,-\corr@channelvertexyspan);
   }{}%
   \corr@ifstringeq{\corr@ttside}{left}{%
@@ -8829,16 +8832,6 @@
     \vertex (corrRTB) at (\corr@channelvertexxspan+\corr@treetriangleoutershift,-\corr@ttwidth);
     \vertex (corrRTC) at (\corr@channelvertexxspan-\corr@treetriangledepth,0);
     \vertex (corrRTO) at (-\corr@channelvertexxspan,0);
-  }{}%
-  % Keep corrected T stubs outside the enlarged loop; the bridge tip stays fixed.
-  \pgfmathsetmacro{\corr@ttoutery}{max(\corr@fourpointyspan,\corr@channelvertexyspan+\corr@treetriangleoutershift+0.28)}%
-  \corr@ifstringeq{\corr@ttside}{bottom}{%
-    \coordinate (corrLL) at (-\corr@fourpointxspan,-\corr@ttoutery);
-    \coordinate (corrLR) at (\corr@fourpointxspan,-\corr@ttoutery);
-  }{}%
-  \corr@ifstringeq{\corr@ttside}{top}{%
-    \coordinate (corrUL) at (-\corr@fourpointxspan,\corr@ttoutery);
-    \coordinate (corrUR) at (\corr@fourpointxspan,\corr@ttoutery);
   }{}%
   \foreach \i in {1,...,4}{\coordinate (corrRTSlot\i) at (corrRTO);}%
   \corr@ifstringeq{\corr@ttside}{bottom}{\coordinate (corrRTSlot2) at (corrRTA);\coordinate (corrRTSlot4) at (corrRTB);}{}%

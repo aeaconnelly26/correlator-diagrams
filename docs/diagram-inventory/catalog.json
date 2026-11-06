@@ -138,7 +138,7 @@
             "channel-line=plain"
           ],
           "description": "Two trivalent vertices joined by one exchange edge.",
-          "limitation": "External insertions are implemented on t trees; s/u hosts are unsupported."
+          "limitation": "External insertions support S/T trees; U/internal hosts remain unsupported."
         },
         {
           "id": "I12",
@@ -148,7 +148,7 @@
             "channel-line=plain"
           ],
           "description": "Two trivalent vertices joined by one exchange edge.",
-          "limitation": "Bubbles: any one external leg. Seagull: external leg 1 only."
+          "limitation": "External insertions support S/T trees; U/internal hosts remain unsupported."
         },
         {
           "id": "I13",
@@ -158,7 +158,7 @@
             "channel-line=plain"
           ],
           "description": "Two trivalent vertices joined by one exchange edge.",
-          "limitation": "External insertions are implemented on t trees; s/u hosts are unsupported."
+          "limitation": "External insertions support S/T trees; U/internal hosts remain unsupported."
         },
         {
           "id": "I14",
@@ -1087,7 +1087,7 @@
             "insertion=seagull",
             "insertion-slot=1",
             "insertion-pre-line=ewboson",
-            "insertion-post-line={ewboson,circ=W,circ position=0.588,circ scale=0.65}",
+            "insertion-post-line={ewboson,circ=W,circ position=0.57332,circ scale=0.65}",
             "seagull-loop-line={proca,magenta!85!red}",
             "seagull-loop-momentum=k",
             "show-channel-momentum=false"
@@ -1128,7 +1128,7 @@
             "insertion=seagull",
             "insertion-slot=2",
             "insertion-pre-line=ewboson",
-            "insertion-post-line={ewboson,circ=W,circ position=0.599,circ scale=0.65}",
+            "insertion-post-line={ewboson,circ=W,circ position=0.57159,circ scale=0.65}",
             "seagull-loop-line={proca,magenta!85!red}",
             "seagull-loop-momentum=k",
             "show-channel-momentum=false",
@@ -1525,6 +1525,101 @@
           ],
           "description": "EW base and wavy exchange; pink two-ended loop edges.",
           "limitation": "No caps, circles, central guide or indices. Index polish remains D01."
+        }
+      ]
+    },
+    {
+      "section": "22 / SHARED OUTER FRAME",
+      "title": "Consistent endpoints across trees and boxes",
+      "subtitle": "One default square outer frame; the large triangle fits without extending selected legs.",
+      "entries": [
+        {
+          "id": "L21",
+          "title": "Ordinary T tree",
+          "macro": "TTreeChannelCorr",
+          "options": [],
+          "description": "Common outer corners: x and y are both +/-2.10.",
+          "limitation": "Comparison repeat; connectivity and inner geometry remain topology-specific."
+        },
+        {
+          "id": "L22",
+          "title": "T triangle, same endpoints",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=top"
+          ],
+          "description": "Common outer corners: x and y are both +/-2.10.",
+          "limitation": "Comparison repeat; connectivity and inner geometry remain topology-specific."
+        },
+        {
+          "id": "L23",
+          "title": "Box, same endpoints",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain"
+          ],
+          "description": "Common outer corners: x and y are both +/-2.10.",
+          "limitation": "Comparison repeat; connectivity and inner geometry remain topology-specific."
+        },
+        {
+          "id": "L24",
+          "title": "Crossed box, same endpoints",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain"
+          ],
+          "description": "Common outer corners: x and y are both +/-2.10.",
+          "limitation": "Comparison repeat; connectivity and inner geometry remain topology-specific."
+        }
+      ]
+    },
+    {
+      "section": "23 / CONTACT FRAME",
+      "title": "The same endpoints in all triangle-contact orientations",
+      "subtitle": "These comparison repeats use the shared outer frame and retain their existing contact connectivity.",
+      "entries": [
+        {
+          "id": "L31",
+          "title": "Triangle-contact: bottom",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=bottom"
+          ],
+          "description": "Same +/-2.10 outer corners as trees, box and crossed box.",
+          "limitation": "Comparison repeat; the quartic vertex and internal spans are unchanged."
+        },
+        {
+          "id": "L32",
+          "title": "Triangle-contact: top",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=top"
+          ],
+          "description": "Same +/-2.10 outer corners as trees, box and crossed box.",
+          "limitation": "Comparison repeat; the quartic vertex and internal spans are unchanged."
+        },
+        {
+          "id": "L33",
+          "title": "Triangle-contact: left",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=left"
+          ],
+          "description": "Same +/-2.10 outer corners as trees, box and crossed box.",
+          "limitation": "Comparison repeat; the quartic vertex and internal spans are unchanged."
+        },
+        {
+          "id": "L34",
+          "title": "Triangle-contact: right",
+          "macro": "TriangleContactCorr",
+          "options": [
+            "triangle-contact-orientation=right"
+          ],
+          "description": "Same +/-2.10 outer corners as trees, box and crossed box.",
+          "limitation": "Comparison repeat; the quartic vertex and internal spans are unchanged."
         }
       ]
     }

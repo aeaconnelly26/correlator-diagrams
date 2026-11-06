@@ -77,6 +77,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - standalone self-energy bubbles via `\BubbleCorr`, bubble insertions on any one of the four external legs of s/t trees, and seagull/swordfish insertions on any one of the four external legs of s/t trees
 - regular tree-attached triangle corrections via `insertion=triangle`: equilateral T top/bottom and S left/right placements with independent annotations on all eight edges
 - default `p_1,p_2` incoming / `p_3,p_4` outgoing momentum flow; compact insertion arrows with labels clear of their lines
+- shared `fourpoint-xspan` / `fourpoint-yspan` outer endpoints across trees, channel loops, boxes and triangle-contact; square default frame at +/-2.10
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
 - quick cleanup switches like `show-momenta=false`

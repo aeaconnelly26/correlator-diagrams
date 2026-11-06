@@ -182,7 +182,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{External insertions are implemented on t trees; s/u hosts are unsupported.}\hfill
+}{Two trivalent vertices joined by one exchange edge.}{External insertions support S/T trees; U/internal hosts remain unsupported.}\hfill
 \atlascell{I12  t-channel tree}{\TTreeChannelCorr}{%
 \TTreeChannelCorr[
   field={},
@@ -196,7 +196,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{Bubbles: any one external leg. Seagull: external leg 1 only.}\par\vspace{4pt}
+}{Two trivalent vertices joined by one exchange edge.}{External insertions support S/T trees; U/internal hosts remain unsupported.}\par\vspace{4pt}
 \atlascell{I13  u-channel tree}{\UTreeChannelCorr}{%
 \UTreeChannelCorr[
   field={},
@@ -210,7 +210,7 @@
   scale=1.0,
   channel-line=plain
 ]
-}{Two trivalent vertices joined by one exchange edge.}{External insertions are implemented on t trees; s/u hosts are unsupported.}\hfill
+}{Two trivalent vertices joined by one exchange edge.}{External insertions support S/T trees; U/internal hosts remain unsupported.}\hfill
 \atlascell{I14  s-channel bubble}{\SChannelCorr}{%
 \SChannelCorr[
   field={},
@@ -1279,7 +1279,7 @@
   insertion=seagull,
   insertion-slot=1,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ position=0.588,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.57332,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false
@@ -1328,7 +1328,7 @@
   insertion=seagull,
   insertion-slot=2,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ position=0.599,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.57159,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false,
@@ -1783,4 +1783,122 @@
   tree-triangle-momentum-8={layout=side}
 ]
 }{EW base and wavy exchange; pink two-ended loop edges.}{No caps, circles, central guide or indices. Index polish remains D01.}\par\vspace{4pt}
+\newpage
+\atlaspage{22 / SHARED OUTER FRAME}{Consistent endpoints across trees and boxes}{One default square outer frame; the large triangle fits without extending selected legs.}
+\atlascell{L21  Ordinary T tree}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0
+]
+}{Common outer corners: x and y are both +/-2.10.}{Comparison repeat; connectivity and inner geometry remain topology-specific.}\hfill
+\atlascell{L22  T triangle, same endpoints}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=top
+]
+}{Common outer corners: x and y are both +/-2.10.}{Comparison repeat; connectivity and inner geometry remain topology-specific.}\par\vspace{4pt}
+\atlascell{L23  Box, same endpoints}{\BoxLoopCorr}{%
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain
+]
+}{Common outer corners: x and y are both +/-2.10.}{Comparison repeat; connectivity and inner geometry remain topology-specific.}\hfill
+\atlascell{L24  Crossed box, same endpoints}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain
+]
+}{Common outer corners: x and y are both +/-2.10.}{Comparison repeat; connectivity and inner geometry remain topology-specific.}\par\vspace{4pt}
+\newpage
+\atlaspage{23 / CONTACT FRAME}{The same endpoints in all triangle-contact orientations}{These comparison repeats use the shared outer frame and retain their existing contact connectivity.}
+\atlascell{L31  Triangle-contact: bottom}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=bottom
+]
+}{Same +/-2.10 outer corners as trees, box and crossed box.}{Comparison repeat; the quartic vertex and internal spans are unchanged.}\hfill
+\atlascell{L32  Triangle-contact: top}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=top
+]
+}{Same +/-2.10 outer corners as trees, box and crossed box.}{Comparison repeat; the quartic vertex and internal spans are unchanged.}\par\vspace{4pt}
+\atlascell{L33  Triangle-contact: left}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=left
+]
+}{Same +/-2.10 outer corners as trees, box and crossed box.}{Comparison repeat; the quartic vertex and internal spans are unchanged.}\hfill
+\atlascell{L34  Triangle-contact: right}{\TriangleContactCorr}{%
+\TriangleContactCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  triangle-contact-orientation=right
+]
+}{Same +/-2.10 outer corners as trees, box and crossed box.}{Comparison repeat; the quartic vertex and internal spans are unchanged.}\par\vspace{4pt}
 \end{document}

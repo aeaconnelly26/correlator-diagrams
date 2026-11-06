@@ -1,0 +1,54 @@
+% Shared four-leg frame checks, included by the M06 public-diagram regression.
+\newcount\framecases
+\newbox\framebox
+\makeatletter
+\def\framex{2.10}\def\framey{2.10}
+\newcommand{\framecheck}[1]{%
+ \coordinate (frameExpectedUL) at (-\framex,\framey);
+ \coordinate (frameExpectedLL) at (-\framex,-\framey);
+ \coordinate (frameExpectedUR) at (\framex,\framey);
+ \coordinate (frameExpectedLR) at (\framex,-\framey);
+ \rtclose{#1UL}{frameExpectedUL}\rtclose{#1LL}{frameExpectedLL}%
+ \rtclose{#1UR}{frameExpectedUR}\rtclose{#1LR}{frameExpectedLR}%
+}
+\let\frameoldtree\corr@fourpointplaceexternalvertices
+\renewcommand{\corr@fourpointplaceexternalvertices}{\framecheck{corr}\frameoldtree}
+\let\frameoldbox\corr@boxplaceexternalvertices
+\renewcommand{\corr@boxplaceexternalvertices}{\framecheck{corrExt}\frameoldbox}
+\let\frameoldtc\corr@trianglecontactplaceexternalvertices
+\renewcommand{\corr@trianglecontactplaceexternalvertices}{\framecheck{corrExt}\frameoldtc}
+\newcommand{\framemeasure}[1]{%
+ \global\advance\framecases by1
+ \edef\framecall{\noexpand\FourPointCorr[field={},central={},show-momenta=false,
+ line=plain,channel-line=plain,box-loop-momentum={},\frameoptions,#1]}%
+ \setbox\framebox=\hbox{\framecall}}
+\newcommand{\framematrix}{%
+ \@for\frametopology:={t-tree,s-tree,u-tree,s,t,u,contact,box,cross-box}\do{\framemeasure{topology=\frametopology}}%
+ \@for\framepair:={horizontal,vertical,crossed}\do{\framemeasure{topology=contact,contact-pairing=\framepair}}%
+ \@for\frameside:={top,bottom,left,right}\do{\framemeasure{topology=triangle-contact,triangle-contact-orientation=\frameside}}%
+ \@for\framechannel:={t-tree,s-tree}\do{%
+  \@for\frameinsertion:={bubble,seagull,swordfish}\do{%
+   \@for\frameslot:={1,2,3,4}\do{\framemeasure{topology=\framechannel,insertion=\frameinsertion,insertion-slot=\frameslot}}}}
+ \framemeasure{topology=t-tree,insertion=triangle,tree-triangle-side=top}%
+ \framemeasure{topology=t-tree,insertion=triangle,tree-triangle-side=bottom}%
+ \framemeasure{topology=s-tree,insertion=triangle,tree-triangle-side=left}%
+ \framemeasure{topology=s-tree,insertion=triangle,tree-triangle-side=right}%
+}
+\def\frameoptions{}\framematrix
+\def\framex{2.40}\def\framey{1.80}\def\frameoptions{fourpoint-xspan=2.40,fourpoint-yspan=1.80}\framematrix
+\def\framex{2.50}\def\framey{2.20}\def\frameoptions{fourpoint-yspan=2.20,fourpoint-xspan=2.50}\framematrix
+% Explicit family overrides win over the shared frame in either option order.
+\def\framex{2.60}\def\framey{2.30}\def\frameoptions{}
+\@for\frametopology:={box,cross-box}\do{%
+ \framemeasure{topology=\frametopology,fourpoint-xspan=2.40,fourpoint-yspan=1.80,box-external-xspan=2.60,box-external-yspan=2.30}%
+ \framemeasure{topology=\frametopology,box-external-yspan=2.30,box-external-xspan=2.60,fourpoint-yspan=1.80,fourpoint-xspan=2.40}}
+\@for\frameside:={top,bottom,left,right}\do{%
+ \framemeasure{topology=triangle-contact,triangle-contact-orientation=\frameside,fourpoint-xspan=2.40,fourpoint-yspan=1.80,triangle-contact-external-xspan=2.60,triangle-contact-external-yspan=2.30}%
+ \framemeasure{topology=triangle-contact,triangle-contact-orientation=\frameside,triangle-contact-external-yspan=2.30,triangle-contact-external-xspan=2.60,fourpoint-yspan=1.80,fourpoint-xspan=2.40}}
+% Consecutive defaults must recover the common frame after explicit overrides.
+\def\framex{2.10}\def\framey{2.10}\def\frameoptions{}\framematrix
+\typeout{PASS shared frame: \the\framecases\space public cases across tree, insertions, loops, box, crossed box and triangle-contact}
+\let\corr@fourpointplaceexternalvertices\frameoldtree
+\let\corr@boxplaceexternalvertices\frameoldbox
+\let\corr@trianglecontactplaceexternalvertices\frameoldtc
+\makeatother

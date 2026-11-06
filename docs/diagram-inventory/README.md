@@ -4,9 +4,9 @@
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
 Complete locally on `codex/m06-tree-triangles`, based on published main
-`eb6182c` (2026-11-06). M06 has not been merged/pushed. There are **94 current
-examples on twenty-one pages**. These are recipes and meaningful layouts/styles,
-not 94 distinct graph topologies. M06 adds all four regular tree triangles
+`eb6182c` (2026-11-06). M06 has not been merged/pushed. There are **102 current
+examples on twenty-three pages**. These are recipes and meaningful layouts/styles,
+not 102 distinct graph topologies. M06 adds all four regular tree triangles
 with equilateral defaults and four mixed-style/annotation samples; see
 [verification](../planning/m06-verification.md). M05 remains published on main.
 
@@ -30,8 +30,8 @@ from their actual arcs, consistently across left/right placements and reversal.
 
 Seagulls now default to `insertion-position=0.40` (outer endpoint toward tree
 vertex), giving the inner segment 20% more length. Styled seagull W circles
-use `circ position=0.588` (T) or `0.599` (S) to balance the visible spaces
-between the pink arrow and black dot. This corrects the former geometric-0.5
+use `circ position=0.57332` (T) or `0.57159` (S) to balance the visible spaces
+between the pink arrow and black dot in the shared 2.10/2.10 frame. This corrects the former geometric-0.5
 criterion, which did not account for the arrow footprint. Set
 `insertion-position=0.50` to recover the former seagull placement; bubble
 positions remain 0.50.
@@ -51,8 +51,17 @@ unchanged. The new visibility control is also available on plain s/t/u trees.
 The W bubble arcs now use `ewboson wavelength=10\feynhandlinesize` for clearer
 ripples around the W circle; the ordinary wavelength remains 22 line widths.
 
+The shared default outer corners are now +/-2.10 on both axes, including the
+ordinary/corrected trees, box/crossed box and triangle-contact. Explicit
+`fourpoint-xspan/yspan` applies across these families; explicit family external
+spans still override it. Inner box/triangle geometry and graph connectivity
+are preserved. Historical PDFs/checkpoints retain their own default spans.
+
 ## How to read it
 
+- Pages 22-23 compare the shared +/-2.10 outer frame across ordinary T trees,
+  regular triangles, box/crossed box and all triangle-contact orientations
+  (L21-L24/L31-L34). These repeat existing graphs to demonstrate alignment.
 - Page 20 shows all four regular tree-attached triangles (L01-L04), using
   plain lines and no annotations. The triangle is equilateral by default,
   enlarged 50% from the first review preview, and

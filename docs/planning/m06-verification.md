@@ -41,9 +41,11 @@ depth 0.75, outer shift 0.60 and automatic half-width
 `(depth+outer-shift)/sqrt(3)`. This keeps all three sides equal in every
 orientation, including after depth/outer-shift edits. Explicit half-width
 permits other shapes. The final sides are 50% larger than the first equilateral
-preview, with the bridge tip held fixed. Corrected T outer endpoints extend
-only as needed to keep the outer stubs clear of the larger base. Styled
-examples use wavy EW exchange lines. Independent PDF measurements give side lengths about
+preview. The final shared-frame review sets ordinary trees, boxes and
+triangle-contact outer endpoints to +/-2.10 on both axes. That fits the large
+triangle while retaining its exchange stem. Explicit custom spans are honored;
+T triangles translate inward only if an explicitly tighter frame requires it.
+Styled examples retain wavy EW exchange lines. Independent PDF measurements give side lengths about
 44.1876 PDF pt, with maximum difference below 0.002 pt. The checker allows
 0.03 pt for PDF coordinate rounding.
 
@@ -75,7 +77,8 @@ before package edits. Placements were enabled and checked sequentially:
 | T top | 52 |
 | S left | 78 |
 | S right | 104 |
-| Expanded checks, equilateral review and compatibility gates | 183 |
+| Expanded checks and equilateral/size review at 2506354 | 183 |
+| Endpoint alignment, exact default/custom outer frames | 191 |
 
 The final focused source checks eight edges/four interactions, loop and
 external-slot ownership, explicit/automatic geometry, scales 0.72/1/1.2,
@@ -105,20 +108,46 @@ removed before the final complete run.
 
 ## Visual deliverables and compatibility
 
-- [Five-page gallery](../../regressions/topologies/insertion/tree-triangle-slots.pdf):
-  20 examples, covering four plain graphs, four default gap examples, four
+- [Seven-page gallery](../../regressions/topologies/insertion/tree-triangle-slots.pdf):
+  28 examples, covering four plain graphs, four default gap examples, four
   continuous-arrow Proca examples, and isolated Proca/scalar contact matrices.
-- [Current atlas](../diagram-inventory/inventory.pdf): **94 recipes / 21 pages**.
+- [Current atlas](../diagram-inventory/inventory.pdf): **102 recipes / 23 pages**.
   Page 20 adds L01-L04 (plain equilateral placements); page 21 adds L11-L14
   (mixed lines and continuous momentum labels, without caps/circles/indices).
 - [Copy/paste recipes](../diagram-inventory/recipes.md) and
   [reference](../reference.md) document supported controls and boundaries.
 
-Every gallery page and both new atlas pages were rendered and inspected for
+Every gallery page and all 23 atlas pages were rendered and inspected for
 connectivity, proportions, labels, marker contact, clipping and crowding.
-The first nineteen atlas page bodies are pixel-identical to published main
-`eb6182c` above their changed revision footer, preserving the reviewed M05/M04
-rendering. Original source archive checksums remain unchanged.
+The cross-family span change intentionally updates earlier default diagrams;
+the previous first-nineteen-pages identity claim applied to checkpoint 2506354.
+Box/cross-box inner geometry and all graph connections remain unchanged.
+Original source archive checksums remain unchanged.
+
+## Endpoint-alignment and shared-frame review
+
+Checkpoint `2506354` enlarged selected T endpoints to fit the triangle. The user
+clarified that spans could change, provided they changed consistently across
+ordinary/corrected trees, box, crossed box and triangle-contact. The final
+solution adopts the existing box frame, +/-2.10 on both axes, as the common
+default, with global span keys and explicit family overrides honored.
+
+All 191 triangle cases assert their requested outer corners. Another 188
+public cases check common/default/custom frames across trees, all supported
+external bubble/seagull/swordfish slots, regular triangles, channel loops,
+box/crossed box and four triangle-contact orientations. Family overrides are
+checked in both key orders, followed by fresh defaults. Independent PDF paths
+measure the common 4.2 by 4.2-unit frame (119.0551pt square) in four regular
+triangle graphs and eight additional tree/box/contact comparisons, while
+retaining the approximately 44.188pt triangle sides and wavy styled exchanges.
+
+Styled seagull W-circle positions were retuned to preserve their measured
+optical centering on the longer legs. The existing 40-circle / 32-contact check
+passes. A near-zero `veclen` calculation in the M02 test harness overflowed;
+its replacement component bound is stricter than the original Euclidean
+0.01pt criterion. Package annotation logic was unchanged. See
+[shared-frame verification](four-leg-frame-verification.md).
+The initial M06 record is preserved in [history](history/m06-checks-2506354.json).
 
 ## Boundaries and next slice
 
