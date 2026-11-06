@@ -10,9 +10,10 @@ M04 checkpoint `854293a` is now merged and published on main, including all
 Nov 4 geometry/style reviews and the final optical W-circle correction. The
 branch `codex/m04-seagull-expansion` is retained. The complete final suite passed
 40 documents and 688 endpoint contacts; see [M04 verification](m04-verification.md).
-No M04 merge or push remains pending. The current checkout is now
-`codex/m05-swordfish`, with M05 complete locally from main `efb5fae`.
-Main/GitHub remain at `efb5fae`; M05 has not been merged or pushed.
+No M04 merge or push remains pending. On 2026-11-06, M05 checkpoint `9daebf9`
+was fast-forwarded from `efb5fae` into main and published with its documentation
+handoff. The current checkout is clean `main`, synchronized with GitHub.
+The branch `codex/m05-swordfish` is retained; no M05 merge/push remains.
 Its [verification record](m05-verification.md) covers all eight placements,
 41 maintained documents and 736 endpoint contacts. The main/M02 record below
 preserves earlier history.
@@ -71,9 +72,9 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M06 (regular tree-attached triangles/R08) is next after M05 publication.
-When authorized, fetch, verify and merge/push the M05 checkpoint; then create
-a fresh feature branch from synchronized main. No manual Git work is required
+M06 (regular tree-attached triangles/R08) is next. M05 is already published.
+Fetch/inspect current main, then create a fresh feature branch from synchronized
+main. No manual Git work is required
 from the user. Freeze the top/bottom T and left/right S graphs first. These
 are distinct from triangle-contact corrections. D01 remains deferred.
 

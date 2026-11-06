@@ -3,8 +3,9 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-Complete locally on `codex/m05-swordfish`, based on published main `efb5fae`
-(2026-11-04). M05 has not been merged/pushed. There are **86 current examples
+Published on main at verified M05 checkpoint `9daebf9` (2026-11-06).
+Built on `codex/m05-swordfish` from `efb5fae`; the retained PDF footer records
+that original local build. There are **86 current examples
 on nineteen pages**. These are recipes and meaningful layouts/styles, not
 86 distinct graph topologies. M05 adds all eight swordfish placements and four
 mixed-style samples; see [verification](../planning/m05-verification.md).

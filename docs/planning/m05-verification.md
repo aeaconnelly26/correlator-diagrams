@@ -1,8 +1,10 @@
 # M05 external swordfish verification - 2026-11-04
 
-Complete locally on `codex/m05-swordfish`, based on clean published main
-`efb5fae`. Main/GitHub remain at that baseline; M05 has not been merged or
-pushed. The feature checkpoint contains implementation, tests and documentation.
+Implemented on `codex/m05-swordfish` from clean published main `efb5fae`.
+Checkpoint `9daebf9` was fast-forwarded into main and published on 2026-11-06;
+the feature branch is retained. All recorded artifact hashes matched before
+merging. This publication handoff changes documentation only; package sources,
+regressions and PDFs retain the verified checkpoint content.
 See [machine-readable checks and hashes](m05-checks.json).
 
 ## Reference and graph
@@ -138,7 +140,7 @@ the checks record the exact delivered artifacts.
 
 ## Next handoff
 
-Publish M05 when authorized, then start **M06 / R08 regular tree-attached
+M05 is now merged and published. Start **M06 / R08 regular tree-attached
 triangles** from synchronized main: top/bottom on T trees, left/right on S
 trees. Freeze their three-trivalent-vertex loop and bridge graph first; the
 existing triangle-contact graph is different. D01 remains a separate later

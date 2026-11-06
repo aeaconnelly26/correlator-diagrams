@@ -3,7 +3,7 @@
   "date": "2026-11-04",
   "baseline": "efb5fae",
   "branch": "codex/m05-swordfish",
-  "published": false,
+  "published": true,
   "requirement": "R12",
   "reference_panels": [
     "S08-L1",
@@ -140,6 +140,12 @@
     "docs/diagram-inventory/inventory.pdf": "84c647085c190d19f1d5c10938d1bf2cfbc973f177e00956e47df126d187f33e",
     "docs/diagram-inventory/recipes.md": "fff697d9100823dcf135546738394a3a6b2dd33e1c85b313f48dfcd6064b78f1",
     "docs/reference.md": "ab276536fa827d976c57195b05c03808e2b652d6356f5deca68ba6b7fe9611da",
-    "docs/planning/m05-verification.md": "b08ee18b6db57e49410c61e528ddeb6ded8c58d3d55a17da5de1d1304ab82289"
-  }
+    "docs/planning/m05-verification.md": "c8f2dbb60023f999c5c5deb3143de081c6ade338f0bb027d6f1dcb19b0cc28fc"
+  },
+  "current_branch": "main",
+  "implementation_commit": "9daebf9",
+  "publication_date": "2026-11-06",
+  "publication_previous_main": "efb5fae",
+  "publication_method": "Fast-forward merge and normal push",
+  "publication_artifacts_unchanged": true
 }

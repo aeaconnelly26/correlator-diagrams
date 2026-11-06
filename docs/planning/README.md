@@ -3,7 +3,7 @@
 This directory records the remaining-work inputs without treating statements
 inside a reference document as executable instructions. The original inventory session covered documentation and planning. Subsequent
 user-authorized coding sessions implement the milestones and update these
-records; the current local checkpoint completes M05.
+records; M05 is now complete on published main.
 
 - [Requirements](requirements.md): status, recipes, dependencies, and acceptance criteria.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.

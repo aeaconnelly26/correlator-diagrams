@@ -216,7 +216,7 @@
     "status": "Verified existing",
     "evidence": "M05: insertion=swordfish on all four external legs of both s/t trees. Atlas K01-K04/K11-K14; K21-K24 styles. 167 public cases and independent PDF paths verify seven edges, one actual shared quartic tree vertex, no bridge/duplicate vertex, and 48 white-filled pink endpoint contacts.",
     "target": "One selected external insertion. U/contact/internal-slot-5 and simultaneous insertions remain unsupported; post-segment controls do not apply. Index appearance remains D01.",
-    "milestone": "M05 complete locally",
+    "milestone": "M05 complete on published main (9daebf9)",
     "dependencies": "M03, M04",
     "acceptance": "Eight placements match the reference connections and vertex valences; there is no artificial extra bridge or overlapping pair of vertices.",
     "source_panels": [
