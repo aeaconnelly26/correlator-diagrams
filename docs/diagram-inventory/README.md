@@ -3,12 +3,12 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-Published on main at verified M05 checkpoint `9daebf9` (2026-11-06).
-Built on `codex/m05-swordfish` from `efb5fae`; the retained PDF footer records
-that original local build. There are **86 current examples
-on nineteen pages**. These are recipes and meaningful layouts/styles, not
-86 distinct graph topologies. M05 adds all eight swordfish placements and four
-mixed-style samples; see [verification](../planning/m05-verification.md).
+Complete locally on `codex/m06-tree-triangles`, based on published main
+`eb6182c` (2026-11-06). M06 has not been merged/pushed. There are **94 current
+examples on twenty-one pages**. These are recipes and meaningful layouts/styles,
+not 94 distinct graph topologies. M06 adds all four regular tree triangles
+with equilateral defaults and four mixed-style/annotation samples; see
+[verification](../planning/m06-verification.md). M05 remains published on main.
 
 M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
 on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
@@ -53,6 +53,13 @@ ripples around the W circle; the ordinary wavelength remains 22 line widths.
 
 ## How to read it
 
+- Page 20 shows all four regular tree-attached triangles (L01-L04), using
+  plain lines and no annotations. The triangle is equilateral by default,
+  enlarged 50% from the first review preview, and
+  has three trivalent loop vertices, joined to the fourth by an exchange bridge.
+- Page 21 shows mixed EW/Proca triangle styles and continuous outside momentum
+  labels and wavy EW exchanges (L11-L14), without caps, circles, central guides
+  or indices.
 - Pages 17-18 show all eight swordfish placements (K01-K04, K11-K14), with
   plain lines, visible vertices and no decorations. Each loop meets the actual
   quartic tree vertex; it has no inner host segment.
@@ -91,7 +98,10 @@ Important limits:
 - The existing crossed box fixes its side edges and crosses its diagonals;
   internal momentum/index coverage remains incomplete.
 - All four triangle-contact orientations have independent annotation controls
-  for slots 1-7. A regular triangle attached to a tree is a different missing graph.
+  for slots 1-7. Regular tree-attached triangles are also supported, through
+  `insertion=triangle`, with separate per-annotation controls for slots 1-8.
+  Their side key selects a vertex correction; external insertion-slot/pre/post
+  controls do not describe this graph.
 - `SunsetDiagram` is a two-loop graph.
 - The integrated endpoint matrix certifies its documented circular vertices,
   scales, and settings, not every arbitrary custom transform or vertex shape.

@@ -57,6 +57,7 @@ run_tex "regressions/topologies/insertion/s-tree-bubble-slots.tex"
 run_tex "regressions/topologies/insertion/seagull-insertion-regression.tex"
 run_tex "regressions/topologies/insertion/seagull-slots.tex"
 run_tex "regressions/topologies/insertion/swordfish-slots.tex"
+run_tex "regressions/topologies/insertion/tree-triangle-slots.tex"
 run_tex "regressions/topologies/insertion/insertion-momentum-review.tex"
 run_tex "regressions/topologies/insertion/insertion-species-samples.tex"
 run_tex "regressions/topologies/loop-audit/loop-momentum-audit.tex"
@@ -99,6 +100,9 @@ if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/topologies/insertion/check-swordfish.py" \
     "$build_root/regressions/topologies/insertion/swordfish-slots.pdf"
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/topologies/insertion/check-tree-triangle.py" \
+    "$build_root/regressions/topologies/insertion/tree-triangle-slots.pdf"
 fi
 
 printf 'PASS  all %s regression and example documents\n' "$check_count"

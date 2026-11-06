@@ -75,6 +75,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
 - standalone self-energy bubbles via `\BubbleCorr`, bubble insertions on any one of the four external legs of s/t trees, and seagull/swordfish insertions on any one of the four external legs of s/t trees
+- regular tree-attached triangle corrections via `insertion=triangle`: equilateral T top/bottom and S left/right placements with independent annotations on all eight edges
 - default `p_1,p_2` incoming / `p_3,p_4` outgoing momentum flow; compact insertion arrows with labels clear of their lines
 - explicit tree-level exchange topologies and contact pairings
 - amputated correlators with endpoint vertices via `external-legs=false` or `amputated`
@@ -100,7 +101,7 @@ Older documents that load `correlator-diagrams` still work through a compatibili
 
 The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which are loaded internally.
 
-To compile all 41 maintained regression and example documents:
+To compile all 42 maintained regression and example documents:
 
 ```sh
 scripts/check-regressions.sh

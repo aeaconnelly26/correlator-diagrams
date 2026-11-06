@@ -16,7 +16,9 @@ and published on main. M03a is published through `6549efa`; M03b checkpoint
 implemented on `codex/m04-seagull-expansion` from `b4a6ad8`, is now merged and
 published on main. The branch is retained. M05 checkpoint `9daebf9`, implemented
 from `efb5fae`, is now also merged and published on main (2026-11-06).
-The M05 branch is retained; M06 is next. See [M05 verification](m05-verification.md).
+The M05 branch is retained. M06 is complete locally on `codex/m06-tree-triangles`
+from `eb6182c`; merge/push remains pending. M07 follows publication. See
+[M05 verification](m05-verification.md) and [M06 verification](m06-verification.md).
 
 ## Common session contract
 
@@ -177,7 +179,11 @@ The following specification is satisfied within the documented geometry limits.
 ## M06 - Regular tree-attached triangles
 
 **Requirement:** R08. **Dependencies:** M01, M02, M03 slot conventions.
-**State:** Next; M05 is published. Freeze the reference graph before coding.
+**State:** Complete locally; all four placements have equilateral defaults.
+183 focused public cases and independent PDF graph/shape/contact checks pass.
+[Contract](../../regressions/topologies/insertion/M06-contract.md),
+[verification](m06-verification.md), [gallery](../../regressions/topologies/insertion/tree-triangle-slots.pdf).
+Index-position polish remains D01. Merge/push is pending.
 
 - Implement bottom/top on t trees, then left/right on s trees. The loop has
   three trivalent vertices and one bridge to the opposite tree vertex.
@@ -190,6 +196,7 @@ The following specification is satisfied within the documented geometry limits.
 ## M07 - Boxes and crossed routing
 
 **Requirements:** R01-R04, R14, R22. **Dependencies:** M01, M02.
+**State:** Next after M06 publication; start with one complementary internal-crossing slice.
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported

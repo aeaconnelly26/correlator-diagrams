@@ -124,10 +124,10 @@
   {
     "id": "R08",
     "title": "Regular tree-attached triangle correction",
-    "status": "Missing",
-    "evidence": "ThreePointCorr is a single vertex; TriangleContactCorr has a quartic vertex. Neither is the requested triangle plus an exchange bridge and a second tree vertex.",
-    "target": "Three trivalent vertices form the loop; a bridge connects one to the other tree interaction. Top/bottom t-channel and left/right s-channel variants.",
-    "milestone": "M06",
+    "status": "Verified existing",
+    "evidence": "M06: TTreeChannelCorr / STreeChannelCorr with insertion=triangle and tree-triangle-side supports T top/bottom and S left/right. Atlas L01-L04/L11-L14; 183 focused cases, four independent PDF graphs with equal triangle sides and 36 pink white-filled endpoint contacts.",
+    "target": "One vertex correction, equilateral defaults; explicit half-width permits other shapes. U/contact/incompatible sides and simultaneous corrections remain unsupported. Extreme geometry is not clamped; index-position polish remains D01.",
+    "milestone": "M06 complete locally",
     "dependencies": "M01, M02, insertion-slot conventions from M03",
     "acceptance": "Four required placements preserve graph connectivity, line styles, outer caps, independent momentum flow, and endpoint indices.",
     "source_panels": [

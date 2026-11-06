@@ -1,6 +1,6 @@
 {
-  "baseline": "M05 local; base efb5fae",
-  "date": "2026-11-04",
+  "baseline": "M06 local; base eb6182c",
+  "date": "2026-11-06",
   "base_options": [
     "field={}",
     "leg-labels={,,,}",
@@ -1361,7 +1361,173 @@
           "limitation": "Species circles intentional; no central/W guide, caps or indices."
         }
       ]
+    },
+    {
+      "section": "20 / TREE TRIANGLES",
+      "title": "Regular tree-attached triangle corrections",
+      "subtitle": "Equilateral defaults; four trivalent interactions, one loop and one exchange bridge. Plain lines and no annotations.",
+      "entries": [
+        {
+          "id": "L01",
+          "title": "T-tree triangle: bottom",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=bottom"
+          ],
+          "description": "Three trivalent loop vertices; bridge to the other tree vertex.",
+          "limitation": "One vertex correction. Equilateral defaults; explicit width allows other shapes."
+        },
+        {
+          "id": "L02",
+          "title": "T-tree triangle: top",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=top"
+          ],
+          "description": "Three trivalent loop vertices; bridge to the other tree vertex.",
+          "limitation": "One vertex correction. Equilateral defaults; explicit width allows other shapes."
+        },
+        {
+          "id": "L03",
+          "title": "S-tree triangle: left",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=left"
+          ],
+          "description": "Three trivalent loop vertices; bridge to the other tree vertex.",
+          "limitation": "One vertex correction. Equilateral defaults; explicit width allows other shapes."
+        },
+        {
+          "id": "L04",
+          "title": "S-tree triangle: right",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=right"
+          ],
+          "description": "Three trivalent loop vertices; bridge to the other tree vertex.",
+          "limitation": "One vertex correction. Equilateral defaults; explicit width allows other shapes."
+        }
+      ]
+    },
+    {
+      "section": "21 / TRIANGLE STYLES",
+      "title": "Independent lines and continuous momentum arrows",
+      "subtitle": "The same four graphs with mixed styles and outside labels. External 1/2 enter; 3/4 leave.",
+      "entries": [
+        {
+          "id": "L11",
+          "title": "T bottom: momentum and mixed lines",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=bottom",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red}",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "tree-triangle-loop-line={proca,magenta!85!red}",
+            "tree-triangle-line-6=ewboson",
+            "tree-triangle-momenta={k,\\ell,q}",
+            "tree-triangle-momentum-1={layout=side}",
+            "tree-triangle-momentum-2={layout=side}",
+            "tree-triangle-momentum-3={layout=side}",
+            "tree-triangle-momentum-4={layout=side}",
+            "tree-triangle-momentum-5={layout=side}",
+            "tree-triangle-momentum-6={layout=side}",
+            "tree-triangle-momentum-7={layout=side}",
+            "tree-triangle-momentum-8={layout=side}"
+          ],
+          "description": "EW base and wavy exchange; pink two-ended loop edges.",
+          "limitation": "No caps, circles, central guide or indices. Index polish remains D01."
+        },
+        {
+          "id": "L12",
+          "title": "T top: momentum and mixed lines",
+          "macro": "TTreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=top",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red}",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "tree-triangle-loop-line={proca,magenta!85!red}",
+            "tree-triangle-line-6=ewboson",
+            "tree-triangle-momenta={k,\\ell,q}",
+            "tree-triangle-momentum-1={layout=side}",
+            "tree-triangle-momentum-2={layout=side}",
+            "tree-triangle-momentum-3={layout=side}",
+            "tree-triangle-momentum-4={layout=side}",
+            "tree-triangle-momentum-5={layout=side}",
+            "tree-triangle-momentum-6={layout=side}",
+            "tree-triangle-momentum-7={layout=side}",
+            "tree-triangle-momentum-8={layout=side}"
+          ],
+          "description": "EW base and wavy exchange; pink two-ended loop edges.",
+          "limitation": "No caps, circles, central guide or indices. Index polish remains D01."
+        },
+        {
+          "id": "L13",
+          "title": "S left: momentum and mixed lines",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=left",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red}",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "tree-triangle-loop-line={proca,magenta!85!red}",
+            "tree-triangle-line-6=ewboson",
+            "tree-triangle-momenta={k,\\ell,q}",
+            "tree-triangle-momentum-1={layout=side}",
+            "tree-triangle-momentum-2={layout=side}",
+            "tree-triangle-momentum-3={layout=side}",
+            "tree-triangle-momentum-4={layout=side}",
+            "tree-triangle-momentum-5={layout=side}",
+            "tree-triangle-momentum-6={layout=side}",
+            "tree-triangle-momentum-7={layout=side}",
+            "tree-triangle-momentum-8={layout=side}"
+          ],
+          "description": "EW base and wavy exchange; pink two-ended loop edges.",
+          "limitation": "No caps, circles, central guide or indices. Index polish remains D01."
+        },
+        {
+          "id": "L14",
+          "title": "S right: momentum and mixed lines",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "insertion=triangle",
+            "tree-triangle-side=right",
+            "line=ewboson",
+            "channel-line={ewboson,magenta!85!red}",
+            "show-momenta=true",
+            "show-channel-momentum=false",
+            "momentum-labels={p_1,p_2,p_3,p_4,P}",
+            "tree-triangle-loop-line={proca,magenta!85!red}",
+            "tree-triangle-line-6=ewboson",
+            "tree-triangle-momenta={k,\\ell,q}",
+            "tree-triangle-momentum-1={layout=side}",
+            "tree-triangle-momentum-2={layout=side}",
+            "tree-triangle-momentum-3={layout=side}",
+            "tree-triangle-momentum-4={layout=side}",
+            "tree-triangle-momentum-5={layout=side}",
+            "tree-triangle-momentum-6={layout=side}",
+            "tree-triangle-momentum-7={layout=side}",
+            "tree-triangle-momentum-8={layout=side}"
+          ],
+          "description": "EW base and wavy exchange; pink two-ended loop edges.",
+          "limitation": "No caps, circles, central guide or indices. Index polish remains D01."
+        }
+      ]
     }
   ],
-  "branch": "codex/m05-swordfish"
+  "branch": "codex/m06-tree-triangles"
 }

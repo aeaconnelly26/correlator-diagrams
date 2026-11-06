@@ -2123,6 +2123,35 @@
   \def\corr@insertionorientation{auto}%
   \def\corr@insertionscale{0.66}%
   \def\corr@swordfishopening{60}%
+  \def\corr@treetriangleside{auto}%
+  \def\corr@treetrianglehalfwidth{auto}%
+  \def\corr@treetriangledepth{0.75}%
+  \def\corr@treetriangleoutershift{0.60}%
+  \def\corr@treetriangleloopline{}%
+  \def\corr@treetrianglemomenta{}%
+  \expandafter\def\csname corr@ttslotoptions1\endcsname{}%
+  \expandafter\def\csname corr@ttslotoptions2\endcsname{}%
+  \expandafter\def\csname corr@ttslotoptions3\endcsname{}%
+  \expandafter\def\csname corr@ttslotoptions4\endcsname{}%
+  \expandafter\def\csname corr@ttslotoptions5\endcsname{}%
+  \expandafter\def\csname corr@ttslotoptions6\endcsname{}%
+  \expandafter\def\csname corr@ttslotoptions7\endcsname{}%
+  \expandafter\def\csname corr@ttslotoptions8\endcsname{}%
+  \expandafter\def\csname corr@ttline6\endcsname{}%
+  \expandafter\def\csname corr@ttline7\endcsname{}%
+  \expandafter\def\csname corr@ttline8\endcsname{}%
+  \def\corr@treetrianglepropagatorleftindices{}%
+  \def\corr@treetrianglepropagatorrightindices{}%
+  \def\corr@treetriangleindexleftposition{above}%
+  \def\corr@treetriangleindexrightposition{below}%
+  \def\corr@treetriangleindexleftxshift{0pt}%
+  \def\corr@treetriangleindexleftyshift{0pt}%
+  \def\corr@treetriangleindexrightxshift{0pt}%
+  \def\corr@treetriangleindexrightyshift{0pt}%
+  \def\corr@treetriangleindexstyle{}%
+  \def\corr@treetriangleindexfill{none}%
+  \def\corr@treetriangleindexinnersep{0.4pt}%
+  \def\corr@treetriangleindexmathstyle{\scriptstyle}%
   \def\corr@insertionstyle{}%
   \def\corr@insertionpreline{}%
   \def\corr@insertionpostline{}%
@@ -3902,6 +3931,35 @@
   insertion-scale/.code={\def\corr@insertionscale{#1}\corr@insertionscaleexplicittrue},
   insertion-style/.store in=\corr@insertionstyle,
   swordfish-opening-angle/.store in=\corr@swordfishopening,
+  tree-triangle-side/.store in=\corr@treetriangleside,
+  tree-triangle-half-width/.store in=\corr@treetrianglehalfwidth,
+  tree-triangle-depth/.store in=\corr@treetriangledepth,
+  tree-triangle-outer-shift/.store in=\corr@treetriangleoutershift,
+  tree-triangle-loop-line/.store in=\corr@treetriangleloopline,
+  tree-triangle-momenta/.store in=\corr@treetrianglemomenta,
+  tree-triangle-propagator-left-indices/.store in=\corr@treetrianglepropagatorleftindices,
+  tree-triangle-propagator-right-indices/.store in=\corr@treetrianglepropagatorrightindices,
+  tree-triangle-index-left-position/.store in=\corr@treetriangleindexleftposition,
+  tree-triangle-index-right-position/.store in=\corr@treetriangleindexrightposition,
+  tree-triangle-index-left-xshift/.store in=\corr@treetriangleindexleftxshift,
+  tree-triangle-index-left-yshift/.store in=\corr@treetriangleindexleftyshift,
+  tree-triangle-index-right-xshift/.store in=\corr@treetriangleindexrightxshift,
+  tree-triangle-index-right-yshift/.store in=\corr@treetriangleindexrightyshift,
+  tree-triangle-index-style/.store in=\corr@treetriangleindexstyle,
+  tree-triangle-index-fill/.store in=\corr@treetriangleindexfill,
+  tree-triangle-index-inner-sep/.store in=\corr@treetriangleindexinnersep,
+  tree-triangle-index-math-style/.store in=\corr@treetriangleindexmathstyle,
+  tree-triangle-momentum-1/.code={\expandafter\def\csname corr@ttslotoptions1\endcsname{#1}},
+  tree-triangle-momentum-2/.code={\expandafter\def\csname corr@ttslotoptions2\endcsname{#1}},
+  tree-triangle-momentum-3/.code={\expandafter\def\csname corr@ttslotoptions3\endcsname{#1}},
+  tree-triangle-momentum-4/.code={\expandafter\def\csname corr@ttslotoptions4\endcsname{#1}},
+  tree-triangle-momentum-5/.code={\expandafter\def\csname corr@ttslotoptions5\endcsname{#1}},
+  tree-triangle-momentum-6/.code={\expandafter\def\csname corr@ttslotoptions6\endcsname{#1}},
+  tree-triangle-momentum-7/.code={\expandafter\def\csname corr@ttslotoptions7\endcsname{#1}},
+  tree-triangle-momentum-8/.code={\expandafter\def\csname corr@ttslotoptions8\endcsname{#1}},
+  tree-triangle-line-6/.code={\expandafter\def\csname corr@ttline6\endcsname{#1}},
+  tree-triangle-line-7/.code={\expandafter\def\csname corr@ttline7\endcsname{#1}},
+  tree-triangle-line-8/.code={\expandafter\def\csname corr@ttline8\endcsname{#1}},
   insertion-pre-line/.store in=\corr@insertionpreline,
   insertion-post-line/.store in=\corr@insertionpostline,
   insertion-outer-line/.style={insertion-pre-line={#1}},
@@ -8672,6 +8730,180 @@
   }%
 }
 
+% Vertex correction: a true three-trivalent-vertex loop and an exchange bridge.
+\newcommand{\corr@iftreetriangle}[2]{%
+  \corr@ifstringeq{\corr@insertion}{triangle}{%
+    \edef\corr@ttside{\corr@treetriangleside}%
+    \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
+      \corr@ifstringeq{\corr@ttside}{auto}{\def\corr@ttside{bottom}}{}%
+      \corr@ifstringeq{\corr@ttside}{bottom}{#1}{\corr@ifstringeq{\corr@ttside}{top}{#1}{#2}}% supported T sides
+    }{%
+      \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+        \corr@ifstringeq{\corr@ttside}{auto}{\def\corr@ttside{left}}{}%
+        \corr@ifstringeq{\corr@ttside}{left}{#1}{\corr@ifstringeq{\corr@ttside}{right}{#1}{#2}}% supported S sides
+      }{#2}%
+    }%
+  }{#2}%
+}
+
+\pgfkeys{/corrdiag/tt-momentum/.is family,/corrdiag/tt-momentum,
+  layout/.is choice,
+  layout/gap/.code={\def\corr@tclayout{gap}},
+  layout/side/.code={\def\corr@tclayout{side}},
+  start/.store in=\corr@tcstart,end/.store in=\corr@tcend,
+  offset/.store in=\corr@tcoffset,label-fraction/.store in=\corr@tcfrac,
+  label-gap/.store in=\corr@tcgap,label-offset/.store in=\corr@tclabeloffset,
+  label-xshift/.store in=\corr@tclabelxshift,label-yshift/.store in=\corr@tclabelyshift,
+  label-anchor/.store in=\corr@tclabelanchor,
+  label/.store in=\corr@tclabel,
+  direction/.is choice,
+  direction/forward/.code={\def\corr@tcdirection{forward}},
+  direction/reverse/.code={\def\corr@tcdirection{reverse}},
+  direction/none/.code={\def\corr@tcdirection{none}},
+  side/.is choice,
+  side/outside/.code={\def\corr@tcside{outside}},
+  side/inside/.code={\def\corr@tcside{inside}},
+  side/left/.code={\def\corr@tcside{left}},
+  side/right/.code={\def\corr@tcside{right}}
+}
+\newcommand{\corr@treetriangleresolveannotation}[1]{%
+  \def\corr@tcdefaultfrac{0.50}%
+  \def\corr@tcstart{0.14}\def\corr@tcend{0.86}%
+  \ifnum#1<5 \def\corr@tcstart{auto}\def\corr@tcend{auto}\fi
+  \def\corr@tcfrac{0.50}\def\corr@tcgap{auto}\def\corr@tcoffset{8pt}%
+  \def\corr@tclayout{gap}\def\corr@tclabeloffset{auto}%
+  \def\corr@tclabelxshift{0pt}\def\corr@tclabelyshift{0pt}%
+  \def\corr@tclabelanchor{auto}\def\corr@tcside{outside}%
+  \edef\corr@ttoptions{\csname corr@ttslotoptions#1\endcsname}%
+  \ifdefempty{\corr@ttoptions}{}{%
+    \edef\corr@ttapply{\noexpand\pgfqkeys{/corrdiag/tt-momentum}{\corr@ttoptions}}\corr@ttapply}%
+}
+\newcommand{\corr@treetrianglemomentum}[3]{%
+  \begingroup
+  \def\corr@tcdirection{forward}%
+  \ifnum#1<6
+    \corr@ifemptymomentumlabel{#1}{\def\corr@tclabel{}}{\edef\corr@tclabel{\corr@momentumlabel{#1}}}%
+    \ifnum#1=5 \def\corr@tclabel{\corr@channelmomentumlabel}\fi
+    \ifnum#1<5
+      \edef\corr@ttdirection{\corr@externalmomentumdirectionfor{#1}}%
+      \corr@ifstringeq{\corr@ttdirection}{out}{\def\corr@tcdirection{reverse}}{}%
+    \fi
+  \else
+    \corr@getlistitemorblank{\corr@treetrianglemomenta}{\numexpr#1-5\relax}%
+    \edef\corr@tclabel{\corr@currentlistitem}%
+  \fi
+  % Only substitute the annotation resolver locally. The graph is independent
+  % of triangle-contact; its measured gap/side renderer is reused unchanged.
+  \let\corr@trianglecontactresolveannotation\corr@treetriangleresolveannotation
+  \corr@treetriangleresolveannotation{#1}%
+  \ifnum#1>5 \ifdefempty{\corr@tclabel}{\def\corr@tcdirection{none}}{}\fi
+  \corr@ifstringeq{\corr@tcdirection}{none}{}{\corr@trianglecontactdrawannotation{#1}{#2}{#3}}%
+  \endgroup
+}
+\newcommand{\corr@treetrianglecoords}{%
+  \vertex (corrC) at (0,0);
+  \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+  \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+  \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+  \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+  \corr@ifstringeq{\corr@ttside}{bottom}{%
+    \vertex (corrRTA) at (-\corr@ttwidth,-\corr@channelvertexyspan-\corr@treetriangleoutershift);
+    \vertex (corrRTB) at (\corr@ttwidth,-\corr@channelvertexyspan-\corr@treetriangleoutershift);
+    \vertex (corrRTC) at (0,-\corr@channelvertexyspan+\corr@treetriangledepth);
+    \vertex (corrRTO) at (0,\corr@channelvertexyspan);
+  }{}%
+  \corr@ifstringeq{\corr@ttside}{top}{%
+    \vertex (corrRTA) at (-\corr@ttwidth,\corr@channelvertexyspan+\corr@treetriangleoutershift);
+    \vertex (corrRTB) at (\corr@ttwidth,\corr@channelvertexyspan+\corr@treetriangleoutershift);
+    \vertex (corrRTC) at (0,\corr@channelvertexyspan-\corr@treetriangledepth);
+    \vertex (corrRTO) at (0,-\corr@channelvertexyspan);
+  }{}%
+  \corr@ifstringeq{\corr@ttside}{left}{%
+    \vertex (corrRTA) at (-\corr@channelvertexxspan-\corr@treetriangleoutershift,\corr@ttwidth);
+    \vertex (corrRTB) at (-\corr@channelvertexxspan-\corr@treetriangleoutershift,-\corr@ttwidth);
+    \vertex (corrRTC) at (-\corr@channelvertexxspan+\corr@treetriangledepth,0);
+    \vertex (corrRTO) at (\corr@channelvertexxspan,0);
+  }{}%
+  \corr@ifstringeq{\corr@ttside}{right}{%
+    \vertex (corrRTA) at (\corr@channelvertexxspan+\corr@treetriangleoutershift,\corr@ttwidth);
+    \vertex (corrRTB) at (\corr@channelvertexxspan+\corr@treetriangleoutershift,-\corr@ttwidth);
+    \vertex (corrRTC) at (\corr@channelvertexxspan-\corr@treetriangledepth,0);
+    \vertex (corrRTO) at (-\corr@channelvertexxspan,0);
+  }{}%
+  % Keep corrected T stubs outside the enlarged loop; the bridge tip stays fixed.
+  \pgfmathsetmacro{\corr@ttoutery}{max(\corr@fourpointyspan,\corr@channelvertexyspan+\corr@treetriangleoutershift+0.28)}%
+  \corr@ifstringeq{\corr@ttside}{bottom}{%
+    \coordinate (corrLL) at (-\corr@fourpointxspan,-\corr@ttoutery);
+    \coordinate (corrLR) at (\corr@fourpointxspan,-\corr@ttoutery);
+  }{}%
+  \corr@ifstringeq{\corr@ttside}{top}{%
+    \coordinate (corrUL) at (-\corr@fourpointxspan,\corr@ttoutery);
+    \coordinate (corrUR) at (\corr@fourpointxspan,\corr@ttoutery);
+  }{}%
+  \foreach \i in {1,...,4}{\coordinate (corrRTSlot\i) at (corrRTO);}%
+  \corr@ifstringeq{\corr@ttside}{bottom}{\coordinate (corrRTSlot2) at (corrRTA);\coordinate (corrRTSlot4) at (corrRTB);}{}%
+  \corr@ifstringeq{\corr@ttside}{top}{\coordinate (corrRTSlot1) at (corrRTA);\coordinate (corrRTSlot3) at (corrRTB);}{}%
+  \corr@ifstringeq{\corr@ttside}{left}{\coordinate (corrRTSlot1) at (corrRTA);\coordinate (corrRTSlot2) at (corrRTB);}{}%
+  \corr@ifstringeq{\corr@ttside}{right}{\coordinate (corrRTSlot3) at (corrRTA);\coordinate (corrRTSlot4) at (corrRTB);}{}%
+  \coordinate (corrRTBridgeStart) at (corrRTO);\coordinate (corrRTBridgeEnd) at (corrRTC);
+  \corr@ifstringeq{\corr@ttside}{top}{\coordinate (corrRTBridgeStart) at (corrRTC);\coordinate (corrRTBridgeEnd) at (corrRTO);}{}%
+  \corr@ifstringeq{\corr@ttside}{left}{\coordinate (corrRTBridgeStart) at (corrRTC);\coordinate (corrRTBridgeEnd) at (corrRTO);}{}%
+  \coordinate (corrTriCentroid) at (barycentric cs:corrRTA=1,corrRTB=1,corrRTC=1);
+}
+% Bare scalar polarization on these new straight loop edges is semantic,
+% directed to the edge end. Keep legacy behavior outside this graph unchanged.
+\newcommand{\corr@treetriangleinternalstyleitem}[1]{%
+  \edef\corr@ttstyleitem{#1}%
+  \corr@ifstringeq{#1}{spol}{\def\corr@ttstyleitem{spolin}}{}%
+  \corr@ifstringeq{#1}{antspol}{\def\corr@ttstyleitem{spolin}}{}%
+  \corr@ifstringeq{#1}{scalar polarized}{\def\corr@ttstyleitem{spolin}}{}%
+  \corr@ifstringeq{#1}{anti scalar polarized}{\def\corr@ttstyleitem{spolin}}{}%
+  \expandafter\corr@ttoriginalinternalstyleitem\expandafter{\corr@ttstyleitem}%
+}
+\newcommand{\corr@drawtreetriangle}{%
+  \corr@ifstringeq{\corr@treetrianglehalfwidth}{auto}{%
+    \pgfmathsetmacro{\corr@ttwidth}{(\corr@treetriangledepth+\corr@treetriangleoutershift)/sqrt(3)}%
+  }{\edef\corr@ttwidth{\corr@treetrianglehalfwidth}}%
+  \begin{feynhand}
+    \let\corr@ttoriginalinternalstyleitem\corr@internalstyleitem
+    \let\corr@internalstyleitem\corr@treetriangleinternalstyleitem
+    \corr@treetrianglecoords
+    \corr@ifexternallegs{%
+      \corr@drawchannelprop{1}{}{corrUL}{corrRTSlot1}{}%
+      \corr@drawchannelprop{2}{}{corrLL}{corrRTSlot2}{}%
+      \corr@drawchannelprop{3}{}{corrUR}{corrRTSlot3}{}%
+      \corr@drawchannelprop{4}{}{corrLR}{corrRTSlot4}{}%
+    }%
+    \corr@drawchannelprop{5}{\corr@channelinternalline}{corrRTBridgeStart}{corrRTBridgeEnd}{}%
+    \foreach \i/\a/\b in {6/corrRTA/corrRTB,7/corrRTB/corrRTC,8/corrRTC/corrRTA}{%
+      \edef\corr@ttline{\csname corr@ttline\i\endcsname}%
+      \ifdefempty{\corr@ttline}{\edef\corr@ttline{\corr@treetriangleloopline}}{}%
+      \corr@drawchannelprop{\i}{\corr@ttline}{\a}{\b}{}%
+    }%
+  \end{feynhand}
+  \ifcorr@centervertex
+    \foreach \v in {corrRTA,corrRTB,corrRTC,corrRTO}{\corr@putvertex{\v}{\corr@centervertexstyle}}%
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \foreach \i/\a/\b in {1/corrUL/corrRTSlot1,2/corrLL/corrRTSlot2,3/corrUR/corrRTSlot3,4/corrLR/corrRTSlot4,5/corrRTBridgeStart/corrRTBridgeEnd,6/corrRTA/corrRTB,7/corrRTB/corrRTC,8/corrRTC/corrRTA}{%
+    \ifcorr@showmomenta
+      \ifnum\i<5
+        \corr@ifexternallegs{\corr@ifexternalmomentumvisible{\i}{\corr@treetrianglemomentum{\i}{\a}{\b}}}%
+      \else
+        \ifnum\i=5
+          \ifcorr@showchannelmomentum\corr@treetrianglemomentum{\i}{\a}{\b}\fi
+        \else\corr@treetrianglemomentum{\i}{\a}{\b}\fi
+      \fi
+    \fi
+    \ifnum\i<5
+      \corr@ifexternallegs{\corr@putpropagatorindiceslot{treetriangle}{\i}{\a}{\b}}%
+    \else\corr@putpropagatorindiceslot{treetriangle}{\i}{\a}{\b}\fi
+  }%
+  \corr@fourpointchannelindices{corrRTBridgeStart}{corrRTBridgeEnd}%
+  \corr@fourpointplaceexternallabels
+  \corr@putchannelcentral{corrC}%
+}
+
 \newcommand{\corr@setstreeinsertionhost}{%
   \ifcase\corr@insertionhostslot\relax
   \or \coordinate (corrInsertionOuter) at (corrUL);\coordinate (corrInsertionHost) at (corrVL);%
@@ -8682,6 +8914,7 @@
 }
 
 \newcommand{\corr@drawfourpointstreeschannel}{%
+  \corr@iftreetriangle{\corr@drawtreetriangle}{%
   \corr@ifstreeinsertion{\corr@resolvettreeinsertionhost}{}%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
@@ -8727,9 +8960,11 @@
   \corr@ifstreeswordfishinsertion{\corr@puttreeswordfishindices}{}%
   \corr@fourpointplaceexternallabels
   \corr@putchannelcentral{corrC}
+  }%
 }
 
 \newcommand{\corr@drawfourpointtreetchannel}{%
+  \corr@iftreetriangle{\corr@drawtreetriangle}{%
   \corr@ifttreeinsertion{\corr@resolvettreeinsertionhost}{}%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
@@ -8789,6 +9024,7 @@
   \corr@ifttreeswordfishinsertion{\corr@puttreeswordfishindices}{}%
   \corr@fourpointplaceexternallabels
   \corr@putchannelcentral{corrC}
+  }%
 }
 
 \newcommand{\corr@drawfourpointtreeuchannel}{%

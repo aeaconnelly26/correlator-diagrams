@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M05 local; base efb5fae`, audited 2026-11-04. Atlas: [PDF](inventory.pdf).
+Baseline: `M06 local; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -2178,5 +2178,249 @@ W loop, pink two-ended Z loop (k), pink Z exchange.
   bubble-top-line={ewboson,ewboson wavelength=14\feynhandlinesize,circ=W,circ scale=.65},
   bubble-bottom-line={proca,magenta!85!red},
   bubble-momenta={,k}
+]
+```
+
+## Regular tree-attached triangle corrections
+
+### L01 - T-tree triangle: bottom
+
+Three trivalent loop vertices; bridge to the other tree vertex.
+
+**Limit:** One vertex correction. Equilateral defaults; explicit width allows other shapes.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=bottom
+]
+```
+
+### L02 - T-tree triangle: top
+
+Three trivalent loop vertices; bridge to the other tree vertex.
+
+**Limit:** One vertex correction. Equilateral defaults; explicit width allows other shapes.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=top
+]
+```
+
+### L03 - S-tree triangle: left
+
+Three trivalent loop vertices; bridge to the other tree vertex.
+
+**Limit:** One vertex correction. Equilateral defaults; explicit width allows other shapes.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=left
+]
+```
+
+### L04 - S-tree triangle: right
+
+Three trivalent loop vertices; bridge to the other tree vertex.
+
+**Limit:** One vertex correction. Equilateral defaults; explicit width allows other shapes.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=right
+]
+```
+
+## Independent lines and continuous momentum arrows
+
+### L11 - T bottom: momentum and mixed lines
+
+EW base and wavy exchange; pink two-ended loop edges.
+
+**Limit:** No caps, circles, central guide or indices. Index polish remains D01.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=bottom,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
+]
+```
+
+### L12 - T top: momentum and mixed lines
+
+EW base and wavy exchange; pink two-ended loop edges.
+
+**Limit:** No caps, circles, central guide or indices. Index polish remains D01.
+
+```tex
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=top,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
+]
+```
+
+### L13 - S left: momentum and mixed lines
+
+EW base and wavy exchange; pink two-ended loop edges.
+
+**Limit:** No caps, circles, central guide or indices. Index polish remains D01.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=left,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
+]
+```
+
+### L14 - S right: momentum and mixed lines
+
+EW base and wavy exchange; pink two-ended loop edges.
+
+**Limit:** No caps, circles, central guide or indices. Index polish remains D01.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=right,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
 ]
 ```

@@ -6,7 +6,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`, synchronized with GitHub after M05 publication.
+- Current branch: `codex/m06-tree-triangles`, based on published main `eb6182c`.
+- M06 is complete locally: regular triangle corrections on T top/bottom and S
+  left/right, with equilateral defaults as requested. Each has four trivalent
+  interactions and an exchange bridge. All 42 documents / 772 endpoint contacts
+  pass. See [M06 verification](planning/m06-verification.md).
+  Merge/push is pending; M05 remains published on main.
 - M05 checkpoint `9daebf9` is merged and published: swordfish insertions on all
   four external legs of both tree channels. The two loop edges meet the actual
   quartic tree vertex. All 41 maintained documents and 736 endpoint contacts
@@ -48,7 +53,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Nineteen pages: 86 recipes, including all eight swordfish placements and styled samples. M05 is published on main. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-one pages: 94 recipes, including four equilateral tree triangles and styled samples. M06 is local only; M05 is published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -67,8 +72,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a and M03b complete on published main |
 | M04 | External seagulls on s/t trees | Complete on published main; verified checkpoint `854293a` |
 | M05 | External swordfish on s/t trees | Complete on published main; verified checkpoint `9daebf9` |
-| M06 | Regular tree-attached triangle corrections, four placements | Next; M05 publication complete |
-| M07 | Complementary crossed box, crossed external layouts, source routing questions | Planned; square defaults already verified |
+| M06 | Regular tree-attached triangle corrections, four placements | Complete locally on `codex/m06-tree-triangles`; merge/push pending |
+| M07 | Complementary crossed box, crossed external layouts, source routing questions | Next after M06 publication; begin with one crossed-box slice |
 | M08a / M08b | Contact external self-energy / seagull | Planned |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
@@ -76,15 +81,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M06 is next: regular tree-attached triangles, R08. M05 is already merged and
-published; no manual Git preparation is needed from the user. Fetch/inspect
-current main and create a new `codex/` feature branch. Freeze the source connectivity before
-coding: top/bottom corrections on T trees, then left/right corrections on S
-trees. These have three trivalent loop vertices and a bridge to the opposite
-tree vertex; the existing triangle-contact graph is a different construction.
-Complete one placement at a time and preserve logical styles/annotations.
-D01 remains a separate later workflow; do not polish index positions during
-these feature sessions.
+M07 is next after publishing the verified M06 checkpoint when authorized.
+The assistant handles the merge/push; no manual Git preparation is required
+from the user. Fetch/inspect synchronized main and create a new feature branch.
+Start with M07a: verify square defaults and freeze the complementary internal
+crossing before implementation. Preserve the existing crossed box; treat
+crossed external connections as a separate slice. Resolve R14/R22 endpoint
+routing at their specification gates before promising support.
+D01 index-position polish remains a separate later workflow.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -427,3 +431,21 @@ reserved for its separate workflow.
   verified 41-document/736-contact checkpoint. Only publication records changed.
 - Main is synchronized with GitHub; no M05 merge/push remains. M06 is ready
   for its next coding session. D01 index-position polish remains deferred.
+
+## M06 implementation - 2026-11-06
+
+- Started from clean published main `eb6182c` on `codex/m06-tree-triangles`.
+- Froze R08's triangle-plus-bridge graph from S05/S06/S07/S08-L2. Enabled
+  T bottom, T top, S left and S right sequentially.
+- Added `insertion=triangle` with `tree-triangle-side`; slots 1-4 retain the
+  outer legs, 5 is the bridge, 6-8 are A--B--C--A. No quartic point is used.
+- User review changed the default to equilateral: automatic half-width derives
+  from the chosen depth/outer shift. The follow-up enlarges sides by 50% and
+  uses wavy styled exchange lines. Explicit width permits other shapes.
+- Reused measured-gap/side-label annotation helpers with independent controls
+  for all eight slots. Preserved external flow/styles/caps and endpoint values;
+  D01 appearance remains deferred. New scalar loop markers use semantic tips.
+- Added a five-page focused gallery and atlas pages 20-21 (94 recipes total).
+  The first nineteen atlas page bodies retain the published M05 rendering.
+- Complete locally; main/GitHub remain `eb6182c`. No M06 merge/push performed.
+  M07 follows publication. See [M06 verification](planning/m06-verification.md).

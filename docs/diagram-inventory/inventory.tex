@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M05 local; base efb5fae | 2026-11-04}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M06 local; base eb6182c | 2026-11-06}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -1595,4 +1595,192 @@
   bubble-momenta={,k}
 ]
 }{W loop, pink two-ended Z loop (k), pink Z exchange.}{Species circles intentional; no central/W guide, caps or indices.}\par\vspace{4pt}
+\newpage
+\atlaspage{20 / TREE TRIANGLES}{Regular tree-attached triangle corrections}{Equilateral defaults; four trivalent interactions, one loop and one exchange bridge. Plain lines and no annotations.}
+\atlascell{L01  T-tree triangle: bottom}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=bottom
+]
+}{Three trivalent loop vertices; bridge to the other tree vertex.}{One vertex correction. Equilateral defaults; explicit width allows other shapes.}\hfill
+\atlascell{L02  T-tree triangle: top}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=top
+]
+}{Three trivalent loop vertices; bridge to the other tree vertex.}{One vertex correction. Equilateral defaults; explicit width allows other shapes.}\par\vspace{4pt}
+\atlascell{L03  S-tree triangle: left}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=left
+]
+}{Three trivalent loop vertices; bridge to the other tree vertex.}{One vertex correction. Equilateral defaults; explicit width allows other shapes.}\hfill
+\atlascell{L04  S-tree triangle: right}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=right
+]
+}{Three trivalent loop vertices; bridge to the other tree vertex.}{One vertex correction. Equilateral defaults; explicit width allows other shapes.}\par\vspace{4pt}
+\newpage
+\atlaspage{21 / TRIANGLE STYLES}{Independent lines and continuous momentum arrows}{The same four graphs with mixed styles and outside labels. External 1/2 enter; 3/4 leave.}
+\atlascell{L11  T bottom: momentum and mixed lines}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=bottom,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
+]
+}{EW base and wavy exchange; pink two-ended loop edges.}{No caps, circles, central guide or indices. Index polish remains D01.}\hfill
+\atlascell{L12  T top: momentum and mixed lines}{\TTreeChannelCorr}{%
+\TTreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=top,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
+]
+}{EW base and wavy exchange; pink two-ended loop edges.}{No caps, circles, central guide or indices. Index polish remains D01.}\par\vspace{4pt}
+\atlascell{L13  S left: momentum and mixed lines}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=left,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
+]
+}{EW base and wavy exchange; pink two-ended loop edges.}{No caps, circles, central guide or indices. Index polish remains D01.}\hfill
+\atlascell{L14  S right: momentum and mixed lines}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=triangle,
+  tree-triangle-side=right,
+  line=ewboson,
+  channel-line={ewboson,magenta!85!red},
+  show-momenta=true,
+  show-channel-momentum=false,
+  momentum-labels={p_1,p_2,p_3,p_4,P},
+  tree-triangle-loop-line={proca,magenta!85!red},
+  tree-triangle-line-6=ewboson,
+  tree-triangle-momenta={k,\ell,q},
+  tree-triangle-momentum-1={layout=side},
+  tree-triangle-momentum-2={layout=side},
+  tree-triangle-momentum-3={layout=side},
+  tree-triangle-momentum-4={layout=side},
+  tree-triangle-momentum-5={layout=side},
+  tree-triangle-momentum-6={layout=side},
+  tree-triangle-momentum-7={layout=side},
+  tree-triangle-momentum-8={layout=side}
+]
+}{EW base and wavy exchange; pink two-ended loop edges.}{No caps, circles, central guide or indices. Index polish remains D01.}\par\vspace{4pt}
 \end{document}

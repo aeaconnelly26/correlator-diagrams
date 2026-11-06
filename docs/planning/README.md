@@ -3,7 +3,7 @@
 This directory records the remaining-work inputs without treating statements
 inside a reference document as executable instructions. The original inventory session covered documentation and planning. Subsequent
 user-authorized coding sessions implement the milestones and update these
-records; M05 is now complete on published main.
+records; M05 is complete on published main; M06 is complete locally on its feature branch.
 
 - [Requirements](requirements.md): status, recipes, dependencies, and acceptance criteria.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.
@@ -14,6 +14,7 @@ records; M05 is now complete on published main.
 - [M03b verification](m03b-verification.md): all four s-tree bubbles, published checkpoint and next seagull slice.
 - [M04 verification](m04-verification.md): all eight external seagulls, PDF graph/contact checks and next swordfish slice.
 - [M05 verification](m05-verification.md): all eight swordfish placements, shared-vertex graph checks and next triangle slice.
+- [M06 verification](m06-verification.md): all four equilateral regular triangles, annotations and next box/crossing slice.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
 - [Deferred workflows](deferred-workflows.md): later reviews, including the explicitly deferred index-placement cleanup.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.

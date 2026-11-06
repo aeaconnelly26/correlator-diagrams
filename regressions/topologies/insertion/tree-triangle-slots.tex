@@ -1,0 +1,197 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,adjustbox,fancyhdr,feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M06: regular tree-attached triangles; one correction}
+\fancyfoot[R]{\thepage}\renewcommand{\headrulewidth}{0pt}\setlength{\parindent}{0pt}
+\newbox\rtbox
+\newcount\rtedges\newcount\rtdots\newcount\rtlabels\newcount\rtcaps\newcount\rtdoublecaps\newcount\rtindices\newcount\rtcases
+\begin{document}
+\makeatletter
+\def\rtplacements{bottom,top,left,right}
+\newcommand{\rtassert}[3]{\ifnum#1=#2\relax\else\PackageError{M06}{#3: got \the#1, wanted #2}{}\fi}
+\newcommand{\rtclose}[2]{\pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{#2}{center}}%
+ \pgfmathsetlengthmacro{\rterror}{max(abs(\pgf@x),abs(\pgf@y))}%
+ \ifdim\rterror>.03pt\PackageError{M06}{Coordinate/ownership mismatch: #1 / #2}{}\fi}
+\let\rtoldprop\corr@drawchannelprop
+\renewcommand{\corr@drawchannelprop}[5]{\global\advance\rtedges by1\rtoldprop{#1}{#2}{#3}{#4}{#5}%
+ \expandafter\xdef\csname rtstyle#1\endcsname{\corr@propoptions}%
+ \expandafter\xdef\csname rtstart#1\endcsname{#3}\expandafter\xdef\csname rtend#1\endcsname{#4}}
+\let\rtoldvertex\corr@putvertex
+\renewcommand{\corr@putvertex}[2]{\global\advance\rtdots by1\rtoldvertex{#1}{#2}}
+\let\rtoldcap\corr@drawexternalendcap
+\renewcommand{\corr@drawexternalendcap}[2]{\global\advance\rtcaps by1\def\rtfound{no}%
+ \@for\rtouter:={corrUL,corrLL,corrUR,corrLR}\do{%
+  \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{\rtouter}{center}}%
+  \pgfmathsetlengthmacro{\rterror}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\rterror<.03pt\def\rtfound{yes}\fi}%
+ \corr@ifstringeq{\rtfound}{yes}{}{\PackageError{M06}{Internal cap}{}}\rtoldcap{#1}{#2}}
+\let\rtolddouble\corr@drawexternalendcapp
+\renewcommand{\corr@drawexternalendcapp}[2]{\global\advance\rtdoublecaps by1\rtolddouble{#1}{#2}}
+\let\rtoldindex\corr@puttopologyindexline
+\renewcommand{\corr@puttopologyindexline}[8]{\edef\rtvalue{#7}\ifdefempty{\rtvalue}{}{%
+ \global\advance\rtindices by1\xdef\rtindexvalues{\rtindexvalues,#7}%
+ \rtclose{#1}{\csname rtstart\i\endcsname}\rtclose{#2}{\csname rtend\i\endcsname}}%
+ \rtoldindex{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
+\let\rtoldannotation\corr@trianglecontactdrawannotation
+\renewcommand{\corr@trianglecontactdrawannotation}[3]{\rtoldannotation{#1}{#2}{#3}%
+ \global\advance\rtlabels by1
+ \pgfpointanchor{corrTCArrowStart}{center}\expandafter\xdef\csname rtx#1\endcsname{\the\pgf@x}\expandafter\xdef\csname rty#1\endcsname{\the\pgf@y}%
+ \expandafter\xdef\csname rtdirection#1\endcsname{\corr@tcdirection}%
+ \expandafter\xdef\csname rtlabel#1\endcsname{\corr@tclabel}%
+ \corr@ifstringeq{\corr@tcside}{outside}{%
+  \pgfpointdiff{\pgfpointanchor{#2}{center}}{\pgfpointanchor{#3}{center}}%
+  \pgfmathsetmacro{\rtdx}{\pgf@x/1cm}\pgfmathsetmacro{\rtdy}{\pgf@y/1cm}%
+  \pgfpointdiff{\pgfpointanchor{#2}{center}}{\pgfpointanchor{corrTCArrowStart}{center}}%
+  \pgfmathsetmacro{\rtcrossarrow}{\rtdx*\pgf@y/1cm-\rtdy*\pgf@x/1cm}%
+  \pgfpointdiff{\pgfpointanchor{#2}{center}}{\pgfpointanchor{corrTriCentroid}{center}}%
+  \pgfmathsetmacro{\rtcrosscenter}{\rtdx*\pgf@y/1cm-\rtdy*\pgf@x/1cm}%
+  \ifdim\rtcrossarrow pt>0pt\ifdim\rtcrosscenter pt>0pt\PackageError{M06}{Guide inside triangle}{}\fi
+  \else\ifdim\rtcrosscenter pt<0pt\PackageError{M06}{Guide inside triangle}{}\fi\fi}{}%
+ \corr@ifstringeq{\corr@tclayout}{gap}{\ifdefempty{\corr@tclabel}{}{%
+  \pgfpointdiff{\pgfpointanchor{corrTCGapStart}{center}}{\pgfpointanchor{corrTCLabelNode}{center}}%
+  \pgfmathsetmacro{\rtgapleft}{\corr@tcdx*\pgf@x/1cm+\corr@tcdy*\pgf@y/1cm}%
+  \pgfpointdiff{\pgfpointanchor{corrTCLabelNode}{center}}{\pgfpointanchor{corrTCGapEnd}{center}}%
+  \pgfmathsetmacro{\rtgapright}{\corr@tcdx*\pgf@x/1cm+\corr@tcdy*\pgf@y/1cm}%
+  \ifdim\rtgapleft pt<-.001pt\PackageError{M06}{Label before gap}{}\fi
+  \ifdim\rtgapright pt<-.001pt\PackageError{M06}{Label after gap}{}\fi}}{}%
+}
+\let\rtolddraw\corr@drawtreetriangle
+\renewcommand{\corr@drawtreetriangle}{\rtolddraw
+ \ifcorr@externallegs\rtassert\rtedges{8}{Eight edges}\else\rtassert\rtedges{4}{Four internal edges}\fi
+ \ifcorr@externallegs\rtassert\rtdots{4}{Four distinct interaction vertices}\else\rtassert\rtdots{8}{Interaction and legacy placeholder dots}\fi%
+ \rtclose{\csname rtstart6\endcsname}{corrRTA}\rtclose{\csname rtend6\endcsname}{corrRTB}%
+ \rtclose{\csname rtstart7\endcsname}{corrRTB}\rtclose{\csname rtend7\endcsname}{corrRTC}%
+ \rtclose{\csname rtstart8\endcsname}{corrRTC}\rtclose{\csname rtend8\endcsname}{corrRTA}%
+ \corr@ifstringeq{\rtside}{bottom}{\rtclose{corrRTSlot2}{corrRTA}\rtclose{corrRTSlot4}{corrRTB}\rtclose{corrRTSlot1}{corrRTO}\rtclose{corrRTSlot3}{corrRTO}}{}%
+ \corr@ifstringeq{\rtside}{top}{\rtclose{corrRTSlot1}{corrRTA}\rtclose{corrRTSlot3}{corrRTB}\rtclose{corrRTSlot2}{corrRTO}\rtclose{corrRTSlot4}{corrRTO}}{}%
+ \corr@ifstringeq{\rtside}{left}{\rtclose{corrRTSlot1}{corrRTA}\rtclose{corrRTSlot2}{corrRTB}\rtclose{corrRTSlot3}{corrRTO}\rtclose{corrRTSlot4}{corrRTO}}{}%
+ \corr@ifstringeq{\rtside}{right}{\rtclose{corrRTSlot3}{corrRTA}\rtclose{corrRTSlot4}{corrRTB}\rtclose{corrRTSlot1}{corrRTO}\rtclose{corrRTSlot2}{corrRTO}}{}%
+ \pgfpointdiff{\pgfpointanchor{corrRTA}{center}}{\pgfpointanchor{corrRTB}{center}}%
+ \pgfmathsetlengthmacro{\rtbase}{veclen(\pgf@x,\pgf@y)}%
+ \corr@ifstringeq{\corr@treetrianglehalfwidth}{auto}{%
+  \pgfmathsetlengthmacro{\rtwanted}{2*(\corr@treetriangledepth+\corr@treetriangleoutershift)/sqrt(3)*1cm}%
+  \pgfpointdiff{\pgfpointanchor{corrRTB}{center}}{\pgfpointanchor{corrRTC}{center}}%
+  \pgfmathsetlengthmacro{\rtsideone}{veclen(\pgf@x,\pgf@y)}%
+  \pgfpointdiff{\pgfpointanchor{corrRTC}{center}}{\pgfpointanchor{corrRTA}{center}}%
+  \pgfmathsetlengthmacro{\rtsidetwo}{veclen(\pgf@x,\pgf@y)}%
+  \pgfmathsetlengthmacro{\rterror}{max(abs(\rtbase-\rtsideone),abs(\rtbase-\rtsidetwo))}%
+  \ifdim\rterror>.03pt\PackageError{M06}{Automatic triangle is not equilateral}{}\fi
+ }{\pgfmathsetlengthmacro{\rtwanted}{2*\corr@treetrianglehalfwidth*1cm}}%
+ \pgfmathsetlengthmacro{\rterror}{abs(\rtbase-\rtwanted)}\ifdim\rterror>.03pt\PackageError{M06}{Wrong triangle width}{}\fi
+}
+\def\rtcolorcheck#1/#2\rtstop{%
+ \edef\rtprobe{\noexpand\in@{#2}{\csname rtstyle#1\endcsname}}\rtprobe
+ \ifin@\else\PackageError{M06}{Wrong line/color ownership in slot #1}{}\fi}
+\newcommand{\rtmeasure}[1]{%
+ \global\rtedges=0\global\rtdots=0\global\rtlabels=0\global\rtcaps=0\global\rtdoublecaps=0\global\rtindices=0\gdef\rtindexvalues{}%
+ \global\advance\rtcases by1
+ \setbox\rtbox=\hbox{\rtpublic[field={},central={},external-vertices=false,line=plain,channel-line=plain,show-momenta=false,insertion=triangle,tree-triangle-side=\rtside,#1]}}
+\@for\rtside:=\rtplacements\do{%
+ \def\rtpublic{\TTreeChannelCorr}\corr@ifstringeq{\rtside}{left}{\def\rtpublic{\STreeChannelCorr}}{}\corr@ifstringeq{\rtside}{right}{\def\rtpublic{\STreeChannelCorr}}{}%
+ \@for\rtscale:={.72,1,1.2}\do{\rtmeasure{scale=\rtscale}}%
+ \rtmeasure{tree-triangle-depth=.65,tree-triangle-outer-shift=.1}% Auto width stays equilateral.
+ \rtmeasure{tree-triangle-half-width=.8,tree-triangle-depth=.65,tree-triangle-outer-shift=.1}%
+ \rtmeasure{line=ewboson,channel-line={proca,magenta!85!red},tree-triangle-loop-line=proca,tree-triangle-line-7=spol}%
+ \expandafter\let\expandafter\rtpreviousstyle\csname rtstyle7\endcsname
+ \rtmeasure{tree-triangle-line-7=spol,tree-triangle-loop-line=proca}%
+ \expandafter\ifx\csname rtstyle7\endcsname\rtpreviousstyle\else\PackageError{M06}{Per-edge style changed with key order}{}\fi
+
+ \rtmeasure{leg-styles={red,blue,green,orange},channel-line=purple,tree-triangle-line-6=cyan,tree-triangle-line-7=brown,tree-triangle-line-8=gray}%
+ \@for\rtentry:={1/red,2/blue,3/green,4/orange,5/purple,6/cyan,7/brown,8/gray}\do{%
+  \expandafter\rtcolorcheck\rtentry\rtstop}%
+ \rtmeasure{leg-styles={{ewboson,endcap},{ewboson,endcap},{ewboson,endcap},{ewboson,endcap}}}\rtassert\rtcaps{4}{Four outer single caps}%
+ \rtmeasure{leg-styles={{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp},{ewboson,endcapp}}}\rtassert\rtdoublecaps{4}{Four outer double caps}%
+ \rtmeasure{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q}}\rtassert\rtlabels{8}{Eight independent momenta}%
+ \@for\rti:={1,2}\do{\edef\rtactual{\csname rtdirection\rti\endcsname}\def\rtwanted{forward}\ifx\rtactual\rtwanted\else\PackageError{M06}{Incoming flow changed}{}\fi}%
+ \@for\rti:={3,4}\do{\edef\rtactual{\csname rtdirection\rti\endcsname}\def\rtwanted{reverse}\ifx\rtactual\rtwanted\else\PackageError{M06}{Outgoing flow changed}{}\fi}%
+ \rtmeasure{show-momenta=true,tree-triangle-momenta={k,\ell,q},show-channel-momentum=false,external-momentum-hide={2,3}}\rtassert\rtlabels{5}{Visibility per logical slot}%
+ \rtmeasure{show-momenta=true,tree-triangle-momenta={k,,q}}\rtassert\rtlabels{7}{Blank loop suppresses one guide}%
+ \rtmeasure{show-momenta=true,momentum-labels={,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q}}\rtassert\rtlabels{8}{Blank external retains unlabeled arrow}%
+ \rtmeasure{show-momenta=true,channel-momentum=Q,tree-triangle-momenta={k,\ell,q}}%
+ \edef\rtactual{\csname rtlabel5\endcsname}\def\rtwanted{Q}\ifx\rtactual\rtwanted\else\PackageError{M06}{Channel label control ignored}{}\fi
+ \@for\rti:={1,2,3,4,5,6,7,8}\do{%
+  \rtmeasure{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q}}%
+  \@for\rtj:={1,2,3,4,5,6,7,8}\do{%
+   \expandafter\xdef\csname rtbaseX\rtj\endcsname{\csname rtx\rtj\endcsname}%
+   \expandafter\xdef\csname rtbaseY\rtj\endcsname{\csname rty\rtj\endcsname}}%
+  \rtmeasure{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q},tree-triangle-momentum-\rti={layout=side,direction=reverse,start=.2,end=.8,label-fraction=.55,offset=10pt,label-offset=4pt,label-xshift=1pt,label-yshift=1pt}}%
+  \edef\rtactual{\csname rtdirection\rti\endcsname}\def\rtwanted{reverse}\ifx\rtactual\rtwanted\else\PackageError{M06}{Per-slot reverse ignored}{}\fi
+  \@for\rtj:={1,2,3,4,5,6,7,8}\do{\ifnum\rtj=\rti\else
+    \edef\rtactual{\csname rtx\rtj\endcsname}\edef\rtwanted{\csname rtbaseX\rtj\endcsname}%
+    \ifx\rtactual\rtwanted\else\PackageError{M06}{Per-edge option moved another arrow X}{}\fi
+    \edef\rtactual{\csname rty\rtj\endcsname}\edef\rtwanted{\csname rtbaseY\rtj\endcsname}%
+    \ifx\rtactual\rtwanted\else\PackageError{M06}{Per-edge option moved another arrow Y}{}\fi\fi}%
+ }%
+ \rtmeasure{show-momenta=true,tree-triangle-momenta={k,\ell,q},tree-triangle-momentum-7={direction=none}}\rtassert\rtlabels{7}{Per-edge hide}%
+ \rtmeasure{tree-triangle-propagator-left-indices={a,b,c,d,e,f,g,h},tree-triangle-propagator-right-indices={A,B,C,D,E,F,G,H}}\rtassert\rtindices{16}{Both endpoints of all eight edges}%
+ \def\rtwanted{,a,A,b,B,c,C,d,D,e,E,f,F,g,G,h,H}\ifx\rtindexvalues\rtwanted\else\PackageError{M06}{Endpoint values/order changed}{}\fi
+ \rtmeasure{external-legs=false,external-vertices=false,tree-triangle-propagator-left-indices={a,b,c,d,e,f,g,h},tree-triangle-propagator-right-indices={A,B,C,D,E,F,G,H}}\rtassert\rtindices{8}{Hidden external indices removed}%
+ \rtmeasure{show-momenta=true,external-left-momentum-direction=out,external-right-momentum-direction=in,tree-triangle-momenta={k,\ell,q},tree-triangle-momentum-6={side=inside,direction=reverse}}%
+ \rtmeasure{show-momenta=true,tree-triangle-momentum-7={label=L}}\rtassert\rtlabels{6}{Per-edge loop label activates only that guide}%
+ \rtmeasure{channel-indices={i,P,j}}%
+ \@for\rtalias:={spol,antspol,scalar polarized,anti scalar polarized}\do{\rtmeasure{tree-triangle-loop-line={\rtalias,magenta!85!red}}}%
+ \corr@ifstringeq{\rtside}{bottom}{\rtmeasure{tree-triangle-side=auto}}{}%
+ \corr@ifstringeq{\rtside}{left}{\rtmeasure{tree-triangle-side=auto}}{}%
+ \let\rtsavedpublic\rtpublic\def\rtpublic{\FourPointCorr}%
+ \def\rttopology{t-tree}\corr@ifstringeq{\rtside}{left}{\def\rttopology{s-tree}}{}\corr@ifstringeq{\rtside}{right}{\def\rttopology{s-tree}}{}%
+ \rtmeasure{topology=\rttopology}\let\rtpublic\rtsavedpublic
+ \rtmeasure{}\rtassert\rtlabels{0}{No stale labels}\rtassert\rtindices{0}{No stale indices}\rtassert\rtcaps{0}{No stale caps}%
+}
+\def\rtunsupported#1/#2\rtstop{%
+ \def\rtpublic{\TTreeChannelCorr}\def\rtkind{#1}%
+ \corr@ifstringeq{\rtkind}{S}{\def\rtpublic{\STreeChannelCorr}}{}\corr@ifstringeq{\rtkind}{U}{\def\rtpublic{\UTreeChannelCorr}}{}%
+ \global\rtedges=0\global\rtdots=0\global\advance\rtcases by1
+ \setbox\rtbox=\hbox{\rtpublic[field={},show-momenta=false,insertion=triangle,tree-triangle-side=#2]}%
+ \rtassert\rtedges{5}{Incompatible side/host unchanged}\rtassert\rtdots{2}{No unsupported correction}}
+% A fresh ordinary call cannot inherit triangle geometry or annotations.
+\global\rtedges=0\global\rtdots=0\global\rtlabels=0\global\rtindices=0\global\advance\rtcases by1
+\setbox\rtbox=\hbox{\TTreeChannelCorr[field={},show-momenta=false,line=plain,channel-line=plain]}%
+\rtassert\rtedges{5}{Fresh ordinary graph}\rtassert\rtdots{2}{No stale triangle vertices}\rtassert\rtlabels{0}{No stale annotation}
+\@for\rtpublic:={\TTreeChannelCorr,\STreeChannelCorr,\UTreeChannelCorr}\do{%
+ \global\rtedges=0\global\rtdots=0\global\advance\rtcases by1
+ \setbox\rtbox=\hbox{\rtpublic[field={},show-momenta=false,insertion=triangle,tree-triangle-side=invalid]}%
+ \rtassert\rtedges{5}{Unsupported side does not activate triangle}\rtassert\rtdots{2}{No unsupported vertices}}
+\@for\rtentry:={T/left,T/right,S/top,S/bottom,U/top}\do{%
+ \expandafter\rtunsupported\rtentry\rtstop}
+\typeout{PASS M06: \the\rtcases\space public cases; graph, slots, geometry, styles, flow, annotations, indices, caps, reset}
+\let\corr@drawchannelprop\rtoldprop\let\corr@putvertex\rtoldvertex\let\corr@drawexternalendcap\rtoldcap
+\let\corr@drawexternalendcapp\rtolddouble\let\corr@puttopologyindexline\rtoldindex
+\let\corr@trianglecontactdrawannotation\rtoldannotation\let\corr@drawtreetriangle\rtolddraw
+\makeatother
+\newcommand{\rtcell}[2]{\begin{minipage}[t][2.9in][t]{.48\linewidth}\textbf{#1}\par\vspace{10pt}\centering\begin{adjustbox}{max width=\linewidth,max totalheight=2.4in}#2\end{adjustbox}\end{minipage}}
+\newcommand{\rtdiagram}[3]{#1[field={},central={},leg-labels={,,,},external-vertices=false,line=plain,channel-line=plain,show-momenta=false,insertion=triangle,tree-triangle-side=#2,#3]}
+\section*{Regular tree-attached triangles: all placements}
+Plain lines; four trivalent interaction vertices and one exchange bridge.\par\vspace{12pt}
+\rtcell{T bottom}{\rtdiagram{\TTreeChannelCorr}{bottom}{}}\hfill
+\rtcell{T top}{\rtdiagram{\TTreeChannelCorr}{top}{}}\par
+\rtcell{S left}{\rtdiagram{\STreeChannelCorr}{left}{}}\hfill
+\rtcell{S right}{\rtdiagram{\STreeChannelCorr}{right}{}}\par
+\newpage
+\section*{Independent momentum: all eight edges}
+Default gaps contain their labels; p1/p2 enter and p3/p4 leave.\par\vspace{12pt}
+\rtcell{T bottom}{\rtdiagram{\TTreeChannelCorr}{bottom}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q}}}\hfill
+\rtcell{T top}{\rtdiagram{\TTreeChannelCorr}{top}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q}}}\par
+\rtcell{S left}{\rtdiagram{\STreeChannelCorr}{left}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q}}}\hfill
+\rtcell{S right}{\rtdiagram{\STreeChannelCorr}{right}{show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-momenta={k,\ell,q}}}\par
+\newpage
+\section*{Continuous arrows and mixed propagators}
+Outside labels and pink loop edges; wavy exchange lines.\par\vspace{12pt}
+\rtcell{T bottom}{\rtdiagram{\TTreeChannelCorr}{bottom}{channel-line={ewboson,magenta!85!red},show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-loop-line={proca,magenta!85!red},tree-triangle-momenta={k,\ell,q},tree-triangle-momentum-1={layout=side},tree-triangle-momentum-2={layout=side},tree-triangle-momentum-3={layout=side},tree-triangle-momentum-4={layout=side},tree-triangle-momentum-5={layout=side},tree-triangle-momentum-6={layout=side},tree-triangle-momentum-7={layout=side},tree-triangle-momentum-8={layout=side}}}\hfill
+\rtcell{T top}{\rtdiagram{\TTreeChannelCorr}{top}{channel-line={ewboson,magenta!85!red},show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-loop-line={proca,magenta!85!red},tree-triangle-momenta={k,\ell,q},tree-triangle-momentum-1={layout=side},tree-triangle-momentum-2={layout=side},tree-triangle-momentum-3={layout=side},tree-triangle-momentum-4={layout=side},tree-triangle-momentum-5={layout=side},tree-triangle-momentum-6={layout=side},tree-triangle-momentum-7={layout=side},tree-triangle-momentum-8={layout=side}}}\par
+\rtcell{S left}{\rtdiagram{\STreeChannelCorr}{left}{channel-line={ewboson,magenta!85!red},show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-loop-line={proca,magenta!85!red},tree-triangle-momenta={k,\ell,q},tree-triangle-momentum-1={layout=side},tree-triangle-momentum-2={layout=side},tree-triangle-momentum-3={layout=side},tree-triangle-momentum-4={layout=side},tree-triangle-momentum-5={layout=side},tree-triangle-momentum-6={layout=side},tree-triangle-momentum-7={layout=side},tree-triangle-momentum-8={layout=side}}}\hfill
+\rtcell{S right}{\rtdiagram{\STreeChannelCorr}{right}{channel-line={ewboson,magenta!85!red},show-momenta=true,momentum-labels={p_1,p_2,p_3,p_4,P},tree-triangle-loop-line={proca,magenta!85!red},tree-triangle-momenta={k,\ell,q},tree-triangle-momentum-1={layout=side},tree-triangle-momentum-2={layout=side},tree-triangle-momentum-3={layout=side},tree-triangle-momentum-4={layout=side},tree-triangle-momentum-5={layout=side},tree-triangle-momentum-6={layout=side},tree-triangle-momentum-7={layout=side},tree-triangle-momentum-8={layout=side}}}\par
+\newpage
+\section*{Proca endpoint contact: all placements}
+Only loop endpoint markers; no momenta, caps or circles.\par\vspace{12pt}
+\rtcell{T bottom}{\rtdiagram{\TTreeChannelCorr}{bottom}{tree-triangle-loop-line={proca,magenta!85!red}}}\hfill
+\rtcell{T top}{\rtdiagram{\TTreeChannelCorr}{top}{tree-triangle-loop-line={proca,magenta!85!red}}}\par
+\rtcell{S left}{\rtdiagram{\STreeChannelCorr}{left}{tree-triangle-loop-line={proca,magenta!85!red}}}\hfill
+\rtcell{S right}{\rtdiagram{\STreeChannelCorr}{right}{tree-triangle-loop-line={proca,magenta!85!red}}}\par
+\newpage
+\section*{Scalar endpoint contact: all placements}
+Only loop endpoint markers; no momenta, caps or circles.\par\vspace{12pt}
+\rtcell{T bottom}{\rtdiagram{\TTreeChannelCorr}{bottom}{tree-triangle-loop-line={spol,magenta!85!red}}}\hfill
+\rtcell{T top}{\rtdiagram{\TTreeChannelCorr}{top}{tree-triangle-loop-line={spol,magenta!85!red}}}\par
+\rtcell{S left}{\rtdiagram{\STreeChannelCorr}{left}{tree-triangle-loop-line={spol,magenta!85!red}}}\hfill
+\rtcell{S right}{\rtdiagram{\STreeChannelCorr}{right}{tree-triangle-loop-line={spol,magenta!85!red}}}\par
+\end{document}

@@ -2204,7 +2204,7 @@ Current semantic insertion hosts:
 
 Supported insertion keys:
 
-- `insertion=none|bubble|seagull|swordfish`
+- `insertion=none|bubble|seagull|swordfish|triangle`
 - `insertion-slot=1|2|3|4|5`
 - `insertion-position=...`
 - `insertion-orientation=auto|top|bottom|left|right`
@@ -2571,6 +2571,108 @@ and `check-swordfish.py`. The 167 public cases verify structure, logical slots,
 geometry, mixed styles, momentum, indices, caps and state reset. Actual PDF paths
 verify all eight shared-quartic graphs and 48 pink, white-filled endpoint contacts.
 Atlas K01-K04/K11-K14 show plain placements; K21-K24 demonstrate mixed loop styles.
+
+### Regular tree-attached triangles
+
+`\TTreeChannelCorr[insertion=triangle,tree-triangle-side=top|bottom]` and
+`\STreeChannelCorr[insertion=triangle,tree-triangle-side=left|right]` replace
+one tree interaction with a three-edge loop. A and B each carry one external
+leg, C connects by a bridge to the opposite tree interaction O. All four
+interaction vertices are trivalent. This is distinct from triangle-contact's
+quartic vertex and from the parallel-edge swordfish loop.
+
+```tex
+\TTreeChannelCorr[
+  field={},central={},show-momenta=false,
+  line=plain,channel-line=plain,
+  insertion=triangle,tree-triangle-side=bottom
+]
+```
+
+`tree-triangle-side=auto` selects bottom for T, left for S. Incompatible sides,
+U trees and contact hosts do not activate a triangle. This is a vertex
+correction: `insertion-slot`, the bubble/seagull keys and external insertion
+position/scale/pre/post keys do not place or style it. One correction is
+supported at a time. With `external-legs=false`, the triangle and exchange
+remain; the four outer placeholder dots retain their existing behavior.
+
+The logical slots and directions are:
+
+| Slot | Directed edge |
+| --- | --- |
+| 1-4 | UL/LL/UR/LR outer endpoint to its interaction vertex |
+| 5 | Exchange bridge, top to bottom (T) or left to right (S) |
+| 6 | A to B; A/B are left/right for T, top/bottom for S |
+| 7 | B to C |
+| 8 | C to A |
+
+External legs retain their logical styles, outer caps, field labels and momentum
+flow; `channel-line` and `channel-indices` retain ownership of the exchange.
+`tree-triangle-loop-line={...}` supplies a loop-wide style fallback;
+`tree-triangle-line-6`, `-7`, `-8` override individual edges, independent of key
+order. Empty styles inherit the corresponding global/logical line style.
+Internal Proca markers contact both endpoints without circles. Bare `spol`,
+`antspol` and their long aliases use the semantic end marker on this graph's
+internal lines; `spolout` selects the start. Existing topologies are unchanged.
+
+Defaults are equilateral in every orientation:
+
+- `tree-triangle-depth=0.75` moves C toward the opposite tree vertex from the
+  old corrected interaction point.
+- `tree-triangle-outer-shift=0.60` moves the A/B base outward from that point.
+- `tree-triangle-half-width=auto` derives `(depth+outer-shift)/sqrt(3)` so all
+  three sides have equal length, including after depth/outer-shift edits.
+  An explicit half-width permits other shapes.
+
+The reviewed defaults enlarge each triangle side by 50% while preserving
+its bridge endpoint. Corrected T-channel outer endpoints extend as needed to
+stay at least 0.28 coordinate units beyond the loop base in the axial direction.
+`fourpoint-yspan` remains the minimum outer extent on that corrected side.
+Styled inventory/gallery examples use wavy EW exchange lines.
+
+Dimensions use TikZ coordinate units and follow the diagram scale. Keep
+vertices separated and the bridge nonzero. Extreme, collapsed or crossing
+custom geometry is not certified and is not automatically clamped.
+
+The first five momentum labels use `momentum-labels={p_1,p_2,p_3,p_4,P}`;
+`channel-momentum=...` overrides slot 5. `tree-triangle-momenta={k,\ell,q}`
+names loop slots 6/7/8. Blank loop entries hide their guides. External blank
+labels retain unlabeled arrows; `external-momentum-hide={...}` and
+`show-channel-momentum=false` preserve their meanings. Default external flow
+is 1/2 incoming and 3/4 outgoing. Loop arrows follow A--B--C--A.
+
+Each slot has its own `tree-triangle-momentum-N={...}` block, N=1 through 8:
+
+```tex
+tree-triangle-momentum-7={
+  layout=side,direction=reverse,start=.2,end=.8,
+  offset=9pt,label-fraction=.5,label-offset=3pt
+}
+```
+
+Options are `layout=gap|side`, `direction=forward|reverse|none`, `label=...`,
+`start`, `end`, `offset`, `label-fraction`, `label-gap`, `label-offset`,
+`label-xshift`, `label-yshift`, `label-anchor`, and
+`side=outside|inside|left|right`. They affect only the selected annotation.
+A nonempty per-slot loop label can activate its guide without a grouped label.
+Default gaps are measured around the actual text; `layout=side` gives an
+unbroken arrow and an outward label. Reversal retains the geometric side.
+External arrows default to a compact 24pt target and internal ranges to
+0.14-0.86, with 8pt normal offset. Labels face away from the actual centroid.
+These defaults belong to M06; triangle-contact tuning remains independent.
+
+`tree-triangle-propagator-left-indices={...}` and `-right-indices={...}`
+provide eight endpoint values each in the directed slot order above (fractions
+0.18/0.82). The `tree-triangle-index-left/right-position`, corresponding
+`-xshift`/`-yshift`, `tree-triangle-index-style`, `-fill`, `-inner-sep` and
+`-math-style` control their appearance. Existing field and channel indices
+remain available. Index-position polish is still deferred to D01.
+
+Atlas L01-L04 show plain equilateral placements; L11-L14 show mixed styles
+and continuous momentum arrows. The focused gallery and independent PDF
+graph/shape/contact checker are in `regressions/topologies/insertion/` under
+`tree-triangle-slots.tex/pdf` and `check-tree-triangle.py`. See
+[M06 verification](planning/m06-verification.md) for coverage and limits.
 
 ## One-Loop `s/t/u` Channel Bubbles For `\phi^4`
 
