@@ -1,3 +1,13 @@
+# Longer S exchanges - 2026-11-06
+
+The current 102-recipe / 23-page atlas uses S exchange half-span 1.05 for
+ordinary trees and external bubble/seagull/swordfish variants. Triangle
+corrections keep their former geometry; all seven triangle-gallery pages
+are pixel-identical to `97ecd10`. The outer frame and compact scale remain
+unchanged. The S styled seagull W circle is retuned to position 0.57513.
+See [S-exchange verification](../planning/s-tree-span-verification.md).
+Earlier sections record historical checkpoints.
+
 # Compact scale review - 2026-11-06
 
 The current 102-recipe / 23-page atlas is rebuilt with a package-wide

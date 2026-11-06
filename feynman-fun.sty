@@ -428,6 +428,7 @@
 \newif\ifcorr@fourpointxspanexplicit
 \newif\ifcorr@fourpointyspanexplicit
 \newif\ifcorr@channelvertexyspanexplicit
+\newif\ifcorr@channelvertexxspanexplicit
 \newif\ifcorr@insertionscaleexplicit
 \newif\ifcorr@insertionpositionexplicit
 \newif\ifcorr@insertionprerangeexplicit
@@ -1395,6 +1396,14 @@
 }
 
 \newcommand{\corr@resolvechanneldefaults}{%
+  % Give ordinary S exchanges more room; retain the tuned triangle geometry.
+  \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+    \corr@iftreetriangle{}{%
+      \ifcorr@channelvertexxspanexplicit\else
+        \def\corr@channelvertexxspan{1.05}%
+      \fi
+    }%
+  }{}%
   % New s-tree insertions need a transverse exchange-arrow offset. Keep the
   % ordinary-tree defaults and every index-position default unchanged.
   \corr@ifstreeinsertion{%
@@ -1858,6 +1867,7 @@
   \corr@fourpointxspanexplicitfalse
   \corr@fourpointyspanexplicitfalse
   \corr@channelvertexyspanexplicitfalse
+  \corr@channelvertexxspanexplicitfalse
   \def\corr@channelinternalline{}%
   \def\corr@channelmomentum{}%
   \def\corr@channelmomstart{0.24}%
@@ -3501,7 +3511,7 @@
   box-index-size/script/.code={\def\corr@boxindexmathstyle{\scriptstyle}},
   box-index-size/scriptscript/.code={\def\corr@boxindexmathstyle{\scriptscriptstyle}},
   box-index-size/default/.style={box-index-size=script},
-  channel-vertex-xspan/.store in=\corr@channelvertexxspan,
+  channel-vertex-xspan/.code={\def\corr@channelvertexxspan{#1}\corr@channelvertexxspanexplicittrue},
   channel-vertex-yspan/.code={\def\corr@channelvertexyspan{#1}\corr@channelvertexyspanexplicittrue},
   channel-internal-line/.store in=\corr@channelinternalline,
   channel-line/.style={channel-internal-line={#1}},

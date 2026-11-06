@@ -1,0 +1,58 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,adjustbox,feynman-fun}
+\setlength{\parindent}{0pt}
+\newbox\ssbox\newcount\sscases
+\makeatletter
+\newcommand{\ssnear}[2]{%
+ \pgfmathparse{abs(#1-(#2))}%
+ \ifdim\pgfmathresult pt>.0001pt\PackageError{S stem}{Incorrect resolved span}{}\fi}
+\newcommand{\sspoint}[3]{%
+ \coordinate (ssExpected) at (#2,#3);
+ \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{ssExpected}{center}}%
+ \pgfmathsetlengthmacro{\sserror}{max(abs(\pgf@x),abs(\pgf@y))}%
+ \ifdim\sserror>.03pt\PackageError{S stem}{Incorrect vertex #1}{}\fi}
+\let\ssoldouter\corr@fourpointplaceexternalvertices
+\renewcommand{\corr@fourpointplaceexternalvertices}{%
+ \ssnear{\corr@channelvertexxspan}{\sshalf}%
+ \sspoint{corrUL}{-2.1}{2.1}\sspoint{corrLL}{-2.1}{-2.1}%
+ \sspoint{corrUR}{2.1}{2.1}\sspoint{corrLR}{2.1}{-2.1}%
+ \corr@ifstringeq{\corr@fourpointtopology}{s-tree}{%
+  \corr@iftreetriangle{%
+   \corr@ifstringeq{\corr@ttside}{left}{%
+    \sspoint{corrRTO}{\sshalf}{0}\sspoint{corrRTC}{-\sshalf+.75}{0}%
+   }{\sspoint{corrRTO}{-\sshalf}{0}\sspoint{corrRTC}{\sshalf-.75}{0}}%
+  }{\sspoint{corrVL}{-\sshalf}{0}\sspoint{corrVR}{\sshalf}{0}}%
+ }{}%
+ \ssoldouter}
+\newcommand{\ssmeasure}[2]{%
+ \global\advance\sscases by1
+ \edef\sscall{\noexpand#1[field={},central={},leg-labels={,,,},show-momenta=false,line=plain,#2]}%
+ \setbox\ssbox=\hbox{\sscall}}
+\newcommand{\ssmatrix}{%
+ \ssmeasure\STreeChannelCorr{\ssoptions}%
+ \@for\sskind:={bubble,seagull,swordfish}\do{%
+  \@for\ssslot:={1,2,3,4}\do{%
+   \ssmeasure\STreeChannelCorr{\ssoptions,insertion=\sskind,insertion-slot=\ssslot}}}}
+\begin{document}
+\def\sshalf{1.05}\def\ssoptions{}\ssmatrix
+\def\sshalf{.78}\def\ssoptions{channel-vertex-xspan=.78}\ssmatrix
+\def\sshalf{.91}\def\ssoptions{channel-vertex-xspan=.91}\ssmatrix
+\@for\ssside:={left,right}\do{%
+ \def\sshalf{.78}\ssmeasure\STreeChannelCorr{insertion=triangle,tree-triangle-side=\ssside}%
+ \def\sshalf{.91}\ssmeasure\STreeChannelCorr{channel-vertex-xspan=.91,insertion=triangle,tree-triangle-side=\ssside}}
+\def\sshalf{1.05}\ssmeasure\FourPointCorr{topology=s-tree}%
+\def\sshalf{.78}\ssmeasure\TTreeChannelCorr{}\ssmeasure\UTreeChannelCorr{}%
+\typeout{PASS S exchange: \the\sscases\space public cases; longer plain/bubble/seagull/swordfish; triangles and T/U unchanged; overrides, corners and reset}
+\let\corr@fourpointplaceexternalvertices\ssoldouter
+\makeatother
+\section*{Longer S-channel exchange; shared outer endpoints}
+Plain lines and interaction vertices only. The triangle correction keeps its previous geometry.
+\newcommand{\sscell}[2]{\begin{minipage}[t][2.30in][t]{.48\linewidth}\textbf{#1}\par\vspace{9pt}\centering
+ \STreeChannelCorr[field={},central={},leg-labels={,,,},show-momenta=false,line=plain,seagull-loop-line=plain,#2]
+ \end{minipage}}
+\par\bigskip
+\sscell{Ordinary S tree}{}\hfill\sscell{Bubble on leg 1}{insertion=bubble,insertion-slot=1}\par
+\sscell{Bubble on leg 2}{insertion=bubble,insertion-slot=2}\hfill\sscell{Seagull on leg 1}{insertion=seagull,insertion-slot=1}\par
+\sscell{Seagull on leg 2}{insertion=seagull,insertion-slot=2}\hfill\sscell{Triangle: unchanged}{insertion=triangle,tree-triangle-side=left}
+\end{document}

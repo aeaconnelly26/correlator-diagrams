@@ -45,44 +45,44 @@
   {
     "page": 3,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.17207627543945547,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.1720437422692499,
     "ew_circles": 8,
     "pink_stem_circles": 4,
     "black_w_circles": 4,
     "centered_inner_w_circles": 4,
     "inner_w_centering_reference": "visible arrow-to-tree gap",
-    "maximum_inner_w_centering_error_pdf_pt": 0.014239096967182618,
+    "maximum_inner_w_centering_error_pdf_pt": 6.0621266661620155e-05,
     "visible_arrow_circle_tree_gaps_pdf_pt": [
       [
-        8.527077316228592,
-        8.498599122294227
+        7.610599780106833,
+        7.610478537573564
       ],
       [
-        8.527077316228592,
-        8.498599122294227
+        7.6105997801068765,
+        7.610478537573553
       ],
       [
-        8.527077316228546,
-        8.498599122294273
+        7.6105997801067815,
+        7.610478537573564
       ],
       [
-        8.527077316228546,
-        8.498599122294273
+        7.610599780106825,
+        7.610478537573553
       ]
     ],
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 8.498599138369654
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 7.610478568024446
   },
   {
     "page": 4,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.17339913574652377,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.1731334484239574,
     "ew_circles": 12,
     "pink_stem_circles": 4,
     "black_w_circles": 8,
     "centered_inner_w_circles": 4,
     "inner_w_centering_reference": "vertex-to-vertex midpoint",
-    "maximum_inner_w_centering_error_pdf_pt": 0.0013724089224268913,
+    "maximum_inner_w_centering_error_pdf_pt": 0.0030452011428187694,
     "visible_arrow_circle_tree_gaps_pdf_pt": [],
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 3.896805878014497
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 3.143830921302399
   }
 ]

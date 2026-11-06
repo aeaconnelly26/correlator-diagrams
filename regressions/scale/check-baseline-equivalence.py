@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare the full current atlas with the pre-rebase package at 0.8x scale."""
+"""Compare the compact-scale checkpoint with its pre-rebase package."""
 import argparse
 from decimal import Decimal
 import hashlib
@@ -30,10 +30,12 @@ def run(command, directory, env=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--baseline-ref', default='ad9592b')
+    parser.add_argument('--current-ref', default='97ecd10',
+                        help='Post-rebase checkpoint; later geometry reviews intentionally differ')
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
     old_package = run(['git', 'show', f'{args.baseline_ref}:feynman-fun.sty'], ROOT)
-    new_package = (ROOT / 'feynman-fun.sty').read_text()
+    new_package = run(['git', 'show', f'{args.current_ref}:feynman-fun.sty'], ROOT)
     new_source = (ROOT / 'docs/diagram-inventory/inventory.tex').read_text()
     old_source, count = re.subn(
         r'(?m)^([ \t]*)scale=([\d.]+)',
@@ -62,7 +64,7 @@ def main():
                 reports.append({'page': page, 'pixel_identical': True,
                                 'size_px': list(a.size),
                                 'rgb_sha256': digest(a.convert('RGB').tobytes())})
-    report = {'baseline_ref': args.baseline_ref, 'coordinate_factor': 0.8,
+    report = {'baseline_ref': args.baseline_ref, 'current_ref': args.current_ref, 'coordinate_factor': 0.8,
               'rebased_scale_settings': count, 'identical_pages': len(reports),
               'old_package_sha256': digest(old_package.encode()),
               'new_package_sha256': digest(new_package.encode()),

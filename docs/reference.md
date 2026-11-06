@@ -2286,6 +2286,14 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
+Ordinary S-tree diagrams, including external bubble, seagull and swordfish
+variants, default to `channel-vertex-xspan=1.05`, giving the central exchange
+length 2.10 coordinate units. S regular-triangle corrections retain their
+0.78 half-span and existing bridge geometry. The shared outer corners remain
++/-2.10, and the compact coordinate scale still applies. Explicit
+`channel-vertex-xspan=...` overrides either default; `0.78` recovers the former
+ordinary S exchange. T/U geometry and four-legged loop bubbles are unchanged.
+
 Default `insertion-position` is **0.40 for supported s/t-tree seagulls** and
 **0.50 for bubble insertions**, measured from the external endpoint toward the
 tree vertex. The seagull default leaves 60% of the leg for the inner host
@@ -2293,7 +2301,7 @@ segment, 20% more length than the former midpoint placement. Explicit positions
 remain effective; `insertion-position=0.50` restores the old seagull placement.
 The styled seagull W circles use optical centering between the visible pink
 endpoint arrow and the black tree vertex: `circ position=0.57332` on T trees and
-`circ position=0.57159` on S trees. These values account for the arrow occupying
+`circ position=0.57513` on S trees. These values account for the arrow occupying
 more of the segment than the dot, using the samples' standard 6pt arrows and
 shared 2.10/2.10 outer frame and default scale. Retune `circ position` for other marker sizes or geometry.
 Ordinary circles and the styled bubble-host circles retain the geometric 0.5.

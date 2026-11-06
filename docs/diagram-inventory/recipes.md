@@ -2,13 +2,15 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M06 local; compact scale; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
+Baseline: `M06 local; longer S exchange; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
 The main atlas hides annotations. The appendix demonstrates selected annotation and style features.
 
 `scale=1` uses the compact coordinate baseline: 0.8 times the former size. Use `scale=1.25` to recover the former `scale=1` size. Text and markers retain the existing TikZ scale behavior.
+
+Ordinary S-tree exchanges and their external bubble/seagull/swordfish variants now use channel-vertex-xspan=1.05 by default. Regular triangle corrections retain 0.78; the shared outer frame is unchanged.
 
 ## Two- and three-point objects
 
@@ -1824,7 +1826,7 @@ Pink Z stem; inner W; two-ended pink loop with k.
   insertion=seagull,
   insertion-slot=2,
   insertion-pre-line=ewboson,
-  insertion-post-line={ewboson,circ=W,circ position=0.57159,circ scale=0.65},
+  insertion-post-line={ewboson,circ=W,circ position=0.57513,circ scale=0.65},
   seagull-loop-line={proca,magenta!85!red},
   seagull-loop-momentum=k,
   show-channel-momentum=false,

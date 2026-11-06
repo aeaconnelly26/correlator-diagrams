@@ -1,8 +1,11 @@
 # Compact diagram scale - 2026-11-06
 
-User-directed follow-up to `ad9592b` on `codex/m06-tree-triangles`.
+Historical scale checkpoint `97ecd10`, a user-directed follow-up to `ad9592b` on `codex/m06-tree-triangles`.
 The package-wide coordinate baseline is now **0.8 times the former size**.
-M06 and this review remain local; merge/push is pending.
+This records the scale-only checkpoint. The subsequent
+[S-exchange review](s-tree-span-verification.md) intentionally changes ordinary
+S geometry, while preserving the compact scale factor. M06 remains local;
+merge/push is pending.
 
 | Public scale | Equivalent former scale |
 | --- | --- |
@@ -65,9 +68,11 @@ Reproduce from the repository root with Python providing `pypdf` and Pillow:
 FEYNMANFUN_PDF_PYTHON=/path/to/python scripts/check-regressions.sh
 python3 docs/diagram-inventory/build.py
 /path/to/python regressions/scale/check-baseline-equivalence.py \
-  --baseline-ref ad9592b --report regressions/scale/baseline-equivalence.json
+  --baseline-ref ad9592b --current-ref 97ecd10 --report /tmp/scale-equivalence.json
 ```
 
-The comparison script requires the local pre-rebase Git commit, `pdflatex`
+The comparison script is pinned to the pre/post-rebase package checkpoints;
+it does not require later geometry changes to reproduce the earlier atlas.
+It requires both local Git commits, `pdflatex`
 and `pdftoppm`. It builds in temporary directories and leaves package sources
 unchanged. M07a remains the next feature slice after authorized publication.

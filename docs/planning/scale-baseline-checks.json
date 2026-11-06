@@ -72,5 +72,8 @@
     "docs/diagram-inventory/README.md": "6e40e9ba2d9f529f1b3bec272d6cf69d8e16755a4418adf558559c93f9a1f987",
     "docs/diagram-inventory/verification.md": "a0bcffcc0524a2f151b4bd4776dca6907b76b0ef0038a01113ca7d49c77c3af7",
     "README.md": "42abe761ddb34bd9b90d868a2c0a2605aff60f32fb2f29f57c59285e672f930c"
-  }
+  },
+  "checkpoint": "97ecd10",
+  "historical": true,
+  "superseded_current_geometry_record": "s-tree-span-checks.json"
 }

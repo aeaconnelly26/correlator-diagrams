@@ -5,7 +5,9 @@ Complete locally on `codex/m06-tree-triangles`, from clean published main
 pushed. Implementation, regression coverage and inventory updates belong to
 this checkpoint. Exact delivered hashes are in [m06-checks.json](m06-checks.json).
 The subsequent [compact scale review](scale-baseline-verification.md) applies
-the 0.8 coordinate baseline throughout and refreshes the PDFs.
+the 0.8 coordinate baseline throughout and refreshes the PDFs. The later
+[S-exchange review](s-tree-span-verification.md) lengthens ordinary S exchanges
+while leaving all seven triangle gallery pages pixel-identical.
 
 ## Graph and reference trace
 
@@ -102,7 +104,7 @@ Isolated pages verify **24 Proca + 12 scalar pink, white-filled contacts**.
 Visible tip/dot gaps are approximately -0.1763 to -0.1741 PDF pt, within the
 maintained tolerance. See [actual-PDF results](../../regressions/topologies/insertion/tree-triangle-contact.json).
 
-The final maintained suite passes **43 documents / 772 endpoint contacts**
+The final maintained suite passes **44 documents / 772 endpoint contacts**
 (736 existing + 36 new). Existing legacy-marker, species-circle/optical-W,
 EW-wavelength and state-reset checks pass. The suite also caught a stray
 paragraph in the new reset definitions when used inside math mode; that was
@@ -153,7 +155,8 @@ its replacement component bound is stricter than the original Euclidean
 [shared-frame verification](four-leg-frame-verification.md).
 The initial M06 record is preserved in [history](history/m06-checks-2506354.json),
 and the pre-rebase shared-frame checkpoint in
-[ad9592b history](history/m06-checks-ad9592b.json).
+[ad9592b history](history/m06-checks-ad9592b.json). The compact-scale checkpoint
+is preserved in [97ecd10 history](history/m06-checks-97ecd10.json).
 
 ## Boundaries and next slice
 

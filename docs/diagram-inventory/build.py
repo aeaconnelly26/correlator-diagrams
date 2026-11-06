@@ -54,7 +54,8 @@ def render_sources(catalog):
                'Baseline: `' + catalog['baseline'] + '`, audited ' + catalog['date'] + '. Atlas: [PDF](inventory.pdf).', '',
                'Use `\\usepackage{feynman-fun}`. Paste a recipe inside `\\[ ... \\]`.', '',
                'The main atlas hides annotations. The appendix demonstrates selected annotation and style features.', '',
-               '`scale=1` uses the compact coordinate baseline: 0.8 times the former size. Use `scale=1.25` to recover the former `scale=1` size. Text and markers retain the existing TikZ scale behavior.', '']
+               '`scale=1` uses the compact coordinate baseline: 0.8 times the former size. Use `scale=1.25` to recover the former `scale=1` size. Text and markers retain the existing TikZ scale behavior.', '',
+               'Ordinary S-tree exchanges and their external bubble/seagull/swordfish variants now use channel-vertex-xspan=1.05 by default. Regular triangle corrections retain 0.78; the shared outer frame is unchanged.', '']
     for pi, page in enumerate(catalog['pages']):
         if pi:
             chunks.append(r'\newpage' + '\n')

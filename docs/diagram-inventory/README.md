@@ -16,6 +16,13 @@ The logical shared frame is still +/-2.10, rendered as a 3.36 cm square at
 `scale=1`. Text and markers retain the existing TikZ sizing behavior. See
 [scale verification](../planning/scale-baseline-verification.md).
 
+Ordinary S exchanges and their external bubble/seagull/swordfish variants
+now default to half-span 1.05 (about 35% longer exchange), with unchanged
+outer endpoints. S triangle corrections retain 0.78. Explicit
+`channel-vertex-xspan=0.78` recovers the former ordinary S geometry. See the
+[plain comparison gallery](../../regressions/topologies/channel/s-tree-span-regression.pdf)
+and [verification](../planning/s-tree-span-verification.md).
+
 M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
 on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
 `97495ba` is now also merged and published on main. Index positioning remains a later
@@ -36,7 +43,7 @@ from their actual arcs, consistently across left/right placements and reversal.
 
 Seagulls now default to `insertion-position=0.40` (outer endpoint toward tree
 vertex), giving the inner segment 20% more length. Styled seagull W circles
-use `circ position=0.57332` (T) or `0.57159` (S) to balance the visible spaces
+use `circ position=0.57332` (T) or `0.57513` (S) to balance the visible spaces
 between the pink arrow and black dot in the shared 2.10/2.10 frame. This corrects the former geometric-0.5
 criterion, which did not account for the arrow footprint. Set
 `insertion-position=0.50` to recover the former seagull placement; bubble
