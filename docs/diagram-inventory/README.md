@@ -3,12 +3,14 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-Complete locally on `codex/m06-tree-triangles`, based on published main
-`eb6182c` (2026-11-06). M06 has not been merged/pushed. There are **106 current
+Verified M06 checkpoint `629356d`, built on `codex/m06-tree-triangles` from
+`eb6182c`, is now merged and published on main (2026-11-06). The atlas and
+package are unchanged from verification; the PDF footer retains its build
+provenance. There are **106 current
 examples on twenty-four pages**. These are recipes and meaningful layouts/styles,
 not 106 distinct graph topologies. M06 adds all four regular tree triangles
 with equilateral defaults and four mixed-style/annotation samples; see
-[verification](../planning/m06-verification.md). M05 remains published on main.
+[verification](../planning/m06-verification.md). M07a is next.
 
 Every recipe now uses the compact coordinate baseline: `scale=1` matches the
 former `scale=0.8`; use `scale=1.25` to recover the former unit-scale size.

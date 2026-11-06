@@ -1,9 +1,9 @@
 # M06 regular tree-attached triangles - 2026-11-06
 
-Complete locally on `codex/m06-tree-triangles`, from clean published main
-`eb6182c`. Main/GitHub remain at that baseline; M06 has not been merged or
-pushed. Implementation, regression coverage and inventory updates belong to
-this checkpoint. Exact delivered hashes are in [m06-checks.json](m06-checks.json).
+Verified checkpoint `629356d`, implemented on `codex/m06-tree-triangles`
+from `eb6182c`, is now merged and published on main (2026-11-06). The feature
+branch is retained. Publication used a fast-forward; the tested package and
+PDFs are unchanged. See [publication record](m06-publication.json). Exact delivered hashes are in [m06-checks.json](m06-checks.json).
 The subsequent [compact scale review](scale-baseline-verification.md) applies
 the 0.8 coordinate baseline throughout and refreshes the PDFs. The later
 [S-exchange review](s-tree-span-verification.md) lengthens ordinary S exchanges
@@ -171,7 +171,7 @@ internal loop/bridge and legacy outer placeholder dots. Use separated
 vertices and a positive bridge; extreme/collapsed custom geometry is not
 clamped or certified. D01 index-position polish remains deferred.
 
-After authorized M06 publication, start **M07a** from synchronized main:
+M06 is published. Start **M07a** next from synchronized main:
 verify square defaults and freeze/implement the complementary internal
 crossing as one narrow slice. Keep crossed external connections and R14/R22
 routing questions separate. No M07 or D01 implementation is included here.

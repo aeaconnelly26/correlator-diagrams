@@ -127,7 +127,7 @@
     "status": "Verified existing",
     "evidence": "M06: TTreeChannelCorr / STreeChannelCorr with insertion=triangle and tree-triangle-side supports T top/bottom and S left/right. Atlas L01-L04/L11-L14; 191 focused cases, four independent PDF graphs with equal triangle sides and 36 pink white-filled endpoint contacts.",
     "target": "One vertex correction, equilateral defaults; explicit half-width permits other shapes. U/contact/incompatible sides and simultaneous corrections remain unsupported. Extreme geometry is not clamped; index-position polish remains D01.",
-    "milestone": "M06 complete locally",
+    "milestone": "M06 complete on published main (629356d)",
     "dependencies": "M01, M02, insertion-slot conventions from M03",
     "acceptance": "Four required placements preserve graph connectivity, line styles, outer caps, independent momentum flow, and endpoint indices.",
     "source_panels": [

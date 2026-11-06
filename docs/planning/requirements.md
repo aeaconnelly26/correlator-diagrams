@@ -72,7 +72,7 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 - **Status:** Verified existing.
 - **Existing construction / evidence:** M06: `insertion=triangle` with `tree-triangle-side` on T top/bottom and S left/right. Atlas L01-L04/L11-L14; 191 focused public cases and actual PDF paths verify four eight-edge graphs, four trivalent interactions, equilateral loop sides, and 36 white-filled pink endpoint contacts.
 - **Remaining target / limitation:** One correction at a time. U/contact hosts, incompatible sides and simultaneous corrections are unsupported. Explicit half-width permits other shapes; extreme geometry is not clamped. Index-position appearance remains D01.
-- **Milestone:** M06 complete locally. **Dependencies:** M01, M02, insertion-slot conventions from M03.
+- **Milestone:** M06 complete on published main (`629356d`). **Dependencies:** M01, M02, insertion-slot conventions from M03.
 - **Acceptance:** Four placements preserve the reference graph, styles, outer caps, independent momentum controls and endpoint values/ownership. No triangle-contact quartic point is substituted.
 - **Sources:** P2-03; S05-L2, S06-L2, S07-L2, S08-L2. See [M06 verification](m06-verification.md).
 

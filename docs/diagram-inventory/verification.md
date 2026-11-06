@@ -1,3 +1,12 @@
+# M06 publication - 2026-11-06
+
+Verified checkpoint `629356d` is merged and published on main, including all
+scale, shared-frame, S-exchange and insertion-endcap reviews. The 106-recipe /
+24-page atlas and package hashes match that tested checkpoint. Publication
+updates documentation only; the PDF footer retains its build provenance.
+The feature branch is retained. See [publication record](../planning/m06-publication.json).
+M07a is next; D01 remains deferred. Earlier sections preserve their checkpoint states.
+
 # Insertion endcaps - 2026-11-06
 
 The atlas now has **106 recipes / 24 pages**. N01-N04 demonstrate retained

@@ -12,9 +12,11 @@ branch `codex/m04-seagull-expansion` is retained. The complete final suite passe
 40 documents and 688 endpoint contacts; see [M04 verification](m04-verification.md).
 No M04 merge or push remains pending. On 2026-11-06, M05 checkpoint `9daebf9`
 was fast-forwarded from `efb5fae` into main and published with its documentation
-handoff at `eb6182c`. The current checkout is now `codex/m06-tree-triangles`,
-with M06 complete locally; main/GitHub remain at `eb6182c`. No M06 merge/push
-has been performed. See [M06 verification](m06-verification.md).
+handoff at `eb6182c`. M06 verified checkpoint `629356d`, including all reviewed
+scale, shared-frame, S-exchange and endcap fixes, is now fast-forwarded into
+main and published to GitHub (2026-11-06). The checkout is synchronized main;
+the M06 feature branch is retained. No M06 merge/push remains. See
+[M06 verification](m06-verification.md) and [publication record](m06-publication.json).
 The branch `codex/m05-swordfish` is retained; no M05 merge/push remains.
 Its [verification record](m05-verification.md) covers all eight placements,
 41 maintained documents and 736 endpoint contacts. The main/M02 record below

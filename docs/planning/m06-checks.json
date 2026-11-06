@@ -3,7 +3,7 @@
   "date": "2026-11-06",
   "baseline": "eb6182c",
   "branch": "codex/m06-tree-triangles",
-  "published": false,
+  "published": true,
   "requirement": "R08",
   "reference_panels": [
     "S05-L2",
@@ -224,7 +224,7 @@
     "feynman-fun.sty": "cdefa642f73e9e0b629542baad8d0d251304f49bb7708567f4ad6c5d29786153",
     "scripts/check-regressions.sh": "39c4f9a9d592ecc89078fde64396105ce67266295c4686513d0a457ef62e677f",
     "docs/reference.md": "b5f61e0d613319df96ccf3d67aa129f5d6777582217f23c44a8da19a1071a476",
-    "docs/planning/m06-verification.md": "d45a337baa3d5959263482fecbab2573063032a3e59f4562a8b7751832d809bf",
+    "docs/planning/m06-verification.md": "c0a11ed3354d3b9b825a0f71d1a9f3225d466fb1cd8636f862ce24d2c57def68",
     "regressions/topologies/insertion/M06-contract.md": "82a94e2af00aa231219d6c0048b6a3b7bc0c9954eb4718ae2031e24675f87ffd",
     "regressions/topologies/insertion/tree-triangle-slots.tex": "f84e1790aaed240ac15057e2167001b524075486672e9fcbf1f27823c2994b63",
     "regressions/topologies/insertion/tree-triangle-slots.pdf": "466501e11afed09cde43eb1ec683cad13f5aeb2c347cb0ce355c0264f81e3f0a",
@@ -256,7 +256,7 @@
     "regressions/topologies/insertion/insertion-endcaps.pdf": "a74e09bc9172d3bfae174ff4ab2de74a3ceb3f56814745e2013519606d7301c1",
     "regressions/topologies/insertion/check-insertion-endcaps.py": "4dc9f3094482ac83213d28b9aab09ce775ca3f5d55c078c32eed7373f2b63df0",
     "regressions/topologies/insertion/insertion-endcaps-checks.json": "ebfad213b7e224894490a434f8cc723512ad3b8429ea205da14ffed101ef8699",
-    "docs/planning/insertion-endcaps-verification.md": "48a067b322da2776c95bbaf432ae1049b5d57fc80200a90cfec7450658cf5f7b",
+    "docs/planning/insertion-endcaps-verification.md": "9765c116b27c8a7641492f7ff6d528c520fdfb1bb4b55087e734cb6eeeedb740",
     "docs/planning/history/m06-checks-b1d84eb.json": "2ad99378c87efd9912d2d8235995aff5e8b56aba5e685166e1986fc23cd1811f",
     "docs/planning/s-tree-span-checks.json": "f6c68cdb6b3adf31b3d1b8ed13aa70e7937efb3b6af6cb84ae4e289935ce4c6f"
   },
@@ -308,5 +308,9 @@
   "insertion_endcap_pdf_bars": 32,
   "insertion_endcap_gallery_pages": 1,
   "insertion_endcap_gallery_examples": 4,
-  "atlas_unchanged_body_pages_from_baseline": 23
+  "atlas_unchanged_body_pages_from_baseline": 23,
+  "verified_checkpoint": "629356d",
+  "current_checkout": "main",
+  "publication_record": "m06-publication.json",
+  "publication_changes": "Documentation and status only; tested package and PDFs unchanged"
 }

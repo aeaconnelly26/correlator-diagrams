@@ -6,12 +6,13 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/m06-tree-triangles`, based on published main `eb6182c`.
-- M06 is complete locally: regular triangle corrections on T top/bottom and S
+- Current branch: `main`. Verified M06 checkpoint `629356d` is merged and published
+  to GitHub; its feature branch `codex/m06-tree-triangles` is retained.
+- M06 is complete on published main: regular triangle corrections on T top/bottom and S
   left/right, with equilateral defaults as requested. Each has four trivalent
   interactions and an exchange bridge. All 45 documents / 772 endpoint contacts
   pass. See [M06 verification](planning/m06-verification.md).
-  Merge/push is pending; M05 remains published on main.
+  No M06 merge/push remains. See [publication record](planning/m06-publication.json).
 - The package-wide coordinate baseline is now 0.8 times the former size:
   `scale=1` matches former `scale=0.8`, while `scale=1.25` restores former
   `scale=1`. Shared geometry remains consistent. The atlas and focused PDFs
@@ -63,7 +64,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-four pages: 106 recipes, including equilateral tree triangles, styled samples and common-frame comparisons. M06 is local only; M05 is published. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-four pages: 106 recipes, including equilateral tree triangles, styled samples and common-frame comparisons. M06 and all reviewed fixes are published on main. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -82,8 +83,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M03a / M03b | External self-energy bubbles on t-tree / s-tree slots 1-4 | M03a and M03b complete on published main |
 | M04 | External seagulls on s/t trees | Complete on published main; verified checkpoint `854293a` |
 | M05 | External swordfish on s/t trees | Complete on published main; verified checkpoint `9daebf9` |
-| M06 | Regular tree-attached triangle corrections, four placements | Complete locally on `codex/m06-tree-triangles`; merge/push pending |
-| M07 | Complementary crossed box, crossed external layouts, source routing questions | Next after M06 publication; begin with one crossed-box slice |
+| M06 | Regular tree-attached triangle corrections, four placements | Complete on published main at verified checkpoint `629356d`; feature branch retained |
+| M07 | Complementary crossed box, crossed external layouts, source routing questions | Next: M07a, one complementary crossed-box slice |
 | M08a / M08b | Contact external self-energy / seagull | Planned |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
@@ -91,9 +92,10 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M07 is next after publishing the verified M06 checkpoint when authorized.
-The assistant handles the merge/push; no manual Git preparation is required
-from the user. Fetch/inspect synchronized main and create a new feature branch.
+M06 checkpoint `629356d`, including all subsequent reviews, is merged and
+published on GitHub. The checkout is synchronized `main`; no manual Git
+preparation is required from the user. M07a is the next coding session.
+Fetch/inspect main and create a new `codex/` feature branch when that session starts.
 Start with M07a: verify square defaults and freeze the complementary internal
 crossing before implementation. Preserve the existing crossed box; treat
 crossed external connections as a separate slice. Resolve R14/R22 endpoint

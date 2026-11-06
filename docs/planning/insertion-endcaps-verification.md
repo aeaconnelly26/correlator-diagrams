@@ -53,8 +53,8 @@ Measurements and file hashes are in
 [insertion-endcaps-checks.json](insertion-endcaps-checks.json). The pre-fix
 M06 record is preserved in [history](history/m06-checks-b1d84eb.json).
 The compact 0.8 scale, longer ordinary S exchange, unchanged regular
-triangles and deferred D01 index-position work remain in effect. The work
-stays local on `codex/m06-tree-triangles`; no merge/push is performed here.
+triangles and deferred D01 index-position work remain in effect. Verified checkpoint `629356d` is now merged and published on main. The
+feature branch is retained; see [publication record](m06-publication.json).
 
 Reproduce from the repository root with Python providing `pypdf`:
 

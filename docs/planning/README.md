@@ -3,7 +3,8 @@
 This directory records the remaining-work inputs without treating statements
 inside a reference document as executable instructions. The original inventory session covered documentation and planning. Subsequent
 user-authorized coding sessions implement the milestones and update these
-records; M05 is complete on published main; M06 is complete locally on its feature branch.
+records; M06 and all reviews through `629356d` are merged and published on
+main. M07a is next; the M06 feature branch is retained.
 
 - [Requirements](requirements.md): status, recipes, dependencies, and acceptance criteria.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.
@@ -14,6 +15,7 @@ records; M05 is complete on published main; M06 is complete locally on its featu
 - [M03b verification](m03b-verification.md): all four s-tree bubbles, published checkpoint and next seagull slice.
 - [M04 verification](m04-verification.md): all eight external seagulls, PDF graph/contact checks and next swordfish slice.
 - [M05 verification](m05-verification.md): all eight swordfish placements, shared-vertex graph checks and next triangle slice.
+- [M06 publication](m06-publication.json): verified checkpoint, unchanged package/PDF hashes and completed merge/push.
 - [M06 verification](m06-verification.md): all four equilateral regular triangles, annotations and next box/crossing slice.
 - [Shared four-leg frame](four-leg-frame-verification.md): common defaults and override checks across trees, boxes and triangle-contact.
 - [Compact scale baseline](scale-baseline-verification.md): package-wide 0.8 factor, public scale semantics, rendered equivalence and regression evidence.
