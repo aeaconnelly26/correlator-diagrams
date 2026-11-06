@@ -34,6 +34,11 @@ intentional tuning. Do not begin with a broad index/momentum rewrite. New
 controls must have documented precedence over existing grouped defaults and
 must reset between diagram calls.
 
+All public diagram scales are relative to the compact 0.8 coordinate baseline.
+Do not compensate individual topology dimensions to undo the common reduction.
+`scale=1.25` recovers the former unit-scale size when needed; preserve the
+shared logical frame. See [verification](scale-baseline-verification.md).
+
 Standard four-leg examples use p1/p2 incoming and p3/p4 outgoing, including
 future milestones. Explicit reversed-flow demonstrations must be identified as
 such; preserve their override coverage in tests.

@@ -81,13 +81,13 @@ def recover(page, reader):
         assert not any(degree[n] == 1 for n in neighbors[tip]), 'External leg attached to bridge tip'
         lengths = [hypot(nodes[a][0]-nodes[b][0],nodes[a][1]-nodes[b][1]) for a in triangle for b in triangle if a < b]
         assert max(lengths)-min(lengths) < .03, 'Default triangle is not equilateral'
-        assert 44.1 < min(lengths) <= max(lengths) < 44.3, 'Reviewed default triangle size regressed'
+        assert 35.28 < min(lengths) <= max(lengths) < 35.44, 'Reviewed compact default triangle size regressed'
         outer = {n for n in group if degree[n] == 1}
         xmin,xmax = min(nodes[n][0] for n in outer),max(nodes[n][0] for n in outer)
         ymin,ymax = min(nodes[n][1] for n in outer),max(nodes[n][1] for n in outer)
-        # The ordinary tree's public default frame is +/-2.10 x +/-2.10 cm.
-        assert abs((xmax-xmin)-4.2*72/2.54) < .03, 'External x frame moved'
-        assert abs((ymax-ymin)-4.2*72/2.54) < .03, 'External y frame moved'
+        # Logical frame +/-2.10, with the package's 0.8 coordinate baseline.
+        assert abs((xmax-xmin)-4.2*.8*72/2.54) < .03, 'External x frame moved'
+        assert abs((ymax-ymin)-4.2*.8*72/2.54) < .03, 'External y frame moved'
         assert all(min(abs(nodes[n][0]-xmin),abs(nodes[n][0]-xmax)) < .03 and
                    min(abs(nodes[n][1]-ymin),abs(nodes[n][1]-ymax)) < .03 for n in outer), 'External corner moved'
 
@@ -134,8 +134,8 @@ def comparison_frames(page, reader):
     nodes, edges, groups = plain_components(page, reader)
     for group in groups:
         xs,ys = zip(*(nodes[n] for n in group))
-        assert abs(max(xs)-min(xs)-4.2*72/2.54) < .03
-        assert abs(max(ys)-min(ys)-4.2*72/2.54) < .03
+        assert abs(max(xs)-min(xs)-4.2*.8*72/2.54) < .03
+        assert abs(max(ys)-min(ys)-4.2*.8*72/2.54) < .03
         corners = [(x,y) for x in (min(xs),max(xs)) for y in (min(ys),max(ys))]
         assert all(any(hypot(x-nodes[n][0],y-nodes[n][1]) < .03 for n in group) for x,y in corners)
     return len(groups)

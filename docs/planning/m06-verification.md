@@ -4,6 +4,8 @@ Complete locally on `codex/m06-tree-triangles`, from clean published main
 `eb6182c`. Main/GitHub remain at that baseline; M06 has not been merged or
 pushed. Implementation, regression coverage and inventory updates belong to
 this checkpoint. Exact delivered hashes are in [m06-checks.json](m06-checks.json).
+The subsequent [compact scale review](scale-baseline-verification.md) applies
+the 0.8 coordinate baseline throughout and refreshes the PDFs.
 
 ## Graph and reference trace
 
@@ -46,7 +48,7 @@ triangle-contact outer endpoints to +/-2.10 on both axes. That fits the large
 triangle while retaining its exchange stem. Explicit custom spans are honored;
 T triangles translate inward only if an explicitly tighter frame requires it.
 Styled examples retain wavy EW exchange lines. Independent PDF measurements give side lengths about
-44.1876 PDF pt, with maximum difference below 0.002 pt. The checker allows
+35.356 PDF pt at the compact baseline (44.1876 before rebasing), with maximum difference below 0.002 pt. The checker allows
 0.03 pt for PDF coordinate rounding.
 
 All eight annotations have independent `tree-triangle-momentum-N` blocks.
@@ -97,10 +99,10 @@ sides, the reviewed larger size, and no duplicate/missing dots or contracted/par
 edges. It also requires four pink wavy exchange paths on the styled page.
 
 Isolated pages verify **24 Proca + 12 scalar pink, white-filled contacts**.
-Visible tip/dot gaps are approximately -0.1246 to -0.1245 PDF pt, within the
+Visible tip/dot gaps are approximately -0.1763 to -0.1741 PDF pt, within the
 maintained tolerance. See [actual-PDF results](../../regressions/topologies/insertion/tree-triangle-contact.json).
 
-The final maintained suite passes **42 documents / 772 endpoint contacts**
+The final maintained suite passes **43 documents / 772 endpoint contacts**
 (736 existing + 36 new). Existing legacy-marker, species-circle/optical-W,
 EW-wavelength and state-reset checks pass. The suite also caught a stray
 paragraph in the new reset definitions when used inside math mode; that was
@@ -137,9 +139,11 @@ public cases check common/default/custom frames across trees, all supported
 external bubble/seagull/swordfish slots, regular triangles, channel loops,
 box/crossed box and four triangle-contact orientations. Family overrides are
 checked in both key orders, followed by fresh defaults. Independent PDF paths
-measure the common 4.2 by 4.2-unit frame (119.0551pt square) in four regular
+measure the common 4.2 by 4.2-unit logical frame (95.2441pt square
+at the compact baseline, nominal before PGF rounding) in four regular
 triangle graphs and eight additional tree/box/contact comparisons, while
-retaining the approximately 44.188pt triangle sides and wavy styled exchanges.
+retaining equilateral triangles (approximately 35.356pt sides at the
+compact baseline) and wavy styled exchanges.
 
 Styled seagull W-circle positions were retuned to preserve their measured
 optical centering on the longer legs. The existing 40-circle / 32-contact check
@@ -147,7 +151,9 @@ passes. A near-zero `veclen` calculation in the M02 test harness overflowed;
 its replacement component bound is stricter than the original Euclidean
 0.01pt criterion. Package annotation logic was unchanged. See
 [shared-frame verification](four-leg-frame-verification.md).
-The initial M06 record is preserved in [history](history/m06-checks-2506354.json).
+The initial M06 record is preserved in [history](history/m06-checks-2506354.json),
+and the pre-rebase shared-frame checkpoint in
+[ad9592b history](history/m06-checks-ad9592b.json).
 
 ## Boundaries and next slice
 

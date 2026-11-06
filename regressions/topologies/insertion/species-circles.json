@@ -2,87 +2,87 @@
   {
     "page": 1,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12462148036817078,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.17212377688910985,
     "ew_circles": 8,
     "pink_stem_circles": 4,
     "black_w_circles": 4,
     "centered_inner_w_circles": 4,
     "inner_w_centering_reference": "visible arrow-to-tree gap",
-    "maximum_inner_w_centering_error_pdf_pt": 0.0006433864404913336,
+    "maximum_inner_w_centering_error_pdf_pt": 0.014576676575596359,
     "visible_arrow_circle_tree_gaps_pdf_pt": [
       [
-        11.173166292884037,
-        11.171879520003138
+        8.1098764892382,
+        8.080723136087062
       ],
       [
-        11.173166292884037,
-        11.171879520003134
+        8.1098764892382,
+        8.08072313608709
       ],
       [
-        11.17316629288406,
-        11.171879520003081
+        8.109876489238198,
+        8.080723136087006
       ],
       [
-        11.17316629288406,
-        11.171879520003078
+        8.109876489238196,
+        8.080723136087066
       ]
     ],
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 11.171879520455352
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 8.08072315190977
   },
   {
     "page": 2,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12459691531893202,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.1733615372060774,
     "ew_circles": 12,
     "pink_stem_circles": 4,
     "black_w_circles": 8,
     "centered_inner_w_circles": 4,
     "inner_w_centering_reference": "vertex-to-vertex midpoint",
-    "maximum_inner_w_centering_error_pdf_pt": 0.002188374111172542,
+    "maximum_inner_w_centering_error_pdf_pt": 0.002806171769516619,
     "visible_arrow_circle_tree_gaps_pdf_pt": [],
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 5.493525299107629
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 3.545478626681769
   },
   {
     "page": 3,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.1246336021691884,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.17207627543945547,
     "ew_circles": 8,
     "pink_stem_circles": 4,
     "black_w_circles": 4,
     "centered_inner_w_circles": 4,
     "inner_w_centering_reference": "visible arrow-to-tree gap",
-    "maximum_inner_w_centering_error_pdf_pt": 0.0014479433256866514,
+    "maximum_inner_w_centering_error_pdf_pt": 0.014239096967182618,
     "visible_arrow_circle_tree_gaps_pdf_pt": [
       [
-        11.698792558990199,
-        11.695896672338957
+        8.527077316228592,
+        8.498599122294227
       ],
       [
-        11.698792558990192,
-        11.695896672339003
+        8.527077316228592,
+        8.498599122294227
       ],
       [
-        11.698792558990295,
-        11.695896672338922
+        8.527077316228546,
+        8.498599122294273
       ],
       [
-        11.698792558990291,
-        11.69589667233895
+        8.527077316228546,
+        8.498599122294273
       ]
     ],
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 11.695896672385338
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 8.498599138369654
   },
   {
     "page": 4,
     "pink_endpoint_arrows": 8,
-    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.12459166344857076,
+    "maximum_visible_endpoint_ink_gap_pdf_pt": -0.17339913574652377,
     "ew_circles": 12,
     "pink_stem_circles": 4,
     "black_w_circles": 8,
     "centered_inner_w_circles": 4,
     "inner_w_centering_reference": "vertex-to-vertex midpoint",
-    "maximum_inner_w_centering_error_pdf_pt": 0.0007398521811746703,
+    "maximum_inner_w_centering_error_pdf_pt": 0.0013724089224268913,
     "visible_arrow_circle_tree_gaps_pdf_pt": [],
-    "minimum_circle_vertex_ink_clearance_pdf_pt": 5.93228749772134
+    "minimum_circle_vertex_ink_clearance_pdf_pt": 3.896805878014497
   }
 ]

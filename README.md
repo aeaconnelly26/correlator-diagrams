@@ -102,7 +102,12 @@ Older documents that load `correlator-diagrams` still work through a compatibili
 
 The package depends on standard LaTeX tools plus `tikz-feynhand`, all of which are loaded internally.
 
-To compile all 42 maintained regression and example documents:
+Diagram scales use a compact coordinate baseline: `scale=1` is the former
+`scale=0.8`; use `scale=1.25` for the former `scale=1` size. This applies across
+all public families and aliases. Text and marker sizing follows the existing
+TikZ scale behavior. See [details](docs/planning/scale-baseline-verification.md).
+
+To compile all 43 maintained regression and example documents:
 
 ```sh
 scripts/check-regressions.sh

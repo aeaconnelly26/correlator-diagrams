@@ -10,6 +10,12 @@ not 102 distinct graph topologies. M06 adds all four regular tree triangles
 with equilateral defaults and four mixed-style/annotation samples; see
 [verification](../planning/m06-verification.md). M05 remains published on main.
 
+Every recipe now uses the compact coordinate baseline: `scale=1` matches the
+former `scale=0.8`; use `scale=1.25` to recover the former unit-scale size.
+The logical shared frame is still +/-2.10, rendered as a 3.36 cm square at
+`scale=1`. Text and markers retain the existing TikZ sizing behavior. See
+[scale verification](../planning/scale-baseline-verification.md).
+
 M03a adds the four t-tree bubble placements (I29, B02-B04) and is published
 on main. M03b adds all four s-tree placements (C01-C04); verified checkpoint
 `97495ba` is now also merged and published on main. Index positioning remains a later

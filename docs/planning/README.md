@@ -16,6 +16,7 @@ records; M05 is complete on published main; M06 is complete locally on its featu
 - [M05 verification](m05-verification.md): all eight swordfish placements, shared-vertex graph checks and next triangle slice.
 - [M06 verification](m06-verification.md): all four equilateral regular triangles, annotations and next box/crossing slice.
 - [Shared four-leg frame](four-leg-frame-verification.md): common defaults and override checks across trees, boxes and triangle-contact.
+- [Compact scale baseline](scale-baseline-verification.md): package-wide 0.8 factor, public scale semantics, rendered equivalence and regression evidence.
 - [Milestones](milestones.md): ordered coding slices and their verification gates.
 - [Deferred workflows](deferred-workflows.md): later reviews, including the explicitly deferred index-placement cleanup.
 - [Source manifest](sources/manifest.json): unchanged originals, original locations, sizes, and SHA-256 checksums.

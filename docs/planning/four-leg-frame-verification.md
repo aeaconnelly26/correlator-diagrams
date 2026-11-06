@@ -12,6 +12,14 @@ crossing connectivity, triangle-contact vertices and the larger equilateral
 regular triangle retain their existing values. Half-box and flat-contact
 identity stubs keep their specialized layouts.
 
+The later [compact scale review](scale-baseline-verification.md) multiplies
+all public coordinate scales by 0.8. Logical corners remain +/-2.10; the
+physical frame is now about 95.256 PDF pt square at `scale=1` (nominally
+95.2441pt before PGF rounding), and equilateral triangle sides are about 35.356pt. The measurements below describe the
+pre-rebase checkpoint `ad9592b`; its machine record is preserved in
+[history](history/m06-checks-ad9592b.json). The same frame/contact checks pass
+at the new baseline, including unchanged optical W positions.
+
 ## Interface and precedence
 
 `fourpoint-xspan` and `fourpoint-yspan` now control the outer endpoints across

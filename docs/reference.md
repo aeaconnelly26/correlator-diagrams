@@ -1344,6 +1344,20 @@ Visibility and vertex controls:
 - `vertex-style=...`
 - `scale=...`
 
+The package-wide coordinate baseline is **0.8 times the former size**:
+`scale=1` now produces the former `scale=0.8` drawing, and `scale=1.25`
+recovers the former `scale=1` size. Every public diagram family and alias uses
+this factor exactly once. Explicit scales remain relative to this baseline;
+for example, `scale=0.8` now has the former `scale=0.64` geometry.
+Existing family presets remain relative too: sunset's default 1.2 and the
+thesis vertex's 0.75 are each reduced by the same factor.
+
+This uses the existing TikZ coordinate-scale behavior: fonts, circles, line
+widths and arrowhead sizes retain their existing sizing rules. Logical span,
+insertion and label options keep their values. Raw user-created TikZ pictures
+and standalone `\propag` lines are unaffected. See
+[scale verification](planning/scale-baseline-verification.md).
+
 Default behavior:
 
 - 2-point and 4-point diagrams show the central blob

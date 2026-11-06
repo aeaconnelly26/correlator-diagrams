@@ -9,9 +9,13 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Current branch: `codex/m06-tree-triangles`, based on published main `eb6182c`.
 - M06 is complete locally: regular triangle corrections on T top/bottom and S
   left/right, with equilateral defaults as requested. Each has four trivalent
-  interactions and an exchange bridge. All 42 documents / 772 endpoint contacts
+  interactions and an exchange bridge. All 43 documents / 772 endpoint contacts
   pass. See [M06 verification](planning/m06-verification.md).
   Merge/push is pending; M05 remains published on main.
+- The package-wide coordinate baseline is now 0.8 times the former size:
+  `scale=1` matches former `scale=0.8`, while `scale=1.25` restores former
+  `scale=1`. Shared geometry remains consistent. The atlas and focused PDFs
+  are refreshed; see [scale verification](planning/scale-baseline-verification.md).
 - M05 checkpoint `9daebf9` is merged and published: swordfish insertions on all
   four external legs of both tree channels. The two loop edges meet the actual
   quartic tree vertex. All 41 maintained documents and 736 endpoint contacts

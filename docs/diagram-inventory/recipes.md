@@ -2,11 +2,13 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M06 local; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
+Baseline: `M06 local; compact scale; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
 The main atlas hides annotations. The appendix demonstrates selected annotation and style features.
+
+`scale=1` uses the compact coordinate baseline: 0.8 times the former size. Use `scale=1.25` to recover the former `scale=1` size. Text and markers retain the existing TikZ scale behavior.
 
 ## Two- and three-point objects
 

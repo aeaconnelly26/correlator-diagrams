@@ -1,3 +1,13 @@
+# Compact scale review - 2026-11-06
+
+The current 102-recipe / 23-page atlas is rebuilt with a package-wide
+coordinate baseline of 0.8. New `scale=1` matches former `scale=0.8`.
+The logical shared frame and topology connections remain unchanged. All
+pages were rendered for review; the numerical/visual evidence and full-suite
+results are recorded in [scale verification](../planning/scale-baseline-verification.md).
+M06 remains local and D01 remains deferred. The records below preserve the
+previous larger-baseline checkpoints.
+
 # M06 current local inventory - 2026-11-06
 
 The atlas has **102 public recipes / 23 pages**, built on

@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{feynman-fun}
+\newbox\scaleprobe
+\newcount\scalecases
+\newif\ifscalechecking
+\makeatletter
+% Observe the real picture transform, rather than only checking key storage.
+\newcommand{\scaletestmatrix}{%
+ \ifscalechecking
+  \pgfgettransformentries{\scalex}{\scalexy}{\scaleyx}{\scaley}{\scaletx}{\scalety}%
+  \pgfmathparse{max(abs(\scalex-\scaleexpected),abs(\scaley-\scaleexpected),abs(\scalexy),abs(\scaleyx))}%
+  \ifdim\pgfmathresult pt>0.00003pt
+   \PackageError{Diagram scale}{Incorrect picture transform for \string\scalemacro}{}%
+  \fi
+ \fi}
+\tikzset{every picture/.append style={execute at begin picture=\scaletestmatrix}}
+\newcommand{\scalemeasure}[1]{%
+ \global\advance\scalecases by1
+ \edef\scalecall{\noexpand\scalemacro[field={},central={},leg-labels={,,,},show-momenta=false,#1]}%
+ \setbox\scaleprobe=\hbox{\scalecall}}
+\begin{document}
+\scalecheckingtrue
+\@for\scalemacro:={\TwoPointCorr,\ThreePointCorr,\ThreePointThesis,\ThesisVertex,
+ \BubbleCorr,\FourPointCorr,\SunsetDiagram,\TwoPtCorr,\ThreePtCorr,\FourPtCorr,
+ \SelfEnergyCorr,\SelfEnergyBubbleCorr,\SLoopChannelCorr,\TLoopChannelCorr,
+ \ULoopChannelCorr,\SChannelCorr,\TChannelCorr,\UChannelCorr,\STreeChannelCorr,
+ \TTreeChannelCorr,\UTreeChannelCorr,\BoxLoopCorr,\CrossBoxCorr,\HalfBoxCorr,
+ \FlatContactCorr,\TriangleContactCorr,\SunsetDiag}\do{%
+ \def\scaleexpected{0.8}%
+ % \@for stores a control sequence token; compare the expanded token list.
+ \def\scalethesis{\ThreePointThesis}\def\scalealias{\ThesisVertex}%
+ \def\scalesunset{\SunsetDiagram}\def\scalesunsetalias{\SunsetDiag}%
+ \ifx\scalemacro\scalethesis\def\scaleexpected{0.6}\fi
+ \ifx\scalemacro\scalealias\def\scaleexpected{0.6}\fi
+ \ifx\scalemacro\scalesunset\def\scaleexpected{0.96}\fi
+ \ifx\scalemacro\scalesunsetalias\def\scaleexpected{0.96}\fi
+ \let\scaledefaultexpected\scaleexpected
+ \scalemeasure{}%
+ \def\scaleexpected{0.64}\scalemeasure{scale=0.8}%
+ \def\scaleexpected{0.8}\scalemeasure{scale=1}%
+ \def\scaleexpected{1}\scalemeasure{scale=1.25}%
+ \let\scaleexpected\scaledefaultexpected\scalemeasure{}%
+}
+% Package drawings must not change the user's next raw TikZ transform.
+\def\scaleexpected{1}
+\setbox\scaleprobe=\hbox{\begin{tikzpicture}\draw (0,0)--(1,0);\end{tikzpicture}}
+\scalecheckingfalse
+\typeout{PASS scale baseline: \the\scalecases\space public cases; all 27 commands/aliases, defaults, explicit scales, reset, raw TikZ isolation}
+\makeatother
+\section*{Compact diagram scale}
+Every public diagram uses a coordinate transform of $0.8\times\texttt{scale}$.
+The existing logical geometry is preserved. Text and marker sizing follow
+the existing TikZ scale behavior.
+\par\bigskip
+\noindent\begin{minipage}{0.48\linewidth}\centering
+\texttt{scale=1}\par\medskip
+\TTreeChannelCorr[field={},central={},leg-labels={,,,},show-momenta=false,line=plain,scale=1]
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering
+\texttt{scale=1.25} (former size)\par\medskip
+\TTreeChannelCorr[field={},central={},leg-labels={,,,},show-momenta=false,line=plain,scale=1.25]
+\end{minipage}
+\end{document}

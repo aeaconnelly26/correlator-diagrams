@@ -1023,6 +1023,9 @@
 \def\corr@externalvertexstyle{dot}
 \def\corr@sunsetinternalvertexstyle{dot}
 \def\corr@scale{1}
+% Public diagram scales are relative to the compact package-wide baseline.
+% Keep this separate from the logical scale key and from raw TikZ pictures.
+\def\corr@unitscale{0.8}
 \def\corr@indexplacement{sub}
 \def\corr@sunsetmomentumlayout{balanced}
 \def\corr@sunsetindexlayout{balanced}
@@ -8042,7 +8045,7 @@
   \corr@configurestyles
   \corr@setthreepointcoordinates
   \corr@clearsemanticmarkerqueue
-  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+  \begin{tikzpicture}[baseline=-0.6ex,scale={\corr@unitscale*(\corr@scale)}]
     \begin{feynhand}
       \corr@topologycoordinate{corrC}{0}{0}%
       \corr@topologycoordinate{corrUL}{\corr@threepointslotonex}{\corr@threepointslotoney}%
@@ -8100,7 +8103,7 @@
   \corr@preparelists
   \corr@configurestyles
   \corr@clearsemanticmarkerqueue
-  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+  \begin{tikzpicture}[baseline=-0.6ex,scale={\corr@unitscale*(\corr@scale)}]
     \begin{feynhand}
       \vertex (corrC) at (0,0);
       \vertex (corrL) at (-1.85,0);
@@ -8141,7 +8144,7 @@
   \corr@preparelists
   \corr@configurestyles
   \corr@clearsemanticmarkerqueue
-  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+  \begin{tikzpicture}[baseline=-0.6ex,scale={\corr@unitscale*(\corr@scale)}]
     \corr@drawbubble
     \corr@flushsemanticmarkerqueue
   \end{tikzpicture}%
@@ -9258,7 +9261,7 @@
   \corr@resolvechanneldefaults
   \corr@resolveloopchanneldefaults
   \corr@clearsemanticmarkerqueue
-  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+  \begin{tikzpicture}[baseline=-0.6ex,scale={\corr@unitscale*(\corr@scale)}]
     \corr@ifstringeq{\corr@fourpointtopology}{contact}{%
       \corr@drawfourpointcontact
     }{%
@@ -9320,7 +9323,7 @@
     \def\corr@central{\corr@sunsetcentrallabel}%
   }{}%
   \corr@clearsemanticmarkerqueue
-  \begin{tikzpicture}[baseline=-0.6ex,scale=\corr@scale]
+  \begin{tikzpicture}[baseline=-0.6ex,scale={\corr@unitscale*(\corr@scale)}]
     \pgfmathsetmacro{\corr@sunsetleftvertexx}{-\corr@sunsetinnerspan}
     \pgfmathsetmacro{\corr@sunsetrightvertexx}{\corr@sunsetinnerspan}
     \pgfmathsetmacro{\corr@sunsetleftextx}{-(\corr@sunsetinnerspan+\corr@sunsetouterspan)}

@@ -1,5 +1,5 @@
 {
-  "baseline": "M06 local; base eb6182c",
+  "baseline": "M06 local; compact scale; base eb6182c",
   "date": "2026-11-06",
   "base_options": [
     "field={}",
@@ -16,7 +16,7 @@
     {
       "section": "01 / FUNDAMENTALS",
       "title": "Two- and three-point objects",
-      "subtitle": "Plain lines expose connectivity. IDs identify recipes; rotated layouts are not extra graph topologies.",
+      "subtitle": "Plain lines expose connectivity. Scale=1 uses the compact baseline (0.8 times the former size). Rotated layouts are not extra graph topologies.",
       "entries": [
         {
           "id": "I01",

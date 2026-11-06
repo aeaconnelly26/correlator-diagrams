@@ -81,7 +81,7 @@
   "independent_pdf_graph_checks": 4,
   "baseline_regression_documents": 41,
   "baseline_endpoint_contacts": 736,
-  "regression_documents": 42,
+  "regression_documents": 43,
   "new_proca_contacts": 24,
   "new_scalar_contacts": 12,
   "total_endpoint_contacts": 772,
@@ -100,12 +100,12 @@
       "exchange_bridges": 1,
       "cycle_rank": 1,
       "triangle_side_lengths_pdf_pt": [
-        44.18720000000002,
-        44.18818058504899,
-        44.18818058504899
+        35.35534000000001,
+        35.35641162573621,
+        35.35641162573621
       ],
-      "outer_frame_width_pdf_pt": 119.05691999999999,
-      "outer_frame_height_pdf_pt": 119.05691999999999
+      "outer_frame_width_pdf_pt": 95.25585999999998,
+      "outer_frame_height_pdf_pt": 95.25585999999998
     },
     {
       "side": "top",
@@ -121,12 +121,12 @@
       "exchange_bridges": 1,
       "cycle_rank": 1,
       "triangle_side_lengths_pdf_pt": [
-        44.18719999999996,
-        44.188180585048976,
-        44.188180585048976
+        35.355339999999956,
+        35.35641162573629,
+        35.35641162573629
       ],
-      "outer_frame_width_pdf_pt": 119.05691999999999,
-      "outer_frame_height_pdf_pt": 119.05691999999999
+      "outer_frame_width_pdf_pt": 95.25585999999998,
+      "outer_frame_height_pdf_pt": 95.25585999999998
     },
     {
       "side": "left",
@@ -142,12 +142,12 @@
       "exchange_bridges": 1,
       "cycle_rank": 1,
       "triangle_side_lengths_pdf_pt": [
-        44.18719999999996,
-        44.188180585048976,
-        44.188180585048976
+        35.355339999999956,
+        35.35624707937481,
+        35.35624707937481
       ],
-      "outer_frame_width_pdf_pt": 119.05691999999999,
-      "outer_frame_height_pdf_pt": 119.05691999999999
+      "outer_frame_width_pdf_pt": 95.25585999999998,
+      "outer_frame_height_pdf_pt": 95.25585999999998
     },
     {
       "side": "right",
@@ -163,17 +163,17 @@
       "exchange_bridges": 1,
       "cycle_rank": 1,
       "triangle_side_lengths_pdf_pt": [
-        44.18719999999996,
-        44.18818058504893,
-        44.18818058504893
+        35.355339999999956,
+        35.35624707937479,
+        35.35624707937479
       ],
-      "outer_frame_width_pdf_pt": 119.05691999999999,
-      "outer_frame_height_pdf_pt": 119.05691999999999
+      "outer_frame_width_pdf_pt": 95.25585999999998,
+      "outer_frame_height_pdf_pt": 95.25585999999998
     }
   ],
   "styled_wavy_exchange_curve_counts": [
-    10,
-    10,
+    8,
+    8,
     6,
     6
   ],
@@ -217,25 +217,32 @@
   "geometry_limit": "Separated vertices and a positive bridge; extreme geometry is not clamped",
   "next_milestone": "M07a complementary internal crossing",
   "sha256": {
-    "feynman-fun.sty": "bb4398cfb5e6140685018bde0f4908e6e951cb4909bd6e57f69d7988734a4c30",
-    "scripts/check-regressions.sh": "3eb1b2ccf8440ab059bc768ef968bbc4844cf2be81165d132d8492ecbc20b218",
-    "docs/reference.md": "939c9677ac97f23db6772a0262d393087ab21004472d760281229b95587df6f6",
-    "docs/planning/m06-verification.md": "ee07888e6d52b02aa20e819505dc3f20f7ac91fdde542843fb76e547fcb5987c",
+    "feynman-fun.sty": "875611050b7a304a952869f27b7aea6aaf004eb2726a295c0fcd0b78d0efbd4a",
+    "scripts/check-regressions.sh": "2c1abd9693aac241981de0bdd8764a43f89b23ba71f65a00d50cbbabf2da7374",
+    "docs/reference.md": "7435207e35dbc9857aa546b56903d10e72e282a19b464c15e688b1f72d6698bd",
+    "docs/planning/m06-verification.md": "4f6104bd4051cc9ddb2e03e15833b1eefd02c0f10a69bbbeb0cd8bd6143961dc",
     "regressions/topologies/insertion/M06-contract.md": "82a94e2af00aa231219d6c0048b6a3b7bc0c9954eb4718ae2031e24675f87ffd",
     "regressions/topologies/insertion/tree-triangle-slots.tex": "f84e1790aaed240ac15057e2167001b524075486672e9fcbf1f27823c2994b63",
-    "regressions/topologies/insertion/tree-triangle-slots.pdf": "9bfeaad607577def0904e11c37b9842c1fa46873a4376f7868eaf39998f20aef",
-    "regressions/topologies/insertion/check-tree-triangle.py": "c4b6b2e90039c381d45dfe178e6bc1761fc3d95da1348f5bf7eef6410595fe66",
-    "regressions/topologies/insertion/tree-triangle-contact.json": "c0ccd7b4b77da45334d370a350b9b8c072e476b3728c23018115d4f11a1c30e4",
-    "docs/diagram-inventory/catalog.json": "09e16237f3c5da73063cc52835e853cf5b7fcec07e00b9f7cfdb51cc9f31149c",
-    "docs/diagram-inventory/inventory.tex": "8527c99263b76b34c6ebe666b0bfd28fc3f0d227581cbb267a5b252f3b93e92d",
-    "docs/diagram-inventory/inventory.pdf": "09c90ed4da92e1af751d496920b384efb3d478d96f5a399024a9e9c319493ef3",
-    "docs/diagram-inventory/recipes.md": "211b9a657c06b07863d88cb878b4b9ffaf44e2bf9194551fd8e9378fed3badd0",
+    "regressions/topologies/insertion/tree-triangle-slots.pdf": "466501e11afed09cde43eb1ec683cad13f5aeb2c347cb0ce355c0264f81e3f0a",
+    "regressions/topologies/insertion/check-tree-triangle.py": "36601185b5394d82280c8f238afb6dad78d851ef4fd2b729d507f98013d3c1d3",
+    "regressions/topologies/insertion/tree-triangle-contact.json": "642f7f072b1d6e7743618d3fb0d9ace619c46a407eefd2c3bd41494e0fcce46e",
+    "docs/diagram-inventory/catalog.json": "1314e7d6d28947e07b3e4a67447b2c18d5f8a54622ebbf8c7f34b62ea8b3b2fc",
+    "docs/diagram-inventory/inventory.tex": "11a13e146658534ba0c8b74dfd84452e9c50a0ca4cbaccd7a841ecd2e3491acd",
+    "docs/diagram-inventory/inventory.pdf": "1f34a59fb00986b8f46c60d8eefbcff9d50987db63bfa070ee2fd8e3b7250ab5",
+    "docs/diagram-inventory/recipes.md": "cc2aa825c0e6a93bc39c537015492605f6f6fe81d807d7e1b35d64b96c3bd4a5",
     "regressions/topologies/insertion/four-leg-frame-checks.tex": "cfae0788f12e72618c2f67c6aa7b43ac69d0574e9c1b9b408095e44514b37c3f",
     "regressions/topologies/insertion/insertion-species-samples.tex": "262da6227c56ab78b151e9791803dd791a0cb2aed055e5b9040aadc73cd7eec9",
-    "regressions/topologies/insertion/insertion-species-samples.pdf": "a2aafba71ae7482b2ee086369b870474d7400a345d017f040ae114486823b344",
-    "regressions/topologies/insertion/species-circles.json": "31469125b6210166f54f081cadd15ef57d9551465b3b091ea3e5bed50257ec96",
+    "regressions/topologies/insertion/insertion-species-samples.pdf": "8fa33fd98385397e333052ce13032ed3a74b9a3e81d3350f74a24de3021c3ba1",
+    "regressions/topologies/insertion/species-circles.json": "a0650a1019655d30e08fc5e0de8f674851d48496fca01913258aeb3155a28430",
     "regressions/topologies/triangle-contact/triangle-contact-annotations.tex": "bb90fba71282da24adfe4152f80deff47142d14ec7438ec506e0ce0c3faf1912",
-    "docs/planning/four-leg-frame-verification.md": "677348bcb21ce95e1cd35033e3733640e7b9d04119cc3247b9b8ed6b4e372c4e"
+    "docs/planning/four-leg-frame-verification.md": "cd10af62fa46227e042a7937e48ffcff0b32733cf771ad4dc4ac45230db9f79c",
+    "regressions/scale/diagram-scale.tex": "3a4c41fba1fb7881be82338ca63da3b480bdb90e53120927b4a9fe5c0bf0ad6a",
+    "regressions/scale/check-baseline-equivalence.py": "ffade29f283dc2d8b27bfc8fc5dd90c9ed01885a4715ddd3d3ea4a3eab88cba8",
+    "regressions/scale/baseline-equivalence.json": "5480d5f5467937e5c7845a84b3b607b741ee5934bf6b288bddaa35d0960c2bab",
+    "regressions/propagators/proca-endpoints/proca-endpoint-audit.tex": "0a9ecd75899363cb8ae0dff751bb0a8eb095d1e94646bf47cab5d8b40f3ddbbb",
+    "docs/diagram-inventory/build.py": "957ffd580a34037de67d768ed00c779c06cbb305739185366828336c3abb7715",
+    "docs/planning/scale-baseline-verification.md": "d008953c476b6b5af32bbd6721c6ad27a7a62d364f4f805e5adc86c65506c015",
+    "docs/planning/history/m06-checks-ad9592b.json": "8fb24b19b752916ae74176e802db111443ee5f91eb66af875bd0cb33630d2930"
   },
   "shared_frame_public_cases": 188,
   "total_public_cases": 379,
@@ -246,16 +253,27 @@
     2.1
   ],
   "default_outer_frame_pdf_pt": [
-    119.05511811023624,
-    119.05511811023624
+    95.25585999999998,
+    95.25585999999998
   ],
   "default_frame_changed_intentionally": true,
   "default_t_triangle_inward_translation": 0,
   "explicit_tight_t_frame_behavior": "Translate triangle inward as one object, preserve side lengths and outer corners",
-  "previous_checkpoint_record": "history/m06-checks-2506354.json",
+  "previous_checkpoint_record": "history/m06-checks-ad9592b.json",
   "styled_seagull_w_circle_position": {
     "t": 0.57332,
     "s": 0.57159
   },
-  "validation": "Full suite: 42 documents / 772 endpoint contacts; 191 triangle and 188 shared-frame public cases; independent frame/shape/wave/contact checks pass"
+  "validation": "Full suite: 43 documents / 772 endpoint contacts; 191 triangle, 188 shared-frame and 135 scale cases; all 23 atlas pages pixel-identical to pre-rebase package at 0.8 times each scale; independent frame/shape/wave/contact checks pass",
+  "current_review": "compact package-wide scale baseline",
+  "review_baseline": "ad9592b",
+  "coordinate_baseline": 0.8,
+  "public_scale_cases": 135,
+  "public_scale_commands_and_aliases": 27,
+  "combined_review_public_cases": 514,
+  "default_outer_frame_nominal_pdf_pt": [
+    95.24409448818898,
+    95.24409448818898
+  ],
+  "scale_equivalence_report": "../../regressions/scale/baseline-equivalence.json"
 }

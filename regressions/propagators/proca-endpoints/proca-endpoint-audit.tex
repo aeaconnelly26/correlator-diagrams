@@ -300,7 +300,9 @@ Upper row: automatic contact. Lower row: explicit legacy distances / generic add
 
 \newpage
 \section*{Managed Proca override compatibility}
-\noindent Per-line M01 settings and semantic vertex controls must survive integration.\par\medskip
+\noindent Per-line M01 settings and semantic vertex controls must survive integration.
+The two legacy-distance examples use scale 1.25 to match the archived raw
+TikZ controls at physical scale 1.0 after the compact-baseline change.\par\medskip
 \makeatletter
 \newcommand{\corr@vertex@auditlargepoint}[1]{\filldraw[black] (#1) circle[radius=4pt];}
 \makeatother
@@ -308,8 +310,8 @@ Upper row: automatic contact. Lower row: explicit legacy distances / generic add
 \auditcell{radius before style / 1.2}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.2,center-vertex=true,center-vertex-style=auditlargepoint,line=ewboson,channel-line={proca vertex radius=4pt,proca,magenta!85!red}]}\hfill
 \auditcell{semantic radius / zero clearance}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,center-vertex-style=auditlargepoint,semantic-marker-vertex-radius=4pt,semantic-marker-tip-clearance=0pt,line=ewboson,channel-line={proca,magenta!85!red}]}\par\vspace{10pt}
 \auditcell{semantic defaults reset}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red}]}\hfill
-\auditcell{legacy 7pt / 6pt arrow}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red,endpoint marker distance=7pt}]}\hfill
-\auditcell{legacy 7pt / 10pt arrow}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.0,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red,open arrow marker distance=7pt,arrow size=10pt}]}\par
+\auditcell{legacy 7pt / 6pt arrow}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.25,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red,endpoint marker distance=7pt}]}\hfill
+\auditcell{legacy 7pt / 10pt arrow}{\TTreeChannelCorr[field={},central={},show-momenta=false,scale=1.25,center-vertex=true,line=ewboson,channel-line={proca,magenta!85!red,open arrow marker distance=7pt,arrow size=10pt}]}\par
 \newpage
 \section*{Integrated seagull and exchange endpoints}
 \noindent Bare EW host legs; pink Proca self-loop and exchange. No independent decorations.\par\medskip
