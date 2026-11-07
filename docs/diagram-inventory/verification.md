@@ -1,3 +1,12 @@
+# M07a internal crossed boxes - 2026-11-06
+
+The atlas now has **114 recipes / 26 pages**. P01-P04/P11-P14 demonstrate
+both fixed-edge layouts and their independent style/annotation controls.
+The existing three-page crossed-box regression remains pixel-identical.
+Atlas pages 4/7 update old limitation text; the other original page bodies
+are unchanged. See [M07a verification](../planning/m07a-verification.md).
+M07a remains local; M06 is published. Earlier sections preserve history.
+
 # M06 publication - 2026-11-06
 
 Verified checkpoint `629356d` is merged and published on main, including all

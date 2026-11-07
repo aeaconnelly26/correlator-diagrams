@@ -312,10 +312,14 @@ as the box order:
 - slot 3 = upper right
 - slot 4 = lower right
 
-The two internal box-edge segments use:
+The two fixed internal segments use (default `cross-box-layout=left-right`):
 
 - slot 5 = left edge
 - slot 6 = right edge
+
+With `cross-box-layout=top-bottom`, slot 5 is TL to TR (fixed top) and slot 6
+is BL to BR (fixed bottom). The external and diagonal slot definitions stay
+the same.
 
 The crossed internal diagonals use:
 
@@ -1761,6 +1765,82 @@ automatic blank marker.
 
 Focused visual QA lives in
 `regressions/topologies/cross-box/cross-box-regression.tex`.
+
+M07a adds `cross-box-layout=top-bottom`, retaining `left-right` as the default.
+The square 1.34/1.34 inner half-spans, shared outer frame and external slots
+are unchanged. Existing explicit dimension overrides remain available.
+
+| Logical slot | `left-right` | `top-bottom` |
+| --- | --- | --- |
+| 1 / 2 / 3 / 4 | external UL / LL / UR / LR to the corresponding corner | same |
+| 5 | BL to TL: fixed left | TL to TR: fixed top |
+| 6 | TR to BR: fixed right | BL to BR: fixed bottom |
+| 7 | TL to BR: split descending diagonal | same |
+| 8 | BL to TR: continuous ascending diagonal | same |
+
+The center crossing is unconnected. The two split strokes belong to slot 7;
+its markers and endpoint indices attach to TL/BR, not to the gap endpoints.
+Use `cross-box-crossing-gap` between 0 and 0.5 for a visible valid gap. Its
+value is the half-width as a fraction of the full diagonal.
+
+`cross-box-line-5` through `cross-box-line-8` override individual internal
+slots, independently of key order. Without a slot override, the fixed edges
+use `box-left-line` / `box-right-line` in the default layout, or
+`box-top-line` / `box-bottom-line` in the complementary layout. Explicit
+`cross-box-up-line` / `cross-box-down-line` still style the diagonals. Their
+fallback keys are `box-top-line` / `box-bottom-line` in the default layout,
+or `box-left-line` / `box-right-line` in the complementary layout. Empty
+edge-specific styles fall back to `box-line`. Existing box color controls
+retain their precedence.
+
+`cross-box-first-circ` / `cross-box-second-circ` and their `-position` keys
+name the fixed slots 5/6 in either layout. The legacy `cross-box-left-circ` /
+`cross-box-right-circ` keys remain aliases for those fixed slots. Up/down
+circle keys retain their diagonal meaning. `cross-box-circs=false` hides
+all topology-level circles, including the compatible automatic blank Proca
+circles. Default `true` preserves existing output. Bare scalar-polarization
+aliases now use semantic tips on the full logical edge, so the split path
+cannot create a false marker near its crossing gap.
+
+Internal crossed-box momentum is opt-in:
+
+```tex
+\CrossBoxCorr[
+  cross-box-layout=top-bottom,
+  field={},central={},leg-labels={,,,},
+  box-line=plain,box-external-line=plain,
+  show-momenta=true,
+  cross-box-momenta={k_5,k_6,k_7,k_8},
+  cross-box-momentum-7={layout=side,direction=reverse}
+]
+```
+
+`cross-box-momenta` follows slots 5/6/7/8; blank entries hide the corresponding
+internal annotation. It defaults empty to preserve existing diagrams.
+`cross-box-momentum-5` through `cross-box-momentum-8` accept independent
+`layout=gap|side`, `label`, `direction=forward|reverse|none`, `start`, `end`,
+`offset`, `label-fraction`, `label-gap`, `label-offset`, `label-xshift`,
+`label-yshift`, `label-anchor`, and `side=outside|inside|left|right`. Gap mode
+fits the break to the actual label; side mode leaves the arrow continuous.
+An explicit block with `label={}` can draw an unlabeled arrow; `direction=none`
+hides it. `show-momenta=false` hides all these guides. Existing external
+momentum controls retain p1/p2 incoming and p3/p4 outgoing defaults.
+
+Fixed-edge annotations default to the outside. Diagonal guides sit near their
+upper endpoints to clear the crossing; their normals are selected separately
+for each layout to avoid the fixed edges. Reversing a direction keeps its
+label on the same side. Ordinary box-edge momentum keys and the ordinary
+box loop arrow are separate controls; use the crossed-box slot keys here.
+
+`box-propagator-left-indices` / `box-propagator-right-indices` now follow the
+crossed-box slot table above, including all eight slots and both endpoints.
+The existing `box-index-*` controls apply. This verifies ownership and values;
+D01 index-position appearance remains a separate later review.
+
+See [M07a verification](planning/m07a-verification.md) and the
+[four-page gallery](../regressions/topologies/cross-box/cross-box-layouts.pdf).
+External crossed-leg routing is the separate M07b slice.
+
 
 ## Triangle-Contact Topology
 

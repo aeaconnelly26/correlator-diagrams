@@ -1,5 +1,5 @@
 {
-  "baseline": "M06 local; insertion caps fixed; base eb6182c",
+  "baseline": "M07a local; base 56a643a",
   "date": "2026-11-06",
   "base_options": [
     "field={}",
@@ -220,7 +220,7 @@
             "box-external-line=plain"
           ],
           "description": "Fixed left/right edges plus two crossing diagonals.",
-          "limitation": "No interaction at crossing; internal momentum/index pass is incomplete."
+          "limitation": "Default left/right fixed; use P02 for top/bottom fixed."
         },
         {
           "id": "I19",
@@ -512,7 +512,7 @@
             "cross-box-down-line={ewboson,circ=Z}"
           ],
           "description": "A blank circle on one pink diagonal and a Z on the other.",
-          "limitation": "Crossing stays unconnected; no internal momenta or indices claimed."
+          "limitation": "Circles shown deliberately; internal annotations are available separately."
         }
       ]
     },
@@ -1699,6 +1699,131 @@
           ],
           "description": "Four outer double caps retained.",
           "limitation": "Explicit segment caps override logical leg caps."
+        }
+      ]
+    },
+    {
+      "section": "25 / INTERNAL CROSSED BOXES",
+      "title": "Complementary internal crossings",
+      "subtitle": "Both layouts preserve the square corner frame and external slots. Plain lines expose the graph; the crossing is not a vertex.",
+      "entries": [
+        {
+          "id": "P01",
+          "title": "Crossed box: left/right fixed",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain",
+            "cross-box-layout=left-right"
+          ],
+          "description": "Four trivalent vertices; the diagonal crossing is unconnected.",
+          "limitation": "One split diagonal; no interaction at the crossing."
+        },
+        {
+          "id": "P02",
+          "title": "Crossed box: top/bottom fixed",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain",
+            "cross-box-layout=top-bottom"
+          ],
+          "description": "Four trivalent vertices; the diagonal crossing is unconnected.",
+          "limitation": "One split diagonal; no interaction at the crossing."
+        },
+        {
+          "id": "P03",
+          "title": "Left/right: wider crossing gap",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain",
+            "cross-box-layout=left-right",
+            "cross-box-crossing-gap=.08"
+          ],
+          "description": "Four trivalent vertices; the diagonal crossing is unconnected.",
+          "limitation": "Same outer frame; the wider gap is a layout variant."
+        },
+        {
+          "id": "P04",
+          "title": "Top/bottom: wider crossing gap",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain",
+            "cross-box-layout=top-bottom",
+            "cross-box-crossing-gap=.08"
+          ],
+          "description": "Four trivalent vertices; the diagonal crossing is unconnected.",
+          "limitation": "Same outer frame; the wider gap is a layout variant."
+        }
+      ]
+    },
+    {
+      "section": "26 / CROSSED-BOX STYLES",
+      "title": "Independent edges and annotations",
+      "subtitle": "The existing and complementary graphs share logical slots. These examples add only the named style or annotation feature.",
+      "entries": [
+        {
+          "id": "P11",
+          "title": "Left/right: mixed EW and Proca",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "cross-box-layout=left-right",
+            "box-external-line=ewboson",
+            "box-line=ewboson",
+            "cross-box-line-7={proca,magenta!85!red}",
+            "cross-box-line-8={proca,magenta!85!red}",
+            "cross-box-circs=false"
+          ],
+          "description": "Wavy EW fixed edges; pink Proca diagonals meet the real vertices.",
+          "limitation": "No caps, circles, indices or momentum guides."
+        },
+        {
+          "id": "P12",
+          "title": "Top/bottom: mixed EW and Proca",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "cross-box-layout=top-bottom",
+            "box-external-line=ewboson",
+            "box-line=ewboson",
+            "cross-box-line-7={proca,magenta!85!red}",
+            "cross-box-line-8={proca,magenta!85!red}",
+            "cross-box-circs=false"
+          ],
+          "description": "Wavy EW fixed edges; pink Proca diagonals meet the real vertices.",
+          "limitation": "No caps, circles, indices or momentum guides."
+        },
+        {
+          "id": "P13",
+          "title": "Left/right: internal momentum gaps",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain",
+            "cross-box-momenta={k_5,k_6,k_7,k_8}",
+            "show-momenta=true"
+          ],
+          "description": "Independent internal annotations; labels sit in measured arrow gaps.",
+          "limitation": "Indices remain a separate D01 appearance review."
+        },
+        {
+          "id": "P14",
+          "title": "Top/bottom: continuous momentum arrows",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line=plain",
+            "box-external-line=plain",
+            "cross-box-layout=top-bottom",
+            "cross-box-momenta={k_5,k_6,k_7,k_8}",
+            "show-momenta=true",
+            "cross-box-momentum-5={layout=side}",
+            "cross-box-momentum-6={layout=side}",
+            "cross-box-momentum-7={layout=side}",
+            "cross-box-momentum-8={layout=side}"
+          ],
+          "description": "Continuous arrows with labels beside their logical edges.",
+          "limitation": "Per-edge directions and positions remain independently adjustable."
         }
       ]
     }

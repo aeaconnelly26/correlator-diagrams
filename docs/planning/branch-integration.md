@@ -14,8 +14,10 @@ No M04 merge or push remains pending. On 2026-11-06, M05 checkpoint `9daebf9`
 was fast-forwarded from `efb5fae` into main and published with its documentation
 handoff at `eb6182c`. M06 verified checkpoint `629356d`, including all reviewed
 scale, shared-frame, S-exchange and endcap fixes, is now fast-forwarded into
-main and published to GitHub (2026-11-06). The checkout is synchronized main;
-the M06 feature branch is retained. No M06 merge/push remains. See
+main and published to GitHub (2026-11-06). At M06 publication the checkout was synchronized main;
+the M06 feature branch is retained. M07a is now complete locally on
+`codex/m07a-crossed-box-layouts`, based on published main `56a643a`; its
+merge/push is pending. M07b follows. No M06 merge/push remains. See
 [M06 verification](m06-verification.md) and [publication record](m06-publication.json).
 The branch `codex/m05-swordfish` is retained; no M05 merge/push remains.
 Its [verification record](m05-verification.md) covers all eight placements,

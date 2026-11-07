@@ -6,8 +6,13 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`. Verified M06 checkpoint `629356d` is merged and published
-  to GitHub; its feature branch `codex/m06-tree-triangles` is retained.
+- Current branch: `codex/m07a-crossed-box-layouts`, based on published main
+  `56a643a`. M07a is complete locally: complementary top/bottom-fixed crossed
+  box, preserved left/right default, independent internal annotations and
+  endpoint indices. All 46 documents / 800 endpoint contacts pass. See
+  [M07a verification](planning/m07a-verification.md). Merge/push is pending.
+- Verified M06 checkpoint `629356d` is merged and published to GitHub; its
+  feature branch `codex/m06-tree-triangles` is retained.
 - M06 is complete on published main: regular triangle corrections on T top/bottom and S
   left/right, with equilateral defaults as requested. Each has four trivalent
   interactions and an exchange bridge. All 45 documents / 772 endpoint contacts
@@ -64,7 +69,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-four pages: 106 recipes, including equilateral tree triangles, styled samples and common-frame comparisons. M06 and all reviewed fixes are published on main. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-six pages: 114 recipes, including both internal crossed-box layouts and their independent annotations. M07a is local; M06 and all reviews are published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -84,7 +89,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M04 | External seagulls on s/t trees | Complete on published main; verified checkpoint `854293a` |
 | M05 | External swordfish on s/t trees | Complete on published main; verified checkpoint `9daebf9` |
 | M06 | Regular tree-attached triangle corrections, four placements | Complete on published main at verified checkpoint `629356d`; feature branch retained |
-| M07 | Complementary crossed box, crossed external layouts, source routing questions | Next: M07a, one complementary crossed-box slice |
+| M07a | Complementary internal crossed box and annotations | Complete locally; merge/push pending |
+| M07b / M07c | Crossed external layouts and source routing questions | Next after M07a publication; begin with the upper external pair |
 | M08a / M08b | Contact external self-energy / seagull | Planned |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
@@ -92,15 +98,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M06 checkpoint `629356d`, including all subsequent reviews, is merged and
-published on GitHub. The checkout is synchronized `main`; no manual Git
-preparation is required from the user. M07a is the next coding session.
-Fetch/inspect main and create a new `codex/` feature branch when that session starts.
-Start with M07a: verify square defaults and freeze the complementary internal
-crossing before implementation. Preserve the existing crossed box; treat
-crossed external connections as a separate slice. Resolve R14/R22 endpoint
-routing at their specification gates before promising support.
-D01 index-position polish remains a separate later workflow.
+M07a is complete locally. After authorized merge/push, start M07b from
+synchronized main on a new `codex/` branch. Implement the crossed upper
+external pair from S02-center first, verifying external slot identity, caps,
+styles, momenta and indices before expanding to the right pair from S03-center.
+The two internal crossed-box layouts remain unchanged. R14/R22 endpoint
+routing remains a separate specification gate. D01 index-position appearance
+remains a dedicated later workflow. No manual Git preparation is required
+from the user; the assistant handles authorized publication.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.

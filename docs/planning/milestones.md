@@ -203,7 +203,12 @@ fixes are merged and published; no M06 merge/push remains.
 ## M07 - Boxes and crossed routing
 
 **Requirements:** R01-R04, R14, R22. **Dependencies:** M01, M02.
-**State:** Next session is M07a: start with one complementary internal-crossing slice from synchronized main.
+**State:** M07a complete locally on `codex/m07a-crossed-box-layouts`, based on
+`56a643a`; merge/push pending. See [verification](m07a-verification.md) and
+[frozen contract](../../regressions/topologies/cross-box/M07a-contract.md).
+104 public cases and independent PDF graph/gap/contact checks pass. M07b
+starts with the upper external pair after publication; right external routing
+is a subsequent narrow slice. D01 remains deferred.
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported

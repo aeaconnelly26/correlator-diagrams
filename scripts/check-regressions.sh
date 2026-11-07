@@ -73,6 +73,7 @@ run_tex "regressions/propagators/w-favorites/w-propagator-favorites.tex"
 run_tex "regressions/topologies/channel/channel-topology-regression.tex"
 run_tex "regressions/topologies/channel/s-tree-span-regression.tex"
 run_tex "regressions/topologies/cross-box/cross-box-regression.tex"
+run_tex "regressions/topologies/cross-box/cross-box-layouts.tex"
 run_tex "regressions/topologies/internal-indices/internal-index-slots.tex"
 run_tex "regressions/topologies/sunset/sunset-example.tex"
 run_tex "regressions/topologies/sunset/sunset-index-regression.tex"
@@ -81,6 +82,9 @@ run_tex "regressions/topologies/three-point/three-point-feature-gallery.tex"
 run_tex "regressions/propagators/proca-endpoints/proca-endpoint-audit.tex"
 
 if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/topologies/cross-box/check-cross-box-layouts.py" \
+    "$build_root/regressions/topologies/cross-box/cross-box-layouts.pdf"
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/topologies/insertion/check-insertion-endcaps.py" \
     "$build_root/regressions/topologies/insertion/insertion-endcaps.pdf"

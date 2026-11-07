@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M06 local; insertion caps fixed; base eb6182c | 2026-11-06}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M07a local; base 56a643a | 2026-11-06}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -287,7 +287,7 @@
   box-line=plain,
   box-external-line=plain
 ]
-}{Fixed left/right edges plus two crossing diagonals.}{No interaction at crossing; internal momentum/index pass is incomplete.}\par\vspace{4pt}
+}{Fixed left/right edges plus two crossing diagonals.}{Default left/right fixed; use P02 for top/bottom fixed.}\par\vspace{4pt}
 \atlascell{I19  Straight half-box}{\HalfBoxCorr}{%
 \HalfBoxCorr[
   field={},
@@ -640,7 +640,7 @@
   cross-box-up-line={proca,magenta!85!red,circ={}},
   cross-box-down-line={ewboson,circ=Z}
 ]
-}{A blank circle on one pink diagonal and a Z on the other.}{Crossing stays unconnected; no internal momenta or indices claimed.}\par\vspace{4pt}
+}{A blank circle on one pink diagonal and a Z on the other.}{Circles shown deliberately; internal annotations are available separately.}\par\vspace{4pt}
 \newpage
 \atlaspage{08 / SEAGULL INSERTIONS}{Seagull insertion examples}{Seagulls now support every external s/t-tree leg. These examples retain the original t-slot-1 styles; full placements: pages 13-14.}
 \atlascell{U01  Seagull: bare structure}{\TTreeChannelCorr}{%
@@ -1991,4 +1991,151 @@
   seagull-loop-line=plain
 ]
 }{Four outer double caps retained.}{Explicit segment caps override logical leg caps.}\par\vspace{4pt}
+\newpage
+\atlaspage{25 / INTERNAL CROSSED BOXES}{Complementary internal crossings}{Both layouts preserve the square corner frame and external slots. Plain lines expose the graph; the crossing is not a vertex.}
+\atlascell{P01  Crossed box: left/right fixed}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=left-right
+]
+}{Four trivalent vertices; the diagonal crossing is unconnected.}{One split diagonal; no interaction at the crossing.}\hfill
+\atlascell{P02  Crossed box: top/bottom fixed}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=top-bottom
+]
+}{Four trivalent vertices; the diagonal crossing is unconnected.}{One split diagonal; no interaction at the crossing.}\par\vspace{4pt}
+\atlascell{P03  Left/right: wider crossing gap}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=left-right,
+  cross-box-crossing-gap=.08
+]
+}{Four trivalent vertices; the diagonal crossing is unconnected.}{Same outer frame; the wider gap is a layout variant.}\hfill
+\atlascell{P04  Top/bottom: wider crossing gap}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=top-bottom,
+  cross-box-crossing-gap=.08
+]
+}{Four trivalent vertices; the diagonal crossing is unconnected.}{Same outer frame; the wider gap is a layout variant.}\par\vspace{4pt}
+\newpage
+\atlaspage{26 / CROSSED-BOX STYLES}{Independent edges and annotations}{The existing and complementary graphs share logical slots. These examples add only the named style or annotation feature.}
+\atlascell{P11  Left/right: mixed EW and Proca}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  cross-box-layout=left-right,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-line-7={proca,magenta!85!red},
+  cross-box-line-8={proca,magenta!85!red},
+  cross-box-circs=false
+]
+}{Wavy EW fixed edges; pink Proca diagonals meet the real vertices.}{No caps, circles, indices or momentum guides.}\hfill
+\atlascell{P12  Top/bottom: mixed EW and Proca}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  cross-box-layout=top-bottom,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-line-7={proca,magenta!85!red},
+  cross-box-line-8={proca,magenta!85!red},
+  cross-box-circs=false
+]
+}{Wavy EW fixed edges; pink Proca diagonals meet the real vertices.}{No caps, circles, indices or momentum guides.}\par\vspace{4pt}
+\atlascell{P13  Left/right: internal momentum gaps}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-momenta={k_5,k_6,k_7,k_8},
+  show-momenta=true
+]
+}{Independent internal annotations; labels sit in measured arrow gaps.}{Indices remain a separate D01 appearance review.}\hfill
+\atlascell{P14  Top/bottom: continuous momentum arrows}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=top-bottom,
+  cross-box-momenta={k_5,k_6,k_7,k_8},
+  show-momenta=true,
+  cross-box-momentum-5={layout=side},
+  cross-box-momentum-6={layout=side},
+  cross-box-momentum-7={layout=side},
+  cross-box-momentum-8={layout=side}
+]
+}{Continuous arrows with labels beside their logical edges.}{Per-edge directions and positions remain independently adjustable.}\par\vspace{4pt}
 \end{document}

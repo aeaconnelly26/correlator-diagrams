@@ -7,18 +7,18 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 ## R01 - Square box defaults
 
 - **Status:** Verified existing.
-- **Existing construction / evidence:** I17; BoxLoopCorr resets box-xspan and box-yspan to 1.34; rendered square in the atlas.
+- **Existing construction / evidence:** I17; BoxLoopCorr resets box-xspan and box-yspan to 1.34. M07a checks the ordinary box and both crossed layouts; actual PDF paths verify matching square spans.
 - **Remaining target / limitation:** Already implemented for defaults. Preserve explicit user dimension overrides. Do not add another square-box macro solely to satisfy this request.
-- **Milestone:** M07 / verification only. **Dependencies:** None.
+- **Milestone:** M07a verification complete; preserve throughout M07. **Dependencies:** None.
 - **Acceptance:** Default box and crossed-box vertex spans agree horizontally and vertically; no regression to rectangular defaults.
 - **Sources:** P1-01; S02-right, S03-left.
 
 ## R02 - Complementary internal crossed box
 
-- **Status:** Missing.
-- **Existing construction / evidence:** I18/CrossBoxCorr provides fixed left/right sides and crossed diagonals only.
-- **Remaining target / limitation:** Keep top/bottom internal edges fixed and cross the other pair. Preserve four trivalent vertices and an unconnected over/under crossing.
-- **Milestone:** M07. **Dependencies:** M01; M07 connectivity specification.
+- **Status:** Verified existing.
+- **Existing construction / evidence:** M07a: `CrossBoxCorr[cross-box-layout=top-bottom]` complements the compatible `left-right` default. P01-P04/P11-P14 show square graphs, style variants and independent internal annotations; 104 focused cases and actual PDF reconstruction verify slots, four trivalent vertices and an unconnected crossing.
+- **Remaining target / limitation:** Internal crossing only. External crossings remain R03/R04. One split descending diagonal; D01 index-position appearance is deferred. Explicit dimension overrides are preserved.
+- **Milestone:** M07a complete locally; merge/push pending. **Dependencies:** M01; frozen M07a connectivity specification.
 - **Acceptance:** Both internal-crossing layouts have matching slot maps, style controls, correct endpoint markers, and explicit crossing gaps.
 - **Sources:** P1-02.
 

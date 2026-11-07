@@ -425,6 +425,8 @@
 \newif\ifcorr@styleitemiscirc
 \newif\ifcorr@crossboxupproca
 \newif\ifcorr@crossboxdownproca
+\newif\ifcorr@crossboxcircs
+\corr@crossboxcircstrue
 \newif\ifcorr@fourpointxspanexplicit
 \newif\ifcorr@fourpointyspanexplicit
 \newif\ifcorr@channelvertexyspanexplicit
@@ -961,6 +963,8 @@
 \def\corr@crossboxdownline{}
 \def\corr@crossboxupline{}
 \def\corr@crossboxcrossinggap{0.045}
+\def\corr@crossboxlayout{left-right}
+\def\corr@crossboxmomenta{}
 \def\corr@crossboxleftcirc{}
 \def\corr@crossboxrightcirc{}
 \def\corr@crossboxupcirc{}
@@ -2423,6 +2427,13 @@
 }
 
 \newcommand{\corr@resetcrossboxdefaults}{%
+  \def\corr@crossboxlayout{left-right}%
+  \def\corr@crossboxmomenta{}%
+  \corr@crossboxcircstrue
+  \@for\corr@cbslot:={5,6,7,8}\do{%
+    \expandafter\def\csname corr@cbline\corr@cbslot\endcsname{}%
+    \expandafter\def\csname corr@cbmomentum\corr@cbslot\endcsname{}%
+  }%
   \corr@topologysetdefault\corr@crossboxdownline{}%
   \corr@topologysetdefault\corr@crossboxupline{}%
   \corr@topologysetdefault\corr@crossboxcrossinggap{0.045}%
@@ -3239,6 +3250,24 @@
   flatcontact-index-inner-sep/.style={flat-contact-index-inner-sep={#1}},
   flatcontact-index-size/.style={flat-contact-index-size={#1}},
   cross-box-down-line/.store in=\corr@crossboxdownline,
+  cross-box-layout/.is choice,
+  cross-box-layout/left-right/.code={\def\corr@crossboxlayout{left-right}},
+  cross-box-layout/top-bottom/.code={\def\corr@crossboxlayout{top-bottom}},
+  crossbox-layout/.style={cross-box-layout={#1}},
+  cross-box-circs/.is if=corr@crossboxcircs,
+  cross-box-momenta/.store in=\corr@crossboxmomenta,
+  cross-box-line-5/.code={\expandafter\def\csname corr@cbline5\endcsname{#1}},
+  cross-box-line-6/.code={\expandafter\def\csname corr@cbline6\endcsname{#1}},
+  cross-box-line-7/.code={\expandafter\def\csname corr@cbline7\endcsname{#1}},
+  cross-box-line-8/.code={\expandafter\def\csname corr@cbline8\endcsname{#1}},
+  cross-box-momentum-5/.code={\expandafter\def\csname corr@cbmomentum5\endcsname{#1}},
+  cross-box-momentum-6/.code={\expandafter\def\csname corr@cbmomentum6\endcsname{#1}},
+  cross-box-momentum-7/.code={\expandafter\def\csname corr@cbmomentum7\endcsname{#1}},
+  cross-box-momentum-8/.code={\expandafter\def\csname corr@cbmomentum8\endcsname{#1}},
+  cross-box-first-circ/.style={cross-box-left-circ={#1}},
+  cross-box-second-circ/.style={cross-box-right-circ={#1}},
+  cross-box-first-circ-position/.style={cross-box-left-circ-position={#1}},
+  cross-box-second-circ-position/.style={cross-box-right-circ-position={#1}},
   cross-box-up-line/.store in=\corr@crossboxupline,
   cross-box-diagonal-lines/.code={\corr@setcrossboxpair{line}{#1}},
   cross-box-crossing-gap/.store in=\corr@crossboxcrossinggap,
@@ -5618,7 +5647,9 @@
 
 \newcommand{\corr@crossboxuplinefor}{%
   \ifdefempty{\corr@crossboxupline}{%
-    \edef\corr@crossboxresolvedline{\corr@boxtopline}%
+    \corr@ifstringeq{\corr@crossboxlayout}{top-bottom}{%
+      \edef\corr@crossboxresolvedline{\corr@boxleftline}%
+    }{\edef\corr@crossboxresolvedline{\corr@boxtopline}}%
   }{%
     \edef\corr@crossboxresolvedline{\corr@crossboxupline}%
   }%
@@ -5626,7 +5657,9 @@
 
 \newcommand{\corr@crossboxdownlinefor}{%
   \ifdefempty{\corr@crossboxdownline}{%
-    \edef\corr@crossboxresolvedline{\corr@boxbottomline}%
+    \corr@ifstringeq{\corr@crossboxlayout}{top-bottom}{%
+      \edef\corr@crossboxresolvedline{\corr@boxrightline}%
+    }{\edef\corr@crossboxresolvedline{\corr@boxbottomline}}%
   }{%
     \edef\corr@crossboxresolvedline{\corr@crossboxdownline}%
   }%
@@ -5666,20 +5699,34 @@
 }
 
 \newcommand{\corr@drawcrossboxinternalprop}[5]{%
-  \corr@crossboxstyleforcirc{#2}{#5}%
+  \corr@crossboxslotline{#1}{#2}%
+  \corr@crossboxstyleforcirc{\corr@cbresolvedline}{#5}%
+  \expandafter\corr@replaceprocastyle\expandafter{\corr@propoptions}{proca}%
+  \ifcorr@stylehasproca\else
+    \expandafter\corr@semanticstyleinternal\expandafter{\corr@propoptions}%
+    \edef\corr@propoptions{\corr@orientedstyle}%
+  \fi
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
+  \corr@crossboxmarkercolors
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
+  \ifcorr@stylehasproca\else\corr@drawsemanticspolmarkers{#1}{#3}{#4}\fi
 }
 
 \newcommand{\corr@drawcrossboxinternalprocaprop}[6]{%
-  \corr@crossboxstyleforcircproca{#2}{#5}{#6}%
+  \corr@crossboxslotline{#1}{#2}%
+  \corr@crossboxstyleforcircproca{\corr@cbresolvedline}{#5}{#6}%
+  \ifcorr@stylehasproca\else
+    \expandafter\corr@semanticstyleinternal\expandafter{\corr@propoptions}%
+    \edef\corr@propoptions{\corr@orientedstyle}%
+  \fi
   \corr@appendproparrowsize{#1}%
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
+  \corr@crossboxmarkercolors
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
 }
 
@@ -5687,7 +5734,7 @@
   \corr@drawcrossboxinternalprocaprop{#1}{#2}{#3}{#4}{proca base}{up}%
   \ifcorr@stylehasproca
     \global\corr@crossboxupprocatrue
-  \fi
+  \else\corr@drawsemanticspolmarkers{#1}{#3}{#4}\fi
 }
 
 \newcommand{\corr@drawcrossboxsplitinternalprop}[6]{%
@@ -5705,7 +5752,27 @@
   \corr@drawcrossboxinternalprocaprop{#1}{#2}{#6}{#4}{proca end}{down}%
   \ifcorr@stylehasproca
     \global\corr@crossboxdownprocatrue
+  \else\corr@drawsemanticspolmarkers{#1}{#3}{#4}\fi
+}
+
+\newcommand{\corr@crossboxslotline}[2]{%
+  \edef\corr@cbresolvedline{\csname corr@cbline#1\endcsname}%
+  \ifdefempty{\corr@cbresolvedline}{\edef\corr@cbresolvedline{#2}}{}%
+}
+\newcommand{\corr@crossboxmarkercolors}{%
+  \ifcorr@stylehasproca\else
+    \ifdefempty{\corr@boxcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@boxcolor}}%
+    \ifdefempty{\corr@boxinternalcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@boxinternalcolor}}%
   \fi
+}
+% Normalize scalar aliases locally so split paths do not acquire fake tips.
+\newcommand{\corr@crossboxinternalstyleitem}[1]{%
+  \edef\corr@cbstyleitem{#1}%
+  \@for\corr@cbscalar:={spol,antspol,scalarpolarized,scalar polarized,antiscalarpolarized,anti scalar polarized,scalarpolarizedin,antspolin}\do{%
+    \edef\corr@cbcompare{\noexpand\corr@ifstringeq{#1}{\corr@cbscalar}{\noexpand\def\noexpand\corr@cbstyleitem{spolin}}{}}\corr@cbcompare}%
+  \corr@ifstringeq{#1}{scalarpolarizedout}{\def\corr@cbstyleitem{spolout}}{}%
+  \corr@ifstringeq{#1}{antspolout}{\def\corr@cbstyleitem{spolout}}{}%
+  \expandafter\corr@cboriginalinternalstyleitem\expandafter{\corr@cbstyleitem}%
 }
 
 \newcommand{\corr@putcircatcoord}[2]{%
@@ -5741,11 +5808,11 @@
 
 \newcommand{\corr@placecrossboxcircs}{%
   \ifcorr@crossboxleftcirc
-    \path (corrBoxBL) -- coordinate[pos=\corr@crossboxleftcircpos] (corrCrossBoxLeftCirc) (corrBoxTL);
+    \path (\corr@cbstartfive) -- coordinate[pos=\corr@crossboxleftcircpos] (corrCrossBoxLeftCirc) (\corr@cbendfive);
     \corr@putcircatcoord{corrCrossBoxLeftCirc}{\corr@crossboxleftcirc}%
   \fi
   \ifcorr@crossboxrightcirc
-    \path (corrBoxTR) -- coordinate[pos=\corr@crossboxrightcircpos] (corrCrossBoxRightCirc) (corrBoxBR);
+    \path (\corr@cbstartsix) -- coordinate[pos=\corr@crossboxrightcircpos] (corrCrossBoxRightCirc) (\corr@cbendsix);
     \corr@putcircatcoord{corrCrossBoxRightCirc}{\corr@crossboxrightcirc}%
   \fi
   \ifcorr@crossboxupcirc
@@ -8292,8 +8359,59 @@
   \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
 }
 
+\newcommand{\corr@crossboxmap}{%
+  \def\corr@cbstartfive{corrBoxBL}\def\corr@cbendfive{corrBoxTL}%
+  \def\corr@cbstartsix{corrBoxTR}\def\corr@cbendsix{corrBoxBR}%
+  \let\corr@cbfivefallback\corr@boxleftline
+  \let\corr@cbsixfallback\corr@boxrightline
+  \corr@ifstringeq{\corr@crossboxlayout}{top-bottom}{%
+    \def\corr@cbstartfive{corrBoxTL}\def\corr@cbendfive{corrBoxTR}%
+    \def\corr@cbstartsix{corrBoxBL}\def\corr@cbendsix{corrBoxBR}%
+    \let\corr@cbfivefallback\corr@boxtopline
+    \let\corr@cbsixfallback\corr@boxbottomline
+  }{}%
+}
+\newcommand{\corr@crossboxresolveannotation}[1]{%
+  \def\corr@tcdefaultfrac{.5}\def\corr@tcfrac{.5}%
+  \def\corr@tcstart{.25}\def\corr@tcend{.75}%
+  \def\corr@tcside{outside}%
+  \ifnum#1=7 \def\corr@tcstart{.06}\def\corr@tcend{.34}\def\corr@tcfrac{.20}\def\corr@tcside{left}\fi
+  \ifnum#1=8 \def\corr@tcstart{.66}\def\corr@tcend{.94}\def\corr@tcfrac{.80}\def\corr@tcside{left}\fi
+  \ifnum#1>6
+    \corr@ifstringeq{\corr@crossboxlayout}{top-bottom}{\def\corr@tcside{right}}{}%
+  \fi
+  \def\corr@tcgap{auto}\def\corr@tcoffset{8pt}\def\corr@tclayout{gap}%
+  \def\corr@tclabeloffset{auto}\def\corr@tclabelanchor{auto}%
+  \def\corr@tclabelxshift{0pt}\def\corr@tclabelyshift{0pt}%
+  \edef\corr@cboptions{\csname corr@cbmomentum#1\endcsname}%
+  \ifdefempty{\corr@cboptions}{}{%
+    \edef\corr@cbapply{\noexpand\pgfqkeys{/corrdiag/tt-momentum}{\corr@cboptions}}\corr@cbapply}%
+}
+\newcommand{\corr@crossboxmomentum}[3]{%
+  \begingroup
+  \corr@getlistitemorblank{\corr@crossboxmomenta}{\numexpr#1-4\relax}%
+  \edef\corr@tclabel{\corr@currentlistitem}\def\corr@tcdirection{forward}%
+  \let\corr@trianglecontactresolveannotation\corr@crossboxresolveannotation
+  \corr@crossboxresolveannotation{#1}%
+  \ifdefempty{\corr@tclabel}{\ifdefempty{\corr@cboptions}{\def\corr@tcdirection{none}}{}}{}%
+  \corr@ifstringeq{\corr@tcdirection}{none}{}{\corr@trianglecontactdrawannotation{#1}{#2}{#3}}%
+  \endgroup
+}
+\newcommand{\corr@crossboxplaceindices}{%
+  \corr@putpropagatorindiceslot{box}{1}{corrExtUL}{corrBoxTL}%
+  \corr@putpropagatorindiceslot{box}{2}{corrExtLL}{corrBoxBL}%
+  \corr@putpropagatorindiceslot{box}{3}{corrExtUR}{corrBoxTR}%
+  \corr@putpropagatorindiceslot{box}{4}{corrExtLR}{corrBoxBR}%
+  \corr@putpropagatorindiceslot{box}{5}{\corr@cbstartfive}{\corr@cbendfive}%
+  \corr@putpropagatorindiceslot{box}{6}{\corr@cbstartsix}{\corr@cbendsix}%
+  \corr@putpropagatorindiceslot{box}{7}{corrBoxTL}{corrBoxBR}%
+  \corr@putpropagatorindiceslot{box}{8}{corrBoxBL}{corrBoxTR}%
+}
 \newcommand{\corr@drawfourpointcrossbox}{%
+  \corr@crossboxmap
   \begin{feynhand}
+    \let\corr@cboriginalinternalstyleitem\corr@internalstyleitem
+    \let\corr@internalstyleitem\corr@crossboxinternalstyleitem
     \vertex (corrC) at (0,0);
     \vertex (corrBoxTL) at (-\corr@boxxspan,\corr@boxyspan);
     \vertex (corrBoxTR) at (\corr@boxxspan,\corr@boxyspan);
@@ -8309,8 +8427,8 @@
       \corr@drawboxexternalprop{3}{corrExtUR}{corrBoxTR}%
       \corr@drawboxexternalprop{4}{corrExtLR}{corrBoxBR}%
     }%
-    \corr@drawcrossboxinternalprop{5}{\corr@boxleftline}{corrBoxBL}{corrBoxTL}{left}%
-    \corr@drawcrossboxinternalprop{6}{\corr@boxrightline}{corrBoxTR}{corrBoxBR}{right}%
+    \corr@drawcrossboxinternalprop{5}{\corr@cbfivefallback}{\corr@cbstartfive}{\corr@cbendfive}{left}%
+    \corr@drawcrossboxinternalprop{6}{\corr@cbsixfallback}{\corr@cbstartsix}{\corr@cbendsix}{right}%
     \corr@crossboxuplinefor
     \corr@drawcrossboxupdiagonalprop{8}{\corr@crossboxresolvedline}{corrBoxBL}{corrBoxTR}%
     \corr@crossboxdownlinefor
@@ -8322,14 +8440,20 @@
     \corr@putvertex{corrBoxBR}{\corr@centervertexstyle}%
     \corr@putvertex{corrBoxBL}{\corr@centervertexstyle}%
   \fi
-  \corr@placecrossboxcircs
+  \ifcorr@crossboxcircs\corr@placecrossboxcircs\fi
   \corr@boxplaceexternalvertices
   \ifcorr@showmomenta
     \corr@drawboxexternalmomentumul{1}{corrExtUL}{corrBoxTL}
     \corr@drawboxexternalmomentumll{2}{corrExtLL}{corrBoxBL}
     \corr@drawboxexternalmomentumur{3}{corrExtUR}{corrBoxTR}
     \corr@drawboxexternalmomentumlr{4}{corrExtLR}{corrBoxBR}
+    \coordinate (corrTriCentroid) at (corrC);
+    \corr@crossboxmomentum{5}{\corr@cbstartfive}{\corr@cbendfive}%
+    \corr@crossboxmomentum{6}{\corr@cbstartsix}{\corr@cbendsix}%
+    \corr@crossboxmomentum{7}{corrBoxTL}{corrBoxBR}%
+    \corr@crossboxmomentum{8}{corrBoxBL}{corrBoxTR}%
   \fi
+  \corr@crossboxplaceindices
   \corr@boxplaceexternallabels
   \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
 }

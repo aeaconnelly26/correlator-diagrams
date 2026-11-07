@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M06 local; insertion caps fixed; base eb6182c`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
+Baseline: `M07a local; base 56a643a`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -384,7 +384,7 @@ Four trivalent vertices around a single loop.
 
 Fixed left/right edges plus two crossing diagonals.
 
-**Limit:** No interaction at crossing; internal momentum/index pass is incomplete.
+**Limit:** Default left/right fixed; use P02 for top/bottom fixed.
 
 ```tex
 \CrossBoxCorr[
@@ -875,7 +875,7 @@ External flow, curved loop momenta, and four endpoint indices.
 
 A blank circle on one pink diagonal and a Z on the other.
 
-**Limit:** Crossing stays unconnected; no internal momenta or indices claimed.
+**Limit:** Circles shown deliberately; internal annotations are available separately.
 
 ```tex
 \CrossBoxCorr[
@@ -2718,5 +2718,208 @@ Four outer double caps retained.
   bubble-top-line=plain,
   bubble-bottom-line=plain,
   seagull-loop-line=plain
+]
+```
+
+## Complementary internal crossings
+
+### P01 - Crossed box: left/right fixed
+
+Four trivalent vertices; the diagonal crossing is unconnected.
+
+**Limit:** One split diagonal; no interaction at the crossing.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=left-right
+]
+```
+
+### P02 - Crossed box: top/bottom fixed
+
+Four trivalent vertices; the diagonal crossing is unconnected.
+
+**Limit:** One split diagonal; no interaction at the crossing.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=top-bottom
+]
+```
+
+### P03 - Left/right: wider crossing gap
+
+Four trivalent vertices; the diagonal crossing is unconnected.
+
+**Limit:** Same outer frame; the wider gap is a layout variant.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=left-right,
+  cross-box-crossing-gap=.08
+]
+```
+
+### P04 - Top/bottom: wider crossing gap
+
+Four trivalent vertices; the diagonal crossing is unconnected.
+
+**Limit:** Same outer frame; the wider gap is a layout variant.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=top-bottom,
+  cross-box-crossing-gap=.08
+]
+```
+
+## Independent edges and annotations
+
+### P11 - Left/right: mixed EW and Proca
+
+Wavy EW fixed edges; pink Proca diagonals meet the real vertices.
+
+**Limit:** No caps, circles, indices or momentum guides.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  cross-box-layout=left-right,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-line-7={proca,magenta!85!red},
+  cross-box-line-8={proca,magenta!85!red},
+  cross-box-circs=false
+]
+```
+
+### P12 - Top/bottom: mixed EW and Proca
+
+Wavy EW fixed edges; pink Proca diagonals meet the real vertices.
+
+**Limit:** No caps, circles, indices or momentum guides.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  cross-box-layout=top-bottom,
+  box-external-line=ewboson,
+  box-line=ewboson,
+  cross-box-line-7={proca,magenta!85!red},
+  cross-box-line-8={proca,magenta!85!red},
+  cross-box-circs=false
+]
+```
+
+### P13 - Left/right: internal momentum gaps
+
+Independent internal annotations; labels sit in measured arrow gaps.
+
+**Limit:** Indices remain a separate D01 appearance review.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-momenta={k_5,k_6,k_7,k_8},
+  show-momenta=true
+]
+```
+
+### P14 - Top/bottom: continuous momentum arrows
+
+Continuous arrows with labels beside their logical edges.
+
+**Limit:** Per-edge directions and positions remain independently adjustable.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line=plain,
+  box-external-line=plain,
+  cross-box-layout=top-bottom,
+  cross-box-momenta={k_5,k_6,k_7,k_8},
+  show-momenta=true,
+  cross-box-momentum-5={layout=side},
+  cross-box-momentum-6={layout=side},
+  cross-box-momentum-7={layout=side},
+  cross-box-momentum-8={layout=side}
 ]
 ```

@@ -107,7 +107,7 @@ Diagram scales use a compact coordinate baseline: `scale=1` is the former
 all public families and aliases. Text and marker sizing follows the existing
 TikZ scale behavior. See [details](docs/planning/scale-baseline-verification.md).
 
-To compile all 45 maintained regression and example documents:
+To compile all 46 maintained regression and example documents:
 
 ```sh
 scripts/check-regressions.sh

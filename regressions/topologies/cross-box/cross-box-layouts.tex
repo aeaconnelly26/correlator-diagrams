@@ -1,0 +1,200 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,adjustbox,feynman-fun}
+\setlength{\parindent}{0pt}
+\newbox\cbbox\newcount\cbcases\newcount\cbedges\newcount\cbdots
+\newcount\cbcaps\newcount\cbdoubles\newcount\cbindices\newcount\cbmomenta
+\makeatletter
+\newcommand{\cbassert}[3]{\ifnum#1=#2\relax\else\PackageError{M07a}{#3: got \the#1, expected #2}{}\fi}
+\newcommand{\cbnear}[2]{%
+ \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{#2}{center}}%
+ \pgfmathsetlengthmacro{\cberror}{max(abs(\pgf@x),abs(\pgf@y))}%
+ \ifdim\cberror>.03pt\PackageError{M07a}{Coordinate mismatch #1/#2}{}\fi}
+\newcommand{\cbrecord}[3]{%
+ \global\advance\cbedges by1
+ \expandafter\xdef\csname cbstart#1\endcsname{#2}%
+ \expandafter\xdef\csname cbend#1\endcsname{#3}%
+ \expandafter\xdef\csname cbstyle#1\endcsname{\corr@propoptions}}
+\let\cboldexternal\corr@drawboxexternalprop
+\renewcommand{\corr@drawboxexternalprop}[3]{\cboldexternal{#1}{#2}{#3}\cbrecord{#1}{#2}{#3}}
+\let\cboldfixed\corr@drawcrossboxinternalprop
+\renewcommand{\corr@drawcrossboxinternalprop}[5]{\cboldfixed{#1}{#2}{#3}{#4}{#5}\cbrecord{#1}{#3}{#4}}
+\let\cboldcontinuous\corr@drawcrossboxupdiagonalprop
+\renewcommand{\corr@drawcrossboxupdiagonalprop}[4]{\cboldcontinuous{#1}{#2}{#3}{#4}\cbrecord{#1}{#3}{#4}}
+\let\cboldsplit\corr@drawcrossboxsplitinternalprop
+\renewcommand{\corr@drawcrossboxsplitinternalprop}[6]{\cboldsplit{#1}{#2}{#3}{#4}{#5}{#6}\cbrecord{#1}{#3}{#4}}
+\let\cboldvertex\corr@putvertex
+\renewcommand{\corr@putvertex}[2]{\global\advance\cbdots by1\cboldvertex{#1}{#2}}
+\let\cboldcap\corr@drawexternalendcap
+\renewcommand{\corr@drawexternalendcap}[2]{%
+ \global\advance\cbcaps by1\def\cbfound{no}%
+ \@for\cbouter:={corrExtUL,corrExtLL,corrExtUR,corrExtLR}\do{%
+  \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{\cbouter}{center}}%
+  \pgfmathsetlengthmacro{\cberror}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\cberror<.03pt\def\cbfound{yes}\fi}%
+ \corr@ifstringeq{\cbfound}{yes}{}{\PackageError{M07a}{Cap at internal/crossing endpoint}{}}%
+ \cboldcap{#1}{#2}}
+\let\cboldcapp\corr@drawexternalendcapp
+\renewcommand{\corr@drawexternalendcapp}[2]{\global\advance\cbdoubles by1\cboldcapp{#1}{#2}}
+\let\cboldindexslot\corr@putpropagatorindiceslot
+\renewcommand{\corr@putpropagatorindiceslot}[4]{\edef\cbindexslot{#2}\cboldindexslot{#1}{#2}{#3}{#4}}
+\let\cboldindex\corr@puttopologyindexline
+\renewcommand{\corr@puttopologyindexline}[8]{%
+ \edef\cbvalue{#7}\ifdefempty{\cbvalue}{}{%
+  \global\advance\cbindices by1
+  \cbnear{#1}{\csname cbstart\cbindexslot\endcsname}\cbnear{#2}{\csname cbend\cbindexslot\endcsname}%
+  \xdef\cbindexvalues{\cbindexvalues,#7}}%
+ \cboldindex{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
+\let\cboldannotation\corr@trianglecontactdrawannotation
+\renewcommand{\corr@trianglecontactdrawannotation}[3]{%
+ \cboldannotation{#1}{#2}{#3}\global\advance\cbmomenta by1
+ \edef\cbvalue{\corr@tclabel}%
+ \expandafter\xdef\csname cbmomentum#1\endcsname{\cbvalue}%
+ \expandafter\xdef\csname cbdirection#1\endcsname{\corr@tcdirection}%
+ \ifdefempty{\cbvalue}{}{%
+  \pgfpointanchor{corrTCLabelNode}{center}%
+  \expandafter\xdef\csname cbmx#1\endcsname{\the\pgf@x}%
+  \expandafter\xdef\csname cbmy#1\endcsname{\the\pgf@y}}%
+ \corr@ifstringeq{\corr@tclayout}{gap}{%
+  \ifdefempty{\cbvalue}{}{%
+   \pgfpointdiff{\pgfpointanchor{corrTCGapStart}{center}}{\pgfpointanchor{corrTCLabelNode}{center}}%
+   \edef\cbdx{\the\pgf@x}\edef\cbdy{\the\pgf@y}%
+   \pgfmathparse{\cbdx*\corr@tcdx+\cbdy*\corr@tcdy}%
+   \ifdim\pgfmathresult pt<-.03pt\PackageError{M07a}{Label before arrow gap}{}\fi
+   \pgfpointdiff{\pgfpointanchor{corrTCLabelNode}{center}}{\pgfpointanchor{corrTCGapEnd}{center}}%
+   \pgfmathparse{\pgf@x*\corr@tcdx+\pgf@y*\corr@tcdy}%
+   \ifdim\pgfmathresult pt<-.03pt\PackageError{M07a}{Label after arrow gap}{}\fi
+  }}{}%
+}
+\let\cboldcrossbox\corr@drawfourpointcrossbox
+\renewcommand{\corr@drawfourpointcrossbox}{\cboldcrossbox
+ \xdef\cbobservedxspan{\corr@boxxspan}\xdef\cbobservedyspan{\corr@boxyspan}%
+ \ifcorr@externallegs\cbassert\cbedges{8}{Eight logical edges}\cbassert\cbdots{4}{Four interactions}%
+ \else\cbassert\cbedges{4}{Four internal edges}\cbassert\cbdots{8}{Legacy outer placeholders}\fi
+ \coordinate (cbExpectedTL) at (-\corr@boxxspan,\corr@boxyspan);
+ \coordinate (cbExpectedTR) at (\corr@boxxspan,\corr@boxyspan);
+ \coordinate (cbExpectedBL) at (-\corr@boxxspan,-\corr@boxyspan);
+ \coordinate (cbExpectedBR) at (\corr@boxxspan,-\corr@boxyspan);
+ \@for\cbcorner:={TL,TR,BL,BR}\do{\cbnear{corrBox\cbcorner}{cbExpected\cbcorner}}%
+ \corr@ifstringeq{\corr@crossboxlayout}{left-right}{%
+  \cbnear{\csname cbstart5\endcsname}{corrBoxBL}\cbnear{\csname cbend5\endcsname}{corrBoxTL}%
+  \cbnear{\csname cbstart6\endcsname}{corrBoxTR}\cbnear{\csname cbend6\endcsname}{corrBoxBR}%
+ }{%
+  \cbnear{\csname cbstart5\endcsname}{corrBoxTL}\cbnear{\csname cbend5\endcsname}{corrBoxTR}%
+  \cbnear{\csname cbstart6\endcsname}{corrBoxBL}\cbnear{\csname cbend6\endcsname}{corrBoxBR}}%
+ \cbnear{\csname cbstart7\endcsname}{corrBoxTL}\cbnear{\csname cbend7\endcsname}{corrBoxBR}%
+ \cbnear{\csname cbstart8\endcsname}{corrBoxBL}\cbnear{\csname cbend8\endcsname}{corrBoxTR}%
+ \coordinate (cbGapA) at ($(corrBoxTL)!{.5-\corr@crossboxcrossinggap}!(corrBoxBR)$);
+ \coordinate (cbGapB) at ($(corrBoxTL)!{.5+\corr@crossboxcrossinggap}!(corrBoxBR)$);
+ \cbnear{corrCrossDownA}{cbGapA}\cbnear{corrCrossDownB}{cbGapB}%
+}
+\newcommand{\cbmeasure}[1]{%
+ \global\advance\cbcases by1\global\cbedges=0\global\cbdots=0\global\cbcaps=0\global\cbdoubles=0\global\cbindices=0\global\cbmomenta=0
+ \gdef\cbindexvalues{}%
+ \edef\cbcall{\noexpand\cbpublic[field={},central={},leg-labels={,,,},show-momenta=false,
+  box-line=plain,box-external-line=plain,\cblayoutoption,#1]}%
+ \setbox\cbbox=\hbox{\cbcall}}
+\let\cbpublic\CrossBoxCorr
+\def\cblayoutoption{cross-box-layout=\cblayout}
+\begin{document}
+\@for\cblayout:={left-right,top-bottom}\do{%
+ \@for\cbscale:={.72,1,1.2}\do{%
+  \cbmeasure{scale=\cbscale}%
+  \cbmeasure{scale=\cbscale,box-line={proca,magenta!85!red},cross-box-circs=false}%
+  \cbmeasure{scale=\cbscale,box-line={spol,magenta!85!red},cross-box-circs=false}}
+ \cbmeasure{box-xspan=1.7,box-yspan=1.1,fourpoint-xspan=2.5,fourpoint-yspan=2.2,cross-box-crossing-gap=.08}%
+ \pgfmathparse{abs(\cbobservedxspan-1.7)+abs(\cbobservedyspan-1.1)}%
+ \ifdim\pgfmathresult pt>.0001pt\PackageError{M07a}{Explicit box dimensions ignored}{}\fi
+ \cbmeasure{box-external-line={ewboson,endcap}}\cbassert\cbcaps{4}{Four single caps}\cbassert\cbdoubles{0}{No double caps}%
+ \cbmeasure{box-external-line={ewboson,endcapp}}\cbassert\cbcaps{4}{Four caps}\cbassert\cbdoubles{4}{Four double caps}%
+ \cbmeasure{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8}}\cbassert\cbmomenta{4}{Four internal annotations}%
+ \cbmeasure{show-momenta=false,cross-box-momenta={k_5,k_6,k_7,k_8}}\cbassert\cbmomenta{0}{Momentum off}%
+ \cbmeasure{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8},cross-box-momentum-5={layout=side},cross-box-momentum-6={layout=side},cross-box-momentum-7={layout=side},cross-box-momentum-8={layout=side}}%
+ \cbassert\cbmomenta{4}{Four continuous annotations}%
+ \@for\cbslot:={5,6,7,8}\do{%
+  \cbmeasure{cross-box-line-\cbslot={plain,blue},box-line=ewboson}%
+  \edef\cbstyle{\csname cbstyle\cbslot\endcsname}\edef\cbprobe{\noexpand\in@{blue}{\cbstyle}}\cbprobe
+  \ifin@\else\PackageError{M07a}{Slot line override lost}{}\fi
+  \cbmeasure{cross-box-line-\cbslot={plain,blue},cross-box-diagonal-lines={{plain,red},{plain,red}},box-top-line={plain,red},box-bottom-line={plain,red},box-left-line={plain,red},box-right-line={plain,red}}%
+  \edef\cbprobe{\noexpand\in@{blue}{\csname cbstyle\cbslot\endcsname}}\cbprobe
+  \ifin@\else\PackageError{M07a}{Specific slot precedence depends on key order}{}\fi
+  \cbmeasure{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8},cross-box-momentum-\cbslot={direction=reverse}}%
+  \cbassert\cbmomenta{4}{Reverse remains visible}%
+  \corr@ifstringeq{\csname cbdirection\cbslot\endcsname}{reverse}{}{\PackageError{M07a}{Reverse ignored}{}}%
+  \cbmeasure{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8},cross-box-momentum-\cbslot={direction=none}}%
+  \cbassert\cbmomenta{3}{Independent hiding}}%
+ \cbmeasure{box-propagator-left-indices={L1,L2,L3,L4,L5,L6,L7,L8},box-propagator-right-indices={R1,R2,R3,R4,R5,R6,R7,R8}}%
+ \cbassert\cbindices{16}{Sixteen endpoint indices}%
+ \def\cbwanted{,L1,R1,L2,R2,L3,R3,L4,R4,L5,R5,L6,R6,L7,R7,L8,R8}%
+ \ifx\cbindexvalues\cbwanted\else\PackageError{M07a}{Endpoint values lost logical ownership}{}\fi
+ \cbmeasure{cross-box-first-circ=W,cross-box-second-circ=Z,cross-box-up-circ=W,cross-box-down-circ=Z}%
+ \cbmeasure{box-external-line={ewboson,magenta!85!red},box-top-line={ewboson,circ=W},box-bottom-line={plain,circ=Z}}%
+ \@for\cbscalar:={spolin,spolout,scalarpolarized,scalarpolarizedin,scalarpolarizedout,antspol,antspolin,antspolout}\do{%
+  \cbmeasure{box-line={\cbscalar,magenta!85!red},cross-box-circs=false}}%
+ \cbmeasure{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8}}%
+ \@for\cbslot:={5,6,7,8}\do{%
+  \expandafter\xdef\csname cbbaseX\cbslot\endcsname{\csname cbmx\cbslot\endcsname}%
+  \expandafter\xdef\csname cbbaseY\cbslot\endcsname{\csname cbmy\cbslot\endcsname}}%
+ \@for\cbslot:={5,6,7,8}\do{%
+  \cbmeasure{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8},cross-box-momentum-\cbslot={label-xshift=4pt}}%
+  \@for\cbother:={5,6,7,8}\do{%
+   \pgfmathsetlengthmacro{\cberror}{max(abs(\csname cbmx\cbother\endcsname-\csname cbbaseX\cbother\endcsname),abs(\csname cbmy\cbother\endcsname-\csname cbbaseY\cbother\endcsname))}%
+   \ifnum\cbslot=\cbother\relax
+    \ifdim\cberror<1pt\PackageError{M07a}{Per-edge label shift was ignored}{}\fi
+   \else\ifdim\cberror>.03pt\PackageError{M07a}{Label shift affected another edge}{}\fi\fi}}%
+ \cbmeasure{show-momenta=true,cross-box-momenta={k_5,,k_7,}}\cbassert\cbmomenta{2}{Blank list entries hide arrows}%
+ \cbmeasure{show-momenta=true,cross-box-momentum-7={label={},layout=side}}\cbassert\cbmomenta{1}{Explicit unlabeled arrow}%
+ \cbmeasure{external-legs=false}%
+}
+\let\cbpublic\FourPointCorr\def\cblayout{top-bottom}\cbmeasure{topology=cross-box}%
+\let\cbpublic\FourPtCorr\cbmeasure{topology=crossbox,crossbox-layout=top-bottom}%
+\let\cbpublic\CrossBoxCorr
+\def\cblayout{left-right}\def\cblayoutoption{}\cbmeasure{}\cbassert\cbindices{0}{Indices reset}\cbassert\cbmomenta{0}{Momenta reset}\cbassert\cbcaps{0}{Caps reset}%
+\pgfmathparse{abs(\cbobservedxspan-1.34)+abs(\cbobservedyspan-1.34)}%
+\ifdim\pgfmathresult pt>.0001pt\PackageError{M07a}{Square defaults failed to reset}{}\fi
+\let\cboldbox\corr@drawfourpointbox
+\renewcommand{\corr@drawfourpointbox}{\cboldbox
+ \pgfpointdiff{\pgfpointanchor{corrBoxBL}{center}}{\pgfpointanchor{corrBoxTR}{center}}%
+ \pgfmathsetlengthmacro{\cberror}{abs(abs(\pgf@x)-abs(\pgf@y))}%
+ \ifdim\cberror>.03pt\PackageError{M07a}{Ordinary box default is not square}{}\fi}
+\global\advance\cbcases by1
+\setbox\cbbox=\hbox{\BoxLoopCorr[field={},central={},show-momenta=false,box-line=plain,box-external-line=plain]}
+\let\corr@drawfourpointbox\cboldbox
+\typeout{PASS M07a: \the\cbcases\space public cases; two layouts, exact graph/slots/gap, styles, caps, annotations, indices, dimensions/scales and reset}
+% Restore instrumentation before the visual gallery.
+\let\corr@drawfourpointcrossbox\cboldcrossbox\let\corr@drawboxexternalprop\cboldexternal
+\let\corr@drawcrossboxinternalprop\cboldfixed\let\corr@drawcrossboxupdiagonalprop\cboldcontinuous\let\corr@drawcrossboxsplitinternalprop\cboldsplit
+\let\corr@putvertex\cboldvertex\let\corr@drawexternalendcap\cboldcap\let\corr@drawexternalendcapp\cboldcapp
+\let\corr@putpropagatorindiceslot\cboldindexslot\let\corr@puttopologyindexline\cboldindex\let\corr@trianglecontactdrawannotation\cboldannotation
+\makeatother
+\newcommand{\cbcell}[2]{\begin{minipage}[t][2.85in][t]{.48\linewidth}\textbf{#1}\par\vspace{10pt}\centering
+ \CrossBoxCorr[field={},central={},leg-labels={,,,},show-momenta=false,box-line=plain,box-external-line=plain,#2]\end{minipage}}
+\section*{Internal crossed boxes: two layouts}
+Four trivalent interactions; the diagonal crossing is unconnected.
+\par\bigskip
+\cbcell{Left/right fixed: compatible default}{cross-box-layout=left-right}\hfill
+\cbcell{Top/bottom fixed: complementary crossing}{cross-box-layout=top-bottom}\par
+\cbcell{Left/right: wider crossing gap}{cross-box-crossing-gap=.08}\hfill
+\cbcell{Top/bottom: wider crossing gap}{cross-box-layout=top-bottom,cross-box-crossing-gap=.08}
+\newpage\section*{Independent internal momenta}
+No caps, species circles or indices. External p1/p2 enter; p3/p4 leave.
+\par\bigskip
+\cbcell{Left/right: measured label gaps}{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8}}\hfill
+\cbcell{Top/bottom: measured label gaps}{cross-box-layout=top-bottom,show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8}}\par
+\cbcell{Left/right: continuous arrows}{show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8},cross-box-momentum-5={layout=side},cross-box-momentum-6={layout=side},cross-box-momentum-7={layout=side},cross-box-momentum-8={layout=side}}\hfill
+\cbcell{Top/bottom: continuous arrows}{cross-box-layout=top-bottom,show-momenta=true,cross-box-momenta={k_5,k_6,k_7,k_8},cross-box-momentum-5={layout=side},cross-box-momentum-6={layout=side},cross-box-momentum-7={layout=side},cross-box-momentum-8={layout=side}}
+\newpage\section*{Endpoint markers: real vertices only}
+No caps, circles or momenta; none of the markers belong to the crossing gap.
+\par\bigskip
+\cbcell{Left/right: Proca}{box-line={proca,magenta!85!red},cross-box-circs=false}\hfill
+\cbcell{Top/bottom: Proca}{cross-box-layout=top-bottom,box-line={proca,magenta!85!red},cross-box-circs=false}\par
+\cbcell{Left/right: scalar polarization}{box-line={spol,magenta!85!red},cross-box-circs=false}\hfill
+\cbcell{Top/bottom: scalar polarization}{cross-box-layout=top-bottom,box-line={spol,magenta!85!red},cross-box-circs=false}
+\newpage\section*{Independent styling and endpoint metadata}
+Only the feature named in each example is added. Index-position polish remains D01.
+\par\bigskip
+\cbcell{Top/bottom: mixed EW / pink Proca}{cross-box-layout=top-bottom,box-external-line=ewboson,box-line=ewboson,cross-box-line-7={proca,magenta!85!red},cross-box-line-8={proca,magenta!85!red},cross-box-circs=false}\hfill
+\cbcell{Top/bottom: explicit species circles}{cross-box-layout=top-bottom,cross-box-first-circ=W,cross-box-second-circ=Z,cross-box-up-circ=W,cross-box-down-circ=Z}\par
+\cbcell{Top/bottom: outer double caps}{cross-box-layout=top-bottom,box-external-line={ewboson,endcapp}}\hfill
+\cbcell{Top/bottom: endpoint indices}{cross-box-layout=top-bottom,box-propagator-left-indices={a,b,c,d,e,f,g,h},box-propagator-right-indices={A,B,C,D,E,F,G,H}}
+\end{document}

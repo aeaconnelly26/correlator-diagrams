@@ -3,14 +3,20 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-Verified M06 checkpoint `629356d`, built on `codex/m06-tree-triangles` from
-`eb6182c`, is now merged and published on main (2026-11-06). The atlas and
-package are unchanged from verification; the PDF footer retains its build
-provenance. There are **106 current
-examples on twenty-four pages**. These are recipes and meaningful layouts/styles,
-not 106 distinct graph topologies. M06 adds all four regular tree triangles
-with equilateral defaults and four mixed-style/annotation samples; see
-[verification](../planning/m06-verification.md). M07a is next.
+M07a is complete locally on `codex/m07a-crossed-box-layouts`, from published
+main `56a643a`. There are **114 current recipes on twenty-six pages**, including
+both internal crossed-box layouts and independent internal annotations.
+M06 and its reviews are published; M07a merge/push is pending. These count
+recipes and meaningful layouts/styles, not distinct graph topologies. See
+[M07a verification](../planning/m07a-verification.md).
+
+Pages 25-26 add P01-P04/P11-P14: the compatible left/right-fixed graph,
+complementary top/bottom-fixed graph, explicit crossing-gap variants, mixed
+EW/Proca lines without circles, and independent momentum examples. The main
+samples use plain lines; field circles/caps/indices are omitted. The focused
+[four-page gallery](../../regressions/topologies/cross-box/cross-box-layouts.pdf)
+separately demonstrates marker contact and named metadata features. D01 index
+appearance remains deferred.
 
 Every recipe now uses the compact coordinate baseline: `scale=1` matches the
 former `scale=0.8`; use `scale=1.25` to recover the former unit-scale size.

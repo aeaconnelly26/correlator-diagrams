@@ -3,9 +3,9 @@
     "id": "R01",
     "title": "Square box defaults",
     "status": "Verified existing",
-    "evidence": "I17; BoxLoopCorr resets box-xspan and box-yspan to 1.34; rendered square in the atlas.",
+    "evidence": "I17 plus M07a: ordinary BoxLoopCorr and both crossed layouts retain square 1.34/1.34 default half-spans; actual crossed-box PDF paths agree on both axes.",
     "target": "Already implemented for defaults. Preserve explicit user dimension overrides. Do not add another square-box macro solely to satisfy this request.",
-    "milestone": "M07 / verification only",
+    "milestone": "M07a verification complete; preserve throughout M07",
     "dependencies": "None",
     "acceptance": "Default box and crossed-box vertex spans agree horizontally and vertically; no regression to rectangular defaults.",
     "source_panels": [
@@ -19,16 +19,17 @@
   {
     "id": "R02",
     "title": "Complementary internal crossed box",
-    "status": "Missing",
-    "evidence": "I18/CrossBoxCorr provides fixed left/right sides and crossed diagonals only.",
+    "status": "Verified existing",
+    "evidence": "M07a: CrossBoxCorr cross-box-layout=top-bottom complements left-right default. P01-P04/P11-P14; 104 public cases, four actual PDF graphs, correct gap/slot/marker semantics and independent annotations/indices.",
     "target": "Keep top/bottom internal edges fixed and cross the other pair. Preserve four trivalent vertices and an unconnected over/under crossing.",
-    "milestone": "M07",
-    "dependencies": "M01; M07 connectivity specification",
+    "milestone": "M07a complete locally; merge/push pending",
+    "dependencies": "M01; frozen M07a connectivity specification",
     "acceptance": "Both internal-crossing layouts have matching slot maps, style controls, correct endpoint markers, and explicit crossing gaps.",
     "source_panels": [],
     "pdf_items": [
       "P1-02"
-    ]
+    ],
+    "limitation": "Internal crossings only; external crossings remain R03/R04. D01 index-position appearance remains deferred; explicit dimension overrides retained."
   },
   {
     "id": "R03",

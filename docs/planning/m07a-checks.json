@@ -1,0 +1,417 @@
+{
+  "milestone": "M07a",
+  "date": "2026-11-06",
+  "baseline": "56a643a",
+  "branch": "codex/m07a-crossed-box-layouts",
+  "published": false,
+  "requirements": [
+    "R01",
+    "R02"
+  ],
+  "priority_reference": "P1-02",
+  "layouts": [
+    "left-right",
+    "top-bottom"
+  ],
+  "default_layout": "left-right",
+  "graph_logical_edges": 8,
+  "graph_interaction_vertices": 4,
+  "graph_external_endpoints": 4,
+  "graph_cycle_rank": 1,
+  "crossing_is_interaction": false,
+  "logical_slots": {
+    "1": "UL external",
+    "2": "LL external",
+    "3": "UR external",
+    "4": "LR external",
+    "5": "first fixed: BL->TL or TL->TR",
+    "6": "second fixed: TR->BR or BL->BR",
+    "7": "TL->BR split descending diagonal",
+    "8": "BL->TR continuous ascending diagonal"
+  },
+  "default_inner_half_spans": [
+    1.34,
+    1.34
+  ],
+  "default_outer_half_spans": [
+    2.1,
+    2.1
+  ],
+  "coordinate_baseline": 0.8,
+  "default_gap_fraction_half_width": 0.045,
+  "internal_momenta_default": "hidden; empty cross-box-momenta list",
+  "automatic_circs_default": true,
+  "minimal_proca_option": "cross-box-circs=false",
+  "focused_public_cases": 104,
+  "tested_scales": [
+    0.72,
+    1,
+    1.2
+  ],
+  "regression_documents": 46,
+  "baseline_regression_documents": 45,
+  "baseline_endpoint_contacts": 772,
+  "new_proca_contacts": 16,
+  "new_scalar_contacts": 8,
+  "new_mixed_proca_contacts": 4,
+  "total_endpoint_contacts": 800,
+  "pdf_verification": {
+    "graphs": [
+      {
+        "layout": "left-right",
+        "logical_edges": 8,
+        "interaction_vertices": 4,
+        "interaction_valences": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cycle_rank": 1,
+        "inner_square_pdf_pt": 60.781920000000014,
+        "gap_fraction_half_width": 0.045,
+        "crossing_is_interaction": false
+      },
+      {
+        "layout": "top-bottom",
+        "logical_edges": 8,
+        "interaction_vertices": 4,
+        "interaction_valences": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cycle_rank": 1,
+        "inner_square_pdf_pt": 60.781920000000014,
+        "gap_fraction_half_width": 0.045,
+        "crossing_is_interaction": false
+      },
+      {
+        "layout": "left-right",
+        "logical_edges": 8,
+        "interaction_vertices": 4,
+        "interaction_valences": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cycle_rank": 1,
+        "inner_square_pdf_pt": 60.781920000000014,
+        "gap_fraction_half_width": 0.08,
+        "crossing_is_interaction": false
+      },
+      {
+        "layout": "top-bottom",
+        "logical_edges": 8,
+        "interaction_vertices": 4,
+        "interaction_valences": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cycle_rank": 1,
+        "inner_square_pdf_pt": 60.781920000000014,
+        "gap_fraction_half_width": 0.08,
+        "crossing_is_interaction": false
+      }
+    ],
+    "proca_contacts": 16,
+    "scalar_contacts": 8,
+    "mixed_proca_contacts": 4,
+    "endpoint_report": [
+      {
+        "page": 3,
+        "triangles": 24,
+        "dots": 16,
+        "gaps_pt": [
+          -1.999997084189964e-05,
+          1.000002919560039e-05,
+          -1.999997084189964e-05,
+          1.000002919560039e-05,
+          -5.39950150626467e-05,
+          0.25116690220488924,
+          -5.39950150626467e-05,
+          0.01681757278405782,
+          -1.9999970799267075e-05,
+          1.0000029181389536e-05,
+          -1.9999970799267075e-05,
+          1.0000029181389536e-05,
+          -5.3995015076857555e-05,
+          0.25116690220487503,
+          -5.3995015076857555e-05,
+          0.01681757278404361,
+          0.19775065304613548,
+          0.19775065304613548,
+          0.1970732334441514,
+          0.1970732334441514,
+          0.19775065304617812,
+          0.19775065304617812,
+          0.19707323344417738,
+          0.19707323344417738
+        ],
+        "visible_gaps_pt": [
+          -0.3736099999708419,
+          -0.3735799999708044,
+          -0.3736099999708419,
+          -0.3735799999708044,
+          -0.3736439950150626,
+          -0.12242309779511074,
+          -0.3736439950150626,
+          -0.35677242721594216,
+          -0.37360999997079924,
+          -0.3735799999708186,
+          -0.37360999997079924,
+          -0.3735799999708186,
+          -0.37364399501507684,
+          -0.12242309779512495,
+          -0.37364399501507684,
+          -0.35677242721595637,
+          -0.1758393469538645,
+          -0.1758393469538645,
+          -0.17651676655584858,
+          -0.17651676655584858,
+          -0.17583934695382186,
+          -0.17583934695382186,
+          -0.1765167665558226,
+          -0.1765167665558226
+        ],
+        "colors": [
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ]
+        ]
+      },
+      {
+        "page": 4,
+        "triangles": 4,
+        "dots": 16,
+        "gaps_pt": [
+          -5.39950150626467e-05,
+          0.25116690220488924,
+          -5.39950150626467e-05,
+          0.01681757278405782
+        ],
+        "visible_gaps_pt": [
+          -0.3736439950150626,
+          -0.12242309779511074,
+          -0.3736439950150626,
+          -0.35677242721594216
+        ],
+        "colors": [
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ],
+          [
+            1.0,
+            0,
+            0.85
+          ]
+        ]
+      }
+    ],
+    "explicit_circles": 4,
+    "wavy_paths": 10,
+    "wavy_path_curve_counts": [
+      8,
+      8,
+      8,
+      8,
+      20,
+      20,
+      6,
+      6,
+      6,
+      6
+    ]
+  },
+  "legacy_regression_identical_pages": 3,
+  "legacy_comparison_height_px": 1100,
+  "baseline_package_sha256": "cdefa642f73e9e0b629542baad8d0d251304f49bb7708567f4ad6c5d29786153",
+  "atlas_pages": 26,
+  "atlas_recipes": 114,
+  "new_atlas_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P11",
+    "P12",
+    "P13",
+    "P14"
+  ],
+  "atlas_changed_prior_text_pages": [
+    4,
+    7
+  ],
+  "atlas_prior_identical_body_pages": 22,
+  "atlas_comparison_height_px": 1100,
+  "atlas_comparison_excludes": "footer provenance",
+  "gallery_pages": 4,
+  "gallery_examples": 16,
+  "endpoint_index_values_per_diagram": 16,
+  "index_appearance_deferred": "D01",
+  "hidden_external_behavior": "internal graph retained; four legacy external placeholder dots remain",
+  "scope_excludes": [
+    "external crossings R03/R04",
+    "routing questions R14/R22",
+    "D01 index-position appearance"
+  ],
+  "next_slice": "M07b: upper external crossing S02-center, then right pair S03-center as a separate narrow slice after publication",
+  "suite_output_sha256": "e1dff50fdd980c532b3f4c2b64f67b6d294c220029d3177fc66a8156debead1d",
+  "sha256": {
+    "feynman-fun.sty": "23e87179ac7471bb96dcc8a0c016306f71fe2822eb2ded57fc2a7cf1e990be0e",
+    "scripts/check-regressions.sh": "450878d49741d31b89e27025a1dfd6af153d8390c5f12b42197ea9b7edc2c0a6",
+    "README.md": "6200129743db50b1b40de22b6f9e06e928283b03a59d1e9970b96d18a4d8f133",
+    "regressions/topologies/cross-box/M07a-contract.md": "83e54a061567bbaebd0810c54b2ab1d74ba0db8f27baffd42abbe957c0cd5549",
+    "regressions/topologies/cross-box/cross-box-layouts.tex": "73aa6ab4d39b15362fcc3eafaf73d9c6fa808fa137c5b33c14e8495d8d73709b",
+    "regressions/topologies/cross-box/cross-box-layouts.pdf": "d6b8266dae73e1a033c34725df44e55c45da0190aeffe3eee219e86d3d0e5c8f",
+    "regressions/topologies/cross-box/check-cross-box-layouts.py": "b2ca60ee1eb22f4d27e98a7448d52865a4272c7afea59b9c87f51f81470e8d08",
+    "regressions/topologies/cross-box/cross-box-layouts-checks.json": "5039eb6e0f2c28791931cfedeebc3e33e314579be78cdf8ae3cf63865865d682",
+    "docs/reference.md": "420473b1b561ed2b585c4c62f68ce8d6ca6131f951cc5879568b1af95d0041fb",
+    "docs/development-plan.md": "fc961c770b7fd72437bb820afc4e793709fdfa1f4b0a3e2e1eaebc7a683739b2",
+    "docs/planning/milestones.md": "b3801184e95f442fe176f5468dbb1c94900b16a04a8603e60f456fb9ae878140",
+    "docs/planning/requirements.md": "2f126680f90eef8695c664578d062edd490906d2ed68b0fce12972263ea979c9",
+    "docs/planning/requirements.json": "a9999510aace7887b3c2d2dfc41263522a6bcc8b917e04462b3b73a43f16c579",
+    "docs/planning/README.md": "71d805da8f13a74d5dddabafee6a16d866e0484eda79866f757605fd5c2c8739",
+    "docs/planning/branch-integration.md": "f039f2d1a6e1c4b6a99708792bca9bcb6f3200a12b3bc3e6212beedc30f65d1d",
+    "docs/planning/m07a-verification.md": "5f310850dab0a8f2eb2da2fa71629b78701604b39c2e12725d0775fea2d0f66c",
+    "docs/diagram-inventory/catalog.json": "f2fb36bbd43cb166369073bbb85b43cffc2afbd955f28633276ead87a44ecfcc",
+    "docs/diagram-inventory/inventory.tex": "97f1394e3319f1628240087f4853780ed781e456f1dc014ec6b0e304ec84af8a",
+    "docs/diagram-inventory/inventory.pdf": "65bda2bf9d937ae5ac2286b9b814b27b705677fdbc8d2a1602aa2fff5667cef0",
+    "docs/diagram-inventory/recipes.md": "4bb31e87acc36ad28d1f319f0700bbce75822c8bf1fe9546f39fd526d7c602c1",
+    "docs/diagram-inventory/README.md": "87434f8f12bb55ca59e525051bd5d9c2baec7b0ce98044832db39e9eeb222ab7",
+    "docs/diagram-inventory/verification.md": "3fa6eef052e32bc0d06b76de0882eb28175bdf04f918dbe025a0cbf9f6d2f908"
+  }
+}
