@@ -8645,11 +8645,12 @@
 }
 
 \newcommand{\corr@validatecontactseagullgeometry}{%
-  \pgfmathparse{\corr@insertionposition>0 && \corr@insertionposition<1}%
+  % Avoid literal ampersands: these checks also run inside TeX alignments.
+  \pgfmathparse{min(\corr@insertionposition,1-\corr@insertionposition)>0}%
   \ifdim\pgfmathresult pt>0pt\else
     \PackageError{feynman-fun}{Contact seagull position must be strictly between 0 and 1}{Choose an interior insertion-position.}%
   \fi
-  \pgfmathparse{\corr@insertionscale>0 && \corr@seagullloopsize>0 && \corr@seagulllooplooseness>0 && veclen(\corr@fourpointxspan,\corr@fourpointyspan)>0}%
+  \pgfmathparse{min(\corr@insertionscale,\corr@seagullloopsize,\corr@seagulllooplooseness,veclen(\corr@fourpointxspan,\corr@fourpointyspan))>0}%
   \ifdim\pgfmathresult pt>0pt\else
     \PackageError{feynman-fun}{Contact seagull requires positive geometry}{Use positive insertion-scale, seagull-loop-size/looseness and a nonzero host leg.}%
   \fi

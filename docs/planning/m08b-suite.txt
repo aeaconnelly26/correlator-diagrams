@@ -48,7 +48,9 @@ CHECK regressions/topologies/insertion/contact-bubble-slots.tex
 PASS  regressions/topologies/insertion/contact-bubble-slots.tex
 CHECK regressions/topologies/insertion/contact-seagull-slots.tex
 PASS  regressions/topologies/insertion/contact-seagull-slots.tex
-PASS M08b: 16 invalid contact-seagull requests produce explicit errors
+CHECK regressions/topologies/insertion/contact-insertion-alignments.tex
+PASS  regressions/topologies/insertion/contact-insertion-alignments.tex
+PASS M08b: 32 invalid contact-seagull requests produce explicit errors (plain and array)
 PASS M08a: 12 invalid contact-bubble requests produce explicit errors
 CHECK regressions/topologies/insertion/seagull-insertion-regression.tex
 PASS  regressions/topologies/insertion/seagull-insertion-regression.tex
@@ -122,4 +124,4 @@ PASS: 40 EW circles (16 pink Z stems, 24 black W); 32 contacting pink endpoint a
 PASS EW waves: 24/54/54/24 rendered curve segments; shorter wavelength, alias/key order and per-line reset
 PASS M05 PDF: eight seven-edge shared-quartic graphs; 32 Proca and 16 scalar white-filled pink contacts
 PASS M06 PDF: four equilateral eight-edge graphs with standard outer frames; eight tree/box/contact frame comparisons; four wavy exchanges; 24 Proca + 12 scalar pink white-filled contacts
-PASS  all 52 regression and example documents
+PASS  all 53 regression and example documents

@@ -48,9 +48,9 @@
   "focused_public_cases": 149,
   "rendered_loop_label_checks": 45,
   "concentric_curve_samples": 410,
-  "invalid_request_checks": 16,
+  "invalid_request_checks": 32,
   "baseline_regression_documents": 51,
-  "regression_documents": 52,
+  "regression_documents": 53,
   "baseline_endpoint_contacts": 874,
   "new_endpoint_contacts": 20,
   "total_endpoint_contacts": 894,
@@ -273,13 +273,13 @@
     }
   ],
   "sha256": {
-    "feynman-fun.sty": "1f0077f2f0ac316da6a8de401e2cfda6660a93c1dc9b464ee21a3bf5562e754f",
-    "scripts/check-regressions.sh": "d18e3e90c04f01ead97457dc25cbb872c428f44acc3cb5b1e0a3addb4b4e9fba",
+    "feynman-fun.sty": "b943e9364e9321b854f73c22d23c08315ddfae3f45fcd844f54d6ce248a45a7d",
+    "scripts/check-regressions.sh": "aed0036c1810161a81663dd8c8d6821d9e23252f09a73126fe0948e5083f319e",
     "regressions/topologies/insertion/M08b-contract.md": "7e376e1997e44109e18fd51501fd9bc8a31ad645ae7d5684277ade195994e143",
     "regressions/topologies/insertion/contact-seagull-slots.tex": "71fd05604d69ef1c48ac5d0f651540f69217283130c9a322ab37112b3a0f228c",
     "regressions/topologies/insertion/contact-seagull-slots.pdf": "6c2f42c2f68748fa47c6faac35092583d8363c66390ee663ef1d593e28dca526",
     "regressions/topologies/insertion/check-contact-seagulls.py": "f317e50e915683b2b7ad40c1b60868fa682a37e48111948ea076c39ef9f69557",
-    "regressions/topologies/insertion/check-contact-seagull-errors.py": "ec096e3c166c820e8307a1f6f5ae2cd33d5cc93e5d95447ac831c94c4cca4a2a",
+    "regressions/topologies/insertion/check-contact-seagull-errors.py": "4178fe21f6e86cf176b02d5aca2c0755be504d56a4f203ea1b2815e221b85921",
     "regressions/topologies/insertion/seagull-slots.tex": "1a1f05af6b066c300ffbcee530a247caf1b834dbc2ba776ae342ce111184bc3b",
     "docs/diagram-inventory/catalog.json": "85a8d63c23f684058a0f0ecbd0131acf4f4ced13b391822ea4af8fe080370724",
     "docs/diagram-inventory/inventory.tex": "74c3df182e71906a9cd6e2d7ac5c3971a224ce67264b5feb28d20e784fcb5274",
@@ -287,7 +287,31 @@
     "docs/diagram-inventory/recipes.md": "b9a13c3f0752cfb0d0b98ea49133b645730a3c8134f974bbe4bf4f09265973d1",
     "docs/planning/m08b-reference-map.json": "f297a19f38aaf4a9c2e46b08d0484a6c06f946847ca5b560a3b076e0f42a99ce",
     "docs/planning/m08b-pdf-checks.json": "6a9a8ede4da39eea4088b8e59fa15014d054996de3e05891df3919b4e708a588",
-    "docs/planning/m08b-suite.txt": "d453b31372b049b91ee4013a0da6636b0b887907db2d9da1c2e71d23948f7643"
+    "docs/planning/m08b-suite.txt": "9b7eebb2098a68306c6663b540a2a740bc530350c421dc8d691cfbf3a2679652",
+    "regressions/topologies/insertion/contact-insertion-alignments.tex": "514f573ba19e73c4d07e081a0d7e945fc0af74d1cbe85e5821a0d2f16efa97b3",
+    "docs/planning/m08b-array-fix.md": "d0371f19f94960d6bc551488394dcd88d7159a6b687c4f6929550888977bc069"
   },
-  "next": "M09a internal-exchange bubbles after M08b integration/publication"
+  "next": "M09a internal-exchange bubbles after M08b integration/publication",
+  "alignment_public_cases": 12,
+  "alignment_compatibility_fix": {
+    "previous_checkpoint": "59c171f",
+    "cause": "Literal && PGF math checks fail inside TeX alignments",
+    "replacement": "Equivalent min(...)>0 checks",
+    "contexts": [
+      "array",
+      "tabular",
+      "aligned"
+    ],
+    "valid_alignment_cases": 12,
+    "invalid_plain_cases": 16,
+    "invalid_array_cases": 16,
+    "minimal_before": "fatal pgfmath parser error",
+    "minimal_after": "success",
+    "actual_project_pages": 9,
+    "actual_project_fixed_local_seconds": 8.462,
+    "actual_project_fixed_exit": 0,
+    "actual_Overleaf_source_edited": false,
+    "actual_project_source_committed": false,
+    "record": "m08b-array-fix.md"
+  }
 }

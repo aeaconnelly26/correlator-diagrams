@@ -1,3 +1,12 @@
+# M08b alignment compatibility - 2026-11-08
+
+The contact-seagull validation now works inside array/tabular/aligned layouts.
+The saved 146-recipe / 34-page atlas and seven-page gallery remain unchanged;
+no visible diagram behavior or public option changes. Twelve alignment cases,
+32 invalid-request checks and the 53-document / 894-contact suite pass. See
+[fix record](../planning/m08b-array-fix.md). Earlier entries retain their
+original checkpoint-specific counts.
+
 # M08b contact seagulls - 2026-11-08
 
 Local branch `codex/m08b-contact-seagulls`, base published main `35c7959`.

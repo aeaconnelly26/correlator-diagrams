@@ -14,6 +14,7 @@ as an unscheduled follow-up. M08a contact-leg bubbles is now merged and publishe
 (2026-11-08); its feature branch is retained. M08b contact seagulls is complete locally on `codex/m08b-contact-seagulls`,
 based on `35c7959`; merge/push pending. M09a internal bubbles is next.
 
+- [M08b array fix](m08b-array-fix.md): corrected the Overleaf failure inside math arrays; full project compiles locally with the fixed package.
 - [M08b verification](m08b-verification.md): four contact seagulls, eight source variants, actual PDF graphs/flow/marker checks and current handoff.
 - [M08a publication](m08a-publication.json): verified checkpoint merged and pushed; package/PDFs unchanged.
 - [M08a verification](m08a-verification.md): four contact bubbles, 78 public cases, PDF graph/marker checks and updated inventory.

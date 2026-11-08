@@ -5,6 +5,9 @@ main `35c7959`. M08a checkpoint `d855152` and its publication handoff are
 already merged/pushed; see [publication record](m08a-publication.json).
 M08b is not merged/pushed. Next is M09a internal-exchange bubbles after integration.
 
+The array-context validation fix is included; see [fix record](m08b-array-fix.md).
+The original 149 cases are supplemented by 12 array/tabular/aligned cases.
+
 ## Interface and graph
 
 ```tex
@@ -82,7 +85,7 @@ decorator rewrite in this feature slice.
   direction reversal, vertex/post indices, aliases and consecutive state resets.
 - **45 loop-label rectangles** clear their measured local normals;
   **410 curve samples** share the loop's concentric momentum geometry.
-- **16 rejection cases** cover slots 0/5/lists, disconnected pairings, endpoint
+- **32 rejection cases** (16 requests in ordinary and array contexts) cover slots 0/5/lists, disconnected pairings, endpoint
   or out-of-range positions, nonpositive scale/loop size/looseness and zero leg.
   All fail with their intended package errors, not missing-node errors/no-ops.
 - Independent PDF paths recover four six-edge graphs with two quartic vertices,
@@ -92,7 +95,7 @@ decorator rewrite in this feature slice.
   eight two-ended Proca, four one-sided scalar and eight styled. Species/flow
   checks verify all eight source variants, 44 distinct filled charge arrows,
   48 actual wavy propagator paths and .8 circle sizing (accounting for fitting).
-- The maintained suite passes **52 documents / 894 endpoint contacts**
+- The maintained suite passes **53 documents / 894 endpoint contacts**
   (the prior 874 plus 20 new); see [saved output](m08b-suite.txt).
 - All **seven gallery pages** and **34 atlas pages** were rendered/reviewed;
   new atlas pages were inspected at reading size. The atlas has **146 recipes**:

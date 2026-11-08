@@ -2430,6 +2430,9 @@ See the [five-page gallery](../regressions/topologies/insertion/contact-bubble-s
 [copyable atlas recipes](diagram-inventory/recipes.md#self-energy-bubble-on-a-quartic-contact-leg)
 and [verification](planning/m08a-verification.md).
 
+Contact-leg seagulls can be used inside `array`, `tabular` and `aligned` layouts.
+The alignment validation repair is described in the [fix record](planning/m08b-array-fix.md).
+
 Contact-leg seagulls retain the quartic contact and attach a direct self-loop
 at one new quartic vertex V: outer--V, V--contact and V--V replace the selected
 leg. There are **six edges and two quartic interactions**, with no stem and no

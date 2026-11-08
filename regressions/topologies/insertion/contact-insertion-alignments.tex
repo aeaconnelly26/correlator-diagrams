@@ -1,0 +1,27 @@
+% Regression: literal logical && in a PGF expression breaks inside amsmath arrays.
+\documentclass{article}
+\usepackage{amsmath,array}
+\usepackage{feynman-fun}
+\newcommand{\ContactSeagull}[1]{\FourPointCorr[
+  field={},central={},leg-labels={,,,},blob=false,
+  show-momenta=false,line=plain,scale=0.65,
+  insertion=seagull,insertion-slot=#1,seagull-loop-line=plain]}
+\begin{document}
+All four contact seagulls inside a math array:
+\[\begin{array}{cc}
+\ContactSeagull{1} & \ContactSeagull{2}\\
+\ContactSeagull{3} & \ContactSeagull{4}
+\end{array}\]
+All four inside a text tabular:
+\begin{tabular}{cc}
+\ContactSeagull{1} & \ContactSeagull{2}\\
+\ContactSeagull{3} & \ContactSeagull{4}
+\end{tabular}
+\newpage
+All four inside an aligned display:
+\[\begin{aligned}
+&\ContactSeagull{1} &&\ContactSeagull{2}\\
+&\ContactSeagull{3} &&\ContactSeagull{4}
+\end{aligned}\]
+\typeout{PASS M08b array fix: 12 contact seagulls in array, tabular and aligned environments}
+\end{document}
