@@ -1,0 +1,256 @@
+{
+  "milestone": "M07c reference-routing audit",
+  "date": "2026-11-07",
+  "baseline": "843c2bf",
+  "verified_package_checkpoint": "e2521e2",
+  "branch": "codex/m07c-reference-routing-review",
+  "published": false,
+  "scope": "Audit, source traces, existing recipes and future plan; no package implementation",
+  "sources": [
+    {
+      "panel": "S13-left",
+      "slide": 13,
+      "archive": "docs/planning/sources/1-loop-WW-WZ.pptx",
+      "media": "ppt/media/image49.png",
+      "slide_offset_emu": [
+        643467,
+        1833966
+      ],
+      "native_dimensions_px": [
+        483,
+        291
+      ],
+      "sha256": "00eb3581802e5aed94ef8e9f4342abccf7411813200f0fcfb2dc9224c6568847",
+      "extraction": "Unchanged native image bytes"
+    },
+    {
+      "panel": "S13-right",
+      "slide": 13,
+      "archive": "docs/planning/sources/1-loop-WW-WZ.pptx",
+      "media": "ppt/media/image50.png",
+      "slide_offset_emu": [
+        6253817,
+        1602324
+      ],
+      "native_dimensions_px": [
+        472,
+        326
+      ],
+      "sha256": "e8cb4c176275e4f739136e33bacf2dd03ebb85ec2563e003912433d0dc63c8f5",
+      "extraction": "Unchanged native image bytes"
+    }
+  ],
+  "pdf_requests": [
+    "P3-05",
+    "P3-06"
+  ],
+  "slot_numbering_basis": "Established fixed spatial convention; q numbers are not printed in the slide images",
+  "R14_R22_correspondence": "Inference: PDF wording q1-q4/q3-q2 names the cubic vertices joined by internal Z in S13-right/left respectively",
+  "traces": [
+    {
+      "id": "S13-left",
+      "quartic_external_pair": [
+        1,
+        4
+      ],
+      "z_single_external_pair": [
+        2,
+        3
+      ],
+      "z_internal_slot": 6,
+      "vertices": {
+        "Q": {
+          "valence": 4,
+          "role": "quartic contact"
+        },
+        "A": {
+          "valence": 3,
+          "role": "cubic"
+        },
+        "B": {
+          "valence": 3,
+          "role": "cubic"
+        }
+      },
+      "outer_slots": {
+        "1": "UL",
+        "2": "LL",
+        "3": "UR",
+        "4": "LR"
+      },
+      "edges": [
+        {
+          "slot": 1,
+          "start": "q1",
+          "end": "Q",
+          "field": "W"
+        },
+        {
+          "slot": 2,
+          "start": "q2",
+          "end": "A",
+          "field": "W"
+        },
+        {
+          "slot": 3,
+          "start": "q3",
+          "end": "B",
+          "field": "W"
+        },
+        {
+          "slot": 4,
+          "start": "q4",
+          "end": "Q",
+          "field": "W"
+        },
+        {
+          "slot": 5,
+          "start": "Q",
+          "end": "A",
+          "field": "W"
+        },
+        {
+          "slot": 6,
+          "start": "A",
+          "end": "B",
+          "field": "Z"
+        },
+        {
+          "slot": 7,
+          "start": "B",
+          "end": "Q",
+          "field": "W"
+        }
+      ],
+      "loop_count": 1,
+      "logical_edges": 7,
+      "crossing": {
+        "kind": "unconnected external crossover",
+        "split_external_slot": 4,
+        "continuous_external_slot": 3
+      },
+      "existing_family": "TriangleContactCorr",
+      "exact_current_public_recipe": null,
+      "missing": "Opposite-quartic-pair external routing with fixed endpoints"
+    },
+    {
+      "id": "S13-right",
+      "quartic_external_pair": [
+        2,
+        3
+      ],
+      "z_single_external_pair": [
+        1,
+        4
+      ],
+      "z_internal_slot": 5,
+      "vertices": {
+        "Q": {
+          "valence": 4,
+          "role": "quartic contact"
+        },
+        "A": {
+          "valence": 3,
+          "role": "cubic"
+        },
+        "B": {
+          "valence": 3,
+          "role": "cubic"
+        }
+      },
+      "outer_slots": {
+        "1": "UL",
+        "2": "LL",
+        "3": "UR",
+        "4": "LR"
+      },
+      "edges": [
+        {
+          "slot": 1,
+          "start": "q1",
+          "end": "A",
+          "field": "W"
+        },
+        {
+          "slot": 2,
+          "start": "q2",
+          "end": "Q",
+          "field": "W"
+        },
+        {
+          "slot": 3,
+          "start": "q3",
+          "end": "Q",
+          "field": "W"
+        },
+        {
+          "slot": 4,
+          "start": "q4",
+          "end": "B",
+          "field": "W"
+        },
+        {
+          "slot": 5,
+          "start": "A",
+          "end": "B",
+          "field": "Z"
+        },
+        {
+          "slot": 6,
+          "start": "A",
+          "end": "Q",
+          "field": "W"
+        },
+        {
+          "slot": 7,
+          "start": "Q",
+          "end": "B",
+          "field": "W"
+        }
+      ],
+      "loop_count": 1,
+      "logical_edges": 7,
+      "crossing": {
+        "kind": "unconnected external crossover",
+        "split_external_slot": 3,
+        "continuous_external_slot": 4
+      },
+      "existing_family": "TriangleContactCorr",
+      "exact_current_public_recipe": null,
+      "missing": "Opposite-quartic-pair external routing with fixed endpoints"
+    }
+  ],
+  "supported_quartic_pairs": {
+    "top": [
+      1,
+      3
+    ],
+    "bottom": [
+      2,
+      4
+    ],
+    "left": [
+      1,
+      2
+    ],
+    "right": [
+      3,
+      4
+    ]
+  },
+  "geometry_already_available": {
+    "inner_square_bounding_half_spans": {
+      "triangle-contact-xspan": 1.1,
+      "triangle-contact-yspan": 1.1
+    },
+    "outer_shared_half_spans": [
+      2.1,
+      2.1
+    ]
+  },
+  "new_loop_family_required": false,
+  "R22_duplicate_routing_requirement": "R14",
+  "implementation_status": "Missing; follow-up unscheduled",
+  "deferred_independent_item": "R04 ordinary box right external crossing remains deferred",
+  "next_scheduled_session": "M08a contact external self-energy bubble"
+}

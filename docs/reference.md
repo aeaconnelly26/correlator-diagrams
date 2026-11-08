@@ -1926,6 +1926,16 @@ quartic/contact vertex. The contact vertex orientation is controlled by:
 The default is `bottom`. External slots remain fixed as upper left, lower left,
 upper right, and lower right while the contact vertex moves.
 
+M07c verifies that these four orientations attach adjacent external pairs at
+the quartic vertex: bottom 2/4, top 1/3, left 1/2, right 3/4. Opposite pairs
+1/4 and 2/3 in S13-left/right require a missing external-routing extension.
+The loop family, Z-edge styles and square bounding spans already exist;
+relabeling outer text does not implement the fixed-slot attachments. See the
+[illustrated audit](planning/m07c/routing-audit.pdf) and
+[current working recipes](planning/m07c/recipes.md). Proposed future orientation
+names in the audit plan are not accepted API.
+
+
 Useful controls:
 
 - `triangle-contact-xspan=...`

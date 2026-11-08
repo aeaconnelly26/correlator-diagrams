@@ -193,6 +193,7 @@ Common wrappers and aliases:
 - Use [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex) for the compact vertex-identity sketch.
 - Use [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex) to inspect channel layouts in isolation.
 - Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
+- The [M07c reference audit](docs/planning/m07c/routing-audit.pdf) distinguishes supported triangle-contact orientations from the missing opposite-pair external attachments in the references.
 - Circles now default to scale **0.8**, including their labels; `circ scale=1` restores the former size. See the [default/override gallery](regressions/propagators/circ/circ-default-scale.pdf).
 - Use the [crossed-box circle comparison](regressions/topologies/cross-box/cross-box-circle-comparison.pdf) to see the D02 fix on the exact reported example; [circle tests](regressions/topologies/cross-box/cross-box-circles.pdf) cover sizes, colors and explicit Proca circles.
 - Use the [upper external-crossing gallery](regressions/topologies/box/box-external-crossing.pdf) for routed box legs, independent momenta, caps and circle scaling.

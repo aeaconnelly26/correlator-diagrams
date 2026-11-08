@@ -7,10 +7,15 @@ records; M06 and all reviews through `629356d` are merged and published on
 main. M07a checkpoint `dfa0066` is also merged and published (2026-11-07);
 M07b upper routing is now verified locally on `codex/m07b-upper-external-crossing`
 from `813736e`; merge/push is pending. The user closed this session and deferred
-right-pair routing; M07c reference-routing review is next, then M08a. Earlier
+right-pair routing. M07c is now a completed audit on
+`codex/m07c-reference-routing-review` from closeout `843c2bf`; the code is unchanged.
+Its two references share one missing triangle-contact routing extension, retained
+as an unscheduled follow-up. M08a contact-leg bubbles is next. Earlier
 feature branches are retained.
 
-- [Session closeout](m07b-session-closeout.md): verified e2521e2, R04 deferred by user, M07c next and explicit pending publication.
+- [M07c verification](m07c-verification.md): traced R14/R22 connections, actual public-output graphs and a precise missing routing slice.
+- [Illustrated M07c audit](m07c/routing-audit.pdf): native sources, numbered target traces and current supported layouts.
+- [Historical M07b closeout](m07b-session-closeout.md): verified e2521e2 and R04 deferral; its former M07c-next handoff is superseded by the current audit.
 - [Requirements](requirements.md): status, recipes, dependencies, and acceptance criteria.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.
 - [Branch integration and session workflow](branch-integration.md): integrated state and closeout policy.

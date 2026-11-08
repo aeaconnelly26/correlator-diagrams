@@ -1,0 +1,188 @@
+{
+  "target_traces": [
+    {
+      "quartic_external_pair": [
+        1,
+        4
+      ],
+      "single_external_pair": [
+        2,
+        3
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        440.785,
+        571.43228
+      ]
+    },
+    {
+      "quartic_external_pair": [
+        2,
+        3
+      ],
+      "single_external_pair": [
+        1,
+        4
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        440.785,
+        395.50771999999995
+      ]
+    }
+  ],
+  "existing_public_outputs": [
+    {
+      "quartic_external_pair": [
+        1,
+        3
+      ],
+      "single_external_pair": [
+        2,
+        4
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        171.215,
+        586.592
+      ]
+    },
+    {
+      "quartic_external_pair": [
+        2,
+        4
+      ],
+      "single_external_pair": [
+        1,
+        3
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        440.785,
+        636.4879999999999
+      ]
+    },
+    {
+      "quartic_external_pair": [
+        1,
+        2
+      ],
+      "single_external_pair": [
+        3,
+        4
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        196.163,
+        411.104
+      ]
+    },
+    {
+      "quartic_external_pair": [
+        3,
+        4
+      ],
+      "single_external_pair": [
+        1,
+        2
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        415.83700000000005,
+        411.104
+      ]
+    }
+  ],
+  "existing_styling_outputs": [
+    {
+      "quartic_external_pair": [
+        1,
+        3
+      ],
+      "single_external_pair": [
+        2,
+        4
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        171.215,
+        587.1460000000001
+      ]
+    },
+    {
+      "quartic_external_pair": [
+        2,
+        4
+      ],
+      "single_external_pair": [
+        1,
+        3
+      ],
+      "logical_edges": 7,
+      "interaction_valences": [
+        3,
+        3,
+        4
+      ],
+      "cycle_rank": 1,
+      "gap_is_vertex": false,
+      "cubic_midpoint": [
+        440.785,
+        637.042
+      ]
+    }
+  ],
+  "target_supported_with_fixed_external_slots": false,
+  "new_loop_topology_required": false,
+  "missing_capability": "Opposite quartic external pairs 1/4 and 2/3 on triangle contact",
+  "styled_circles": 2
+}

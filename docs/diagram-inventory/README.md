@@ -3,8 +3,8 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-The current build includes M07b's upper external-routing slice and the D02
-crossed-box circle fix on `codex/m07b-upper-external-crossing`. D02 starts from
+The atlas build includes M07b's upper external-routing slice and the D02
+crossed-box circle fix, now inherited unchanged by `codex/m07c-reference-routing-review`. D02 starts from
 M07b checkpoint `e64cc2f`; last verified published main was `813736e`.
 The later circle-default review now makes unset circles and labels equivalent
 to `circ scale=0.8`; explicit scales keep their original meaning. Page 29 adds
@@ -17,9 +17,11 @@ pink Proca external legs and external flow controls. See
 The [18-case top-W clearance review](../../regressions/topologies/box/upper-crossing-w-clearance.pdf)
 shows current upper-leg/circle interference. D03 records the remaining crowding;
 it introduces no new capability or default, so atlas counts remain unchanged.
-The user closed this session on 2026-11-07 and deferred right external-pair
-routing. M07c reference-routing review is next, then M08a contact-leg bubbles;
-see [closeout](../planning/m07b-session-closeout.md). Recipe counts include meaningful
+The user closed M07b on 2026-11-07 and deferred right external-pair
+routing. The subsequent M07c review is complete: [illustrated audit](../planning/m07c/routing-audit.pdf)
+traces the opposite-pair triangle-contact attachments missing from current APIs.
+It adds no supported recipe, so counts/PDF stay unchanged. M08a contact-leg
+bubbles is next. See [M07c verification](../planning/m07c-verification.md). Recipe counts include meaningful
 layouts/styles, not only distinct graph topologies.
 
 M07a checkpoint `dfa0066` and preceding work are merged and published on main.

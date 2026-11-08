@@ -1,0 +1,49 @@
+{
+  "milestone": "M07c specification audit",
+  "date": "2026-11-07",
+  "baseline": "843c2bf",
+  "package_checkpoint": "e2521e2",
+  "branch": "codex/m07c-reference-routing-review",
+  "complete_as_audit": true,
+  "package_feature_implemented": false,
+  "published": false,
+  "requirements_resolved": [
+    "R14",
+    "R22"
+  ],
+  "feature_status": "Same missing external-routing extension; unimplemented and unscheduled",
+  "public_recipe_outputs_checked": 6,
+  "target_traces_checked": 2,
+  "audit_pdf_pages": 3,
+  "original_and_native_source_checksums": "unchanged",
+  "maintained_baseline_documents": 50,
+  "maintained_baseline_contacts": 850,
+  "full_suite_rerun": false,
+  "atlas_recipes": 126,
+  "atlas_pages": 29,
+  "atlas_artifacts_unchanged": true,
+  "next_session": "M08a contact-leg self-energy bubbles",
+  "deferred_R04": "Unchanged",
+  "verified_files_unchanged_sha256": {
+    "feynman-fun.sty": "ed4ffbc89c1bda6f9291ce03a4a785ba2dc6708b0b51835d2a96ac7e475d9183",
+    "scripts/check-regressions.sh": "772f86e684bc4030c98db129e2e6ed41ed58bccdb13d2f7ab1041c9dbe159793",
+    "regressions/propagators/circ/circ-default-scale.tex": "9d3ffcf45097e0437bf0925eed77f7b5a4778d5f522b4c9aafbdc09f2f35ae11",
+    "regressions/propagators/circ/circ-default-scale.pdf": "035e827cdfb6b501278227ad3e84b56d9c1a6fb7a39e8225db9077c49abccc27",
+    "docs/diagram-inventory/catalog.json": "ee43f6f8e015b45dc2ca6d38100c379409f7f4f49df09a5cc4ebce063a984a35",
+    "docs/diagram-inventory/inventory.tex": "054453f2fee7b93fe59cd63946068a9c20e8d8914e4ffd04d8e909713ce61bfc",
+    "docs/diagram-inventory/inventory.pdf": "697152bef8de9ce3fd2f33488e028553d476797332e9de18ed35613d65d4c32d",
+    "docs/diagram-inventory/recipes.md": "6c640b73f43f57570f98f1e3278ffa73a2eef1b545004107fb6336204936cae0"
+  },
+  "audit_sha256": {
+    "docs/planning/m07c/check-routing-audit.py": "cd280ccfe42e6eccb868ada732f868320112148b30e62038aed90f63a36db7df",
+    "docs/planning/m07c/future-routing-plan.md": "c98606a38ecf2974f142aecd8cca34e66dd917eec5e96786c0cb3b9c19683a43",
+    "docs/planning/m07c/pdf-checks.json": "6938ff17b5a542e68283347ca850ae8d1463dd5f175345aab624cd09b43fb0de",
+    "docs/planning/m07c/recipes.md": "08829402abff452f8dbdce255e9c55dec1bbb8f26ebbb09ddf115a2b9feb9239",
+    "docs/planning/m07c/routing-audit.pdf": "b1985bc9e7e1e354bd773410b80fcda1740dc28f26aff9209115d3c5e7f4eaa1",
+    "docs/planning/m07c/routing-audit.tex": "3c38a2ec691abb07fc07df5e7a70ac6ac85321c337575104bb50ef569dbcba09",
+    "docs/planning/m07c/routing-map.json": "48d28e41e5de16c328f87f19196fe17b7cf89a27eaa7deda82ca74ae99888fb0",
+    "docs/planning/m07c/source-panels/S13-left.png": "00eb3581802e5aed94ef8e9f4342abccf7411813200f0fcfb2dc9224c6568847",
+    "docs/planning/m07c/source-panels/S13-right.png": "e8cb4c176275e4f739136e33bacf2dd03ebb85ec2563e003912433d0dc63c8f5",
+    "docs/planning/m07c-verification.md": "36ce09e2d6152c0835892baffaf0dd3bdd6999ab46cb8786efe37508875153d8"
+  }
+}

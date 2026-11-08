@@ -211,8 +211,9 @@ on main (2026-11-07). Its feature branch is retained. See [verification](m07a-ve
 upper external pair is now verified locally on `codex/m07b-upper-external-crossing`
 from `813736e`: 52 public cases and actual PDF connectivity, markers, caps and
 circle scaling. Merge/push is pending. At session closeout on 2026-11-07 the
-user deferred right external routing (R04); M07c reference-routing review is
-next, followed by M08a contact-leg bubbles. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed locally in a separate
+user deferred right external routing (R04). M07c is now complete as an audit:
+R14/R22 need the same opposite-pair triangle-contact routing extension; that
+implementation is unscheduled. M08a contact-leg bubbles is next. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed locally in a separate
 follow-up. See [D02 verification](d02-verification.md).
 
 - Session A: confirm default square geometry, then add the complementary
@@ -222,8 +223,7 @@ follow-up. See [D02 verification](d02-verification.md).
 - Session B: upper external crossing from S02-center is complete locally.
   The right external pair from S03-center is deferred by the user (2026-11-07),
   retaining its requirement/acceptance record for a later requested session.
-- Session C (next): resolve Q01/Q02 below, then implement only any demonstrated
-  additional routing gap. No new shape should be inferred from an informal name.
+- Session C (audit complete): Q01/Q02 are resolved by [native source traces](m07c/routing-map.json) and [current public recipes](m07c/recipes.md). The missing opposite-pair attachment extension is specified in a [future plan](m07c/future-routing-plan.md), with no implementation in this audit.
 - Gate: square default vertex spans; explicit user geometry overrides retained;
   correct connected/unconnected crossing semantics; independently styled edges;
   labels/indices routed with the edges rather than reassigned by visual position.
@@ -231,6 +231,7 @@ follow-up. See [D02 verification](d02-verification.md).
 ## M08 - Contact-host external corrections
 
 **Requirements:** R13, R21. **Dependencies:** M03, M04, M02 conventions.
+**Next scheduled coding slice:** M08a, one contact-leg self-energy first, then all four.
 
 - M08a: self-energy insertion on one contact leg, then all four (S10).
 - M08b: direct seagull insertion on all four contact legs (S11).
@@ -254,7 +255,8 @@ follow-up. See [D02 verification](d02-verification.md).
 
 ## M10 - Stemmed tadpoles and resolved remaining variants
 
-**Requirement:** R20; any newly resolved R22 gap. **Dependencies:** M04, M08;
+**Requirement:** R20. R22 was resolved by M07c as an existing-family routing gap,
+not another M10 loop family. **Dependencies:** M04, M08;
 M09 where internal hosts are involved.
 
 - Session A: tree-vertex stemmed loops from S16. The original trivalent host
@@ -262,8 +264,8 @@ M09 where internal hosts are involved.
 - Session B: external-leg stemmed loops on contact/s/t hosts from S17-S19.
   On a propagator the attachment point is a separate trivalent vertex with
   two host segments plus the stem; retain the loop endpoint vertex too.
-- Session C only if required: implement a distinct graph established by the
-  resolved S13 references. Otherwise record the existing recipe and close R22.
+- The S13 references are now R14/R22 triangle-contact external-routing variants
+  and do not add a stemmed-loop or other new family here.
 - Gate: preserve stem length and both endpoints; do not replace the appendage
   with a direct quartic seagull. Verify all referenced placements and document
   attachment valences rather than silently permitting a fifth-order contact.
@@ -281,15 +283,17 @@ M09 where internal hosts are involved.
 
 ## Specification questions to resolve at their milestone
 
-- **Q01 / R14:** For q1-q4 and q3-q2, which interaction vertices and internal
-  edge carry the Z, and which external slots are permuted? Start with an
-  explicitly numbered sketch. Existing orientation controls may be sufficient;
-  do not assume either new code or no new code before tracing it.
-- **Q02 / R22:** Trace both S13 images at their native resolution. Determine
-  which lines cross without joining, where vertices actually lie, and whether
-  these are embeddings of a supported graph. Save the traced endpoint list
-  before declaring an implementation missing or completed. Ask the user only
-  if the originals still do not resolve the connections.
+- **Q01 / R14 (resolved by audit):** Under fixed spatial numbering, the Z joins
+  cubic vertices carrying q2/q3 in S13-left and q1/q4 in S13-right. The PDF-to-slide
+  correspondence is recorded as an inference; q labels are absent from the slides.
+  Internal Z styling and square bounding spans already work; opposite-pair
+  quartic attachments remain missing.
+- **Q02 / R22 (resolved by audit):** Both native images have seven logical edges,
+  three interactions with valences 4/3/3 and one W/W/Z cycle. The external crossover
+  has no interaction. They share the R14 extension of TriangleContactCorr;
+  [maps](m07c/routing-map.json), [illustrated comparison](m07c/routing-audit.pdf)
+  and [future slice](m07c/future-routing-plan.md) are saved. No new loop family
+  or current exact public recipe is asserted.
 
 ## Scope carried across sessions
 

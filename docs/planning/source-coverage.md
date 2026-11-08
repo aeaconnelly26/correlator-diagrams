@@ -158,8 +158,8 @@ Eight diagrams are visible although the slide contains fewer image objects; the 
 
 | Panel | Visible diagram / placement | Requirement | Relation |
 | --- | --- | --- | --- |
-| S13-left | Triangle-shaped crossed drawing, first embedding | R22 | Unclear reference: endpoint tracing required |
-| S13-right | Triangle-shaped crossed drawing, second embedding | R22 | Unclear reference: endpoint tracing required |
+| S13-left | Triangle contact; quartic pair 1/4; Z between q2/q3 cubic vertices | R22 | M07c resolved; same missing external-routing extension as R14 |
+| S13-right | Triangle contact; quartic pair 2/3; Z between q1/q4 cubic vertices | R22 | M07c resolved; same missing external-routing extension as R14 |
 
 ## Slide 14
 
@@ -259,6 +259,6 @@ Eight diagrams are visible although the slide contains fewer image objects; the 
 
 ## Cross-cutting requirements
 
-R06 (independent annotations), R15 (Proca endpoint contact), and R16 (documentation) apply to every relevant diagram, including repeats. R02 is requested in the PDF even though no isolated PowerPoint panel explicitly specifies the complementary internal crossing. R14 is preserved separately because a diagonal particle connection is not fully specified by its endpoint names alone.
+R06 (independent annotations), R15 (Proca endpoint contact), and R16 (documentation) apply to every relevant diagram, including repeats. R02 is requested in the PDF even though no isolated PowerPoint panel explicitly specifies the complementary internal crossing. M07c now records the full endpoint map for R14 and infers its correspondence to S13 from the established spatial slot numbering. R22 preserves the two slide-panel records for that same routing gap.
 
-The cross-shaped contact hosts on slides 10, 11, and 17 are actual interactions. The crossovers on the box examples are routing crossings and must not acquire extra interaction vertices. The S13 panels remain R22 until their endpoints have been traced.
+The cross-shaped contact hosts on slides 10, 11, and 17 are actual interactions. The crossovers on the box examples are routing crossings and must not acquire extra interaction vertices. The S13 panels are now traced: each has one quartic and two cubic interactions; its external crossover has no interaction. See the [M07c audit](m07c/routing-audit.pdf).

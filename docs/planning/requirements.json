@@ -37,7 +37,7 @@
     "status": "Verified existing",
     "evidence": "M07b upper slice: BoxLoopCorr[box-external-crossing=top]; P21-P24, 52 focused public cases, actual PDF graph/marker/circle/cap checks. Baseline 813736e; local checkpoint, not published.",
     "target": "Cross the two upper external legs without turning their crossing into a vertex. This is not the same as crossing internal edges.",
-    "milestone": "M07b upper slice closed locally; M07c routing review next; right pair deferred by user",
+    "milestone": "M07b upper slice closed locally; M07c audit complete; right pair deferred by user",
     "dependencies": "M01; frozen M07b connectivity contract",
     "acceptance": "Reproduce S02-center with square loop geometry and unchanged external slot identity.",
     "source_panels": [
@@ -255,18 +255,23 @@
   },
   {
     "id": "R14",
-    "title": "Crossed diagonal/vertex-correction routing",
-    "status": "Unclear reference",
-    "evidence": "The PDF asks for a Z edge connecting q1-q4 or q3-q2, but does not fix a complete endpoint/vertex map. Existing I23-I26 cover unpermuted triangle-contact placements.",
-    "target": "Record actual external slot permutation and internal endpoints before deciding whether existing triangle-contact geometry suffices or new routing is needed.",
-    "milestone": "M07 specification gate",
-    "dependencies": "M02; resolve Q01 in milestones.md",
-    "acceptance": "Produce a labeled endpoint sketch and exact public recipe or a defined new layout; identify every crossing as connected or unconnected.",
-    "source_panels": [],
+    "title": "Opposite-pair triangle-contact routing / diagonal Z connection",
+    "status": "Missing",
+    "evidence": "M07c native S13 traces: quartic pairs 1/4 (left) and 2/3 (right); Z joins cubic vertices carrying q2/q3 and q1/q4 respectively under fixed spatial slots. Four public orientations only provide adjacent pairs. See m07c/routing-audit.pdf and routing-map.json.",
+    "target": "Extend the existing TriangleContactCorr external routing to the two opposite quartic pairs; retain three interactions, seven edges, W/W/Z loop, fixed outer corners and an unconnected external crossover. Square bounding spans already have public controls.",
+    "milestone": "M07c specification audit complete; implementation follow-up unscheduled",
+    "dependencies": "M02 and the M07c traced graph/slot contract",
+    "acceptance": "Both source layouts have exact public recipes with quartic pairs 1/4 and 2/3, Z on internal slots 6 and 5, seven logical edges, valences 4/3/3, one cycle and preserved logical metadata.",
+    "source_panels": [
+      "S13-left",
+      "S13-right"
+    ],
     "pdf_items": [
       "P3-05",
       "P3-06"
-    ]
+    ],
+    "source_link_basis": "Inference linking the PDF q1-q4/q3-q2 wording to S13 under the established spatial slot convention; q numbers are not printed on the slide images.",
+    "limitation": "Underlying triangle-contact loop and Z styling already exist; external label changes or span overrides do not supply fixed-slot opposite-pair attachments."
   },
   {
     "id": "R15",
@@ -399,17 +404,19 @@
   },
   {
     "id": "R22",
-    "title": "Triangle-shaped crossed drawings",
-    "status": "Unclear reference",
-    "evidence": "S13 contains two dense triangle-like drawings with crossings/overlapping paths. No unsupported topology is asserted to be reproduced by I18 or I23-I26.",
-    "target": "Trace every endpoint from the original images before classifying these as crossed boxes, triangle corrections, or another graph. Preserve both panel references.",
-    "milestone": "M07 specification gate; M10 only if a distinct family is established",
-    "dependencies": "Resolve Q02 in milestones.md",
-    "acceptance": "Save an unambiguous vertex/edge sketch for each panel, map to a reproducible recipe or a precisely scoped missing requirement, and then implement only the demonstrated gap.",
+    "title": "Crossed external triangle-contact layouts from slide 13",
+    "status": "Missing",
+    "evidence": "M07c resolves both native images as three-vertex W/W/Z triangle contacts: left quartic pair 1/4, right 2/3. Crossed right-side external paths have no interaction dot. Existing public orientations only attach adjacent quartic pairs.",
+    "target": "Same missing routing extension as R14. Preserve both panel records and their distinct fixed-slot assignments; no additional loop family is established.",
+    "milestone": "M07c specification audit complete; same unscheduled implementation follow-up as R14",
+    "dependencies": "M02; resolved M07c source traces",
+    "acceptance": "Match both saved seven-edge target maps with fixed outer slots; preserve Q valence 4, A/B valence 3 and the noninteracting external crossing.",
     "source_panels": [
       "S13-left",
       "S13-right"
     ],
-    "pdf_items": []
+    "pdf_items": [],
+    "duplicate_routing_requirement": "R14",
+    "new_loop_family_required": false
   }
 ]

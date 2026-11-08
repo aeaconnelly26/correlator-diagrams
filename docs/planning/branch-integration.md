@@ -19,9 +19,9 @@ the M06 feature branch is retained. M07a checkpoint `dfa0066`, implemented on
 `codex/m07a-crossed-box-layouts` from `56a643a`, is now fast-forwarded into
 main and published on GitHub (2026-11-07). At publication the checkout was synchronized main,
 and the M07a feature branch is retained. No M07a merge/push remains. The current
-checkout is `codex/m07b-upper-external-crossing` from `813736e`, with a verified
-local upper-routing slice; its merge/push is pending. Right external routing
-is next. See [M07b verification](m07b-verification.md). See [M07a publication](m07a-publication.json).
+checkout is `codex/m07c-reference-routing-review` from M07b closeout `843c2bf`,
+retaining verified code `e2521e2`. Merge/push is pending. The M07c audit is complete;
+R04 right external routing remains deferred and M08a is next. See [M07b verification](m07b-verification.md). See [M07a publication](m07a-publication.json).
 No M06 merge/push remains. See
 [M06 verification](m06-verification.md) and [publication record](m06-publication.json).
 The branch `codex/m05-swordfish` is retained; no M05 merge/push remains.
@@ -83,14 +83,17 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-The user closed M07b's upper-routing session on 2026-11-07 and deferred the
-right external pair (R04). Next is M07c's R14/R22 reference-routing review,
-then M08a contact-leg bubbles. Do not silently implement the deferred pair.
-Code checkpoint `e2521e2` remains on `codex/m07b-upper-external-crossing`;
-50 documents / 850 endpoint contacts passed, and the current atlas has
-126 recipes / 29 pages. The later closeout commit changes documentation only.
-No merge/push/PR was performed. Local main remains `813736e`; integration is
-an assistant responsibility when authorized. See [session closeout](m07b-session-closeout.md).
+M07c's R14/R22 reference audit is complete on
+`codex/m07c-reference-routing-review`, created from `843c2bf`. No package code,
+maintained tests or current atlas artifacts changed. Both source panels need
+the same missing opposite-pair triangle-contact routing; its implementation
+is an unscheduled future slice. Next is M08a contact-leg bubbles. R04 ordinary
+box right crossing remains deferred. See [M07c verification](m07c-verification.md).
+
+Verified code `e2521e2` (50 documents / 850 contacts) is inherited on this branch;
+M07b and M07c remain local. No merge/push/PR was performed. Local main remains
+`813736e`. The assistant handles authorized integration and the prerequisite
+base for the next session; no manual Git preparation is required from the user.
 
 Remote state was refreshed with `git fetch origin` for the earlier synchronization;
 this documentation-only closeout does not recheck or publish remote state.

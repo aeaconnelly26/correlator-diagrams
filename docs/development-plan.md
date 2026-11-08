@@ -6,22 +6,27 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/m07b-upper-external-crossing`, based on published
-  `main` at `813736e`. M07b's upper external pair (R03) is complete locally;
-  merge/push remains pending. The right pair (R04) is the next narrow slice.
-  D02 now also fixes crossed-box unsolicited Proca circles and per-line circle
-  scaling on this branch; 49 documents / 850 endpoint contacts pass. See [D02 verification](planning/d02-verification.md)
-  and [M07b verification](planning/m07b-verification.md).
+- Current branch: `codex/m07c-reference-routing-review`, created from the local
+  M07b closeout `843c2bf`. M07c is complete as a reference/specification audit:
+  R14/R22 resolve to the same missing opposite-pair triangle-contact routing.
+  No package feature was implemented. See [M07c audit](planning/m07c/routing-audit.pdf)
+  and [verification](planning/m07c-verification.md).
+- This branch retains verified code `e2521e2`: M07b upper external crossing,
+  D02 circles and the new circle default .8. Code, maintained tests and atlas
+  artifacts are unchanged; the prior 50-document / 850-contact result remains
+  applicable. Merge/push is pending. R04 ordinary-box right crossing remains
+  deferred by the user. Local main remains `813736e`.
 - The user-selected circle default is now equivalent to `circ scale=0.8`:
   9.6pt ring diameter and label scale 0.8; 50 documents / 850 endpoint checks
   pass. Explicit scale values retain their
   original meanings (`1` restores the former size). See
   [verification](planning/circ-default-verification.md). This is local on the
-  same M07b branch; publication remains pending.
+  M07b branch and inherited by M07c; publication remains pending.
 - D03 now records demonstrated overlap between wavy upper crossed external legs
   and a full-size W circle on the top internal edge. The 18-case
-  [review](planning/upper-crossing-w-review.md) is diagnostic; package geometry
-  and defaults are unchanged. This is distinct from the completed D02 fix.
+  [review](planning/upper-crossing-w-review.md) made no geometry/default change.
+  The later circle-size choice is recorded above; D03 spacing remains separate
+  from the completed D02 fix.
 - Verified M07a checkpoint `dfa0066` is merged and
   published on GitHub (2026-11-07); its feature branch is retained.
   Both internal crossed-box layouts, independent annotations and endpoint
@@ -107,37 +112,36 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M05 | External swordfish on s/t trees | Complete on published main; verified checkpoint `9daebf9` |
 | M06 | Regular tree-attached triangle corrections, four placements | Complete on published main at verified checkpoint `629356d`; feature branch retained |
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
-| M07b / M07c | Crossed external layouts and source routing questions | M07b upper session closed locally; R04 right pair deferred by user; M07c source gates next |
-| M08a / M08b | Contact external self-energy / seagull | After M07c routing review: M08a contact-leg bubble first, then M08b seagull |
+| M07b | Crossed external layouts | Upper slice closed locally; R04 right pair deferred by user |
+| M07c | R14/R22 reference-routing audit | Complete specification audit; same missing triangle-contact routing extension, implementation unscheduled |
+| M08a / M08b | Contact external self-energy / seagull | Next: M08a contact-leg bubble on one leg, then all four; M08b seagull follows |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
 | M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
 
 ## Next coding session
 
-The user closed the M07b upper-routing session on 2026-11-07 and deferred
-right external-pair routing (R04 / S03-center). Do not implement R04 as an
-automatic continuation; it remains missing and deferred, not completed or
-removed from the roadmap.
+**Next: M08a contact-leg self-energy bubbles**, beginning with one external
+leg on the four-point contact, then expanding to all four after focused graph,
+style and metadata verification. M08b contact seagulls follows.
 
-The next coding session is **M07c: reference-routing review** for R14/R22
-(Q01/Q02). Trace the original numbered endpoints and internal connections,
-record an existing recipe where sufficient, and implement a new routing only
-if that review establishes a distinct missing graph. Do not start this work
-as part of the session closeout. After that review, proceed to **M08a: an
-external self-energy bubble on a four-point contact**, one leg first, then all
-four; M08b contact seagulls follows.
+M07c's source audit is complete. Both slide-13 panels are triangle contacts
+with opposite quartic external pairs (1/4 and 2/3); current public orientations
+only support adjacent pairs. R14/R22 therefore share one precisely specified
+missing routing extension, retained as an **unscheduled future slice** in
+[the plan](planning/m07c/future-routing-plan.md). This audit does not implement
+it. The user-deferred ordinary-box right crossing R04 remains separate.
 
-Verified code checkpoint `e2521e2` on `codex/m07b-upper-external-crossing`
-includes upper crossing, the D02 circle fix and the circle default .8. All
-50 documents / 850 endpoint contacts passed. The atlas has 126 recipes / 29
-pages. D01 index appearance and D03 residual crossing/circle spacing remain
-separate reviews. See [session closeout](planning/m07b-session-closeout.md).
+The current branch is `codex/m07c-reference-routing-review` from M07b closeout
+`843c2bf`; underlying tested code is unchanged at `e2521e2`. Six existing public
+recipes and two target traces were compiled, rendered and checked from PDF
+paths for this audit. The maintained 50-document / 850-contact baseline and
+126-recipe / 29-page capability atlas are unchanged. D01 index appearance and
+D03 residual circle/crossing spacing remain separate reviews.
 
-The checkpoint remains local; no merge, push or PR was performed at closeout.
-The assistant handles integration when authorized and uses the correct
-prerequisite base for the next session; no manual Git preparation is required
-from the user. Local main remains at `813736e`.
+No merge, push or PR was performed. The assistant handles authorized integration
+and the prerequisite base for the next session; no manual Git preparation is
+required from the user. Local main remains `813736e`.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.

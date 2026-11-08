@@ -27,7 +27,7 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 - **Status:** Verified existing (M07b upper slice, local checkpoint).
 - **Existing construction / evidence:** `BoxLoopCorr[box-external-crossing=top]`; P21-P24. 52 focused public cases plus actual PDF graph/marker/circle/cap checks verify UL-to-TR and UR-to-TL routing, four trivalent vertices and an unconnected upper crossing.
 - **Remaining target / limitation:** Ordinary box only. Right-pair routing remains R04; D01 index appearance remains deferred; D02 circles are fixed in the later local follow-up. Internal loop slots 5-8 and the shared outer frame are unchanged.
-- **Milestone:** M07b upper slice closed locally; M07c review next; right pair deferred by user. **Dependencies:** M01; frozen M07b connectivity contract.
+- **Milestone:** M07b upper slice closed locally; M07c audit complete; right pair deferred by user. **Dependencies:** M01; frozen M07b connectivity contract.
 - **Acceptance:** S02-center reproduced with square loop geometry and unchanged external slot identities; see [verification](m07b-verification.md).
 - **Sources:** P1-03; S02-center.
 
@@ -121,14 +121,14 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 - **Acceptance:** Four contact-host recipes retain the quartic host vertex, two trivalent insertion vertices, caps, styles, momenta, and indices.
 - **Sources:** P4-01; S10-TL, S10-TR, S10-BL, S10-BR.
 
-## R14 - Crossed diagonal/vertex-correction routing
+## R14 - Opposite-pair triangle-contact routing / diagonal Z connection
 
-- **Status:** Unclear reference.
-- **Existing construction / evidence:** The PDF asks for a Z edge connecting q1-q4 or q3-q2, but does not fix a complete endpoint/vertex map. Existing I23-I26 cover unpermuted triangle-contact placements.
-- **Remaining target / limitation:** Record actual external slot permutation and internal endpoints before deciding whether existing triangle-contact geometry suffices or new routing is needed.
-- **Milestone:** M07 specification gate. **Dependencies:** M02; resolve Q01 in milestones.md.
-- **Acceptance:** Produce a labeled endpoint sketch and exact public recipe or a defined new layout; identify every crossing as connected or unconnected.
-- **Sources:** P3-05, P3-06.
+- **Status:** Missing; source/slot specification resolved by M07c.
+- **Existing construction / evidence:** Native S13-left has quartic external pair 1/4 and Z between the q2/q3 cubic vertices; S13-right has quartic pair 2/3 and Z between q1/q4. This identification with the PDF wording uses the established spatial numbering (the slide images do not print q labels). The four public TriangleContactCorr orientations only provide adjacent quartic pairs.
+- **Remaining target / limitation:** Add the opposite-pair external attachments to the existing triangle-contact family. Keep three interactions, seven edges, a W/W/Z cycle, fixed outer corners and an unconnected external crossover. Z styling and square bounding spans already work; changing labels/spans does not supply the missing attachments.
+- **Milestone:** M07c specification audit complete; implementation follow-up unscheduled. **Dependencies:** M02 and the [traced graph/slot contract](m07c/routing-map.json).
+- **Acceptance:** Both source layouts have exact public recipes with quartic pairs 1/4 and 2/3, Z on slots 6 and 5, valences 4/3/3 and preserved logical styles/caps/momenta/indices. See [future slice](m07c/future-routing-plan.md).
+- **Sources:** P3-05, P3-06; inferred correspondence to S13-left/right. See [illustrated audit](m07c/routing-audit.pdf).
 
 ## R15 - Proca marker contact across topology families
 
@@ -193,18 +193,18 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 - **Acceptance:** Reproduce S11 four placements, retain one quartic host and one quartic insertion point, and verify the displayed species/flow variants.
 - **Sources:** S11-T1, S11-T2, S11-T3, S11-T4, S11-B1, S11-B2, S11-B3, S11-B4.
 
-## R22 - Triangle-shaped crossed drawings
+## R22 - Crossed external triangle-contact layouts from slide 13
 
-- **Status:** Unclear reference.
-- **Existing construction / evidence:** S13 contains two dense triangle-like drawings with crossings/overlapping paths. No unsupported topology is asserted to be reproduced by I18 or I23-I26.
-- **Remaining target / limitation:** Trace every endpoint from the original images before classifying these as crossed boxes, triangle corrections, or another graph. Preserve both panel references.
-- **Milestone:** M07 specification gate; M10 only if a distinct family is established. **Dependencies:** Resolve Q02 in milestones.md.
-- **Acceptance:** Save an unambiguous vertex/edge sketch for each panel, map to a reproducible recipe or a precisely scoped missing requirement, and then implement only the demonstrated gap.
-- **Sources:** S13-left, S13-right.
+- **Status:** Missing; source traces resolved by M07c.
+- **Existing construction / evidence:** Both native images have three interactions (one quartic, two cubic) and a W/W/Z triangle loop. S13-left carries external 1/4 at the quartic vertex; S13-right carries 2/3. The right-side external crossover has no interaction dot.
+- **Remaining target / limitation:** Same missing external-routing extension as R14. These are variants of the existing triangle-contact family, not an additional loop family. Preserve both source panels without counting the shared implementation gap twice.
+- **Milestone:** M07c specification audit complete; R14/R22 implementation follow-up unscheduled. **Dependencies:** M02; resolved [M07c maps](m07c/routing-map.json).
+- **Acceptance:** Match both seven-edge target maps with fixed outer slots, valences 4/3/3, one cycle and the unconnected external crossover; preserve metadata along the logical edges.
+- **Sources:** S13-left, S13-right. [Audit](m07c/routing-audit.pdf), [current recipes](m07c/recipes.md), [future plan](m07c/future-routing-plan.md).
 
 ## Audit boundaries
 
-R14 and R22 are intentionally unresolved references, not promises that existing macros reproduce those drawings. They have explicit specification gates. Stemmed contact-host attachments in R20 also need their attachment valences recorded before implementation. None of these uncertainties blocks the current inventory.
+M07c resolves R14/R22 as one missing external-routing extension of the existing triangle-contact family. The source traces are specifications, not advertised working package recipes. Current atlas I23-I26 remain valid for adjacent pairs only. Stemmed contact-host attachments in R20 still need their attachment valences recorded before implementation.
 
 Feature gaps found while constructing recipes: a global explicit `line=...` overrides the half-box bridge-specific style, so A04 omits the global setting. Blank external bubble momentum text still leaves arrows when `show-momenta=true`; A05 uses explicit external momenta rather than implying that blanks suppress arrows. These are existing behaviors recorded for later review, not package changes.
 
