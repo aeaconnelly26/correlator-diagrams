@@ -1,3 +1,13 @@
+# Circle default 0.8 - 2026-11-07
+
+The atlas now has **126 recipes / 29 pages**. P41-P44 compare the new unset
+circle default with explicit `circ scale=1`, plus tree and crossed-box circles.
+Prior recipes use the new default wherever they do not specify a scale/size;
+explicit scales are unchanged. The package-wide coordinate scale and all
+endpoint geometry remain unchanged. See
+[circle-default verification](../planning/circ-default-verification.md).
+Earlier sections retain their historical checkpoint states.
+
 # D02 crossed-box circle styling - 2026-11-07
 
 The atlas now has **122 recipes / 28 pages**. P31-P34 demonstrate the user's

@@ -1,5 +1,5 @@
 {
-  "baseline": "D02 local; base e64cc2f",
+  "baseline": "circ 0.8 local; base a90e6f0",
   "date": "2026-11-07",
   "base_options": [
     "field={}",
@@ -1948,6 +1948,63 @@
           ],
           "description": "The complementary layout follows the same circle rule.",
           "limitation": "Cross-box-circs=false remains an explicit hide-all option."
+        }
+      ]
+    },
+    {
+      "section": "29 / CIRCLE DEFAULT 0.8",
+      "title": "Smaller circles and labels by default",
+      "subtitle": "Unspecified circles now match circ scale=0.8. Explicit scale values retain their original 12pt reference; circ scale=1 restores the former size.",
+      "entries": [
+        {
+          "id": "P41",
+          "title": "Upper crossing: new default circle",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-external-crossing=top",
+            "box-line=plain",
+            "box-external-line=plain",
+            "leg-styles={ewboson,plain,ewboson,plain}",
+            "box-top-line={ewboson,circ=W}"
+          ],
+          "description": "Default ring diameter 9.6pt; label scale 0.8.",
+          "limitation": "Same shared frame; no caps or momenta. D03 geometry review remains open."
+        },
+        {
+          "id": "P42",
+          "title": "Upper crossing: explicit former size",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-external-crossing=top",
+            "box-line=plain",
+            "box-external-line=plain",
+            "leg-styles={ewboson,plain,ewboson,plain}",
+            "box-top-line={ewboson,circ=W,circ scale=1}"
+          ],
+          "description": "Explicit scale 1 retains the original 12pt diameter.",
+          "limitation": "Larger ring still crowds the upper crossing in this geometry."
+        },
+        {
+          "id": "P43",
+          "title": "S-tree: default Z stem circle",
+          "macro": "STreeChannelCorr",
+          "options": [
+            "line=plain",
+            "channel-line={ewboson,circ=Z,magenta!85!red}"
+          ],
+          "description": "The same smaller default applies to exchange-line circles.",
+          "limitation": "Explicit circ scales and circle sizes still override defaults."
+        },
+        {
+          "id": "P44",
+          "title": "Crossed box: default W circles",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-line={plain,circ=W}",
+            "box-external-line=plain"
+          ],
+          "description": "Manual crossed-box circles share the new default.",
+          "limitation": "Circles remain explicit; Proca alone never requests one."
         }
       ]
     }

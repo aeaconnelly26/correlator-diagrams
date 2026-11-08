@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `D02 local; base e64cc2f`, audited 2026-11-07. Atlas: [PDF](inventory.pdf).
+Baseline: `circ 0.8 local; base a90e6f0`, audited 2026-11-07. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -3123,5 +3123,101 @@ The complementary layout follows the same circle rule.
   cross-box-layout=top-bottom,
   box-external-line=plain,
   box-line={proca,magenta!85!red}
+]
+```
+
+## Smaller circles and labels by default
+
+### P41 - Upper crossing: new default circle
+
+Default ring diameter 9.6pt; label scale 0.8.
+
+**Limit:** Same shared frame; no caps or momenta. D03 geometry review remains open.
+
+```tex
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain,
+  leg-styles={ewboson,plain,ewboson,plain},
+  box-top-line={ewboson,circ=W}
+]
+```
+
+### P42 - Upper crossing: explicit former size
+
+Explicit scale 1 retains the original 12pt diameter.
+
+**Limit:** Larger ring still crowds the upper crossing in this geometry.
+
+```tex
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain,
+  leg-styles={ewboson,plain,ewboson,plain},
+  box-top-line={ewboson,circ=W,circ scale=1}
+]
+```
+
+### P43 - S-tree: default Z stem circle
+
+The same smaller default applies to exchange-line circles.
+
+**Limit:** Explicit circ scales and circle sizes still override defaults.
+
+```tex
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line=plain,
+  channel-line={ewboson,circ=Z,magenta!85!red}
+]
+```
+
+### P44 - Crossed box: default W circles
+
+Manual crossed-box circles share the new default.
+
+**Limit:** Circles remain explicit; Proca alone never requests one.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line={plain,circ=W},
+  box-external-line=plain
 ]
 ```

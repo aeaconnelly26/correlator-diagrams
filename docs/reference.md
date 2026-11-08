@@ -1200,13 +1200,20 @@ Use `circ={}` for a blank circle. The aliases `with circle=...` and
 - `circ draw=...`
 - `circ label style={...}`
 
+The package default is now equivalent to `circ scale=0.8`: a **9.6pt diameter**
+with label scale **0.8**. `circ scale` retains its existing 12pt reference:
+explicit `circ scale=1` restores the former full-size circle/text, while explicit
+`.6` and `.8` retain their previous meanings. `circ size` and `circ label scale`
+remain independently adjustable. See the
+[default/override gallery](../regressions/propagators/circ/circ-default-scale.pdf).
+
 The circle keeps the configured `circ size`; labels are overlaid rather than
 allowed to resize the marker. Increase `circ size` when a deliberately wide
 custom label should fit fully inside the circle. By default, the circle outline
 inherits the resolved propagator color, including Proca propagators; use
 `circ draw=...` to override the outline color independently. Use
-`circ scale=...` for short segment markers; it scales the default circle and
-the overlaid label contents together while keeping labels upright on sloped
+`circ scale=...` for short segment markers; it scales the 12pt reference circle
+and the overlaid label contents together while keeping labels upright on sloped
 segments. Use `circ label scale=...` to tune only the label size.
 
 W-family markers are hand-tuned to keep the default circle size readable:

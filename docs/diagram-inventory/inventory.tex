@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline D02 local; base e64cc2f | 2026-11-07}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline circ 0.8 local; base a90e6f0 | 2026-11-07}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -2284,4 +2284,72 @@
   box-line={proca,magenta!85!red}
 ]
 }{The complementary layout follows the same circle rule.}{Cross-box-circs=false remains an explicit hide-all option.}\par\vspace{4pt}
+\newpage
+\atlaspage{29 / CIRCLE DEFAULT 0.8}{Smaller circles and labels by default}{Unspecified circles now match circ scale=0.8. Explicit scale values retain their original 12pt reference; circ scale=1 restores the former size.}
+\atlascell{P41  Upper crossing: new default circle}{\BoxLoopCorr}{%
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain,
+  leg-styles={ewboson,plain,ewboson,plain},
+  box-top-line={ewboson,circ=W}
+]
+}{Default ring diameter 9.6pt; label scale 0.8.}{Same shared frame; no caps or momenta. D03 geometry review remains open.}\hfill
+\atlascell{P42  Upper crossing: explicit former size}{\BoxLoopCorr}{%
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain,
+  leg-styles={ewboson,plain,ewboson,plain},
+  box-top-line={ewboson,circ=W,circ scale=1}
+]
+}{Explicit scale 1 retains the original 12pt diameter.}{Larger ring still crowds the upper crossing in this geometry.}\par\vspace{4pt}
+\atlascell{P43  S-tree: default Z stem circle}{\STreeChannelCorr}{%
+\STreeChannelCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  line=plain,
+  channel-line={ewboson,circ=Z,magenta!85!red}
+]
+}{The same smaller default applies to exchange-line circles.}{Explicit circ scales and circle sizes still override defaults.}\hfill
+\atlascell{P44  Crossed box: default W circles}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-line={plain,circ=W},
+  box-external-line=plain
+]
+}{Manual crossed-box circles share the new default.}{Circles remain explicit; Proca alone never requests one.}\par\vspace{4pt}
 \end{document}

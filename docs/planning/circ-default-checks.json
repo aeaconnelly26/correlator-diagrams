@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-07",
+  "baseline": "a90e6f0",
+  "branch": "codex/m07b-upper-external-crossing",
+  "published": false,
+  "default_circ_scale": 0.8,
+  "default_diameter_tex_pt": 9.6,
+  "default_label_scale": 0.8,
+  "explicit_scale_reference_diameter_tex_pt": 12,
+  "explicit_scale_values_unchanged": [
+    0.6,
+    0.8,
+    1
+  ],
+  "package_code_change": "Two initial values only; paths/endpoints and explicit scale implementation unchanged",
+  "pdf_checks": {
+    "default_scale": 0.8,
+    "default_diameter_tex_pt": 9.6,
+    "default_radius_pdf_pt": 4.782067247820672,
+    "pages": [
+      {
+        "page": 1,
+        "circles": 7,
+        "radii_pdf_pt": [
+          4.782135000000011,
+          4.78212000000002,
+          4.782129999999995,
+          4.782129999999995,
+          4.7821249999999935,
+          4.7821249999999935,
+          4.78212000000002
+        ],
+        "label_font_sizes_pdf_pt": [
+          5.57904,
+          5.57904,
+          5.57904,
+          5.57904,
+          5.57904,
+          5.57904,
+          5.57904
+        ]
+      },
+      {
+        "page": 2,
+        "circles": 4,
+        "radii_pdf_pt": [
+          4.782134999999997,
+          5.977654999999999,
+          3.586624999999998,
+          4.78212000000002
+        ],
+        "label_font_sizes_pdf_pt": [
+          5.57904,
+          6.9738,
+          4.184279999999999,
+          5.57904
+        ]
+      }
+    ],
+    "explicit_scales_preserved": [
+      0.6,
+      0.8,
+      1
+    ],
+    "fresh_call_reset": true
+  },
+  "maintained_documents": 50,
+  "endpoint_contacts": 850,
+  "atlas_recipes": 126,
+  "atlas_pages": 29,
+  "visual_review": "All 29 atlas pages rendered/reviewed; focused two-page gallery and new atlas page inspected at reading size",
+  "original_source_checksums": "unchanged",
+  "spacing_review": "D03 remains open at smaller diagram scales; new default is a circle-size choice",
+  "sha256": {
+    "README.md": "175f3edf50268eb670a39f92036b65825e290c39224f49a0706c190b42181eff",
+    "docs/development-plan.md": "4a9b5d9ae1e14195a2c65094fde3474448920452a929d4bf4e706c66cbc079d1",
+    "docs/diagram-inventory/README.md": "cce2ad4cdda01674024c100a40085784970d6a2f54fc01aa68fc266eed59e957",
+    "docs/diagram-inventory/catalog.json": "ee43f6f8e015b45dc2ca6d38100c379409f7f4f49df09a5cc4ebce063a984a35",
+    "docs/diagram-inventory/inventory.pdf": "697152bef8de9ce3fd2f33488e028553d476797332e9de18ed35613d65d4c32d",
+    "docs/diagram-inventory/inventory.tex": "054453f2fee7b93fe59cd63946068a9c20e8d8914e4ffd04d8e909713ce61bfc",
+    "docs/diagram-inventory/recipes.md": "6c640b73f43f57570f98f1e3278ffa73a2eef1b545004107fb6336204936cae0",
+    "docs/diagram-inventory/verification.md": "bc47afaeef12f9d2827e0d24dae8ea82ef76e422f7b58a24a742826b91474402",
+    "docs/planning/README.md": "60d7a0f242528ec5779d7aec5cf72fbc10486293fc6ccfd0e5ea8397f7f8c6d1",
+    "docs/planning/circ-default-regression-results.txt": "4f10df01b0ad6635a26938a209c23c5c7ff39611abb4181d0e32449fcee5db71",
+    "docs/planning/circ-default-verification.md": "eaa87ce3db28ae2415cc979d3af072a9be940fb1f593703aca677db2ee1e424f",
+    "docs/planning/deferred-workflows.md": "b0ee5be4d9757081d2955309cc0c6349b1fd1bdb15651ace0e784962ceaeac88",
+    "docs/planning/upper-crossing-w-review.md": "18cb25fb91583a77fe38ba52eb4e5c244c5b8634e8dfbde52a0ba77290d07cbd",
+    "docs/reference.md": "f73e4c6cc61c5bccf4a486d932ac7e7864a2c69a429b53c1fc9b6b46bfa237f6",
+    "feynman-fun.sty": "ed4ffbc89c1bda6f9291ce03a4a785ba2dc6708b0b51835d2a96ac7e475d9183",
+    "regressions/propagators/circ/check-circ-default-scale.py": "2777f24e0b077d38810c0d2224f586196705b66b931aef99fea15e5e15239fb9",
+    "regressions/propagators/circ/circ-default-scale-checks.json": "793be3aedabae64e7198465be615506e36482a47559e22c87bcf1ae4149919d5",
+    "regressions/propagators/circ/circ-default-scale.pdf": "035e827cdfb6b501278227ad3e84b56d9c1a6fb7a39e8225db9077c49abccc27",
+    "regressions/propagators/circ/circ-default-scale.tex": "9d3ffcf45097e0437bf0925eed77f7b5a4778d5f522b4c9aafbdc09f2f35ae11",
+    "scripts/check-regressions.sh": "772f86e684bc4030c98db129e2e6ed41ed58bccdb13d2f7ab1041c9dbe159793"
+  }
+}

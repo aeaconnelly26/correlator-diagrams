@@ -56,3 +56,7 @@ upper EW leg by about 0.47 PDF pt. Smaller centered circles help; widening the
 split-leg gap alone does not clear the other leg. Off-center circles can make
 the crowding worse. See the [18-case visual/geometry review](upper-crossing-w-review.md).
 D03 is independent of the completed D02 scaling/unsolicited-circle fix.
+
+The later user-selected circle default .8 improves the centered diagram-scale-1
+case (about .73 pt clearance). The .8 diagram-scale case remains very tight;
+D03 is still an open spacing review. See [circle-default verification](circ-default-verification.md).

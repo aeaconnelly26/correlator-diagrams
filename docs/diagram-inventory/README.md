@@ -6,8 +6,11 @@
 The current build includes M07b's upper external-routing slice and the D02
 crossed-box circle fix on `codex/m07b-upper-external-crossing`. D02 starts from
 M07b checkpoint `e64cc2f`; published main remains `813736e`.
-It is verified locally; merge/push remains pending. There are **122 recipes
-on twenty-eight pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
+The later circle-default review now makes unset circles and labels equivalent
+to `circ scale=0.8`; explicit scales keep their original meaning. Page 29 adds
+P41-P44. See [verification](../planning/circ-default-verification.md).
+It is verified locally; merge/push remains pending. There are **126 recipes
+on twenty-nine pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
 pink Proca external legs and external flow controls. See
 [M07b verification](../planning/m07b-verification.md) and the focused
 [four-page gallery](../../regressions/topologies/box/box-external-crossing.pdf).

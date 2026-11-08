@@ -54,3 +54,15 @@ W circle from both upper EW legs at representative scales, while preserving
 the shared outer endpoints and correct crossing connectivity. Keep the circle
 scaling correction from D02. The current artifact is a concrete review record;
 this session implements no package geometry change.
+
+## Later default choice
+
+The user subsequently selected `circ scale=0.8` as the package-wide default,
+including label scaling. See [verification](circ-default-verification.md).
+The measurements above and PDF/preview remain historical observations at
+`477f850`; their explicit circle-scale cases are still reproducible. References
+to the old default scale 1 in those artifacts refer to that checkpoint. With
+the new default, the centered diagram-scale-1 case has about 0.73 pt clearance;
+the diagram-scale-.8 case remains very tight (about .11 pt ink-envelope overlap).
+This changes circle sizing, not crossing geometry; D03 is not closed as a fully
+resolved spacing review.

@@ -67,6 +67,7 @@ run_tex "regressions/topologies/loop-audit/self-energy-bubble-mockups.tex"
 run_tex "regressions/topologies/box/box-topology-regression.tex"
 run_tex "regressions/topologies/box/box-external-crossing.tex"
 run_tex "regressions/propagators/circ/propagator-circ-check.tex"
+run_tex "regressions/propagators/circ/circ-default-scale.tex"
 run_tex "regressions/propagators/endpoint-markers/endpoint-marker-regression.tex"
 run_tex "regressions/propagators/ewboson-frequency/ewboson-frequency-check.tex"
 run_tex "regressions/propagators/proca/proca-regression.tex"
@@ -85,6 +86,9 @@ run_tex "regressions/topologies/three-point/three-point-feature-gallery.tex"
 run_tex "regressions/propagators/proca-endpoints/proca-endpoint-audit.tex"
 
 if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/propagators/circ/check-circ-default-scale.py" \
+    "$build_root/regressions/propagators/circ/circ-default-scale.pdf"
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/topologies/cross-box/check-cross-box-circles.py" \
     "$build_root/regressions/topologies/cross-box/cross-box-circles.pdf"

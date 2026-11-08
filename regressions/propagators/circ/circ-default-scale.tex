@@ -1,0 +1,22 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,feynman-fun}
+\setlength{\parindent}{0pt}
+\newcommand{\sample}[2]{\begin{minipage}[t][2.85in][t]{.48\linewidth}\textbf{#1}\par\vspace{12pt}\centering #2\end{minipage}}
+\newcommand{\boxsample}[1]{\BoxLoopCorr[field={},central={},leg-labels={,,,},show-momenta=false,box-line=plain,box-external-line=plain,box-top-line={ewboson,circ=W,#1}]}
+\begin{document}
+\section*{Circle default: scale 0.8 across interfaces}
+No explicit circ scale below. Rings have diameter 9.6pt; labels use scale 0.8.
+\par\bigskip
+\sample{Raw propagator}{\begin{tikzpicture}\begin{feynhand}\vertex(a)at(0,0);\vertex(b)at(2.7,0);\propag[ewboson,circ=W](a)to(b);\end{feynhand}\end{tikzpicture}}\hfill
+\sample{Ordinary box}{\boxsample{}}\par
+\sample{Internal crossed box}{\CrossBoxCorr[field={},central={},leg-labels={,,,},show-momenta=false,box-line={plain,circ=W},box-external-line=plain]}\hfill
+\sample{S-tree exchange}{\STreeChannelCorr[field={},central={},leg-labels={,,,},show-momenta=false,line=plain,channel-line={ewboson,circ=Z,magenta!85!red}]}
+\newpage\section*{Explicit overrides and fresh-call reset}
+The scale key retains its existing 12pt reference. Explicit 1.0 restores the old size.
+\par\bigskip
+\sample{Explicit circ scale 0.8: matches default}{\boxsample{circ scale=.8}}\hfill
+\sample{Explicit circ scale 1.0: former size}{\boxsample{circ scale=1}}\par
+\sample{Explicit circ scale 0.6: unchanged}{\boxsample{circ scale=.6}}\hfill
+\sample{Fresh call: returns to default 0.8}{\boxsample{}}
+\end{document}

@@ -12,6 +12,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   D02 now also fixes crossed-box unsolicited Proca circles and per-line circle
   scaling on this branch; 49 documents / 850 endpoint contacts pass. See [D02 verification](planning/d02-verification.md)
   and [M07b verification](planning/m07b-verification.md).
+- The user-selected circle default is now equivalent to `circ scale=0.8`:
+  9.6pt ring diameter and label scale 0.8; 50 documents / 850 endpoint checks
+  pass. Explicit scale values retain their
+  original meanings (`1` restores the former size). See
+  [verification](planning/circ-default-verification.md). This is local on the
+  same M07b branch; publication remains pending.
 - D03 now records demonstrated overlap between wavy upper crossed external legs
   and a full-size W circle on the top internal edge. The 18-case
   [review](planning/upper-crossing-w-review.md) is diagnostic; package geometry
@@ -80,7 +86,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-eight pages: 122 recipes, including crossed upper external legs and the D02 circle fix. M07b upper slice is local; M07a and earlier work are published. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-nine pages: 126 recipes, including crossed upper external legs and the D02 circle fix. M07b upper slice is local; M07a and earlier work are published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
