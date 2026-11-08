@@ -1,3 +1,12 @@
+# M07a publication - 2026-11-07
+
+Verified checkpoint `dfa0066` is merged and published on main. The 114-recipe /
+26-page atlas and four-page crossed-box gallery retain the exact tested
+package/PDF hashes. Publication changes documentation/status only; the PDF
+footer retains its build provenance. The feature branch is retained. See
+[publication record](../planning/m07a-publication.json). M07b is next, starting
+with crossed upper external legs. Earlier sections preserve checkpoint states.
+
 # M07a internal crossed boxes - 2026-11-06
 
 The atlas now has **114 recipes / 26 pages**. P01-P04/P11-P14 demonstrate

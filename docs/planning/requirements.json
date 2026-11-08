@@ -22,7 +22,7 @@
     "status": "Verified existing",
     "evidence": "M07a: CrossBoxCorr cross-box-layout=top-bottom complements left-right default. P01-P04/P11-P14; 104 public cases, four actual PDF graphs, correct gap/slot/marker semantics and independent annotations/indices.",
     "target": "Keep top/bottom internal edges fixed and cross the other pair. Preserve four trivalent vertices and an unconnected over/under crossing.",
-    "milestone": "M07a complete locally; merge/push pending",
+    "milestone": "M07a complete on published main (dfa0066)",
     "dependencies": "M01; frozen M07a connectivity specification",
     "acceptance": "Both internal-crossing layouts have matching slot maps, style controls, correct endpoint markers, and explicit crossing gaps.",
     "source_panels": [],

@@ -1,16 +1,17 @@
 # Feynman Fun Development Plan
 
-Current roadmap and session handoff, refreshed 2026-11-06. The original plan
+Current roadmap and session handoff, refreshed 2026-11-07. The original plan
 is preserved in [the history archive](planning/history/development-plan-before-2026-11-03.md).
 
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/m07a-crossed-box-layouts`, based on published main
-  `56a643a`. M07a is complete locally: complementary top/bottom-fixed crossed
-  box, preserved left/right default, independent internal annotations and
-  endpoint indices. All 46 documents / 800 endpoint contacts pass. See
-  [M07a verification](planning/m07a-verification.md). Merge/push is pending.
+- Current branch: `main`. Verified M07a checkpoint `dfa0066` is merged and
+  published on GitHub (2026-11-07); its feature branch is retained.
+  Both internal crossed-box layouts, independent annotations and endpoint
+  indices are included. All 46 documents / 800 endpoint contacts passed at
+  that unchanged checkpoint. See [verification](planning/m07a-verification.md)
+  and [publication record](planning/m07a-publication.json). No M07a merge/push remains.
 - Verified M06 checkpoint `629356d` is merged and published to GitHub; its
   feature branch `codex/m06-tree-triangles` is retained.
 - M06 is complete on published main: regular triangle corrections on T top/bottom and S
@@ -69,7 +70,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-six pages: 114 recipes, including both internal crossed-box layouts and their independent annotations. M07a is local; M06 and all reviews are published. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-six pages: 114 recipes, including both internal crossed-box layouts and their independent annotations. M07a and all preceding reviews are published on main. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -89,8 +90,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M04 | External seagulls on s/t trees | Complete on published main; verified checkpoint `854293a` |
 | M05 | External swordfish on s/t trees | Complete on published main; verified checkpoint `9daebf9` |
 | M06 | Regular tree-attached triangle corrections, four placements | Complete on published main at verified checkpoint `629356d`; feature branch retained |
-| M07a | Complementary internal crossed box and annotations | Complete locally; merge/push pending |
-| M07b / M07c | Crossed external layouts and source routing questions | Next after M07a publication; begin with the upper external pair |
+| M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
+| M07b / M07c | Crossed external layouts and source routing questions | Next: M07b, beginning with the upper external pair |
 | M08a / M08b | Contact external self-energy / seagull | Planned |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
@@ -98,8 +99,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M07a is complete locally. After authorized merge/push, start M07b from
-synchronized main on a new `codex/` branch. Implement the crossed upper
+M07a is merged and published; the checkout is synchronized `main`. Start
+M07b next on a new `codex/` branch after fetching and inspecting main. Implement the crossed upper
 external pair from S02-center first, verifying external slot identity, caps,
 styles, momenta and indices before expanding to the right pair from S03-center.
 The two internal crossed-box layouts remain unchanged. R14/R22 endpoint

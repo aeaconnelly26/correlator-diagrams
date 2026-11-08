@@ -3,10 +3,12 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-M07a is complete locally on `codex/m07a-crossed-box-layouts`, from published
-main `56a643a`. There are **114 current recipes on twenty-six pages**, including
+Verified M07a checkpoint `dfa0066`, built on `codex/m07a-crossed-box-layouts`
+from `56a643a`, is now merged and published on main (2026-11-07). The package
+and PDFs match the tested checkpoint; the PDF footer retains its build
+provenance. There are **114 current recipes on twenty-six pages**, including
 both internal crossed-box layouts and independent internal annotations.
-M06 and its reviews are published; M07a merge/push is pending. These count
+M07b is next; no M07a merge/push remains. These count
 recipes and meaningful layouts/styles, not distinct graph topologies. See
 [M07a verification](../planning/m07a-verification.md).
 

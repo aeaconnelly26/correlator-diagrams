@@ -1,0 +1,47 @@
+{
+  "milestone": "M07a",
+  "publication_date": "2026-11-07",
+  "verified_checkpoint": "dfa0066",
+  "verified_full_revision": "dfa00661e6790daec749e028621cf4589522a1b9",
+  "previous_published_main": "56a643a",
+  "source_branch": "codex/m07a-crossed-box-layouts",
+  "source_branch_retained": true,
+  "destination_branch": "main",
+  "remote": "origin",
+  "repository": "https://github.com/aeaconnelly26/correlator-diagrams",
+  "merge_method": "fast-forward",
+  "published": true,
+  "feature_checkpoint_pushed": true,
+  "publication_handoff": "This commit updates documentation/status only; the verified package, regressions and PDFs are unchanged.",
+  "regression_documents": 46,
+  "endpoint_contacts": 800,
+  "focused_public_cases": 104,
+  "atlas_pages": 26,
+  "atlas_recipes": 114,
+  "gallery_pages": 4,
+  "gallery_examples": 16,
+  "next_session": "M07b: crossed upper external pair from S02-center first; verify slot/cap/style/momentum/index ownership before the separate right-pair slice from S03-center.",
+  "index_appearance_deferred": "D01",
+  "routing_specification_gates": [
+    "R14",
+    "R22"
+  ],
+  "verified_files_unchanged_sha256": {
+    "feynman-fun.sty": "23e87179ac7471bb96dcc8a0c016306f71fe2822eb2ded57fc2a7cf1e990be0e",
+    "scripts/check-regressions.sh": "450878d49741d31b89e27025a1dfd6af153d8390c5f12b42197ea9b7edc2c0a6",
+    "README.md": "6200129743db50b1b40de22b6f9e06e928283b03a59d1e9970b96d18a4d8f133",
+    "regressions/topologies/cross-box/M07a-contract.md": "83e54a061567bbaebd0810c54b2ab1d74ba0db8f27baffd42abbe957c0cd5549",
+    "regressions/topologies/cross-box/cross-box-layouts.tex": "73aa6ab4d39b15362fcc3eafaf73d9c6fa808fa137c5b33c14e8495d8d73709b",
+    "regressions/topologies/cross-box/cross-box-layouts.pdf": "d6b8266dae73e1a033c34725df44e55c45da0190aeffe3eee219e86d3d0e5c8f",
+    "regressions/topologies/cross-box/check-cross-box-layouts.py": "b2ca60ee1eb22f4d27e98a7448d52865a4272c7afea59b9c87f51f81470e8d08",
+    "regressions/topologies/cross-box/cross-box-layouts-checks.json": "5039eb6e0f2c28791931cfedeebc3e33e314579be78cdf8ae3cf63865865d682",
+    "docs/reference.md": "420473b1b561ed2b585c4c62f68ce8d6ca6131f951cc5879568b1af95d0041fb",
+    "docs/diagram-inventory/catalog.json": "f2fb36bbd43cb166369073bbb85b43cffc2afbd955f28633276ead87a44ecfcc",
+    "docs/diagram-inventory/inventory.tex": "97f1394e3319f1628240087f4853780ed781e456f1dc014ec6b0e304ec84af8a",
+    "docs/diagram-inventory/inventory.pdf": "65bda2bf9d937ae5ac2286b9b814b27b705677fdbc8d2a1602aa2fff5667cef0",
+    "docs/diagram-inventory/recipes.md": "4bb31e87acc36ad28d1f319f0700bbce75822c8bf1fe9546f39fd526d7c602c1"
+  },
+  "archived_verification_records": {
+    "history/m07a-checks-dfa0066.json": "b4a8ac02d1a967ecd98ce6f3b9643efc64e582e771476c05eba16d7e46f12a4a"
+  }
+}

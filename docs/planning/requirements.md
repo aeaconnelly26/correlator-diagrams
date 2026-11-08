@@ -18,7 +18,7 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 - **Status:** Verified existing.
 - **Existing construction / evidence:** M07a: `CrossBoxCorr[cross-box-layout=top-bottom]` complements the compatible `left-right` default. P01-P04/P11-P14 show square graphs, style variants and independent internal annotations; 104 focused cases and actual PDF reconstruction verify slots, four trivalent vertices and an unconnected crossing.
 - **Remaining target / limitation:** Internal crossing only. External crossings remain R03/R04. One split descending diagonal; D01 index-position appearance is deferred. Explicit dimension overrides are preserved.
-- **Milestone:** M07a complete locally; merge/push pending. **Dependencies:** M01; frozen M07a connectivity specification.
+- **Milestone:** M07a complete on published main (`dfa0066`). **Dependencies:** M01; frozen M07a connectivity specification.
 - **Acceptance:** Both internal-crossing layouts have matching slot maps, style controls, correct endpoint markers, and explicit crossing gaps.
 - **Sources:** P1-02.
 

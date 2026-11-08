@@ -3,7 +3,7 @@
   "date": "2026-11-06",
   "baseline": "56a643a",
   "branch": "codex/m07a-crossed-box-layouts",
-  "published": false,
+  "published": true,
   "requirements": [
     "R01",
     "R02"
@@ -400,18 +400,23 @@
     "regressions/topologies/cross-box/check-cross-box-layouts.py": "b2ca60ee1eb22f4d27e98a7448d52865a4272c7afea59b9c87f51f81470e8d08",
     "regressions/topologies/cross-box/cross-box-layouts-checks.json": "5039eb6e0f2c28791931cfedeebc3e33e314579be78cdf8ae3cf63865865d682",
     "docs/reference.md": "420473b1b561ed2b585c4c62f68ce8d6ca6131f951cc5879568b1af95d0041fb",
-    "docs/development-plan.md": "fc961c770b7fd72437bb820afc4e793709fdfa1f4b0a3e2e1eaebc7a683739b2",
-    "docs/planning/milestones.md": "b3801184e95f442fe176f5468dbb1c94900b16a04a8603e60f456fb9ae878140",
-    "docs/planning/requirements.md": "2f126680f90eef8695c664578d062edd490906d2ed68b0fce12972263ea979c9",
-    "docs/planning/requirements.json": "a9999510aace7887b3c2d2dfc41263522a6bcc8b917e04462b3b73a43f16c579",
-    "docs/planning/README.md": "71d805da8f13a74d5dddabafee6a16d866e0484eda79866f757605fd5c2c8739",
-    "docs/planning/branch-integration.md": "f039f2d1a6e1c4b6a99708792bca9bcb6f3200a12b3bc3e6212beedc30f65d1d",
-    "docs/planning/m07a-verification.md": "5f310850dab0a8f2eb2da2fa71629b78701604b39c2e12725d0775fea2d0f66c",
+    "docs/development-plan.md": "b03cb1fbef3490db82585a8c1612e17ad00874c12c52e32b0757de1365a6f344",
+    "docs/planning/milestones.md": "a3fa5f6211304b9e5cbcac553bdd973a61c7cbf61fca59ed48f8c5ed80af9a6e",
+    "docs/planning/requirements.md": "32d21a75e3e213e2fd348e62c54d636a52fcea4e50e10cff5dc3f0f695723e9a",
+    "docs/planning/requirements.json": "e6d281e888d6e0886a13ba0076ce12e7f87e8ebe8b4adfec194f7aefe4debfda",
+    "docs/planning/README.md": "0ca54913f56d1a6145bf96d6c7a42f68e37c074980f5ff94029cb624d3744cf2",
+    "docs/planning/branch-integration.md": "1826a1e2f56de3a5e5d08a75c044fbaa5a6248d748b8769913c2762cd15a45a1",
+    "docs/planning/m07a-verification.md": "bf30b46d93383b74897e7719361449005a8e28c9abbbd2b5428684f2cbdfc6f2",
     "docs/diagram-inventory/catalog.json": "f2fb36bbd43cb166369073bbb85b43cffc2afbd955f28633276ead87a44ecfcc",
     "docs/diagram-inventory/inventory.tex": "97f1394e3319f1628240087f4853780ed781e456f1dc014ec6b0e304ec84af8a",
     "docs/diagram-inventory/inventory.pdf": "65bda2bf9d937ae5ac2286b9b814b27b705677fdbc8d2a1602aa2fff5667cef0",
     "docs/diagram-inventory/recipes.md": "4bb31e87acc36ad28d1f319f0700bbce75822c8bf1fe9546f39fd526d7c602c1",
-    "docs/diagram-inventory/README.md": "87434f8f12bb55ca59e525051bd5d9c2baec7b0ce98044832db39e9eeb222ab7",
-    "docs/diagram-inventory/verification.md": "3fa6eef052e32bc0d06b76de0882eb28175bdf04f918dbe025a0cbf9f6d2f908"
-  }
+    "docs/diagram-inventory/README.md": "a45400d105db06268b4f59a6a1c7355617df8021bd307bc10d26de14c3ef0084",
+    "docs/diagram-inventory/verification.md": "65855deb88a206e46eeee307f88c857e8a1fe3f6386c5290e9bd1ab560d6e3a2"
+  },
+  "verified_checkpoint": "dfa0066",
+  "publication_date": "2026-11-07",
+  "current_checkout": "main",
+  "publication_record": "m07a-publication.json",
+  "publication_changes": "Documentation/status only; tested package, regressions and PDFs unchanged"
 }

@@ -203,11 +203,12 @@ fixes are merged and published; no M06 merge/push remains.
 ## M07 - Boxes and crossed routing
 
 **Requirements:** R01-R04, R14, R22. **Dependencies:** M01, M02.
-**State:** M07a complete locally on `codex/m07a-crossed-box-layouts`, based on
-`56a643a`; merge/push pending. See [verification](m07a-verification.md) and
+**State:** M07a verified checkpoint `dfa0066`, implemented on
+`codex/m07a-crossed-box-layouts` from `56a643a`, is now merged and published
+on main (2026-11-07). Its feature branch is retained. See [verification](m07a-verification.md) and
 [frozen contract](../../regressions/topologies/cross-box/M07a-contract.md).
 104 public cases and independent PDF graph/gap/contact checks pass. M07b
-starts with the upper external pair after publication; right external routing
+is next, starting with the upper external pair; right external routing
 is a subsequent narrow slice. D01 remains deferred.
 
 - Session A: confirm default square geometry, then add the complementary

@@ -1,8 +1,10 @@
 # M07a complementary internal crossed box - 2026-11-06
 
-Complete locally on `codex/m07a-crossed-box-layouts`, from published main
-`56a643a`. Merge/push remains pending. M06 remains published through its
-verified checkpoint and publication handoff. This slice implements R02 and
+Verified checkpoint `dfa0066`, implemented on `codex/m07a-crossed-box-layouts`
+from `56a643a`, is now merged and published on main (2026-11-07). Its feature
+branch is retained. Publication used a fast-forward; the tested package and
+PDFs are unchanged. See [publication record](m07a-publication.json).
+This slice implements R02 and
 rechecks R01; external crossed legs (R03/R04) remain the next M07b work.
 
 The checklist P1-02 explicitly requests fixed top/bottom edges and crossed
@@ -88,10 +90,10 @@ I18/A06 limitation text is corrected; other earlier page bodies are unchanged
 apart from footer provenance. Exact measurements and hashes are in
 [m07a-checks.json](m07a-checks.json).
 
-After authorized publication, begin M07b with the crossed upper external pair
+M07a is published. Begin M07b next with the crossed upper external pair
 from S02-center; verify its slot/cap/annotation ownership before the separate
 right-pair slice from S03-center. R14/R22 routing questions and D01 remain
-separate gates. No M07b implementation or automatic merge/push is included.
+separate gates. No M07b implementation is included in this checkpoint.
 
 Reproduce from the repository root, with Python providing `pypdf`:
 
