@@ -1,3 +1,12 @@
+# M08a publication - 2026-11-08
+
+Verified checkpoint `d855152` is fast-forward merged and published on main.
+The 134-recipe / 31-page atlas and five-page focused gallery retain their
+verified hashes; package and regression sources are unchanged. The feature
+branch is retained and M08b contact seagulls is next. See
+[publication record](../planning/m08a-publication.json). Earlier local records
+below preserve the state at verification.
+
 # M08a contact bubbles - 2026-11-08
 
 Local M08a branch, base main `096b2b3`; merge/push pending. The regenerated

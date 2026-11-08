@@ -1,7 +1,7 @@
 # Current diagram inventory
 
-M08a is complete locally on `codex/m08a-contact-bubbles`, base main `096b2b3`;
-merge/push pending. The atlas now has **134 recipes / 31 pages**. Page 30 adds
+M08a is merged and published on main at verified checkpoint `d855152`
+(2026-11-08); its feature branch is retained and the tested PDFs are unchanged. The atlas now has **134 recipes / 31 pages**. Page 30 adds
 CT01-CT04: plain contact-leg bubbles at all four corners. Page 31 adds CT11-CT14:
 EW W arcs/inner segments, two-ended pink scalar-polarization arcs with k and no
 pink circles. The crossed contact view is the same quartic topology. No contact

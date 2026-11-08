@@ -1,8 +1,9 @@
 # M08a contact-leg self-energy bubbles - 2026-11-08
 
 Implemented R13 on `codex/m08a-contact-bubbles`, based on published main
-`096b2b3`. This is a local checkpoint; merge/push is pending. M08b contact-leg
-seagulls is next after integration. The checklist's P4-01 and all four native
+`096b2b3`. Verified checkpoint `d855152` is now merged and published on main
+(2026-11-08); the feature branch is retained. M08b contact-leg seagulls is next.
+See [publication record](m08a-publication.json). The checklist's P4-01 and all four native
 S10 panels are covered: TL -> slot 1, BL -> 2, TR -> 3, BR -> 4.
 
 ## Interface and graph

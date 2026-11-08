@@ -1,11 +1,11 @@
 # Integrated branch state and coding-session closeout
 
-Current checkout: `codex/m08a-contact-bubbles`, based on published main `096b2b3`.
-M08a is locally complete: four contact-leg bubbles, updated atlas and verification.
-It has not been merged or pushed. When the user requests integration, publish the
-verified checkpoint before starting M08b contact seagulls. Earlier records below
-retain their historical publication states. See [M08a verification](m08a-verification.md).
-
+Current checkout at M08a publication: `main`. Verified checkpoint `d855152`
+was fast-forward merged from `096b2b3` and pushed to GitHub (2026-11-08).
+The feature branch is retained; package/tests/PDFs are unchanged. No M08a
+merge/push remains; M08b contact seagulls is next. See
+[publication](m08a-publication.json) and [verification](m08a-verification.md).
+Earlier records retain their historical publication states.
 
 M03a checkpoint `2c3b467` is now merged and published on main; see
 [M03a verification](m03a-verification.md) and the current development plan.

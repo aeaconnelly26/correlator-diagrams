@@ -231,9 +231,9 @@ implementation is unscheduled. M08a contact-leg bubbles is next. See [M07b verif
 ## M08 - Contact-host external corrections
 
 **Requirements:** R13, R21. **Dependencies:** M03, M04, M02 conventions.
-**M08a complete locally** on `codex/m08a-contact-bubbles` (base main `096b2b3`); merge/push pending. [Verification](m08a-verification.md). **Next scheduled coding slice:** M08b, contact-leg seagulls.
+**M08a complete on published main** at `d855152`; feature branch retained. [Verification](m08a-verification.md). **Next scheduled coding slice:** M08b, contact-leg seagulls.
 
-- M08a: complete locally; all four S10 external contact bubbles, 78 public cases and actual PDF graph/marker checks. Central/crossed quartic views only; invalid hosts/slots fail explicitly.
+- M08a: complete on published main; all four S10 external contact bubbles, 78 public cases and actual PDF graph/marker checks. Central/crossed quartic views only; invalid hosts/slots fail explicitly.
 - M08b: direct seagull insertion on all four contact legs (S11).
 - Gate: the original quartic contact survives; new vertices have the required
   valences; no additional contact is introduced at a geometric crossover.

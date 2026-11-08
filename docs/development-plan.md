@@ -6,10 +6,11 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/m08a-contact-bubbles`, based on published main `096b2b3`.
-  M08a implements all four external contact-bubble placements locally; see
-  [verification](planning/m08a-verification.md). Merge/push remains pending.
-  The updated atlas has 134 recipes / 31 pages. M08b contact seagulls is next.
+- Current branch: `main`. M08a checkpoint `d855152` is merged and published
+  to GitHub (2026-11-08), with verified package and PDFs unchanged. Its feature
+  branch is retained. The atlas has 134 recipes / 31 pages; 51 documents /
+  874 contacts pass. See [publication record](planning/m08a-publication.json).
+  M08b contact seagulls is next; no M08a merge/push remains.
 - M07b upper crossing, D02 circles, circle default .8
   and the M07c reference audit are merged and published to GitHub (2026-11-07),
   through verified feature tip `40dae7b`. Both feature branches are retained.
@@ -120,14 +121,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
 | M07b | Crossed external layouts | Upper slice published on main; R04 right pair deferred by user |
 | M07c | R14/R22 reference-routing audit | Specification audit published on main; missing triangle-contact routing extension remains unscheduled |
-| M08a / M08b | Contact external self-energy / seagull | M08a complete locally on feature branch; merge/push pending. M08b next |
+| M08a / M08b | Contact external self-energy / seagull | M08a complete on published main (`d855152`); M08b next |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
 | M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
 
 ## Next coding session
 
-**Next: M08b contact-leg seagulls**, after reviewing and merging/publishing M08a.
+**Next: M08b contact-leg seagulls**, from published M08a main.
 M08a now covers all four contact-leg bubbles with the original quartic host,
 two trivalent insertion vertices and fixed outer endpoints. The 78 focused
 public cases, 12 rejection cases, PDF graph/marker checks and updated atlas
@@ -140,17 +141,13 @@ missing routing extension, retained as an **unscheduled future slice** in
 [the plan](planning/m07c/future-routing-plan.md). This audit does not implement
 it. The user-deferred ordinary-box right crossing R04 remains separate.
 
-The current M08a branch is based on published main `096b2b3`. Its changes are
-local; main and GitHub have not been advanced during M08a. The maintained
-suite now covers 51 documents and 874 automatic endpoint contacts. The atlas
-has 134 recipes / 31 pages, including four plain contact-bubble placements
-and four named style samples. D01 index appearance and D03 residual
-circle/crossing spacing remain separate later reviews.
-
-M07b and M07c are already published. Their feature branches and historical
-verification records are retained. No manual Git preparation is needed from
-the user; when asked to integrate M08a, verify the clean checkpoint, refresh
-main, merge and push, then start M08b from that published baseline.
+M08a is now merged and published at verified feature checkpoint `d855152`.
+The maintained suite covers 51 documents / 874 automatic endpoint contacts;
+the atlas has 134 recipes / 31 pages. Package, regression and PDF hashes match
+the tested local checkpoint. D01 index appearance and D03 circle/crossing
+spacing remain separate later reviews. M07b/M07c and their historical feature
+branches are retained. No manual Git preparation is needed from the user.
+See [publication record](planning/m08a-publication.json).
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -544,3 +541,10 @@ checks. Invalid slots, disconnected pairings and non-fitting/nonpositive
 geometry fail explicitly. Existing marker, style, cap, momentum and index
 helpers are reused. No index appearance retuning or contact seagull work.
 See [verification](planning/m08a-verification.md) and [contract](../regressions/topologies/insertion/M08a-contract.md).
+
+## M08a publication - 2026-11-08
+
+Verified checkpoint `d855152` was fast-forward merged from `096b2b3` into main
+and pushed to GitHub. The feature branch is retained. This publication handoff
+changes documentation only; the 51-document / 874-contact verification and
+134-recipe / 31-page atlas remain unchanged. M08b follows from this baseline.

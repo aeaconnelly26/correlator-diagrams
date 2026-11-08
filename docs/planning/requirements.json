@@ -237,10 +237,10 @@
   {
     "id": "R13",
     "title": "Self-energy bubble on contact external legs",
-    "status": "Verified existing (local M08a branch; publication pending)",
+    "status": "Verified existing (M08a published on main at d855152)",
     "evidence": "FourPointCorr insertion=bubble, slots 1-4; atlas CT01-CT04/CT11-CT14. 78 focused cases, 12 rejection cases; independent PDF seven-edge graphs, quartic/cubic/cubic valences and 24 marker contacts. See m08a-verification.md.",
     "target": "One selected external bubble on a central/crossed quartic host. Horizontal/vertical pairings rejected; contact seagulls are M08b; index appearance remains D01.",
-    "milestone": "M08a complete locally; merge/push pending",
+    "milestone": "M08a complete on published main; M08b next",
     "dependencies": "M03; M02 annotation conventions",
     "acceptance": "Four contact-host recipes retain the quartic host vertex, two trivalent insertion vertices, caps, styles, momenta, and indices.",
     "source_panels": [

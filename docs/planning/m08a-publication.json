@@ -1,0 +1,17 @@
+{
+  "milestone": "M08a",
+  "date": "2026-11-08",
+  "feature_checkpoint": "d855152ab7496f5bdcf413baabb2d1dfed9cfc29",
+  "previous_main": "096b2b3ad374e18797397624d978f431be94a1db",
+  "merge": "fast-forward",
+  "published_to": "origin/main",
+  "repository": "https://github.com/aeaconnelly26/correlator-diagrams",
+  "feature_branch_retained": "codex/m08a-contact-bubbles",
+  "verified_package_and_artifacts_unchanged": true,
+  "regression_documents": 51,
+  "endpoint_contacts": 874,
+  "atlas_recipes": 134,
+  "atlas_pages": 31,
+  "verification_record": "m08a-checks.json",
+  "next": "M08b contact external-leg seagulls"
+}

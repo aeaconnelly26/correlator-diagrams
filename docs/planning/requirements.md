@@ -114,10 +114,10 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R13 - Self-energy bubble on contact external legs
 
-- **Status:** Verified existing (local M08a branch; not yet merged/published).
+- **Status:** Verified existing (M08a published on main at `d855152`).
 - **Existing construction / evidence:** `FourPointCorr[insertion=bubble,insertion-slot=1|2|3|4]`, one selected slot. Atlas CT01-CT04 and styled CT11-CT14. Central/crossed quartic contact views; 78 focused public cases, 12 explicit rejection cases and actual PDF graph/contact checks. Seven edges, interaction valences 4/3/3, one loop; 24 new endpoint contacts.
 - **Remaining target / limitation:** One external insertion only. Horizontal/vertical disconnected pairings are rejected; no contact seagull until M08b. D01 index appearance remains deferred; index attachment/controls are preserved.
-- **Milestone:** M08a complete locally on `codex/m08a-contact-bubbles`, base main `096b2b3`. **Dependencies:** M03; M02 annotation conventions.
+- **Milestone:** M08a complete on published main at `d855152`; feature branch retained. **Dependencies:** M03; M02 annotation conventions.
 - **Acceptance:** All four source corners reproduced; quartic host and two trivalent insertions retained; fixed outer frame; caps, logical styles, independent momentum and endpoint/post indices verified.
 - **Sources:** P4-01; S10-TL, S10-TR, S10-BL, S10-BR. See [M08a verification](m08a-verification.md).
 
