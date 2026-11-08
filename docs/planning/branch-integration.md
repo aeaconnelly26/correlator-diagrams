@@ -19,10 +19,11 @@ the M06 feature branch is retained. M07a checkpoint `dfa0066`, implemented on
 `codex/m07a-crossed-box-layouts` from `56a643a`, is now fast-forwarded into
 main and published on GitHub (2026-11-07). At publication the checkout was synchronized main,
 and the M07a feature branch is retained. No M07a merge/push remains. The current
-checkout is `codex/m07c-reference-routing-review` from M07b closeout `843c2bf`,
-retaining verified code `e2521e2`. The M07c feature branch is pushed through
-audit checkpoint `e99c4be`; main integration is pending. The M07c audit is complete;
-R04 right external routing remains deferred and M08a is next. See [M07b verification](m07b-verification.md). See [M07a publication](m07a-publication.json).
+checkout is synchronized `main`. Verified M07c feature tip `40dae7b`, including
+all M07b upper-routing work, D02 fixes and the circle default .8, was fast-forward
+merged and pushed to GitHub on 2026-11-07. Both feature branches are retained;
+no M07b/M07c merge/push remains. R04 remains deferred; M08a is next.
+See [publication record](m07bc-publication.json).
 No M06 merge/push remains. See
 [M06 verification](m06-verification.md) and [publication record](m06-publication.json).
 The branch `codex/m05-swordfish` is retained; no M05 merge/push remains.
@@ -84,24 +85,22 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M07c's R14/R22 reference audit is complete on
-`codex/m07c-reference-routing-review`, created from `843c2bf`. No package code,
-maintained tests or current atlas artifacts changed. Both source panels need
-the same missing opposite-pair triangle-contact routing; its implementation
-is an unscheduled future slice. Next is M08a contact-leg bubbles. R04 ordinary
-box right crossing remains deferred. See [M07c verification](m07c-verification.md).
+M07c's R14/R22 audit is complete and published on main together with M07b
+upper crossing, D02 circle fixes and the default circle scale .8. The source
+branch `codex/m07c-reference-routing-review` and M07b branch are retained.
+The package, maintained regressions and PDFs match the verified checkpoints:
+50 documents / 850 contacts and a 126-recipe / 29-page atlas. The merge is a
+fast-forward to verified feature tip `40dae7b`; this later publication handoff
+changes documentation only. See [publication record](m07bc-publication.json).
 
-Verified code `e2521e2` (50 documents / 850 contacts) is inherited on this branch;
-M07b and M07c are now pushed on the M07c feature branch. No merge into main or
-PR was performed; see [push record](m07c-branch-push.json). Local main remains
-`813736e`. The assistant handles authorized integration and the prerequisite
-base for the next session; no manual Git preparation is required from the user.
+Next is M08a contact-leg bubbles, one leg then all four. R04 ordinary-box right
+crossing remains user-deferred; R14/R22 share a missing opposite-pair
+triangle-contact routing extension with an unscheduled implementation.
+No manual Git preparation or M07b/M07c integration remains for the user.
 
-Remote state was refreshed with `git fetch origin` for the earlier synchronization;
-the later feature push verifies remote M07c at `e99c4be` and main at `813736e`.
-When publishing main, verify `git ls-remote origin refs/heads/main` matches
-local main. A later feature-branch HEAD may intentionally be ahead of main;
-report its separate publication state and verify a clean working tree.
+Remote state was refreshed before the merge. Main was pushed successfully;
+final `git ls-remote origin refs/heads/main` is checked against local HEAD after
+the publication handoff. Start the next feature from refreshed main.
 
 ## Session workflow going forward
 

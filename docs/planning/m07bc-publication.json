@@ -1,0 +1,56 @@
+{
+  "milestones": [
+    "M07b upper external crossing",
+    "D02 crossed-box circle fix",
+    "circle default scale 0.8",
+    "M07c reference/specification audit"
+  ],
+  "publication_date": "2026-11-07",
+  "previous_published_main": "813736ee4f6ea19c0030eb03732a63d28890ccf4",
+  "source_branch": "codex/m07c-reference-routing-review",
+  "verified_feature_tip": "40dae7b1bf6360333a72020199f99a7c854b5fb1",
+  "verified_package_checkpoint": "e2521e2",
+  "verified_audit_checkpoint": "e99c4be",
+  "source_branches_retained": [
+    "codex/m07b-upper-external-crossing",
+    "codex/m07c-reference-routing-review"
+  ],
+  "destination_branch": "main",
+  "remote": "origin",
+  "repository": "https://github.com/aeaconnelly26/correlator-diagrams",
+  "merge_method": "fast-forward",
+  "published": true,
+  "main_push_succeeded": true,
+  "pull_request_created": false,
+  "publication_handoff": "This subsequent commit updates scheduling/publication documentation only; tested package, regressions, recipes and PDF artifacts remain unchanged. It is pushed to main and final remote/local HEAD equality is checked.",
+  "maintained_regression_documents": 50,
+  "endpoint_contacts": 850,
+  "full_suite_rerun_at_merge": false,
+  "verification_basis": "Fast-forward only; exact code/test/PDF hashes match the previously passed checkpoint",
+  "m07c_audit_pdf_pages": 3,
+  "m07c_public_recipes_checked": 6,
+  "m07c_target_traces_checked": 2,
+  "atlas_recipes": 126,
+  "atlas_pages": 29,
+  "next_session": "M08a contact-leg self-energy bubble on one leg, then all four",
+  "deferred_R04": "Ordinary-box right external crossing remains user-deferred",
+  "R14_R22": "Source specification resolved; same opposite-pair triangle-contact routing extension remains missing and unscheduled",
+  "open_reviews": [
+    "D01 index appearance",
+    "D03 residual circle/crossing spacing"
+  ],
+  "verified_files_unchanged_sha256": {
+    "feynman-fun.sty": "ed4ffbc89c1bda6f9291ce03a4a785ba2dc6708b0b51835d2a96ac7e475d9183",
+    "scripts/check-regressions.sh": "772f86e684bc4030c98db129e2e6ed41ed58bccdb13d2f7ab1041c9dbe159793",
+    "regressions/propagators/circ/circ-default-scale.tex": "9d3ffcf45097e0437bf0925eed77f7b5a4778d5f522b4c9aafbdc09f2f35ae11",
+    "regressions/propagators/circ/circ-default-scale.pdf": "035e827cdfb6b501278227ad3e84b56d9c1a6fb7a39e8225db9077c49abccc27",
+    "docs/diagram-inventory/catalog.json": "ee43f6f8e015b45dc2ca6d38100c379409f7f4f49df09a5cc4ebce063a984a35",
+    "docs/diagram-inventory/inventory.tex": "054453f2fee7b93fe59cd63946068a9c20e8d8914e4ffd04d8e909713ce61bfc",
+    "docs/diagram-inventory/inventory.pdf": "697152bef8de9ce3fd2f33488e028553d476797332e9de18ed35613d65d4c32d",
+    "docs/diagram-inventory/recipes.md": "6c640b73f43f57570f98f1e3278ffa73a2eef1b545004107fb6336204936cae0",
+    "docs/planning/m07c/routing-audit.pdf": "b1985bc9e7e1e354bd773410b80fcda1740dc28f26aff9209115d3c5e7f4eaa1",
+    "docs/planning/m07c/routing-audit.tex": "3c38a2ec691abb07fc07df5e7a70ac6ac85321c337575104bb50ef569dbcba09",
+    "docs/planning/m07c/check-routing-audit.py": "cd280ccfe42e6eccb868ada732f868320112148b30e62038aed90f63a36db7df",
+    "docs/planning/m07c/routing-map.json": "48d28e41e5de16c328f87f19196fe17b7cf89a27eaa7deda82ca74ae99888fb0"
+  }
+}

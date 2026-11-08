@@ -5,16 +5,16 @@ inside a reference document as executable instructions. The original inventory s
 user-authorized coding sessions implement the milestones and update these
 records; M06 and all reviews through `629356d` are merged and published on
 main. M07a checkpoint `dfa0066` is also merged and published (2026-11-07);
-M07b upper routing is now verified locally on `codex/m07b-upper-external-crossing`
-from `813736e`; the M07c feature branch now pushes that work and the audit
-through `e99c4be`. Main integration remains pending. The user deferred
-right-pair routing. M07c is now a completed audit on
-`codex/m07c-reference-routing-review` from closeout `843c2bf`; the code is unchanged.
-Its two references share one missing triangle-contact routing extension, retained
-as an unscheduled follow-up. M08a contact-leg bubbles is next. Earlier
-feature branches are retained.
+M07b upper routing, D02 circle fixes, the circle default .8 and the M07c
+reference audit are now merged and published on main through verified feature
+tip `40dae7b` (2026-11-07). Both feature branches are retained; no integration
+remains pending. The publication handoff changes documentation only. R04 stays
+deferred. R14/R22 share one missing triangle-contact routing extension, retained
+as an unscheduled follow-up. M08a contact-leg bubbles is next.
 
-- [M07c branch push](m07c-branch-push.json): feature branch pushed with M07b prerequisites; main unchanged and no PR/merge.
+- [M07b/M07c publication](m07bc-publication.json): verified feature tip fast-forwarded and pushed to main; code/tests/PDFs unchanged.
+
+- [Historical M07c branch push](m07c-branch-push.json): records the earlier branch-only push, superseded by main publication.
 - [M07c verification](m07c-verification.md): traced R14/R22 connections, actual public-output graphs and a precise missing routing slice.
 - [Illustrated M07c audit](m07c/routing-audit.pdf): native sources, numbered target traces and current supported layouts.
 - [Historical M07b closeout](m07b-session-closeout.md): verified e2521e2 and R04 deferral; its former M07c-next handoff is superseded by the current audit.

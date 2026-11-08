@@ -35,9 +35,9 @@
     "id": "R03",
     "title": "Box with crossed upper external legs",
     "status": "Verified existing",
-    "evidence": "M07b upper slice: BoxLoopCorr[box-external-crossing=top]; P21-P24, 52 focused public cases, actual PDF graph/marker/circle/cap checks. Baseline 813736e; local checkpoint, not published.",
+    "evidence": "M07b upper slice: BoxLoopCorr[box-external-crossing=top]; P21-P24, 52 focused public cases, actual PDF graph/marker/circle/cap checks. Implemented from 813736e; now merged and published on main through verified feature tip 40dae7b.",
     "target": "Cross the two upper external legs without turning their crossing into a vertex. This is not the same as crossing internal edges.",
-    "milestone": "M07b upper slice closed locally; M07c audit complete; right pair deferred by user",
+    "milestone": "M07b upper slice published on main; M07c audit published; right pair deferred by user",
     "dependencies": "M01; frozen M07b connectivity contract",
     "acceptance": "Reproduce S02-center with square loop geometry and unchanged external slot identity.",
     "source_panels": [
@@ -46,7 +46,7 @@
     "pdf_items": [
       "P1-03"
     ],
-    "limitation": "Ordinary box only, top/none choices. Right pair remains R04. One external split; internal square loop unchanged. D01 index appearance remains deferred; D02 crossed-box circles were fixed in a subsequent local follow-up."
+    "limitation": "Ordinary box only, top/none choices. Right pair remains R04. One external split; internal square loop unchanged. D01 index appearance remains deferred; D02 crossed-box circles were fixed in a subsequent published follow-up."
   },
   {
     "id": "R04",

@@ -3,15 +3,15 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-The atlas build includes M07b's upper external-routing slice and the D02
-crossed-box circle fix, now inherited unchanged by `codex/m07c-reference-routing-review`. D02 starts from
-M07b checkpoint `e64cc2f`; last verified published main was `813736e`.
-The later circle-default review now makes unset circles and labels equivalent
-to `circ scale=0.8`; explicit scales keep their original meaning. Page 29 adds
-P41-P44. See [verification](../planning/circ-default-verification.md).
-The M07c feature branch is pushed to GitHub with the inherited M07b code and
-audit checkpoint `e99c4be`; main integration remains pending. See
-[push record](../planning/m07c-branch-push.json). There are **126 recipes
+M07b upper crossing, D02 circle fixes, circle default .8 and the M07c reference
+audit are now merged and published on main through verified feature tip
+`40dae7b` (2026-11-07). Both feature branches are retained; no merge/push remains.
+The tested package and PDFs are unchanged. Their footers/catalog retain build
+provenance. See [publication record](../planning/m07bc-publication.json).
+
+Unspecified circles and labels match `circ scale=0.8`; explicit scales retain
+their original meaning. Page 29 adds P41-P44; see
+[verification](../planning/circ-default-verification.md). There are **126 recipes
 on twenty-nine pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
 pink Proca external legs and external flow controls. See
 [M07b verification](../planning/m07b-verification.md) and the focused

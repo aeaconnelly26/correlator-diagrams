@@ -1,3 +1,14 @@
+# M07b/M07c main publication - 2026-11-07
+
+Verified feature tip `40dae7b` is fast-forward merged and published on main,
+including upper external crossing, D02 circle fixes, default circle scale .8
+and the M07c source audit. Both feature branches are retained. All tested code,
+regressions, recipes and PDF artifacts are unchanged; the 50-document /
+850-contact result and 126-recipe / 29-page atlas remain valid. Footer provenance
+is preserved. See [publication record](../planning/m07bc-publication.json).
+Earlier sections retain their historical checkpoint states. Next is M08a;
+R04 remains deferred and the R14/R22 routing follow-up remains unscheduled.
+
 # Circle default 0.8 - 2026-11-07
 
 The atlas now has **126 recipes / 29 pages**. P41-P44 compare the new unset

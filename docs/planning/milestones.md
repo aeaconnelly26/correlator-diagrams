@@ -208,19 +208,19 @@ fixes are merged and published; no M06 merge/push remains.
 on main (2026-11-07). Its feature branch is retained. See [verification](m07a-verification.md) and
 [frozen contract](../../regressions/topologies/cross-box/M07a-contract.md).
 104 public cases and independent PDF graph/gap/contact checks pass. M07b's
-upper external pair is now verified locally on `codex/m07b-upper-external-crossing`
-from `813736e`: 52 public cases and actual PDF connectivity, markers, caps and
-circle scaling. Merge/push is pending. At session closeout on 2026-11-07 the
+upper external pair is now published on main with M07c through feature tip
+`40dae7b`: 52 public cases and actual PDF connectivity, markers, caps and circle
+scaling. D02 and circle default .8 are included; all 50 documents / 850 contacts
+passed at the unchanged package checkpoint. See [publication](m07bc-publication.json). At session closeout on 2026-11-07 the
 user deferred right external routing (R04). M07c is now complete as an audit:
 R14/R22 need the same opposite-pair triangle-contact routing extension; that
-implementation is unscheduled. M08a contact-leg bubbles is next. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed locally in a separate
-follow-up. See [D02 verification](d02-verification.md).
+implementation is unscheduled. M08a contact-leg bubbles is next. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed and published in the follow-up. See [D02 verification](d02-verification.md).
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported
   default/alias. Complete missing internal momentum/index treatment for the
   crossed layouts rather than assuming box annotations already render there.
-- Session B: upper external crossing from S02-center is complete locally.
+- Session B: upper external crossing from S02-center is complete on published main.
   The right external pair from S03-center is deferred by the user (2026-11-07),
   retaining its requirement/acceptance record for a later requested session.
 - Session C (audit complete): Q01/Q02 are resolved by [native source traces](m07c/routing-map.json) and [current public recipes](m07c/recipes.md). The missing opposite-pair attachment extension is specified in a [future plan](m07c/future-routing-plan.md), with no implementation in this audit.
