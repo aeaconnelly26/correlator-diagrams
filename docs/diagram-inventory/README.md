@@ -9,7 +9,9 @@ M07b checkpoint `e64cc2f`; last verified published main was `813736e`.
 The later circle-default review now makes unset circles and labels equivalent
 to `circ scale=0.8`; explicit scales keep their original meaning. Page 29 adds
 P41-P44. See [verification](../planning/circ-default-verification.md).
-It is verified locally; merge/push remains pending. There are **126 recipes
+The M07c feature branch is pushed to GitHub with the inherited M07b code and
+audit checkpoint `e99c4be`; main integration remains pending. See
+[push record](../planning/m07c-branch-push.json). There are **126 recipes
 on twenty-nine pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
 pink Proca external legs and external flow controls. See
 [M07b verification](../planning/m07b-verification.md) and the focused

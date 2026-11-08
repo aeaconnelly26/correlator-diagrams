@@ -14,14 +14,16 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - This branch retains verified code `e2521e2`: M07b upper external crossing,
   D02 circles and the new circle default .8. Code, maintained tests and atlas
   artifacts are unchanged; the prior 50-document / 850-contact result remains
-  applicable. Merge/push is pending. R04 ordinary-box right crossing remains
+  applicable. The M07c feature branch, including inherited M07b work, is pushed
+  to GitHub at audit checkpoint `e99c4be`; main integration remains pending.
+  See [push record](planning/m07c-branch-push.json). R04 ordinary-box right crossing remains
   deferred by the user. Local main remains `813736e`.
 - The user-selected circle default is now equivalent to `circ scale=0.8`:
   9.6pt ring diameter and label scale 0.8; 50 documents / 850 endpoint checks
   pass. Explicit scale values retain their
   original meanings (`1` restores the former size). See
   [verification](planning/circ-default-verification.md). This is local on the
-  M07b branch and inherited by M07c; publication remains pending.
+  M07b branch and inherited by M07c; the feature branch is pushed, with main integration pending.
 - D03 now records demonstrated overlap between wavy upper crossed external legs
   and a full-size W circle on the top internal edge. The 18-case
   [review](planning/upper-crossing-w-review.md) made no geometry/default change.
@@ -139,7 +141,9 @@ paths for this audit. The maintained 50-document / 850-contact baseline and
 126-recipe / 29-page capability atlas are unchanged. D01 index appearance and
 D03 residual circle/crossing spacing remain separate reviews.
 
-No merge, push or PR was performed. The assistant handles authorized integration
+The feature branch is pushed to GitHub, including M07b code and the M07c audit.
+No merge into main or PR was performed. See [push record](planning/m07c-branch-push.json).
+The assistant handles authorized integration
 and the prerequisite base for the next session; no manual Git preparation is
 required from the user. Local main remains `813736e`.
 

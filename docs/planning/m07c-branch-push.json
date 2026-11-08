@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-07",
+  "repository": "https://github.com/aeaconnelly26/correlator-diagrams",
+  "remote": "origin",
+  "branch": "codex/m07c-reference-routing-review",
+  "feature_branch_pushed": true,
+  "verified_audit_checkpoint": "e99c4bebe3f91a71c12d123099282d7d372a4ace",
+  "verified_remote_branch_head_before_handoff": "e99c4bebe3f91a71c12d123099282d7d372a4ace",
+  "includes_inherited_M07b_work": true,
+  "merged_to_main": false,
+  "published_to_main": false,
+  "pull_request_created": false,
+  "verified_remote_main": "813736ee4f6ea19c0030eb03732a63d28890ccf4",
+  "transport": "Initial HTTPS push returned HTTP 400 and created no remote branch; retry with HTTP/1.1 and http.postBuffer=524288000 succeeded.",
+  "handoff": "This push-status commit changes documentation only and is pushed to the same feature branch. Final remote HEAD is verified against local HEAD after pushing.",
+  "next_session": "M08a contact-leg self-energy bubbles; resolve main integration when authorized, preserving prerequisite code",
+  "sha256_unchanged": {
+    "feynman-fun.sty": "ed4ffbc89c1bda6f9291ce03a4a785ba2dc6708b0b51835d2a96ac7e475d9183",
+    "scripts/check-regressions.sh": "772f86e684bc4030c98db129e2e6ed41ed58bccdb13d2f7ab1041c9dbe159793",
+    "regressions/propagators/circ/circ-default-scale.tex": "9d3ffcf45097e0437bf0925eed77f7b5a4778d5f522b4c9aafbdc09f2f35ae11",
+    "regressions/propagators/circ/circ-default-scale.pdf": "035e827cdfb6b501278227ad3e84b56d9c1a6fb7a39e8225db9077c49abccc27",
+    "docs/diagram-inventory/catalog.json": "ee43f6f8e015b45dc2ca6d38100c379409f7f4f49df09a5cc4ebce063a984a35",
+    "docs/diagram-inventory/inventory.tex": "054453f2fee7b93fe59cd63946068a9c20e8d8914e4ffd04d8e909713ce61bfc",
+    "docs/diagram-inventory/inventory.pdf": "697152bef8de9ce3fd2f33488e028553d476797332e9de18ed35613d65d4c32d",
+    "docs/diagram-inventory/recipes.md": "6c640b73f43f57570f98f1e3278ffa73a2eef1b545004107fb6336204936cae0"
+  }
+}
