@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-08",
+  "references": [
+    {
+      "filename": "IMG_0135.HEIC",
+      "sha256": "adf082477317c93a27ad5ef978b5852b6331ed4ea4f28f8c88d4bd94b8b1b5c7",
+      "bytes": 1915699,
+      "view": "right"
+    },
+    {
+      "filename": "IMG_0136.HEIC",
+      "sha256": "9b7bbc7a426050b5a12eda0a43f05bfc4ef8a56644ab063c057fb198d3d024ae",
+      "bytes": 1808779,
+      "view": "left"
+    }
+  ],
+  "note": "Original photos remain unchanged at their supplied local locations. Only the graph/visual contract is committed; photos and image metadata are not published."
+}

@@ -4,6 +4,19 @@ Reusable LaTeX macros for the QFT diagrams that actually show up in notes, assig
 
 Fast defaults when you just need the figure. One-option switches for common cleanup like hiding momenta. More detailed control when the geometry gets ugly.
 
+## Crossed vertex corrections
+
+Two half-moon layouts join opposite cubic corners, with two collinear W
+propagators meeting the central quartic vertex:
+
+```tex
+\CrossedVertexCorr[crossed-vertex-orientation=right] % UL to LR
+\CrossedVertexCorr[crossed-vertex-orientation=left]  % LL to UR
+```
+
+See [plain and styled copy/paste recipes](docs/diagram-inventory/recipes.md#crossed-vertex-the-two-diagonal-layouts)
+and [public controls](docs/reference.md#crossed-vertex-correction-two-half-moon-layouts).
+
 ## Tiny Examples
 
 <table>

@@ -42,6 +42,7 @@ run_tex "regressions/topologies/triangle-contact/triangle-contact-regression.tex
 run_tex "regressions/topologies/triangle-contact/triangle-contact-internal-momentum.tex"
 run_tex "regressions/topologies/triangle-contact/momentum-directions-demo.tex"
 run_tex "regressions/topologies/triangle-contact/triangle-contact-annotations.tex"
+run_tex "regressions/topologies/crossed-vertex/crossed-vertex-regression.tex"
 run_tex "regressions/topologies/vertex-identity/vertex-identity-check.tex"
 run_tex "regressions/topologies/vertex-identity/half-box-bridge-momentum.tex"
 run_tex "regressions/topologies/channel/channel-momentum-label-gap.tex"
@@ -91,6 +92,9 @@ run_tex "regressions/topologies/three-point/three-point-feature-gallery.tex"
 run_tex "regressions/propagators/proca-endpoints/proca-endpoint-audit.tex"
 
 if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/topologies/crossed-vertex/check-crossed-vertex.py" \
+    "$build_root/regressions/topologies/crossed-vertex/crossed-vertex-regression.pdf"
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/topologies/insertion/check-contact-seagulls.py" \
     "$build_root/regressions/topologies/insertion/contact-seagull-slots.pdf"

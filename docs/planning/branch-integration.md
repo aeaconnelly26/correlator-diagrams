@@ -1,6 +1,10 @@
 # Integrated branch state and coding-session closeout
 
-Current checkout: `main`. Verified M08b checkpoint `e57499e`, including the
+Current checkout: `codex/crossed-vertex`, based on published main `bfb23ac`.
+The two user-requested half-moon views are implemented locally. Merge/push
+remains pending; see [crossed-vertex verification](crossed-vertex/verification.md).
+
+Previous publication: main is unchanged. Verified M08b checkpoint `e57499e`, including the
 Overleaf array fix, was fast-forward merged from `35c7959` and pushed to GitHub
 on 2026-11-08. The source branch `codex/m08b-contact-seagulls` is retained.
 All 53 documents / 894 contacts pass, with unchanged verified package/PDFs.

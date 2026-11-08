@@ -21,6 +21,14 @@ on `codex/m06-tree-triangles` from `eb6182c`, is now merged and published on
 main. Its feature branch is retained. M07a is now also published; M07b's upper slice is verified locally. See
 [M05 verification](m05-verification.md) and [M06 verification](m06-verification.md).
 
+## User-selected crossed-vertex follow-up (2026-11-08)
+
+Exactly two half-moon layouts follow M07c: opposite cubic corners, collinear W
+segments and a curved crossing without an extra interaction. Implemented on
+local `codex/crossed-vertex`; merge/push pending. The user-selected
+[contract](crossed-vertex/contract.md) supersedes the proposed angular layout/API.
+See [verification](crossed-vertex/verification.md). M09a follows after integration.
+
 ## Common session contract
 
 Before coding, freeze a small contract: the reference panel(s), graph
@@ -213,8 +221,8 @@ upper external pair is now published on main with M07c through feature tip
 scaling. D02 and circle default .8 are included; all 50 documents / 850 contacts
 passed at the unchanged package checkpoint. See [publication](m07bc-publication.json). At session closeout on 2026-11-07 the
 user deferred right external routing (R04). M07c is now complete as an audit:
-R14/R22 need the same opposite-pair triangle-contact routing extension; that
-implementation is unscheduled. M08a contact-leg bubbles is next. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed and published in the follow-up. See [D02 verification](d02-verification.md).
+R14/R22 identified the same opposite-pair routing gap. Its user-selected
+half-moon follow-up is now implemented locally; M08a/M08b are published. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed and published in the follow-up. See [D02 verification](d02-verification.md).
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported
@@ -287,13 +295,13 @@ M09 where internal hosts are involved.
   cubic vertices carrying q2/q3 in S13-left and q1/q4 in S13-right. The PDF-to-slide
   correspondence is recorded as an inference; q labels are absent from the slides.
   Internal Z styling and square bounding spans already work; opposite-pair
-  quartic attachments remain missing.
+  quartic attachments are now supplied by the local crossed-vertex follow-up.
 - **Q02 / R22 (resolved by audit):** Both native images have seven logical edges,
   three interactions with valences 4/3/3 and one W/W/Z cycle. The external crossover
   has no interaction. They share the R14 extension of TriangleContactCorr;
   [maps](m07c/routing-map.json), [illustrated comparison](m07c/routing-audit.pdf)
-  and [future slice](m07c/future-routing-plan.md) are saved. No new loop family
-  or current exact public recipe is asserted.
+  and [historical proposed slice](m07c/future-routing-plan.md) are saved. The user-selected
+  half-moon contract now supplies CV01/CV02; no new loop family is counted.
 
 ## Scope carried across sessions
 

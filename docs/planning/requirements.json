@@ -256,12 +256,12 @@
   {
     "id": "R14",
     "title": "Opposite-pair triangle-contact routing / diagonal Z connection",
-    "status": "Missing",
-    "evidence": "M07c native S13 traces: quartic pairs 1/4 (left) and 2/3 (right); Z joins cubic vertices carrying q2/q3 and q1/q4 respectively under fixed spatial slots. Four public orientations only provide adjacent pairs. See m07c/routing-audit.pdf and routing-map.json.",
-    "target": "Extend the existing TriangleContactCorr external routing to the two opposite quartic pairs; retain three interactions, seven edges, W/W/Z loop, fixed outer corners and an unconnected external crossover. Square bounding spans already have public controls.",
-    "milestone": "M07c specification audit complete; implementation follow-up unscheduled",
+    "status": "Verified existing (local crossed-vertex branch)",
+    "evidence": "CV01/CV02/CV11/CV12; crossed-vertex/checks.json recovers seven edges, valences 4/3/3, fixed-slot quartic pairs 1/4 and 2/3, one cycle and no crossing vertex. User-selected half-moon reference contract dated 2026-11-08 supersedes the angular M07c proposal.",
+    "target": "Two half-moon views via CrossedVertexCorr; W internal slots 5/7 remain collinear with their outer diagonal and Z occupies curved slot 6 in both views.",
+    "milestone": "User-selected crossed-vertex follow-up to M07c; verified locally, merge/push pending",
     "dependencies": "M02 and the M07c traced graph/slot contract",
-    "acceptance": "Both source layouts have exact public recipes with quartic pairs 1/4 and 2/3, Z on internal slots 6 and 5, seven logical edges, valences 4/3/3, one cycle and preserved logical metadata.",
+    "acceptance": "Both fixed-slot graphs and styled samples pass; shared outer frame, collinear W edges, actual arc markers/circles, all seven independent momentum controls, cap/scale/index/array/reset coverage and maintained regressions.",
     "source_panels": [
       "S13-left",
       "S13-right"
@@ -271,7 +271,7 @@
       "P3-06"
     ],
     "source_link_basis": "Inference linking the PDF q1-q4/q3-q2 wording to S13 under the established spatial slot convention; q numbers are not printed on the slide images.",
-    "limitation": "Underlying triangle-contact loop and Z styling already exist; external label changes or span overrides do not supply fixed-slot opposite-pair attachments."
+    "limitation": "Exactly the two user-requested half-moon views; no new top/bottom rotations or reproduction of the old angular S13 embedding. D01 index appearance remains deferred."
   },
   {
     "id": "R15",
@@ -405,18 +405,19 @@
   {
     "id": "R22",
     "title": "Crossed external triangle-contact layouts from slide 13",
-    "status": "Missing",
-    "evidence": "M07c resolves both native images as three-vertex W/W/Z triangle contacts: left quartic pair 1/4, right 2/3. Crossed right-side external paths have no interaction dot. Existing public orientations only attach adjacent quartic pairs.",
-    "target": "Same missing routing extension as R14. Preserve both panel records and their distinct fixed-slot assignments; no additional loop family is established.",
-    "milestone": "M07c specification audit complete; same unscheduled implementation follow-up as R14",
+    "status": "Verified existing (local crossed-vertex branch)",
+    "evidence": "CV01/CV02/CV11/CV12; crossed-vertex/checks.json recovers seven edges, valences 4/3/3, fixed-slot quartic pairs 1/4 and 2/3, one cycle and no crossing vertex. User-selected half-moon reference contract dated 2026-11-08 supersedes the angular M07c proposal.",
+    "target": "Two half-moon views via CrossedVertexCorr; W internal slots 5/7 remain collinear with their outer diagonal and Z occupies curved slot 6 in both views.",
+    "milestone": "User-selected crossed-vertex follow-up to M07c; verified locally, merge/push pending",
     "dependencies": "M02; resolved M07c source traces",
-    "acceptance": "Match both saved seven-edge target maps with fixed outer slots; preserve Q valence 4, A/B valence 3 and the noninteracting external crossing.",
+    "acceptance": "Both fixed-slot graphs and styled samples pass; shared outer frame, collinear W edges, actual arc markers/circles, all seven independent momentum controls, cap/scale/index/array/reset coverage and maintained regressions.",
     "source_panels": [
       "S13-left",
       "S13-right"
     ],
     "pdf_items": [],
     "duplicate_routing_requirement": "R14",
-    "new_loop_family_required": false
+    "new_loop_family_required": false,
+    "limitation": "Exactly the two user-requested half-moon views; no new top/bottom rotations or reproduction of the old angular S13 embedding. D01 index appearance remains deferred."
   }
 ]

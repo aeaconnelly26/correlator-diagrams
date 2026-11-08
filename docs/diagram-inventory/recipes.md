@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M08b local; base main 35c7959`, audited 2026-11-08. Atlas: [PDF](inventory.pdf).
+Baseline: `crossed vertex local; base main bfb23ac`, audited 2026-11-08. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -3735,5 +3735,105 @@ Inner W circle; two-ended pink scalar loop with k.
   external-momentum-hide={1,2,3,4},
   seagull-loop-momentum=k,
   contact-pairing=crossed
+]
+```
+
+## Crossed vertex: the two diagonal layouts
+
+### CV01 - Crossed vertex: right half-moon
+
+One central quartic vertex, two cubic vertices on a diagonal, three internal edges; the curved edge crosses an external leg without interacting.
+
+**Limit:** Exactly two layouts. The two straight internal edges follow the opposite outer corners; this extends the triangle-contact family.
+
+```tex
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=right
+]
+```
+
+### CV02 - Crossed vertex: left half-moon
+
+One central quartic vertex, two cubic vertices on a diagonal, three internal edges; the curved edge crosses an external leg without interacting.
+
+**Limit:** Exactly two layouts. The two straight internal edges follow the opposite outer corners; this extends the triangle-contact family.
+
+```tex
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=left
+]
+```
+
+## Crossed vertex with W and scalar-polarization lines
+
+### CV11 - Styled crossed vertex: right
+
+Two W propagators share the diagonal; a pink Proca half-moon has two endpoint tips and a compact k guide.
+
+**Limit:** No automatic circle on Proca; no caps or external momenta in this reference-style sample.
+
+```tex
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=right,
+  triangle-contact-external-line=ewboson,
+  triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  triangle-contact-internal-momenta={,k,},
+  triangle-contact-momentum-6={layout=side,label-offset=3pt}
+]
+```
+
+### CV12 - Styled crossed vertex: left
+
+Two W propagators share the diagonal; a pink Proca half-moon has two endpoint tips and a compact k guide.
+
+**Limit:** No automatic circle on Proca; no caps or external momenta in this reference-style sample.
+
+```tex
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=left,
+  triangle-contact-external-line=ewboson,
+  triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  triangle-contact-internal-momenta={,k,},
+  triangle-contact-momentum-6={layout=side,label-offset=3pt}
 ]
 ```

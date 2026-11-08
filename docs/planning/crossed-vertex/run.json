@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-08",
+  "branch": "codex/crossed-vertex",
+  "base_main": "bfb23ac37cf44abb6a05850f0119d2da5c0b4eab",
+  "state": "verified local; merge/push pending",
+  "maintained_documents": 54,
+  "endpoint_contacts": 928,
+  "atlas_recipes": 150,
+  "atlas_pages": 36,
+  "gallery_pages": 9,
+  "python": "/Users/aeaconnelly/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "sha256": {
+    "feynman-fun.sty": "ca9e9875fc7015e2bab882aa8fbeb17b72745401f6f8797f3de70608281dd361",
+    "regressions/topologies/crossed-vertex/crossed-vertex-regression.tex": "c4eb01189fc9d38f9d4dfa22d9632ef42298c18fea411b1c46c0c05b2647ede0",
+    "regressions/topologies/crossed-vertex/check-crossed-vertex.py": "0308d5773688add76172bff5d9d4513b86801d3fef5dd52482027d5a93452a0d",
+    "scripts/check-regressions.sh": "3418e276fa0b35517605a5ecf253350d9d4af20c3abd5924fa653796ef6df5c8",
+    "docs/diagram-inventory/catalog.json": "63f21d6ba791e37adb54818ef1309e3865acbc549fef82028938cc8b1f8438d2",
+    "docs/diagram-inventory/inventory.pdf": "7ee696d6f24b76da3e24e5331e1c29662e5161a8b3963514bb9cf2d9a6e09764",
+    "docs/planning/crossed-vertex/gallery.pdf": "240e2ed1feb7bbda09eb50640bfafcd4cd9bd5365a7e84c4943cef5414cfdadb"
+  }
+}

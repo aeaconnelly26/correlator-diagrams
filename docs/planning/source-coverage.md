@@ -158,8 +158,8 @@ Eight diagrams are visible although the slide contains fewer image objects; the 
 
 | Panel | Visible diagram / placement | Requirement | Relation |
 | --- | --- | --- | --- |
-| S13-left | Triangle contact; quartic pair 1/4; Z between q2/q3 cubic vertices | R22 | M07c resolved; same missing external-routing extension as R14 |
-| S13-right | Triangle contact; quartic pair 2/3; Z between q1/q4 cubic vertices | R22 | M07c resolved; same missing external-routing extension as R14 |
+| S13-left | Triangle contact; quartic pair 1/4; Z between q2/q3 cubic vertices | R22 | CrossedVertexCorr left/right supplies the fixed-slot graph; user-selected half-moon embedding, CV01/CV02 (local) |
+| S13-right | Triangle contact; quartic pair 2/3; Z between q1/q4 cubic vertices | R22 | CrossedVertexCorr left/right supplies the fixed-slot graph; user-selected half-moon embedding, CV01/CV02 (local) |
 
 ## Slide 14
 
@@ -262,3 +262,5 @@ Eight diagrams are visible although the slide contains fewer image objects; the 
 R06 (independent annotations), R15 (Proca endpoint contact), and R16 (documentation) apply to every relevant diagram, including repeats. R02 is requested in the PDF even though no isolated PowerPoint panel explicitly specifies the complementary internal crossing. M07c now records the full endpoint map for R14 and infers its correspondence to S13 from the established spatial slot numbering. R22 preserves the two slide-panel records for that same routing gap.
 
 The cross-shaped contact hosts on slides 10, 11, and 17 are actual interactions. The crossovers on the box examples are routing crossings and must not acquire extra interaction vertices. The S13 panels are now traced: each has one quartic and two cubic interactions; its external crossover has no interaction. See the [M07c audit](m07c/routing-audit.pdf).
+
+2026-11-08: the user-selected [crossed-vertex contract](crossed-vertex/contract.md) implements both R14/R22 fixed-slot graphs with half-moon geometry. The native S13 angular embedding remains archived; internal Z is now consistently slot 6 in both new views.

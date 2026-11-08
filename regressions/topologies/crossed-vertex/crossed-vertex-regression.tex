@@ -1,0 +1,58 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,graphicx,feynman-fun}
+\pagestyle{plain}
+\setlength{\parindent}{0pt}
+\newcommand{\CV}[1][]{\CrossedVertexCorr[field={},leg-labels={,,,},central={},blob=false,center-vertex=true,external-vertices=false,line=plain,show-momenta=false,#1]}
+\newcommand{\pair}[2]{\[\CV[crossed-vertex-orientation=right,#1]\qquad\CV[crossed-vertex-orientation=left,#2]\]}
+\begin{document}
+\section*{Crossed vertex: the two diagonal layouts}
+Plain lines, three interaction vertices. A continuous half-moon passes over
+one interrupted external leg; the crossing has no interaction dot.
+\pair{}{}
+\vfill
+\texttt{\string\CrossedVertexCorr[crossed-vertex-orientation=right/left]}\par
+Internal slots: 5 = center to A, 6 = curved A to B, 7 = B to center.
+The two straight internal edges share a diagonal with the opposite outer corners.
+\newpage
+\section*{Styled references}
+EW external legs, W circles on the two collinear internal edges, pink Proca
+half-moon with two endpoint tips and only its $k$ momentum guide. No caps.
+\pair{triangle-contact-external-line=ewboson,triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}},show-momenta=true,external-momentum-hide={1,2,3,4},triangle-contact-internal-momenta={,k,},triangle-contact-momentum-6={layout=side,label-offset=3pt}}
+{triangle-contact-external-line=ewboson,triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}},show-momenta=true,external-momentum-hide={1,2,3,4},triangle-contact-internal-momenta={,k,},triangle-contact-momentum-6={layout=side,label-offset=3pt}}
+\newpage
+\section*{Semantic markers: all internal edges}
+Minimal marker-contact checks: no circles, caps or momentum.
+\pair{triangle-contact-internal-line={proca,magenta}}{triangle-contact-internal-line={proca,magenta}}
+\newpage
+\section*{Independent momenta: gap and side}
+\pair{show-momenta=true,triangle-contact-internal-momenta={k_5,k_6,k_7}}{show-momenta=true,triangle-contact-internal-momenta={k_5,k_6,k_7},triangle-contact-momentum-layout=side}
+\newpage
+\section*{Scale and span overrides}
+\pair{scale=.72}{scale=1.2}
+\pair{triangle-contact-xspan=.9,triangle-contact-yspan=1.15}{triangle-contact-xspan=1.2,triangle-contact-yspan=.8}
+\newpage
+\section*{Full outer caps and split-leg styles}
+\pair{triangle-contact-external-line={proca,magenta,endcapp}}{triangle-contact-external-line={ewboson,circ=W,circ scale=.6,endcap}}
+\pair{triangle-contact-external-line={ewboson,endcapp}}{triangle-contact-external-line={proca,magenta,endcap}}
+\newpage
+\section*{Reversal, slot controls and math alignments}
+\[\begin{array}{cc}
+\CV[show-momenta=true,triangle-contact-internal-momenta={,k,},triangle-contact-internal-momentum-directions={auto,reverse,auto},triangle-contact-momentum-6={layout=side,start=.35,end=.65,label-fraction=.5}]
+&\CV[crossed-vertex-orientation=left,show-momenta=true,external-momentum-hide={2,4},triangle-contact-internal-momenta={a,b,c},triangle-contact-internal-momentum-directions={none,none,none}]\\
+\CV[triangle-contact-external-line={ewboson,endcapp}]&\CV[crossed-vertex-orientation=left]
+\end{array}\]
+\newpage
+\section*{One-ended tips, reversed arcs and unequal outer spans}
+\pair{triangle-contact-internal-lines={{proca,magenta},{spolin,magenta},{proca,magenta}},scale=.8,propagator-arrow-size=4pt}
+{triangle-contact-internal-lines={{proca,magenta},{spolout,magenta},{proca,magenta}},scale=1.15,propagator-arrow-size=7pt}
+\pair{triangle-contact-external-xspan=2.4,triangle-contact-external-yspan=1.9}
+{triangle-contact-external-xspan=1.9,triangle-contact-external-yspan=2.4,crossed-vertex-crossing-gap=.06}
+\newpage
+\section*{Index attachment and consecutive-call reset}
+Index appearance remains the deferred D01 workflow. Slot 6 attaches to the
+actual curved edge, with the existing per-end anchor and shift controls.
+\pair{triangle-contact-propagator-left-indices={a,b,c,d,e,f,g},triangle-contact-propagator-right-indices={A,B,C,D,E,F,G}}
+{triangle-contact-propagator-left-indices={a,b,c,d,e,f,g},triangle-contact-propagator-right-indices={A,B,C,D,E,F,G}}
+\[\TriangleContactCorr[field={},leg-labels={,,,},central={},line=plain,show-momenta=false,blob=false,external-vertices=false,center-vertex=true]\qquad\CV[]\]
+\end{document}

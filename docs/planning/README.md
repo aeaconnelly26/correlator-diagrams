@@ -9,11 +9,12 @@ M07b upper routing, D02 circle fixes, the circle default .8 and the M07c
 reference audit are now merged and published on main through verified feature
 tip `40dae7b` (2026-11-07). Both feature branches are retained; no integration
 remains pending. The publication handoff changes documentation only. R04 stays
-deferred. R14/R22 share one missing triangle-contact routing extension, retained
-as an unscheduled follow-up. M08a contact-leg bubbles is now merged and published on main at `d855152`
+deferred. R14/R22 share one triangle-contact routing extension. The user selected
+its two half-moon views on 2026-11-08; they are now implemented locally on
+`codex/crossed-vertex`, with merge/push pending. M08a contact-leg bubbles is now merged and published on main at `d855152`
 (2026-11-08); its feature branch is retained. M08b contact seagulls and the array fix are merged and published at `e57499e`
-(2026-11-08); the source branch is retained. Ready for the user's next task;
-M09a remains the next diagram-roadmap milestone.
+(2026-11-08); the source branch is retained. The current user-selected task is crossed vertex; M09a remains the next numbered
+diagram-roadmap milestone. See [contract and results](crossed-vertex/verification.md).
 
 - [M08b publication](m08b-publication.json): verified implementation and array fix merged/pushed; package and PDF artifacts unchanged.
 - [M08b array fix](m08b-array-fix.md): corrected the Overleaf failure inside math arrays; full project compiles locally with the fixed package.

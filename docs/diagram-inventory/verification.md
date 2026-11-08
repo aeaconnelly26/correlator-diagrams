@@ -1,3 +1,20 @@
+# Crossed-vertex follow-up - 2026-11-08
+
+Local branch `codex/crossed-vertex`, base published main `bfb23ac`; merge/push
+pending. The atlas now has **150 recipes / 36 pages**. CV01/CV02 show the two
+plain half-moon layouts; CV11/CV12 show EW W segments and pink Proca half-moons
+with k guides, without caps or plus/minus-one labels. Both internal W segments
+stay collinear with their opposite outer corners. These are triangle-contact
+routing variants, not additional graph families.
+
+All 36 pages are rendered/reviewed; both new pages are inspected at reading
+size. Prior page bodies 1-34 are pixel-identical at 90dpi after excluding the
+provenance footer. All 54 maintained documents / 928 endpoint contacts pass.
+See [verification](../planning/crossed-vertex/verification.md),
+[PDF checks](../planning/crossed-vertex/checks.json) and
+[pixel comparison](../planning/crossed-vertex/atlas-pixel-check.json).
+Earlier sections preserve their checkpoint-specific states.
+
 # M08b publication - 2026-11-08
 
 Verified checkpoint `e57499e` is merged and published on main, including the

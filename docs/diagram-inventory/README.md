@@ -1,3 +1,16 @@
+# Current inventory: crossed-vertex follow-up
+
+The atlas now has **150 recipes / 36 pages**, including CV01/CV02 plain crossed
+vertex layouts and CV11/CV12 styled W/Proca examples on pages 35/36. Exactly two
+half-moon views preserve opposite-corner W diagonals and a noninteracting
+external crossing. This is an extension of triangle-contact, not another loop
+family. Current branch `codex/crossed-vertex`, based on published main `bfb23ac`;
+merge/push pending. See [contract and verification](../planning/crossed-vertex/verification.md).
+All previous 34 page bodies are pixel-identical apart from the excluded footer.
+
+Earlier checkpoint records follow; their counts/publication statements refer
+to their named session.
+
 # Current diagram inventory
 
 M08b checkpoint `e57499e`, including the Overleaf array fix, is merged and
@@ -230,6 +243,7 @@ These names do not add graph topologies:
 | `SLoopChannelCorr`, `TLoopChannelCorr`, `ULoopChannelCorr` | `SChannelCorr`, `TChannelCorr`, `UChannelCorr` |
 | `SunsetDiag` | `SunsetDiagram` |
 | `ThreePointThesis`, `ThesisVertex` | Styled `ThreePointCorr` preset |
+| `CrossedVertexCorr` | `TriangleContactCorr` with `crossed-right/crossed-left` routing |
 | `FourPointCorr[topology=...]` | Dispatch form of the named contact/channel/box/identity helpers |
 
 The generic three-point corner orientation and legacy cardinal orientation

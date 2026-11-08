@@ -123,12 +123,12 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R14 - Opposite-pair triangle-contact routing / diagonal Z connection
 
-- **Status:** Missing; source/slot specification resolved by M07c.
-- **Existing construction / evidence:** Native S13-left has quartic external pair 1/4 and Z between the q2/q3 cubic vertices; S13-right has quartic pair 2/3 and Z between q1/q4. This identification with the PDF wording uses the established spatial numbering (the slide images do not print q labels). The four public TriangleContactCorr orientations only provide adjacent quartic pairs.
-- **Remaining target / limitation:** Add the opposite-pair external attachments to the existing triangle-contact family. Keep three interactions, seven edges, a W/W/Z cycle, fixed outer corners and an unconnected external crossover. Z styling and square bounding spans already work; changing labels/spans does not supply the missing attachments.
-- **Milestone:** M07c specification audit complete; implementation follow-up unscheduled. **Dependencies:** M02 and the [traced graph/slot contract](m07c/routing-map.json).
-- **Acceptance:** Both source layouts have exact public recipes with quartic pairs 1/4 and 2/3, Z on slots 6 and 5, valences 4/3/3 and preserved logical styles/caps/momenta/indices. See [future slice](m07c/future-routing-plan.md).
-- **Sources:** P3-05, P3-06; inferred correspondence to S13-left/right. See [illustrated audit](m07c/routing-audit.pdf).
+- **Status:** Verified existing on local `codex/crossed-vertex`; merge/push pending.
+- **Existing construction / evidence:** CV01/CV02/CV11/CV12; `CrossedVertexCorr[crossed-vertex-orientation=left/right]` provides quartic external pairs 1/4 and 2/3. Actual PDF checks recover seven edges, valences 4/3/3 and one cycle. See [contract](crossed-vertex/contract.md) and [verification](crossed-vertex/verification.md).
+- **Remaining target / limitation:** Exactly two user-selected half-moon layouts, with W slots 5/7 on their outer diagonal and a curved Z slot 6. This supersedes the unimplemented angular M07c drawing; no top/bottom rotations. D01 index appearance remains deferred.
+- **Milestone:** User-selected crossed-vertex follow-up to M07c, local. **Dependencies:** M01 semantic endpoints, M02 annotations, M07b split-leg pipeline and M07c graph audit.
+- **Acceptance:** Both fixed-slot graphs, styled samples, marker/circle contact, independent momentum controls, caps, scaling, indices, arrays and call reset pass.
+- **Sources:** S13-left, S13-right; new IMG_0135/IMG_0136 reference contract dated 2026-11-08. PDF P3-05/P3-06; R22 duplicates this graph requirement.
 
 ## R15 - Proca marker contact across topology families
 
@@ -195,22 +195,9 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R22 - Crossed external triangle-contact layouts from slide 13
 
-- **Status:** Missing; source traces resolved by M07c.
-- **Existing construction / evidence:** Both native images have three interactions (one quartic, two cubic) and a W/W/Z triangle loop. S13-left carries external 1/4 at the quartic vertex; S13-right carries 2/3. The right-side external crossover has no interaction dot.
-- **Remaining target / limitation:** Same missing external-routing extension as R14. These are variants of the existing triangle-contact family, not an additional loop family. Preserve both source panels without counting the shared implementation gap twice.
-- **Milestone:** M07c specification audit complete; R14/R22 implementation follow-up unscheduled. **Dependencies:** M02; resolved [M07c maps](m07c/routing-map.json).
-- **Acceptance:** Match both seven-edge target maps with fixed outer slots, valences 4/3/3, one cycle and the unconnected external crossover; preserve metadata along the logical edges.
-- **Sources:** S13-left, S13-right. [Audit](m07c/routing-audit.pdf), [current recipes](m07c/recipes.md), [future plan](m07c/future-routing-plan.md).
-
-## Audit boundaries
-
-M07c resolves R14/R22 as one missing external-routing extension of the existing triangle-contact family. The source traces are specifications, not advertised working package recipes. Current atlas I23-I26 remain valid for adjacent pairs only. Stemmed contact-host attachments in R20 still need their attachment valences recorded before implementation.
-
-Feature gaps found while constructing recipes: a global explicit `line=...` overrides the half-box bridge-specific style, so A04 omits the global setting. Blank external bubble momentum text still leaves arrows when `show-momenta=true`; A05 uses explicit external momenta rather than implying that blanks suppress arrows. These are existing behaviors recorded for later review, not package changes.
-
-## Additional integrated capabilities
-
-External momentum hiding, continuous unlabeled arrows for empty entries,
-compact external indices, and channel side-label gap fixes are already available
-and illustrated by inventory F01-F03. The Compton example is preserved as a
-reusable application of existing tree/contact primitives, not an extra topology.
+- **Status:** Verified existing on local `codex/crossed-vertex`; merge/push pending.
+- **Existing construction / evidence:** CV01/CV02/CV11/CV12; `CrossedVertexCorr[crossed-vertex-orientation=left/right]` provides quartic external pairs 1/4 and 2/3. Actual PDF checks recover seven edges, valences 4/3/3 and one cycle. See [contract](crossed-vertex/contract.md) and [verification](crossed-vertex/verification.md).
+- **Remaining target / limitation:** Exactly two user-selected half-moon layouts, with W slots 5/7 on their outer diagonal and a curved Z slot 6. This supersedes the unimplemented angular M07c drawing; no top/bottom rotations. D01 index appearance remains deferred.
+- **Milestone:** User-selected crossed-vertex follow-up to M07c, local. **Dependencies:** M01 semantic endpoints, M02 annotations, M07b split-leg pipeline and M07c graph audit.
+- **Acceptance:** Both fixed-slot graphs, styled samples, marker/circle contact, independent momentum controls, caps, scaling, indices, arrays and call reset pass.
+- **Sources:** S13-left, S13-right; new IMG_0135/IMG_0136 reference contract dated 2026-11-08. Same graph requirement as R14; no extra loop family.

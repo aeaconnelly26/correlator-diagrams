@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M08b local; base main 35c7959 | 2026-11-08}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline crossed vertex local; base main bfb23ac | 2026-11-08}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -2728,4 +2728,76 @@
   contact-pairing=crossed
 ]
 }{Inner W circle; two-ended pink scalar loop with k.}{Pink loop has no circle. Post segment uses the default .8 W circle.}\par\vspace{4pt}
+\newpage
+\atlaspage{CURRENT / CROSSED VERTEX}{Crossed vertex: the two diagonal layouts}{Plain graph checks: a continuous half-moon, two collinear internal edges, and the shared outer frame. No momenta, circles or caps.}
+\atlascell{CV01  Crossed vertex: right half-moon}{\CrossedVertexCorr}{%
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=right
+]
+}{One central quartic vertex, two cubic vertices on a diagonal, three internal edges; the curved edge crosses an external leg without interacting.}{Exactly two layouts. The two straight internal edges follow the opposite outer corners; this extends the triangle-contact family.}\hfill
+\atlascell{CV02  Crossed vertex: left half-moon}{\CrossedVertexCorr}{%
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=left
+]
+}{One central quartic vertex, two cubic vertices on a diagonal, three internal edges; the curved edge crosses an external leg without interacting.}{Exactly two layouts. The two straight internal edges follow the opposite outer corners; this extends the triangle-contact family.}\par\vspace{4pt}
+\newpage
+\atlaspage{APPENDIX / CROSSED VERTEX}{Crossed vertex with W and scalar-polarization lines}{The two user-selected half-moon layouts. No plus/minus-one annotations. Both reuse triangle-contact styling and seven logical momentum slots.}
+\atlascell{CV11  Styled crossed vertex: right}{\CrossedVertexCorr}{%
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=right,
+  triangle-contact-external-line=ewboson,
+  triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  triangle-contact-internal-momenta={,k,},
+  triangle-contact-momentum-6={layout=side,label-offset=3pt}
+]
+}{Two W propagators share the diagonal; a pink Proca half-moon has two endpoint tips and a compact k guide.}{No automatic circle on Proca; no caps or external momenta in this reference-style sample.}\hfill
+\atlascell{CV12  Styled crossed vertex: left}{\CrossedVertexCorr}{%
+\CrossedVertexCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  crossed-vertex-orientation=left,
+  triangle-contact-external-line=ewboson,
+  triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  triangle-contact-internal-momenta={,k,},
+  triangle-contact-momentum-6={layout=side,label-offset=3pt}
+]
+}{Two W propagators share the diagonal; a pink Proca half-moon has two endpoint tips and a compact k guide.}{No automatic circle on Proca; no caps or external momenta in this reference-style sample.}\par\vspace{4pt}
 \end{document}

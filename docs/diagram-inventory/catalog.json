@@ -1,5 +1,5 @@
 {
-  "baseline": "M08b local; base main 35c7959",
+  "baseline": "crossed vertex local; base main bfb23ac",
   "date": "2026-11-08",
   "base_options": [
     "field={}",
@@ -2326,6 +2326,72 @@
           ],
           "description": "Inner W circle; two-ended pink scalar loop with k.",
           "limitation": "Pink loop has no circle. Post segment uses the default .8 W circle."
+        }
+      ]
+    },
+    {
+      "section": "CURRENT / CROSSED VERTEX",
+      "title": "Crossed vertex: the two diagonal layouts",
+      "subtitle": "Plain graph checks: a continuous half-moon, two collinear internal edges, and the shared outer frame. No momenta, circles or caps.",
+      "entries": [
+        {
+          "id": "CV01",
+          "title": "Crossed vertex: right half-moon",
+          "macro": "CrossedVertexCorr",
+          "options": [
+            "crossed-vertex-orientation=right"
+          ],
+          "description": "One central quartic vertex, two cubic vertices on a diagonal, three internal edges; the curved edge crosses an external leg without interacting.",
+          "limitation": "Exactly two layouts. The two straight internal edges follow the opposite outer corners; this extends the triangle-contact family."
+        },
+        {
+          "id": "CV02",
+          "title": "Crossed vertex: left half-moon",
+          "macro": "CrossedVertexCorr",
+          "options": [
+            "crossed-vertex-orientation=left"
+          ],
+          "description": "One central quartic vertex, two cubic vertices on a diagonal, three internal edges; the curved edge crosses an external leg without interacting.",
+          "limitation": "Exactly two layouts. The two straight internal edges follow the opposite outer corners; this extends the triangle-contact family."
+        }
+      ]
+    },
+    {
+      "section": "APPENDIX / CROSSED VERTEX",
+      "title": "Crossed vertex with W and scalar-polarization lines",
+      "subtitle": "The two user-selected half-moon layouts. No plus/minus-one annotations. Both reuse triangle-contact styling and seven logical momentum slots.",
+      "entries": [
+        {
+          "id": "CV11",
+          "title": "Styled crossed vertex: right",
+          "macro": "CrossedVertexCorr",
+          "options": [
+            "crossed-vertex-orientation=right",
+            "triangle-contact-external-line=ewboson",
+            "triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "triangle-contact-internal-momenta={,k,}",
+            "triangle-contact-momentum-6={layout=side,label-offset=3pt}"
+          ],
+          "description": "Two W propagators share the diagonal; a pink Proca half-moon has two endpoint tips and a compact k guide.",
+          "limitation": "No automatic circle on Proca; no caps or external momenta in this reference-style sample."
+        },
+        {
+          "id": "CV12",
+          "title": "Styled crossed vertex: left",
+          "macro": "CrossedVertexCorr",
+          "options": [
+            "crossed-vertex-orientation=left",
+            "triangle-contact-external-line=ewboson",
+            "triangle-contact-internal-lines={{ewboson,circ=W},{proca,magenta},{ewboson,circ=W}}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "triangle-contact-internal-momenta={,k,}",
+            "triangle-contact-momentum-6={layout=side,label-offset=3pt}"
+          ],
+          "description": "Two W propagators share the diagonal; a pink Proca half-moon has two endpoint tips and a compact k guide.",
+          "limitation": "No automatic circle on Proca; no caps or external momenta in this reference-style sample."
         }
       ]
     }

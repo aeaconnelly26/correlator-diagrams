@@ -2466,6 +2466,7 @@
 }
 
 \newcommand{\corr@resettrianglecontactdefaults}{%
+  \def\corr@crossedvertexgap{.04}%
   \@for\corr@tcslot:={1,2,3,4,5,6,7}\do{%
     \expandafter\def\csname corr@tcslotoptions\corr@tcslot\endcsname{}%
   }%
@@ -2496,7 +2497,7 @@
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumstart{auto}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumend{auto}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumoffset{10pt}%
-  \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelfraction{0.50}%
+  \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelfraction{auto}%
   \corr@topologysetdefault\corr@trianglecontactinternalmomentumlabelgap{auto}%
   \corr@topologysetdefault\corr@trianglecontactpropagatorleftindices{}%
   \corr@topologysetdefault\corr@trianglecontactpropagatorrightindices{}%
@@ -3330,6 +3331,12 @@
   triangle-contact-orientation/top/.code={\def\corr@trianglecontactorientation{top}},
   triangle-contact-orientation/left/.code={\def\corr@trianglecontactorientation{left}},
   triangle-contact-orientation/right/.code={\def\corr@trianglecontactorientation{right}},
+  triangle-contact-orientation/crossed-left/.code={\def\corr@trianglecontactorientation{crossed-left}},
+  triangle-contact-orientation/crossed-right/.code={\def\corr@trianglecontactorientation{crossed-right}},
+  crossed-vertex-orientation/.is choice,
+  crossed-vertex-orientation/left/.style={triangle-contact-orientation=crossed-left},
+  crossed-vertex-orientation/right/.style={triangle-contact-orientation=crossed-right},
+  crossed-vertex-crossing-gap/.store in=\corr@crossedvertexgap,
   triangle-contact-orientation/default/.style={triangle-contact-orientation=bottom},
   triangle-contact-xspan/.store in=\corr@trianglecontactxspan,
   triangle-contact-yspan/.store in=\corr@trianglecontactyspan,
@@ -5962,6 +5969,14 @@
     \corr@ifstringeq{\corr@trianglecontactorientation}{right}{%
       \ifnum#1>2 \def\corr@tcdefaultfrac{0.30}\fi
     }{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-right}{%
+      \ifnum#1=2 \def\corr@tcdefaultfrac{0.30}\fi
+      \ifnum#1=3 \def\corr@tcdefaultfrac{0.22}\fi
+    }{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-left}{%
+      \ifnum#1=1 \def\corr@tcdefaultfrac{0.22}\fi
+      \ifnum#1=4 \def\corr@tcdefaultfrac{0.30}\fi
+    }{}%
     \edef\corr@tcstart{\corr@trianglecontactmomentumstart}%
     \edef\corr@tcend{\corr@trianglecontactmomentumend}%
     \edef\corr@tcgap{\corr@trianglecontactmomentumlabelgap}%
@@ -5976,7 +5991,7 @@
     \corr@tcinherit\corr@tcstart{\corr@trianglecontactinternalmomentumstart}{\corr@tcdefaultstart}%
     \corr@tcinherit\corr@tcend{\corr@trianglecontactinternalmomentumend}{\corr@tcdefaultend}%
     \edef\corr@tcgap{\corr@trianglecontactinternalmomentumlabelgap}%
-    \edef\corr@tcfrac{\corr@trianglecontactinternalmomentumlabelfraction}%
+    \corr@tcinherit\corr@tcfrac{\corr@trianglecontactinternalmomentumlabelfraction}{0.50}%
     \edef\corr@tcoffset{\corr@trianglecontactinternalmomentumoffset}%
   \fi
   \edef\corr@tclayout{\corr@trianglecontactmomentumlayout}%
@@ -6139,6 +6154,8 @@
     \def\corr@trianglecontactreverseautoslot{6}%
     \corr@ifstringeq{\corr@trianglecontactorientation}{top}{\def\corr@trianglecontactreverseautoslot{7}}{}%
     \corr@ifstringeq{\corr@trianglecontactorientation}{left}{\def\corr@trianglecontactreverseautoslot{7}}{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-left}{\def\corr@trianglecontactreverseautoslot{7}}{}%
+    \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-right}{\def\corr@trianglecontactreverseautoslot{7}}{}%
     \ifnum#1=\corr@trianglecontactreverseautoslot\relax
       \def\corr@trianglecontactthisinternalmomentumdirection{reverse}%
     \fi
@@ -9157,7 +9174,222 @@
   \corr@trianglecontactfinish
 }
 
+% Crossed vertex: Q lies on the A--B diameter. Slots 5/7 are the
+% collinear Q--A / B--Q edges; slot 6 is one continuous semicircle A--B.
+% A crossing is a stroke break, never an interaction or a new logical edge.
+\newcommand{\corr@crossedvertexgeometry}{%
+  \pgfmathsetmacro{\corr@cvradius}{veclen(\corr@trianglecontactxspan,\corr@trianglecontactyspan)}%
+  \pgfmathsetmacro{\corr@cvouterradius}{veclen(\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan)}%
+  \pgfmathsetmacro{\corr@cvcrossfraction}{1-\corr@cvradius/\corr@cvouterradius}%
+  \pgfmathtruncatemacro{\corr@cvvalid}{min(\corr@trianglecontactxspan,\corr@trianglecontactyspan,\corr@trianglecontactexternalxspan-\corr@trianglecontactxspan,\corr@trianglecontactexternalyspan-\corr@trianglecontactyspan,\corr@crossedvertexgap,\corr@cvcrossfraction-\corr@crossedvertexgap,1-\corr@cvcrossfraction-\corr@crossedvertexgap)>0}%
+  \ifnum\corr@cvvalid=0
+    \PackageError{feynman-fun}{Invalid crossed vertex spans or crossing gap}{Use positive internal spans smaller than the external spans, and a positive crossing half-gap smaller than either endpoint fraction.}%
+  \fi
+  \def\corr@cvysign{1}\def\corr@cvcrossslot{3}%
+  \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-left}{%
+    \def\corr@cvysign{-1}\def\corr@cvcrossslot{1}}{}%
+  % Project the diameter onto the actual outer diagonal. Changing the frame
+  % or radius must never kink the two W edges away from their outer corners.
+  \pgfmathsetmacro{\corr@cvinternalx}{\corr@cvradius*\corr@trianglecontactexternalxspan/\corr@cvouterradius}%
+  \pgfmathsetmacro{\corr@cvinternaly}{\corr@cvradius*\corr@trianglecontactexternalyspan/\corr@cvouterradius}%
+  \pgfmathsetmacro{\corr@cvstartangle}{atan2(\corr@cvysign*\corr@cvinternaly,-\corr@cvinternalx)}%
+  \coordinate (corrC) at (0,0);
+  \coordinate (corrTriContact) at (corrC);
+  \coordinate (corrTriA) at (-\corr@cvinternalx,\corr@cvysign*\corr@cvinternaly);
+  \coordinate (corrTriB) at (\corr@cvinternalx,-\corr@cvysign*\corr@cvinternaly);
+  \coordinate (corrExtUL) at (-\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+  \coordinate (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+  \coordinate (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
+  \coordinate (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
+  \coordinate (corrTriSlotOne) at (corrTriA);
+  \coordinate (corrTriSlotTwo) at (corrTriContact);
+  \coordinate (corrTriSlotThree) at (corrTriContact);
+  \coordinate (corrTriSlotFour) at (corrTriB);
+  \def\corr@cvcrossouter{corrExtUR}%
+  \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-left}{%
+    \coordinate (corrTriSlotOne) at (corrTriContact);
+    \coordinate (corrTriSlotTwo) at (corrTriA);
+    \coordinate (corrTriSlotThree) at (corrTriB);
+    \coordinate (corrTriSlotFour) at (corrTriContact);
+    \def\corr@cvcrossouter{corrExtUL}}{}%
+  \coordinate (corrBEGapA) at ($(\corr@cvcrossouter)!{\corr@cvcrossfraction-\corr@crossedvertexgap}!(corrTriContact)$);
+  \coordinate (corrBEGapB) at ($(\corr@cvcrossouter)!{\corr@cvcrossfraction+\corr@crossedvertexgap}!(corrTriContact)$);
+  \coordinate (corrTriEdgeFiveStart) at (corrTriContact);
+  \coordinate (corrTriEdgeFiveEnd) at (corrTriA);
+  \coordinate (corrTriEdgeSixStart) at (corrTriA);
+  \coordinate (corrTriEdgeSixEnd) at (corrTriB);
+  \coordinate (corrTriEdgeSevenStart) at (corrTriB);
+  \coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
+  % An interior point of the half-disc supplies a meaningful outside normal
+  % even though its three interaction vertices themselves are collinear.
+  \coordinate (corrTriCentroid) at ({.4*\corr@cvradius*cos(\corr@cvstartangle-90)},{.4*\corr@cvradius*sin(\corr@cvstartangle-90)});
+}
+\newcommand{\corr@drawcrossedvertexexternal}[3]{%
+  \begingroup
+  \ifnum#1=\corr@cvcrossslot\relax
+    \let\corr@drawexternalpropagatorpath\corr@drawboxsplitexternalpath
+  \fi
+  \corr@drawtrianglecontactexternalprop{#1}{#2}{#3}%
+  \endgroup
+}
+\newcommand{\corr@drawcrossedvertexarc}{%
+  \corr@trianglecontactinternallinefor{6}%
+  \corr@trianglecontactstylefor{6}{\corr@trianglecontactresolvedinternalline}%
+  \expandafter\corr@semanticstyleinternal\expandafter{\corr@propoptions}%
+  \edef\corr@propoptions{\corr@orientedstyle}%
+  \corr@appendproparrowsize{6}\corr@appendpropcolor
+  \corr@appendpropcolorvalue{\corr@trianglecontactcolor}%
+  \corr@appendpropcolorvalue{\corr@trianglecontactinternalcolor}%
+  \ifdefempty{\corr@trianglecontactcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@trianglecontactcolor}}%
+  \ifdefempty{\corr@trianglecontactinternalcolor}{}{\corr@appendsemanticmarkerstyleitem{\corr@trianglecontactinternalcolor}}%
+  \expandafter\propag\expandafter[\corr@propoptions] (corrTriA)
+    arc[start angle=\corr@cvstartangle,delta angle=-180,radius=\corr@cvradius cm];
+  % Exact endpoint tangents; marker contact and size use the shared semantic
+  % pipeline. The diameter is not the tangent of the half-moon.
+  \coordinate (corrCVArcStartGuide) at ($(corrTriA)+({cos(\corr@cvstartangle-90)},{sin(\corr@cvstartangle-90)})$);
+  \coordinate (corrCVArcEndGuide) at ($(corrTriB)+({cos(\corr@cvstartangle-90)},{sin(\corr@cvstartangle-90)})$);
+  \corr@crossedvertexarcmarkers
+}
+% Queue the arc's two ends independently: both outward tangents point toward
+% the bulging half-disc, unlike the two directions on a straight propagator.
+\newcommand{\corr@crossedvertexarcmarkers}{%
+  \ifcorr@semanticspolmarkerstart
+    \ifcorr@semanticmarkerstartfilled
+      \corr@queuesemanticendpointmarker{6}{corrTriA}{corrCVArcStartGuide}{filled}{\corr@semanticmarkeroptions}%
+    \else
+      \corr@queuesemanticendpointmarker{6}{corrTriA}{corrCVArcStartGuide}{open}{\corr@semanticmarkeroptions}%
+    \fi
+  \fi
+  \ifcorr@semanticspolmarkerend
+    \ifcorr@semanticmarkerendfilled
+      \corr@queuesemanticendpointmarker{6}{corrTriB}{corrCVArcEndGuide}{filled}{\corr@semanticmarkeroptions}%
+    \else
+      \corr@queuesemanticendpointmarker{6}{corrTriB}{corrCVArcEndGuide}{open}{\corr@semanticmarkeroptions}%
+    \fi
+  \fi
+}
+\newcommand{\corr@crossedvertexarrowsegment}[3]{%
+  \pgfmathsetmacro{\corr@cvanglea}{\corr@cvstartangle-180*(#1)}%
+  \pgfmathsetmacro{\corr@cvangleb}{\corr@cvstartangle-180*(#2)}%
+  \draw[#3,line width=\corr@momentumlinewidth]
+    ($(corrC)+({\corr@cvarrowradius*cos(\corr@cvanglea)},{\corr@cvarrowradius*sin(\corr@cvanglea)})$)
+    arc[start angle=\corr@cvanglea,end angle=\corr@cvangleb,radius=\corr@cvarrowradius cm];
+}
+\newcommand{\corr@crossedvertexarcmomentum}{%
+  \corr@selectmomentumslot{6}{\corr@trianglecontactinternalmomentumslots}%
+  \ifcorr@slotselected
+  \corr@trianglecontactinternalmomentumlabel{6}%
+  \ifdefempty{\corr@trianglecontactthisinternalmomentum}{}{%
+    \corr@trianglecontactinternalmomentumdirection{6}%
+    \corr@ifstringeq{\corr@trianglecontactthisinternalmomentumdirection}{none}{}{%
+      \begingroup
+      \corr@trianglecontactresolveannotation{6}%
+      \def\corr@cvdefaultfrac{.75}%
+      \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-left}{\def\corr@cvdefaultfrac{.25}}{}%
+      \corr@ifstringeq{\corr@trianglecontactinternalmomentumlabelfraction}{auto}{\let\corr@tcfrac\corr@cvdefaultfrac}{}%
+      \corr@ifstringeq{\corr@trianglecontactinternalmomentumstart}{auto}{\pgfmathsetmacro{\corr@tcstart}{\corr@cvdefaultfrac-.11}}{}%
+      \corr@ifstringeq{\corr@trianglecontactinternalmomentumend}{auto}{\pgfmathsetmacro{\corr@tcend}{\corr@cvdefaultfrac+.11}}{}%
+      % Reapply the per-edge overrides after the curved-edge defaults.
+      \edef\corr@tcoptions{\csname corr@tcslotoptions6\endcsname}%
+      \edef\corr@tcapplyoptions{\noexpand\pgfqkeys{/corrdiag/tc-momentum}{\corr@tcoptions}}\corr@tcapplyoptions
+      \def\corr@cvnormalsign{1}%
+      \corr@ifstringeq{\corr@tcside}{inside}{\def\corr@cvnormalsign{-1}}{}%
+      \corr@ifstringeq{\corr@tcside}{right}{\def\corr@cvnormalsign{-1}}{}%
+      \pgfmathsetmacro{\corr@cvarrowradius}{\corr@cvradius+\corr@cvnormalsign*\corr@tcoffset/1cm}%
+      \corr@ifstringeq{\corr@tclabeloffset}{auto}{%
+        \def\corr@tclabeloffset{0pt}%
+        \corr@ifstringeq{\corr@tclayout}{side}{\def\corr@tclabeloffset{3pt}}{}%
+      }{}%
+      \pgfmathsetmacro{\corr@cvlabelradius}{\corr@cvarrowradius+\corr@cvnormalsign*\corr@tclabeloffset/1cm}%
+      \pgfmathsetmacro{\corr@cvlabelangle}{\corr@cvstartangle-180*\corr@tcfrac}%
+      \corr@ifstringeq{\corr@tclabelanchor}{auto}{%
+        \def\corr@tclabelanchor{center}%
+        \corr@ifstringeq{\corr@tclayout}{side}{\pgfmathsetmacro{\corr@tclabelanchor}{\corr@cvlabelangle+90+90*\corr@cvnormalsign}}{}%
+      }{}%
+      \coordinate (corrTCLabel) at ($(corrC)+({\corr@cvlabelradius*cos(\corr@cvlabelangle)},{\corr@cvlabelradius*sin(\corr@cvlabelangle)})$);
+      \begingroup
+        \tikzset{every node/.append style={alias=corrTCLabelNode}}%
+        \corr@putmomentumlabelwithdistance{(corrTCLabel)}{\corr@tclabelanchor}{0pt}{\corr@tclabelxshift}{\corr@tclabelyshift}{\corr@trianglecontactthisinternalmomentum}%
+      \endgroup
+      \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{6}}%
+      \def\corr@cvarrowstyle{-{Stealth[length=\corr@thismomarrowsize]}}%
+      \corr@ifstringeq{\corr@trianglecontactthisinternalmomentumdirection}{reverse}{\def\corr@cvarrowstyle{{Stealth[length=\corr@thismomarrowsize]}-}}{}%
+      \corr@ifstringeq{\corr@tclayout}{gap}{%
+        \pgfpointdiff{\pgfpointanchor{corrTCLabelNode}{west}}{\pgfpointanchor{corrTCLabelNode}{east}}%
+        \edef\corr@cvlabelwidth{\the\pgf@x}%
+        \pgfpointdiff{\pgfpointanchor{corrTCLabelNode}{south}}{\pgfpointanchor{corrTCLabelNode}{north}}%
+        \edef\corr@cvlabelheight{\the\pgf@y}%
+        \corr@ifstringeq{\corr@tcgap}{auto}{%
+          \pgfmathsetmacro{\corr@tcgap}{(.5*(abs(sin(\corr@cvlabelangle))*\corr@cvlabelwidth+abs(cos(\corr@cvlabelangle))*\corr@cvlabelheight)+1pt)/(pi*\corr@cvarrowradius*1cm)}%
+        }{}%
+        % Center the break on the actual shifted label, or use a continuous
+        % arrow if the label was moved clear of its circular guide.
+        \pgfpointdiff{\pgfpointanchor{corrC}{center}}{\pgfpointanchor{corrTCLabelNode}{center}}%
+        \pgfmathsetmacro{\corr@cvlabelx}{\pgf@x/1cm}%
+        \pgfmathsetmacro{\corr@cvlabely}{\pgf@y/1cm}%
+        \pgfmathsetmacro{\corr@cvgapcenter}{mod(\corr@cvstartangle-atan2(\corr@cvlabely,\corr@cvlabelx)+720,360)/180}%
+        \pgfmathsetlengthmacro{\corr@cvnormaldistance}{abs(veclen(\corr@cvlabelx,\corr@cvlabely)-\corr@cvarrowradius)*1cm}%
+        \pgfmathsetlengthmacro{\corr@cvnormalhalf}{.5*(abs(cos(\corr@cvlabelangle))*\corr@cvlabelwidth+abs(sin(\corr@cvlabelangle))*\corr@cvlabelheight)}%
+        \pgfmathsetmacro{\corr@cvga}{max(\corr@tcstart,min(\corr@tcend,\corr@cvgapcenter-\corr@tcgap))}%
+        \pgfmathsetmacro{\corr@cvgb}{max(\corr@tcstart,min(\corr@tcend,\corr@cvgapcenter+\corr@tcgap))}%
+        \ifdim\corr@cvnormaldistance>\corr@cvnormalhalf
+          \corr@crossedvertexarrowsegment{\corr@tcstart}{\corr@tcend}{\corr@cvarrowstyle}%
+        \else
+        \corr@ifstringeq{\corr@trianglecontactthisinternalmomentumdirection}{reverse}{%
+          \corr@crossedvertexarrowsegment{\corr@tcstart}{\corr@cvga}{\corr@cvarrowstyle}%
+          \corr@crossedvertexarrowsegment{\corr@cvgb}{\corr@tcend}{}%
+        }{%
+          \corr@crossedvertexarrowsegment{\corr@tcstart}{\corr@cvga}{}%
+          \corr@crossedvertexarrowsegment{\corr@cvgb}{\corr@tcend}{\corr@cvarrowstyle}%
+        }%
+        \fi
+      }{\corr@crossedvertexarrowsegment{\corr@tcstart}{\corr@tcend}{\corr@cvarrowstyle}}%
+      \endgroup
+    }%
+  }%
+  \fi
+}
+\newcommand{\corr@crossedvertexindexline}[8]{%
+  \corr@ifstringeq{#1}{corrTriEdgeSixStart}{%
+    \coordinate (corrCVIndex) at ($(corrC)+({\corr@cvradius*cos(\corr@cvstartangle-180*(#3))},{\corr@cvradius*sin(\corr@cvstartangle-180*(#3))})$);
+    \corr@cvoriginalindexline{corrCVIndex}{corrCVIndex}{0}{#4}{#5}{#6}{#7}{#8}%
+  }{\corr@cvoriginalindexline{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}%
+}
+\newcommand{\corr@drawfourpointcrossedvertex}{%
+  \corr@crossedvertexgeometry
+  \begin{feynhand}
+    \corr@ifexternallegs{%
+      \corr@drawcrossedvertexexternal{1}{corrExtUL}{corrTriSlotOne}%
+      \corr@drawcrossedvertexexternal{2}{corrExtLL}{corrTriSlotTwo}%
+      \corr@drawcrossedvertexexternal{3}{corrExtUR}{corrTriSlotThree}%
+      \corr@drawcrossedvertexexternal{4}{corrExtLR}{corrTriSlotFour}%
+    }%
+    \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
+    \corr@drawtrianglecontactinternalprop{7}{corrTriB}{corrTriContact}%
+    \corr@drawcrossedvertexarc
+  \end{feynhand}
+  \corr@trianglecontactputvertices
+  \corr@trianglecontactplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawtrianglecontactinternalmomentum{5}{corrTriContact}{corrTriA}{90}%
+    \corr@drawtrianglecontactinternalmomentum{7}{corrTriB}{corrTriContact}{90}%
+    \corr@crossedvertexarcmomentum
+    \corr@drawtrianglecontactmomentum{1}{corrExtUL}{corrTriSlotOne}{90}%
+    \corr@drawtrianglecontactmomentum{2}{corrExtLL}{corrTriSlotTwo}{-90}%
+    \corr@drawtrianglecontactmomentum{3}{corrExtUR}{corrTriSlotThree}{-90}%
+    \corr@drawtrianglecontactmomentum{4}{corrExtLR}{corrTriSlotFour}{90}%
+  \fi
+  \begingroup
+    \let\corr@cvoriginalindexline\corr@puttopologyindexline
+    \let\corr@puttopologyindexline\corr@crossedvertexindexline
+    \corr@trianglecontactplacepropagatorindices
+  \endgroup
+  \corr@trianglecontactplaceexternallabels
+  \corr@topologyputcentral{corrC}{\corr@trianglecontactcentrallabelyshift}%
+}
 \newcommand{\corr@drawfourpointtrianglecontact}{%
+  \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-left}{\corr@drawfourpointcrossedvertex}{%
+  \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-right}{\corr@drawfourpointcrossedvertex}{%
   \corr@ifstringeq{\corr@trianglecontactorientation}{top}{%
     \corr@drawfourpointtrianglecontacttop
   }{%
@@ -9171,6 +9403,7 @@
       }%
     }%
   }%
+  }}%
 }
 
 % Vertex correction: a true three-trivalent-vertex loop and an exchange bridge.
@@ -9965,6 +10198,7 @@
 \NewDocumentCommand{\HalfBoxCorr}{O{}}{\FourPointCorr[topology=half-box,#1]}
 \NewDocumentCommand{\FlatContactCorr}{O{}}{\FourPointCorr[topology=flat-contact,#1]}
 \NewDocumentCommand{\TriangleContactCorr}{O{}}{\FourPointCorr[topology=triangle-contact,#1]}
+\NewDocumentCommand{\CrossedVertexCorr}{O{}}{\TriangleContactCorr[triangle-contact-orientation=crossed-right,#1]}
 \NewDocumentCommand{\SunsetDiag}{O{}}{\SunsetDiagram[#1]}
 
 \makeatother

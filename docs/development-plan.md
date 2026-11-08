@@ -6,13 +6,19 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`. M08b checkpoint `e57499e`, including the Overleaf
+- Current branch: `codex/crossed-vertex`, based on published main `bfb23ac`.
+  The user-selected crossed-vertex session implements exactly two half-moon
+  layouts, with collinear W propagators on opposite diagonals. Verification,
+  inventory and reference records are in [the session record](planning/crossed-vertex/verification.md).
+  All 54 documents / 928 endpoint checks pass; the atlas has 150 recipes /
+  36 pages. Merge/push is pending; main remains unchanged.
+- M08b checkpoint `e57499e`, including the Overleaf
   array compatibility fix, is merged and published to GitHub (2026-11-08).
   The feature branch is retained. All 53 documents / 894 contacts pass;
   the atlas remains 146 recipes / 34 pages. See
   [publication record](planning/m08b-publication.json). No M08b merge/push remains.
-- Ready for the user's next task. M09a remains the next diagram-roadmap
-  milestone; no next feature session has started. Thesis sources/PDFs under
+- The crossed-vertex follow-up to M07c is the current session. M09a remains
+  the next numbered diagram-roadmap milestone after this branch is integrated. Thesis sources/PDFs under
   ignored `output/` are local artifacts and were not included in this publication.
 - M08a checkpoint `d855152` is merged and published to GitHub; the publication
   handoff is `35c7959` (2026-11-08). The feature branch is retained. No M08a
@@ -26,7 +32,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   were included unchanged. That checkpoint passed 50 documents / 850 contacts
   and had a 126-recipe / 29-page atlas; M08a extends it as recorded above.
   No M07b/M07c merge/push remains. R04 ordinary-box right crossing stays deferred;
-  R14/R22 opposite-pair triangle-contact routing remains missing and unscheduled.
+  R14/R22 opposite-pair routing is implemented locally in the current
+  user-selected half-moon follow-up.
   See [M07c audit](planning/m07c/routing-audit.pdf) and
   [verification](planning/m07c-verification.md).
 - The user-selected circle default is now equivalent to `circ scale=0.8`:
@@ -95,7 +102,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   triangle-contact orientations are already implemented.
 - Semantic bubbles, seagulls and swordfish support s/t-tree external slots 1-4, one at
   a time. Contact bubbles and seagulls support the same four physical slots on central/crossed
-  quartic hosts (seagulls are local M08b); U-tree/internal hosts remain unsupported.
+  quartic hosts (published M08b); U-tree/internal hosts remain unsupported.
   Seagulls have one quartic self-loop vertex, distinct from bubbles.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
   the repository or delete branches.
@@ -104,7 +111,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-nine pages: 126 recipes, including crossed upper external legs and the D02 circle fix. M07b upper slice is local; M07a and earlier work are published. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Thirty-six pages: 150 recipes, including both new plain/styled crossed-vertex views. The crossed-vertex additions are local; M08b and earlier work are published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -126,7 +133,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M06 | Regular tree-attached triangle corrections, four placements | Complete on published main at verified checkpoint `629356d`; feature branch retained |
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
 | M07b | Crossed external layouts | Upper slice published on main; R04 right pair deferred by user |
-| M07c | R14/R22 reference-routing audit | Specification audit published on main; missing triangle-contact routing extension remains unscheduled |
+| M07c | R14/R22 reference-routing audit | Audit published; two user-selected half-moon routings implemented locally in the crossed-vertex follow-up |
 | M08a / M08b | Contact external self-energy / seagull | M08a and M08b published on main; M08b includes the array fix |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
@@ -134,8 +141,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-**Ready for the user's next task.** M08b is merged and published. The next
-diagram-roadmap milestone is **M09a internal-exchange self-energy bubbles**. Begin with one tree channel's internal slot 5, verify its
+**First integrate the verified crossed-vertex branch when the user requests it.**
+M08b is already merged and published. The next numbered diagram-roadmap
+milestone is **M09a internal-exchange self-energy bubbles**. Begin with one tree channel's internal slot 5, verify its
 two inserted cubic vertices and exchange segments, then expand to the other
 channel. M09b internal seagulls and M09c shared inner-vertex bubbles are separate
 later slices, with their own source graph maps.
@@ -145,12 +153,10 @@ one quartic contact plus one quartic self-loop insertion. Defaults put upper
 loops up and lower loops down; styles, caps, momentum and index controls are
 preserved. See [M08b verification](planning/m08b-verification.md).
 
-M07c's source audit is complete. Both slide-13 panels are triangle contacts
-with opposite quartic external pairs (1/4 and 2/3); current public orientations
-only support adjacent pairs. R14/R22 therefore share one precisely specified
-missing routing extension, retained as an **unscheduled future slice** in
-[the plan](planning/m07c/future-routing-plan.md). This audit does not implement
-it. The user-deferred ordinary-box right crossing R04 remains separate.
+M07c's audit established the two opposite-pair graphs. The user selected their
+implementation on 2026-11-08 with a half-moon embedding and exactly two views.
+`CrossedVertexCorr` now supplies both locally; see [contract](planning/crossed-vertex/contract.md).
+The former proposed top/bottom angular API was never implemented and is superseded.
 
 M08a is published at verified feature checkpoint `d855152`, with the documentation
 handoff at `35c7959`. M08b is now published at `e57499e`; its feature branch is retained. The maintained

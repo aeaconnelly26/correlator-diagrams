@@ -1,0 +1,64 @@
+{
+  "graphs": [
+    {
+      "orientation": "right",
+      "logical_edges": 7,
+      "interaction_valences": [
+        4,
+        3,
+        3
+      ],
+      "cycle_rank": 1,
+      "quartic_external_pair": [
+        2,
+        3
+      ],
+      "crossed_external_slot": 3,
+      "crossing_is_vertex": false,
+      "half_moon_radius_pdf_pt": 33.411460091438656,
+      "outer_frame_pdf_pt": [
+        95.25585999999998,
+        95.25585999999998
+      ]
+    },
+    {
+      "orientation": "left",
+      "logical_edges": 7,
+      "interaction_valences": [
+        4,
+        3,
+        3
+      ],
+      "cycle_rank": 1,
+      "quartic_external_pair": [
+        1,
+        4
+      ],
+      "crossed_external_slot": 1,
+      "crossing_is_vertex": false,
+      "half_moon_radius_pdf_pt": 33.411460091438656,
+      "outer_frame_pdf_pt": [
+        95.25585999999998,
+        95.25585999999998
+      ]
+    }
+  ],
+  "new_marker_contacts": 34,
+  "styled_W_circles": 4,
+  "rejected_options": 8,
+  "annotation_isolation": [
+    {
+      "orientation": "right",
+      "independent_momentum_slots": 7,
+      "label_only_strokes_unchanged": true,
+      "all_momenta_hidden": true
+    },
+    {
+      "orientation": "left",
+      "independent_momentum_slots": 7,
+      "label_only_strokes_unchanged": true,
+      "all_momenta_hidden": true
+    }
+  ],
+  "pages": 9
+}

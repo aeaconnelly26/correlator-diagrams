@@ -1,4 +1,9 @@
-# R14/R22: precise future implementation slice
+# R14/R22: historical future implementation slice
+
+**Superseded 2026-11-08:** the user selected exactly two half-moon crossed-vertex
+views. Their [implemented contract](../crossed-vertex/contract.md) preserves the
+fixed-slot graphs with a different embedding/API. The proposed values below
+were never implemented. This file preserves the original audit recommendation.
 
 This plan records the gap established by M07c. **No package implementation is
 included; the follow-up is unscheduled.** It is separate from the user-deferred

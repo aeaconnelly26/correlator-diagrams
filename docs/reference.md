@@ -3492,3 +3492,74 @@ If you use `latexmk`:
 ```sh
 latexmk -pdf yourfile.tex
 ```
+
+
+## Crossed vertex correction: two half-moon layouts
+
+`\CrossedVertexCorr` reuses the triangle-contact graph and its style/label
+controls. `crossed-vertex-orientation=right` is the default and connects the
+UL/LR cubic vertices through a half-moon; `left` connects LL/UR. In both, the
+two straight W propagators share that same diagonal and meet the central
+quartic vertex. The arc crosses one external leg without an interaction dot.
+
+```tex
+\CrossedVertexCorr[
+  field={}, leg-labels={,,,}, central={}, blob=false,
+  center-vertex=true, external-vertices=false,
+  crossed-vertex-orientation=right,
+  line=plain, show-momenta=false
+]
+```
+
+For the reference-style sample, replace `line=plain, show-momenta=false` with:
+
+```tex
+triangle-contact-external-line=ewboson,
+triangle-contact-internal-lines={{ewboson,circ=W},
+                                {proca,magenta},
+                                {ewboson,circ=W}},
+show-momenta=true,
+external-momentum-hide={1,2,3,4},
+triangle-contact-internal-momenta={,k,},
+triangle-contact-momentum-6={layout=side,label-offset=3pt}
+```
+
+The underlying form is `\TriangleContactCorr[triangle-contact-orientation=crossed-right]`
+or `crossed-left`. These are presets/layouts of one graph family, not extra
+loop topologies. Exactly two crossed views are supported.
+
+| Logical slot | Connection |
+| --- | --- |
+| 1,2,3,4 | Physical UL, LL, UR, LR external corners |
+| 5 | Q to first cubic vertex A; straight W in the sample |
+| 6 | A to opposite cubic vertex B; continuous semicircle |
+| 7 | B to Q; second straight W in the sample |
+
+Q hosts slots 2/3 in the right view and 1/4 in the left. Slot 3 is interrupted
+in the right view; slot 1 in the left. The full logical external edge keeps its
+styles, semantic tips and outer caps. No artificial cut-end tips/caps are added.
+`crossed-vertex-crossing-gap=.04` sets the half-gap as a fraction of that full
+edge. Invalid orientations, spans and gaps produce errors.
+
+The outer frame inherits `fourpoint-xspan/yspan` (2.10 by default), with explicit
+`triangle-contact-external-xspan/yspan` overrides. In crossed views, the internal
+span settings determine a **circular radius** `sqrt(xspan^2+yspan^2)`; the diameter
+is projected onto the actual outer diagonal. They do not set ellipse axes.
+This keeps the W segments straight through their outer corners, including
+unequal-frame examples. Both internal spans must be positive and individually
+smaller than their external counterparts.
+
+All seven `triangle-contact-momentum-N` keys retain their per-edge controls.
+Slot 6 follows the circle, with compact clockwise default arrows centered at
+fraction .75 in the right view and .25 in the left, away from the crossing.
+Choose `layout=side` for an unbroken arrow or `layout=gap` for a label in its
+break; `side=inside/outside/left/right`, range, offset, label shifts and anchor
+remain available. The grouped internal label fraction defaults to `auto`:
+existing straight triangle-contact views still resolve to .50, while crossed
+views use the above shoulder defaults. Explicit fractions are authoritative.
+Reverse or hide with `triangle-contact-internal-momentum-directions`; default
+external momentum stays p1/p2 incoming and p3/p4 outgoing. Slot-6 endpoint indices
+attach to its actual curve; D01 index appearance remains a later workflow.
+
+See inventory CV01/CV02/CV11/CV12, [the frozen contract](planning/crossed-vertex/contract.md),
+and the maintained `regressions/topologies/crossed-vertex/crossed-vertex-regression.tex`.
