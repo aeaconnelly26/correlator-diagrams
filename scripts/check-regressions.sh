@@ -57,6 +57,8 @@ run_tex "regressions/topologies/insertion/insertion-endcaps.tex"
 run_tex "regressions/topologies/insertion/t-tree-bubble-slots.tex"
 run_tex "regressions/topologies/insertion/s-tree-bubble-slots.tex"
 run_tex "regressions/topologies/insertion/contact-bubble-slots.tex"
+run_tex "regressions/topologies/insertion/contact-seagull-slots.tex"
+python3 "$repo_root/regressions/topologies/insertion/check-contact-seagull-errors.py"
 python3 "$repo_root/regressions/topologies/insertion/check-contact-bubble-errors.py"
 run_tex "regressions/topologies/insertion/seagull-insertion-regression.tex"
 run_tex "regressions/topologies/insertion/seagull-slots.tex"
@@ -88,6 +90,9 @@ run_tex "regressions/topologies/three-point/three-point-feature-gallery.tex"
 run_tex "regressions/propagators/proca-endpoints/proca-endpoint-audit.tex"
 
 if [ -n "${FEYNMANFUN_PDF_PYTHON:-}" ]; then
+  "$FEYNMANFUN_PDF_PYTHON" \
+    "$repo_root/regressions/topologies/insertion/check-contact-seagulls.py" \
+    "$build_root/regressions/topologies/insertion/contact-seagull-slots.pdf"
   "$FEYNMANFUN_PDF_PYTHON" \
     "$repo_root/regressions/topologies/insertion/check-contact-bubbles.py" \
     "$build_root/regressions/topologies/insertion/contact-bubble-slots.pdf"

@@ -1,10 +1,12 @@
 # Integrated branch state and coding-session closeout
 
-Current checkout at M08a publication: `main`. Verified checkpoint `d855152`
-was fast-forward merged from `096b2b3` and pushed to GitHub (2026-11-08).
-The feature branch is retained; package/tests/PDFs are unchanged. No M08a
-merge/push remains; M08b contact seagulls is next. See
-[publication](m08a-publication.json) and [verification](m08a-verification.md).
+Current checkout: `codex/m08b-contact-seagulls`, based on published main `35c7959`.
+M08a checkpoint `d855152` and its documentation handoff `35c7959` were pushed to
+GitHub on 2026-11-08. Its feature branch is retained; no M08a integration remains.
+M08b is complete locally, with verified package, gallery, atlas and roadmap changes.
+It is not merged/pushed. After the user requests integration, publish that verified
+checkpoint before starting M09a internal-exchange bubbles. See
+[M08b verification](m08b-verification.md) and [M08a publication](m08a-publication.json).
 Earlier records retain their historical publication states.
 
 M03a checkpoint `2c3b467` is now merged and published on main; see

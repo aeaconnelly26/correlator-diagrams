@@ -509,7 +509,7 @@ The hide key applies to external slots across two-, three-, and four-point
 families, including bubble and sunset. Slots follow the family's logical
 external label order, so they stay attached when a three-point diagram rotates.
 Bubble and sunset external momentum slots are 1 (left) and 2 (right).
-For bubble/seagull insertions on s/t-tree external slots 1-4 and contact bubbles, hiding the
+For bubble/seagull insertions on s/t-tree external slots 1-4 and external contact insertions, hiding the
 selected slot suppresses both pre- and post-insertion momentum annotations. Channel, bridge, box-edge,
 and loop momenta retain their existing controls; this key does not hide them.
 The setting is scoped to the current diagram.
@@ -2407,7 +2407,7 @@ has seven propagators, two cubic insertion vertices and one quartic host.
 `contact-pairing=central` (default) and `crossed` use this same insertion graph.
 Horizontal/vertical pairings have no quartic host and are rejected for contact
 bubbles, as are slots outside 1-4 or lists of simultaneous slots. Their ordinary
-no-insertion behavior is unchanged. Contact seagulls remain unsupported (M08b).
+no-insertion behavior is unchanged. Contact seagulls now use the same slots with `insertion=seagull` (M08b).
 
 Contact bubbles default to `insertion-position=0.50`, `insertion-scale=0.50`.
 Position is the outer-to-contact fraction. Both insertion vertices must fit
@@ -2429,6 +2429,40 @@ remain independent. There is no exchange edge or channel momentum on this host.
 See the [five-page gallery](../regressions/topologies/insertion/contact-bubble-slots.pdf),
 [copyable atlas recipes](diagram-inventory/recipes.md#self-energy-bubble-on-a-quartic-contact-leg)
 and [verification](planning/m08a-verification.md).
+
+Contact-leg seagulls retain the quartic contact and attach a direct self-loop
+at one new quartic vertex V: outer--V, V--contact and V--V replace the selected
+leg. There are **six edges and two quartic interactions**, with no stem and no
+pair of split bubble vertices. Use the same minimal recipe above with
+`insertion=seagull,seagull-loop-line=plain`.
+
+Central/crossed quartic views support slots 1 UL, 2 LL, 3 UR, 4 LR. Default
+position is .40 and scale .66; loop size/looseness remain 1.55/1.0. The contact
+seagull's `auto` side matches slide 11: upper loops up, lower loops down
+(+90 from outer-to-host on slots 1/4, -90 on 2/3). Explicit `top`/`bottom`
+remain host-relative +90/-90; `left`/`right` remain page-relative. Tree seagull
+and bubble defaults are unchanged. Position must lie strictly between 0 and 1;
+scale, loop size and looseness must be positive and the host leg nonzero.
+Invalid slots/pairings/geometry fail explicitly.
+
+External logical styles/caps, contact direction controls, pre/post momentum
+controls, loop orientation/direction/clearance and all four
+`seagull-vertex-indices` work as below. `insertion-post-indices` also attaches
+to the contact-seagull V--contact segment. Hidden external legs suppress the
+insertion and preserve existing amputated placeholders; hidden center vertices
+hide both interaction dots. Index appearance remains D01.
+
+The [seven-page gallery](../regressions/topologies/insertion/contact-seagull-slots.pdf)
+shows all eight S11 species variants and named pink scalar-polarization samples.
+Neutral Z uses EW with an explicit Z circle; directed W uses raw
+`with arrow=0.5` plus an explicit W circle at fraction .25 to separate it from
+the arrow at .5. External charge arrows are independent of momentum flow;
+the gallery hides momentum guides on those source variants. Raw arrow+circ
+coincident overpaint predates M08b and is recorded as
+[D04](planning/deferred-workflows.md#d04---coincident-raw-charge-arrowcircle-decorations).
+The preferred pink samples use `proca` for two scalar-polarization endpoint
+arrows, without a loop circle; the k guide follows the actual concentric loop.
+See [M08b verification](planning/m08b-verification.md).
 
 Supported insertion keys:
 
@@ -2480,7 +2514,7 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
-For external S/T bubble, seagull and swordfish insertions, and contact bubbles,
+For external S/T bubble, seagull and swordfish insertions, and external contact insertions,
 `insertion-pre-line=...` changes the outer segment's appearance while retaining
 single/double caps from the logical external leg. For example,
 `line={ewboson,endcapp},insertion-pre-line=ewboson` keeps all four outer double
@@ -2498,9 +2532,9 @@ length 2.10 coordinate units. S regular-triangle corrections retain their
 `channel-vertex-xspan=...` overrides either default; `0.78` recovers the former
 ordinary S exchange. T/U geometry and four-legged loop bubbles are unchanged.
 
-Default `insertion-position` is **0.40 for supported s/t-tree seagulls** and
+Default `insertion-position` is **0.40 for supported s/t-tree and contact seagulls** and
 **0.50 for bubble insertions**, measured from the external endpoint toward the
-tree vertex. The seagull default leaves 60% of the leg for the inner host
+host vertex. The seagull default leaves 60% of the leg for the inner host
 segment, 20% more length than the former midpoint placement. Explicit positions
 remain effective; `insertion-position=0.50` restores the old seagull placement.
 The styled seagull W circles use optical centering between the visible pink
@@ -2528,7 +2562,7 @@ a self-loop instead of the bubble's two new vertices. `insertion=swordfish`
 supports the same external matrix with one new trivalent vertex and two loop
 arcs meeting the actual tree vertex, now quartic. Its position/scale defaults
 are 0.50/0.66; see the swordfish section for geometry and applicable controls.
-Contact bubbles support the four external slots described above. Other contact
+Contact bubbles support the four external slots described above. Contact seagulls also support those four external slots. Other contact
 insertions, U-tree insertions and internal slot `5` remain unsupported. Legacy
 unsupported tree requests may be no-ops; invalid contact bubble slots/pairings
 now fail explicitly. Simultaneous insertions are not supported.

@@ -212,8 +212,8 @@
 \sgselect s1\sgstop\sgmeasure{insertion-slot=5}
 \let\sgpublic\UTreeChannelCorr\sgmeasure{}
 \sgassert\sgedges{5}{Unsupported U host unchanged}\sgassert\sgloops{0}{No U seagull}
-\let\sgpublic\FourPointCorr\sgmeasure{topology=contact}
-\sgassert\sgvertices{1}{Unsupported contact unchanged}\sgassert\sgloops{0}{No contact seagull}
+\let\sgpublic\FourPointCorr\sgmeasure{topology=contact,insertion=none}% Contact seagulls are now covered by M08b.
+\sgassert\sgvertices{1}{Ordinary contact unchanged}\sgassert\sgloops{0}{No stale contact seagull}
 \typeout{PASS M04: \the\sgcases\space public diagram cases; seven edges, quartic valence, slots, styles, caps, momenta, indices and state reset}
 \typeout{PASS M04: \the\sglabelchecks\space rendered loop label rectangles clear their local curve normals}
 \typeout{PASS M04: \the\sgcurvechecks\space samples share concentric loop and momentum geometry}

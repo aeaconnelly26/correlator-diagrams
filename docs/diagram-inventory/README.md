@@ -1,5 +1,15 @@
 # Current diagram inventory
 
+M08b is complete locally on `codex/m08b-contact-seagulls`, based on published
+main `35c7959`; merge/push pending. The atlas now has **146 recipes / 34 pages**.
+Pages 32-34 add CS01-CS04 plain contact seagulls, CS11-CS14 selected Z/W
+species/charge-flow variants and CS21-CS24 pink scalar-polarization loops with
+inner W circles. The seven-page [gallery](../../regressions/topologies/insertion/contact-seagull-slots.pdf)
+shows every S11 variant. CT01-CT04's old no-contact-seagull limitation is removed;
+existing bubble geometry/styles are unchanged. See [verification](../planning/m08b-verification.md).
+Earlier sections preserve their checkpoint-specific history.
+
+
 M08a is merged and published on main at verified checkpoint `d855152`
 (2026-11-08); its feature branch is retained and the tested PDFs are unchanged. The atlas now has **134 recipes / 31 pages**. Page 30 adds
 CT01-CT04: plain contact-leg bubbles at all four corners. Page 31 adds CT11-CT14:

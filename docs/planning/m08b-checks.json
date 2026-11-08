@@ -1,0 +1,293 @@
+{
+  "milestone": "M08b",
+  "date": "2026-11-08",
+  "baseline": "35c795947172058eef33cdc2f33ee0784647b333",
+  "branch": "codex/m08b-contact-seagulls",
+  "published": false,
+  "M08a_published_feature": "d855152ab7496f5bdcf413baabb2d1dfed9cfc29",
+  "M08a_publication_record": "m08a-publication.json",
+  "requirements": [
+    "R21"
+  ],
+  "source_map": "m08b-reference-map.json",
+  "interface": "FourPointCorr[insertion=seagull,insertion-slot=1|2|3|4] (one slot at a time)",
+  "aliases": [
+    "FourPtCorr"
+  ],
+  "pairings": [
+    "central",
+    "crossed"
+  ],
+  "graph": {
+    "logical_edges": 6,
+    "interaction_valences": [
+      4,
+      4
+    ],
+    "external_endpoints": 4,
+    "self_loops": 1,
+    "cycle_rank": 1,
+    "stem": false
+  },
+  "default_position": 0.4,
+  "default_scale": 0.66,
+  "default_loop_size": 1.55,
+  "default_loop_looseness": 1.0,
+  "default_normal_from_outer_to_host_degrees": {
+    "1": 90,
+    "2": -90,
+    "3": -90,
+    "4": 90
+  },
+  "default_outer_half_spans": [
+    2.1,
+    2.1
+  ],
+  "coordinate_baseline": 0.8,
+  "default_circ_scale": 0.8,
+  "focused_public_cases": 149,
+  "rendered_loop_label_checks": 45,
+  "concentric_curve_samples": 410,
+  "invalid_request_checks": 16,
+  "baseline_regression_documents": 51,
+  "regression_documents": 52,
+  "baseline_endpoint_contacts": 874,
+  "new_endpoint_contacts": 20,
+  "total_endpoint_contacts": 894,
+  "gallery_pages": 7,
+  "atlas_recipes": 146,
+  "atlas_pages": 34,
+  "new_atlas_ids": [
+    "CS01",
+    "CS02",
+    "CS03",
+    "CS04",
+    "CS11",
+    "CS12",
+    "CS13",
+    "CS14",
+    "CS21",
+    "CS22",
+    "CS23",
+    "CS24"
+  ],
+  "native_species_variants": 8,
+  "pdf_report": "m08b-pdf-checks.json",
+  "visual_review": {
+    "all_gallery_pages": true,
+    "all_atlas_pages": true,
+    "new_atlas_pages_reading_size": true,
+    "comparisons": {
+      "dpi": 90,
+      "atlas": [
+        {
+          "page": 1,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 2,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 3,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 4,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 5,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 6,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 7,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 8,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 9,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 10,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 11,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 12,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 13,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 14,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 15,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 16,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 17,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 18,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 19,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 20,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 21,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 22,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 23,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 24,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 25,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 26,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 27,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 28,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 29,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 30,
+          "diagram_regions_identical": true,
+          "boxes": [
+            [
+              0,
+              180,
+              765,
+              320
+            ],
+            [
+              0,
+              400,
+              765,
+              540
+            ]
+          ],
+          "text_change": "Remove obsolete no-contact-seagull limitation"
+        },
+        {
+          "page": 31,
+          "body_pixel_identical": true
+        }
+      ],
+      "M08a_gallery": [
+        {
+          "page": 1,
+          "pixel_identical": true
+        },
+        {
+          "page": 2,
+          "pixel_identical": true
+        },
+        {
+          "page": 3,
+          "pixel_identical": true
+        },
+        {
+          "page": 4,
+          "pixel_identical": true
+        },
+        {
+          "page": 5,
+          "pixel_identical": true
+        }
+      ]
+    }
+  },
+  "legacy_D04_probe": {
+    "baseline_package": "35c7959:feynman-fun.sty",
+    "public_macro": "STreeChannelCorr",
+    "options": "field={},central={},leg-labels={,,,},show-momenta=false,insertion=seagull,seagull-loop-line={ewboson,with arrow=.5,circ=W,circ position=.25}",
+    "observed_W_ring_paints": 2,
+    "observed_distinct_W_positions": 1,
+    "extracted_species_text": "WW",
+    "predates_M08b": true
+  },
+  "limitations": [
+    "One external insertion at a time",
+    "Disconnected pairings rejected",
+    "D01 index appearance remains deferred",
+    "D04 inherited raw marking overpaint recorded, not changed",
+    "Internal/bridge/stemmed corrections remain future milestones"
+  ],
+  "source_archives": [
+    {
+      "file": "docs/planning/sources/Last diagrams we need.pdf",
+      "sha256": "d7b716769379cbf2a18d6fed868e022393298e1e75a56e5bdfdd5702cd7bf37b",
+      "unchanged": true
+    },
+    {
+      "file": "docs/planning/sources/1-loop-WW-WZ.pptx",
+      "sha256": "1cb50e60dbe2790838f576338d00e67f4cd3da035323b1b2d4c67aafc4faf6ff",
+      "unchanged": true
+    }
+  ],
+  "sha256": {
+    "feynman-fun.sty": "1f0077f2f0ac316da6a8de401e2cfda6660a93c1dc9b464ee21a3bf5562e754f",
+    "scripts/check-regressions.sh": "d18e3e90c04f01ead97457dc25cbb872c428f44acc3cb5b1e0a3addb4b4e9fba",
+    "regressions/topologies/insertion/M08b-contract.md": "7e376e1997e44109e18fd51501fd9bc8a31ad645ae7d5684277ade195994e143",
+    "regressions/topologies/insertion/contact-seagull-slots.tex": "71fd05604d69ef1c48ac5d0f651540f69217283130c9a322ab37112b3a0f228c",
+    "regressions/topologies/insertion/contact-seagull-slots.pdf": "6c2f42c2f68748fa47c6faac35092583d8363c66390ee663ef1d593e28dca526",
+    "regressions/topologies/insertion/check-contact-seagulls.py": "f317e50e915683b2b7ad40c1b60868fa682a37e48111948ea076c39ef9f69557",
+    "regressions/topologies/insertion/check-contact-seagull-errors.py": "ec096e3c166c820e8307a1f6f5ae2cd33d5cc93e5d95447ac831c94c4cca4a2a",
+    "regressions/topologies/insertion/seagull-slots.tex": "1a1f05af6b066c300ffbcee530a247caf1b834dbc2ba776ae342ce111184bc3b",
+    "docs/diagram-inventory/catalog.json": "85a8d63c23f684058a0f0ecbd0131acf4f4ced13b391822ea4af8fe080370724",
+    "docs/diagram-inventory/inventory.tex": "74c3df182e71906a9cd6e2d7ac5c3971a224ce67264b5feb28d20e784fcb5274",
+    "docs/diagram-inventory/inventory.pdf": "8491573bc460931a2ee73d436e2f0b71ee54efecda59b0319119fcf909985855",
+    "docs/diagram-inventory/recipes.md": "b9a13c3f0752cfb0d0b98ea49133b645730a3c8134f974bbe4bf4f09265973d1",
+    "docs/planning/m08b-reference-map.json": "f297a19f38aaf4a9c2e46b08d0484a6c06f946847ca5b560a3b076e0f42a99ce",
+    "docs/planning/m08b-pdf-checks.json": "6a9a8ede4da39eea4088b8e59fa15014d054996de3e05891df3919b4e708a588",
+    "docs/planning/m08b-suite.txt": "d453b31372b049b91ee4013a0da6636b0b887907db2d9da1c2e71d23948f7643"
+  },
+  "next": "M09a internal-exchange bubbles after M08b integration/publication"
+}

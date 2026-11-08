@@ -74,7 +74,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 - triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations, split color controls, independent momentum placement for all seven slots, and a choice of gapped or continuous momentum arrows
 - vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
 - one-loop `s`, `t`, and `u` channel bubbles via `\SChannelCorr`, `\TChannelCorr`, and `\UChannelCorr`
-- standalone self-energy bubbles via `\BubbleCorr`, bubble insertions on any one of the four external legs of s/t trees or a quartic contact, and seagull/swordfish insertions on any one of the four external legs of s/t trees
+- standalone self-energy bubbles via `\BubbleCorr`, bubble insertions on any one of the four external legs of s/t trees or a quartic contact, seagull insertions on any one of the four external legs of s/t trees or a quartic contact, and swordfish insertions on s/t trees
 - regular tree-attached triangle corrections via `insertion=triangle`: equilateral T top/bottom and S left/right placements with independent annotations on all eight edges
 - default `p_1,p_2` incoming / `p_3,p_4` outgoing momentum flow; compact insertion arrows with labels clear of their lines
 - shared `fourpoint-xspan` / `fourpoint-yspan` outer endpoints across trees, channel loops, boxes and triangle-contact; square default frame at +/-2.10
@@ -193,6 +193,7 @@ Common wrappers and aliases:
 - Use [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex) for the compact vertex-identity sketch.
 - Use [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex) to inspect channel layouts in isolation.
 - Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
+- The [M08b contact-seagull gallery](regressions/topologies/insertion/contact-seagull-slots.pdf) shows direct quartic self-loops on all four contact legs, including the slide-11 species/flow variants.
 - The [M08a contact-bubble gallery](regressions/topologies/insertion/contact-bubble-slots.pdf) shows all four quartic-contact external placements; the atlas includes plain and styled recipes.
 - The [M07c reference audit](docs/planning/m07c/routing-audit.pdf) distinguishes supported triangle-contact orientations from the missing opposite-pair external attachments in the references.
 - Circles now default to scale **0.8**, including their labels; `circ scale=1` restores the former size. See the [default/override gallery](regressions/propagators/circ/circ-default-scale.pdf).

@@ -1,0 +1,303 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,graphicx,adjustbox,fancyhdr}
+\usepackage{feynman-fun}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[L]{\scriptsize M08b external seagulls: one quartic insertion vertex}\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}\setlength{\parindent}{0pt}
+\newbox\sgbox
+\newcount\sgedges \newcount\sgvertices \newcount\sgloops \newcount\sgposts
+\newcount\sglabels \newcount\sgcaps \newcount\sgdoublecaps \newcount\sgindices
+\newcount\sgpostindices
+\newcount\sgforward \newcount\sgreverse \newcount\sgcases \newcount\sglabelchecks \newcount\sgcurvechecks
+\makeatletter
+\def\sgplacements{1,2,3,4}
+\def\sgexpected{seagull}\def\sgloopchecking{no}
+\newcommand{\sgassert}[3]{\ifnum#1=#2\relax\else\PackageError{M08b}{#3: got \the#1; expected #2}{}\fi}
+\newcommand{\sgcontains}[2]{\edef\sgprobe{\noexpand\in@{#1}{#2}}\sgprobe\ifin@\else\PackageError{M08b}{Missing style #1 in #2}{}\fi}
+\newcommand{\sgcanonical}[1]{%
+  \edef\sgnode{#1}%
+  \corr@ifstringeq{\sgnode}{corrInsertionOuter}{\let\sgnode\sgouter}{}%
+  \corr@ifstringeq{\sgnode}{corrInsertionHost}{\let\sgnode\sghost}{}%
+}
+\newcommand{\sgedge}[2]{%
+  \global\advance\sgedges by 1
+  \@for\sgendpoint:={#1,#2}\do{%
+    \sgcanonical{\sgendpoint}%
+    \expandafter\xdef\csname sgdegree\sgnode\endcsname{\number\numexpr\csname sgdegree\sgnode\endcsname+1\relax}}}
+\let\sgoldprop\corr@drawchannelprop
+\renewcommand{\corr@drawchannelprop}[5]{%
+  \sgedge{#3}{#4}\sgoldprop{#1}{#2}{#3}{#4}{#5}%
+  \expandafter\xdef\csname sgstyle#1\endcsname{\corr@propoptions}%
+  \expandafter\xdef\csname sgstart#1\endcsname{#3}%
+  \expandafter\xdef\csname sgend#1\endcsname{#4}}
+\let\sgoldpost\corr@drawchannelpropnoendcaps
+\renewcommand{\corr@drawchannelpropnoendcaps}[5]{%
+  \sgedge{#3}{#4}\global\advance\sgposts by 1
+  \xdef\sgpostslot{#1}\xdef\sgpoststart{#3}\xdef\sgpostend{#4}%
+  \sgoldpost{#1}{#2}{#3}{#4}{#5}\xdef\sgpoststyle{\corr@propoptions}}
+\let\sgoldloop\corr@drawseagullloop
+\renewcommand{\corr@drawseagullloop}{%
+  \sgedge{corrInsertionV}{corrInsertionV}\global\advance\sgloops by 1
+  \sgoldloop\xdef\sgloopstyle{\corr@seagullbasepropoptions}\xdef\sglooparrowsize{\corr@resolvedproparrowsize}%
+  \xdef\sgmarkers{\ifcorr@seagullmarkerstart 1\else 0\fi\ifcorr@seagullmarkerend 1\else 0\fi}}
+\let\sgoldvertex\corr@putvertex
+\renewcommand{\corr@putvertex}[2]{\global\advance\sgvertices by 1\sgoldvertex{#1}{#2}}
+\let\sgoldforward\corr@drawseagullmomentumforward
+\renewcommand{\corr@drawseagullmomentumforward}{\global\advance\sgforward by 1\sgoldforward}
+\let\sgoldreverse\corr@drawseagullmomentumreverse
+\renewcommand{\corr@drawseagullmomentumreverse}{\global\advance\sgreverse by 1\sgoldreverse}
+\let\sgoldmomentum\corr@drawttreeinsertionseagullmomentum
+\renewcommand{\corr@drawttreeinsertionseagullmomentum}{\begingroup\def\sgloopchecking{yes}\sgoldmomentum\endgroup}
+\let\sgoldlabel\corr@putmomentumlabelwithdistance
+\renewcommand{\corr@putmomentumlabelwithdistance}[6]{%
+  \global\advance\sglabels by 1\edef\sgtext{#6}%
+  \@for\sgidx:={1,2,3,4}\do{\edef\sgtest{L\sgidx}\ifx\sgtext\sgtest
+    \expandafter\xdef\csname sglabel\sgidx\endcsname{\number\numexpr\csname sglabel\sgidx\endcsname+1\relax}\fi}%
+  \corr@ifstringeq{\sgloopchecking}{yes}{%
+    \begingroup\tikzset{every node/.append style={alias=sgLoopLabel}}\sgoldlabel{#1}{#2}{#3}{#4}{#5}{#6}\endgroup
+    \path (corrseagullmomlabel) coordinate (sgArrowLabel);
+    \pgfpointdiff{\pgfpointanchor{sgArrowLabel}{center}}{\pgfpointanchor{sgLoopLabel}{center}}%
+    \edef\sgdx{\the\pgf@x}\edef\sgdy{\the\pgf@y}%
+    \pgfmathsetlengthmacro{\sgoutward}{\sgdx*cos(\corr@seagulllabelnormal)+\sgdy*sin(\corr@seagulllabelnormal)}%
+    \ifdim\sgoutward>0pt\else\PackageError{M08b}{Loop label faces inward}{}\fi
+    \pgfpointdiff{\pgfpointanchor{sgLoopLabel}{west}}{\pgfpointanchor{sgLoopLabel}{east}}\edef\sglabelwidth{\the\pgf@x}%
+    \pgfpointdiff{\pgfpointanchor{sgLoopLabel}{south}}{\pgfpointanchor{sgLoopLabel}{north}}\edef\sglabelheight{\the\pgf@y}%
+    \pgfmathsetlengthmacro{\sglabelgap}{\sgoutward-0.5*(abs(cos(\corr@seagulllabelnormal))*\sglabelwidth+abs(sin(\corr@seagulllabelnormal))*\sglabelheight)}%
+    \pgfmathsetlengthmacro{\sgminimumgap}{\corr@seagullloopmomentumlabeldistance-0.05pt}%
+    \ifdim\sglabelgap<\sgminimumgap\PackageError{M08b}{Seagull text rectangle overlaps its arrow}{}\fi
+    \corr@ifstringeq{\corr@seagullloopmomentumlabelfraction}{auto}{%
+      \pgfmathsetmacro{\sgfractionerror}{abs(\corr@seagullresolvedlabelfraction-0.5*(\corr@seagullloopmomentumstart+\corr@seagullloopmomentumend))}%
+      \ifdim\sgfractionerror pt>0.0001pt\PackageError{M08b}{Default loop label is not at arrow midpoint}{}\fi
+    }{}%
+    % Uniformly scaled curves must share the loop center at every sampled
+    % fraction, even when loop looseness differs from a circle.
+    \ifdim\corr@seagullloopmomentumlooseness pt=1pt
+      \@for\sgfraction:={\corr@seagullloopmomentumstart,\corr@seagullmomponefraction,\corr@seagullmomptwofraction,\corr@seagullmompthreefraction,\corr@seagullmompfourfraction,\corr@seagullmompfivefraction,\corr@seagullmompsixfraction,\corr@seagullmompsevenfraction,\corr@seagullloopmomentumend,\corr@seagullresolvedlabelfraction}\do{%
+        \corr@setseagulloutercoord{corrSeagullLoop}{\corr@seagullloopcontrol}{\sgfraction}{sgLoopReference}%
+        \corr@setseagullmomentumcoord{\sgfraction}{sgMomentumReference}%
+        \pgfpointdiff{\pgfpointanchor{corrSeagullLoopCenter}{center}}{\pgfpointanchor{sgLoopReference}{center}}%
+        \edef\sgloopdx{\the\pgf@x}\edef\sgloopdy{\the\pgf@y}%
+        \pgfpointdiff{\pgfpointanchor{corrSeagullLoopCenter}{center}}{\pgfpointanchor{sgMomentumReference}{center}}%
+        \edef\sgarrowdx{\the\pgf@x}\edef\sgarrowdy{\the\pgf@y}%
+        \pgfmathsetlengthmacro{\sgcurveerrorx}{abs(\sgarrowdx-\sgloopdx*\corr@seagullmomentumradius/\corr@seagullloopradius)}%
+        \pgfmathsetlengthmacro{\sgcurveerrory}{abs(\sgarrowdy-\sgloopdy*\corr@seagullmomentumradius/\corr@seagullloopradius)}%
+        \ifdim\sgcurveerrorx>0.05pt\PackageError{M08b}{Loop/arrow centers disagree in x}{}\fi
+        \ifdim\sgcurveerrory>0.05pt\PackageError{M08b}{Loop/arrow centers disagree in y}{}\fi
+        \global\advance\sgcurvechecks by 1
+      }%
+    \fi
+    \global\advance\sglabelchecks by 1
+  }{\sgoldlabel{#1}{#2}{#3}{#4}{#5}{#6}}}
+\let\sgoldcap\corr@drawexternalendcap
+\renewcommand{\corr@drawexternalendcap}[2]{%
+  \global\advance\sgcaps by 1\def\sgfound{no}%
+  \@for\sgnode:={corrUL,corrLL,corrUR,corrLR}\do{%
+    \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{\sgnode}{center}}%
+    \ifdim\pgf@x<0pt\pgf@x=-\pgf@x\fi\ifdim\pgf@y<0pt\pgf@y=-\pgf@y\fi
+    \ifdim\pgf@x<0.03pt\ifdim\pgf@y<0.03pt\def\sgfound{yes}\fi\fi}%
+  \corr@ifstringeq{\sgfound}{yes}{}{\PackageError{M08b}{Cap on internal endpoint}{}}\sgoldcap{#1}{#2}}
+\let\sgoldcapp\corr@drawexternalendcapp
+\renewcommand{\corr@drawexternalendcapp}[2]{\global\advance\sgdoublecaps by 1\sgoldcapp{#1}{#2}}
+\let\sgoldindex\corr@putseagullvertexindex
+\renewcommand{\corr@putseagullvertexindex}[5]{%
+  \edef\sgtext{#5}\ifdefempty{\sgtext}{}{\global\advance\sgindices by 1\xdef\sgindexvalues{\sgindexvalues/#5}}%
+  \sgoldindex{#1}{#2}{#3}{#4}{#5}}
+\let\sgoldpostindex\corr@putttreeinsertionpostindex
+\renewcommand{\corr@putttreeinsertionpostindex}[6]{%
+  \edef\sgtext{#6}\ifdefempty{\sgtext}{}{\global\advance\sgpostindices by 1}%
+  \sgoldpostindex{#1}{#2}{#3}{#4}{#5}{#6}}
+\newcommand{\sgfinish}{%
+  \corr@ifstringeq{\sgexpected}{seagull}{%
+    \sgassert\sgedges{6}{Six propagator edges}\ifcorr@centervertex\sgassert\sgvertices{2}{Two interaction vertices}\else\sgassert\sgvertices{0}{Hidden interaction vertices}\fi%
+    \sgassert\sgloops{1}{One closed self-loop}\sgassert\sgposts{1}{One post segment}%
+    \ifnum\sgpostslot=\sgslot\relax\else\PackageError{M08b}{Wrong logical host slot}{}\fi
+    \expandafter\sgassert\csname sgdegreecorrInsertionV\endcsname{4}{Quartic insertion valence}%
+    \@for\sgnode:={corrUL,corrLL,corrUR,corrLR}\do{\expandafter\sgassert\csname sgdegree\sgnode\endcsname{1}{External degree}}%
+    \@for\sgnode:=\sgtreevertices\do{\expandafter\sgassert\csname sgdegree\sgnode\endcsname{4}{Quartic host degree}}%
+    \def\sgtest{corrInsertionV}\ifx\sgpoststart\sgtest\else\PackageError{M08b}{Post segment disconnected}{}\fi
+    \def\sgtest{corrInsertionHost}\ifx\sgpostend\sgtest\else\PackageError{M08b}{Wrong post host}{}\fi
+    \@for\sgalias:={Outer,Host}\do{%
+      \corr@ifstringeq{\sgalias}{Outer}{\let\sgactual\sgouter}{\let\sgactual\sghost}%
+      \pgfpointdiff{\pgfpointanchor{corrInsertion\sgalias}{center}}{\pgfpointanchor{\sgactual}{center}}%
+      \ifdim\pgf@x<0pt\pgf@x=-\pgf@x\fi\ifdim\pgf@y<0pt\pgf@y=-\pgf@y\fi
+      \ifdim\pgf@x>0.03pt\PackageError{M08b}{Host alias x mismatch}{}\fi
+      \ifdim\pgf@y>0.03pt\PackageError{M08b}{Host alias y mismatch}{}\fi}%
+    \path (\sgouter) -- coordinate[pos=\corr@insertionposition] (sgExpectedV) (\sghost);
+    \pgfpointdiff{\pgfpointanchor{sgExpectedV}{center}}{\pgfpointanchor{corrInsertionV}{center}}%
+    \ifdim\pgf@x<0pt\pgf@x=-\pgf@x\fi\ifdim\pgf@y<0pt\pgf@y=-\pgf@y\fi
+    \ifdim\pgf@x>0.03pt\PackageError{M08b}{Insertion x position mismatch}{}\fi
+    \ifdim\pgf@y>0.03pt\PackageError{M08b}{Insertion y position mismatch}{}\fi
+    \pgfpointdiff{\pgfpointanchor{\sgouter}{center}}{\pgfpointanchor{\sghost}{center}}%
+    \edef\sgadx{\the\pgf@x}\edef\sgady{\the\pgf@y}%
+    \pgfpointdiff{\pgfpointanchor{corrInsertionV}{center}}{\pgfpointanchor{corrSeagullLoopFar}{center}}%
+    \edef\sgfdx{\the\pgf@x}\edef\sgfdy{\the\pgf@y}%
+    \pgfmathsetmacro{\sgcross}{(\sgadx/1pt)*(\sgfdy/1pt)-(\sgady/1pt)*(\sgfdx/1pt)}%
+    \corr@ifstringeq{\corr@insertionorientation}{top}{\ifdim\sgcross pt>0pt\else\PackageError{M08b}{Top orientation ignored}{}\fi}{}%
+    \corr@ifstringeq{\corr@insertionorientation}{bottom}{\ifdim\sgcross pt<0pt\else\PackageError{M08b}{Bottom orientation ignored}{}\fi}{}%
+    \corr@ifstringeq{\corr@insertionorientation}{left}{\ifdim\sgfdx<0pt\else\PackageError{M08b}{Left orientation ignored}{}\fi}{}%
+    \corr@ifstringeq{\corr@insertionorientation}{right}{\ifdim\sgfdx>0pt\else\PackageError{M08b}{Right orientation ignored}{}\fi}{}%
+    \corr@ifstringeq{\corr@insertionorientation}{auto}{%
+      \pgfpointdiff{\pgfpointanchor{corrInsertionV}{center}}{\pgfpointanchor{corrSeagullLoopFar}{center}}%
+      \ifnum\sgslot=1\def\sgup{1}\else\ifnum\sgslot=3\def\sgup{1}\else\def\sgup{0}\fi\fi
+      \ifnum\sgup=1\ifdim\pgf@y>0pt\else\PackageError{M08b}{Upper loop faces down}{}\fi
+      \else\ifdim\pgf@y<0pt\else\PackageError{M08b}{Lower loop faces up}{}\fi\fi
+    }{}%
+  }{\PackageError{M08b}{Seagull renderer activated for baseline request}{}}}
+\def\sgexpectedposition{}
+\let\sgoldcontact\corr@drawfourpointcontactseagull
+\renewcommand{\corr@drawfourpointcontactseagull}{\sgoldcontact\sgfinish\ifdefempty{\sgexpectedposition}{}{\sgassertposition{\sgexpectedposition}}}
+\def\sgselect#1\sgstop{%
+  \def\sgslot{#1}%
+  \ifcase\sgslot\relax\or\def\sgouter{corrUL}\or\def\sgouter{corrLL}\or\def\sgouter{corrUR}\or\def\sgouter{corrLR}\fi
+  \let\sgpublic\FourPointCorr\def\sgtreevertices{corrC}\def\sghost{corrC}}
+\let\sgoldoutermomentum\corr@drawttreeinsertionoutermomentum
+\renewcommand{\corr@drawttreeinsertionoutermomentum}{\xdef\sgactualdirection{\corr@insertionhostmomentumdirection}\sgoldoutermomentum}
+% Measure actual vertex projections, independently of the configured value.
+\newcommand{\sgassertposition}[1]{%
+  \pgfpointdiff{\pgfpointanchor{\sgouter}{center}}{\pgfpointanchor{\sghost}{center}}%
+  \edef\sglegdx{\the\pgf@x}\edef\sglegdy{\the\pgf@y}%
+  \pgfpointdiff{\pgfpointanchor{\sgouter}{center}}{\pgfpointanchor{corrInsertionV}{center}}%
+  \pgfmathsetmacro{\sgpositionerror}{abs((\pgf@x*\sglegdx+\pgf@y*\sglegdy)/(\sglegdx*\sglegdx+\sglegdy*\sglegdy)-#1)}%
+  \ifdim\sgpositionerror pt>0.001pt\PackageError{M08b}{Seagull position differs from default or explicit request}{}\fi}
+\newcommand{\sgmeasure}[1]{%
+  \global\advance\sgcases by 1
+  \global\sgedges=0\global\sgvertices=0\global\sgloops=0\global\sgposts=0
+  \global\sglabels=0\global\sgcaps=0\global\sgdoublecaps=0\global\sgindices=0
+  \global\sgpostindices=0
+  \global\sgforward=0\global\sgreverse=0\gdef\sgindexvalues{}%
+  \@for\sgnode:={corrUL,corrLL,corrUR,corrLR,corrC,corrInsertionV}\do{\expandafter\gdef\csname sgdegree\sgnode\endcsname{0}}%
+  \@for\sgidx:={1,2,3,4}\do{\expandafter\gdef\csname sglabel\sgidx\endcsname{0}}%
+  \edef\sgoptions{field={},central={},leg-labels={,,,},show-momenta=false,line=plain,blob=false,
+    center-vertex=true,external-vertices=false,insertion=seagull,insertion-slot=\sgslot,seagull-loop-line=plain,#1}%
+  \setbox\sgbox=\hbox{\expandafter\sgpublic\expandafter[\sgoptions]}}
+\begin{document}
+\@for\sgentry:=\sgplacements\do{%
+  \expandafter\sgselect\sgentry\sgstop
+  \def\sgexpectedposition{0.40}\sgmeasure{}%
+  \def\sgexpectedposition{0.50}\sgmeasure{insertion-position=0.50}%
+  \def\sgexpectedposition{0.68}\sgmeasure{insertion-position=0.68}%
+  \def\sgexpectedposition{0.40}\sgmeasure{}%
+  \def\sgexpectedposition{}%
+  \@for\sgscale:={0.72,1,1.2}\do{\sgmeasure{scale=\sgscale}}%
+  \sgmeasure{insertion-position=0.35,insertion-scale=0.5,seagull-loop-size=1.2}%
+  \sgmeasure{insertion-position=0.68,seagull-loop-looseness=1.15}%
+  \sgmeasure{fourpoint-xspan=2.2,fourpoint-yspan=1.6}%
+  \sgmeasure{leg-styles={red,blue,green,orange}}%
+  \ifcase\sgslot\relax\or\def\sgwanted{red}\or\def\sgwanted{blue}\or\def\sgwanted{green}\or\def\sgwanted{orange}\fi
+  \sgcontains{\sgwanted}{\csname sgstyle\sgslot\endcsname}\sgcontains{\sgwanted}{\sgpoststyle}%
+  \sgmeasure{insertion-pre-line=green,insertion-post-line=blue,seagull-loop-line=ewboson}%
+  \sgcontains{green}{\csname sgstyle\sgslot\endcsname}\sgcontains{blue}{\sgpoststyle}\sgcontains{ewboson}{\sgloopstyle}%
+  \sgmeasure{center-vertex=false}%
+  \sgmeasure{contact-pairing=crossed}%
+  \sgmeasure{leg-styles={{plain,endcap},{plain,endcap},{plain,endcap},{plain,endcap}}}%
+  \sgassert\sgcaps{4}{Four outer caps}\sgassert\sgdoublecaps{0}{Single caps}%
+  \sgmeasure{leg-styles={{plain,endcapp},{plain,endcapp},{plain,endcapp},{plain,endcapp}},insertion-post-line={plain,endcapp}}%
+  \sgassert\sgcaps{4}{Four outer caps}\sgassert\sgdoublecaps{4}{Double caps}%
+  \sgmeasure{line={plain,endcapp},insertion-pre-line=green,insertion-post-line={blue,endcapp}}%
+  \sgassert\sgcaps{4}{Explicit pre override retains caps}\sgassert\sgdoublecaps{4}{Inherited outer double caps}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K}%
+  \sgassert\sglabels{6}{All momentum labels}\sgassert\sgforward{1}{Clockwise loop}%
+  \ifnum\sgslot<3\def\sgwanted{in}\else\def\sgwanted{out}\fi
+  \ifx\sgactualdirection\sgwanted\else\PackageError{M08b}{Wrong default external momentum direction}{}\fi
+  \@for\sgidx:={1,2,3,4}\do{\ifnum\sgidx=\sgslot\relax\def\sgwanted{2}\else\def\sgwanted{1}\fi
+    \expandafter\sgassert\csname sglabel\sgidx\endcsname{\sgwanted}{Logical host momentum}}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,external-momentum-hide={\sgslot}}%
+  \sgassert\sglabels{4}{Hidden host, independent loop}%
+  \ifcase\sgslot\relax\or\def\sgblanks{,L2,L3,L4,P}\or\def\sgblanks{L1,,L3,L4,P}\or\def\sgblanks{L1,L2,,L4,P}\or\def\sgblanks{L1,L2,L3,,P}\fi
+  \sgmeasure{show-momenta=true,momentum-labels={\sgblanks},seagull-loop-momentum=K}%
+  \sgassert\sglabels{4}{Blank host}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,seagull-loop-momentum-direction=none}%
+  \sgassert\sglabels{5}{Loop hidden}\sgassert\sgforward{0}{No loop arrow}\sgassert\sgreverse{0}{No reverse loop arrow}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,seagull-loop-momentum-direction=counterclockwise,external-left-momentum-direction=out,external-right-momentum-direction=in}%
+  \sgassert\sglabels{6}{Reversed labels}\sgassert\sgreverse{1}{Reversed loop}%
+  \ifnum\sgslot<3\def\sgwanted{out}\else\def\sgwanted{in}\fi
+  \ifx\sgactualdirection\sgwanted\else\PackageError{M08b}{Wrong logical host direction}{}\fi
+  \@for\sgorientation:={auto,top,bottom,left,right}\do{%
+    \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,insertion-orientation=\sgorientation}}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,seagull-loop-size=1.8,seagull-loop-looseness=1.15}%
+  \sgmeasure{show-momenta=true,momentum-labels={L1,L2,L3,L4,P},seagull-loop-momentum=K,seagull-loop-momentum-offset=9pt,seagull-loop-momentum-label-distance=4pt,seagull-loop-momentum-start=0.1,seagull-loop-momentum-end=0.8,seagull-loop-momentum-label-fraction=0.7,seagull-loop-momentum-looseness=1.2,seagull-loop-momentum-direction=counterclockwise}%
+  \sgmeasure{show-momenta=true,insertion-pre-momentum-start=0.2,insertion-pre-momentum-end=0.7,insertion-post-momentum-start=0.1,insertion-post-momentum-end=0.8,insertion-post-momentum-label-distance=4pt}%
+  \sgmeasure{insertion-post-indices={r,s}}\sgassert\sgpostindices{2}{Two independent post indices}%
+  \sgmeasure{seagull-vertex-indices={a,b,c,d}}\sgassert\sgindices{4}{Four vertex indices}%
+  \def\sgwanted{/a/b/c/d}\ifx\sgindexvalues\sgwanted\else\PackageError{M08b}{Index values changed}{}\fi
+  \sgmeasure{seagull-loop-line={proca,magenta},propagator-arrow-sizes={4pt,5pt,7pt,8pt}}%
+  \ifdim\sglooparrowsize=7pt\else\PackageError{M08b}{Loop marker size must use local slot 3}{}\fi
+  \def\sgwanted{11}\ifx\sgmarkers\sgwanted\else\PackageError{M08b}{Proca marker count}{}\fi
+  \sgmeasure{seagull-loop-line={spolin,magenta}}\def\sgwanted{01}\ifx\sgmarkers\sgwanted\else\PackageError{M08b}{In marker direction}{}\fi
+  \sgmeasure{seagull-loop-line={spolout,magenta}}\def\sgwanted{10}\ifx\sgmarkers\sgwanted\else\PackageError{M08b}{Out marker direction}{}\fi
+  \def\sgexpected{none}\sgmeasure{insertion=none}\def\sgexpected{seagull}%
+}
+% Equivalent quartic view and per-slot directions.
+\sgselect 2\sgstop\sgmeasure{contact-pairing=crossed}
+\sgmeasure{show-momenta=true,contact-momentum-directions={out,out,in,in},seagull-loop-momentum=K}
+\def\sgwanted{out}\ifx\sgactualdirection\sgwanted\else\PackageError{M08b}{Per-contact direction lost}{}\fi
+\sgselect 4\sgstop\let\sgpublic\FourPtCorr\sgmeasure{}
+\def\sgexpected{none}\sgmeasure{insertion=none}
+\sgassert\sgvertices{1}{Ordinary contact remains quartic}\sgassert\sgloops{0}{No stale self-loop}
+\sgmeasure{external-legs=false}
+\sgassert\sgvertices{5}{Amputated host and endpoint placeholders}\sgassert\sgloops{0}{No hidden insertion}
+\typeout{PASS M08b: \the\sgcases\space public diagram cases; six edges, two quartic vertices, slots, styles, caps, momenta, indices and state reset}
+\typeout{PASS M08b: \the\sglabelchecks\space rendered loop label rectangles clear their local curve normals}
+\typeout{PASS M08b: \the\sgcurvechecks\space samples share concentric loop and momentum geometry}
+% Restore package renderers for the visible public-interface gallery.
+\let\corr@drawchannelprop\sgoldprop\let\corr@drawchannelpropnoendcaps\sgoldpost
+\let\corr@drawseagullloop\sgoldloop\let\corr@putvertex\sgoldvertex
+\let\corr@drawseagullmomentumforward\sgoldforward\let\corr@drawseagullmomentumreverse\sgoldreverse
+\let\corr@drawttreeinsertionseagullmomentum\sgoldmomentum
+\let\corr@putmomentumlabelwithdistance\sgoldlabel\let\corr@drawexternalendcap\sgoldcap\let\corr@drawexternalendcapp\sgoldcapp
+\let\corr@putseagullvertexindex\sgoldindex
+\let\corr@putttreeinsertionpostindex\sgoldpostindex
+\let\corr@drawfourpointcontactseagull\sgoldcontact
+\let\corr@drawttreeinsertionoutermomentum\sgoldoutermomentum
+\makeatother
+\newcommand{\sgcell}[2]{\begin{minipage}[t][2.9in][t]{0.48\linewidth}\textbf{#1}\par\vspace{9pt}\centering
+\begin{adjustbox}{max width=\linewidth,max totalheight=2.4in}#2\end{adjustbox}\end{minipage}}
+\newcommand{\sgsmallcell}[2]{\begin{minipage}[t][1.95in][t]{0.48\linewidth}\textbf{#1}\par\vspace{5pt}\centering
+\begin{adjustbox}{max width=\linewidth,max totalheight=1.5in}#2\end{adjustbox}\end{minipage}}
+\newcommand{\sgdiagram}[2]{\FourPointCorr[field={},central={},leg-labels={,,,},blob=false,show-momenta=false,line=plain,
+ insertion=seagull,insertion-slot=#1,seagull-loop-line=plain,#2]}
+\section*{Contact-leg seagulls: four placements}
+Two quartic interaction vertices and one self-loop: six edges. Plain lines; no momentum, caps or circles.\par\vspace{12pt}
+\sgcell{Slot 1: upper left}{\sgdiagram{1}{}}\hfill\sgcell{Slot 2: lower left}{\sgdiagram{2}{}}\par
+\sgcell{Slot 3: upper right}{\sgdiagram{3}{}}\hfill\sgcell{Slot 4: lower right}{\sgdiagram{4}{}}
+\newpage\section*{Momentum labels and loop flow}
+Defaults: p1/p2 in, p3/p4 out. Loop labels clear their local curve normals.\par\vspace{12pt}
+\sgcell{Slot 1: default flow}{\sgdiagram{1}{show-momenta=true,seagull-loop-momentum=k}}\hfill
+\sgcell{Slot 2: default flow}{\sgdiagram{2}{show-momenta=true,seagull-loop-momentum=k}}\par
+\sgcell{Slot 3: pink loop}{\sgdiagram{3}{show-momenta=true,seagull-loop-momentum=k,seagull-loop-line={proca,magenta}}}\hfill
+\sgcell{Slot 4: reversed loop}{\sgdiagram{4}{show-momenta=true,seagull-loop-momentum=k,seagull-loop-momentum-direction=counterclockwise}}
+\newpage\section*{Separate controls and compatibility}
+Caps and indices appear only in their dedicated checks. Index appearance is deferred (D01).\par\vspace{12pt}
+\sgcell{Slot 2: outer caps only}{\sgdiagram{2}{line={plain,endcapp},insertion-pre-line=plain,insertion-post-line={plain,endcapp}}}\hfill
+\sgcell{Slot 3: independent indices}{\sgdiagram{3}{seagull-vertex-indices={a,b,c,d},insertion-post-indices={r,s}}}\par
+\sgcell{Slot 4: explicit top orientation}{\sgdiagram{4}{insertion-orientation=top}}\hfill
+\sgcell{Slot 1: shifted and smaller}{\sgdiagram{1}{insertion-position=0.68,insertion-scale=0.5}}
+\newpage\section*{Proca endpoint contact: all four legs}
+Only the self-loop is pink; two open markers meet the same quartic insertion. No caps, circles or momentum.\par\vspace{12pt}
+\sgcell{Slot 1; scale .72}{\sgdiagram{1}{scale=0.72,seagull-loop-line={proca,magenta}}}\hfill
+\sgcell{Slot 2; scale 1}{\sgdiagram{2}{seagull-loop-line={proca,magenta}}}\par
+\sgcell{Slot 3; scale 1.2}{\sgdiagram{3}{scale=1.2,seagull-loop-line={proca,magenta}}}\hfill
+\sgcell{Slot 4; scale .9}{\sgdiagram{4}{scale=0.9,seagull-loop-line={proca,magenta}}}
+\newpage\section*{One-sided scalar endpoint contact}
+One open marker per loop. No caps, circles or momentum.\par\vspace{12pt}
+\sgcell{Slot 1: spolin; scale .72}{\sgdiagram{1}{scale=0.72,seagull-loop-line={spolin,magenta}}}\hfill
+\sgcell{Slot 2: spolout; scale 1}{\sgdiagram{2}{seagull-loop-line={spolout,magenta}}}\par
+\sgcell{Slot 3: spolin; scale 1.2}{\sgdiagram{3}{scale=1.2,seagull-loop-line={spolin,magenta}}}\hfill
+\sgcell{Slot 4: spolout; scale .9}{\sgdiagram{4}{scale=0.9,seagull-loop-line={spolout,magenta}}}
+\newpage\section*{Slide 11 species and charge-flow variants}
+Eight source panels: neutral Z or directed W loop at each corner. Filled charge-flow arrows are separate from momentum guides (hidden here). No outer caps.\par\vspace{9pt}
+\newcommand{\sgnative}[2]{\sgdiagram{#1}{leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},seagull-loop-line={#2}}}
+\sgsmallcell{S11-T1: lower right Z}{\sgnative{4}{ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}}\hfill
+\sgsmallcell{S11-T2: lower right W}{\sgnative{4}{ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}}\par
+\sgsmallcell{S11-T3: upper right Z}{\sgnative{3}{ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}}\hfill
+\sgsmallcell{S11-T4: upper right W}{\sgnative{3}{ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}}\par
+\sgsmallcell{S11-B1: lower left Z}{\sgnative{2}{ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}}\hfill
+\sgsmallcell{S11-B2: lower left W}{\sgnative{2}{ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}}\par
+\sgsmallcell{S11-B4: upper left Z}{\sgnative{1}{ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}}\hfill
+\sgsmallcell{S11-B3: upper left W}{\sgnative{1}{ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}}
+\newpage\section*{Styled samples: pink scalar polarization and inner W}
+EW outer legs without caps/circles; inner W circle; pink loop with two open endpoint markers, no circle and momentum k.\par\vspace{12pt}
+\newcommand{\sgpink}[1]{\sgdiagram{#1}{line=ewboson,insertion-post-line={ewboson,circ=W},seagull-loop-line={proca,magenta},show-momenta=true,external-momentum-hide={1,2,3,4},seagull-loop-momentum=k}}
+\sgcell{Slot 1}{\sgpink{1}}\hfill\sgcell{Slot 2}{\sgpink{2}}\par
+\sgcell{Slot 3}{\sgpink{3}}\hfill\sgcell{Slot 4}{\sgpink{4}}
+\end{document}

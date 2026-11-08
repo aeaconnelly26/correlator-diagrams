@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M08a local; base main 096b2b3`, audited 2026-11-08. Atlas: [PDF](inventory.pdf).
+Baseline: `M08b local; base main 35c7959`, audited 2026-11-08. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -3228,7 +3228,7 @@ Manual crossed-box circles share the new default.
 
 Seven edges; interaction valences 4/3/3; one loop.
 
-**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+**Limit:** Central/crossed quartic host only. One insertion at a time.
 
 ```tex
 \FourPointCorr[
@@ -3250,7 +3250,7 @@ Seven edges; interaction valences 4/3/3; one loop.
 
 Seven edges; interaction valences 4/3/3; one loop.
 
-**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+**Limit:** Central/crossed quartic host only. One insertion at a time.
 
 ```tex
 \FourPointCorr[
@@ -3272,7 +3272,7 @@ Seven edges; interaction valences 4/3/3; one loop.
 
 Seven edges; interaction valences 4/3/3; one loop.
 
-**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+**Limit:** Central/crossed quartic host only. One insertion at a time.
 
 ```tex
 \FourPointCorr[
@@ -3294,7 +3294,7 @@ Seven edges; interaction valences 4/3/3; one loop.
 
 Seven edges; interaction valences 4/3/3; one loop.
 
-**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+**Limit:** Central/crossed quartic host only. One insertion at a time.
 
 ```tex
 \FourPointCorr[
@@ -3427,6 +3427,313 @@ Inner W; two-ended pink arc without a circle; k only on pink arc.
   show-momenta=true,
   external-momentum-hide={1,2,3,4},
   bubble-momenta={k,},
+  contact-pairing=crossed
+]
+```
+
+## Seagull self-loop on a quartic contact leg
+
+### CS01 - Upper left: slot 1
+
+Six edges; two quartic interactions; one direct self-loop.
+
+**Limit:** One external insertion; central/crossed quartic host only. No stem.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line=plain
+]
+```
+
+### CS02 - Lower left: slot 2
+
+Six edges; two quartic interactions; one direct self-loop.
+
+**Limit:** One external insertion; central/crossed quartic host only. No stem.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  seagull-loop-line=plain
+]
+```
+
+### CS03 - Upper right: slot 3
+
+Six edges; two quartic interactions; one direct self-loop.
+
+**Limit:** One external insertion; central/crossed quartic host only. No stem.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  seagull-loop-line=plain
+]
+```
+
+### CS04 - Lower right: slot 4
+
+Six edges; two quartic interactions; one direct self-loop.
+
+**Limit:** One external insertion; central/crossed quartic host only. No stem.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  seagull-loop-line=plain
+]
+```
+
+## Contact seagulls: neutral Z and directed W loops
+
+### CS11 - Upper left: neutral Z
+
+Slide-11 species/charge-flow variant; momentum guides hidden.
+
+**Limit:** Neutral loop has no charge arrow. Eight source variants appear in the gallery.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}
+]
+```
+
+### CS12 - Lower left: directed W
+
+Slide-11 species/charge-flow variant; momentum guides hidden.
+
+**Limit:** Raw arrow+circ coincident overpaint is recorded as D04; visible decoration is single.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}
+]
+```
+
+### CS13 - Upper right: neutral Z
+
+Slide-11 species/charge-flow variant; momentum guides hidden.
+
+**Limit:** Neutral loop has no charge arrow. Eight source variants appear in the gallery.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}
+]
+```
+
+### CS14 - Lower right: directed W
+
+Slide-11 species/charge-flow variant; momentum guides hidden.
+
+**Limit:** Raw arrow+circ coincident overpaint is recorded as D04; visible decoration is single.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}
+]
+```
+
+## Contact seagulls: pink scalar polarization and inner W
+
+### CS21 - Upper left: pink loop
+
+Inner W circle; two-ended pink scalar loop with k.
+
+**Limit:** Pink loop has no circle. Post segment uses the default .8 W circle.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k
+]
+```
+
+### CS22 - Lower left: pink loop
+
+Inner W circle; two-ended pink scalar loop with k.
+
+**Limit:** Pink loop has no circle. Post segment uses the default .8 W circle.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k
+]
+```
+
+### CS23 - Upper right: pink loop
+
+Inner W circle; two-ended pink scalar loop with k.
+
+**Limit:** Pink loop has no circle. Post segment uses the default .8 W circle.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k
+]
+```
+
+### CS24 - Lower right: pink loop
+
+Inner W circle; two-ended pink scalar loop with k.
+
+**Limit:** Pink loop has no circle. Post segment uses the default .8 W circle.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k,
   contact-pairing=crossed
 ]
 ```

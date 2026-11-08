@@ -6,11 +6,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`. M08a checkpoint `d855152` is merged and published
-  to GitHub (2026-11-08), with verified package and PDFs unchanged. Its feature
-  branch is retained. The atlas has 134 recipes / 31 pages; 51 documents /
-  874 contacts pass. See [publication record](planning/m08a-publication.json).
-  M08b contact seagulls is next; no M08a merge/push remains.
+- Current branch: `codex/m08b-contact-seagulls`, based on published main `35c7959`.
+  M08b is complete locally: all four contact-leg seagulls, 149 focused public
+  cases, 16 rejection cases and actual PDF graph/species/flow checks. The atlas
+  has 146 recipes / 34 pages. Merge/push remains pending; see
+  [M08b verification](planning/m08b-verification.md).
+- M08a checkpoint `d855152` is merged and published to GitHub; the publication
+  handoff is `35c7959` (2026-11-08). The feature branch is retained. No M08a
+  merge/push remains. See [publication record](planning/m08a-publication.json).
 - M07b upper crossing, D02 circles, circle default .8
   and the M07c reference audit are merged and published to GitHub (2026-11-07),
   through verified feature tip `40dae7b`. Both feature branches are retained.
@@ -88,8 +91,8 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
   triangle-contact orientations are already implemented.
 - Semantic bubbles, seagulls and swordfish support s/t-tree external slots 1-4, one at
-  a time. Contact bubbles now support the same four physical slots on central/crossed
-  quartic hosts. Contact seagulls are M08b; U-tree/internal hosts remain unsupported.
+  a time. Contact bubbles and seagulls support the same four physical slots on central/crossed
+  quartic hosts (seagulls are local M08b); U-tree/internal hosts remain unsupported.
   Seagulls have one quartic self-loop vertex, distinct from bubbles.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
   the repository or delete branches.
@@ -121,18 +124,23 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
 | M07b | Crossed external layouts | Upper slice published on main; R04 right pair deferred by user |
 | M07c | R14/R22 reference-routing audit | Specification audit published on main; missing triangle-contact routing extension remains unscheduled |
-| M08a / M08b | Contact external self-energy / seagull | M08a complete on published main (`d855152`); M08b next |
+| M08a / M08b | Contact external self-energy / seagull | M08a published on main; M08b complete locally, merge/push pending |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
 | M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
 
 ## Next coding session
 
-**Next: M08b contact-leg seagulls**, from published M08a main.
-M08a now covers all four contact-leg bubbles with the original quartic host,
-two trivalent insertion vertices and fixed outer endpoints. The 78 focused
-public cases, 12 rejection cases, PDF graph/marker checks and updated atlas
-are recorded in [M08a verification](planning/m08a-verification.md).
+**Next: M09a internal-exchange self-energy bubbles**, after reviewing and
+integrating M08b. Begin with one tree channel's internal slot 5, verify its
+two inserted cubic vertices and exchange segments, then expand to the other
+channel. M09b internal seagulls and M09c shared inner-vertex bubbles are separate
+later slices, with their own source graph maps.
+
+M08b now covers all four direct contact-leg seagulls from S11: six edges,
+one quartic contact plus one quartic self-loop insertion. Defaults put upper
+loops up and lower loops down; styles, caps, momentum and index controls are
+preserved. See [M08b verification](planning/m08b-verification.md).
 
 M07c's source audit is complete. Both slide-13 panels are triangle contacts
 with opposite quartic external pairs (1/4 and 2/3); current public orientations
@@ -141,13 +149,13 @@ missing routing extension, retained as an **unscheduled future slice** in
 [the plan](planning/m07c/future-routing-plan.md). This audit does not implement
 it. The user-deferred ordinary-box right crossing R04 remains separate.
 
-M08a is now merged and published at verified feature checkpoint `d855152`.
-The maintained suite covers 51 documents / 874 automatic endpoint contacts;
-the atlas has 134 recipes / 31 pages. Package, regression and PDF hashes match
-the tested local checkpoint. D01 index appearance and D03 circle/crossing
-spacing remain separate later reviews. M07b/M07c and their historical feature
-branches are retained. No manual Git preparation is needed from the user.
-See [publication record](planning/m08a-publication.json).
+M08a is published at verified feature checkpoint `d855152`, with the documentation
+handoff at `35c7959`. M08b remains local on its feature branch. The maintained
+suite now covers 52 documents / 894 automatic endpoint contacts; the atlas has
+146 recipes / 34 pages. All five existing M08a gallery pages remain pixel-identical.
+D01 index appearance, D03 crossing/circle spacing and the observed D04 coincident
+raw-decoration overpaint remain separate later reviews. No manual Git preparation
+is needed from the user.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -548,3 +556,12 @@ Verified checkpoint `d855152` was fast-forward merged from `096b2b3` into main
 and pushed to GitHub. The feature branch is retained. This publication handoff
 changes documentation only; the 51-document / 874-contact verification and
 134-recipe / 31-page atlas remain unchanged. M08b follows from this baseline.
+
+## M08b local closeout - 2026-11-08
+
+All four external contact seagulls and all eight S11 Z/W variants are covered.
+The original quartic contact survives; one new quartic vertex carries a direct
+self-loop, without a stem or split bubble vertices. The first-leg slice passed
+before the all-slot matrix. A seven-page gallery, independent PDF graph/contact/
+charge-flow checks, and atlas CS01-CS04/CS11-CS14/CS21-CS24 are saved. M08b is
+committed locally; merge/push is pending. M09a follows after integration.

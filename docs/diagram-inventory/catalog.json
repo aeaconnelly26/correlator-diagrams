@@ -1,5 +1,5 @@
 {
-  "baseline": "M08a local; base main 096b2b3",
+  "baseline": "M08b local; base main 35c7959",
   "date": "2026-11-08",
   "base_options": [
     "field={}",
@@ -2022,7 +2022,7 @@
             "insertion-slot=1"
           ],
           "description": "Seven edges; interaction valences 4/3/3; one loop.",
-          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+          "limitation": "Central/crossed quartic host only. One insertion at a time."
         },
         {
           "id": "CT02",
@@ -2033,7 +2033,7 @@
             "insertion-slot=2"
           ],
           "description": "Seven edges; interaction valences 4/3/3; one loop.",
-          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+          "limitation": "Central/crossed quartic host only. One insertion at a time."
         },
         {
           "id": "CT03",
@@ -2044,7 +2044,7 @@
             "insertion-slot=3"
           ],
           "description": "Seven edges; interaction valences 4/3/3; one loop.",
-          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+          "limitation": "Central/crossed quartic host only. One insertion at a time."
         },
         {
           "id": "CT04",
@@ -2055,7 +2055,7 @@
             "insertion-slot=4"
           ],
           "description": "Seven edges; interaction valences 4/3/3; one loop.",
-          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+          "limitation": "Central/crossed quartic host only. One insertion at a time."
         }
       ]
     },
@@ -2136,6 +2136,196 @@
           ],
           "description": "Inner W; two-ended pink arc without a circle; k only on pink arc.",
           "limitation": "Circle default .8. Slot 4 uses the equivalent crossed contact view."
+        }
+      ]
+    },
+    {
+      "section": "32 / CONTACT SEAGULLS",
+      "title": "Seagull self-loop on a quartic contact leg",
+      "subtitle": "One direct self-loop, two quartic vertices and six edges. Upper loops face up; lower loops down.",
+      "entries": [
+        {
+          "id": "CS01",
+          "title": "Upper left: slot 1",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=1",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Six edges; two quartic interactions; one direct self-loop.",
+          "limitation": "One external insertion; central/crossed quartic host only. No stem."
+        },
+        {
+          "id": "CS02",
+          "title": "Lower left: slot 2",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=2",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Six edges; two quartic interactions; one direct self-loop.",
+          "limitation": "One external insertion; central/crossed quartic host only. No stem."
+        },
+        {
+          "id": "CS03",
+          "title": "Upper right: slot 3",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=3",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Six edges; two quartic interactions; one direct self-loop.",
+          "limitation": "One external insertion; central/crossed quartic host only. No stem."
+        },
+        {
+          "id": "CS04",
+          "title": "Lower right: slot 4",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=4",
+            "seagull-loop-line=plain"
+          ],
+          "description": "Six edges; two quartic interactions; one direct self-loop.",
+          "limitation": "One external insertion; central/crossed quartic host only. No stem."
+        }
+      ]
+    },
+    {
+      "section": "33 / CONTACT SPECIES AND FLOW",
+      "title": "Contact seagulls: neutral Z and directed W loops",
+      "subtitle": "Selected slide-11 variants. Wavy lines and filled charge-flow arrows; momentum guides hidden. Species circles are explicit here.",
+      "entries": [
+        {
+          "id": "CS11",
+          "title": "Upper left: neutral Z",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=1",
+            "leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}}",
+            "seagull-loop-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=Z}"
+          ],
+          "description": "Slide-11 species/charge-flow variant; momentum guides hidden.",
+          "limitation": "Neutral loop has no charge arrow. Eight source variants appear in the gallery."
+        },
+        {
+          "id": "CS12",
+          "title": "Lower left: directed W",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=2",
+            "leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}}",
+            "seagull-loop-line={ewboson,ewboson wavelength=10\\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}"
+          ],
+          "description": "Slide-11 species/charge-flow variant; momentum guides hidden.",
+          "limitation": "Raw arrow+circ coincident overpaint is recorded as D04; visible decoration is single."
+        },
+        {
+          "id": "CS13",
+          "title": "Upper right: neutral Z",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=3",
+            "leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}}",
+            "seagull-loop-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=Z}"
+          ],
+          "description": "Slide-11 species/charge-flow variant; momentum guides hidden.",
+          "limitation": "Neutral loop has no charge arrow. Eight source variants appear in the gallery."
+        },
+        {
+          "id": "CS14",
+          "title": "Lower right: directed W",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=4",
+            "leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}}",
+            "seagull-loop-line={ewboson,ewboson wavelength=10\\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}"
+          ],
+          "description": "Slide-11 species/charge-flow variant; momentum guides hidden.",
+          "limitation": "Raw arrow+circ coincident overpaint is recorded as D04; visible decoration is single."
+        }
+      ]
+    },
+    {
+      "section": "34 / CONTACT SCALAR POLARIZATION",
+      "title": "Contact seagulls: pink scalar polarization and inner W",
+      "subtitle": "EW outer legs without caps or circles. Pink loop: two open endpoint markers, no circle and momentum k.",
+      "entries": [
+        {
+          "id": "CS21",
+          "title": "Upper left: pink loop",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=1",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "seagull-loop-line={proca,magenta}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Inner W circle; two-ended pink scalar loop with k.",
+          "limitation": "Pink loop has no circle. Post segment uses the default .8 W circle."
+        },
+        {
+          "id": "CS22",
+          "title": "Lower left: pink loop",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=2",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "seagull-loop-line={proca,magenta}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Inner W circle; two-ended pink scalar loop with k.",
+          "limitation": "Pink loop has no circle. Post segment uses the default .8 W circle."
+        },
+        {
+          "id": "CS23",
+          "title": "Upper right: pink loop",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=3",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "seagull-loop-line={proca,magenta}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "seagull-loop-momentum=k"
+          ],
+          "description": "Inner W circle; two-ended pink scalar loop with k.",
+          "limitation": "Pink loop has no circle. Post segment uses the default .8 W circle."
+        },
+        {
+          "id": "CS24",
+          "title": "Lower right: pink loop",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=seagull",
+            "insertion-slot=4",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "seagull-loop-line={proca,magenta}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "seagull-loop-momentum=k",
+            "contact-pairing=crossed"
+          ],
+          "description": "Inner W circle; two-ended pink scalar loop with k.",
+          "limitation": "Pink loop has no circle. Post segment uses the default .8 W circle."
         }
       ]
     }

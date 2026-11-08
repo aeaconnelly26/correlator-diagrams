@@ -1,0 +1,106 @@
+{
+  "slide": 11,
+  "archive": "sources/1-loop-WW-WZ.pptx",
+  "native_images": [
+    {
+      "native_image": 1,
+      "zip_path": "ppt/media/image44.png",
+      "offset_emu": {
+        "x": "137886",
+        "y": "626685"
+      }
+    },
+    {
+      "native_image": 2,
+      "zip_path": "ppt/media/image45.png",
+      "offset_emu": {
+        "x": "9421371",
+        "y": "1018905"
+      }
+    },
+    {
+      "native_image": 3,
+      "zip_path": "ppt/media/image46.png",
+      "offset_emu": {
+        "x": "361719",
+        "y": "3016363"
+      }
+    },
+    {
+      "native_image": 4,
+      "zip_path": "ppt/media/image47.png",
+      "offset_emu": {
+        "x": "5438825",
+        "y": "3204721"
+      }
+    },
+    {
+      "native_image": 5,
+      "zip_path": "ppt/media/image48.png",
+      "offset_emu": {
+        "x": "8706510",
+        "y": "3122059"
+      }
+    }
+  ],
+  "panels": [
+    {
+      "id": "S11-T1",
+      "slot": 4,
+      "loop_species": "Z",
+      "native_image": 1
+    },
+    {
+      "id": "S11-T2",
+      "slot": 4,
+      "loop_species": "W",
+      "native_image": 1
+    },
+    {
+      "id": "S11-T3",
+      "slot": 3,
+      "loop_species": "Z",
+      "native_image": 1
+    },
+    {
+      "id": "S11-T4",
+      "slot": 3,
+      "loop_species": "W",
+      "native_image": 2
+    },
+    {
+      "id": "S11-B1",
+      "slot": 2,
+      "loop_species": "Z",
+      "native_image": 3
+    },
+    {
+      "id": "S11-B2",
+      "slot": 2,
+      "loop_species": "W",
+      "native_image": 3
+    },
+    {
+      "id": "S11-B3",
+      "slot": 1,
+      "loop_species": "W",
+      "native_image": 4
+    },
+    {
+      "id": "S11-B4",
+      "slot": 1,
+      "loop_species": "Z",
+      "native_image": 5
+    }
+  ],
+  "graph": {
+    "edges": 6,
+    "interaction_valences": [
+      4,
+      4
+    ],
+    "self_loops": 1,
+    "cycle_rank": 1
+  },
+  "context": "Editing tooltip in image 4 is UI/context, not a requirement."
+}

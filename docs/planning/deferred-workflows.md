@@ -24,8 +24,8 @@ in this note.
 ## D02 - Crossed-box circles and per-line circle styling
 
 **Source:** user's report during M07b, 2026-11-07.
-**State:** fixed locally in the user-authorized D02 follow-up, based on
-M07b checkpoint `e64cc2f`. Merge/push remains pending.
+**State:** fixed and published on main with M07b/M07c (2026-11-07). The original
+D02 verification checkpoint, based on `e64cc2f`, is retained as historical evidence.
 
 Bare Proca lines now add no circle. Explicit `circ=...`, `circ={}` and topology
 circle labels still work. The manual placement pass reapplies each logical
@@ -60,3 +60,24 @@ D03 is independent of the completed D02 scaling/unsolicited-circle fix.
 The later user-selected circle default .8 improves the centered diagram-scale-1
 case (about .73 pt clearance). The .8 diagram-scale case remains very tight;
 D03 is still an open spacing review. See [circle-default verification](circ-default-verification.md).
+
+## D04 - Coincident raw charge-arrow/circle decorations
+
+**Source:** measured during M08b, 2026-11-08. **State:** recorded for a later
+style/decorator cleanup; no geometry or public-interface change in this slice.
+
+Combining raw `with arrow=.5` and `circ=W` on the same EW loop paints both
+markings twice at identical coordinates. A probe against published baseline
+`35c7959` reproduces the same two coincident W rings on an existing s-tree
+seagull. This predates contact seagulls. The eight source-variant panels have
+44 distinct charge arrows (48 paints) and eight distinct species circles
+(12 paints). Visible positions, connectivity and species/flow are correct;
+PDF text extraction also repeats W on the four charged loops. The focused
+checker records both physical paints and distinct visible positions rather
+than treating repeated paint as an extra graph feature.
+
+If addressed later, isolate the marking postactions while preserving existing
+EW paths, visible arrow/circle placement, label size/color and option-order
+compatibility. Use a minimal raw/tree/contact comparison and then regenerate
+the named source-variant examples. This is separate from D01 index appearance
+and D03 crossed-leg/circle spacing; do not expand M09 into this cleanup.

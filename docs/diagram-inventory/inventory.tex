@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M08a local; base main 096b2b3 | 2026-11-08}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M08b local; base main 35c7959 | 2026-11-08}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -2368,7 +2368,7 @@
   insertion=bubble,
   insertion-slot=1
 ]
-}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\hfill
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion at a time.}\hfill
 \atlascell{CT02  Lower left: slot 2}{\FourPointCorr}{%
 \FourPointCorr[
   field={},
@@ -2383,7 +2383,7 @@
   insertion=bubble,
   insertion-slot=2
 ]
-}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\par\vspace{4pt}
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion at a time.}\par\vspace{4pt}
 \atlascell{CT03  Upper right: slot 3}{\FourPointCorr}{%
 \FourPointCorr[
   field={},
@@ -2398,7 +2398,7 @@
   insertion=bubble,
   insertion-slot=3
 ]
-}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\hfill
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion at a time.}\hfill
 \atlascell{CT04  Lower right: slot 4}{\FourPointCorr}{%
 \FourPointCorr[
   field={},
@@ -2413,7 +2413,7 @@
   insertion=bubble,
   insertion-slot=4
 ]
-}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\par\vspace{4pt}
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion at a time.}\par\vspace{4pt}
 \newpage
 \atlaspage{31 / CONTACT BUBBLE STYLING}{Contact bubbles: EW W and pink scalar polarization}{EW outer legs; inner W segment; EW W arc and a two-ended pink scalar-polarization arc carrying k. No outer caps or field labels.}
 \atlascell{CT11  Upper left: mixed bubble}{\FourPointCorr}{%
@@ -2505,4 +2505,227 @@
   contact-pairing=crossed
 ]
 }{Inner W; two-ended pink arc without a circle; k only on pink arc.}{Circle default .8. Slot 4 uses the equivalent crossed contact view.}\par\vspace{4pt}
+\newpage
+\atlaspage{32 / CONTACT SEAGULLS}{Seagull self-loop on a quartic contact leg}{One direct self-loop, two quartic vertices and six edges. Upper loops face up; lower loops down.}
+\atlascell{CS01  Upper left: slot 1}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  seagull-loop-line=plain
+]
+}{Six edges; two quartic interactions; one direct self-loop.}{One external insertion; central/crossed quartic host only. No stem.}\hfill
+\atlascell{CS02  Lower left: slot 2}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  seagull-loop-line=plain
+]
+}{Six edges; two quartic interactions; one direct self-loop.}{One external insertion; central/crossed quartic host only. No stem.}\par\vspace{4pt}
+\atlascell{CS03  Upper right: slot 3}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  seagull-loop-line=plain
+]
+}{Six edges; two quartic interactions; one direct self-loop.}{One external insertion; central/crossed quartic host only. No stem.}\hfill
+\atlascell{CS04  Lower right: slot 4}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  seagull-loop-line=plain
+]
+}{Six edges; two quartic interactions; one direct self-loop.}{One external insertion; central/crossed quartic host only. No stem.}\par\vspace{4pt}
+\newpage
+\atlaspage{33 / CONTACT SPECIES AND FLOW}{Contact seagulls: neutral Z and directed W loops}{Selected slide-11 variants. Wavy lines and filled charge-flow arrows; momentum guides hidden. Species circles are explicit here.}
+\atlascell{CS11  Upper left: neutral Z}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}
+]
+}{Slide-11 species/charge-flow variant; momentum guides hidden.}{Neutral loop has no charge arrow. Eight source variants appear in the gallery.}\hfill
+\atlascell{CS12  Lower left: directed W}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}
+]
+}{Slide-11 species/charge-flow variant; momentum guides hidden.}{Raw arrow+circ coincident overpaint is recorded as D04; visible decoration is single.}\par\vspace{4pt}
+\atlascell{CS13  Upper right: neutral Z}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=Z}
+]
+}{Slide-11 species/charge-flow variant; momentum guides hidden.}{Neutral loop has no charge arrow. Eight source variants appear in the gallery.}\hfill
+\atlascell{CS14  Lower right: directed W}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  leg-styles={{ewboson,with reversed arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with arrow=0.5},{ewboson,with reversed arrow=0.5}},
+  seagull-loop-line={ewboson,ewboson wavelength=10\feynhandlinesize,with arrow=0.5,circ=W,circ position=0.25}
+]
+}{Slide-11 species/charge-flow variant; momentum guides hidden.}{Raw arrow+circ coincident overpaint is recorded as D04; visible decoration is single.}\par\vspace{4pt}
+\newpage
+\atlaspage{34 / CONTACT SCALAR POLARIZATION}{Contact seagulls: pink scalar polarization and inner W}{EW outer legs without caps or circles. Pink loop: two open endpoint markers, no circle and momentum k.}
+\atlascell{CS21  Upper left: pink loop}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=1,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k
+]
+}{Inner W circle; two-ended pink scalar loop with k.}{Pink loop has no circle. Post segment uses the default .8 W circle.}\hfill
+\atlascell{CS22  Lower left: pink loop}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=2,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k
+]
+}{Inner W circle; two-ended pink scalar loop with k.}{Pink loop has no circle. Post segment uses the default .8 W circle.}\par\vspace{4pt}
+\atlascell{CS23  Upper right: pink loop}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=3,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k
+]
+}{Inner W circle; two-ended pink scalar loop with k.}{Pink loop has no circle. Post segment uses the default .8 W circle.}\hfill
+\atlascell{CS24  Lower right: pink loop}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=seagull,
+  insertion-slot=4,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  seagull-loop-line={proca,magenta},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  seagull-loop-momentum=k,
+  contact-pairing=crossed
+]
+}{Inner W circle; two-ended pink scalar loop with k.}{Pink loop has no circle. Post segment uses the default .8 W circle.}\par\vspace{4pt}
 \end{document}

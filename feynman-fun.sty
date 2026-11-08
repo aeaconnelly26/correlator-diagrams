@@ -1910,6 +1910,9 @@
   \corr@iftreeseagullinsertion{%
     \ifcorr@insertionpositionexplicit\else\def\corr@insertionposition{0.40}\fi
   }{}%
+  \corr@ifcontactseagullinsertion{%
+    \ifcorr@insertionpositionexplicit\else\def\corr@insertionposition{0.40}\fi
+  }{}%
   \corr@iftreebubbleinsertion{%
     \ifcorr@insertionscaleexplicit\else\def\corr@insertionscale{0.50}\fi
   }{}%
@@ -6834,21 +6837,31 @@
   }{#2}%
 }
 
-\newcommand{\corr@validatecontactbubble}{%
+\newcommand{\corr@ifcontactseagullinsertion}[2]{%
   \corr@ifstringeq{\corr@fourpointtopology}{contact}{%
-    \corr@ifstringeq{\corr@insertion}{bubble}{%
-      \corr@ifstringeq{\corr@insertionslot}{1}{}{%
-      \corr@ifstringeq{\corr@insertionslot}{2}{}{%
-      \corr@ifstringeq{\corr@insertionslot}{3}{}{%
-      \corr@ifstringeq{\corr@insertionslot}{4}{}{%
-        \PackageError{feynman-fun}{Contact bubble requires insertion-slot=1, 2, 3 or 4}{Select one external leg.}%
-      }}}}%
-      \corr@ifstringeq{\corr@contactpairing}{central}{}{%
-      \corr@ifstringeq{\corr@contactpairing}{crossed}{}{%
-        \PackageError{feynman-fun}{Contact bubble requires contact-pairing=central or crossed}{Horizontal and vertical pairings have no quartic host.}%
-      }}%
-    }{}%
+    \corr@ifstringeq{\corr@insertion}{seagull}{%
+      \ifcorr@externallegs #1\else #2\fi
+    }{#2}%
+  }{#2}%
+}
+\newcommand{\corr@validatecontactinsertion}{%
+  \corr@ifstringeq{\corr@fourpointtopology}{contact}{%
+    \corr@ifstringeq{\corr@insertion}{bubble}{\corr@validatecontactinsertionslot}{%
+      \corr@ifstringeq{\corr@insertion}{seagull}{\corr@validatecontactinsertionslot}{}%
+    }%
   }{}%
+}
+\newcommand{\corr@validatecontactinsertionslot}{%
+  \corr@ifstringeq{\corr@insertionslot}{1}{}{%
+  \corr@ifstringeq{\corr@insertionslot}{2}{}{%
+  \corr@ifstringeq{\corr@insertionslot}{3}{}{%
+  \corr@ifstringeq{\corr@insertionslot}{4}{}{%
+    \PackageError{feynman-fun}{Contact \corr@insertion\space requires insertion-slot=1, 2, 3 or 4}{Select one external leg.}%
+  }}}}%
+  \corr@ifstringeq{\corr@contactpairing}{central}{}{%
+  \corr@ifstringeq{\corr@contactpairing}{crossed}{}{%
+    \PackageError{feynman-fun}{Contact \corr@insertion\space requires contact-pairing=central or crossed}{Horizontal and vertical pairings have no quartic host.}%
+  }}%
 }
 
 \newcommand{\corr@ifttreebubbleinsertion}[2]{%
@@ -7096,6 +7109,11 @@
   \corr@ifstringeq{\corr@insertionorientation}{auto}{%
     \ifnum\corr@insertionhostslot=2 \xdef\corr@seagullloopangle{\corr@insertiontopangle}\fi
     \ifnum\corr@insertionhostslot=3 \xdef\corr@seagullloopangle{\corr@insertiontopangle}\fi
+    \corr@ifcontactseagullinsertion{%
+      \xdef\corr@seagullloopangle{\corr@insertionbottomangle}%
+      \ifnum\corr@insertionhostslot=1 \xdef\corr@seagullloopangle{\corr@insertiontopangle}\fi
+      \ifnum\corr@insertionhostslot=4 \xdef\corr@seagullloopangle{\corr@insertiontopangle}\fi
+    }{}%
   }{}%
   \xdef\corr@seagullloopmomentumlabelposition{below}%
   \corr@ifstringeq{\corr@insertionorientation}{top}{%
@@ -8626,10 +8644,25 @@
   \fi
 }
 
-\newcommand{\corr@drawcontactbubbleleg}[2]{%
+\newcommand{\corr@validatecontactseagullgeometry}{%
+  \pgfmathparse{\corr@insertionposition>0 && \corr@insertionposition<1}%
+  \ifdim\pgfmathresult pt>0pt\else
+    \PackageError{feynman-fun}{Contact seagull position must be strictly between 0 and 1}{Choose an interior insertion-position.}%
+  \fi
+  \pgfmathparse{\corr@insertionscale>0 && \corr@seagullloopsize>0 && \corr@seagulllooplooseness>0 && veclen(\corr@fourpointxspan,\corr@fourpointyspan)>0}%
+  \ifdim\pgfmathresult pt>0pt\else
+    \PackageError{feynman-fun}{Contact seagull requires positive geometry}{Use positive insertion-scale, seagull-loop-size/looseness and a nonzero host leg.}%
+  \fi
+}
+
+\newcommand{\corr@drawcontactinsertionleg}[2]{%
   \ifnum#1=\corr@insertionslot\relax
     \coordinate (corrInsertionOuter) at (#2);
     \coordinate (corrInsertionHost) at (corrC);
+    \corr@ifcontactseagullinsertion{%
+      \corr@validatecontactseagullgeometry
+      \corr@drawttreeslotoneseagullinsertion
+    }{%
     % Test the requested dimensions in unscaled package coordinates.
     \pgfmathsetmacro{\corr@contactleglength}{veclen(\corr@fourpointxspan,\corr@fourpointyspan)}%
     \pgfmathsetmacro{\corr@contactbubbleroom}{min(\corr@insertionposition,1-\corr@insertionposition)*\corr@contactleglength-\corr@bubblevertexspan*\corr@insertionscale}%
@@ -8643,6 +8676,7 @@
       \PackageError{feynman-fun}{Contact bubble does not fit inside the selected leg}{Reduce insertion-scale or move insertion-position toward 0.5.}%
     \fi
     \corr@drawttreebubbleinsertion
+    }%
   \else \corr@drawchannelprop{#1}{}{#2}{corrC}{}%
   \fi
 }
@@ -8660,7 +8694,9 @@
   \endgroup
 }
 
-\newcommand{\corr@drawfourpointcontactbubble}{%
+\newcommand{\corr@drawfourpointcontactbubble}{\corr@drawfourpointcontactinsertion}
+\newcommand{\corr@drawfourpointcontactseagull}{\corr@drawfourpointcontactinsertion}
+\newcommand{\corr@drawfourpointcontactinsertion}{%
   \corr@resolvettreeinsertionhost
   \begin{feynhand}
     \vertex (corrC) at (0,0);
@@ -8668,18 +8704,22 @@
     \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
     \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
     \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
-    \corr@drawcontactbubbleleg{1}{corrUL}%
-    \corr@drawcontactbubbleleg{2}{corrLL}%
-    \corr@drawcontactbubbleleg{3}{corrUR}%
-    \corr@drawcontactbubbleleg{4}{corrLR}%
+    \corr@drawcontactinsertionleg{1}{corrUL}%
+    \corr@drawcontactinsertionleg{2}{corrLL}%
+    \corr@drawcontactinsertionleg{3}{corrUR}%
+    \corr@drawcontactinsertionleg{4}{corrLR}%
     \corr@ifstringeq{\corr@contactpairing}{central}{%
       \ifcorr@blob \corr@putblob{corrC}{\corr@blobstyle}\fi
     }{}%
   \end{feynhand}
   \ifcorr@centervertex
     \corr@putvertex{corrC}{\corr@centervertexstyle}%
-    \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}%
-    \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}%
+    \corr@ifcontactseagullinsertion{%
+      \corr@putvertex{corrInsertionV}{\corr@centervertexstyle}%
+    }{%
+      \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}%
+      \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}%
+    }%
   \fi
   \corr@fourpointplaceexternalvertices
   \ifcorr@showmomenta
@@ -8687,9 +8727,12 @@
     \corr@drawcontactbubblemomentum{2}{corrLL}{-90}%
     \corr@drawcontactbubblemomentum{3}{corrUR}{-90}%
     \corr@drawcontactbubblemomentum{4}{corrLR}{90}%
-    \corr@drawttreeinsertionbubblemomenta
+    \corr@ifcontactseagullinsertion{\corr@drawttreeinsertionseagullmomentum}{\corr@drawttreeinsertionbubblemomenta}
   \fi
-  \corr@putttreeinsertionbubbleindices
+  \corr@ifcontactseagullinsertion{%
+    \corr@putttreeinsertionseagullindices
+    \corr@putttreeinsertionpostindices
+  }{\corr@putttreeinsertionbubbleindices}
   \corr@fourpointplaceexternallabels
   \corr@putcentral{corrC}%
 }
@@ -8811,6 +8854,7 @@
 }
 
 \newcommand{\corr@drawfourpointcontact}{%
+  \corr@ifcontactseagullinsertion{\corr@drawfourpointcontactseagull}{%
   \corr@ifcontactbubbleinsertion{\corr@drawfourpointcontactbubble}{%
   \corr@ifstringeq{\corr@contactpairing}{horizontal}{%
     \corr@drawfourpointcontacthorizontal
@@ -8826,6 +8870,7 @@
     }%
   }%
   }% End ordinary contact dispatch.
+  }% End bubble/seagull dispatch.
 }
 
 \newcommand{\corr@halfboxplaceexternallabels}{%
@@ -9654,7 +9699,7 @@
       \PackageError{feynman-fun}{box-external-crossing requires topology=box}{Use BoxLoopCorr for this routing.}%
     }%
   }%
-  \corr@validatecontactbubble
+  \corr@validatecontactinsertion
   \corr@applyinsertionhostdefaults
   \corr@preparelists
   \corr@configurestyles

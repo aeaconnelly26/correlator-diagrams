@@ -384,10 +384,10 @@
   {
     "id": "R21",
     "title": "Seagull on contact external legs",
-    "status": "Missing",
-    "evidence": "Contact baseline I06 exists; there is no quartic self-loop insertion on its external legs.",
-    "target": "Four external-leg seagull placements; species/loop-arrow variants are examples, not extra graph topologies.",
-    "milestone": "M08b",
+    "status": "Verified existing (local M08b branch; publication pending)",
+    "evidence": "FourPointCorr insertion=seagull, external slots 1-4; central/crossed quartic hosts. Atlas CS01-CS04/CS11-CS14/CS21-CS24. 149 public cases, 16 rejection cases; PDF six-edge graphs, two quartic vertices, 20 pink contacts, eight S11 species/flow variants.",
+    "target": "One direct self-loop insertion at a time, no stem; fixed outer frame. D01 index appearance and D04 inherited raw-decoration overpaint remain deferred.",
+    "milestone": "M08b complete locally on codex/m08b-contact-seagulls; merge/push pending",
     "dependencies": "M04, M08a",
     "acceptance": "Reproduce S11 four placements, retain one quartic host and one quartic insertion point, and verify the displayed species/flow variants.",
     "source_panels": [

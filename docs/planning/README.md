@@ -11,8 +11,10 @@ tip `40dae7b` (2026-11-07). Both feature branches are retained; no integration
 remains pending. The publication handoff changes documentation only. R04 stays
 deferred. R14/R22 share one missing triangle-contact routing extension, retained
 as an unscheduled follow-up. M08a contact-leg bubbles is now merged and published on main at `d855152`
-(2026-11-08); its feature branch is retained. M08b contact seagulls is next.
+(2026-11-08); its feature branch is retained. M08b contact seagulls is complete locally on `codex/m08b-contact-seagulls`,
+based on `35c7959`; merge/push pending. M09a internal bubbles is next.
 
+- [M08b verification](m08b-verification.md): four contact seagulls, eight source variants, actual PDF graphs/flow/marker checks and current handoff.
 - [M08a publication](m08a-publication.json): verified checkpoint merged and pushed; package/PDFs unchanged.
 - [M08a verification](m08a-verification.md): four contact bubbles, 78 public cases, PDF graph/marker checks and updated inventory.
 - [M07b/M07c publication](m07bc-publication.json): verified feature tip fast-forwarded and pushed to main; code/tests/PDFs unchanged.

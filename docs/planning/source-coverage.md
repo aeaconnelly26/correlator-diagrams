@@ -136,14 +136,14 @@ Photographed handwritten swordfish/momentum notes: context for R12 and its annot
 
 | Panel | Visible diagram / placement | Requirement | Relation |
 | --- | --- | --- | --- |
-| S11-T1 | Contact seagull on lower-right leg | R21 | Target |
-| S11-T2 | Contact seagull on lower-right leg | R21 | Species/flow variant of S11-T1 |
-| S11-T3 | Contact seagull on upper-right leg | R21 | Target |
-| S11-T4 | Contact seagull on upper-right leg | R21 | Species/flow variant of S11-T3 |
-| S11-B1 | Contact seagull on lower-left leg | R21 | Target |
-| S11-B2 | Contact seagull on lower-left leg | R21 | Species/flow variant of S11-B1 |
-| S11-B3 | Contact seagull on upper-left leg | R21 | Target |
-| S11-B4 | Contact seagull on upper-left leg | R21 | Species/flow variant of S11-B3 |
+| S11-T1 | Contact seagull on lower-right leg | R21 | Verified M08b locally: CS04; Z loop; gallery p6 |
+| S11-T2 | Contact seagull on lower-right leg | R21 | Verified M08b locally: CS04; W loop; gallery p6  species/flow variant of S11-T1; same topology |
+| S11-T3 | Contact seagull on upper-right leg | R21 | Verified M08b locally: CS03; Z loop; gallery p6 |
+| S11-T4 | Contact seagull on upper-right leg | R21 | Verified M08b locally: CS03; W loop; gallery p6  species/flow variant of S11-T3; same topology |
+| S11-B1 | Contact seagull on lower-left leg | R21 | Verified M08b locally: CS02; Z loop; gallery p6 |
+| S11-B2 | Contact seagull on lower-left leg | R21 | Verified M08b locally: CS02; W loop; gallery p6  species/flow variant of S11-B1; same topology |
+| S11-B3 | Contact seagull on upper-left leg | R21 | Verified M08b locally: CS01; W loop; gallery p6 |
+| S11-B4 | Contact seagull on upper-left leg | R21 | Verified M08b locally: CS01; Z loop; gallery p6  species/flow variant of S11-B3; same topology |
 
 Eight diagrams are visible although the slide contains fewer image objects; the composite images have been split into panel references.
 

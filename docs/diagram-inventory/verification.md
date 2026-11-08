@@ -1,3 +1,14 @@
+# M08b contact seagulls - 2026-11-08
+
+Local branch `codex/m08b-contact-seagulls`, base published main `35c7959`.
+The atlas has 146 recipes / 34 pages: four plain seagulls, four selected source
+species/flow samples and four pink scalar-polarization samples. All pages are
+rendered/reviewed; new pages are inspected at reading size. Prior page bodies
+1-29 and 31 remain pixel-identical at 90dpi. Page 30 changes only the stale
+no-contact-seagull limitation; its four diagram regions are unchanged. All five
+M08a gallery pages remain pixel-identical. See [verification](../planning/m08b-verification.md)
+and [checks](../planning/m08b-checks.json). Earlier records preserve history.
+
 # M08a publication - 2026-11-08
 
 Verified checkpoint `d855152` is fast-forward merged and published on main.
