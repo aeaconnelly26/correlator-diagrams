@@ -1,3 +1,12 @@
+# M08b publication - 2026-11-08
+
+Verified checkpoint `e57499e` is merged and published on main, including the
+Overleaf array fix. The 146-recipe / 34-page atlas and seven-page gallery retain
+their verified PDF hashes; package and regressions are unchanged from the
+53-document / 894-contact checkpoint. The feature branch is retained; no M08b
+merge/push remains. See [publication record](../planning/m08b-publication.json).
+Earlier entries retain their checkpoint-specific verification states.
+
 # M08b alignment compatibility - 2026-11-08
 
 The contact-seagull validation now works inside array/tabular/aligned layouts.

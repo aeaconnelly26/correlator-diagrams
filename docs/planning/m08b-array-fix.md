@@ -43,7 +43,8 @@ The actual user project is kept only in temporary diagnostic files; it is not
 added to this repository or published. Its Overleaf source was not edited.
 The corrected package must replace the older package in that Overleaf project.
 
-M08b remains local on `codex/m08b-contact-seagulls`; this fix does not publish
-or merge the feature branch. The atlas has the same 146 recipes / 34 pages,
+This fix is included in verified M08b checkpoint `e57499e`, now merged and
+published on main (2026-11-08). The source branch is retained; see
+[publication record](m08b-publication.json). The atlas has the same 146 recipes / 34 pages,
 and its saved PDFs remain unchanged because this only repairs compile-context
-compatibility. The next feature milestone remains M09a after M08b integration.
+compatibility. The next diagram-roadmap milestone remains M09a; no M08b integration remains.

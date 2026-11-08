@@ -3,7 +3,7 @@
   "date": "2026-11-08",
   "baseline": "35c795947172058eef33cdc2f33ee0784647b333",
   "branch": "codex/m08b-contact-seagulls",
-  "published": false,
+  "published": true,
   "M08a_published_feature": "d855152ab7496f5bdcf413baabb2d1dfed9cfc29",
   "M08a_publication_record": "m08a-publication.json",
   "requirements": [
@@ -289,7 +289,7 @@
     "docs/planning/m08b-pdf-checks.json": "6a9a8ede4da39eea4088b8e59fa15014d054996de3e05891df3919b4e708a588",
     "docs/planning/m08b-suite.txt": "9b7eebb2098a68306c6663b540a2a740bc530350c421dc8d691cfbf3a2679652",
     "regressions/topologies/insertion/contact-insertion-alignments.tex": "514f573ba19e73c4d07e081a0d7e945fc0af74d1cbe85e5821a0d2f16efa97b3",
-    "docs/planning/m08b-array-fix.md": "d0371f19f94960d6bc551488394dcd88d7159a6b687c4f6929550888977bc069"
+    "docs/planning/m08b-array-fix.md": "65310549d40f0969de1aad9a3816b4e8385d35677bd525feb15db1b7b0c93a4b"
   },
   "next": "M09a internal-exchange bubbles after M08b integration/publication",
   "alignment_public_cases": 12,
@@ -313,5 +313,7 @@
     "actual_Overleaf_source_edited": false,
     "actual_project_source_committed": false,
     "record": "m08b-array-fix.md"
-  }
+  },
+  "published_feature_checkpoint": "e57499eb47c76e150fec66e848e04fb6e04d0404",
+  "publication_record": "m08b-publication.json"
 }

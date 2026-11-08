@@ -1,13 +1,13 @@
 # Integrated branch state and coding-session closeout
 
-Current checkout: `codex/m08b-contact-seagulls`, based on published main `35c7959`.
-M08a checkpoint `d855152` and its documentation handoff `35c7959` were pushed to
-GitHub on 2026-11-08. Its feature branch is retained; no M08a integration remains.
-M08b is complete locally, with verified package, gallery, atlas and roadmap changes.
-It is not merged/pushed. After the user requests integration, publish that verified
-checkpoint before starting M09a internal-exchange bubbles. See
-[M08b verification](m08b-verification.md) and [M08a publication](m08a-publication.json).
-Earlier records retain their historical publication states.
+Current checkout: `main`. Verified M08b checkpoint `e57499e`, including the
+Overleaf array fix, was fast-forward merged from `35c7959` and pushed to GitHub
+on 2026-11-08. The source branch `codex/m08b-contact-seagulls` is retained.
+All 53 documents / 894 contacts pass, with unchanged verified package/PDFs.
+No M08b merge/push remains. Ready for the user's next task; M09a is still the
+next diagram-roadmap milestone. Local thesis artifacts under ignored `output/`
+were left untouched and were not published. See [publication](m08b-publication.json)
+and [verification](m08b-verification.md). Earlier records preserve history.
 
 M03a checkpoint `2c3b467` is now merged and published on main; see
 [M03a verification](m03a-verification.md) and the current development plan.

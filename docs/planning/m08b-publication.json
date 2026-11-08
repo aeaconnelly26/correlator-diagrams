@@ -1,0 +1,23 @@
+{
+  "milestone": "M08b",
+  "date": "2026-11-08",
+  "feature_checkpoint": "e57499eb47c76e150fec66e848e04fb6e04d0404",
+  "implementation_commit": "59c171f",
+  "previous_main": "35c795947172058eef33cdc2f33ee0784647b333",
+  "merge": "fast-forward",
+  "published_to": "origin/main",
+  "repository": "https://github.com/aeaconnelly26/correlator-diagrams",
+  "feature_branch_retained": "codex/m08b-contact-seagulls",
+  "includes_Overleaf_array_fix": true,
+  "verified_package_and_PDF_artifacts_unchanged": true,
+  "regression_documents": 53,
+  "endpoint_contacts": 894,
+  "focused_public_cases": 149,
+  "alignment_public_cases": 12,
+  "invalid_request_cases": 32,
+  "atlas_recipes": 146,
+  "atlas_pages": 34,
+  "verification_record": "m08b-checks.json",
+  "ignored_output_artifacts_excluded": true,
+  "next": "Ready for next user-selected task; M09a remains the next diagram-roadmap milestone"
+}

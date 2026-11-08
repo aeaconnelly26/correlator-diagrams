@@ -6,11 +6,14 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/m08b-contact-seagulls`, based on published main `35c7959`.
-  M08b is complete locally: all four contact-leg seagulls, 149 focused public
-  cases plus 12 alignment cases, 32 rejection cases and actual PDF graph/species/flow checks. The atlas
-  has 146 recipes / 34 pages. Merge/push remains pending; see
-  [M08b verification](planning/m08b-verification.md).
+- Current branch: `main`. M08b checkpoint `e57499e`, including the Overleaf
+  array compatibility fix, is merged and published to GitHub (2026-11-08).
+  The feature branch is retained. All 53 documents / 894 contacts pass;
+  the atlas remains 146 recipes / 34 pages. See
+  [publication record](planning/m08b-publication.json). No M08b merge/push remains.
+- Ready for the user's next task. M09a remains the next diagram-roadmap
+  milestone; no next feature session has started. Thesis sources/PDFs under
+  ignored `output/` are local artifacts and were not included in this publication.
 - M08a checkpoint `d855152` is merged and published to GitHub; the publication
   handoff is `35c7959` (2026-11-08). The feature branch is retained. No M08a
   merge/push remains. See [publication record](planning/m08a-publication.json).
@@ -124,15 +127,15 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
 | M07b | Crossed external layouts | Upper slice published on main; R04 right pair deferred by user |
 | M07c | R14/R22 reference-routing audit | Specification audit published on main; missing triangle-contact routing extension remains unscheduled |
-| M08a / M08b | Contact external self-energy / seagull | M08a published on main; M08b complete locally, merge/push pending |
+| M08a / M08b | Contact external self-energy / seagull | M08a and M08b published on main; M08b includes the array fix |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
 | M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
 
 ## Next coding session
 
-**Next: M09a internal-exchange self-energy bubbles**, after reviewing and
-integrating M08b. Begin with one tree channel's internal slot 5, verify its
+**Ready for the user's next task.** M08b is merged and published. The next
+diagram-roadmap milestone is **M09a internal-exchange self-energy bubbles**. Begin with one tree channel's internal slot 5, verify its
 two inserted cubic vertices and exchange segments, then expand to the other
 channel. M09b internal seagulls and M09c shared inner-vertex bubbles are separate
 later slices, with their own source graph maps.
@@ -150,7 +153,7 @@ missing routing extension, retained as an **unscheduled future slice** in
 it. The user-deferred ordinary-box right crossing R04 remains separate.
 
 M08a is published at verified feature checkpoint `d855152`, with the documentation
-handoff at `35c7959`. M08b remains local on its feature branch. The maintained
+handoff at `35c7959`. M08b is now published at `e57499e`; its feature branch is retained. The maintained
 suite now covers 53 documents / 894 automatic endpoint contacts; the atlas has
 146 recipes / 34 pages. All five existing M08a gallery pages remain pixel-identical.
 D01 index appearance, D03 crossing/circle spacing and the observed D04 coincident
@@ -575,3 +578,13 @@ locally in about 8.5 seconds with only the package replaced; Overleaf source
 was not edited. Twelve array/tabular/aligned cases and 32 negative cases now
 pass, along with 53 maintained documents / 894 endpoint contacts. See
 [fix record](planning/m08b-array-fix.md). The atlas PDFs and geometry are unchanged.
+
+## M08b publication - 2026-11-08
+
+Verified checkpoint `e57499e` (implementation `59c171f` plus array fix) was
+fast-forward merged from `35c7959` and pushed to main. The source branch is
+retained. This handoff changes publication/status documentation only; package,
+regressions and PDFs retain the verified content. All 53 documents / 894
+contacts pass; the atlas is 146 recipes / 34 pages. No manual merge/push remains
+for the user. The local thesis artifacts in ignored `output/` were not published.
+See [publication record](planning/m08b-publication.json).

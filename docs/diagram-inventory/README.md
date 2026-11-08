@@ -1,7 +1,8 @@
 # Current diagram inventory
 
-M08b is complete locally on `codex/m08b-contact-seagulls`, based on published
-main `35c7959`; merge/push pending. The atlas now has **146 recipes / 34 pages**.
+M08b checkpoint `e57499e`, including the Overleaf array fix, is merged and
+published on main (2026-11-08); the source branch is retained. No M08b integration
+remains. See [publication record](../planning/m08b-publication.json). The atlas now has **146 recipes / 34 pages**.
 Pages 32-34 add CS01-CS04 plain contact seagulls, CS11-CS14 selected Z/W
 species/charge-flow variants and CS21-CS24 pink scalar-polarization loops with
 inner W circles. The seven-page [gallery](../../regressions/topologies/insertion/contact-seagull-slots.pdf)

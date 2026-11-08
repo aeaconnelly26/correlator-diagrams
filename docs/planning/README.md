@@ -11,9 +11,11 @@ tip `40dae7b` (2026-11-07). Both feature branches are retained; no integration
 remains pending. The publication handoff changes documentation only. R04 stays
 deferred. R14/R22 share one missing triangle-contact routing extension, retained
 as an unscheduled follow-up. M08a contact-leg bubbles is now merged and published on main at `d855152`
-(2026-11-08); its feature branch is retained. M08b contact seagulls is complete locally on `codex/m08b-contact-seagulls`,
-based on `35c7959`; merge/push pending. M09a internal bubbles is next.
+(2026-11-08); its feature branch is retained. M08b contact seagulls and the array fix are merged and published at `e57499e`
+(2026-11-08); the source branch is retained. Ready for the user's next task;
+M09a remains the next diagram-roadmap milestone.
 
+- [M08b publication](m08b-publication.json): verified implementation and array fix merged/pushed; package and PDF artifacts unchanged.
 - [M08b array fix](m08b-array-fix.md): corrected the Overleaf failure inside math arrays; full project compiles locally with the fixed package.
 - [M08b verification](m08b-verification.md): four contact seagulls, eight source variants, actual PDF graphs/flow/marker checks and current handoff.
 - [M08a publication](m08a-publication.json): verified checkpoint merged and pushed; package/PDFs unchanged.

@@ -186,10 +186,10 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R21 - Seagull on contact external legs
 
-- **Status:** Verified existing (local M08b branch; merge/push pending).
+- **Status:** Verified existing (M08b published on main at `e57499e`).
 - **Existing construction / evidence:** `FourPointCorr[insertion=seagull,insertion-slot=1|2|3|4]`, one selected external leg. Atlas CS01-CS04/CS11-CS14/CS21-CS24; seven-page gallery; 149 focused public cases plus 12 alignment cases, 32 rejection cases and independent PDF checks. All eight S11 species/charge-flow variants are mapped and reproduced.
 - **Remaining target / limitation:** Central/crossed quartic hosts only. One direct self-loop; no stem or simultaneous insertion. Index appearance remains D01. Raw arrow+circ coincident overpaint is inherited from the published baseline and recorded as D04; visible graph/decoration positions are unaffected.
-- **Milestone:** M08b complete locally on `codex/m08b-contact-seagulls`, based on published main `35c7959`. **Dependencies:** M04, M08a (published).
+- **Milestone:** M08b complete on published main at `e57499e`; source branch retained. **Dependencies:** M04, M08a (published).
 - **Acceptance:** All four fixed outer corners retain one quartic contact and one quartic insertion, six edges and one cycle. Default loops face up on upper legs and down on lower legs. Styles/caps/momenta/indices, 20 new pink endpoint contacts, eight Z/W variants, 44 distinct charge arrows and 48 wavy paths verified.
 - **Sources:** S11-T1, S11-T2, S11-T3, S11-T4, S11-B1, S11-B2, S11-B3, S11-B4. See [source map](m08b-reference-map.json) and [verification](m08b-verification.md).
 

@@ -1,9 +1,10 @@
 # M08b contact-leg seagulls - 2026-11-08
 
-Implemented R21 locally on `codex/m08b-contact-seagulls`, based on published
-main `35c7959`. M08a checkpoint `d855152` and its publication handoff are
+Implemented R21 on `codex/m08b-contact-seagulls`, based on published main
+`35c7959`; verified checkpoint `e57499e` is now merged and published (2026-11-08).
+The feature branch is retained. See [publication record](m08b-publication.json). M08a checkpoint `d855152` and its publication handoff are
 already merged/pushed; see [publication record](m08a-publication.json).
-M08b is not merged/pushed. Next is M09a internal-exchange bubbles after integration.
+No M08b merge/push remains. Ready for the user's next task; M09a remains the next diagram-roadmap milestone.
 
 The array-context validation fix is included; see [fix record](m08b-array-fix.md).
 The original 149 cases are supplemented by 12 array/tabular/aligned cases.
