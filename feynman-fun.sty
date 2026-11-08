@@ -1913,6 +1913,9 @@
   \corr@iftreebubbleinsertion{%
     \ifcorr@insertionscaleexplicit\else\def\corr@insertionscale{0.50}\fi
   }{}%
+  \corr@ifcontactbubbleinsertion{%
+    \ifcorr@insertionscaleexplicit\else\def\corr@insertionscale{0.50}\fi
+  }{}%
   \corr@ifttreeinsertion{%
     \ifcorr@channelvertexyspanexplicit\else
       \def\corr@channelvertexyspan{0.9}%
@@ -6822,6 +6825,32 @@
   \corr@drawsemanticspolmarkers{#1}{#3}{#4}%
 }
 
+% Contact bubbles share the existing semantic insertion controls and arc renderer.
+\newcommand{\corr@ifcontactbubbleinsertion}[2]{%
+  \corr@ifstringeq{\corr@fourpointtopology}{contact}{%
+    \corr@ifstringeq{\corr@insertion}{bubble}{%
+      \ifcorr@externallegs #1\else #2\fi
+    }{#2}%
+  }{#2}%
+}
+
+\newcommand{\corr@validatecontactbubble}{%
+  \corr@ifstringeq{\corr@fourpointtopology}{contact}{%
+    \corr@ifstringeq{\corr@insertion}{bubble}{%
+      \corr@ifstringeq{\corr@insertionslot}{1}{}{%
+      \corr@ifstringeq{\corr@insertionslot}{2}{}{%
+      \corr@ifstringeq{\corr@insertionslot}{3}{}{%
+      \corr@ifstringeq{\corr@insertionslot}{4}{}{%
+        \PackageError{feynman-fun}{Contact bubble requires insertion-slot=1, 2, 3 or 4}{Select one external leg.}%
+      }}}}%
+      \corr@ifstringeq{\corr@contactpairing}{central}{}{%
+      \corr@ifstringeq{\corr@contactpairing}{crossed}{}{%
+        \PackageError{feynman-fun}{Contact bubble requires contact-pairing=central or crossed}{Horizontal and vertical pairings have no quartic host.}%
+      }}%
+    }{}%
+  }{}%
+}
+
 \newcommand{\corr@ifttreebubbleinsertion}[2]{%
   \corr@ifstringeq{\corr@fourpointtopology}{t-tree}{%
     \corr@ifstringeq{\corr@insertion}{bubble}{%
@@ -6867,7 +6896,7 @@
   \corr@ifttreeswordfishinsertion{#1}{\corr@ifstreeswordfishinsertion{#1}{#2}}%
 }
 \newcommand{\corr@ifstreecurvedinsertion}[2]{%
-  \corr@ifstreebubbleinsertion{#1}{\corr@ifstreeswordfishinsertion{#1}{#2}}%
+  \corr@ifstreebubbleinsertion{#1}{\corr@ifstreeswordfishinsertion{#1}{\corr@ifcontactbubbleinsertion{#1}{#2}}}%
 }
 
 \newcommand{\corr@ifttreeslotoneseagullinsertion}[2]{%
@@ -8588,6 +8617,83 @@
   \corr@topologyputcentral{corrC}{\corr@boxcentrallabelyshift}
 }
 
+\newcommand{\corr@resolvecontactbubbledirection}[1]{%
+  \ifcase#1\relax
+  \or \corr@contactexternalmomentumdirectionfor{\corr@contactulmomentumdirection}{\corr@externalleftmomentumdirection}%
+  \or \corr@contactexternalmomentumdirectionfor{\corr@contactllmomentumdirection}{\corr@externalleftmomentumdirection}%
+  \or \corr@contactexternalmomentumdirectionfor{\corr@contacturmomentumdirection}{\corr@externalrightmomentumdirection}%
+  \or \corr@contactexternalmomentumdirectionfor{\corr@contactlrmomentumdirection}{\corr@externalrightmomentumdirection}%
+  \fi
+}
+
+\newcommand{\corr@drawcontactbubbleleg}[2]{%
+  \ifnum#1=\corr@insertionslot\relax
+    \coordinate (corrInsertionOuter) at (#2);
+    \coordinate (corrInsertionHost) at (corrC);
+    % Test the requested dimensions in unscaled package coordinates.
+    \pgfmathsetmacro{\corr@contactleglength}{veclen(\corr@fourpointxspan,\corr@fourpointyspan)}%
+    \pgfmathsetmacro{\corr@contactbubbleroom}{min(\corr@insertionposition,1-\corr@insertionposition)*\corr@contactleglength-\corr@bubblevertexspan*\corr@insertionscale}%
+    \ifdim\corr@insertionscale pt>0pt\else
+      \PackageError{feynman-fun}{Contact bubble insertion-scale must be positive}{Use a positive bubble size.}%
+    \fi
+    \ifdim\corr@bubblevertexspan pt>0pt\else
+      \PackageError{feynman-fun}{Contact bubble bubble-vertex-span must be positive}{Use a positive base vertex span.}%
+    \fi
+    \ifdim\corr@contactbubbleroom pt>0pt\else
+      \PackageError{feynman-fun}{Contact bubble does not fit inside the selected leg}{Reduce insertion-scale or move insertion-position toward 0.5.}%
+    \fi
+    \corr@drawttreebubbleinsertion
+  \else \corr@drawchannelprop{#1}{}{#2}{corrC}{}%
+  \fi
+}
+
+\newcommand{\corr@drawcontactbubblemomentum}[3]{%
+  \begingroup
+  \corr@resolvecontactbubbledirection{#1}%
+  \ifnum#1=\corr@insertionslot\relax
+    \let\corr@insertionhostmomentumdirection\corr@contactthisexternaldirection
+    \corr@drawttreeinsertionoutermomentum
+    \corr@drawttreeinsertioninnermomentum
+  \else
+    \corr@drawmomentumrange{#1}{#2}{corrC}{#3}{\corr@externalmomentumstart}{\corr@externalmomentumend}{\corr@externalmomentumlabelfraction}{\corr@contactthisexternaldirection}%
+  \fi
+  \endgroup
+}
+
+\newcommand{\corr@drawfourpointcontactbubble}{%
+  \corr@resolvettreeinsertionhost
+  \begin{feynhand}
+    \vertex (corrC) at (0,0);
+    \vertex (corrUL) at (-\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLL) at (-\corr@fourpointxspan,-\corr@fourpointyspan);
+    \vertex (corrUR) at (\corr@fourpointxspan,\corr@fourpointyspan);
+    \vertex (corrLR) at (\corr@fourpointxspan,-\corr@fourpointyspan);
+    \corr@drawcontactbubbleleg{1}{corrUL}%
+    \corr@drawcontactbubbleleg{2}{corrLL}%
+    \corr@drawcontactbubbleleg{3}{corrUR}%
+    \corr@drawcontactbubbleleg{4}{corrLR}%
+    \corr@ifstringeq{\corr@contactpairing}{central}{%
+      \ifcorr@blob \corr@putblob{corrC}{\corr@blobstyle}\fi
+    }{}%
+  \end{feynhand}
+  \ifcorr@centervertex
+    \corr@putvertex{corrC}{\corr@centervertexstyle}%
+    \corr@putvertex{corrInsertionA}{\corr@centervertexstyle}%
+    \corr@putvertex{corrInsertionB}{\corr@centervertexstyle}%
+  \fi
+  \corr@fourpointplaceexternalvertices
+  \ifcorr@showmomenta
+    \corr@drawcontactbubblemomentum{1}{corrUL}{90}%
+    \corr@drawcontactbubblemomentum{2}{corrLL}{-90}%
+    \corr@drawcontactbubblemomentum{3}{corrUR}{-90}%
+    \corr@drawcontactbubblemomentum{4}{corrLR}{90}%
+    \corr@drawttreeinsertionbubblemomenta
+  \fi
+  \corr@putttreeinsertionbubbleindices
+  \corr@fourpointplaceexternallabels
+  \corr@putcentral{corrC}%
+}
+
 \newcommand{\corr@drawfourpointcontactcentral}{%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
@@ -8705,6 +8811,7 @@
 }
 
 \newcommand{\corr@drawfourpointcontact}{%
+  \corr@ifcontactbubbleinsertion{\corr@drawfourpointcontactbubble}{%
   \corr@ifstringeq{\corr@contactpairing}{horizontal}{%
     \corr@drawfourpointcontacthorizontal
   }{%
@@ -8718,6 +8825,7 @@
       }%
     }%
   }%
+  }% End ordinary contact dispatch.
 }
 
 \newcommand{\corr@halfboxplaceexternallabels}{%
@@ -9546,6 +9654,7 @@
       \PackageError{feynman-fun}{box-external-crossing requires topology=box}{Use BoxLoopCorr for this routing.}%
     }%
   }%
+  \corr@validatecontactbubble
   \corr@applyinsertionhostdefaults
   \corr@preparelists
   \corr@configurestyles

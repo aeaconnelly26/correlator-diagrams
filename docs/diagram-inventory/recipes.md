@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `circ 0.8 local; base a90e6f0`, audited 2026-11-07. Atlas: [PDF](inventory.pdf).
+Baseline: `M08a local; base main 096b2b3`, audited 2026-11-08. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -3219,5 +3219,214 @@ Manual crossed-box circles share the new default.
   scale=1.0,
   box-line={plain,circ=W},
   box-external-line=plain
+]
+```
+
+## Self-energy bubble on a quartic contact leg
+
+### CT01 - Upper left: slot 1
+
+Seven edges; interaction valences 4/3/3; one loop.
+
+**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=1
+]
+```
+
+### CT02 - Lower left: slot 2
+
+Seven edges; interaction valences 4/3/3; one loop.
+
+**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2
+]
+```
+
+### CT03 - Upper right: slot 3
+
+Seven edges; interaction valences 4/3/3; one loop.
+
+**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3
+]
+```
+
+### CT04 - Lower right: slot 4
+
+Seven edges; interaction valences 4/3/3; one loop.
+
+**Limit:** Central/crossed quartic host only. One insertion; no contact seagull yet.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4
+]
+```
+
+## Contact bubbles: EW W and pink scalar polarization
+
+### CT11 - Upper left: mixed bubble
+
+Inner W; two-ended pink arc without a circle; k only on pink arc.
+
+**Limit:** No momentum guide on the W arc; no circle on the pink arc.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=1,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,}
+]
+```
+
+### CT12 - Lower left: mixed bubble
+
+Inner W; two-ended pink arc without a circle; k only on pink arc.
+
+**Limit:** No momentum guide on the W arc; no circle on the pink arc.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,}
+]
+```
+
+### CT13 - Upper right: mixed bubble
+
+Inner W; two-ended pink arc without a circle; k only on pink arc.
+
+**Limit:** No momentum guide on the W arc; no circle on the pink arc.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,}
+]
+```
+
+### CT14 - Lower right: mixed bubble
+
+Inner W; two-ended pink arc without a circle; k only on pink arc.
+
+**Limit:** Circle default .8. Slot 4 uses the equivalent crossed contact view.
+
+```tex
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,},
+  contact-pairing=crossed
 ]
 ```

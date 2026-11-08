@@ -1,6 +1,6 @@
 {
-  "baseline": "circ 0.8 local; base a90e6f0",
-  "date": "2026-11-07",
+  "baseline": "M08a local; base main 096b2b3",
+  "date": "2026-11-08",
   "base_options": [
     "field={}",
     "leg-labels={,,,}",
@@ -2005,6 +2005,137 @@
           ],
           "description": "Manual crossed-box circles share the new default.",
           "limitation": "Circles remain explicit; Proca alone never requests one."
+        }
+      ]
+    },
+    {
+      "section": "30 / CONTACT SELF-ENERGY",
+      "title": "Self-energy bubble on a quartic contact leg",
+      "subtitle": "One selected external leg at a time. One quartic host and two cubic bubble vertices; outer frame unchanged.",
+      "entries": [
+        {
+          "id": "CT01",
+          "title": "Upper left: slot 1",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=1"
+          ],
+          "description": "Seven edges; interaction valences 4/3/3; one loop.",
+          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+        },
+        {
+          "id": "CT02",
+          "title": "Lower left: slot 2",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=2"
+          ],
+          "description": "Seven edges; interaction valences 4/3/3; one loop.",
+          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+        },
+        {
+          "id": "CT03",
+          "title": "Upper right: slot 3",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=3"
+          ],
+          "description": "Seven edges; interaction valences 4/3/3; one loop.",
+          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+        },
+        {
+          "id": "CT04",
+          "title": "Lower right: slot 4",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=4"
+          ],
+          "description": "Seven edges; interaction valences 4/3/3; one loop.",
+          "limitation": "Central/crossed quartic host only. One insertion; no contact seagull yet."
+        }
+      ]
+    },
+    {
+      "section": "31 / CONTACT BUBBLE STYLING",
+      "title": "Contact bubbles: EW W and pink scalar polarization",
+      "subtitle": "EW outer legs; inner W segment; EW W arc and a two-ended pink scalar-polarization arc carrying k. No outer caps or field labels.",
+      "entries": [
+        {
+          "id": "CT11",
+          "title": "Upper left: mixed bubble",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=1",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "bubble-top-line={proca,magenta}",
+            "bubble-bottom-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=W}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "bubble-momenta={k,}"
+          ],
+          "description": "Inner W; two-ended pink arc without a circle; k only on pink arc.",
+          "limitation": "No momentum guide on the W arc; no circle on the pink arc."
+        },
+        {
+          "id": "CT12",
+          "title": "Lower left: mixed bubble",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=2",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "bubble-top-line={proca,magenta}",
+            "bubble-bottom-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=W}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "bubble-momenta={k,}"
+          ],
+          "description": "Inner W; two-ended pink arc without a circle; k only on pink arc.",
+          "limitation": "No momentum guide on the W arc; no circle on the pink arc."
+        },
+        {
+          "id": "CT13",
+          "title": "Upper right: mixed bubble",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=3",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "bubble-top-line={proca,magenta}",
+            "bubble-bottom-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=W}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "bubble-momenta={k,}"
+          ],
+          "description": "Inner W; two-ended pink arc without a circle; k only on pink arc.",
+          "limitation": "No momentum guide on the W arc; no circle on the pink arc."
+        },
+        {
+          "id": "CT14",
+          "title": "Lower right: mixed bubble",
+          "macro": "FourPointCorr",
+          "options": [
+            "insertion=bubble",
+            "insertion-slot=4",
+            "line=ewboson",
+            "insertion-post-line={ewboson,circ=W}",
+            "bubble-top-line={proca,magenta}",
+            "bubble-bottom-line={ewboson,ewboson wavelength=10\\feynhandlinesize,circ=W}",
+            "show-momenta=true",
+            "external-momentum-hide={1,2,3,4}",
+            "bubble-momenta={k,}",
+            "contact-pairing=crossed"
+          ],
+          "description": "Inner W; two-ended pink arc without a circle; k only on pink arc.",
+          "limitation": "Circle default .8. Slot 4 uses the equivalent crossed contact view."
         }
       ]
     }

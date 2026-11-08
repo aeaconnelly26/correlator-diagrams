@@ -33,7 +33,7 @@ The originals in `sources/` are authoritative for species and arrow details; pre
 | P3-04 | 3 | s-tree swordfish example | [R12](requirements.md) |
 | P3-05 | 3 | Diagonal Z connection q1-q4 / q3-q2 | [R14](requirements.md) |
 | P3-06 | 3 | Prefer square-shaped vertex-correction layout | [R14](requirements.md) |
-| P4-01 | 4 | Contact external self-energy example | [R13](requirements.md) |
+| P4-01 | 4 | Contact external self-energy example; verified M08a locally, CT01-CT04 | [R13](requirements.md) |
 | P4-02 | 4 | Vertex-correction labeling heading | [R06](requirements.md) |
 | P4-03 | 4 | Proca arrows reach vertices in every topology | [R15](requirements.md) |
 | P4-04 | 4 | Reference, landing page, and visuals refresh | [R16](requirements.md) |
@@ -127,10 +127,10 @@ Photographed handwritten swordfish/momentum notes: context for R12 and its annot
 
 | Panel | Visible diagram / placement | Requirement | Relation |
 | --- | --- | --- | --- |
-| S10-TL | Contact self-energy on upper-left leg | R13 | Target |
-| S10-TR | Contact self-energy on upper-right leg | R13 | Target |
-| S10-BL | Contact self-energy on lower-left leg | R13 | Target |
-| S10-BR | Contact self-energy on lower-right leg | R13 | Target |
+| S10-TL | Contact self-energy on upper-left leg | R13 | Verified M08a locally: CT01; seven edges, 4/3/3 |
+| S10-TR | Contact self-energy on upper-right leg | R13 | Verified M08a locally: CT03; seven edges, 4/3/3 |
+| S10-BL | Contact self-energy on lower-left leg | R13 | Verified M08a locally: CT02; seven edges, 4/3/3 |
+| S10-BR | Contact self-energy on lower-right leg | R13 | Verified M08a locally: CT04; seven edges, 4/3/3 |
 
 ## Slide 11
 

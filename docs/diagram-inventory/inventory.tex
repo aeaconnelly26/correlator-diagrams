@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline circ 0.8 local; base a90e6f0 | 2026-11-07}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline M08a local; base main 096b2b3 | 2026-11-08}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -2352,4 +2352,157 @@
   box-external-line=plain
 ]
 }{Manual crossed-box circles share the new default.}{Circles remain explicit; Proca alone never requests one.}\par\vspace{4pt}
+\newpage
+\atlaspage{30 / CONTACT SELF-ENERGY}{Self-energy bubble on a quartic contact leg}{One selected external leg at a time. One quartic host and two cubic bubble vertices; outer frame unchanged.}
+\atlascell{CT01  Upper left: slot 1}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=1
+]
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\hfill
+\atlascell{CT02  Lower left: slot 2}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2
+]
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\par\vspace{4pt}
+\atlascell{CT03  Upper right: slot 3}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3
+]
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\hfill
+\atlascell{CT04  Lower right: slot 4}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4
+]
+}{Seven edges; interaction valences 4/3/3; one loop.}{Central/crossed quartic host only. One insertion; no contact seagull yet.}\par\vspace{4pt}
+\newpage
+\atlaspage{31 / CONTACT BUBBLE STYLING}{Contact bubbles: EW W and pink scalar polarization}{EW outer legs; inner W segment; EW W arc and a two-ended pink scalar-polarization arc carrying k. No outer caps or field labels.}
+\atlascell{CT11  Upper left: mixed bubble}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=1,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,}
+]
+}{Inner W; two-ended pink arc without a circle; k only on pink arc.}{No momentum guide on the W arc; no circle on the pink arc.}\hfill
+\atlascell{CT12  Lower left: mixed bubble}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=2,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,}
+]
+}{Inner W; two-ended pink arc without a circle; k only on pink arc.}{No momentum guide on the W arc; no circle on the pink arc.}\par\vspace{4pt}
+\atlascell{CT13  Upper right: mixed bubble}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=3,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,}
+]
+}{Inner W; two-ended pink arc without a circle; k only on pink arc.}{No momentum guide on the W arc; no circle on the pink arc.}\hfill
+\atlascell{CT14  Lower right: mixed bubble}{\FourPointCorr}{%
+\FourPointCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  insertion=bubble,
+  insertion-slot=4,
+  line=ewboson,
+  insertion-post-line={ewboson,circ=W},
+  bubble-top-line={proca,magenta},
+  bubble-bottom-line={ewboson,ewboson wavelength=10\feynhandlinesize,circ=W},
+  show-momenta=true,
+  external-momentum-hide={1,2,3,4},
+  bubble-momenta={k,},
+  contact-pairing=crossed
+]
+}{Inner W; two-ended pink arc without a circle; k only on pink arc.}{Circle default .8. Slot 4 uses the equivalent crossed contact view.}\par\vspace{4pt}
 \end{document}

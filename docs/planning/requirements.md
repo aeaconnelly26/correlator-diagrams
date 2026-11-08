@@ -114,12 +114,12 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R13 - Self-energy bubble on contact external legs
 
-- **Status:** Missing.
-- **Existing construction / evidence:** I06 is a contact host; semantic bubble insertion dispatch covers s/t-tree external slots 1-4 but not contact hosts.
-- **Remaining target / limitation:** A four-leg contact with a self-energy bubble splitting one external leg. Cover four choices shown on S10.
-- **Milestone:** M08a. **Dependencies:** M03; M02 annotation conventions.
-- **Acceptance:** Four contact-host recipes retain the quartic host vertex, two trivalent insertion vertices, caps, styles, momenta, and indices.
-- **Sources:** P4-01; S10-TL, S10-TR, S10-BL, S10-BR.
+- **Status:** Verified existing (local M08a branch; not yet merged/published).
+- **Existing construction / evidence:** `FourPointCorr[insertion=bubble,insertion-slot=1|2|3|4]`, one selected slot. Atlas CT01-CT04 and styled CT11-CT14. Central/crossed quartic contact views; 78 focused public cases, 12 explicit rejection cases and actual PDF graph/contact checks. Seven edges, interaction valences 4/3/3, one loop; 24 new endpoint contacts.
+- **Remaining target / limitation:** One external insertion only. Horizontal/vertical disconnected pairings are rejected; no contact seagull until M08b. D01 index appearance remains deferred; index attachment/controls are preserved.
+- **Milestone:** M08a complete locally on `codex/m08a-contact-bubbles`, base main `096b2b3`. **Dependencies:** M03; M02 annotation conventions.
+- **Acceptance:** All four source corners reproduced; quartic host and two trivalent insertions retained; fixed outer frame; caps, logical styles, independent momentum and endpoint/post indices verified.
+- **Sources:** P4-01; S10-TL, S10-TR, S10-BL, S10-BR. See [M08a verification](m08a-verification.md).
 
 ## R14 - Opposite-pair triangle-contact routing / diagonal Z connection
 

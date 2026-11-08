@@ -1,3 +1,14 @@
+# M08a contact bubbles - 2026-11-08
+
+Local M08a branch, base main `096b2b3`; merge/push pending. The regenerated
+atlas has 134 recipes / 31 pages, with CT01-CT04 plain contact bubbles and
+CT11-CT14 named mixed-style examples. All 31 pages are rendered and visually
+inspected; the two new pages are checked at reading size. The previous 29 page
+bodies are compared against the published atlas, excluding footer provenance.
+Reproduction, PDF graph checks and checksums are recorded in
+[M08a verification](../planning/m08a-verification.md) and [checks](../planning/m08a-checks.json).
+Earlier sections retain historical states.
+
 # M07b/M07c main publication - 2026-11-07
 
 Verified feature tip `40dae7b` is fast-forward merged and published on main,

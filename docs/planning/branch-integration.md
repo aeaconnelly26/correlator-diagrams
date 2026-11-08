@@ -1,5 +1,12 @@
 # Integrated branch state and coding-session closeout
 
+Current checkout: `codex/m08a-contact-bubbles`, based on published main `096b2b3`.
+M08a is locally complete: four contact-leg bubbles, updated atlas and verification.
+It has not been merged or pushed. When the user requests integration, publish the
+verified checkpoint before starting M08b contact seagulls. Earlier records below
+retain their historical publication states. See [M08a verification](m08a-verification.md).
+
+
 M03a checkpoint `2c3b467` is now merged and published on main; see
 [M03a verification](m03a-verification.md) and the current development plan.
 Index placement is deferred to a separate later workflow, [D01](deferred-workflows.md).
@@ -18,11 +25,11 @@ main and published to GitHub (2026-11-06). At M06 publication the checkout was s
 the M06 feature branch is retained. M07a checkpoint `dfa0066`, implemented on
 `codex/m07a-crossed-box-layouts` from `56a643a`, is now fast-forwarded into
 main and published on GitHub (2026-11-07). At publication the checkout was synchronized main,
-and the M07a feature branch is retained. No M07a merge/push remains. The current
-checkout is synchronized `main`. Verified M07c feature tip `40dae7b`, including
+and the M07a feature branch is retained. No M07a merge/push remains. At that publication the
+checkout was synchronized `main`. Verified M07c feature tip `40dae7b`, including
 all M07b upper-routing work, D02 fixes and the circle default .8, was fast-forward
 merged and pushed to GitHub on 2026-11-07. Both feature branches are retained;
-no M07b/M07c merge/push remains. R04 remains deferred; M08a is next.
+no M07b/M07c merge/push remains. R04 remains deferred; M08a followed on its feature branch.
 See [publication record](m07bc-publication.json).
 No M06 merge/push remains. See
 [M06 verification](m06-verification.md) and [publication record](m06-publication.json).
@@ -93,7 +100,7 @@ The package, maintained regressions and PDFs match the verified checkpoints:
 fast-forward to verified feature tip `40dae7b`; this later publication handoff
 changes documentation only. See [publication record](m07bc-publication.json).
 
-Next is M08a contact-leg bubbles, one leg then all four. R04 ordinary-box right
+That published checkpoint was the baseline for M08a contact-leg bubbles. R04 ordinary-box right
 crossing remains user-deferred; R14/R22 share a missing opposite-pair
 triangle-contact routing extension with an unscheduled implementation.
 No manual Git preparation or M07b/M07c integration remains for the user.

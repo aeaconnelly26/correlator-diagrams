@@ -1,19 +1,23 @@
 # Feynman Fun Development Plan
 
-Current roadmap and session handoff, refreshed 2026-11-07. The original plan
+Current roadmap and session handoff, refreshed 2026-11-08. The original plan
 is preserved in [the history archive](planning/history/development-plan-before-2026-11-03.md).
 
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`. M07b upper crossing, D02 circles, circle default .8
+- Current branch: `codex/m08a-contact-bubbles`, based on published main `096b2b3`.
+  M08a implements all four external contact-bubble placements locally; see
+  [verification](planning/m08a-verification.md). Merge/push remains pending.
+  The updated atlas has 134 recipes / 31 pages. M08b contact seagulls is next.
+- M07b upper crossing, D02 circles, circle default .8
   and the M07c reference audit are merged and published to GitHub (2026-11-07),
   through verified feature tip `40dae7b`. Both feature branches are retained.
   This publication handoff changes documentation only; see
   [publication record](planning/m07bc-publication.json).
-- Verified code `e2521e2` and the M07c audit `e99c4be` are included unchanged.
-  The prior 50-document / 850-contact result remains applicable. The atlas
-  remains 126 recipes / 29 pages, with its original build provenance preserved.
+- At M07b/M07c publication, verified code `e2521e2` and audit `e99c4be`
+  were included unchanged. That checkpoint passed 50 documents / 850 contacts
+  and had a 126-recipe / 29-page atlas; M08a extends it as recorded above.
   No M07b/M07c merge/push remains. R04 ordinary-box right crossing stays deferred;
   R14/R22 opposite-pair triangle-contact routing remains missing and unscheduled.
   See [M07c audit](planning/m07c/routing-audit.pdf) and
@@ -83,8 +87,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Existing square box defaults, four-legged s/t/u bubbles, and all four
   triangle-contact orientations are already implemented.
 - Semantic bubbles, seagulls and swordfish support s/t-tree external slots 1-4, one at
-  a time. U-tree/contact hosts and internal insertions remain unsupported and
-  can be no-ops. Seagulls have one quartic self-loop vertex, distinct from bubbles.
+  a time. Contact bubbles now support the same four physical slots on central/crossed
+  quartic hosts. Contact seagulls are M08b; U-tree/internal hosts remain unsupported.
+  Seagulls have one quartic self-loop vertex, distinct from bubbles.
 - Preserve existing public APIs and intentional visual tuning. Do not rename
   the repository or delete branches.
 
@@ -115,16 +120,18 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
 | M07b | Crossed external layouts | Upper slice published on main; R04 right pair deferred by user |
 | M07c | R14/R22 reference-routing audit | Specification audit published on main; missing triangle-contact routing extension remains unscheduled |
-| M08a / M08b | Contact external self-energy / seagull | Next: M08a contact-leg bubble on one leg, then all four; M08b seagull follows |
+| M08a / M08b | Contact external self-energy / seagull | M08a complete locally on feature branch; merge/push pending. M08b next |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
 | M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
 
 ## Next coding session
 
-**Next: M08a contact-leg self-energy bubbles**, beginning with one external
-leg on the four-point contact, then expanding to all four after focused graph,
-style and metadata verification. M08b contact seagulls follows.
+**Next: M08b contact-leg seagulls**, after reviewing and merging/publishing M08a.
+M08a now covers all four contact-leg bubbles with the original quartic host,
+two trivalent insertion vertices and fixed outer endpoints. The 78 focused
+public cases, 12 rejection cases, PDF graph/marker checks and updated atlas
+are recorded in [M08a verification](planning/m08a-verification.md).
 
 M07c's source audit is complete. Both slide-13 panels are triangle contacts
 with opposite quartic external pairs (1/4 and 2/3); current public orientations
@@ -133,18 +140,17 @@ missing routing extension, retained as an **unscheduled future slice** in
 [the plan](planning/m07c/future-routing-plan.md). This audit does not implement
 it. The user-deferred ordinary-box right crossing R04 remains separate.
 
-The current branch is synchronized `main`, containing verified feature tip
-`40dae7b`; underlying tested code is unchanged at `e2521e2`. Six existing public
-recipes and two target traces were compiled, rendered and checked from PDF
-paths for this audit. The maintained 50-document / 850-contact baseline and
-126-recipe / 29-page capability atlas are unchanged. D01 index appearance and
-D03 residual circle/crossing spacing remain separate reviews.
+The current M08a branch is based on published main `096b2b3`. Its changes are
+local; main and GitHub have not been advanced during M08a. The maintained
+suite now covers 51 documents and 874 automatic endpoint contacts. The atlas
+has 134 recipes / 31 pages, including four plain contact-bubble placements
+and four named style samples. D01 index appearance and D03 residual
+circle/crossing spacing remain separate later reviews.
 
-M07b and M07c are merged and published on main; no integration remains pending.
-Both feature branches are retained. The assistant creates the next coding branch
-from refreshed main; no manual Git preparation is required from the user. See
-[publication record](planning/m07bc-publication.json). Historical verification
-records retain their checkpoint-specific local/publication states.
+M07b and M07c are already published. Their feature branches and historical
+verification records are retained. No manual Git preparation is needed from
+the user; when asked to integrate M08a, verify the clean checkpoint, refresh
+main, merge and push, then start M08b from that published baseline.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.
@@ -528,3 +534,13 @@ Atlas: 102 recipes / 23 pages; gallery: seven pages. Earlier first-nineteen-page
 pixel-identity statements describe the initial M06 checkpoint, before this
 authorized default change. Still local; M07 remains next after publication.
 See [shared-frame verification](planning/four-leg-frame-verification.md).
+
+## M08a local closeout - 2026-11-08
+
+Contact-host external self-energy bubbles now cover slots 1 UL, 2 LL, 3 UR,
+4 LR. One insertion at a time; central/crossed are equivalent quartic views.
+The first-leg slice was compiled and inspected before expanding the focused
+checks. Invalid slots, disconnected pairings and non-fitting/nonpositive
+geometry fail explicitly. Existing marker, style, cap, momentum and index
+helpers are reused. No index appearance retuning or contact seagull work.
+See [verification](planning/m08a-verification.md) and [contract](../regressions/topologies/insertion/M08a-contract.md).

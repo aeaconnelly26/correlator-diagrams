@@ -1,0 +1,498 @@
+{
+  "milestone": "M08a",
+  "date": "2026-11-08",
+  "baseline": "096b2b3",
+  "branch": "codex/m08a-contact-bubbles",
+  "published": false,
+  "requirements": [
+    "R13"
+  ],
+  "source_panels": {
+    "S10-TL": 1,
+    "S10-BL": 2,
+    "S10-TR": 3,
+    "S10-BR": 4
+  },
+  "pdf_items": [
+    "P4-01"
+  ],
+  "interface": "FourPointCorr[insertion=bubble,insertion-slot=1|2|3|4] (one slot at a time)",
+  "contact_pairings": [
+    "central",
+    "crossed"
+  ],
+  "graph": {
+    "logical_edges": 7,
+    "interaction_vertices": 3,
+    "interaction_valences": [
+      4,
+      3,
+      3
+    ],
+    "external_endpoints": 4,
+    "cycle_rank": 1,
+    "parallel_bubble_edges": 2
+  },
+  "default_insertion_position": 0.5,
+  "default_insertion_scale": 0.5,
+  "default_outer_half_spans": [
+    2.1,
+    2.1
+  ],
+  "coordinate_baseline": 0.8,
+  "default_circle_scale": 0.8,
+  "focused_public_cases": 78,
+  "additional_amputated_host_check": true,
+  "rendered_loop_label_checks": 38,
+  "invalid_request_checks": 12,
+  "regression_documents": 51,
+  "baseline_endpoint_contacts": 850,
+  "new_endpoint_contacts": 24,
+  "total_endpoint_contacts": 874,
+  "atlas_recipes": 134,
+  "atlas_pages": 31,
+  "new_atlas_ids": [
+    "CT01",
+    "CT02",
+    "CT03",
+    "CT04",
+    "CT11",
+    "CT12",
+    "CT13",
+    "CT14"
+  ],
+  "gallery_pages": 5,
+  "visual_review": {
+    "atlas_all_pages": true,
+    "gallery_all_pages": true,
+    "new_atlas_pages_reading_size": true,
+    "baseline_comparison": {
+      "body_fraction": 0.935,
+      "comparison_dpi": 90,
+      "pages": [
+        {
+          "page": 1,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 2,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 3,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 4,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 5,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 6,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 7,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 8,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 9,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 10,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 11,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 12,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 13,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 14,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 15,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 16,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 17,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 18,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 19,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 20,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 21,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 22,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 23,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 24,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 25,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 26,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 27,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 28,
+          "body_pixel_identical": true
+        },
+        {
+          "page": 29,
+          "body_pixel_identical": true
+        }
+      ]
+    }
+  },
+  "pdf_checks": {
+    "graphs": [
+      {
+        "slot": 1,
+        "edges": 7,
+        "interaction_valences": [
+          4,
+          3,
+          3
+        ],
+        "parallel_bubble_edges": 2,
+        "cycle_rank": 1,
+        "insertion_fractions": [
+          0.3753712438395454,
+          0.6245447762165433
+        ],
+        "outer_frame_pdf_pt": [
+          95.25835,
+          95.25834999999995
+        ]
+      },
+      {
+        "slot": 2,
+        "edges": 7,
+        "interaction_valences": [
+          4,
+          3,
+          3
+        ],
+        "parallel_bubble_edges": 2,
+        "cycle_rank": 1,
+        "insertion_fractions": [
+          0.37537124383954557,
+          0.6245447762165436
+        ],
+        "outer_frame_pdf_pt": [
+          95.25835000000001,
+          95.25834999999995
+        ]
+      },
+      {
+        "slot": 3,
+        "edges": 7,
+        "interaction_valences": [
+          4,
+          3,
+          3
+        ],
+        "parallel_bubble_edges": 2,
+        "cycle_rank": 1,
+        "insertion_fractions": [
+          0.37537124383954634,
+          0.624544776216544
+        ],
+        "outer_frame_pdf_pt": [
+          95.25834999999998,
+          95.25835000000001
+        ]
+      },
+      {
+        "slot": 4,
+        "edges": 7,
+        "interaction_valences": [
+          4,
+          3,
+          3
+        ],
+        "parallel_bubble_edges": 2,
+        "cycle_rank": 1,
+        "insertion_fractions": [
+          0.3753712438395465,
+          0.6245447762165445
+        ],
+        "outer_frame_pdf_pt": [
+          95.25835000000001,
+          95.25835000000001
+        ]
+      }
+    ],
+    "proca_endpoint_page": {
+      "page": 4,
+      "triangles": 16,
+      "dots": 12,
+      "gaps_pt": [
+        0.14341406738629736,
+        0.14355600354459375,
+        0.14341406738631823,
+        0.1435560035446506,
+        0.19915986448903555,
+        0.19936345832843672,
+        0.19915986448903555,
+        0.19936345832851243,
+        0.23901077417216676,
+        0.23870439944588284,
+        0.2390107741722094,
+        0.23870439944590371,
+        0.17925803195021262,
+        0.17939609072519214,
+        0.17925803195021262,
+        0.17939609072511198
+      ],
+      "visible_gaps_pt": [
+        -0.23017593261370262,
+        -0.23003399645540623,
+        -0.23017593261368174,
+        -0.2300339964553494,
+        -0.17443013551096442,
+        -0.17422654167156326,
+        -0.17443013551096442,
+        -0.17422654167148754,
+        -0.13457922582783322,
+        -0.13488560055411714,
+        -0.13457922582779058,
+        -0.13488560055409626,
+        -0.19433196804978736,
+        -0.19419390927480784,
+        -0.19433196804978736,
+        -0.194193909274888
+      ],
+      "colors": [
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ]
+      ]
+    },
+    "styled_endpoint_page": {
+      "page": 5,
+      "triangles": 8,
+      "dots": 12,
+      "gaps_pt": [
+        0.19915986448896605,
+        0.19936345832837565,
+        0.1991598644891197,
+        0.19936345832851243,
+        0.19915986448898315,
+        0.19936345832849822,
+        0.19915986448903555,
+        0.19936345832851243
+      ],
+      "visible_gaps_pt": [
+        -0.17443013551103392,
+        -0.17422654167162432,
+        -0.17443013551088027,
+        -0.17422654167148754,
+        -0.17443013551101683,
+        -0.17422654167150176,
+        -0.17443013551096442,
+        -0.17422654167148754
+      ],
+      "colors": [
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ],
+        [
+          1.0,
+          0,
+          1.0
+        ]
+      ]
+    },
+    "styled_W_circles": 8,
+    "default_circle_radius_pdf_pt": 4.7821249999999935
+  },
+  "source_archives": [
+    {
+      "file": "docs/planning/sources/Last diagrams we need.pdf",
+      "sha256": "d7b716769379cbf2a18d6fed868e022393298e1e75a56e5bdfdd5702cd7bf37b",
+      "unchanged": true
+    },
+    {
+      "file": "docs/planning/sources/1-loop-WW-WZ.pptx",
+      "sha256": "1cb50e60dbe2790838f576338d00e67f4cd3da035323b1b2d4c67aafc4faf6ff",
+      "unchanged": true
+    }
+  ],
+  "sha256": {
+    "feynman-fun.sty": "787666d5846e37eb9fb2127acb34faca6ee62716d2736521b4d09324e43015a6",
+    "regressions/topologies/insertion/contact-bubble-slots.tex": "7492756306bbb2f7a7884b5cbb4a1d6c46cd739d869e5ba7721a6a929ebcd1fb",
+    "regressions/topologies/insertion/contact-bubble-slots.pdf": "64c3aab3ac811b4471d824768bebbae5893e2ef58a3dd06d372a1edd0b1cf07b",
+    "regressions/topologies/insertion/check-contact-bubbles.py": "5326b2f9f4e549cef9628ef5a56d9b9ce6b71c4500ba0ad99839f86bcaafa83a",
+    "regressions/topologies/insertion/check-contact-bubble-errors.py": "d0adcbfc85eddad6abc0bf0c4db58b239c14b71a04bfa3c2de34845fba12bad6",
+    "regressions/topologies/insertion/M08a-contract.md": "c547fa4708cdcfb5ec6c4316f4ecb81b740cc1cb2f87a6c306e5d3abaf5e6444",
+    "scripts/check-regressions.sh": "cde8bf4a44b317354d1422ee976bdab44ddab20b33e90109d67fdb532bfdd60d",
+    "docs/diagram-inventory/catalog.json": "718c8ae9b438d890a396f748f56080e56d153062c8f8017f25fc735f0bd432a9",
+    "docs/diagram-inventory/inventory.tex": "52060de55d5fe44380a54e9ea854691ef4212bcf38c39178a9aa0a575a20842e",
+    "docs/diagram-inventory/inventory.pdf": "ddb6ffbb507509633bc2a8e428b602aa67481c8b5f9ed4934881398866224872",
+    "docs/diagram-inventory/recipes.md": "75b578995e9a40144d57a6cdca40cdaf86377bd03a01eb4ffb59f1255c6067f3",
+    "docs/planning/m08a-suite.txt": "f86bbb055b21a6ebb51705611088b5c69582afbf00da6638ab75b64f521b7d3e"
+  },
+  "limitations": [
+    "One external contact bubble at a time",
+    "No disconnected horizontal/vertical pairing hosts",
+    "No contact seagulls until M08b",
+    "D01 index appearance remains deferred",
+    "R04 and R14/R22 routing work not included"
+  ],
+  "next": "M08b contact-leg seagulls after M08a integration/publication"
+}

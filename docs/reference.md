@@ -509,7 +509,7 @@ The hide key applies to external slots across two-, three-, and four-point
 families, including bubble and sunset. Slots follow the family's logical
 external label order, so they stay attached when a three-point diagram rotates.
 Bubble and sunset external momentum slots are 1 (left) and 2 (right).
-For bubble/seagull insertions on s/t-tree external slots 1-4, hiding the
+For bubble/seagull insertions on s/t-tree external slots 1-4 and contact bubbles, hiding the
 selected slot suppresses both pre- and post-insertion momentum annotations. Channel, bridge, box-edge,
 and loop momenta retain their existing controls; this key does not hide them.
 The setting is scoped to the current diagram.
@@ -2390,6 +2390,46 @@ Current semantic insertion hosts:
 \]
 ```
 
+Contact external self-energy bubbles also use the existing semantic interface:
+
+```tex
+\FourPointCorr[
+  field={},central={},leg-labels={,,,},blob=false,
+  line=plain,show-momenta=false,
+  insertion=bubble,insertion-slot=1
+]
+```
+
+Slots are physical corners: 1 upper left, 2 lower left, 3 upper right,
+4 lower right. `FourPtCorr` is an alias. The central quartic vertex survives;
+the selected leg becomes outer--A, two parallel A--B arcs, B--contact. This
+has seven propagators, two cubic insertion vertices and one quartic host.
+`contact-pairing=central` (default) and `crossed` use this same insertion graph.
+Horizontal/vertical pairings have no quartic host and are rejected for contact
+bubbles, as are slots outside 1-4 or lists of simultaneous slots. Their ordinary
+no-insertion behavior is unchanged. Contact seagulls remain unsupported (M08b).
+
+Contact bubbles default to `insertion-position=0.50`, `insertion-scale=0.50`.
+Position is the outer-to-contact fraction. Both insertion vertices must fit
+strictly inside the selected leg; nonpositive scale/base span or a bubble that
+does not fit produces a package error. The shared +/-2.10 outer frame and
+package coordinate scale are unchanged; explicit `fourpoint-xspan/yspan` work.
+`external-legs=false` hides the insertion, retaining existing amputated endpoint
+placeholders. `center-vertex=false` hides all three interaction dots.
+
+Pre/post line overrides, logical external caps, both bubble arc styles and
+bubble endpoint/external/post indices use the existing helpers below. No new
+index appearance tuning is included. `show-momenta=false` suppresses all guides;
+`external-momentum-hide={slot}` hides both selected pre/post guides. The default
+p1/p2 flow is incoming and p3/p4 outgoing; global left/right directions and
+`contact-momentum-directions={ul,ll,ur,lr}` apply, including both selected
+segments. Loop labels face outward along the actual normal; blank loop labels
+hide their guide. Existing `bubble-*-momentum-*` and pre/post momentum controls
+remain independent. There is no exchange edge or channel momentum on this host.
+See the [five-page gallery](../regressions/topologies/insertion/contact-bubble-slots.pdf),
+[copyable atlas recipes](diagram-inventory/recipes.md#self-energy-bubble-on-a-quartic-contact-leg)
+and [verification](planning/m08a-verification.md).
+
 Supported insertion keys:
 
 - `insertion=none|bubble|seagull|swordfish|triangle`
@@ -2440,7 +2480,7 @@ Supported insertion keys:
 - `seagull-loop-marker-distance=auto|...`
 - `seagull-vertex-indices={host-left,host-right,loop-left,loop-right}`
 
-For external S/T bubble, seagull and swordfish insertions,
+For external S/T bubble, seagull and swordfish insertions, and contact bubbles,
 `insertion-pre-line=...` changes the outer segment's appearance while retaining
 single/double caps from the logical external leg. For example,
 `line={ewboson,endcapp},insertion-pre-line=ewboson` keeps all four outer double
@@ -2470,7 +2510,7 @@ more of the segment than the dot, using the samples' standard 6pt arrows and
 shared 2.10/2.10 outer frame and default scale. Retune `circ position` for other marker sizes or geometry.
 Ordinary circles and the styled bubble-host circles retain the geometric 0.5.
 
-Default `insertion-scale` is **0.50 for supported s/t-tree bubble insertions**
+Default `insertion-scale` is **0.50 for supported s/t-tree and contact bubble insertions**
 (previously 0.66), so the bubble footprint is about 24% shorter and each host
 piece has more room for a species circle. Seagulls retain **0.66**. An explicit
 `insertion-scale=0.66` restores the former bubble size; other explicit values
@@ -2488,8 +2528,10 @@ a self-loop instead of the bubble's two new vertices. `insertion=swordfish`
 supports the same external matrix with one new trivalent vertex and two loop
 arcs meeting the actual tree vertex, now quartic. Its position/scale defaults
 are 0.50/0.66; see the swordfish section for geometry and applicable controls.
-U-tree, contact-host and
-internal slot `5` insertions remain unsupported and retain their no-op behavior. Simultaneous insertions are not supported.
+Contact bubbles support the four external slots described above. Other contact
+insertions, U-tree insertions and internal slot `5` remain unsupported. Legacy
+unsupported tree requests may be no-ops; invalid contact bubble slots/pairings
+now fail explicitly. Simultaneous insertions are not supported.
 
 ```tex
 \TTreeChannelCorr[

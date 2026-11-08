@@ -1,5 +1,14 @@
 # Current diagram inventory
 
+M08a is complete locally on `codex/m08a-contact-bubbles`, base main `096b2b3`;
+merge/push pending. The atlas now has **134 recipes / 31 pages**. Page 30 adds
+CT01-CT04: plain contact-leg bubbles at all four corners. Page 31 adds CT11-CT14:
+EW W arcs/inner segments, two-ended pink scalar-polarization arcs with k and no
+pink circles. The crossed contact view is the same quartic topology. No contact
+seagull is claimed; M08b is next. See [verification](../planning/m08a-verification.md).
+Earlier sections preserve the development history.
+
+
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
@@ -11,7 +20,7 @@ provenance. See [publication record](../planning/m07bc-publication.json).
 
 Unspecified circles and labels match `circ scale=0.8`; explicit scales retain
 their original meaning. Page 29 adds P41-P44; see
-[verification](../planning/circ-default-verification.md). There are **126 recipes
+[verification](../planning/circ-default-verification.md). The prior checkpoint had **126 recipes
 on twenty-nine pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
 pink Proca external legs and external flow controls. See
 [M07b verification](../planning/m07b-verification.md) and the focused
@@ -23,7 +32,7 @@ The user closed M07b on 2026-11-07 and deferred right external-pair
 routing. The subsequent M07c review is complete: [illustrated audit](../planning/m07c/routing-audit.pdf)
 traces the opposite-pair triangle-contact attachments missing from current APIs.
 It adds no supported recipe, so counts/PDF stay unchanged. M08a contact-leg
-bubbles is next. See [M07c verification](../planning/m07c-verification.md). Recipe counts include meaningful
+bubbles follows that published checkpoint. See [M07c verification](../planning/m07c-verification.md). Recipe counts include meaningful
 layouts/styles, not only distinct graph topologies.
 
 M07a checkpoint `dfa0066` and preceding work are merged and published on main.
