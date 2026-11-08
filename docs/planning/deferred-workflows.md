@@ -44,3 +44,15 @@ See [verification](d02-verification.md), the
 and [three-page regression gallery](../../regressions/topologies/cross-box/cross-box-circles.pdf).
 Both layouts, per-slot scales/colors, aliases, manual labels, explicit Proca
 circles, hiding and consecutive-call reset are checked from actual PDF output.
+
+## D03 - Upper external crossing versus top-edge W circle
+
+**Source:** user's request to inspect EW upper external legs and an EW top
+internal edge with `circ=W`, 2026-11-07.
+**State:** demonstrated crowding; no geometry/default change made in this review.
+
+At diagram scale 1, a default-size centered W circle overlaps the continuous
+upper EW leg by about 0.47 PDF pt. Smaller centered circles help; widening the
+split-leg gap alone does not clear the other leg. Off-center circles can make
+the crowding worse. See the [18-case visual/geometry review](upper-crossing-w-review.md).
+D03 is independent of the completed D02 scaling/unsolicited-circle fix.

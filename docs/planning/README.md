@@ -19,6 +19,7 @@ feature branches are retained.
 - [M04 verification](m04-verification.md): all eight external seagulls, PDF graph/contact checks and next swordfish slice.
 - [M05 verification](m05-verification.md): all eight swordfish placements, shared-vertex graph checks and next triangle slice.
 - [M07b verification](m07b-verification.md): upper external-pair routing, actual PDF graph/metadata checks and pending publication.
+- [Upper crossing W-circle review](upper-crossing-w-review.md): 18 visual cases and measured D03 crowding, with package defaults unchanged.
 - [D02 verification](d02-verification.md): crossed-box circle scaling, explicit-only Proca circles and exact before/after example.
 - [Deferred workflows](deferred-workflows.md): pending D01 index appearance and completed local D02 record.
 - [M07a publication](m07a-publication.json): verified checkpoint, unchanged package/PDF hashes and completed merge/push.

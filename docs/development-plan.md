@@ -12,6 +12,10 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   D02 now also fixes crossed-box unsolicited Proca circles and per-line circle
   scaling on this branch; 49 documents / 850 endpoint contacts pass. See [D02 verification](planning/d02-verification.md)
   and [M07b verification](planning/m07b-verification.md).
+- D03 now records demonstrated overlap between wavy upper crossed external legs
+  and a full-size W circle on the top internal edge. The 18-case
+  [review](planning/upper-crossing-w-review.md) is diagnostic; package geometry
+  and defaults are unchanged. This is distinct from the completed D02 fix.
 - Verified M07a checkpoint `dfa0066` is merged and
   published on GitHub (2026-11-07); its feature branch is retained.
   Both internal crossed-box layouts, independent annotations and endpoint

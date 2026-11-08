@@ -1,0 +1,46 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.6in]{geometry}
+\usepackage{amsmath,feynman-fun}
+\setlength{\parindent}{0pt}
+\newcommand{\testcell}[3]{%
+ \begin{minipage}[t][2.48in][t]{.48\linewidth}
+ \textbf{#1}\par\vspace{6pt}\centering
+ \BoxLoopCorr[field={},central={},leg-labels={,,,},show-momenta=false,
+  blob=false,external-vertices=false,box-external-crossing=top,
+  box-line=plain,box-external-line=plain,leg-styles={ewboson,plain,ewboson,plain},
+  box-top-line={ewboson,circ=W,#2},#3]
+ \end{minipage}}
+\begin{document}
+\section*{Upper crossing versus top-edge W circle}
+Upper external legs and the top internal edge are EW bosons. Other edges are
+plain; no caps, momenta or extra circles. All figures use existing public options.
+\par\medskip
+\testcell{Circle 1.0; diagram scale 0.8}{circ scale=1}{scale=.8}\hfill
+\testcell{Circle 1.0; diagram scale 1.0}{circ scale=1}{scale=1}\par
+\testcell{Circle 0.8; diagram scale 0.8}{circ scale=.8}{scale=.8}\hfill
+\testcell{Circle 0.8; diagram scale 1.0}{circ scale=.8}{scale=1}\par
+\testcell{Circle 0.6; diagram scale 0.8}{circ scale=.6}{scale=.8}\hfill
+\testcell{Circle 0.6; diagram scale 1.0}{circ scale=.6}{scale=1}
+\newpage
+\section*{Does widening the crossing gap help?}
+Diagram scale 1.0; centered W. Only the gap on the split upper external leg
+changes. The other crossing leg stays continuous. No defaults are changed.
+\par\medskip
+\testcell{Gap 0.04 (default); circle 1.0}{circ scale=1}{box-external-crossing-gap=.04}\hfill
+\testcell{Gap 0.04 (default); circle 0.6}{circ scale=.6}{box-external-crossing-gap=.04}\par
+\testcell{Gap 0.08; circle 1.0}{circ scale=1}{box-external-crossing-gap=.08}\hfill
+\testcell{Gap 0.08; circle 0.6}{circ scale=.6}{box-external-crossing-gap=.08}\par
+\testcell{Gap 0.12; circle 1.0}{circ scale=1}{box-external-crossing-gap=.12}\hfill
+\testcell{Gap 0.12; circle 0.6}{circ scale=.6}{box-external-crossing-gap=.12}
+\newpage
+\section*{Does moving the W along its edge help?}
+Diagram scale 1.0; default crossing gap 0.04. The top internal edge runs
+left to right; circ position is its fractional position. Geometry is unchanged.
+\par\medskip
+\testcell{Position 0.35; circle 1.0}{circ scale=1,circ position=.35}{}\hfill
+\testcell{Position 0.35; circle 0.6}{circ scale=.6,circ position=.35}{}\par
+\testcell{Position 0.50 (default); circle 1.0}{circ scale=1,circ position=.5}{}\hfill
+\testcell{Position 0.50 (default); circle 0.6}{circ scale=.6,circ position=.5}{}\par
+\testcell{Position 0.65; circle 1.0}{circ scale=1,circ position=.65}{}\hfill
+\testcell{Position 0.65; circle 0.6}{circ scale=.6,circ position=.65}{}
+\end{document}

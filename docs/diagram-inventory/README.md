@@ -11,6 +11,9 @@ on twenty-eight pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
 pink Proca external legs and external flow controls. See
 [M07b verification](../planning/m07b-verification.md) and the focused
 [four-page gallery](../../regressions/topologies/box/box-external-crossing.pdf).
+The [18-case top-W clearance review](../../regressions/topologies/box/upper-crossing-w-clearance.pdf)
+shows current upper-leg/circle interference. D03 records the remaining crowding;
+it introduces no new capability or default, so atlas counts remain unchanged.
 Right external-pair routing is next. Recipe counts include meaningful
 layouts/styles, not only distinct graph topologies.
 
