@@ -1689,10 +1689,10 @@ legs into the measured annotation renderer. Options reset per public call.
 ```
 
 See [the focused gallery](../regressions/topologies/box/box-external-crossing.pdf)
-and atlas P21-P24. D01 index-position polish is deferred. D02 concerns the
-separate **internal** crossed-box manual circles: their automatic Proca rings
-and ignored line-local circle styles remain known defects; see the exact
-[user reproducer](planning/reproductions/d02-cross-box-circles.tex).
+and atlas P21-P24. D01 index-position polish is deferred. D02 now fixes
+**internal** crossed-box circles: bare Proca adds none, and explicit circles
+retain line-local scaling/color/label style. See the
+[before/after comparison](../regressions/topologies/cross-box/cross-box-circle-comparison.pdf).
 
 Box propagator index slots use the same numbering as the propagators:
 external slots 1--4, then internal left/top/right/bottom slots 5--8.
@@ -1812,7 +1812,7 @@ When `cross-box-up-line={proca,circ={}}` or
 the same topology-level placement automatically. This also works inside
 comma-composed styles such as `{proca,fieldA,circ={}}`. An explicit
 `cross-box-up-circ=...` or `cross-box-down-circ=...` label overrides the
-automatic blank marker.
+explicit line-circle label.
 
 Focused visual QA lives in
 `regressions/topologies/cross-box/cross-box-regression.tex`.
@@ -1848,8 +1848,14 @@ retain their precedence.
 name the fixed slots 5/6 in either layout. The legacy `cross-box-left-circ` /
 `cross-box-right-circ` keys remain aliases for those fixed slots. Up/down
 circle keys retain their diagonal meaning. `cross-box-circs=false` hides
-all topology-level circles, including the compatible automatic blank Proca
-circles. Default `true` preserves existing output. Bare scalar-polarization
+all topology-level circles. Default `true` displays circles only when requested
+with `circ=...` or a topology circle key. D02 removes the old unsolicited empty
+Proca circles; use `circ={}` to request an empty ring explicitly. Per-line
+`circ scale`, `circ size`, `circ fill`, `circ draw` and `circ label style` are
+retained by the manual placement pass, including split diagonals and overrides
+for slots 5-8. Existing topology `-circ-position` keys still control placement.
+See the [circle gallery](../regressions/topologies/cross-box/cross-box-circles.pdf).
+Bare scalar-polarization
 aliases now use semantic tips on the full logical edge, so the split path
 cannot create a false marker near its crossing gap.
 

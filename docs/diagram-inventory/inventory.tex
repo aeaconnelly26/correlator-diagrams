@@ -5,7 +5,7 @@
 \usepackage{feynman-fun}
 \definecolor{atlasink}{HTML}{20394B}
 \pagestyle{fancy}\fancyhf{}
-\fancyfoot[L]{\scriptsize Feynman Fun | baseline M07b local; base 813736e | 2026-11-07}
+\fancyfoot[L]{\scriptsize Feynman Fun | baseline D02 local; base e64cc2f | 2026-11-07}
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\parindent}{0pt}
@@ -2215,4 +2215,73 @@
   box-external-momentum-4={layout=side}
 ]
 }{p1/p2 enter; p3/p4 leave. Measured upper gaps; lower continuous arrows.}{Independent box-external-momentum-1..4 controls; right crossing is still missing.}\par\vspace{4pt}
+\newpage
+\atlaspage{28 / EXPLICIT CROSSED-BOX CIRCLES}{Circle scales and bare Proca lines}{D02: circles are explicit. The user example now honors per-line circ scale; Proca alone does not add a circle.}
+\atlascell{P31  User example: circle scale 0.6}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  scale=.8,
+  box-line={ewboson,circ=W,circ scale=.6},
+  box-external-line={ewboson,endcapp},
+  cross-box-up-line={proca,magenta!85!red},
+  cross-box-down-line={magenta!85!red,ewboson}
+]
+}{Two W circles; both rings and their labels use scale 0.6.}{Caps are retained here to reproduce the exact user example.}\hfill
+\atlascell{P32  Same diagram: circle scale 1.0}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  scale=.8,
+  box-line={ewboson,circ=W,circ scale=1},
+  box-external-line={ewboson,endcapp},
+  cross-box-up-line={proca,magenta!85!red},
+  cross-box-down-line={magenta!85!red,ewboson}
+]
+}{Only the requested circle scale changes; endpoints remain fixed.}{No automatic empty circle on the pink Proca diagonal.}\par\vspace{4pt}
+\atlascell{P33  Bare Proca: left/right layout}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-line=plain,
+  box-line={proca,magenta!85!red}
+]
+}{Both endpoint tips are present, without circles.}{Explicit circ or cross-box circle keys still request circles.}\hfill
+\atlascell{P34  Bare Proca: top/bottom layout}{\CrossBoxCorr}{%
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  cross-box-layout=top-bottom,
+  box-external-line=plain,
+  box-line={proca,magenta!85!red}
+]
+}{The complementary layout follows the same circle rule.}{Cross-box-circs=false remains an explicit hide-all option.}\par\vspace{4pt}
 \end{document}

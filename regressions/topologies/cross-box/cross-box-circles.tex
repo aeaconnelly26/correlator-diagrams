@@ -1,0 +1,29 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,adjustbox,feynman-fun}
+\setlength{\parindent}{0pt}
+\newcommand{\circlecell}[2]{\begin{minipage}[t][2.85in][t]{.48\linewidth}\textbf{#1}\par\vspace{10pt}\centering
+ \CrossBoxCorr[field={},leg-labels={,,,},central={},show-momenta=false,blob=false,external-vertices=false,line=plain,box-line=plain,box-external-line=plain,#2]\end{minipage}}
+\begin{document}
+\section*{Crossed-box circles: explicit requests only}
+The first cell repeats the user's exact options. Bare Proca lines add no circles.
+\par\bigskip
+\circlecell{User example: circ scale 0.6}{scale=.8,box-line={ewboson,circ=W,circ scale=.6},box-external-line={ewboson,endcapp},cross-box-up-line={proca,magenta!85!red},cross-box-down-line={magenta!85!red,ewboson}}\hfill
+\circlecell{Same example: circ scale 1.0}{scale=.8,box-line={ewboson,circ=W,circ scale=1},box-external-line={ewboson,endcapp},cross-box-up-line={proca,magenta!85!red},cross-box-down-line={magenta!85!red,ewboson}}\par
+\circlecell{Bare Proca: left/right fixed}{box-line={proca,magenta!85!red}}\hfill
+\circlecell{Bare Proca: top/bottom fixed}{cross-box-layout=top-bottom,box-line={proca,magenta!85!red}}
+\newpage\section*{Independent line-local circle styling}
+Slots retain their own circle scale and color across layouts and calls.
+\par\bigskip
+\circlecell{Mixed sizes/colors: left/right}{cross-box-line-5={plain,circ=W,circ scale=.5},cross-box-line-6={plain,blue,circ=W,circ scale=.7},cross-box-line-7={proca,magenta!85!red,circ=Z,circ scale=.6},cross-box-line-8={plain,green!50!black,circ=H,circ scale=.8}}\hfill
+\circlecell{Mixed sizes/colors: top/bottom}{cross-box-layout=top-bottom,cross-box-line-5={plain,circ=W,circ scale=.5},cross-box-line-6={plain,blue,circ=W,circ scale=.7},cross-box-line-7={proca,magenta!85!red,circ=Z,circ scale=.6},cross-box-line-8={plain,green!50!black,circ=H,circ scale=.8}}\par
+\circlecell{Explicit hiding still works}{box-line={proca,magenta!85!red,circ=Z,circ scale=.5},cross-box-circs=false}\hfill
+\circlecell{Fresh call: no leaked circles}{box-line=plain}
+\newpage\section*{Explicit circles on split and continuous lines}
+Existing manual labels and circle aliases remain supported. Rings stay solid.
+\par\bigskip
+\circlecell{Manual circle labels; common scale 0.6}{box-line={plain,circ scale=.6},cross-box-first-circ=W,cross-box-second-circ=Z,cross-box-up-circ=W,cross-box-down-circ=Z}\hfill
+\circlecell{Per-line circle aliases}{cross-box-up-line={proca,magenta!85!red,circled=Z,circ scale=.5},cross-box-down-line={plain,with circle=W,circ scale=.7}}\par
+\circlecell{Split Proca: one circle, two tips}{cross-box-down-line={proca,magenta!85!red,circ=Z,circ scale=.4}}\hfill
+\circlecell{Ring and label style overrides}{box-line={plain,magenta!85!red,circ=W,circ scale=.6,circ draw={blue},circ label style={text=magenta!85!red}}}
+\end{document}

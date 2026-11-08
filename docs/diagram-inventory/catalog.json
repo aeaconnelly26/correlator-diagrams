@@ -1,5 +1,5 @@
 {
-  "baseline": "M07b local; base 813736e",
+  "baseline": "D02 local; base e64cc2f",
   "date": "2026-11-07",
   "base_options": [
     "field={}",
@@ -1890,6 +1890,64 @@
           ],
           "description": "p1/p2 enter; p3/p4 leave. Measured upper gaps; lower continuous arrows.",
           "limitation": "Independent box-external-momentum-1..4 controls; right crossing is still missing."
+        }
+      ]
+    },
+    {
+      "section": "28 / EXPLICIT CROSSED-BOX CIRCLES",
+      "title": "Circle scales and bare Proca lines",
+      "subtitle": "D02: circles are explicit. The user example now honors per-line circ scale; Proca alone does not add a circle.",
+      "entries": [
+        {
+          "id": "P31",
+          "title": "User example: circle scale 0.6",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "scale=.8",
+            "box-line={ewboson,circ=W,circ scale=.6}",
+            "box-external-line={ewboson,endcapp}",
+            "cross-box-up-line={proca,magenta!85!red}",
+            "cross-box-down-line={magenta!85!red,ewboson}"
+          ],
+          "description": "Two W circles; both rings and their labels use scale 0.6.",
+          "limitation": "Caps are retained here to reproduce the exact user example."
+        },
+        {
+          "id": "P32",
+          "title": "Same diagram: circle scale 1.0",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "scale=.8",
+            "box-line={ewboson,circ=W,circ scale=1}",
+            "box-external-line={ewboson,endcapp}",
+            "cross-box-up-line={proca,magenta!85!red}",
+            "cross-box-down-line={magenta!85!red,ewboson}"
+          ],
+          "description": "Only the requested circle scale changes; endpoints remain fixed.",
+          "limitation": "No automatic empty circle on the pink Proca diagonal."
+        },
+        {
+          "id": "P33",
+          "title": "Bare Proca: left/right layout",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "box-external-line=plain",
+            "box-line={proca,magenta!85!red}"
+          ],
+          "description": "Both endpoint tips are present, without circles.",
+          "limitation": "Explicit circ or cross-box circle keys still request circles."
+        },
+        {
+          "id": "P34",
+          "title": "Bare Proca: top/bottom layout",
+          "macro": "CrossBoxCorr",
+          "options": [
+            "cross-box-layout=top-bottom",
+            "box-external-line=plain",
+            "box-line={proca,magenta!85!red}"
+          ],
+          "description": "The complementary layout follows the same circle rule.",
+          "limitation": "Cross-box-circs=false remains an explicit hide-all option."
         }
       ]
     }

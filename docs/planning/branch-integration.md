@@ -86,9 +86,8 @@ See [integration verification](integration-verification.md) for the evidence.
 M07b's upper external pair is verified locally on
 `codex/m07b-upper-external-crossing`, based on published main `813736e`.
 Its merge/push is pending. After authorized publication, begin the right-pair
-slice from S03-center with its own slot/connectivity contract. Keep M07c source
-routing questions, D01 index appearance and D02 internal crossed-box circle
-styling separate. The assistant handles authorized Git work.
+slice from S03-center with its own slot/connectivity contract. Keep M07c source routing questions and D01 index appearance separate. D02
+internal crossed-box circle styling is now fixed locally; see [verification](d02-verification.md). The assistant handles authorized Git work.
 
 Remote state was refreshed with `git fetch origin` for this synchronization.
 When publishing main, verify `git ls-remote origin refs/heads/main` matches

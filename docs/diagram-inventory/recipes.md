@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M07b local; base 813736e`, audited 2026-11-07. Atlas: [PDF](inventory.pdf).
+Baseline: `D02 local; base e64cc2f`, audited 2026-11-07. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -3026,5 +3026,102 @@ p1/p2 enter; p3/p4 leave. Measured upper gaps; lower continuous arrows.
   box-edge-momentum-directions={none,none,none,none},
   box-external-momentum-2={layout=side},
   box-external-momentum-4={layout=side}
+]
+```
+
+## Circle scales and bare Proca lines
+
+### P31 - User example: circle scale 0.6
+
+Two W circles; both rings and their labels use scale 0.6.
+
+**Limit:** Caps are retained here to reproduce the exact user example.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  scale=.8,
+  box-line={ewboson,circ=W,circ scale=.6},
+  box-external-line={ewboson,endcapp},
+  cross-box-up-line={proca,magenta!85!red},
+  cross-box-down-line={magenta!85!red,ewboson}
+]
+```
+
+### P32 - Same diagram: circle scale 1.0
+
+Only the requested circle scale changes; endpoints remain fixed.
+
+**Limit:** No automatic empty circle on the pink Proca diagonal.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  scale=.8,
+  box-line={ewboson,circ=W,circ scale=1},
+  box-external-line={ewboson,endcapp},
+  cross-box-up-line={proca,magenta!85!red},
+  cross-box-down-line={magenta!85!red,ewboson}
+]
+```
+
+### P33 - Bare Proca: left/right layout
+
+Both endpoint tips are present, without circles.
+
+**Limit:** Explicit circ or cross-box circle keys still request circles.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-line=plain,
+  box-line={proca,magenta!85!red}
+]
+```
+
+### P34 - Bare Proca: top/bottom layout
+
+The complementary layout follows the same circle rule.
+
+**Limit:** Cross-box-circs=false remains an explicit hide-all option.
+
+```tex
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  cross-box-layout=top-bottom,
+  box-external-line=plain,
+  box-line={proca,magenta!85!red}
 ]
 ```

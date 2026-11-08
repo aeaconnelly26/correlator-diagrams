@@ -9,7 +9,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Current branch: `codex/m07b-upper-external-crossing`, based on published
   `main` at `813736e`. M07b's upper external pair (R03) is complete locally;
   merge/push remains pending. The right pair (R04) is the next narrow slice.
-  See [M07b verification](planning/m07b-verification.md).
+  D02 now also fixes crossed-box unsolicited Proca circles and per-line circle
+  scaling on this branch; 49 documents / 850 endpoint contacts pass. See [D02 verification](planning/d02-verification.md)
+  and [M07b verification](planning/m07b-verification.md).
 - Verified M07a checkpoint `dfa0066` is merged and
   published on GitHub (2026-11-07); its feature branch is retained.
   Both internal crossed-box layouts, independent annotations and endpoint
@@ -74,7 +76,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-seven pages: 118 recipes, including crossed upper external legs. M07b upper slice is local; M07a and earlier work are published. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-eight pages: 122 recipes, including crossed upper external legs and the D02 circle fix. M07b upper slice is local; M07a and earlier work are published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -108,9 +110,9 @@ published main `813736e`. Finish authorized merge/push before starting the next
 slice; publication has not happened automatically. Next implement the right
 external pair from S03-center (R04), with its own connectivity/slot contract and
 focused acceptance gallery. R14/R22 endpoint routing remains a separate M07c
-specification gate. D01 index appearance remains deferred. D02 records the
-user's exact crossed-box circle/scaling reproducer for a dedicated follow-up;
-that defect was not folded into the upper-routing implementation. No manual
+specification gate. D01 index appearance remains deferred. D02 is now fixed
+in a separate follow-up: the exact user example has no unsolicited Proca ring
+and honors circle/label scaling. Both local commits need publication. No manual
 Git preparation is required from the user.
 
 See [integration verification](planning/integration-verification.md) and

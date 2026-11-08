@@ -1,0 +1,200 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "cells": [
+        {
+          "explicit_circles": 2,
+          "scales": [
+            0.6,
+            0.6
+          ]
+        },
+        {
+          "explicit_circles": 2,
+          "scales": [
+            1,
+            1
+          ]
+        },
+        {
+          "explicit_circles": 0,
+          "scales": []
+        },
+        {
+          "explicit_circles": 0,
+          "scales": []
+        }
+      ],
+      "text_sizes": [
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "W",
+          "effective_font_size": 6.9738
+        },
+        {
+          "text": "W",
+          "effective_font_size": 6.9738
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "cells": [
+        {
+          "explicit_circles": 4,
+          "scales": [
+            0.5,
+            0.7,
+            0.6,
+            0.8
+          ]
+        },
+        {
+          "explicit_circles": 4,
+          "scales": [
+            0.5,
+            0.7,
+            0.6,
+            0.8
+          ]
+        },
+        {
+          "explicit_circles": 0,
+          "scales": []
+        },
+        {
+          "explicit_circles": 0,
+          "scales": []
+        }
+      ],
+      "text_sizes": [
+        {
+          "text": "W",
+          "effective_font_size": 3.4869
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.881659999999999
+        },
+        {
+          "text": "H",
+          "effective_font_size": 5.57904
+        },
+        {
+          "text": "Z",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "W",
+          "effective_font_size": 3.4869
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.881659999999999
+        },
+        {
+          "text": "H",
+          "effective_font_size": 5.57904
+        },
+        {
+          "text": "Z",
+          "effective_font_size": 4.184279999999999
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "cells": [
+        {
+          "explicit_circles": 4,
+          "scales": [
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ]
+        },
+        {
+          "explicit_circles": 2,
+          "scales": [
+            0.5,
+            0.7
+          ]
+        },
+        {
+          "explicit_circles": 1,
+          "scales": [
+            0.4
+          ]
+        },
+        {
+          "explicit_circles": 4,
+          "scales": [
+            0.6,
+            0.6,
+            0.6,
+            0.6
+          ]
+        }
+      ],
+      "text_sizes": [
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "Z",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "Z",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "Z",
+          "effective_font_size": 3.4869
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.881659999999999
+        },
+        {
+          "text": "Z",
+          "effective_font_size": 2.78952
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        },
+        {
+          "text": "W",
+          "effective_font_size": 4.184279999999999
+        }
+      ]
+    }
+  ],
+  "marker_contacts": 36,
+  "automatic_proca_circles": 0,
+  "circle_label_scaling": true,
+  "circle_label_color_override": true
+}

@@ -211,8 +211,8 @@ on main (2026-11-07). Its feature branch is retained. See [verification](m07a-ve
 upper external pair is now verified locally on `codex/m07b-upper-external-crossing`
 from `813736e`: 52 public cases and actual PDF connectivity, markers, caps and
 circle scaling. Merge/push is pending; right external routing (R04) is the next
-narrow slice. See [M07b verification](m07b-verification.md). D01 and the newly
-recorded D02 crossed-box circle defect remain separate reviews.
+narrow slice. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed locally in a separate
+follow-up. See [D02 verification](d02-verification.md).
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported

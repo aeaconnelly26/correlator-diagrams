@@ -2433,6 +2433,9 @@
   \def\corr@crossboxlayout{left-right}%
   \def\corr@crossboxmomenta{}%
   \corr@crossboxcircstrue
+  \@for\corr@cbside:={left,right,up,down}\do{%
+    \expandafter\def\csname corr@cbcircstyle\corr@cbside\endcsname{}%
+  }%
   \@for\corr@cbslot:={5,6,7,8}\do{%
     \expandafter\def\csname corr@cbline\corr@cbslot\endcsname{}%
     \expandafter\def\csname corr@cbmomentum\corr@cbslot\endcsname{}%
@@ -5727,6 +5730,7 @@
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
+  \expandafter\xdef\csname corr@cbcircstyle#5\endcsname{\corr@propoptions}%
   \corr@crossboxmarkercolors
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
   \ifcorr@stylehasproca\else\corr@drawsemanticspolmarkers{#1}{#3}{#4}\fi
@@ -5743,6 +5747,7 @@
   \corr@appendpropcolor
   \corr@appendpropcolorvalue{\corr@boxcolor}%
   \corr@appendpropcolorvalue{\corr@boxinternalcolor}%
+  \expandafter\xdef\csname corr@cbcircstyle#6\endcsname{\corr@propoptions}%
   \corr@crossboxmarkercolors
   \expandafter\propag\expandafter[\corr@propoptions] (#3) to (#4);
 }
@@ -5823,32 +5828,33 @@
   \fi
 }
 
+% Reapply the logical line's style in a scope so circ size/fill/label style
+% and color survive the earlier propagator path's scope. Nodes start fresh
+% paths (without the line's endpoint decorations); rings themselves are solid.
+\newcommand{\corr@putcrossboxcirc}[5]{%
+  \begingroup
+  \edef\corr@cbcircleoptions{\csname corr@cbcircstyle#1\endcsname}%
+  \begin{feynhand}
+    \expandafter\scope\expandafter[\corr@cbcircleoptions]
+      \path (#2) -- coordinate[pos=#4] (corrCrossBoxCirc) (#3);
+      \tikzset{every node/.append style={solid}}%
+      \corr@putcircatcoord{corrCrossBoxCirc}{#5}%
+    \endscope
+  \end{feynhand}
+  \endgroup
+}
 \newcommand{\corr@placecrossboxcircs}{%
   \ifcorr@crossboxleftcirc
-    \path (\corr@cbstartfive) -- coordinate[pos=\corr@crossboxleftcircpos] (corrCrossBoxLeftCirc) (\corr@cbendfive);
-    \corr@putcircatcoord{corrCrossBoxLeftCirc}{\corr@crossboxleftcirc}%
+    \corr@putcrossboxcirc{left}{\corr@cbstartfive}{\corr@cbendfive}{\corr@crossboxleftcircpos}{\corr@crossboxleftcirc}%
   \fi
   \ifcorr@crossboxrightcirc
-    \path (\corr@cbstartsix) -- coordinate[pos=\corr@crossboxrightcircpos] (corrCrossBoxRightCirc) (\corr@cbendsix);
-    \corr@putcircatcoord{corrCrossBoxRightCirc}{\corr@crossboxrightcirc}%
+    \corr@putcrossboxcirc{right}{\corr@cbstartsix}{\corr@cbendsix}{\corr@crossboxrightcircpos}{\corr@crossboxrightcirc}%
   \fi
   \ifcorr@crossboxupcirc
-    \path (corrBoxBL) -- coordinate[pos=\corr@crossboxupcircpos] (corrCrossBoxUpCirc) (corrBoxTR);
-    \corr@putcircatcoord{corrCrossBoxUpCirc}{\corr@crossboxupcirc}%
-  \else
-    \ifcorr@crossboxupproca
-      \path (corrBoxBL) -- coordinate[pos=\corr@crossboxupcircpos] (corrCrossBoxUpCirc) (corrBoxTR);
-      \corr@putcircatcoord{corrCrossBoxUpCirc}{}%
-    \fi
+    \corr@putcrossboxcirc{up}{corrBoxBL}{corrBoxTR}{\corr@crossboxupcircpos}{\corr@crossboxupcirc}%
   \fi
   \ifcorr@crossboxdowncirc
-    \path (corrBoxTL) -- coordinate[pos=\corr@crossboxdowncircpos] (corrCrossBoxDownCirc) (corrBoxBR);
-    \corr@putcircatcoord{corrCrossBoxDownCirc}{\corr@crossboxdowncirc}%
-  \else
-    \ifcorr@crossboxdownproca
-      \path (corrBoxTL) -- coordinate[pos=\corr@crossboxdowncircpos] (corrCrossBoxDownCirc) (corrBoxBR);
-      \corr@putcircatcoord{corrCrossBoxDownCirc}{}%
-    \fi
+    \corr@putcrossboxcirc{down}{corrBoxTL}{corrBoxBR}{\corr@crossboxdowncircpos}{\corr@crossboxdowncirc}%
   \fi
 }
 

@@ -3,10 +3,11 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-The current build is M07b's upper external-routing slice on
-`codex/m07b-upper-external-crossing`, from published main `813736e`.
-It is verified locally; merge/push remains pending. There are **118 recipes
-on twenty-seven pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
+The current build includes M07b's upper external-routing slice and the D02
+crossed-box circle fix on `codex/m07b-upper-external-crossing`. D02 starts from
+M07b checkpoint `e64cc2f`; published main remains `813736e`.
+It is verified locally; merge/push remains pending. There are **122 recipes
+on twenty-eight pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
 pink Proca external legs and external flow controls. See
 [M07b verification](../planning/m07b-verification.md) and the focused
 [four-page gallery](../../regressions/topologies/box/box-external-crossing.pdf).
@@ -23,9 +24,11 @@ EW/Proca lines without circles, and independent momentum examples. The main
 samples use plain lines; field circles/caps/indices are omitted. The focused
 [four-page gallery](../../regressions/topologies/cross-box/cross-box-layouts.pdf)
 separately demonstrates marker contact and named metadata features. D01 index
-appearance remains deferred. D02 separately records automatic black Proca circles
-and ignored per-line `circ scale` in internal crossed boxes; the exact user
-[reproducer](../planning/reproductions/d02-cross-box-circles.tex) is retained.
+appearance remains deferred. D02 fixes automatic black Proca circles and
+ignored per-line `circ scale` in internal crossed boxes. Page 28 adds P31-P34:
+the exact user example at .6/1 circle scales and bare Proca in both layouts.
+See [verification](../planning/d02-verification.md) and the
+[comparison](../../regressions/topologies/cross-box/cross-box-circle-comparison.pdf).
 
 Every recipe now uses the compact coordinate baseline: `scale=1` matches the
 former `scale=0.8`; use `scale=1.25` to recover the former unit-scale size.

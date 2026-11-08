@@ -1,0 +1,29 @@
+{
+  "baseline": "e64cc2f",
+  "command_options_unchanged": true,
+  "before": {
+    "circles": 3,
+    "ring_radii_pdf_pt": [
+      5.977659999999986,
+      5.977659999999986,
+      5.97766
+    ],
+    "W_effective_font_sizes": [
+      6.9738,
+      6.9738
+    ],
+    "interactions": 4
+  },
+  "after": {
+    "circles": 2,
+    "ring_radii_pdf_pt": [
+      3.586634999999987,
+      3.586634999999987
+    ],
+    "W_effective_font_sizes": [
+      4.184279999999999,
+      4.184279999999999
+    ],
+    "interactions": 4
+  }
+}

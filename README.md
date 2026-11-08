@@ -193,6 +193,7 @@ Common wrappers and aliases:
 - Use [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex) for the compact vertex-identity sketch.
 - Use [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex) to inspect channel layouts in isolation.
 - Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
+- Use the [crossed-box circle comparison](regressions/topologies/cross-box/cross-box-circle-comparison.pdf) to see the D02 fix on the exact reported example; [circle tests](regressions/topologies/cross-box/cross-box-circles.pdf) cover sizes, colors and explicit Proca circles.
 - Use the [upper external-crossing gallery](regressions/topologies/box/box-external-crossing.pdf) for routed box legs, independent momenta, caps and circle scaling.
 - Use [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex) to inspect the crossed-box topology in isolation.
 - Use [`regressions/topologies/triangle-contact/triangle-contact-regression.tex`](regressions/topologies/triangle-contact/triangle-contact-regression.tex) to inspect triangle-contact orientations.

@@ -1,3 +1,14 @@
+# D02 crossed-box circle styling - 2026-11-07
+
+The atlas now has **122 recipes / 28 pages**. P31-P34 demonstrate the user's
+exact example with effective .6/1 circle scales and circle-free bare Proca in
+both internal layouts. A06 intentionally keeps its explicit empty circle;
+it now inherits the pink line color. The other prior page bodies remain
+unchanged apart from footer provenance. See [D02 verification](../planning/d02-verification.md).
+
+D02 is a local follow-up to M07b checkpoint `e64cc2f`; neither is published.
+Earlier sections retain their historical checkpoint states and known-defect notes.
+
 # M07b upper external routing - 2026-11-07
 
 The atlas now has **118 recipes / 27 pages**. P21-P24 add the upper crossed

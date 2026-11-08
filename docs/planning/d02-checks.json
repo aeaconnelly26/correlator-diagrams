@@ -1,0 +1,283 @@
+{
+  "issue": "D02",
+  "date": "2026-11-07",
+  "baseline": "e64cc2f",
+  "branch": "codex/m07b-upper-external-crossing",
+  "published": false,
+  "result": "Explicit-only Proca circles; line-local size/color/label styles preserved",
+  "compatibility": "Use circ={} to request the formerly automatic empty ring",
+  "exact_user_example": {
+    "baseline": "e64cc2f",
+    "command_options_unchanged": true,
+    "before": {
+      "circles": 3,
+      "ring_radii_pdf_pt": [
+        5.977659999999986,
+        5.977659999999986,
+        5.97766
+      ],
+      "W_effective_font_sizes": [
+        6.9738,
+        6.9738
+      ],
+      "interactions": 4
+    },
+    "after": {
+      "circles": 2,
+      "ring_radii_pdf_pt": [
+        3.586634999999987,
+        3.586634999999987
+      ],
+      "W_effective_font_sizes": [
+        4.184279999999999,
+        4.184279999999999
+      ],
+      "interactions": 4
+    }
+  },
+  "focused_pdf": {
+    "pages": [
+      {
+        "page": 1,
+        "cells": [
+          {
+            "explicit_circles": 2,
+            "scales": [
+              0.6,
+              0.6
+            ]
+          },
+          {
+            "explicit_circles": 2,
+            "scales": [
+              1,
+              1
+            ]
+          },
+          {
+            "explicit_circles": 0,
+            "scales": []
+          },
+          {
+            "explicit_circles": 0,
+            "scales": []
+          }
+        ],
+        "text_sizes": [
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "W",
+            "effective_font_size": 6.9738
+          },
+          {
+            "text": "W",
+            "effective_font_size": 6.9738
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "cells": [
+          {
+            "explicit_circles": 4,
+            "scales": [
+              0.5,
+              0.7,
+              0.6,
+              0.8
+            ]
+          },
+          {
+            "explicit_circles": 4,
+            "scales": [
+              0.5,
+              0.7,
+              0.6,
+              0.8
+            ]
+          },
+          {
+            "explicit_circles": 0,
+            "scales": []
+          },
+          {
+            "explicit_circles": 0,
+            "scales": []
+          }
+        ],
+        "text_sizes": [
+          {
+            "text": "W",
+            "effective_font_size": 3.4869
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.881659999999999
+          },
+          {
+            "text": "H",
+            "effective_font_size": 5.57904
+          },
+          {
+            "text": "Z",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "W",
+            "effective_font_size": 3.4869
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.881659999999999
+          },
+          {
+            "text": "H",
+            "effective_font_size": 5.57904
+          },
+          {
+            "text": "Z",
+            "effective_font_size": 4.184279999999999
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "cells": [
+          {
+            "explicit_circles": 4,
+            "scales": [
+              0.6,
+              0.6,
+              0.6,
+              0.6
+            ]
+          },
+          {
+            "explicit_circles": 2,
+            "scales": [
+              0.5,
+              0.7
+            ]
+          },
+          {
+            "explicit_circles": 1,
+            "scales": [
+              0.4
+            ]
+          },
+          {
+            "explicit_circles": 4,
+            "scales": [
+              0.6,
+              0.6,
+              0.6,
+              0.6
+            ]
+          }
+        ],
+        "text_sizes": [
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "Z",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "Z",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "Z",
+            "effective_font_size": 3.4869
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.881659999999999
+          },
+          {
+            "text": "Z",
+            "effective_font_size": 2.78952
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          },
+          {
+            "text": "W",
+            "effective_font_size": 4.184279999999999
+          }
+        ]
+      }
+    ],
+    "marker_contacts": 36,
+    "automatic_proca_circles": 0,
+    "circle_label_scaling": true,
+    "circle_label_color_override": true
+  },
+  "maintained_documents": 49,
+  "endpoint_contacts": 850,
+  "atlas_recipes": 122,
+  "atlas_pages": 28,
+  "previous_atlas_bodies_identical": 26,
+  "previous_atlas_pages_changed": [
+    7
+  ],
+  "changed_page_reason": "A06 explicit empty Proca ring now inherits pink line color",
+  "comparison_dpi": 90,
+  "comparison_excludes": "Footer provenance",
+  "original_source_checksums": "unchanged",
+  "next_feature": "M07b right external pair R04 after authorized publication",
+  "sha256": {
+    "README.md": "3abcdb1db7926920a16babdc84744eacba7d60dcc20421309dbe90cdeaa410c8",
+    "docs/development-plan.md": "abc6c11be8992640fd38c9ccb584008d888de848bff0665f0c5199628f667af8",
+    "docs/diagram-inventory/README.md": "ce23e82b91c277681401ea8c34b8d628af5a1b036a0cfed9f2b11452dcc7eef6",
+    "docs/diagram-inventory/catalog.json": "a5182a699456e485ee4dfa40899728f4bf419750c67320e0d49b57e275896baa",
+    "docs/diagram-inventory/inventory.pdf": "f3b3b52f80ccb242c551989d820ac8d1737622b06bea20cb6a8bc1a3b2ed450d",
+    "docs/diagram-inventory/inventory.tex": "d6f2cce3f415ef3b9d2558de376935c8508f62ca9ae34d00b003504bb6276440",
+    "docs/diagram-inventory/recipes.md": "51992c3d42f8f28bd729ca4f6e1bfa0623d8a30de21e4af57b18911953753ab4",
+    "docs/diagram-inventory/verification.md": "bc14655e8ec107e587dc62a0a18c9b37e9aaa63911ddc6c5d6bdeb151a228ee9",
+    "docs/planning/README.md": "24e7bbbc70c914bf213bb20aa2c28ff37efe8e6947f23f115880eef9ebb9dafb",
+    "docs/planning/branch-integration.md": "1f202daa3c75b539c017fcc220f288295f9d376e03bd855345416a91b2b589d8",
+    "docs/planning/d02-regression-results.txt": "df15e926ebd0af7ca336ed92a23112834280ff3d094a5af9e40b568df73c8e77",
+    "docs/planning/d02-verification.md": "073105f34a9855978d2fe1e54c2432e004938900f78755a5871f901b2c160fd5",
+    "docs/planning/deferred-workflows.md": "41e08fe18548523e711461e71553816f3c766080a16f573f8b75652473c22ed8",
+    "docs/planning/milestones.md": "956b9b3dbe1d18a78ea4f177c4c4bf63acbb3790429253e26052512fd2810328",
+    "docs/planning/reproductions/d02-cross-box-circles-after.pdf": "ab74cf600ef4b0750123305ecdc7d513acdfda7de7f0325c0567d11708352eab",
+    "docs/planning/reproductions/d02-cross-box-circles-before.pdf": "142e0519f275625a6029877e8f0de434549e3d72eab3c8db91856ea811ea9135",
+    "docs/planning/reproductions/d02-cross-box-circles-fixed.json": "583a551d50bf57f9fbd9d51591897b51da646f32f066c08768871d654b2da1c6",
+    "docs/planning/reproductions/d02-cross-box-circles.tex": "b24b10588798044bf2cd63f04b6b5c3fd6dfda071c663094848e011d7e277500",
+    "docs/planning/requirements.json": "204664035c4139edce0630784d648e70c9c8eb80c3b907595bee744515b1e6ff",
+    "docs/planning/requirements.md": "9fa12cc7261afd9de9fbe9c8e3d2a450308508b2035d99a83f6a3447d588dfbc",
+    "docs/reference.md": "383167397f142fc7e6529860405d0c46c494c673a11b98bcf1877bf9f3bc540b",
+    "feynman-fun.sty": "bf0820c29f01d90333637db9a11865e66d80ca73fd8b2e7072519545904a4837",
+    "regressions/topologies/cross-box/check-cross-box-circles.py": "872e5c334120f9e48acbc7d1dfba9f4c5219e922ebd7795e96fc90181d4922fa",
+    "regressions/topologies/cross-box/cross-box-circle-comparison.pdf": "daa4c1438619b8ccc045a560c4191e6aae0a125c6d932c4a299d73b4a7c3be79",
+    "regressions/topologies/cross-box/cross-box-circle-comparison.png": "7a98b39da0bfd0f5ff4cb4726cd8ed8f4317d0dbdc33f385d1e5fb3950c9fddb",
+    "regressions/topologies/cross-box/cross-box-circle-comparison.tex": "45c38f7d64c8d12eb76e9cf6768da5db27ffd1ee8c8d94841c664a7b89e77bf8",
+    "regressions/topologies/cross-box/cross-box-circles-checks.json": "e3349f867a77b243f07786b4b1567d9be4f99d02e8feae830f135289dd818090",
+    "regressions/topologies/cross-box/cross-box-circles.pdf": "bada5f7b106e426018918933bd15c791b4731b25a2947e922af3e1c32b983036",
+    "regressions/topologies/cross-box/cross-box-circles.tex": "41022a84f35c52f0600836535cef3b33b7594ebb771409d656a1272d3ea796e8",
+    "scripts/check-regressions.sh": "6572bb23eccb3311e2af6f02af8b946e11e134244f8fb6d9cc0a9c45f30fd232"
+  }
+}
