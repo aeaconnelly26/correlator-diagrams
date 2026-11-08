@@ -17,9 +17,11 @@ scale, shared-frame, S-exchange and endcap fixes, is now fast-forwarded into
 main and published to GitHub (2026-11-06). At M06 publication the checkout was synchronized main;
 the M06 feature branch is retained. M07a checkpoint `dfa0066`, implemented on
 `codex/m07a-crossed-box-layouts` from `56a643a`, is now fast-forwarded into
-main and published on GitHub (2026-11-07). The checkout is synchronized main,
-and the M07a feature branch is retained. No M07a merge/push remains. M07b is
-next, beginning with the upper external pair. See [M07a publication](m07a-publication.json).
+main and published on GitHub (2026-11-07). At publication the checkout was synchronized main,
+and the M07a feature branch is retained. No M07a merge/push remains. The current
+checkout is `codex/m07b-upper-external-crossing` from `813736e`, with a verified
+local upper-routing slice; its merge/push is pending. Right external routing
+is next. See [M07b verification](m07b-verification.md). See [M07a publication](m07a-publication.json).
 No M06 merge/push remains. See
 [M06 verification](m06-verification.md) and [publication record](m06-publication.json).
 The branch `codex/m05-swordfish` is retained; no M05 merge/push remains.
@@ -81,10 +83,12 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M07 is next after M06 publication. When authorized, fetch, verify and merge/push
-M06, then create a fresh feature branch from synchronized main. No manual Git
-work is required from the user. Begin with one complementary crossed-box slice;
-keep external crossings/routing questions separate. D01 remains deferred.
+M07b's upper external pair is verified locally on
+`codex/m07b-upper-external-crossing`, based on published main `813736e`.
+Its merge/push is pending. After authorized publication, begin the right-pair
+slice from S03-center with its own slot/connectivity contract. Keep M07c source
+routing questions, D01 index appearance and D02 internal crossed-box circle
+styling separate. The assistant handles authorized Git work.
 
 Remote state was refreshed with `git fetch origin` for this synchronization.
 When publishing main, verify `git ls-remote origin refs/heads/main` matches

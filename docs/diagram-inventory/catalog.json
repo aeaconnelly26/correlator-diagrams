@@ -1,6 +1,6 @@
 {
-  "baseline": "M07a local; base 56a643a",
-  "date": "2026-11-06",
+  "baseline": "M07b local; base 813736e",
+  "date": "2026-11-07",
   "base_options": [
     "field={}",
     "leg-labels={,,,}",
@@ -1826,7 +1826,73 @@
           "limitation": "Per-edge directions and positions remain independently adjustable."
         }
       ]
+    },
+    {
+      "section": "27 / CROSSED EXTERNAL PAIR",
+      "title": "Square box with crossed upper legs",
+      "subtitle": "R03 / S02-center. External slots follow their outer endpoints; the crossing is not an interaction. Internal loop slots 5-8 are unchanged.",
+      "entries": [
+        {
+          "id": "P21",
+          "title": "Box: upper external crossing",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-external-crossing=top",
+            "box-line=plain",
+            "box-external-line=plain"
+          ],
+          "description": "UL connects to TR; UR connects to TL. The square loop stays intact.",
+          "limitation": "One split external leg; no interaction at the upper crossing."
+        },
+        {
+          "id": "P22",
+          "title": "Upper crossing: EW external legs",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-external-crossing=top",
+            "box-line=plain",
+            "box-external-line=plain",
+            "box-external-line=ewboson"
+          ],
+          "description": "Same routed graph, with wavy external lines.",
+          "limitation": "No extra caps, circles or annotations."
+        },
+        {
+          "id": "P23",
+          "title": "Upper crossing: pink Proca legs",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-external-crossing=top",
+            "box-line=plain",
+            "box-external-line=plain",
+            "box-external-line={proca,magenta!85!red}"
+          ],
+          "description": "Endpoint tips belong to full legs, never to the gap.",
+          "limitation": "Two tips per Proca leg; external endpoints stay in the shared frame."
+        },
+        {
+          "id": "P24",
+          "title": "Upper crossing: external momenta",
+          "macro": "BoxLoopCorr",
+          "options": [
+            "box-external-crossing=top",
+            "box-line=plain",
+            "box-external-line=plain",
+            "show-momenta=true",
+            "box-left-momentum={}",
+            "box-top-momentum={}",
+            "box-right-momentum={}",
+            "box-bottom-momentum={}",
+            "box-loop-momentum={}",
+            "box-edge-momentum-directions={none,none,none,none}",
+            "box-external-momentum-2={layout=side}",
+            "box-external-momentum-4={layout=side}"
+          ],
+          "description": "p1/p2 enter; p3/p4 leave. Measured upper gaps; lower continuous arrows.",
+          "limitation": "Independent box-external-momentum-1..4 controls; right crossing is still missing."
+        }
+      ]
     }
   ],
-  "branch": "codex/m06-tree-triangles"
+  "branch": "codex/m07b-upper-external-crossing"
 }

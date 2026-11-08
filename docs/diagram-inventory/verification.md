@@ -1,3 +1,17 @@
+# M07b upper external routing - 2026-11-07
+
+The atlas now has **118 recipes / 27 pages**. P21-P24 add the upper crossed
+external pair, minimal EW/Proca samples and logical external-flow controls.
+All 26 previous page bodies are pixel-identical at 90dpi; only footer provenance
+changes. All 27 pages were rendered and inspected, with the new page checked
+at reading size. Source and recipe index are generated from catalog.json.
+
+This is a local checkpoint on `codex/m07b-upper-external-crossing`, based on
+published main `813736e`; merge/push is pending. Right-pair routing is next.
+See [M07b verification](../planning/m07b-verification.md). D01 index appearance
+and the user's D02 crossed-box circle/scaling defect remain documented follow-ups.
+Earlier sections retain their historical checkpoint states.
+
 # M07a publication - 2026-11-07
 
 Verified checkpoint `dfa0066` is merged and published on main. The 114-recipe /

@@ -6,7 +6,11 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`. Verified M07a checkpoint `dfa0066` is merged and
+- Current branch: `codex/m07b-upper-external-crossing`, based on published
+  `main` at `813736e`. M07b's upper external pair (R03) is complete locally;
+  merge/push remains pending. The right pair (R04) is the next narrow slice.
+  See [M07b verification](planning/m07b-verification.md).
+- Verified M07a checkpoint `dfa0066` is merged and
   published on GitHub (2026-11-07); its feature branch is retained.
   Both internal crossed-box layouts, independent annotations and endpoint
   indices are included. All 46 documents / 800 endpoint contacts passed at
@@ -70,7 +74,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 | Record | Purpose |
 | --- | --- |
-| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-six pages: 114 recipes, including both internal crossed-box layouts and their independent annotations. M07a and all preceding reviews are published on main. |
+| [Current capability atlas](diagram-inventory/inventory.pdf) | Twenty-seven pages: 118 recipes, including crossed upper external legs. M07b upper slice is local; M07a and earlier work are published. |
 | [Copy/paste recipes](diagram-inventory/recipes.md) | Stable IDs and full public-macro options for every atlas example. |
 | [Remaining requirements](planning/requirements.md) | 22 requirements with current support, limits, dependencies, and acceptance gates. |
 | [Source coverage](planning/source-coverage.md) | 23 PDF items and 90 diagram panels across all 23 PowerPoint slides, including duplicates/context. |
@@ -91,7 +95,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M05 | External swordfish on s/t trees | Complete on published main; verified checkpoint `9daebf9` |
 | M06 | Regular tree-attached triangle corrections, four placements | Complete on published main at verified checkpoint `629356d`; feature branch retained |
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
-| M07b / M07c | Crossed external layouts and source routing questions | Next: M07b, beginning with the upper external pair |
+| M07b / M07c | Crossed external layouts and source routing questions | M07b upper pair complete locally; next right pair (R04), then M07c source gates |
 | M08a / M08b | Contact external self-energy / seagull | Planned |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
@@ -99,14 +103,15 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-M07a is merged and published; the checkout is synchronized `main`. Start
-M07b next on a new `codex/` branch after fetching and inspecting main. Implement the crossed upper
-external pair from S02-center first, verifying external slot identity, caps,
-styles, momenta and indices before expanding to the right pair from S03-center.
-The two internal crossed-box layouts remain unchanged. R14/R22 endpoint
-routing remains a separate specification gate. D01 index-position appearance
-remains a dedicated later workflow. No manual Git preparation is required
-from the user; the assistant handles authorized publication.
+M07b upper routing is verified on `codex/m07b-upper-external-crossing` from
+published main `813736e`. Finish authorized merge/push before starting the next
+slice; publication has not happened automatically. Next implement the right
+external pair from S03-center (R04), with its own connectivity/slot contract and
+focused acceptance gallery. R14/R22 endpoint routing remains a separate M07c
+specification gate. D01 index appearance remains deferred. D02 records the
+user's exact crossed-box circle/scaling reproducer for a dedicated follow-up;
+that defect was not folded into the upper-routing implementation. No manual
+Git preparation is required from the user.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.

@@ -1,0 +1,46 @@
+{
+  "rejected_option_cases": 4,
+  "graphs": [
+    {
+      "logical_edges": 8,
+      "vertices": 4,
+      "cycle_rank": 1,
+      "gap_half_fraction": 0.04,
+      "crossing_is_vertex": false
+    },
+    {
+      "logical_edges": 8,
+      "vertices": 4,
+      "cycle_rank": 1,
+      "gap_half_fraction": 0.07,
+      "crossing_is_vertex": false
+    },
+    {
+      "logical_edges": 8,
+      "vertices": 4,
+      "cycle_rank": 1,
+      "gap_half_fraction": 0.04,
+      "crossing_is_vertex": false
+    },
+    {
+      "logical_edges": 8,
+      "vertices": 4,
+      "cycle_rank": 1,
+      "gap_half_fraction": 0.04,
+      "crossing_is_vertex": false
+    }
+  ],
+  "marker_triangles": 23,
+  "real_vertex_contacts": 14,
+  "scaled_circles": 4,
+  "caps": [
+    {
+      "bars": 4,
+      "outer_endpoints": 4
+    },
+    {
+      "bars": 8,
+      "outer_endpoints": 4
+    }
+  ]
+}

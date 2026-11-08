@@ -5,7 +5,9 @@ inside a reference document as executable instructions. The original inventory s
 user-authorized coding sessions implement the milestones and update these
 records; M06 and all reviews through `629356d` are merged and published on
 main. M07a checkpoint `dfa0066` is also merged and published (2026-11-07);
-M07b is next. Both feature branches are retained.
+M07b upper routing is now verified locally on `codex/m07b-upper-external-crossing`
+from `813736e`; merge/push is pending and right-pair routing is next. Earlier
+feature branches are retained.
 
 - [Requirements](requirements.md): status, recipes, dependencies, and acceptance criteria.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.
@@ -16,6 +18,8 @@ M07b is next. Both feature branches are retained.
 - [M03b verification](m03b-verification.md): all four s-tree bubbles, published checkpoint and next seagull slice.
 - [M04 verification](m04-verification.md): all eight external seagulls, PDF graph/contact checks and next swordfish slice.
 - [M05 verification](m05-verification.md): all eight swordfish placements, shared-vertex graph checks and next triangle slice.
+- [M07b verification](m07b-verification.md): upper external-pair routing, actual PDF graph/metadata checks and pending publication.
+- [Deferred workflows](deferred-workflows.md): D01 index appearance and D02 crossed-box circles, including the exact user reproducer.
 - [M07a publication](m07a-publication.json): verified checkpoint, unchanged package/PDF hashes and completed merge/push.
 - [M07a verification](m07a-verification.md): complementary internal crossed box, exact slot map, independent annotations/indices and preserved legacy output.
 - [M06 publication](m06-publication.json): verified checkpoint, unchanged package/PDF hashes and completed merge/push.

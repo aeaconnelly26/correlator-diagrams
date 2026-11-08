@@ -1,0 +1,20 @@
+% Exact user example, reported during M07b on 2026-11-07.
+% Known defect D02; not an acceptance example claiming correct output.
+\documentclass{article}
+\usepackage{feynman-fun}
+\begin{document}
+\CrossBoxCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  external-vertices=false,
+  line=plain,
+  scale=0.8,
+  box-line={ewboson,circ=W,circ scale=0.6},
+  box-external-line={ewboson,endcapp},
+  cross-box-up-line={proca,magenta!85!red},
+  cross-box-down-line={magenta!85!red,ewboson}
+]
+\end{document}

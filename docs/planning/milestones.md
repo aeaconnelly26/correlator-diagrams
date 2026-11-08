@@ -18,7 +18,7 @@ published on main. The branch is retained. M05 checkpoint `9daebf9`, implemented
 from `efb5fae`, is now also merged and published on main (2026-11-06).
 The M05 branch is retained. M06 verified checkpoint `629356d`, implemented
 on `codex/m06-tree-triangles` from `eb6182c`, is now merged and published on
-main. Its feature branch is retained. M07a is next. See
+main. Its feature branch is retained. M07a is now also published; M07b's upper slice is verified locally. See
 [M05 verification](m05-verification.md) and [M06 verification](m06-verification.md).
 
 ## Common session contract
@@ -207,9 +207,12 @@ fixes are merged and published; no M06 merge/push remains.
 `codex/m07a-crossed-box-layouts` from `56a643a`, is now merged and published
 on main (2026-11-07). Its feature branch is retained. See [verification](m07a-verification.md) and
 [frozen contract](../../regressions/topologies/cross-box/M07a-contract.md).
-104 public cases and independent PDF graph/gap/contact checks pass. M07b
-is next, starting with the upper external pair; right external routing
-is a subsequent narrow slice. D01 remains deferred.
+104 public cases and independent PDF graph/gap/contact checks pass. M07b's
+upper external pair is now verified locally on `codex/m07b-upper-external-crossing`
+from `813736e`: 52 public cases and actual PDF connectivity, markers, caps and
+circle scaling. Merge/push is pending; right external routing (R04) is the next
+narrow slice. See [M07b verification](m07b-verification.md). D01 and the newly
+recorded D02 crossed-box circle defect remain separate reviews.
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported

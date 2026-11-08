@@ -1,0 +1,107 @@
+CHECK example.tex
+PASS  example.tex
+CHECK vertex-example/vertex-example.tex
+PASS  vertex-example/vertex-example.tex
+CHECK compton-example/compton-example.tex
+PASS  compton-example/compton-example.tex
+CHECK regressions/compat/correlator-diagrams-wrapper.tex
+PASS  regressions/compat/correlator-diagrams-wrapper.tex
+CHECK regressions/scale/diagram-scale.tex
+PASS  regressions/scale/diagram-scale.tex
+CHECK regressions/topologies/triangle-contact/triangle-contact-regression.tex
+PASS  regressions/topologies/triangle-contact/triangle-contact-regression.tex
+CHECK regressions/topologies/triangle-contact/triangle-contact-internal-momentum.tex
+PASS  regressions/topologies/triangle-contact/triangle-contact-internal-momentum.tex
+CHECK regressions/topologies/triangle-contact/momentum-directions-demo.tex
+PASS  regressions/topologies/triangle-contact/momentum-directions-demo.tex
+CHECK regressions/topologies/triangle-contact/triangle-contact-annotations.tex
+PASS  regressions/topologies/triangle-contact/triangle-contact-annotations.tex
+CHECK regressions/topologies/vertex-identity/vertex-identity-check.tex
+PASS  regressions/topologies/vertex-identity/vertex-identity-check.tex
+CHECK regressions/topologies/vertex-identity/half-box-bridge-momentum.tex
+PASS  regressions/topologies/vertex-identity/half-box-bridge-momentum.tex
+CHECK regressions/topologies/channel/channel-momentum-label-gap.tex
+PASS  regressions/topologies/channel/channel-momentum-label-gap.tex
+CHECK regressions/momenta/external-momentum-visibility.tex
+PASS  regressions/momenta/external-momentum-visibility.tex
+CHECK regressions/labels/mini-index.tex
+PASS  regressions/labels/mini-index.tex
+CHECK regressions/propagators/proca/one-sided-loop-markers.tex
+PASS  regressions/propagators/proca/one-sided-loop-markers.tex
+CHECK regressions/topologies/three-point/three-point-check.tex
+PASS  regressions/topologies/three-point/three-point-check.tex
+CHECK regressions/topologies/three-point/three-point-translation-check.tex
+PASS  regressions/topologies/three-point/three-point-translation-check.tex
+CHECK regressions/propagators/scalar-polarization/scalar-polarization-check.tex
+PASS  regressions/propagators/scalar-polarization/scalar-polarization-check.tex
+CHECK regressions/topologies/bubble/bubble-regression.tex
+PASS  regressions/topologies/bubble/bubble-regression.tex
+CHECK regressions/topologies/insertion/insertion-regression.tex
+PASS  regressions/topologies/insertion/insertion-regression.tex
+CHECK regressions/topologies/insertion/insertion-endcaps.tex
+PASS  regressions/topologies/insertion/insertion-endcaps.tex
+CHECK regressions/topologies/insertion/t-tree-bubble-slots.tex
+PASS  regressions/topologies/insertion/t-tree-bubble-slots.tex
+CHECK regressions/topologies/insertion/s-tree-bubble-slots.tex
+PASS  regressions/topologies/insertion/s-tree-bubble-slots.tex
+CHECK regressions/topologies/insertion/seagull-insertion-regression.tex
+PASS  regressions/topologies/insertion/seagull-insertion-regression.tex
+CHECK regressions/topologies/insertion/seagull-slots.tex
+PASS  regressions/topologies/insertion/seagull-slots.tex
+CHECK regressions/topologies/insertion/swordfish-slots.tex
+PASS  regressions/topologies/insertion/swordfish-slots.tex
+CHECK regressions/topologies/insertion/tree-triangle-slots.tex
+PASS  regressions/topologies/insertion/tree-triangle-slots.tex
+CHECK regressions/topologies/insertion/insertion-momentum-review.tex
+PASS  regressions/topologies/insertion/insertion-momentum-review.tex
+CHECK regressions/topologies/insertion/insertion-species-samples.tex
+PASS  regressions/topologies/insertion/insertion-species-samples.tex
+CHECK regressions/topologies/loop-audit/loop-momentum-audit.tex
+PASS  regressions/topologies/loop-audit/loop-momentum-audit.tex
+CHECK regressions/topologies/loop-audit/self-energy-bubble-mockups.tex
+PASS  regressions/topologies/loop-audit/self-energy-bubble-mockups.tex
+CHECK regressions/topologies/box/box-topology-regression.tex
+PASS  regressions/topologies/box/box-topology-regression.tex
+CHECK regressions/topologies/box/box-external-crossing.tex
+PASS  regressions/topologies/box/box-external-crossing.tex
+CHECK regressions/propagators/circ/propagator-circ-check.tex
+PASS  regressions/propagators/circ/propagator-circ-check.tex
+CHECK regressions/propagators/endpoint-markers/endpoint-marker-regression.tex
+PASS  regressions/propagators/endpoint-markers/endpoint-marker-regression.tex
+CHECK regressions/propagators/ewboson-frequency/ewboson-frequency-check.tex
+PASS  regressions/propagators/ewboson-frequency/ewboson-frequency-check.tex
+CHECK regressions/propagators/proca/proca-regression.tex
+PASS  regressions/propagators/proca/proca-regression.tex
+CHECK regressions/propagators/w-favorites/w-propagator-favorites.tex
+PASS  regressions/propagators/w-favorites/w-propagator-favorites.tex
+CHECK regressions/topologies/channel/channel-topology-regression.tex
+PASS  regressions/topologies/channel/channel-topology-regression.tex
+CHECK regressions/topologies/channel/s-tree-span-regression.tex
+PASS  regressions/topologies/channel/s-tree-span-regression.tex
+CHECK regressions/topologies/cross-box/cross-box-regression.tex
+PASS  regressions/topologies/cross-box/cross-box-regression.tex
+CHECK regressions/topologies/cross-box/cross-box-layouts.tex
+PASS  regressions/topologies/cross-box/cross-box-layouts.tex
+CHECK regressions/topologies/internal-indices/internal-index-slots.tex
+PASS  regressions/topologies/internal-indices/internal-index-slots.tex
+CHECK regressions/topologies/sunset/sunset-example.tex
+PASS  regressions/topologies/sunset/sunset-example.tex
+CHECK regressions/topologies/sunset/sunset-index-regression.tex
+PASS  regressions/topologies/sunset/sunset-index-regression.tex
+CHECK regressions/topologies/three-point/three-point-feature-gallery.tex
+PASS  regressions/topologies/three-point/three-point-feature-gallery.tex
+CHECK regressions/propagators/proca-endpoints/proca-endpoint-audit.tex
+PASS  regressions/propagators/proca-endpoints/proca-endpoint-audit.tex
+PASS M07b PDF: four routed square/perimeter graphs; 23 tips, 14 contacts, four scaled circles; 12 cap bars with correct tangent/contact
+PASS M07a PDF: four eight-edge square crossed graphs, no central interaction; 16 Proca + 8 scalar + 4 mixed contacting tips; four explicit circles
+PASS insertion caps PDF: 16 double caps / 32 bars at outer corners; waves end on inner bars
+PASS: 26 pages; 609 endpoint triangles; 600 automatic contacts; maximum circle-path gap 0.2512 PDF pt; maximum visible ink gap -0.1224 PDF pt
+PASS: raw and managed legacy overrides and the generic open-arrow add-on retain baseline placement
+PASS M03a: 16 white-filled pink Proca tips contact vertices across all four t-tree placements
+PASS M03b: 16 white-filled pink Proca tips contact vertices across all four s-tree placements
+PASS M04: 8 actual PDF graphs, each 7 edges / one quartic self-loop; 24 pink, white-filled endpoint tips contact visible vertices
+PASS: 40 EW circles (16 pink Z stems, 24 black W); 32 contacting pink endpoint arrows; 8 optically centered seagull W circles; 8 midpoint bubble-host W circles; circle/vertex clearance 3.144 PDF pt
+PASS EW waves: 24/54/54/24 rendered curve segments; shorter wavelength, alias/key order and per-line reset
+PASS M05 PDF: eight seven-edge shared-quartic graphs; 32 Proca and 16 scalar white-filled pink contacts
+PASS M06 PDF: four equilateral eight-edge graphs with standard outer frames; eight tree/box/contact frame comparisons; four wavy exchanges; 24 Proca + 12 scalar pink white-filled contacts
+PASS  all 47 regression and example documents

@@ -3,14 +3,19 @@
 [Open the atlas](inventory.pdf), [copy a recipe](recipes.md), or
 [review all 16 insertion momentum examples](../../regressions/topologies/insertion/insertion-momentum-review.pdf).
 
-Verified M07a checkpoint `dfa0066`, built on `codex/m07a-crossed-box-layouts`
-from `56a643a`, is now merged and published on main (2026-11-07). The package
-and PDFs match the tested checkpoint; the PDF footer retains its build
-provenance. There are **114 current recipes on twenty-six pages**, including
-both internal crossed-box layouts and independent internal annotations.
-M07b is next; no M07a merge/push remains. These count
-recipes and meaningful layouts/styles, not distinct graph topologies. See
-[M07a verification](../planning/m07a-verification.md).
+The current build is M07b's upper external-routing slice on
+`codex/m07b-upper-external-crossing`, from published main `813736e`.
+It is verified locally; merge/push remains pending. There are **118 recipes
+on twenty-seven pages**. Page 27 adds P21-P24: plain upper crossing, EW lines,
+pink Proca external legs and external flow controls. See
+[M07b verification](../planning/m07b-verification.md) and the focused
+[four-page gallery](../../regressions/topologies/box/box-external-crossing.pdf).
+Right external-pair routing is next. Recipe counts include meaningful
+layouts/styles, not only distinct graph topologies.
+
+M07a checkpoint `dfa0066` and preceding work are merged and published on main.
+Its feature branch is retained; [verification](../planning/m07a-verification.md)
+remains historical evidence for the internal crossed-box layouts.
 
 Pages 25-26 add P01-P04/P11-P14: the compatible left/right-fixed graph,
 complementary top/bottom-fixed graph, explicit crossing-gap variants, mixed
@@ -18,7 +23,9 @@ EW/Proca lines without circles, and independent momentum examples. The main
 samples use plain lines; field circles/caps/indices are omitted. The focused
 [four-page gallery](../../regressions/topologies/cross-box/cross-box-layouts.pdf)
 separately demonstrates marker contact and named metadata features. D01 index
-appearance remains deferred.
+appearance remains deferred. D02 separately records automatic black Proca circles
+and ignored per-line `circ scale` in internal crossed boxes; the exact user
+[reproducer](../planning/reproductions/d02-cross-box-circles.tex) is retained.
 
 Every recipe now uses the compact coordinate baseline: `scale=1` matches the
 former `scale=0.8`; use `scale=1.25` to recover the former unit-scale size.

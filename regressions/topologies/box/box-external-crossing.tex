@@ -1,0 +1,131 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,adjustbox,feynman-fun}
+\setlength{\parindent}{0pt}
+\newbox\betest\newcount\becases\newcount\beedges\newcount\becaps\newcount\bedoubles\newcount\beindices\newcount\bemomenta
+\makeatletter
+\newcommand{\beassert}[3]{\ifnum#1=#2\relax\else\PackageError{M07b}{#3: \the#1, expected #2}{}\fi}
+\newcommand{\benear}[2]{%
+ \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{#2}{center}}%
+ \pgfmathsetlengthmacro{\beerror}{max(abs(\pgf@x),abs(\pgf@y))}%
+ \ifdim\beerror>.03pt\PackageError{M07b}{Wrong endpoint #1/#2}{}\fi}
+\newcommand{\berecord}[3]{\global\advance\beedges by1
+ \expandafter\xdef\csname bestart#1\endcsname{#2}\expandafter\xdef\csname beend#1\endcsname{#3}}
+\let\beoldexternal\corr@drawboxexternalprop
+\renewcommand{\corr@drawboxexternalprop}[3]{\beoldexternal{#1}{#2}{#3}\berecord{#1}{#2}{#3}}
+\let\beoldinternal\corr@drawboxinternalprop
+\renewcommand{\corr@drawboxinternalprop}[4]{\beoldinternal{#1}{#2}{#3}{#4}\berecord{#1}{#3}{#4}}
+\let\beoldcap\corr@drawexternalendcap
+\renewcommand{\corr@drawexternalendcap}[2]{\global\advance\becaps by1
+ \def\befound{}\@for\beouter:={corrExtUL,corrExtLL,corrExtUR,corrExtLR}\do{%
+  \pgfpointdiff{\pgfpointanchor{#1}{center}}{\pgfpointanchor{\beouter}{center}}%
+  \pgfmathsetlengthmacro{\beerror}{max(abs(\pgf@x),abs(\pgf@y))}%
+  \ifdim\beerror<.03pt\def\befound{yes}\fi}%
+ \ifdefempty{\befound}{\PackageError{M07b}{Cap at artificial/internal endpoint}{}}{}\beoldcap{#1}{#2}}
+\let\beoldcapp\corr@drawexternalendcapp
+\renewcommand{\corr@drawexternalendcapp}[2]{\global\advance\bedoubles by1\beoldcapp{#1}{#2}}
+\let\beoldindexslot\corr@putpropagatorindiceslot
+\renewcommand{\corr@putpropagatorindiceslot}[4]{\edef\beindexslot{#2}\beoldindexslot{#1}{#2}{#3}{#4}}
+\let\beoldindex\corr@puttopologyindexline
+\renewcommand{\corr@puttopologyindexline}[8]{\edef\bevalue{#7}\ifdefempty{\bevalue}{}{%
+ \global\advance\beindices by1\benear{#1}{\csname bestart\beindexslot\endcsname}\benear{#2}{\csname beend\beindexslot\endcsname}%
+ \xdef\beindexvalues{\beindexvalues,#7}}\beoldindex{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
+\let\beoldannotation\corr@trianglecontactdrawannotation
+\renewcommand{\corr@trianglecontactdrawannotation}[3]{\beoldannotation{#1}{#2}{#3}\global\advance\bemomenta by1
+ \expandafter\xdef\csname bedir#1\endcsname{\corr@tcdirection}%
+ \expandafter\xdef\csname belabel#1\endcsname{\corr@tclabel}%
+ \expandafter\xdef\csname befrac#1\endcsname{\corr@tcfrac}%
+ \expandafter\xdef\csname bestartfrac#1\endcsname{\corr@tcstart}%
+ \ifdefempty{\corr@tclabel}{}{\pgfpointanchor{corrTCLabelNode}{center}%
+  \expandafter\xdef\csname bemx#1\endcsname{\the\pgf@x}\expandafter\xdef\csname bemy#1\endcsname{\the\pgf@y}}}
+\let\beoldbox\corr@drawfourpointbox
+\renewcommand{\corr@drawfourpointbox}{\beoldbox
+ \ifcorr@externallegs\beassert\beedges{8}{Eight logical edges}\else\beassert\beedges{4}{Internal graph only}\fi
+ \corr@ifstringeq{\corr@boxexternalcrossing}{top}{%
+  \ifcorr@externallegs
+   \benear{\csname bestart1\endcsname}{corrExtUL}\benear{\csname beend1\endcsname}{corrBoxTR}%
+   \benear{\csname bestart3\endcsname}{corrExtUR}\benear{\csname beend3\endcsname}{corrBoxTL}%
+  \fi
+  \pgfmathsetmacro{\becross}{\corr@boxexternalxspan/(\corr@boxexternalxspan+\corr@boxxspan)}%
+  \coordinate (beExpectedA) at ($(corrExtUL)!{\becross-\corr@boxexternalcrossinggap}!(corrBoxTR)$);
+  \coordinate (beExpectedB) at ($(corrExtUL)!{\becross+\corr@boxexternalcrossinggap}!(corrBoxTR)$);
+  \benear{corrBEGapA}{beExpectedA}\benear{corrBEGapB}{beExpectedB}%
+ }{\ifcorr@externallegs\benear{\csname beend1\endcsname}{corrBoxTL}\benear{\csname beend3\endcsname}{corrBoxTR}\fi}%
+ \ifcorr@externallegs\benear{\csname beend2\endcsname}{corrBoxBL}\benear{\csname beend4\endcsname}{corrBoxBR}\fi
+ \benear{\csname bestart5\endcsname}{corrBoxBL}\benear{\csname beend5\endcsname}{corrBoxTL}%
+ \benear{\csname bestart6\endcsname}{corrBoxTL}\benear{\csname beend6\endcsname}{corrBoxTR}%
+ \benear{\csname bestart7\endcsname}{corrBoxTR}\benear{\csname beend7\endcsname}{corrBoxBR}%
+ \benear{\csname bestart8\endcsname}{corrBoxBL}\benear{\csname beend8\endcsname}{corrBoxBR}}
+\newcommand{\bemeasure}[1]{\global\advance\becases by1\global\beedges=0\global\becaps=0\global\bedoubles=0\global\beindices=0\global\bemomenta=0\gdef\beindexvalues{}%
+ \edef\becall{\noexpand\bepublic[field={},central={},leg-labels={,,,},show-momenta=false,box-line=plain,box-external-line=plain,box-external-crossing=top,#1]}%
+ \setbox\betest=\hbox{\becall}}
+\let\bepublic\BoxLoopCorr
+\begin{document}
+\@for\bescale:={.72,1,1.2}\do{%
+ \@for\bestyle:={plain,ewboson,proca,spol,spolin,spolout,antspol}\do{%
+  \bemeasure{scale=\bescale,box-external-line={\bestyle,magenta!85!red}}}%
+ \bemeasure{scale=\bescale,box-external-line={ewboson,circ=W,circ scale=.6,endcapp}}%
+ \bemeasure{scale=\bescale,box-external-line={proca,magenta!85!red,proca vertex radius=2.15pt}}%
+ \bemeasure{scale=\bescale,box-external-line={proca start,magenta!85!red,endpoint marker distance=2.15pt}}%
+ \bemeasure{scale=\bescale,box-external-line={proca end,magenta!85!red,endpoint marker distance=2.15pt}}}
+\bemeasure{box-xspan=1.7,box-yspan=1.1,fourpoint-xspan=2.5,fourpoint-yspan=2.3,box-external-crossing-gap=.07}
+\bemeasure{box-external-line={ewboson,endcap}}\beassert\becaps{4}{Single caps}\beassert\bedoubles{0}{Single only}
+\bemeasure{box-external-line={ewboson,endcapp}}\beassert\becaps{4}{Cap endpoints}\beassert\bedoubles{4}{Double caps}
+\bemeasure{show-momenta=true}\beassert\bemomenta{2}{Two routed annotations}
+\def\beexpected{forward}\edef\bevalue{\csname bedir1\endcsname}\ifx\bevalue\beexpected\else\PackageError{M07b}{p1 must enter}{}\fi
+\def\beexpected{reverse}\edef\bevalue{\csname bedir3\endcsname}\ifx\bevalue\beexpected\else\PackageError{M07b}{p3 must leave}{}\fi
+\pgfmathparse{abs(\csname befrac1\endcsname-.23)+abs(\csname befrac3\endcsname-.23)}\ifdim\pgfmathresult pt>.0001pt\PackageError{M07b}{Upper arrows not at outer ends}{}\fi
+\@for\beslot:={1,2,3,4}\do{%
+ \bemeasure{show-momenta=true,box-external-momentum-\beslot={layout=side,label={Q_\beslot},direction=reverse}}%
+ \ifodd\beslot\beassert\bemomenta{2}{Independent routed control}\else\beassert\bemomenta{3}{Independent lower control}\fi
+ \edef\bevalue{\csname bedir\beslot\endcsname}\def\beexpected{reverse}\ifx\bevalue\beexpected\else\PackageError{M07b}{Reverse ignored}{}\fi}
+\bemeasure{show-momenta=true,external-momentum-hide={1,3}}\beassert\bemomenta{0}{Visibility mask}
+\bemeasure{show-momenta=true,box-external-momentum-1={direction=none}}\beassert\bemomenta{1}{Independent hiding}
+\bemeasure{show-momenta=true,box-external-momentum-1={label={},layout=side}}\beassert\bemomenta{2}{Unlabeled arrow}
+\bemeasure{show-momenta=true,box-external-momentum-start=.09,box-external-momentum-end=.39,box-external-momentum-label-fraction=.24,box-external-momentum-label-gap=.035}
+\pgfmathparse{abs(\csname befrac1\endcsname-.24)+abs(\csname bestartfrac1\endcsname-.09)}\ifdim\pgfmathresult pt>.0001pt\PackageError{M07b}{Legacy explicit placement ignored}{}\fi
+\bemeasure{show-momenta=true}\xdef\bebasex{\csname bemx1\endcsname}\xdef\bebaseother{\csname bemx3\endcsname}
+\bemeasure{show-momenta=true,box-external-momentum-1={label-xshift=4pt}}
+\pgfmathsetlengthmacro{\beerror}{abs(\csname bemx1\endcsname-\bebasex)}\ifdim\beerror<1pt\PackageError{M07b}{Label shift ignored}{}\fi
+\pgfmathsetlengthmacro{\beerror}{abs(\csname bemx3\endcsname-\bebaseother)}\ifdim\beerror>.03pt\PackageError{M07b}{Label shift leaked to other slot}{}\fi
+\bemeasure{box-propagator-left-indices={L1,L2,L3,L4,L5,L6,L7,L8},box-propagator-right-indices={R1,R2,R3,R4,R5,R6,R7,R8}}\beassert\beindices{16}{All index values}
+\def\beexpected{,L1,R1,L2,R2,L3,R3,L4,R4,L5,R5,L6,R6,L7,R7,L8,R8}\ifx\beindexvalues\beexpected\else\PackageError{M07b}{Index ownership changed}{}\fi
+\bemeasure{external-legs=false}
+\let\bepublic\FourPointCorr\bemeasure{topology=box}
+\let\bepublic\BoxLoopCorr\bemeasure{box-external-crossing=none}\beassert\beindices{0}{Index reset}\beassert\bemomenta{0}{Annotation reset}\beassert\becaps{0}{Cap reset}
+\global\beedges=0\global\advance\becases by1
+\setbox\betest=\hbox{\BoxLoopCorr[field={},central={},leg-labels={,,,},show-momenta=false,box-line=plain,box-external-line=plain]}
+\typeout{PASS M07b: \the\becases\space public cases; logical routing, full-endpoint metadata, independent annotations, explicit dimensions/scales and reset}
+\let\corr@drawfourpointbox\beoldbox\let\corr@drawboxexternalprop\beoldexternal\let\corr@drawboxinternalprop\beoldinternal
+\let\corr@drawexternalendcap\beoldcap\let\corr@drawexternalendcapp\beoldcapp\let\corr@putpropagatorindiceslot\beoldindexslot\let\corr@puttopologyindexline\beoldindex\let\corr@trianglecontactdrawannotation\beoldannotation
+\makeatother
+\newcommand{\becell}[2]{\begin{minipage}[t][2.85in][t]{.48\linewidth}\textbf{#1}\par\vspace{10pt}\centering
+ \edef\becellcall{\noexpand\BoxLoopCorr[field={},central={},leg-labels={,,,},show-momenta=false,box-line=plain,box-external-line=plain,box-external-crossing=top,#2]}\becellcall\end{minipage}}
+\newcommand{\beexternalflow}{show-momenta=true,box-left-momentum={},box-top-momentum={},box-right-momentum={},box-bottom-momentum={},box-loop-momentum={},box-edge-momentum-directions={none,none,none,none},box-external-momentum-2={layout=side},box-external-momentum-4={layout=side}}
+\section*{Box: crossed upper external pair}
+The square loop is unchanged. The upper crossing has no interaction vertex.
+\par\bigskip
+\becell{Default upper routing}{}\hfill\becell{Larger crossing gap}{box-external-crossing-gap=.07}\par
+\becell{Explicit rectangular loop}{box-xspan=1.1,box-yspan=1.0}\hfill\becell{Smaller diagram}{scale=.8}
+\newpage\section*{Logical flow follows the outer slots}
+Slot 1 enters from UL and meets TR; slot 3 leaves TL toward UR.
+\par\bigskip
+\becell{Measured label gaps}{\beexternalflow}\hfill
+\becell{Continuous upper arrows}{\beexternalflow,box-external-momentum-1={layout=side},box-external-momentum-3={layout=side}}\par
+\becell{Independent upper label / reversed flow}{\beexternalflow,box-external-momentum-1={label=Q,direction=reverse,label-fraction=.28}}\hfill
+\becell{Wavy external lines}{box-external-line=ewboson}
+\newpage\section*{Endpoint markers: no tips at the cut}
+Pink Proca has two tips per leg; scalar polarization has its existing one-tip convention.
+\par\bigskip
+\becell{Proca external legs}{box-external-line={proca,magenta!85!red}}\hfill
+\becell{Scalar polarized external legs}{box-external-line={spol,magenta!85!red}}\par
+\becell{Legacy radius override: Proca}{box-external-line={proca,magenta!85!red,proca vertex radius=2.15pt}}\hfill
+\becell{Mixed logical styles}{leg-styles={{proca,magenta!85!red},ewboson,{spol,blue},plain}}
+\newpage\section*{Caps, species circles and endpoint metadata}
+Each cell adds only its named feature. Index-position polish remains deferred as D01.
+\par\bigskip
+\becell{Single outer caps}{box-external-line={ewboson,endcap}}\hfill
+\becell{Double outer caps}{box-external-line={ewboson,endcapp}}\par
+\becell{One scaled species circle per leg}{box-external-line={plain,circ=W,circ scale=.6}}\hfill
+\becell{Endpoint index ownership}{box-propagator-left-indices={a,b,c,d,e,f,g,h},box-propagator-right-indices={A,B,C,D,E,F,G,H}}
+\end{document}

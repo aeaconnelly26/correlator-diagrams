@@ -1,0 +1,14 @@
+{
+  "baseline": "M07b worktree from 813736e; crossed-box code unchanged",
+  "source": "d02-cross-box-circles.tex",
+  "requested_circ_scale": 0.6,
+  "actual_ring_radii_pdf_pt": [
+    5.977659999999986,
+    5.977659999999986,
+    5.97766
+  ],
+  "expected_scaled_radius_pdf_pt": 3.5865504358655045,
+  "circle_count": 3,
+  "labels": "W W\n1",
+  "notes": "Two explicit W rings keep the default size; an extra empty black ring is generated on the Proca up diagonal."
+}

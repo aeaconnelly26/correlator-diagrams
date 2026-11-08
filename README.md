@@ -69,7 +69,7 @@ The detailed geometry tuning is there when you need it, but the common cases abo
 
 - `\TwoPointCorr`, `\ThreePointCorr`, and `\FourPointCorr` as the main correlator entry points
 - 3-point vertices via `\ThreePointCorr`, including per-leg styles, custom labels, and all-in/all-out momentum flow
-- one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`
+- one-loop box diagrams via `\BoxLoopCorr` or `\FourPointCorr[topology=box]`, including crossed upper external legs with `box-external-crossing=top`
 - crossed-box diagrams via `\CrossBoxCorr` or `\FourPointCorr[topology=cross-box]`
 - triangle-contact diagrams via `\TriangleContactCorr` with top/bottom/left/right contact orientations, split color controls, independent momentum placement for all seven slots, and a choice of gapped or continuous momentum arrows
 - vertex-identity helpers via `\HalfBoxCorr` and `\FlatContactCorr`, including half-prop lower-leg styles
@@ -193,6 +193,7 @@ Common wrappers and aliases:
 - Use [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex) for the compact vertex-identity sketch.
 - Use [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex) to inspect channel layouts in isolation.
 - Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
+- Use the [upper external-crossing gallery](regressions/topologies/box/box-external-crossing.pdf) for routed box legs, independent momenta, caps and circle scaling.
 - Use [`regressions/topologies/cross-box/cross-box-regression.tex`](regressions/topologies/cross-box/cross-box-regression.tex) to inspect the crossed-box topology in isolation.
 - Use [`regressions/topologies/triangle-contact/triangle-contact-regression.tex`](regressions/topologies/triangle-contact/triangle-contact-regression.tex) to inspect triangle-contact orientations.
 - Use the [M02 annotation gallery](regressions/topologies/triangle-contact/triangle-contact-annotations.pdf) and its [source](regressions/topologies/triangle-contact/triangle-contact-annotations.tex) for independent arrow and label controls.

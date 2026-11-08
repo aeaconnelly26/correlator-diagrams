@@ -1643,6 +1643,57 @@ Box external momentum arrow placement:
 - `box-external-momentum-label-gap=...`
 - `box-external-momentum-offset=...`
 
+### Crossed upper external pair (M07b)
+
+`\BoxLoopCorr[box-external-crossing=top,...]` (or
+`\FourPointCorr[topology=box,...]`) preserves the square loop and crosses its
+upper external pair. Default `box-external-crossing=none` preserves existing
+output. The current choices are `none` and `top`; right-pair routing is still
+R04. Nonempty routing on a different host raises a package error.
+
+| Logical slot | Outer endpoint | Normal host | Top-crossed host |
+| --- | --- | --- | --- |
+| 1 | upper left | TL | TR |
+| 2 | lower left | BL | BL |
+| 3 | upper right | TR | TL |
+| 4 | lower right | BR | BR |
+
+Internal slots 5-8 remain left/top/right/bottom. Slot 1 has a crossing gap;
+slot 3 stays continuous. `box-external-crossing-gap=.04` is its default
+half-width as a fraction of the full logical leg. The crossing fraction is
+derived from actual spans, not assumed to be 0.5. Positive inner/outer x spans,
+an outer top above the loop, and a positive gap wholly inside the leg are
+required. A crossing is not an interaction. Caps, indices and markers attach
+to full logical endpoints; a split leg has only one species circle and preserves
+its line-local `circ scale`, color and position.
+
+Upper momentum guides default near fraction .23 from the outer endpoint with
+compact spans and measured label gaps; slots 1/2 enter and 3/4 leave. Lower
+legacy guides retain their existing defaults. Optional
+`box-external-momentum-1={...}` through `-4={...}` independently control
+`layout=gap|side`, `start`, `end`, `offset`, `label-fraction`, `label-gap`,
+`label-offset`, `label-anchor`, `label-xshift`, `label-yshift`, `label`,
+`direction=forward|reverse|none` and `side=outside|inside|left|right`.
+`forward` follows outer-to-loop orientation. These blocks override global
+box placement/direction keys regardless of key order. Explicit old global
+start/end/fraction/gap controls are respected; the visibility mask and
+`show-momenta=false` remain authoritative. Blocks may also opt ordinary box
+legs into the measured annotation renderer. Options reset per public call.
+
+```tex
+\BoxLoopCorr[
+  field={},central={},leg-labels={,,,},show-momenta=false,
+  box-line=plain,box-external-line=plain,
+  box-external-crossing=top
+]
+```
+
+See [the focused gallery](../regressions/topologies/box/box-external-crossing.pdf)
+and atlas P21-P24. D01 index-position polish is deferred. D02 concerns the
+separate **internal** crossed-box manual circles: their automatic Proca rings
+and ignored line-local circle styles remain known defects; see the exact
+[user reproducer](planning/reproductions/d02-cross-box-circles.tex).
+
 Box propagator index slots use the same numbering as the propagators:
 external slots 1--4, then internal left/top/right/bottom slots 5--8.
 

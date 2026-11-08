@@ -24,11 +24,11 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R03 - Box with crossed upper external legs
 
-- **Status:** Missing.
-- **Existing construction / evidence:** I17 is an ordinary square box; existing box macros do not expose this external routing.
-- **Remaining target / limitation:** Cross the two upper external legs without turning their crossing into a vertex. This is not the same as crossing internal edges.
-- **Milestone:** M07. **Dependencies:** M01; source-panel routing specification.
-- **Acceptance:** Reproduce S02-center with square loop geometry and unchanged external slot identity.
+- **Status:** Verified existing (M07b upper slice, local checkpoint).
+- **Existing construction / evidence:** `BoxLoopCorr[box-external-crossing=top]`; P21-P24. 52 focused public cases plus actual PDF graph/marker/circle/cap checks verify UL-to-TR and UR-to-TL routing, four trivalent vertices and an unconnected upper crossing.
+- **Remaining target / limitation:** Ordinary box only. Right-pair routing remains R04; D01 index appearance and D02 internal crossed-box circles remain separate reviews. Internal loop slots 5-8 and the shared outer frame are unchanged.
+- **Milestone:** M07b upper slice complete locally; right external pair next. **Dependencies:** M01; frozen M07b connectivity contract.
+- **Acceptance:** S02-center reproduced with square loop geometry and unchanged external slot identities; see [verification](m07b-verification.md).
 - **Sources:** P1-03; S02-center.
 
 ## R04 - Box with crossed right external legs

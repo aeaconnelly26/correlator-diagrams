@@ -34,18 +34,19 @@
   {
     "id": "R03",
     "title": "Box with crossed upper external legs",
-    "status": "Missing",
-    "evidence": "I17 is an ordinary square box; existing box macros do not expose this external routing.",
+    "status": "Verified existing",
+    "evidence": "M07b upper slice: BoxLoopCorr[box-external-crossing=top]; P21-P24, 52 focused public cases, actual PDF graph/marker/circle/cap checks. Baseline 813736e; local checkpoint, not published.",
     "target": "Cross the two upper external legs without turning their crossing into a vertex. This is not the same as crossing internal edges.",
-    "milestone": "M07",
-    "dependencies": "M01; source-panel routing specification",
+    "milestone": "M07b upper slice complete locally; right pair is next",
+    "dependencies": "M01; frozen M07b connectivity contract",
     "acceptance": "Reproduce S02-center with square loop geometry and unchanged external slot identity.",
     "source_panels": [
       "S02-center"
     ],
     "pdf_items": [
       "P1-03"
-    ]
+    ],
+    "limitation": "Ordinary box only, top/none choices. Right pair remains R04. One external split; internal square loop unchanged. D01 index appearance and D02 internal crossed-box circles remain deferred."
   },
   {
     "id": "R04",

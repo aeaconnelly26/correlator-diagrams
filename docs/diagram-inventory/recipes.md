@@ -2,7 +2,7 @@
 
 Generated from `catalog.json`. These are existing capabilities, not proposed APIs.
 
-Baseline: `M07a local; base 56a643a`, audited 2026-11-06. Atlas: [PDF](inventory.pdf).
+Baseline: `M07b local; base 813736e`, audited 2026-11-07. Atlas: [PDF](inventory.pdf).
 
 Use `\usepackage{feynman-fun}`. Paste a recipe inside `\[ ... \]`.
 
@@ -2921,5 +2921,110 @@ Continuous arrows with labels beside their logical edges.
   cross-box-momentum-6={layout=side},
   cross-box-momentum-7={layout=side},
   cross-box-momentum-8={layout=side}
+]
+```
+
+## Square box with crossed upper legs
+
+### P21 - Box: upper external crossing
+
+UL connects to TR; UR connects to TL. The square loop stays intact.
+
+**Limit:** One split external leg; no interaction at the upper crossing.
+
+```tex
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain
+]
+```
+
+### P22 - Upper crossing: EW external legs
+
+Same routed graph, with wavy external lines.
+
+**Limit:** No extra caps, circles or annotations.
+
+```tex
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain,
+  box-external-line=ewboson
+]
+```
+
+### P23 - Upper crossing: pink Proca legs
+
+Endpoint tips belong to full legs, never to the gap.
+
+**Limit:** Two tips per Proca leg; external endpoints stay in the shared frame.
+
+```tex
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain,
+  box-external-line={proca,magenta!85!red}
+]
+```
+
+### P24 - Upper crossing: external momenta
+
+p1/p2 enter; p3/p4 leave. Measured upper gaps; lower continuous arrows.
+
+**Limit:** Independent box-external-momentum-1..4 controls; right crossing is still missing.
+
+```tex
+\BoxLoopCorr[
+  field={},
+  leg-labels={,,,},
+  central={},
+  show-momenta=false,
+  blob=false,
+  center-vertex=true,
+  external-vertices=false,
+  line=plain,
+  scale=1.0,
+  box-external-crossing=top,
+  box-line=plain,
+  box-external-line=plain,
+  show-momenta=true,
+  box-left-momentum={},
+  box-top-momentum={},
+  box-right-momentum={},
+  box-bottom-momentum={},
+  box-loop-momentum={},
+  box-edge-momentum-directions={none,none,none,none},
+  box-external-momentum-2={layout=side},
+  box-external-momentum-4={layout=side}
 ]
 ```

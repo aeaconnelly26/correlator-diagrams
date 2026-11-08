@@ -2256,6 +2256,9 @@
 }
 
 \newcommand{\corr@resetboxdefaults}{%
+  \def\corr@boxexternalcrossing{none}\def\corr@boxexternalcrossinggap{.04}%
+  \def\corr@bemstartset{}\def\corr@bemendset{}\def\corr@bemfracset{}\def\corr@bemgapset{}%
+  \@for\corr@beslot:={1,2,3,4}\do{\expandafter\def\csname corr@bemomentum\corr@beslot\endcsname{}}%
   \corr@topologysetdefault\corr@boxxspan{1.34}%
   \corr@topologysetdefault\corr@boxyspan{1.34}%
   \corr@topologysetdefault\corr@boxexternalxspan{\corr@fourpointxspan}%
@@ -3250,6 +3253,14 @@
   flatcontact-index-inner-sep/.style={flat-contact-index-inner-sep={#1}},
   flatcontact-index-size/.style={flat-contact-index-size={#1}},
   cross-box-down-line/.store in=\corr@crossboxdownline,
+  box-external-crossing/.is choice,
+  box-external-crossing/none/.code={\def\corr@boxexternalcrossing{none}},
+  box-external-crossing/top/.code={\def\corr@boxexternalcrossing{top}},
+  box-external-crossing-gap/.store in=\corr@boxexternalcrossinggap,
+  box-external-momentum-1/.code={\expandafter\def\csname corr@bemomentum1\endcsname{#1}},
+  box-external-momentum-2/.code={\expandafter\def\csname corr@bemomentum2\endcsname{#1}},
+  box-external-momentum-3/.code={\expandafter\def\csname corr@bemomentum3\endcsname{#1}},
+  box-external-momentum-4/.code={\expandafter\def\csname corr@bemomentum4\endcsname{#1}},
   cross-box-layout/.is choice,
   cross-box-layout/left-right/.code={\def\corr@crossboxlayout{left-right}},
   cross-box-layout/top-bottom/.code={\def\corr@crossboxlayout{top-bottom}},
@@ -3474,10 +3485,10 @@
   box-edge-labels/.code={\corr@setboxquad{edgelabel}{#1}},
   box-internal-labels/.style={box-edge-labels={#1}},
   box-loop-momentum/.store in=\corr@boxloopmomentum,
-  box-external-momentum-start/.store in=\corr@boxexternalmomentumstart,
-  box-external-momentum-end/.store in=\corr@boxexternalmomentumend,
-  box-external-momentum-label-fraction/.store in=\corr@boxexternalmomentumlabelfraction,
-  box-external-momentum-label-gap/.store in=\corr@boxexternalmomentumlabelgap,
+  box-external-momentum-start/.code={\def\corr@boxexternalmomentumstart{#1}\def\corr@bemstartset{yes}},
+  box-external-momentum-end/.code={\def\corr@boxexternalmomentumend{#1}\def\corr@bemendset{yes}},
+  box-external-momentum-label-fraction/.code={\def\corr@boxexternalmomentumlabelfraction{#1}\def\corr@bemfracset{yes}},
+  box-external-momentum-label-gap/.code={\def\corr@boxexternalmomentumlabelgap{#1}\def\corr@bemgapset{yes}},
   box-external-momentum-offset/.store in=\corr@boxexternalmomentumoffset,
   box-left-arrow-start/.store in=\corr@boxleftarrowstart,
   box-left-arrow-end/.store in=\corr@boxleftarrowend,
@@ -4620,6 +4631,12 @@
     ($($(#1)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap}!(#2)$)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap inner length}\tikzfeynhand@arrow@size!-90:(#2)$);
 }
 
+% Override only this stroke callback when a logical external edge is split.
+% The enclosing helper retains the full endpoints for caps and marker queues.
+\newcommand{\corr@drawexternalpropagatorpath}[2]{%
+  \expandafter\propag\expandafter[\corr@propoptions] (#1) to (#2);
+}
+
 \newcommand{\corr@propagwithexternalendcaps}[2]{%
   \expandafter\corr@stripendcapstyles\expandafter{\corr@propoptions}%
   \coordinate (correndcapdrawstart) at (#1);
@@ -4630,7 +4647,7 @@
   \ifcorr@endcappend
     \coordinate (correndcapdrawend) at ($(#2)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap}!(#1)$);
   \fi
-  \expandafter\propag\expandafter[\corr@propoptions] (correndcapdrawstart) to (correndcapdrawend);
+  \corr@drawexternalpropagatorpath{correndcapdrawstart}{correndcapdrawend}%
   \ifcorr@endcapatstart
     \corr@drawexternalendcap{#1}{#2}%
   \fi
@@ -6149,9 +6166,9 @@
 }
 
 \newcommand{\corr@boxplacepropagatorindices}{%
-  \corr@putpropagatorindiceslot{box}{1}{corrExtUL}{corrBoxTL}%
+  \corr@putpropagatorindiceslot{box}{1}{corrExtUL}{\corr@beonehost}%
   \corr@putpropagatorindiceslot{box}{2}{corrExtLL}{corrBoxBL}%
-  \corr@putpropagatorindiceslot{box}{3}{corrExtUR}{corrBoxTR}%
+  \corr@putpropagatorindiceslot{box}{3}{corrExtUR}{\corr@bethreehost}%
   \corr@putpropagatorindiceslot{box}{4}{corrExtLR}{corrBoxBR}%
   \corr@putpropagatorindiceslot{box}{5}{corrBoxBL}{corrBoxTL}%
   \corr@putpropagatorindiceslot{box}{6}{corrBoxTL}{corrBoxTR}%
@@ -8310,7 +8327,108 @@
     {\corr@channelvertexindexmathstyle}
 }
 
+% M07b: retain one logical external edge while drawing two visible strokes.
+% Raw legacy Proca overrides need one-sided decorations on each fragment.
+\newcommand{\corr@boxfragmentstyle}[1]{%
+  \def\corr@orientedstyle{}%
+  \@for\corr@bestyleitem:=\corr@becircless\do{%
+    \edef\corr@beitem{\corr@bestyleitem}%
+    \def\corr@behandled{}%
+      \corr@ifstringeq{\corr@beitem}{/tikzfeynhand/proca}{%
+        \def\corr@behandled{yes}\corr@appendorientedstyleitem{/tikzfeynhand/proca line}%
+        \corr@ifstringeq{#1}{start}{\corr@appendorientedstyleitem{/tikzfeynhand/proca start}}{}%
+        \corr@ifstringeq{#1}{end}{\corr@appendorientedstyleitem{/tikzfeynhand/proca end}}{}%
+      }{}%
+      \corr@ifstringeq{\corr@beitem}{/tikzfeynhand/proca start}{%
+        \def\corr@behandled{yes}\corr@appendorientedstyleitem{/tikzfeynhand/proca line}%
+        \corr@ifstringeq{#1}{start}{\corr@appendorientedstyleitem{/tikzfeynhand/proca start}}{}%
+      }{}%
+      \corr@ifstringeq{\corr@beitem}{/tikzfeynhand/proca end}{%
+        \def\corr@behandled{yes}\corr@appendorientedstyleitem{/tikzfeynhand/proca line}%
+        \corr@ifstringeq{#1}{end}{\corr@appendorientedstyleitem{/tikzfeynhand/proca end}}{}%
+      }{}%
+    \ifdefempty{\corr@behandled}{\expandafter\corr@appendorientedstyleitem\expandafter{\corr@beitem}}{}%
+  }%
+}
+\newcommand{\corr@drawboxsplitexternalpath}[2]{%
+  \expandafter\corr@stripcircstyle\expandafter{\corr@propoptions}%
+  \let\corr@becircless\corr@propoptions
+  \corr@boxfragmentstyle{start}%
+  \expandafter\propag\expandafter[\corr@orientedstyle] (#1) to (corrBEGapA);
+  \corr@boxfragmentstyle{end}%
+  \expandafter\propag\expandafter[\corr@orientedstyle] (corrBEGapB) to (#2);
+  \ifcorr@stylehascirc
+    % One decoration on the full, cap-trimmed edge, without a third stroke.
+    \corr@boxfragmentstyle{circle}%
+    \edef\corr@becircleoptions{\corr@orientedstyle,circ={\corr@stylecirclabel},draw=none}%
+    \expandafter\path\expandafter[\corr@becircleoptions] (#1) -- (#2);
+  \fi
+  \let\corr@propoptions\corr@becircless
+}
+\newcommand{\corr@boxexternalmap}{%
+  \corr@ifstringeq{\corr@boxexternalcrossing}{top}{%
+    \pgfmathtruncatemacro{\corr@bevalid}{\corr@boxxspan>0 && \corr@boxexternalxspan>0 && \corr@boxexternalyspan>\corr@boxyspan}%
+    \ifnum\corr@bevalid=0
+      \PackageError{feynman-fun}{Crossed upper legs require positive x spans and outer yspan above the box}{Adjust box-xspan and fourpoint-xspan/yspan.}%
+    \fi
+    \pgfmathsetmacro{\corr@becrossfraction}{\corr@boxexternalxspan/(\corr@boxexternalxspan+\corr@boxxspan)}%
+    \pgfmathtruncatemacro{\corr@bevalid}{\corr@boxexternalcrossinggap>0 && \corr@boxexternalcrossinggap<min(\corr@becrossfraction,1-\corr@becrossfraction)}%
+    \ifnum\corr@bevalid=0
+      \PackageError{feynman-fun}{Invalid box external crossing gap}{Use a positive half-width smaller than both endpoint fractions.}%
+    \fi
+    \coordinate (corrBEGapA) at ($(corrExtUL)!{\corr@becrossfraction-\corr@boxexternalcrossinggap}!(corrBoxTR)$);
+    \coordinate (corrBEGapB) at ($(corrExtUL)!{\corr@becrossfraction+\corr@boxexternalcrossinggap}!(corrBoxTR)$);
+  }{}%
+}
+\newcommand{\corr@boxexternalresolveannotation}[1]{%
+  \def\corr@tcdefaultfrac{.5}\def\corr@tcfrac{.5}%
+  \def\corr@tcstart{auto}\def\corr@tcend{auto}%
+  \corr@ifstringeq{\corr@boxexternalcrossing}{top}{%
+    \ifodd#1 \def\corr@tcdefaultfrac{.23}\def\corr@tcfrac{.23}\fi}{}%
+  \ifdefempty{\corr@bemstartset}{}{\let\corr@tcstart\corr@boxexternalmomentumstart}%
+  \ifdefempty{\corr@bemendset}{}{\let\corr@tcend\corr@boxexternalmomentumend}%
+  \ifdefempty{\corr@bemfracset}{}{\let\corr@tcfrac\corr@boxexternalmomentumlabelfraction}%
+  \def\corr@tcgap{auto}%
+  \ifdefempty{\corr@bemgapset}{}{\let\corr@tcgap\corr@boxexternalmomentumlabelgap}%
+  \def\corr@tcside{outside}\def\corr@tclayout{gap}%
+  \let\corr@tcoffset\corr@boxexternalmomentumoffset
+  \def\corr@tclabeloffset{auto}\def\corr@tclabelanchor{auto}%
+  \def\corr@tclabelxshift{0pt}\def\corr@tclabelyshift{0pt}%
+  \edef\corr@beoptions{\csname corr@bemomentum#1\endcsname}%
+  \ifdefempty{\corr@beoptions}{}{%
+    \edef\corr@beapply{\noexpand\pgfqkeys{/corrdiag/tt-momentum}{\corr@beoptions}}\corr@beapply}%
+}
+\newcommand{\corr@boxexternalannotation}[4]{%
+  \begingroup
+  \corr@ifemptymomentumlabel{#1}{\def\corr@tclabel{}}{\def\corr@tclabel{\corr@momentumlabel{#1}}}%
+  \def\corr@tcdirection{forward}%
+  \corr@ifstringeq{#4}{out}{\def\corr@tcdirection{reverse}}{}%
+  \let\corr@trianglecontactresolveannotation\corr@boxexternalresolveannotation
+  \corr@boxexternalresolveannotation{#1}%
+  \corr@ifexternalmomentumvisible{#1}{%
+    \corr@ifstringeq{\corr@tcdirection}{none}{}{\corr@trianglecontactdrawannotation{#1}{#2}{#3}}%
+  }%
+  \endgroup
+}
+
+\newcommand{\corr@drawboxroutedmomentum}[5]{%
+  \edef\corr@beoptions{\csname corr@bemomentum#1\endcsname}%
+  \def\corr@beuseannotation{}%
+  \corr@ifstringeq{\corr@boxexternalcrossing}{top}{%
+    \ifodd#1 \def\corr@beuseannotation{yes}\fi}{}%
+  \ifdefempty{\corr@beoptions}{}{\def\corr@beuseannotation{yes}}%
+  \ifdefempty{\corr@beuseannotation}{%
+    \csname corr@drawboxexternalmomentum#4\endcsname{#1}{#2}{#3}%
+  }{%
+    \corr@boxexternalmomentumdirectionfor{\csname corr@box#4momentumdirection\endcsname}{#5}%
+    \corr@boxexternalannotation{#1}{#2}{#3}{\corr@boxthisexternaldirection}%
+  }%
+}
+
 \newcommand{\corr@drawfourpointbox}{%
+  \def\corr@beonehost{corrBoxTL}\def\corr@bethreehost{corrBoxTR}%
+  \corr@ifstringeq{\corr@boxexternalcrossing}{top}{%
+    \def\corr@beonehost{corrBoxTR}\def\corr@bethreehost{corrBoxTL}}{}%
   \begin{feynhand}
     \vertex (corrC) at (0,0);
     \vertex (corrBoxTL) at (-\corr@boxxspan,\corr@boxyspan);
@@ -8321,10 +8439,16 @@
     \vertex (corrExtLL) at (-\corr@boxexternalxspan,-\corr@boxexternalyspan);
     \vertex (corrExtLR) at (\corr@boxexternalxspan,-\corr@boxexternalyspan);
     \vertex (corrExtUR) at (\corr@boxexternalxspan,\corr@boxexternalyspan);
+    \corr@boxexternalmap
+    \coordinate (corrTriCentroid) at (corrC);
     \corr@ifexternallegs{%
-      \corr@drawboxexternalprop{1}{corrExtUL}{corrBoxTL}%
+      \begingroup
+      \corr@ifstringeq{\corr@boxexternalcrossing}{top}{%
+        \let\corr@drawexternalpropagatorpath\corr@drawboxsplitexternalpath}{}%
+      \corr@drawboxexternalprop{1}{corrExtUL}{\corr@beonehost}%
+      \endgroup
       \corr@drawboxexternalprop{2}{corrExtLL}{corrBoxBL}%
-      \corr@drawboxexternalprop{3}{corrExtUR}{corrBoxTR}%
+      \corr@drawboxexternalprop{3}{corrExtUR}{\corr@bethreehost}%
       \corr@drawboxexternalprop{4}{corrExtLR}{corrBoxBR}%
     }%
     \corr@drawboxinternalprop{5}{\corr@boxleftline}{corrBoxBL}{corrBoxTL}%
@@ -8340,10 +8464,10 @@
   \fi
   \corr@boxplaceexternalvertices
   \ifcorr@showmomenta
-    \corr@drawboxexternalmomentumul{1}{corrExtUL}{corrBoxTL}
-    \corr@drawboxexternalmomentumll{2}{corrExtLL}{corrBoxBL}
-    \corr@drawboxexternalmomentumur{3}{corrExtUR}{corrBoxTR}
-    \corr@drawboxexternalmomentumlr{4}{corrExtLR}{corrBoxBR}
+    \corr@drawboxroutedmomentum{1}{corrExtUL}{\corr@beonehost}{ul}{\corr@externalleftmomentumdirection}%
+    \corr@drawboxroutedmomentum{2}{corrExtLL}{corrBoxBL}{ll}{\corr@externalleftmomentumdirection}%
+    \corr@drawboxroutedmomentum{3}{corrExtUR}{\corr@bethreehost}{ur}{\corr@externalrightmomentumdirection}%
+    \corr@drawboxroutedmomentum{4}{corrExtLR}{corrBoxBR}{lr}{\corr@externalrightmomentumdirection}%
     \corr@drawboxmomentumedge{left}{5}{corrBoxBL}{corrBoxTL}
     \corr@drawboxmomentumedge{top}{6}{corrBoxTL}{corrBoxTR}
     \corr@drawboxmomentumedge{right}{7}{corrBoxTR}{corrBoxBR}
@@ -9411,6 +9535,11 @@
   \corr@resetinsertiondefaults
   \corr@lineexplicitfalse
   \pgfqkeys{/corrdiag}{#1}%
+  \corr@ifstringeq{\corr@boxexternalcrossing}{none}{}{%
+    \corr@ifstringeq{\corr@fourpointtopology}{box}{}{%
+      \PackageError{feynman-fun}{box-external-crossing requires topology=box}{Use BoxLoopCorr for this routing.}%
+    }%
+  }%
   \corr@applyinsertionhostdefaults
   \corr@preparelists
   \corr@configurestyles

@@ -1,0 +1,119 @@
+{
+  "milestone": "M07b upper external pair",
+  "date": "2026-11-07",
+  "baseline": "813736e",
+  "branch": "codex/m07b-upper-external-crossing",
+  "published": false,
+  "requirements": [
+    "R03"
+  ],
+  "reference_panels": [
+    "P1-03",
+    "S02-center"
+  ],
+  "interface": "BoxLoopCorr[box-external-crossing=top]",
+  "default_routing": "none",
+  "logical_slots": {
+    "1": "UL -> TR (split)",
+    "2": "LL -> BL",
+    "3": "UR -> TL",
+    "4": "LR -> BR",
+    "5": "BL -> TL",
+    "6": "TL -> TR",
+    "7": "TR -> BR",
+    "8": "BL -> BR"
+  },
+  "focused_public_cases": 52,
+  "maintained_documents": 47,
+  "previous_contact_checks": 800,
+  "new_vertex_contacts": 14,
+  "pdf_checks": {
+    "rejected_option_cases": 4,
+    "graphs": [
+      {
+        "logical_edges": 8,
+        "vertices": 4,
+        "cycle_rank": 1,
+        "gap_half_fraction": 0.04,
+        "crossing_is_vertex": false
+      },
+      {
+        "logical_edges": 8,
+        "vertices": 4,
+        "cycle_rank": 1,
+        "gap_half_fraction": 0.07,
+        "crossing_is_vertex": false
+      },
+      {
+        "logical_edges": 8,
+        "vertices": 4,
+        "cycle_rank": 1,
+        "gap_half_fraction": 0.04,
+        "crossing_is_vertex": false
+      },
+      {
+        "logical_edges": 8,
+        "vertices": 4,
+        "cycle_rank": 1,
+        "gap_half_fraction": 0.04,
+        "crossing_is_vertex": false
+      }
+    ],
+    "marker_triangles": 23,
+    "real_vertex_contacts": 14,
+    "scaled_circles": 4,
+    "caps": [
+      {
+        "bars": 4,
+        "outer_endpoints": 4
+      },
+      {
+        "bars": 8,
+        "outer_endpoints": 4
+      }
+    ]
+  },
+  "legacy_box_pixel_identical_pages": 5,
+  "atlas_recipes": 118,
+  "atlas_pages": 27,
+  "atlas_prior_identical_body_pages": 26,
+  "pixel_comparison_dpi": 90,
+  "atlas_comparison_excludes": "footer provenance",
+  "gallery_pages": 4,
+  "gallery_examples": 16,
+  "visual_inspection": "all 27 atlas pages and four gallery pages rendered; new atlas page and all gallery pages checked at reading size",
+  "original_source_checksums": "unchanged",
+  "known_defects": [
+    "D01 index appearance",
+    "D02 internal crossed-box automatic Proca circles and ignored line-local circ scale (exact user example retained)"
+  ],
+  "next_slice": "Right external-pair R04 / S03-center after authorized publication; M07c source-routing gates later",
+  "sha256": {
+    "feynman-fun.sty": "87f23280bdd6c1bfcde4d21f1414402d5a324e9efdcaab0c71d9423a303b9a1d",
+    "scripts/check-regressions.sh": "cb403b2757b9ec606fcdc12f3ffdea4790713747b8feaf1d2d9db2184151dff5",
+    "README.md": "e1e62828654be11e7a7326ca69400133736dea600095e435ddaa566836c91c68",
+    "docs/reference.md": "06d2af90e45ff1106006cb9c71db8ac748546c8ffe8b6d91f15e2ad43a0b92c4",
+    "docs/development-plan.md": "a01548d085ee6919ef01e2bad186ddf5f55e2d232792b89e335acd5f23b7340c",
+    "docs/planning/milestones.md": "fa499f32797524cbac1d070521e83893247f8f07657e2a68168ab808fbc933fd",
+    "docs/planning/requirements.json": "32ec53a6459d4875e5a5141692942a60a2597d61e0e0c648a958b4de29fe4b4d",
+    "docs/planning/requirements.md": "8a446b58a07c971c4cd145dbca2fc6cb59918151e4af5b48e658ae486855835a",
+    "docs/planning/README.md": "c0c38cad51f3c466a6896553762e434ad160d7aa825b2d5e847d67e2191a0737",
+    "docs/planning/branch-integration.md": "4305b7d87ad3bc451b1b7f2616146040bd71b5b073b7508420c71d7cd3f296d8",
+    "docs/planning/deferred-workflows.md": "27ea878b0eae9952cc346a0a71934924783bd69835f885d344e9134adfb310c9",
+    "docs/planning/m07b-regression-results.txt": "9f279e442117096f66c9565a7b3ce4d55a58453ac2305a1c001d382253decb20",
+    "docs/planning/m07b-verification.md": "109ed72346767af711e1d82fa19c0d4d6465b68440fcba19d55fd304a15f7e5d",
+    "docs/planning/reproductions/d02-cross-box-circles.tex": "92153f8ad82a6fa43005d8f63220d7167656edf0d62ab1d95493e78727cd660c",
+    "docs/planning/reproductions/d02-cross-box-circles-observed.json": "7369340bbae6464b37815e186b79182b0c20ddb960c98a1258bccaa46a6a6b2b",
+    "regressions/topologies/box/M07b-contract.md": "89b93a3e2017c6f8be4d22daabeb83b05285ff3850854f4ce19cc77142f5e317",
+    "regressions/topologies/box/box-external-crossing.tex": "741a97eb75583f414cfc456695d917f431c0dfd1a5f4624175de480b3dfacac0",
+    "regressions/topologies/box/box-external-crossing.pdf": "b1bd6e5dd21eb2c346362b2ca0b2e828dd8e65a95c15801931507140522ff39c",
+    "regressions/topologies/box/check-box-external-crossing.py": "55ae05bcaf6168cd74f368fe138f4b6f0968b5df8696d2788014af2cedfa0169",
+    "regressions/topologies/box/box-external-crossing-checks.json": "9b4769c6d937defd291f4246f561256218a81c6eef1830214f2606a91b291187",
+    "docs/diagram-inventory/catalog.json": "849fcf2ae9fdf8b5638342848f3694ac6a92ddc25f3ad7701ba4409f91de48c9",
+    "docs/diagram-inventory/inventory.tex": "4caea21152b379ae58a4173df7dba8f77c8cf9580c4491c2dd444e263f17c895",
+    "docs/diagram-inventory/inventory.pdf": "587f472a0d2aaf0ec8a9cd827b6de3414d985fe4471bfec917288d4104b2515d",
+    "docs/diagram-inventory/recipes.md": "25ae5e235aae3842e3b95a6186eacbb92aa893d8f8589072cc569eb089e05053",
+    "docs/diagram-inventory/README.md": "50e47497bb3b7635dc575cbf50309e0666667818aec07549d30ff368b46aac2e",
+    "docs/diagram-inventory/verification.md": "a925ed0ea8d1084ce9dde50052cda056d019b8ff92450b3fdcac030d67715970"
+  }
+}
