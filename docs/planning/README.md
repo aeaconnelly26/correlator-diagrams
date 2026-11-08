@@ -6,9 +6,11 @@ user-authorized coding sessions implement the milestones and update these
 records; M06 and all reviews through `629356d` are merged and published on
 main. M07a checkpoint `dfa0066` is also merged and published (2026-11-07);
 M07b upper routing is now verified locally on `codex/m07b-upper-external-crossing`
-from `813736e`; merge/push is pending and right-pair routing is next. Earlier
+from `813736e`; merge/push is pending. The user closed this session and deferred
+right-pair routing; M07c reference-routing review is next, then M08a. Earlier
 feature branches are retained.
 
+- [Session closeout](m07b-session-closeout.md): verified e2521e2, R04 deferred by user, M07c next and explicit pending publication.
 - [Requirements](requirements.md): status, recipes, dependencies, and acceptance criteria.
 - [Source coverage](source-coverage.md): every PDF request and all 23 PowerPoint slides.
 - [Branch integration and session workflow](branch-integration.md): integrated state and closeout policy.

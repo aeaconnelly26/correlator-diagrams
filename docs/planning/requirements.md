@@ -27,16 +27,16 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 - **Status:** Verified existing (M07b upper slice, local checkpoint).
 - **Existing construction / evidence:** `BoxLoopCorr[box-external-crossing=top]`; P21-P24. 52 focused public cases plus actual PDF graph/marker/circle/cap checks verify UL-to-TR and UR-to-TL routing, four trivalent vertices and an unconnected upper crossing.
 - **Remaining target / limitation:** Ordinary box only. Right-pair routing remains R04; D01 index appearance remains deferred; D02 circles are fixed in the later local follow-up. Internal loop slots 5-8 and the shared outer frame are unchanged.
-- **Milestone:** M07b upper slice complete locally; right external pair next. **Dependencies:** M01; frozen M07b connectivity contract.
+- **Milestone:** M07b upper slice closed locally; M07c review next; right pair deferred by user. **Dependencies:** M01; frozen M07b connectivity contract.
 - **Acceptance:** S02-center reproduced with square loop geometry and unchanged external slot identities; see [verification](m07b-verification.md).
 - **Sources:** P1-03; S02-center.
 
 ## R04 - Box with crossed right external legs
 
-- **Status:** Missing.
+- **Status:** Missing; deferred by user on 2026-11-07.
 - **Existing construction / evidence:** I17/I18 cannot independently cross the right external pair.
 - **Remaining target / limitation:** Preserve the square loop and cross the right external pair.
-- **Milestone:** M07. **Dependencies:** M01; source-panel routing specification.
+- **Milestone:** M07b right-pair slice, deferred; do not implement in the next session. **Dependencies:** M01; source-panel routing specification.
 - **Acceptance:** Reproduce S03-center; species, caps, labels, and slot identity follow the routed legs.
 - **Sources:** P1-04; S03-center.
 

@@ -37,7 +37,7 @@
     "status": "Verified existing",
     "evidence": "M07b upper slice: BoxLoopCorr[box-external-crossing=top]; P21-P24, 52 focused public cases, actual PDF graph/marker/circle/cap checks. Baseline 813736e; local checkpoint, not published.",
     "target": "Cross the two upper external legs without turning their crossing into a vertex. This is not the same as crossing internal edges.",
-    "milestone": "M07b upper slice complete locally; right pair is next",
+    "milestone": "M07b upper slice closed locally; M07c routing review next; right pair deferred by user",
     "dependencies": "M01; frozen M07b connectivity contract",
     "acceptance": "Reproduce S02-center with square loop geometry and unchanged external slot identity.",
     "source_panels": [
@@ -54,7 +54,7 @@
     "status": "Missing",
     "evidence": "I17/I18 cannot independently cross the right external pair.",
     "target": "Preserve the square loop and cross the right external pair.",
-    "milestone": "M07",
+    "milestone": "M07b right-pair slice deferred by user on 2026-11-07",
     "dependencies": "M01; source-panel routing specification",
     "acceptance": "Reproduce S03-center; species, caps, labels, and slot identity follow the routed legs.",
     "source_panels": [
@@ -62,7 +62,8 @@
     ],
     "pdf_items": [
       "P1-04"
-    ]
+    ],
+    "scheduling": "Do not implement in the next session; resume when the user chooses to revisit it. Remains missing, not completed or removed."
   },
   {
     "id": "R05",

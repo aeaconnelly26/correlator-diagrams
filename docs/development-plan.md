@@ -107,23 +107,37 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M05 | External swordfish on s/t trees | Complete on published main; verified checkpoint `9daebf9` |
 | M06 | Regular tree-attached triangle corrections, four placements | Complete on published main at verified checkpoint `629356d`; feature branch retained |
 | M07a | Complementary internal crossed box and annotations | Complete on published main at verified checkpoint `dfa0066`; feature branch retained |
-| M07b / M07c | Crossed external layouts and source routing questions | M07b upper pair complete locally; next right pair (R04), then M07c source gates |
-| M08a / M08b | Contact external self-energy / seagull | Planned |
+| M07b / M07c | Crossed external layouts and source routing questions | M07b upper session closed locally; R04 right pair deferred by user; M07c source gates next |
+| M08a / M08b | Contact external self-energy / seagull | After M07c routing review: M08a contact-leg bubble first, then M08b seagull |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
 | M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
 
 ## Next coding session
 
-M07b upper routing is verified on `codex/m07b-upper-external-crossing` from
-published main `813736e`. Finish authorized merge/push before starting the next
-slice; publication has not happened automatically. Next implement the right
-external pair from S03-center (R04), with its own connectivity/slot contract and
-focused acceptance gallery. R14/R22 endpoint routing remains a separate M07c
-specification gate. D01 index appearance remains deferred. D02 is now fixed
-in a separate follow-up: the exact user example has no unsolicited Proca ring
-and honors circle/label scaling. Both local commits need publication. No manual
-Git preparation is required from the user.
+The user closed the M07b upper-routing session on 2026-11-07 and deferred
+right external-pair routing (R04 / S03-center). Do not implement R04 as an
+automatic continuation; it remains missing and deferred, not completed or
+removed from the roadmap.
+
+The next coding session is **M07c: reference-routing review** for R14/R22
+(Q01/Q02). Trace the original numbered endpoints and internal connections,
+record an existing recipe where sufficient, and implement a new routing only
+if that review establishes a distinct missing graph. Do not start this work
+as part of the session closeout. After that review, proceed to **M08a: an
+external self-energy bubble on a four-point contact**, one leg first, then all
+four; M08b contact seagulls follows.
+
+Verified code checkpoint `e2521e2` on `codex/m07b-upper-external-crossing`
+includes upper crossing, the D02 circle fix and the circle default .8. All
+50 documents / 850 endpoint contacts passed. The atlas has 126 recipes / 29
+pages. D01 index appearance and D03 residual crossing/circle spacing remain
+separate reviews. See [session closeout](planning/m07b-session-closeout.md).
+
+The checkpoint remains local; no merge, push or PR was performed at closeout.
+The assistant handles integration when authorized and uses the correct
+prerequisite base for the next session; no manual Git preparation is required
+from the user. Local main remains at `813736e`.
 
 See [integration verification](planning/integration-verification.md) and
 [branch state](planning/branch-integration.md) for the completed reconciliation.

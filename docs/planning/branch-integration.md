@@ -83,13 +83,17 @@ See [integration verification](integration-verification.md) for the evidence.
 
 ## Next coding session
 
-M07b's upper external pair is verified locally on
-`codex/m07b-upper-external-crossing`, based on published main `813736e`.
-Its merge/push is pending. After authorized publication, begin the right-pair
-slice from S03-center with its own slot/connectivity contract. Keep M07c source routing questions and D01 index appearance separate. D02
-internal crossed-box circle styling is now fixed locally; see [verification](d02-verification.md). The assistant handles authorized Git work.
+The user closed M07b's upper-routing session on 2026-11-07 and deferred the
+right external pair (R04). Next is M07c's R14/R22 reference-routing review,
+then M08a contact-leg bubbles. Do not silently implement the deferred pair.
+Code checkpoint `e2521e2` remains on `codex/m07b-upper-external-crossing`;
+50 documents / 850 endpoint contacts passed, and the current atlas has
+126 recipes / 29 pages. The later closeout commit changes documentation only.
+No merge/push/PR was performed. Local main remains `813736e`; integration is
+an assistant responsibility when authorized. See [session closeout](m07b-session-closeout.md).
 
-Remote state was refreshed with `git fetch origin` for this synchronization.
+Remote state was refreshed with `git fetch origin` for the earlier synchronization;
+this documentation-only closeout does not recheck or publish remote state.
 When publishing main, verify `git ls-remote origin refs/heads/main` matches
 local main. A later feature-branch HEAD may intentionally be ahead of main;
 report its separate publication state and verify a clean working tree.

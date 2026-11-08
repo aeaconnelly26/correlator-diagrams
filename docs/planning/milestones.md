@@ -210,17 +210,19 @@ on main (2026-11-07). Its feature branch is retained. See [verification](m07a-ve
 104 public cases and independent PDF graph/gap/contact checks pass. M07b's
 upper external pair is now verified locally on `codex/m07b-upper-external-crossing`
 from `813736e`: 52 public cases and actual PDF connectivity, markers, caps and
-circle scaling. Merge/push is pending; right external routing (R04) is the next
-narrow slice. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed locally in a separate
+circle scaling. Merge/push is pending. At session closeout on 2026-11-07 the
+user deferred right external routing (R04); M07c reference-routing review is
+next, followed by M08a contact-leg bubbles. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed locally in a separate
 follow-up. See [D02 verification](d02-verification.md).
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported
   default/alias. Complete missing internal momentum/index treatment for the
   crossed layouts rather than assuming box annotations already render there.
-- Session B: add the upper and right external crossing layouts from S02-center
-  and S03-center while preserving external slot identities and outer cap positions.
-- Session C: resolve Q01/Q02 below, then implement only any demonstrated
+- Session B: upper external crossing from S02-center is complete locally.
+  The right external pair from S03-center is deferred by the user (2026-11-07),
+  retaining its requirement/acceptance record for a later requested session.
+- Session C (next): resolve Q01/Q02 below, then implement only any demonstrated
   additional routing gap. No new shape should be inferred from an informal name.
 - Gate: square default vertex spans; explicit user geometry overrides retained;
   correct connected/unconnected crossing semantics; independently styled edges;
