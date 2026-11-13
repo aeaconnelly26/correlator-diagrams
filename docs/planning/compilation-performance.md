@@ -2,7 +2,9 @@
 
 Requested 2026-11-13, after publishing the crossed-vertex checkpoint and before
 M09a. This session optimizes package structure to reduce document compilation
-time. Complete locally on `codex/compilation-performance`; merge/push is pending.
+time. Checkpoint `9884f9b` is merged and published on main with label-style tip
+`1b989cd` (2026-11-13); its source branch is retained. See the
+[publication record](performance-labels-publication.json).
 Repeated diagram batches improve by about 4.5-5.3%, and the atlas median by 1.9%
 in local paired measurements; loading is effectively unchanged. All 55 maintained
 documents / 928 endpoint contacts and registered PDF checks pass, with 69

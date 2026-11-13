@@ -3,7 +3,7 @@
 ## D05 - Common annotation names across topologies
 
 **Source:** user's request on 2026-11-13, following the three-point leg-label controls.
-**State:** nested external-leg `label-style` implemented and verified locally;
+**State:** nested external-leg `label-style` implemented, verified and published on main;
 broader naming/refactoring workflow remains deferred.
 
 Use the same public name for the same concept across diagram families. Geometry

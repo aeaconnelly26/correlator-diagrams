@@ -1,10 +1,12 @@
 # Compilation-performance follow-up - 2026-11-13
 
-The local `codex/compilation-performance` branch preserves all 150 recipes and
+The published `9884f9b` performance checkpoint preserves all 150 recipes and
 all 36 atlas pages: the rebuilt benchmark atlas is pixel-identical to the
 published baseline at 90 dpi. The existing PDF, generated source and recipes
 are unchanged. All 55 maintained documents / 928 endpoint contacts and registered
-PDF checks pass; merge/push is pending. See
+PDF checks pass at that checkpoint. It is now merged/pushed with label-style tip
+`1b989cd`; the final verified suite has 57 documents / 928 contacts. See
+[publication](../planning/performance-labels-publication.json) and
 [performance verification](../planning/compilation-performance/verification.md).
 Earlier entries record their original checkpoints.
 

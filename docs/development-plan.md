@@ -6,19 +6,22 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/three-point-field-labels`, based on local performance
-  checkpoint `9884f9b`. External labels now accept `label-style={...}` inside
-  each `leg-styles` entry, shared across families with topology-specific defaults.
-  Earlier three-point controls remain compatible; defaults are unchanged.
-  All 57 documents / 928 endpoint contacts and registered PDF checks pass, with
-  517 shared-label checks plus the earlier 48 legacy placement checks.
-  Merge/push remains pending. See [verification](planning/leg-label-styles.md).
-- Performance checkpoint: `codex/compilation-performance`, based on published main
-  `7069f39`. The intermediate performance session is complete locally: repeated
-  diagram batches improve by 4.5-5.3%, the atlas median by 1.9%, with no claimed
-  loading-time gain. All 55 documents / 928 endpoint contacts and registered PDF
-  checks pass; 69 rendered page comparisons are identical. Merge/push is pending.
-  See [verification](planning/compilation-performance/verification.md).
+- Current checkout: `main`. Verified feature tip `1b989cd`, including performance
+  checkpoint `9884f9b` and the external-label follow-ups, is fast-forward merged
+  and published to `origin/main` (2026-11-13). Both source branches are retained.
+  External labels accept `label-style={...}` inside each `leg-styles` entry;
+  earlier three-point controls and all default positions remain compatible.
+  The verified suite passes all 57 documents / 928 endpoint contacts and registered
+  PDF checks, with 517 shared-label checks plus 48 legacy placement checks.
+  Package, test sources and PDF artifacts are unchanged at publication; saved
+  verification hashes match. No merge/push remains. See
+  [publication](planning/performance-labels-publication.json) and
+  [label verification](planning/leg-label-styles.md).
+- The published performance checkpoint measured 4.5-5.3% gains on repeated diagram
+  batches and 1.9% on the atlas median, with no loading-time gain claimed.
+  Its 55-document checkpoint and 69 identical rendered page comparisons remain
+  historical measurements; the label follow-ups extend the maintained suite to
+  57 documents. See [verification](planning/compilation-performance/verification.md).
 - Published main: crossed-vertex checkpoint `8b41ca1` is merged and
   published on GitHub (2026-11-13); the feature branch is retained. Exactly two
   half-moon layouts preserve collinear W propagators on opposite diagonals.
@@ -30,8 +33,7 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   The feature branch is retained. All 53 documents / 894 contacts pass;
   the atlas remains 146 recipes / 34 pages. See
   [publication record](planning/m08b-publication.json). No M08b merge/push remains.
-- After integrating the verified performance branch when requested, M09a is
-  the next numbered diagram-roadmap milestone. See the
+- M09a is the next numbered diagram-roadmap milestone after this publication. See the
   [performance handoff](planning/compilation-performance.md). Thesis sources/PDFs under
   ignored `output/` are local artifacts and were not included in this publication.
 - M08a checkpoint `d855152` is merged and published to GitHub; the publication

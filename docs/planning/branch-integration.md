@@ -1,19 +1,21 @@
 # Integrated branch state and coding-session closeout
 
-Current checkout: `codex/three-point-field-labels`, based on local checkpoint
-`9884f9b`. Shared external-label styles are complete locally:
-57 documents / 928 contacts and registered PDF checks pass, with 517 nested-style
-checks and the earlier 48 legacy placement assertions. Use `label-style={...}`
-inside each `leg-styles` entry; defaults are unchanged. The branch includes the
-performance work below; merge/push is pending. See
-[label-style verification](leg-label-styles.md).
+Current checkout: `main`, clean and synchronized with `origin/main` after the
+2026-11-13 publication. Feature tip `1b989cd` was fast-forward merged from
+`7069f39`, including performance checkpoint `9884f9b`, the original three-point
+label controls, and shared nested `label-style` options. Both feature branches
+are retained. No merge/push remains. See
+[publication](performance-labels-publication.json).
 
-Performance checkpoint: `codex/compilation-performance`, based on published main
-`7069f39`. The intermediate performance session is complete locally: 4.5-5.3%
-gains on repeated diagram batches, 1.9% on the atlas median, and no loading-time
-gain claimed. All 55 maintained documents / 928 endpoint contacts and registered
-PDF checks pass, with 69 pixel-identical page comparisons. Merge/push is pending;
-M09a follows integration. See [verification](compilation-performance/verification.md).
+The verified suite passes 57 documents / 928 contacts and registered PDF checks,
+with 517 nested-label checks plus 48 legacy placement assertions. The saved
+verification hashes still match; publication changes only handoff documentation.
+Package, tests, PDFs, atlas recipes and ignored local artifacts are unchanged.
+The atlas remains 150 recipes / 36 pages. Earlier verification documents retain
+their checkpoint-specific states. M09a is next; D01/D03/D04 and the broader D05
+annotation naming review remain deferred. See
+[label verification](leg-label-styles.md) and
+[performance results](compilation-performance/verification.md).
 
 Published baseline: crossed-vertex checkpoint `8b41ca1` was fast-forward merged
 and published with handoff `7069f39` on 2026-11-13; its feature branch is retained.

@@ -13,14 +13,18 @@ deferred. R14/R22 share one triangle-contact routing extension. The user selecte
 its two half-moon views on 2026-11-08; checkpoint `8b41ca1` is now merged and
 published on main (2026-11-13), with its feature branch retained. M08a contact-leg bubbles is now merged and published on main at `d855152`
 (2026-11-08); its feature branch is retained. M08b contact seagulls and the array fix are merged and published at `e57499e`
-(2026-11-08); the source branch is retained. The user-selected compilation-performance session is now complete locally on
-`codex/compilation-performance`, with merge/push pending. All 55 documents / 928
-contacts pass; M09a remains the next numbered diagram-roadmap milestone after
-integration. See [contract and results](crossed-vertex/verification.md).
+(2026-11-08); the source branch is retained. The compilation-performance checkpoint and label-style follow-ups are now
+merged and published through feature tip `1b989cd` (2026-11-13). Both source
+branches are retained. The verified suite passes all 57 documents / 928 contacts;
+M09a remains the next numbered diagram-roadmap milestone. Earlier verification
+records retain their original checkpoint states; the publication record below
+supersedes their pending integration notes. See [contract and results](crossed-vertex/verification.md).
 
-- [Three-point field-label follow-up](three-point-field-labels.md): independent external label placement; 48 node-center checks and full-suite pass; local on `codex/three-point-field-labels`.
+- [Performance and label publication](performance-labels-publication.json): verified checkpoints merged/pushed; clean main and retained feature branches.
+- [Shared leg-label styles](leg-label-styles.md): nested `label-style` options with 517 checks; published on main.
+- [Three-point field-label follow-up](three-point-field-labels.md): earlier compatibility controls with 48 node-center checks; published on main.
 - [Crossed-vertex publication](crossed-vertex/publication.json): verified checkpoint merged/pushed; sources/PDFs unchanged.
-- [Compilation-performance results](compilation-performance/verification.md): measured local gains, 69 identical page comparisons and full-suite verification; merge/push pending.
+- [Compilation-performance results](compilation-performance/verification.md): measured local gains, 69 identical page comparisons and full-suite verification; published on main.
 - [M08b publication](m08b-publication.json): verified implementation and array fix merged/pushed; package and PDF artifacts unchanged.
 - [M08b array fix](m08b-array-fix.md): corrected the Overleaf failure inside math arrays; full project compiles locally with the fixed package.
 - [M08b verification](m08b-verification.md): four contact seagulls, eight source variants, actual PDF graphs/flow/marker checks and current handoff.

@@ -32,12 +32,13 @@ See [verification](crossed-vertex/verification.md) and [publication](crossed-ver
 
 ## Intermediate compilation-performance session (2026-11-13)
 
-Complete locally on `codex/compilation-performance`, based on published main
-`7069f39`; merge/push pending. Seven paired runs per workload show 4.5-5.3% gains
+Checkpoint `9884f9b`, based on `7069f39`, is merged and published on main with
+label-style tip `1b989cd`; both source branches are retained. See
+[publication](performance-labels-publication.json). Seven paired runs per workload show 4.5-5.3% gains
 on repeated diagram batches and a 1.9% atlas median gain. All 55 documents / 928
 endpoint contacts and registered PDF checks pass; 69 rendered page comparisons
 are identical. Public APIs/defaults and the atlas recipes are unchanged. See
-[verification](compilation-performance/verification.md). M09a follows integration.
+[verification](compilation-performance/verification.md). M09a follows this publication.
 
 ## Common session contract
 

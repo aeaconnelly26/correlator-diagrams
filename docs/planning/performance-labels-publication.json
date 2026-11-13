@@ -1,0 +1,27 @@
+{
+  "feature": "compilation-performance and external leg-label styles",
+  "date": "2026-11-13",
+  "previous_main": "7069f394e458df0bcfcfdfe059b3ac529373a96d",
+  "feature_checkpoint": "1b989cdb5a1b8e14a2b55eb7877af452bd194fa5",
+  "performance_checkpoint": "9884f9ba190e8dc6f83b86e6d74848bebe917989",
+  "merge": "fast-forward",
+  "published_to": "origin/main",
+  "repository": "https://github.com/aeaconnelly26/correlator-diagrams",
+  "feature_branches_retained": [
+    "codex/compilation-performance",
+    "codex/three-point-field-labels"
+  ],
+  "verified_source_and_PDF_hashes_unchanged": true,
+  "verification": "Reused the existing full-suite pass after fast-forward; all seven saved final-checkpoint hashes match. Publication changes handoff documentation only.",
+  "verification_record": "leg-label-styles-checks.json",
+  "suite_output": "leg-label-styles-suite.txt",
+  "regression_documents": 57,
+  "endpoint_contacts": 928,
+  "nested_label_assertions": 517,
+  "legacy_label_assertions": 48,
+  "atlas_recipes": 150,
+  "atlas_pages": 36,
+  "ignored_output_artifacts_excluded": true,
+  "suite_sha256": "801e263e44b3cf3b5b520f9fc0d76da326f06d913cd43ea32001863404202d66",
+  "next": "M09a; broader D05 annotation naming and D01/D03/D04 reviews remain deferred"
+}
