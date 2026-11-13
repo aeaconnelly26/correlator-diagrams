@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage[margin=.7in]{geometry}
+\usepackage{amsmath,feynman-fun}
+\pagestyle{empty}
+\makeatletter
+\newif\ifFFRecord
+\newcount\FFChecks
+\newsavebox{\FFResetBox}
+\@for\FFSlot:={One,Two,Three}\do{%
+  \expandafter\newdimen\csname FFBaseX\FFSlot\endcsname
+  \expandafter\newdimen\csname FFBaseY\FFSlot\endcsname
+  \expandafter\def\csname FFDX\FFSlot\endcsname{0pt}%
+  \expandafter\def\csname FFDY\FFSlot\endcsname{0pt}%
+}
+\newcommand{\FFCheckDistance}[1]{%
+  \ifdim#1<-.02pt\PackageError{field-label-check}{Unexpected field-label displacement}{}\fi
+  \ifdim#1>.02pt\PackageError{field-label-check}{Unexpected field-label displacement}{}\fi
+  \global\advance\FFChecks by 1
+}
+\newcommand{\FFCaptureFields}{%
+  \@for\FFSlot:={One,Two,Three}\do{%
+    \pgfpointtransformed{\pgfpointanchor{FFField\FFSlot}{center}}%
+    \ifFFRecord
+      \global\csname FFBaseX\FFSlot\endcsname=\pgf@x
+      \global\csname FFBaseY\FFSlot\endcsname=\pgf@y
+    \else
+      \@tempdima=\dimexpr\pgf@x-\csname FFBaseX\FFSlot\endcsname-\csname FFDX\FFSlot\endcsname\relax
+      \FFCheckDistance{\@tempdima}%
+      \@tempdima=\dimexpr\pgf@y-\csname FFBaseY\FFSlot\endcsname-\csname FFDY\FFSlot\endcsname\relax
+      \FFCheckDistance{\@tempdima}%
+    \fi
+  }%
+}
+\apptocmd{\corr@threepointplaceexternallabels}{\FFCaptureFields}{}{\PackageError{field-label-check}{Cannot observe label centers}{}}
+\makeatother
+\corrset{
+  three-point-field-label-1-style={name=FFFieldOne},
+  three-point-field-label-2-style={name=FFFieldTwo},
+  three-point-field-label-3-style={name=FFFieldThree}
+}
+\newcommand{\FFDiagram}[1]{\ThreePointCorr[
+  leg-styles={{scalarpolarized,endcap},{ewboson,endcap},{ewboson,endcap}},
+  leg-labels={Z_\alpha,W^+_\gamma,W^-_\beta},
+  three-point-momentum-flow=all-in,momentum-labels={q_1,q_3,q_2},
+  propagator-arrow-sizes={8pt,,},three-point-momentum-layout=outward,#1]}
+\newcommand{\FFPair}[1]{%
+  \textbf{#1: default and shifted field labels}\par
+  \FFRecordtrue
+  \begin{center}\FFDiagram{three-point-orientation=#1}\qquad
+  \FFRecordfalse
+  \def\FFDXOne{-2pt}\def\FFDYOne{3pt}%
+  \def\FFDXTwo{5pt}\def\FFDYTwo{3pt}%
+  \def\FFDXThree{0pt}\def\FFDYThree{-3pt}%
+  \FFDiagram{three-point-orientation=#1,
+    three-point-field-label-1-style={name=FFFieldOne,xshift=-2pt,yshift=3pt},
+    three-point-field-label-2-style={name=FFFieldTwo,xshift=5pt,yshift=3pt},
+    three-point-field-label-3-style={name=FFFieldThree,yshift=-3pt}}\end{center}%
+  \FFRecordfalse
+  \def\FFDXOne{0pt}\def\FFDYOne{0pt}%
+  \def\FFDXTwo{0pt}\def\FFDYTwo{0pt}%
+  \def\FFDXThree{0pt}\def\FFDYThree{0pt}%
+  \sbox{\FFResetBox}{$\FFDiagram{three-point-orientation=#1}$}%
+  \vspace{1em}
+}
+\begin{document}
+\FFPair{right}
+\FFPair{left}
+\newpage
+\FFPair{up}
+\FFPair{down}
+\typeout{PASS field labels: \the\FFChecks\space actual node-center displacement/reset checks}
+\end{document}

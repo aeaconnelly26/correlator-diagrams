@@ -18,6 +18,7 @@ published on main (2026-11-13), with its feature branch retained. M08a contact-l
 contacts pass; M09a remains the next numbered diagram-roadmap milestone after
 integration. See [contract and results](crossed-vertex/verification.md).
 
+- [Three-point field-label follow-up](three-point-field-labels.md): independent external label placement; 48 node-center checks and full-suite pass; local on `codex/three-point-field-labels`.
 - [Crossed-vertex publication](crossed-vertex/publication.json): verified checkpoint merged/pushed; sources/PDFs unchanged.
 - [Compilation-performance results](compilation-performance/verification.md): measured local gains, 69 identical page comparisons and full-suite verification; merge/push pending.
 - [M08b publication](m08b-publication.json): verified implementation and array fix merged/pushed; package and PDF artifacts unchanged.

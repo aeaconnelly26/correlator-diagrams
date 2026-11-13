@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-13",
+  "branch": "codex/three-point-field-labels",
+  "base_checkpoint": "9884f9b",
+  "state": "verified local; merge/push pending",
+  "maintained_documents": 56,
+  "endpoint_contacts": 928,
+  "field_node_displacement_reset_assertions": 48,
+  "unmodified_user_example_pdf_drawing_content_unchanged": true,
+  "atlas_recipes": 150,
+  "atlas_pages": 36,
+  "sha256": {
+    "feynman-fun.sty": "5e98f2da3b3d652fee343ce201a4b9f0b01467566b1a49b0075c4b120e2661ea",
+    "scripts/check-regressions.sh": "665ed70598f52871a7f02366d99ab6a2b3e9482dd977a707b5fe88e3832c54f2",
+    "regressions/topologies/three-point/three-point-field-labels.tex": "3efecbc7bc34d096dda823816dec6c37cd353c6989b01df191726e50bb4b22ec",
+    "regressions/topologies/three-point/three-point-field-labels.pdf": "c539aa5980b13a9eb333950a04d0a15217b2a786f744578cd04a5b84d78f0595",
+    "docs/planning/three-point-field-labels.md": "42d36afe22517f548e05fc61ce0a1879a3570075f4302c906ab2fe3d82102fe1",
+    "docs/planning/three-point-field-labels-suite.txt": "27a3a8046ffb15a82d6c7deeef39eb7043861746f00e8a85ad75d7f7d33af607"
+  }
+}

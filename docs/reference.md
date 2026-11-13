@@ -477,6 +477,24 @@ If you need complete manual control, use:
 
 `leg-labels` overrides `field` and `indices` for the legs you specify.
 
+For `\ThreePointCorr`, each external field label also accepts its own TikZ node
+style. These are additional shifts from the orientation's default placement:
+
+```tex
+three-point-field-label-1-style={xshift=-2pt,yshift=3pt},
+three-point-field-label-2-style={xshift=5pt,yshift=3pt},
+three-point-field-label-3-style={yshift=-3pt}
+```
+
+The numbers follow `leg-labels` order: in the default orientation, 1 is the
+upper-left leg, 2 the right leg, and 3 the bottom leg. Positive `xshift` moves
+right; positive `yshift` moves up, including on rotated diagrams. The styles can
+also set node options such as `anchor` or `font`. They follow the logical fields
+when the diagram rotates, and do not move the momentum annotations or legs.
+Global defaults can be set with `\corrset`; per-diagram styles replace the style
+for that slot within the call. With empty styles, the original placement is
+unchanged. See the [placement gallery](../regressions/topologies/three-point/three-point-field-labels.pdf).
+
 ## Momentum Labels And Arrows
 
 ### Hide selected external momenta

@@ -205,6 +205,7 @@ Common wrappers and aliases:
 - Start with [`example.tex`](example.tex) if you want copy-paste examples.
 - Use [`docs/reference.md`](docs/reference.md) for the full macro and tuning reference.
 - Use [`vertex-example/vertex-example.tex`](vertex-example/vertex-example.tex) for the compact vertex-identity sketch.
+- Use the [three-point field-label gallery](regressions/topologies/three-point/three-point-field-labels.pdf) for independent external field-label offsets and rotation examples.
 - Use [`regressions/topologies/channel/channel-topology-regression.tex`](regressions/topologies/channel/channel-topology-regression.tex) to inspect channel layouts in isolation.
 - Use [`regressions/topologies/box/box-topology-regression.tex`](regressions/topologies/box/box-topology-regression.tex) to inspect the one-loop box topology in isolation.
 - The [M08b contact-seagull gallery](regressions/topologies/insertion/contact-seagull-slots.pdf) shows direct quartic self-loops on all four contact legs, including the slide-11 species/flow variants.

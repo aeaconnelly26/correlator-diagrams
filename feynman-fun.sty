@@ -469,6 +469,7 @@
 \def\corr@field{\phi}
 \def\corr@indices{}
 \def\corr@leglabels{}
+\def\corr@currentfieldlabelstyle{}
 \def\corr@central{}
 \def\corr@scalararrowposition{0.84}
 \def\corr@scalararrowdirection{in}
@@ -479,6 +480,9 @@
 \def\corr@threepointmomentumoffset{7pt}
 \def\corr@threepointorientation{right}
 \def\corr@threepointexternallength{}
+\def\corr@threepointfieldlabelonestyle{}
+\def\corr@threepointfieldlabeltwostyle{}
+\def\corr@threepointfieldlabelthreestyle{}
 \def\corr@sunsetleftmomentum{p}
 \def\corr@sunsetrightmomentum{}
 \def\corr@sunsettopmomentum{k}
@@ -4189,6 +4193,9 @@
   three-point-diagonal-corner/.style={orientation={#1}},
   three-point-corner/.style={orientation={#1}},
   three-point-central-label-yshift/.store in=\corr@threepointcentrallabelyshift,
+  three-point-field-label-1-style/.store in=\corr@threepointfieldlabelonestyle,
+  three-point-field-label-2-style/.store in=\corr@threepointfieldlabeltwostyle,
+  three-point-field-label-3-style/.store in=\corr@threepointfieldlabelthreestyle,
   three-point-momentum-start/.store in=\corr@threepointmomentumstart,
   three-point-momentum-end/.store in=\corr@threepointmomentumend,
   three-point-momentum-label-fraction/.store in=\corr@threepointmomentumlabelfraction,
@@ -5030,7 +5037,7 @@
 }
 
 \newcommand{\corr@putlabel}[3]{%
-  \node at ([#2]#1) {$\corr@leglabel{#3}$};
+  \expandafter\node\expandafter[\corr@currentfieldlabelstyle] at ([#2]#1) {$\corr@leglabel{#3}$};
 }
 
 \newcommand{\corr@vertex@dot}[1]{%
@@ -8232,8 +8239,20 @@
   }}}%
 }
 
+\newcommand{\corr@threepointfieldlabelstylefor}[1]{%
+  \ifcase#1%
+  \or\corr@threepointfieldlabelonestyle
+  \or\corr@threepointfieldlabeltwostyle
+  \or\corr@threepointfieldlabelthreestyle
+  \fi
+}
+
 \newcommand{\corr@threepointputexternallabel}[3]{%
+  % Append to the orientation's placement; the node retains its true bounds.
+  \begingroup
+  \edef\corr@currentfieldlabelstyle{\corr@threepointfieldlabelstylefor{#3}}%
   \expanded{\noexpand\corr@topologyputexternallabel{#1}{#2}{#3}}%
+  \endgroup
 }
 
 \newcommand{\corr@threepointplaceexternallabels}{%

@@ -6,7 +6,13 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `codex/compilation-performance`, based on published main
+- Current branch: `codex/three-point-field-labels`, based on local performance
+  checkpoint `9884f9b`. The requested external field-label follow-up adds three
+  independent node-style controls to `ThreePointCorr`; defaults are unchanged.
+  All 56 documents / 928 endpoint contacts and registered PDF checks pass, with
+  48 actual field-node displacement/reset checks. Merge/push remains pending.
+  See [verification](planning/three-point-field-labels.md).
+- Performance checkpoint: `codex/compilation-performance`, based on published main
   `7069f39`. The intermediate performance session is complete locally: repeated
   diagram batches improve by 4.5-5.3%, the atlas median by 1.9%, with no claimed
   loading-time gain. All 55 documents / 928 endpoint contacts and registered PDF
@@ -149,9 +155,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 ## Next coding session
 
-**First integrate the verified compilation-performance branch when requested.**
-The intermediate session is complete locally; the package and public behavior
-are verified against published main. See the
+**First integrate the verified field-label branch, including the performance checkpoint, when requested.**
+The performance session and external field-label follow-up are complete locally.
+See [field-label verification](planning/three-point-field-labels.md) and the
 [results and reproduction commands](planning/compilation-performance/verification.md).
 
 After publication, the next numbered diagram-roadmap milestone is
