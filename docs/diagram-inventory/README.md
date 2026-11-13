@@ -4,8 +4,8 @@ The atlas now has **150 recipes / 36 pages**, including CV01/CV02 plain crossed
 vertex layouts and CV11/CV12 styled W/Proca examples on pages 35/36. Exactly two
 half-moon views preserve opposite-corner W diagonals and a noninteracting
 external crossing. This is an extension of triangle-contact, not another loop
-family. Current branch `codex/crossed-vertex`, based on published main `bfb23ac`;
-merge/push pending. See [contract and verification](../planning/crossed-vertex/verification.md).
+family. Crossed-vertex checkpoint `8b41ca1` is merged and published on main
+(2026-11-13), with the feature branch retained; no merge/push remains. See [contract and verification](../planning/crossed-vertex/verification.md).
 All previous 34 page bodies are pixel-identical apart from the excluded footer.
 
 Earlier checkpoint records follow; their counts/publication statements refer

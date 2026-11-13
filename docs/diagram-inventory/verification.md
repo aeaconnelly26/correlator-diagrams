@@ -1,7 +1,8 @@
 # Crossed-vertex follow-up - 2026-11-08
 
-Local branch `codex/crossed-vertex`, base published main `bfb23ac`; merge/push
-pending. The atlas now has **150 recipes / 36 pages**. CV01/CV02 show the two
+Crossed-vertex checkpoint `8b41ca1` is merged and published on main
+(2026-11-13); the full suite was rerun and original source/PDF hashes match.
+See [publication](../planning/crossed-vertex/publication.json). The atlas now has **150 recipes / 36 pages**. CV01/CV02 show the two
 plain half-moon layouts; CV11/CV12 show EW W segments and pink Proca half-moons
 with k guides, without caps or plus/minus-one labels. Both internal W segments
 stay collinear with their opposite outer corners. These are triangle-contact

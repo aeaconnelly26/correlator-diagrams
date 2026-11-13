@@ -256,10 +256,10 @@
   {
     "id": "R14",
     "title": "Opposite-pair triangle-contact routing / diagonal Z connection",
-    "status": "Verified existing (local crossed-vertex branch)",
+    "status": "Verified existing (crossed-vertex checkpoint 8b41ca1 published on main)",
     "evidence": "CV01/CV02/CV11/CV12; crossed-vertex/checks.json recovers seven edges, valences 4/3/3, fixed-slot quartic pairs 1/4 and 2/3, one cycle and no crossing vertex. User-selected half-moon reference contract dated 2026-11-08 supersedes the angular M07c proposal.",
     "target": "Two half-moon views via CrossedVertexCorr; W internal slots 5/7 remain collinear with their outer diagonal and Z occupies curved slot 6 in both views.",
-    "milestone": "User-selected crossed-vertex follow-up to M07c; verified locally, merge/push pending",
+    "milestone": "User-selected crossed-vertex follow-up to M07c; checkpoint 8b41ca1 published on main",
     "dependencies": "M02 and the M07c traced graph/slot contract",
     "acceptance": "Both fixed-slot graphs and styled samples pass; shared outer frame, collinear W edges, actual arc markers/circles, all seven independent momentum controls, cap/scale/index/array/reset coverage and maintained regressions.",
     "source_panels": [
@@ -405,10 +405,10 @@
   {
     "id": "R22",
     "title": "Crossed external triangle-contact layouts from slide 13",
-    "status": "Verified existing (local crossed-vertex branch)",
+    "status": "Verified existing (crossed-vertex checkpoint 8b41ca1 published on main)",
     "evidence": "CV01/CV02/CV11/CV12; crossed-vertex/checks.json recovers seven edges, valences 4/3/3, fixed-slot quartic pairs 1/4 and 2/3, one cycle and no crossing vertex. User-selected half-moon reference contract dated 2026-11-08 supersedes the angular M07c proposal.",
     "target": "Two half-moon views via CrossedVertexCorr; W internal slots 5/7 remain collinear with their outer diagonal and Z occupies curved slot 6 in both views.",
-    "milestone": "User-selected crossed-vertex follow-up to M07c; verified locally, merge/push pending",
+    "milestone": "User-selected crossed-vertex follow-up to M07c; checkpoint 8b41ca1 published on main",
     "dependencies": "M02; resolved M07c source traces",
     "acceptance": "Both fixed-slot graphs and styled samples pass; shared outer frame, collinear W edges, actual arc markers/circles, all seven independent momentum controls, cap/scale/index/array/reset coverage and maintained regressions.",
     "source_panels": [

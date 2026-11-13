@@ -10,12 +10,14 @@ reference audit are now merged and published on main through verified feature
 tip `40dae7b` (2026-11-07). Both feature branches are retained; no integration
 remains pending. The publication handoff changes documentation only. R04 stays
 deferred. R14/R22 share one triangle-contact routing extension. The user selected
-its two half-moon views on 2026-11-08; they are now implemented locally on
-`codex/crossed-vertex`, with merge/push pending. M08a contact-leg bubbles is now merged and published on main at `d855152`
+its two half-moon views on 2026-11-08; checkpoint `8b41ca1` is now merged and
+published on main (2026-11-13), with its feature branch retained. M08a contact-leg bubbles is now merged and published on main at `d855152`
 (2026-11-08); its feature branch is retained. M08b contact seagulls and the array fix are merged and published at `e57499e`
-(2026-11-08); the source branch is retained. The current user-selected task is crossed vertex; M09a remains the next numbered
-diagram-roadmap milestone. See [contract and results](crossed-vertex/verification.md).
+(2026-11-08); the source branch is retained. Next is the user-selected compilation-performance session, before M09a, which
+remains the next numbered diagram-roadmap milestone. See [contract and results](crossed-vertex/verification.md).
 
+- [Crossed-vertex publication](crossed-vertex/publication.json): verified checkpoint merged/pushed; sources/PDFs unchanged.
+- [Compilation-performance handoff](compilation-performance.md): next intermediate session, with benchmarks and compatibility gates.
 - [M08b publication](m08b-publication.json): verified implementation and array fix merged/pushed; package and PDF artifacts unchanged.
 - [M08b array fix](m08b-array-fix.md): corrected the Overleaf failure inside math arrays; full project compiles locally with the fixed package.
 - [M08b verification](m08b-verification.md): four contact seagulls, eight source variants, actual PDF graphs/flow/marker checks and current handoff.

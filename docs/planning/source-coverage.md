@@ -158,8 +158,8 @@ Eight diagrams are visible although the slide contains fewer image objects; the 
 
 | Panel | Visible diagram / placement | Requirement | Relation |
 | --- | --- | --- | --- |
-| S13-left | Triangle contact; quartic pair 1/4; Z between q2/q3 cubic vertices | R22 | CrossedVertexCorr left/right supplies the fixed-slot graph; user-selected half-moon embedding, CV01/CV02 (local) |
-| S13-right | Triangle contact; quartic pair 2/3; Z between q1/q4 cubic vertices | R22 | CrossedVertexCorr left/right supplies the fixed-slot graph; user-selected half-moon embedding, CV01/CV02 (local) |
+| S13-left | Triangle contact; quartic pair 1/4; Z between q2/q3 cubic vertices | R22 | CrossedVertexCorr left/right supplies the fixed-slot graph; user-selected half-moon embedding, CV01/CV02 (published on main at 8b41ca1) |
+| S13-right | Triangle contact; quartic pair 2/3; Z between q1/q4 cubic vertices | R22 | CrossedVertexCorr left/right supplies the fixed-slot graph; user-selected half-moon embedding, CV01/CV02 (published on main at 8b41ca1) |
 
 ## Slide 14
 

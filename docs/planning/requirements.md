@@ -123,10 +123,10 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R14 - Opposite-pair triangle-contact routing / diagonal Z connection
 
-- **Status:** Verified existing on local `codex/crossed-vertex`; merge/push pending.
+- **Status:** Verified existing on published main at feature checkpoint `8b41ca1`.
 - **Existing construction / evidence:** CV01/CV02/CV11/CV12; `CrossedVertexCorr[crossed-vertex-orientation=left/right]` provides quartic external pairs 1/4 and 2/3. Actual PDF checks recover seven edges, valences 4/3/3 and one cycle. See [contract](crossed-vertex/contract.md) and [verification](crossed-vertex/verification.md).
 - **Remaining target / limitation:** Exactly two user-selected half-moon layouts, with W slots 5/7 on their outer diagonal and a curved Z slot 6. This supersedes the unimplemented angular M07c drawing; no top/bottom rotations. D01 index appearance remains deferred.
-- **Milestone:** User-selected crossed-vertex follow-up to M07c, local. **Dependencies:** M01 semantic endpoints, M02 annotations, M07b split-leg pipeline and M07c graph audit.
+- **Milestone:** User-selected crossed-vertex follow-up to M07c, published on main. **Dependencies:** M01 semantic endpoints, M02 annotations, M07b split-leg pipeline and M07c graph audit.
 - **Acceptance:** Both fixed-slot graphs, styled samples, marker/circle contact, independent momentum controls, caps, scaling, indices, arrays and call reset pass.
 - **Sources:** S13-left, S13-right; new IMG_0135/IMG_0136 reference contract dated 2026-11-08. PDF P3-05/P3-06; R22 duplicates this graph requirement.
 
@@ -195,9 +195,9 @@ Machine-readable counterpart: `requirements.json`. Update both representations t
 
 ## R22 - Crossed external triangle-contact layouts from slide 13
 
-- **Status:** Verified existing on local `codex/crossed-vertex`; merge/push pending.
+- **Status:** Verified existing on published main at feature checkpoint `8b41ca1`.
 - **Existing construction / evidence:** CV01/CV02/CV11/CV12; `CrossedVertexCorr[crossed-vertex-orientation=left/right]` provides quartic external pairs 1/4 and 2/3. Actual PDF checks recover seven edges, valences 4/3/3 and one cycle. See [contract](crossed-vertex/contract.md) and [verification](crossed-vertex/verification.md).
 - **Remaining target / limitation:** Exactly two user-selected half-moon layouts, with W slots 5/7 on their outer diagonal and a curved Z slot 6. This supersedes the unimplemented angular M07c drawing; no top/bottom rotations. D01 index appearance remains deferred.
-- **Milestone:** User-selected crossed-vertex follow-up to M07c, local. **Dependencies:** M01 semantic endpoints, M02 annotations, M07b split-leg pipeline and M07c graph audit.
+- **Milestone:** User-selected crossed-vertex follow-up to M07c, published on main. **Dependencies:** M01 semantic endpoints, M02 annotations, M07b split-leg pipeline and M07c graph audit.
 - **Acceptance:** Both fixed-slot graphs, styled samples, marker/circle contact, independent momentum controls, caps, scaling, indices, arrays and call reset pass.
 - **Sources:** S13-left, S13-right; new IMG_0135/IMG_0136 reference contract dated 2026-11-08. Same graph requirement as R14; no extra loop family.

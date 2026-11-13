@@ -1,9 +1,13 @@
 # Crossed-vertex checkpoint - 2026-11-08
 
-Current branch: `codex/crossed-vertex`, based on published main `bfb23ac`.
-Implemented and verified locally; merge/push pending. Main and GitHub were not
-changed by this session. M08b remains published. The next numbered roadmap
-slice is M09a after this branch is integrated, unless the user selects another task.
+Implementation branch: `codex/crossed-vertex`, based on published main `bfb23ac`.
+Feature checkpoint `8b41ca1` is merged and published on main (2026-11-13);
+the source branch is retained. The full suite was rerun before publication:
+54 documents / 928 endpoint contacts and the registered PDF checks pass.
+Original tested source/PDF hashes in `run.json` still match. See
+[publication](publication.json). Next is the user-requested
+[compilation-performance session](../compilation-performance.md), before M09a.
+The implementation/visual review evidence below records the 2026-11-08 checkpoint.
 
 ## Implemented result
 

@@ -1,0 +1,22 @@
+{
+  "feature": "crossed-vertex",
+  "date": "2026-11-13",
+  "feature_checkpoint": "8b41ca1c79be71781586f94341b3bae4b08a4963",
+  "previous_main": "bfb23ac37cf44abb6a05850f0119d2da5c0b4eab",
+  "merge": "fast-forward",
+  "published_to": "origin/main",
+  "repository": "https://github.com/aeaconnelly26/correlator-diagrams",
+  "feature_branch_retained": "codex/crossed-vertex",
+  "verified_source_and_PDF_hashes_unchanged": true,
+  "regression_documents": 54,
+  "endpoint_contacts": 928,
+  "atlas_recipes": 150,
+  "atlas_pages": 36,
+  "verification_record": "verification.md",
+  "original_hash_record": "run.json",
+  "publication_suite": "publication-suite.txt",
+  "ignored_output_artifacts_excluded": true,
+  "next": "Intermediate compilation-performance session before M09a",
+  "performance_handoff": "../compilation-performance.md",
+  "publication_suite_sha256": "3b236df0529d3ea13bc3e3ad15dacd5ac7e614f56e88b2fa7a1e6200ad7a6479"
+}

@@ -25,9 +25,17 @@ main. Its feature branch is retained. M07a is now also published; M07b's upper s
 
 Exactly two half-moon layouts follow M07c: opposite cubic corners, collinear W
 segments and a curved crossing without an extra interaction. Implemented on
-local `codex/crossed-vertex`; merge/push pending. The user-selected
+`codex/crossed-vertex`; checkpoint `8b41ca1` is merged and published on main
+(2026-11-13), with its source branch retained. The user-selected
 [contract](crossed-vertex/contract.md) supersedes the proposed angular layout/API.
-See [verification](crossed-vertex/verification.md). M09a follows after integration.
+See [verification](crossed-vertex/verification.md) and [publication](crossed-vertex/publication.json).
+
+## Intermediate compilation-performance session (2026-11-13)
+
+The next user-selected session optimizes package structure to reduce compilation
+time. Establish repeated loading/drawing benchmarks before selecting changes,
+and preserve public behavior and rendered output. See the
+[performance handoff](compilation-performance.md). M09a follows this session.
 
 ## Common session contract
 
@@ -222,7 +230,7 @@ scaling. D02 and circle default .8 are included; all 50 documents / 850 contacts
 passed at the unchanged package checkpoint. See [publication](m07bc-publication.json). At session closeout on 2026-11-07 the
 user deferred right external routing (R04). M07c is now complete as an audit:
 R14/R22 identified the same opposite-pair routing gap. Its user-selected
-half-moon follow-up is now implemented locally; M08a/M08b are published. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed and published in the follow-up. See [D02 verification](d02-verification.md).
+half-moon follow-up is now published on main; M08a/M08b are published. See [M07b verification](m07b-verification.md). D01 remains deferred; D02 crossed-box circles are fixed and published in the follow-up. See [D02 verification](d02-verification.md).
 
 - Session A: confirm default square geometry, then add the complementary
   internal crossing. Preserve the existing CrossBoxCorr behavior as a supported
@@ -239,7 +247,7 @@ half-moon follow-up is now implemented locally; M08a/M08b are published. See [M0
 ## M08 - Contact-host external corrections
 
 **Requirements:** R13, R21. **Dependencies:** M03, M04, M02 conventions.
-**M08a complete on published main** at `d855152`; feature branch retained. [Verification](m08a-verification.md). **M08b complete on published main** at `e57499e`, including the array fix; source branch retained. [Verification](m08b-verification.md). **Next scheduled slice:** M09a, internal-exchange self-energy bubbles.
+**M08a complete on published main** at `d855152`; feature branch retained. [Verification](m08a-verification.md). **M08b complete on published main** at `e57499e`, including the array fix; source branch retained. [Verification](m08b-verification.md). **Next session:** compilation performance; M09a internal-exchange self-energy bubbles follows.
 
 - M08a: complete on published main; all four S10 external contact bubbles, 78 public cases and actual PDF graph/marker checks. Central/crossed quartic views only; invalid hosts/slots fail explicitly.
 - M08b: complete on published main; all four direct contact seagulls and all eight S11 species/flow variants. Six edges, two quartic interactions, one self-loop; no stem.
@@ -295,7 +303,7 @@ M09 where internal hosts are involved.
   cubic vertices carrying q2/q3 in S13-left and q1/q4 in S13-right. The PDF-to-slide
   correspondence is recorded as an inference; q labels are absent from the slides.
   Internal Z styling and square bounding spans already work; opposite-pair
-  quartic attachments are now supplied by the local crossed-vertex follow-up.
+  quartic attachments are now supplied by the published crossed-vertex follow-up.
 - **Q02 / R22 (resolved by audit):** Both native images have seven logical edges,
   three interactions with valences 4/3/3 and one W/W/Z cycle. The external crossover
   has no interaction. They share the R14 extension of TriangleContactCorr;
