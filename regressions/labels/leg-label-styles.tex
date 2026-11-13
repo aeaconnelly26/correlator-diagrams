@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage[margin=.6in]{geometry}
+\usepackage{amsmath,feynman-fun}
+\pagestyle{empty}
+\makeatletter
+\newif\ifFFRecord
+\newcount\FFChecks
+\newcount\FFStyledNodes
+\newsavebox{\FFResetBox}
+\@for\FFSlot:={1,2,3,4}\do{%
+  \expandafter\newdimen\csname FFBaseX\FFSlot\endcsname
+  \expandafter\newdimen\csname FFBaseY\FFSlot\endcsname
+  \expandafter\newdimen\csname FFAnchorX\FFSlot\endcsname
+  \expandafter\newdimen\csname FFAnchorY\FFSlot\endcsname
+  \expandafter\def\csname FFDX\FFSlot\endcsname{0pt}%
+  \expandafter\def\csname FFDY\FFSlot\endcsname{0pt}%
+}
+\newcommand{\FFCheckDistance}[1]{%
+  \ifdim#1<-.02pt\PackageError{leg-label-check}{Unexpected label/endpoint displacement}{}\fi
+  \ifdim#1>.02pt\PackageError{leg-label-check}{Unexpected label/endpoint displacement}{}\fi
+  \global\advance\FFChecks by 1
+}
+\newcommand{\FFCaptureLabel}[2]{%
+  \pgfpointtransformed{\pgfpointanchor{FFObservedLabel}{center}}%
+  \ifFFRecord
+    \global\csname FFBaseX#2\endcsname=\pgf@x
+    \global\csname FFBaseY#2\endcsname=\pgf@y
+  \else
+    \@tempdima=\dimexpr\pgf@x-\csname FFBaseX#2\endcsname-\csname FFDX#2\endcsname\relax
+    \FFCheckDistance{\@tempdima}%
+    \@tempdima=\dimexpr\pgf@y-\csname FFBaseY#2\endcsname-\csname FFDY#2\endcsname\relax
+    \FFCheckDistance{\@tempdima}%
+  \fi
+  \pgfpointtransformed{\pgfpointanchor{#1}{center}}%
+  \ifFFRecord
+    \global\csname FFAnchorX#2\endcsname=\pgf@x
+    \global\csname FFAnchorY#2\endcsname=\pgf@y
+  \else
+    \@tempdima=\dimexpr\pgf@x-\csname FFAnchorX#2\endcsname\relax
+    \FFCheckDistance{\@tempdima}%
+    \@tempdima=\dimexpr\pgf@y-\csname FFAnchorY#2\endcsname\relax
+    \FFCheckDistance{\@tempdima}%
+  \fi
+}
+% Observe the actual node immediately after it is drawn, including explicit {}.
+\let\FFOriginalPutLabel\corr@putlabel
+\renewcommand{\corr@putlabel}[3]{%
+  \begingroup
+  \tikzset{every node/.append style={name=FFObservedLabel}}%
+  \FFOriginalPutLabel{#1}{#2}{#3}%
+  \FFCaptureLabel{#1}{#3}%
+  \endgroup
+}
+\newcommand{\FFCheckStyles}{%
+  \begingroup
+  \pgfqkeys{/corrdiag}{leg-styles={
+    {ewboson,circ={W},decoration={markings,mark=at position .5 with {}},label-style={xshift=1pt,font=\small},red},
+    {spol,label-style={xshift=99pt},label-style={}},
+    {ewboson,endcap}}}%
+  \corr@preparelists
+  \long\def\FFExpected{ewboson,circ={W},decoration={markings,mark=at position .5 with {}},red}%
+  \expandafter\ifx\csname corr@legpathstyle@1\endcsname\FFExpected\else
+    \PackageError{leg-label-check}{Propagator style items changed or metadata leaked}{}%
+  \fi
+  \long\def\FFExpected{xshift=1pt,font=\small}%
+  \expandafter\ifx\csname corr@leglabelstyle@1\endcsname\FFExpected\else
+    \PackageError{leg-label-check}{Label style tokens expanded or lost}{}%
+  \fi
+  \ifcsempty{corr@leglabelstyle@2}{}{\PackageError{leg-label-check}{Last label-style must win, including empty}{}}%
+  \ifcsundef{corr@leglabelstyle@3}{}{\PackageError{leg-label-check}{Unexpected style on another slot}{}}%
+  \global\advance\FFChecks by 4
+  \endgroup
+}
+\makeatother
+\newcommand{\FFShiftOn}{%
+  \expandafter\def\csname FFDX1\endcsname{-2pt}\expandafter\def\csname FFDY1\endcsname{3pt}%
+  \expandafter\def\csname FFDX2\endcsname{5pt}\expandafter\def\csname FFDY2\endcsname{3pt}%
+  \expandafter\def\csname FFDX3\endcsname{0pt}\expandafter\def\csname FFDY3\endcsname{-3pt}%
+  \expandafter\def\csname FFDX4\endcsname{2pt}\expandafter\def\csname FFDY4\endcsname{-2pt}%
+}
+\makeatletter
+\newcommand{\FFShiftOff}{%
+  \@for\FFSlot:={1,2,3,4}\do{%
+    \expandafter\def\csname FFDX\FFSlot\endcsname{0pt}%
+    \expandafter\def\csname FFDY\FFSlot\endcsname{0pt}%
+  }%
+}
+\makeatother
+\newcommand{\FFPair}[3]{%
+  \textbf{#1: default and nested label styles}\par
+  \FFRecordtrue
+  \begin{center}#2[scale=.8,show-momenta=false,
+    leg-labels={Z_\alpha,W^+_\gamma,W^-_\beta,A_\delta},
+    leg-styles={{ewboson,endcapp},{ewboson,endcap},{endcap,spol},{ewboson,endcap}},#3]\qquad
+  \FFRecordfalse\FFShiftOn
+  #2[scale=.8,show-momenta=false,leg-labels={Z_\alpha,W^+_\gamma,W^-_\beta,A_\delta},#3,
+    leg-styles={
+      {ewboson,endcapp,label-style={xshift=-2pt,yshift=3pt}},
+      {ewboson,endcap,label-style={xshift=5pt,yshift=3pt}},
+      {endcap,spol,label-style={yshift=-3pt}},
+      {ewboson,endcap,label-style={xshift=2pt,yshift=-2pt}}}]
+  \end{center}%
+  \FFRecordfalse\FFShiftOff
+  \sbox{\FFResetBox}{$#2[scale=.8,show-momenta=false,
+    leg-labels={Z_\alpha,W^+_\gamma,W^-_\beta,A_\delta},
+    leg-styles={{ewboson,endcapp},{ewboson,endcap},{endcap,spol},{ewboson,endcap}},#3]$}%
+}
+\begin{document}
+\FFCheckStyles
+\FFPair{Three point right}{\ThreePointCorr}{three-point-orientation=right}
+\FFPair{Three point left}{\ThreePointCorr}{three-point-orientation=left}
+\FFPair{Three point up}{\ThreePointCorr}{three-point-orientation=up}
+\FFPair{Three point down}{\ThreePointCorr}{three-point-orientation=down}
+\newpage
+\FFPair{Two point}{\TwoPointCorr}{}
+\FFPair{Contact}{\FourPointCorr}{}
+\FFPair{Loop channel}{\SLoopChannelCorr}{}
+\FFPair{Box}{\BoxLoopCorr}{}
+\newpage
+\FFPair{Crossed box left-right}{\CrossBoxCorr}{}
+\FFPair{Crossed box top-bottom}{\CrossBoxCorr}{cross-box-layout=top-bottom}
+\FFPair{Half box}{\HalfBoxCorr}{}
+\FFPair{Flat contact}{\FlatContactCorr}{}
+\newpage
+\FFPair{Triangle contact}{\TriangleContactCorr}{}
+\FFPair{Bubble insertion}{\TTreeChannelCorr}{insertion=bubble,insertion-slot=3}
+\FFPair{Seagull insertion}{\STreeChannelCorr}{insertion=seagull,insertion-slot=2}
+\FFPair{Bubble}{\BubbleCorr}{}
+\FFPair{Sunset external labels}{\SunsetDiagram}{}
+\newpage
+\textbf{Global defaults, local replacement, and legacy precedence}\par
+\begingroup
+\corrset{leg-styles={
+  {ewboson,label-style={xshift=-2pt,yshift=3pt}},
+  {ewboson,label-style={xshift=5pt,yshift=3pt}},
+  {spol,label-style={yshift=-3pt}}}}
+\FFRecordtrue
+\begin{center}\ThreePointCorr[show-momenta=false]\qquad
+\FFRecordfalse
+% Replacing the global list removes its nested metadata; no styles leak.
+\expandafter\def\csname FFDX1\endcsname{2pt}\expandafter\def\csname FFDY1\endcsname{-3pt}%
+\expandafter\def\csname FFDX2\endcsname{-5pt}\expandafter\def\csname FFDY2\endcsname{-3pt}%
+\expandafter\def\csname FFDX3\endcsname{0pt}\expandafter\def\csname FFDY3\endcsname{3pt}%
+\ThreePointCorr[show-momenta=false,leg-styles={ewboson,{},spol}]
+\end{center}
+\FFRecordfalse\FFShiftOff
+\sbox{\FFResetBox}{$\ThreePointCorr[show-momenta=false]$}%
+\endgroup
+\FFRecordtrue
+\begin{center}\ThreePointCorr[show-momenta=false]\qquad
+\FFRecordfalse\FFShiftOn
+\ThreePointCorr[show-momenta=false,
+  three-point-field-label-1-style={xshift=40pt},
+  leg-styles={
+    {ewboson,label-style={xshift=-2pt,yshift=3pt}},
+    {ewboson,label-style={xshift=5pt,yshift=3pt}},
+    {spol,label-style={yshift=-3pt}}}]
+\end{center}
+\FFRecordfalse\FFShiftOff
+\sbox{\FFResetBox}{$\ThreePointCorr[show-momenta=false,
+  three-point-field-label-1-style={xshift=40pt},
+  leg-styles={{ewboson,label-style={}},{}}]$}%
+% A non-transform node option executes once per label, not on a path.
+\FFRecordtrue
+\sbox{\FFResetBox}{$\TwoPointCorr[show-momenta=false,
+  leg-styles={{ewboson,label-style={font=\small,execute at begin node={\global\advance\FFStyledNodes by 1}}},{}}]$}%
+\ifnum\FFStyledNodes=1\else\PackageError{leg-label-check}{Node options reached the wrong objects}{}\fi
+\global\advance\FFChecks by 1
+\textbf{Requested all-in vertex}\par
+\begin{center}
+\ThreePointCorr[
+  field=\hspace{1mm},scale=.8,
+  indices={\alpha,\gamma,\beta},
+  leg-labels={Z_\alpha,{W^+}_\gamma,{W^-}_\beta},
+  leg-styles={
+    {ewboson,endcapp,label-style={xshift=-2pt,yshift=3pt}},
+    {ewboson,endcap,label-style={xshift=5pt,yshift=3pt}},
+    {endcap,spol,label-style={yshift=-3pt}}},
+  three-point-momentum-flow=all-in,momentum-labels={q_1,q_3,q_2},
+  propagator-arrow-sizes={10pt,,},three-point-momentum-layout=outward]
+\end{center}
+\typeout{PASS nested leg labels: \the\FFChecks\space node/endpoint/style/reset checks}
+\end{document}

@@ -1289,7 +1289,7 @@
     \ifnum\corr@legstyleitemslen<#1
       \expandafter\def\csname #3\endcsname{sca}%
     \else
-      \expandafter\edef\csname #3\endcsname{\corr@legstyleitems[#1]}%
+      \expandafter\edef\csname #3\endcsname{\corr@legpathstylefor{#1}}%
     \fi
   }{}%
 }
@@ -4262,6 +4262,72 @@
 
 \corr@configurestyles
 
+% Separate label-node metadata from propagator options once per logical leg.
+% Retain ordinary style items verbatim, including their braced comma values.
+\ExplSyntaxOn
+\tl_new:N \l__corr_leg_path_style_tl
+\tl_new:N \l__corr_leg_label_style_tl
+\bool_new:N \l__corr_leg_label_style_bool
+\bool_new:N \l__corr_label_style_item_bool
+\cs_new_protected:Npn \__corr_leg_style_key:n #1
+  {
+    \str_if_eq:nnT {#1} {label-style}
+      {
+        \PackageError{feynman-fun}{label-style~requires~a~value}
+          {Use~label-style={xshift=2pt,yshift=1pt},~or~label-style={}.}
+      }
+  }
+\cs_new_protected:Npn \__corr_leg_style_key_value:nn #1#2
+  {
+    \str_if_eq:nnT {#1} {label-style}
+      {
+        \bool_set_true:N \l__corr_label_style_item_bool
+        \bool_set_true:N \l__corr_leg_label_style_bool
+        \tl_set:Nn \l__corr_leg_label_style_tl {#2}
+      }
+  }
+\cs_new_protected:Npn \corr@splitlegstyle #1#2
+  {
+    \tl_set:Nn \l__corr_leg_path_style_tl {#2}
+    \bool_set_false:N \l__corr_leg_label_style_bool
+    % Existing styles need no key/value parsing when the metadata is absent.
+    \tl_if_in:nnT {#2} {label-style}
+      {
+        \tl_clear:N \l__corr_leg_path_style_tl
+        \clist_map_inline:nn {#2}
+          {
+            \bool_set_false:N \l__corr_label_style_item_bool
+            \keyval_parse:NNn \__corr_leg_style_key:n
+              \__corr_leg_style_key_value:nn {##1}
+            \bool_if:NF \l__corr_label_style_item_bool
+              {
+                \tl_if_empty:NF \l__corr_leg_path_style_tl
+                  {\tl_put_right:Nn \l__corr_leg_path_style_tl {,}}
+                \tl_put_right:Nn \l__corr_leg_path_style_tl {##1}
+              }
+          }
+      }
+    \cs_set:cpx {corr@legpathstyle@#1}
+      {\exp_not:V \l__corr_leg_path_style_tl}
+    \bool_if:NTF \l__corr_leg_label_style_bool
+      {
+        \cs_set:cpx {corr@leglabelstyle@#1}
+          {\exp_not:V \l__corr_leg_label_style_tl}
+      }
+      {\cs_set_eq:cN {corr@leglabelstyle@#1} \relax}
+  }
+\cs_new_protected:Npn \corr@preparelegstyles
+  {
+    \int_step_inline:nn {\corr@legstyleitemslen}
+      {
+        \itemtomacro\corr@legstyleitems[##1]\corr@rawlegstyle
+        \exp_args:Nno \corr@splitlegstyle {##1} {\corr@rawlegstyle}
+      }
+  }
+\ExplSyntaxOff
+
+\newcommand{\corr@legpathstylefor}[1]{\csname corr@legpathstyle@#1\endcsname}
+
 \newcommand{\corr@preparelists}{%
   % Never retain parsed topology lists across calls or list-parser settings.
   \let\corr@cachedlistkeyone\relax
@@ -4277,6 +4343,7 @@
   \def\corr@flatcontactcoloritemslen{0}%
   \ifdefempty{\corr@legstyles}{}{%
     \readlist*\corr@legstyleitems{\corr@legstyles}%
+    \corr@preparelegstyles
   }%
   \ifdefempty{\corr@momentumlabels}{}{%
     \reademptyitems
@@ -4379,7 +4446,7 @@
   \ifnum\corr@legstyleitemslen<#1
     \corr@line
   \else
-    \corr@legstyleitems[#1]%
+    \corr@legpathstylefor{#1}%
   \fi
 }
 
@@ -5037,7 +5104,15 @@
 }
 
 \newcommand{\corr@putlabel}[3]{%
+  \begingroup
+  % Explicit nested styles (including {}) replace legacy per-slot styles.
+  \ifnum\corr@legstyleitemslen<#3\relax\else
+    \ifcsundef{corr@leglabelstyle@#3}{}{%
+      \expandafter\let\expandafter\corr@currentfieldlabelstyle\csname corr@leglabelstyle@#3\endcsname
+    }%
+  \fi
   \expandafter\node\expandafter[\corr@currentfieldlabelstyle] at ([#2]#1) {$\corr@leglabel{#3}$};
+  \endgroup
 }
 
 \newcommand{\corr@vertex@dot}[1]{%
@@ -5087,7 +5162,7 @@
       \edef\corr@boxresolvedexternalstyle{\corr@boxexternalline}%
     \fi
   \else
-    \edef\corr@boxresolvedexternalstyle{\corr@legstyleitems[#1]}%
+    \edef\corr@boxresolvedexternalstyle{\corr@legpathstylefor{#1}}%
   \fi
 }
 
@@ -5131,7 +5206,7 @@
       #2%
     \fi
   \else
-    \corr@legstyleitems[#1]%
+    \corr@legpathstylefor{#1}%
   \fi
 }
 
@@ -5159,7 +5234,7 @@
       }%
     \fi
   \else
-    \edef\corr@halfboxresolvedstyle{\corr@legstyleitems[#1]}%
+    \edef\corr@halfboxresolvedstyle{\corr@legpathstylefor{#1}}%
   \fi
 }
 

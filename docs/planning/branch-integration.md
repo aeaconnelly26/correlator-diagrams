@@ -1,11 +1,12 @@
 # Integrated branch state and coding-session closeout
 
 Current checkout: `codex/three-point-field-labels`, based on local checkpoint
-`9884f9b`. The three-point external field-label follow-up is complete locally:
-56 documents / 928 contacts and registered PDF checks pass, with 48 field-node
-placement/reset assertions. Defaults are unchanged. The branch includes the
+`9884f9b`. Shared external-label styles are complete locally:
+57 documents / 928 contacts and registered PDF checks pass, with 517 nested-style
+checks and the earlier 48 legacy placement assertions. Use `label-style={...}`
+inside each `leg-styles` entry; defaults are unchanged. The branch includes the
 performance work below; merge/push is pending. See
-[field-label verification](three-point-field-labels.md).
+[label-style verification](leg-label-styles.md).
 
 Performance checkpoint: `codex/compilation-performance`, based on published main
 `7069f39`. The intermediate performance session is complete locally: 4.5-5.3%

@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-13",
+  "branch": "codex/three-point-field-labels",
+  "base_checkpoint": "6ab45df",
+  "state": "verified local; merge/push pending",
+  "maintained_documents": 57,
+  "endpoint_contacts": 928,
+  "nested_label_node_endpoint_style_reset_assertions": 517,
+  "legacy_three_point_assertions": 48,
+  "final_focused_build_passed": true,
+  "final_focused_build_changes_after_suite": "Added the displayed user acceptance recipe and strengthened the braced-value preservation assertion; package source unchanged.",
+  "visual_review": {
+    "gallery_pages": 5,
+    "requested_example_inspected": true
+  },
+  "output_comparisons": {
+    "legacy_gallery": {
+      "dpi": 144,
+      "pages": [
+        {
+          "page": 1,
+          "changed_pixels": 0
+        },
+        {
+          "page": 2,
+          "changed_pixels": 0
+        }
+      ],
+      "identical": true
+    },
+    "user_example_equivalent_styles": {
+      "dpi": 200,
+      "pages": [
+        {
+          "page": 1,
+          "changed_pixels": 0
+        }
+      ],
+      "identical": true
+    }
+  },
+  "optional_local_cache_adapter": {
+    "path": "output/cache-demo/feynman-fun-cache.tex",
+    "sha256": "3cbe49cbb614ca9e28d6c1582478e2f7100cd2f40c29a28e3ece9bc88eb52084",
+    "result": "PASS: cold creates one PDF, warm reuses it unchanged, edited nested xshift creates one new PDF",
+    "cold_images": 1,
+    "warm_images": 1,
+    "edited_images": 2,
+    "warm_bytes_and_mtime_unchanged": true
+  },
+  "atlas_recipes": 150,
+  "atlas_pages": 36,
+  "sha256": {
+    "feynman-fun.sty": "d165b941aeb0af9110f44e73b2493efc1ce8f6f5abed2c42015e8b4377473abc",
+    "scripts/check-regressions.sh": "cd6384d59eaeaa7662be306ece42309c73d548517432477b43ba10602a68f281",
+    "regressions/labels/leg-label-styles.tex": "569942d649356b51ef9d0e90943f58a79457c5ca090b826196520a3b47575082",
+    "regressions/labels/leg-label-styles.pdf": "41b239498b86dbdaa22d30572cf3aab6f8bd076b0ec9b86cea4861577befd258",
+    "docs/reference.md": "ea9426bd810aa073d1a70ecdefd1c3dcde74af3426bc6a524334646b4493026e",
+    "docs/planning/leg-label-styles.md": "49281bbe29eab816844b9228e714b51e13ce2e7e9b631c4dd7dd1a118ad1d1a6",
+    "docs/planning/leg-label-styles-suite.txt": "801e263e44b3cf3b5b520f9fc0d76da326f06d913cd43ea32001863404202d66"
+  }
+}

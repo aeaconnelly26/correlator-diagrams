@@ -477,23 +477,54 @@ If you need complete manual control, use:
 
 `leg-labels` overrides `field` and `indices` for the legs you specify.
 
-For `\ThreePointCorr`, each external field label also accepts its own TikZ node
-style. These are additional shifts from the orientation's default placement:
+Put `label-style={...}` inside a `leg-styles` entry to adjust that leg's label.
+The text still comes from the matching `leg-labels` entry (or `field`/`indices`).
+For example:
 
 ```tex
-three-point-field-label-1-style={xshift=-2pt,yshift=3pt},
-three-point-field-label-2-style={xshift=5pt,yshift=3pt},
-three-point-field-label-3-style={yshift=-3pt}
+\ThreePointCorr[
+  field=\hspace{1mm},scale=0.8,
+  indices={\alpha,\gamma,\beta},
+  leg-labels={Z_\alpha,{W^+}_\gamma,{W^-}_\beta},
+  leg-styles={
+    {ewboson,endcapp,label-style={xshift=-2pt,yshift=3pt}},
+    {ewboson,endcap,label-style={xshift=5pt,yshift=3pt}},
+    {endcap,spol,label-style={yshift=-3pt}}
+  },
+  three-point-momentum-flow=all-in,
+  momentum-labels={q_1,q_3,q_2},
+  propagator-arrow-sizes={10pt,,},
+  three-point-momentum-layout=outward
+]
 ```
 
-The numbers follow `leg-labels` order: in the default orientation, 1 is the
-upper-left leg, 2 the right leg, and 3 the bottom leg. Positive `xshift` moves
-right; positive `yshift` moves up, including on rotated diagrams. The styles can
-also set node options such as `anchor` or `font`. They follow the logical fields
-when the diagram rotates, and do not move the momentum annotations or legs.
-Global defaults can be set with `\corrset`; per-diagram styles replace the style
-for that slot within the call. With empty styles, the original placement is
-unchanged. See the [placement gallery](../regressions/topologies/three-point/three-point-field-labels.pdf).
+This is shared external-label syntax for the two-, three- and four-point
+families, including bubble, sunset and insertion hosts. Entries follow logical
+external-label order. In the default three-point orientation, 1 is upper-left,
+2 is right, and 3 is bottom; rotation keeps each style with the same leg.
+Sunset's first two entries control its left/right external labels; segment
+appearance still uses its existing `sunset-...-line` keys.
+
+The nested options style the label's TikZ node. Positive `xshift` moves right and
+positive `yshift` moves up, relative to the topology's existing placement; shifts
+use physical lengths independent of diagram scale. Node options such as `anchor`,
+`font`, `text` and named TikZ styles also work. The label retains its true bounds
+for PDF export. Bare `xshift`/`yshift` outside `label-style` keep their existing
+propagator meaning. Propagators, momentum labels and endpoint indices are unaffected
+by nested label options.
+
+Use `\corrset{leg-styles={...}}` for global defaults. A per-call `leg-styles` list
+replaces that list locally, including its nested label styles. Missing label
+styles keep the topology's default placement. `label-style={}` explicitly selects
+an empty node style; if repeated within one leg, the last `label-style` wins.
+See the [shared placement gallery](../regressions/labels/leg-label-styles.pdf).
+
+The earlier `three-point-field-label-1-style`, `-2-style` and `-3-style` keys
+remain compatible. When both forms are present, the nested `label-style`
+replaces the complete legacy style for that slot, including when it is `{}`;
+without a nested style, the legacy key still applies. The original
+[three-point gallery](../regressions/topologies/three-point/three-point-field-labels.pdf)
+checks those controls independently.
 
 ## Momentum Labels And Arrows
 

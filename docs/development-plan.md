@@ -7,11 +7,12 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
 - Current branch: `codex/three-point-field-labels`, based on local performance
-  checkpoint `9884f9b`. The requested external field-label follow-up adds three
-  independent node-style controls to `ThreePointCorr`; defaults are unchanged.
-  All 56 documents / 928 endpoint contacts and registered PDF checks pass, with
-  48 actual field-node displacement/reset checks. Merge/push remains pending.
-  See [verification](planning/three-point-field-labels.md).
+  checkpoint `9884f9b`. External labels now accept `label-style={...}` inside
+  each `leg-styles` entry, shared across families with topology-specific defaults.
+  Earlier three-point controls remain compatible; defaults are unchanged.
+  All 57 documents / 928 endpoint contacts and registered PDF checks pass, with
+  517 shared-label checks plus the earlier 48 legacy placement checks.
+  Merge/push remains pending. See [verification](planning/leg-label-styles.md).
 - Performance checkpoint: `codex/compilation-performance`, based on published main
   `7069f39`. The intermediate performance session is complete locally: repeated
   diagram batches improve by 4.5-5.3%, the atlas median by 1.9%, with no claimed
@@ -104,10 +105,11 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Index-label positions are a known deferred workflow item, D01. Do not retune
   their appearance during M03b or the current feature sessions; preserve their
   attachment and controls. See [deferred workflows](planning/deferred-workflows.md).
-- D05 records the requested future unification of annotation names across
-  topologies: one name per concept, with topology-specific defaults. The leg-label
-  discussion proposes a nested `label-style` within `leg-styles`; it is not yet
-  implemented. See [the design note](planning/deferred-workflows.md#d05---common-annotation-names-across-topologies).
+- D05 records the requested unification of annotation names across
+  topologies: one name per concept, with topology-specific defaults. Nested
+  `label-style` within `leg-styles` now implements the external-label part;
+  broader annotation naming remains deferred. See
+  [the design note](planning/deferred-workflows.md#d05---common-annotation-names-across-topologies).
 - M02 was fast-forwarded into main and published to GitHub on 2026-11-03;
   that published baseline is retained. The implementation branch is retained.
 - M02 is complete: independent controls for all seven triangle-contact

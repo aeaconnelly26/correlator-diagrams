@@ -5,6 +5,11 @@ user's all-in three-point vertex. Implemented on `codex/three-point-field-labels
 based on local performance checkpoint `9884f9b`. This is an external field-label
 follow-up; D01 internal/endpoint index appearance remains deferred.
 
+The preferred shorter interface is now `label-style={...}` nested in each
+`leg-styles` entry. See the [shared-label follow-up](leg-label-styles.md).
+The original controls and checkpoint evidence below remain as compatibility
+coverage.
+
 ## Public controls
 
 ```tex
