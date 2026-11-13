@@ -104,6 +104,10 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 - Index-label positions are a known deferred workflow item, D01. Do not retune
   their appearance during M03b or the current feature sessions; preserve their
   attachment and controls. See [deferred workflows](planning/deferred-workflows.md).
+- D05 records the requested future unification of annotation names across
+  topologies: one name per concept, with topology-specific defaults. The leg-label
+  discussion proposes a nested `label-style` within `leg-styles`; it is not yet
+  implemented. See [the design note](planning/deferred-workflows.md#d05---common-annotation-names-across-topologies).
 - M02 was fast-forwarded into main and published to GitHub on 2026-11-03;
   that published baseline is retained. The implementation branch is retained.
 - M02 is complete: independent controls for all seven triangle-contact

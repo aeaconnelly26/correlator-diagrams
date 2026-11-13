@@ -1,5 +1,48 @@
 # Deferred workflow reviews
 
+## D05 - Common annotation names across topologies
+
+**Source:** user's request on 2026-11-13, following the three-point leg-label controls.
+**State:** requested future API-design/refactoring workflow; design discussion only.
+
+Use the same public name for the same concept across diagram families. Geometry
+and placement defaults should be resolved from the topology, rather than exposed
+through a separate family-prefixed name for every equivalent control. Review
+leg labels first, then the equivalent momentum and index annotation concepts.
+Keep label text, label placement, propagator appearance and geometry distinct.
+
+The user specifically found `three-point-field-label-N-style` and the proposed
+`three-point-leg-label-N-style` unnecessarily long. Prefer the established
+`leg-labels` vocabulary and use the existing list's slot order instead of
+repeating the topology and leg number in each key.
+
+Current proposal for discussion:
+
+```tex
+leg-labels={Z_\alpha,W^+_\gamma,W^-_\beta},
+leg-styles={
+  {ewboson,endcapp,label-style={xshift=-2pt,yshift=3pt}},
+  {ewboson,endcap,label-style={xshift=5pt,yshift=3pt}},
+  {endcap,spol,label-style={yshift=-3pt}}
+}
+```
+
+This nested `label-style` syntax is not implemented. `leg-styles` currently feeds
+the propagator's style parser; the displayed leg label is a separate TikZ node.
+Supporting the proposal requires routing the nested options to that node and
+removing them from the propagator options. Keep ordinary path transformations
+unambiguous; do not silently reinterpret bare `xshift`/`yshift` on existing
+propagator styles as label-only shifts. A separate `leg-label-styles` list is an
+alternative if the common API needs independently reusable label styles.
+
+Before implementation, agree on canonical names and precedence, map the existing
+logical slots, preserve old spellings as compatibility aliases, and verify
+global/local settings, orientation changes, insertion/split-leg ownership and
+cache invalidation. The same controls should work wherever the same annotation
+concept exists, with topology-specific default placement. This naming workflow
+does not itself authorize retuning the D01 index appearance or other diagram
+geometry. No broad API rewrite has been started.
+
 ## D01 - Systematic index-label placement review
 
 **Source:** user's request after M03a, 2026-11-03.
