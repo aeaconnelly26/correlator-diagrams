@@ -1,0 +1,221 @@
+{
+  "method": "Inclusive pdfelapsedtime ticks (1/65536 second); instrumented, not benchmark timing. Nested helper times must not be added together.",
+  "engine": "pdfTeX 3.141592653-2.6-1.40.27 (TeX Live 2025)",
+  "package_sha256": "5e1eeedd9c159d9c3677bb6cbe1dd92b69de108edbeda72aaf5ed12624828dc9",
+  "cases": {
+    "mixed": {
+      "configurestyles": {
+        "calls": 20,
+        "ticks": 274,
+        "seconds": 0.004180908203125
+      },
+      "preparelists": {
+        "calls": 20,
+        "ticks": 276,
+        "seconds": 0.00421142578125
+      },
+      "resetchanneldefaults": {
+        "calls": 20,
+        "ticks": 13,
+        "seconds": 0.0001983642578125
+      },
+      "resetloopchanneldefaults": {
+        "calls": 20,
+        "ticks": 9,
+        "seconds": 0.0001373291015625
+      },
+      "resetboxdefaults": {
+        "calls": 20,
+        "ticks": 35,
+        "seconds": 0.0005340576171875
+      },
+      "resetcrossboxdefaults": {
+        "calls": 20,
+        "ticks": 29,
+        "seconds": 0.0004425048828125
+      },
+      "resethalfboxdefaults": {
+        "calls": 20,
+        "ticks": 8,
+        "seconds": 0.0001220703125
+      },
+      "resetflatcontactdefaults": {
+        "calls": 20,
+        "ticks": 9,
+        "seconds": 0.0001373291015625
+      },
+      "resettrianglecontactdefaults": {
+        "calls": 20,
+        "ticks": 21,
+        "seconds": 0.0003204345703125
+      },
+      "resetinsertedbubbledefaults": {
+        "calls": 20,
+        "ticks": 11,
+        "seconds": 0.0001678466796875
+      },
+      "resetseagullinsertiondefaults": {
+        "calls": 20,
+        "ticks": 5,
+        "seconds": 7.62939453125e-05
+      },
+      "resetinsertiondefaults": {
+        "calls": 20,
+        "ticks": 15,
+        "seconds": 0.0002288818359375
+      },
+      "resolvechanneldefaults": {
+        "calls": 20,
+        "ticks": 76,
+        "seconds": 0.00115966796875
+      },
+      "resolveloopchanneldefaults": {
+        "calls": 20,
+        "ticks": 81,
+        "seconds": 0.0012359619140625
+      },
+      "getlistitemorblank": {
+        "calls": 208,
+        "ticks": 49,
+        "seconds": 0.0007476806640625
+      },
+      "selectmomentumslot": {
+        "calls": 116,
+        "ticks": 128,
+        "seconds": 0.001953125
+      },
+      "stripendcapstyles": {
+        "calls": 88,
+        "ticks": 402,
+        "seconds": 0.006134033203125
+      },
+      "scalarstyletoend": {
+        "calls": 80,
+        "ticks": 596,
+        "seconds": 0.00909423828125
+      },
+      "semanticstyleinternal": {
+        "calls": 60,
+        "ticks": 426,
+        "seconds": 0.006500244140625
+      },
+      "drawmomentumrangeoffset": {
+        "calls": 8,
+        "ticks": 2880,
+        "seconds": 0.0439453125
+      },
+      "drawmomentumrangeoffsetout": {
+        "calls": 8,
+        "ticks": 2842,
+        "seconds": 0.043365478515625
+      }
+    },
+    "indexed": {
+      "configurestyles": {
+        "calls": 20,
+        "ticks": 272,
+        "seconds": 0.004150390625
+      },
+      "preparelists": {
+        "calls": 20,
+        "ticks": 36,
+        "seconds": 0.00054931640625
+      },
+      "resetchanneldefaults": {
+        "calls": 20,
+        "ticks": 12,
+        "seconds": 0.00018310546875
+      },
+      "resetloopchanneldefaults": {
+        "calls": 20,
+        "ticks": 11,
+        "seconds": 0.0001678466796875
+      },
+      "resetboxdefaults": {
+        "calls": 20,
+        "ticks": 32,
+        "seconds": 0.00048828125
+      },
+      "resetcrossboxdefaults": {
+        "calls": 20,
+        "ticks": 25,
+        "seconds": 0.0003814697265625
+      },
+      "resethalfboxdefaults": {
+        "calls": 20,
+        "ticks": 11,
+        "seconds": 0.0001678466796875
+      },
+      "resetflatcontactdefaults": {
+        "calls": 20,
+        "ticks": 4,
+        "seconds": 6.103515625e-05
+      },
+      "resettrianglecontactdefaults": {
+        "calls": 20,
+        "ticks": 22,
+        "seconds": 0.000335693359375
+      },
+      "resetinsertedbubbledefaults": {
+        "calls": 20,
+        "ticks": 16,
+        "seconds": 0.000244140625
+      },
+      "resetseagullinsertiondefaults": {
+        "calls": 20,
+        "ticks": 2,
+        "seconds": 3.0517578125e-05
+      },
+      "resetinsertiondefaults": {
+        "calls": 20,
+        "ticks": 16,
+        "seconds": 0.000244140625
+      },
+      "resolvechanneldefaults": {
+        "calls": 20,
+        "ticks": 65,
+        "seconds": 0.0009918212890625
+      },
+      "resolveloopchanneldefaults": {
+        "calls": 20,
+        "ticks": 82,
+        "seconds": 0.001251220703125
+      },
+      "getlistitemorblank": {
+        "calls": 320,
+        "ticks": 1325,
+        "seconds": 0.0202178955078125
+      },
+      "selectmomentumslot": {
+        "calls": 0,
+        "ticks": 0,
+        "seconds": 0.0
+      },
+      "stripendcapstyles": {
+        "calls": 80,
+        "ticks": 211,
+        "seconds": 0.0032196044921875
+      },
+      "scalarstyletoend": {
+        "calls": 80,
+        "ticks": 409,
+        "seconds": 0.0062408447265625
+      },
+      "semanticstyleinternal": {
+        "calls": 80,
+        "ticks": 358,
+        "seconds": 0.005462646484375
+      },
+      "drawmomentumrangeoffset": {
+        "calls": 0,
+        "ticks": 0,
+        "seconds": 0.0
+      },
+      "drawmomentumrangeoffsetout": {
+        "calls": 0,
+        "ticks": 0,
+        "seconds": 0.0
+      }
+    }
+  }
+}

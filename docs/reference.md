@@ -3494,6 +3494,10 @@ latexmk -pdf yourfile.tex
 ```
 
 
+The compilation-performance follow-up reduces repeated internal style/list setup
+and path construction while retaining these APIs and the single-file installation.
+See [measured results and compatibility checks](planning/compilation-performance/verification.md).
+
 ## Crossed vertex correction: two half-moon layouts
 
 `\CrossedVertexCorr` reuses the triangle-contact graph and its style/label

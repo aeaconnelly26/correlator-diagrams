@@ -32,10 +32,12 @@ See [verification](crossed-vertex/verification.md) and [publication](crossed-ver
 
 ## Intermediate compilation-performance session (2026-11-13)
 
-The next user-selected session optimizes package structure to reduce compilation
-time. Establish repeated loading/drawing benchmarks before selecting changes,
-and preserve public behavior and rendered output. See the
-[performance handoff](compilation-performance.md). M09a follows this session.
+Complete locally on `codex/compilation-performance`, based on published main
+`7069f39`; merge/push pending. Seven paired runs per workload show 4.5-5.3% gains
+on repeated diagram batches and a 1.9% atlas median gain. All 55 documents / 928
+endpoint contacts and registered PDF checks pass; 69 rendered page comparisons
+are identical. Public APIs/defaults and the atlas recipes are unchanged. See
+[verification](compilation-performance/verification.md). M09a follows integration.
 
 ## Common session contract
 
@@ -247,7 +249,7 @@ half-moon follow-up is now published on main; M08a/M08b are published. See [M07b
 ## M08 - Contact-host external corrections
 
 **Requirements:** R13, R21. **Dependencies:** M03, M04, M02 conventions.
-**M08a complete on published main** at `d855152`; feature branch retained. [Verification](m08a-verification.md). **M08b complete on published main** at `e57499e`, including the array fix; source branch retained. [Verification](m08b-verification.md). **Next session:** compilation performance; M09a internal-exchange self-energy bubbles follows.
+**M08a complete on published main** at `d855152`; feature branch retained. [Verification](m08a-verification.md). **M08b complete on published main** at `e57499e`, including the array fix; source branch retained. [Verification](m08b-verification.md). **Next numbered slice:** M09a internal-exchange self-energy bubbles, after integrating the verified performance branch.
 
 - M08a: complete on published main; all four S10 external contact bubbles, 78 public cases and actual PDF graph/marker checks. Central/crossed quartic views only; invalid hosts/slots fail explicitly.
 - M08b: complete on published main; all four direct contact seagulls and all eight S11 species/flow variants. Six edges, two quartic interactions, one self-loop; no stem.

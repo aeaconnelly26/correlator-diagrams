@@ -1,13 +1,17 @@
 # Integrated branch state and coding-session closeout
 
-Current checkout: `main`. Crossed-vertex checkpoint `8b41ca1` was fast-forward
-merged from `bfb23ac` and published on GitHub (2026-11-13). The feature branch is
-retained. All 54 maintained documents / 928 endpoint contacts and registered PDF
-checks pass; original tested sources/PDFs are unchanged. See
-[publication](crossed-vertex/publication.json) and
-[verification](crossed-vertex/verification.md). No crossed-vertex merge/push remains.
-Next is the user-requested [compilation-performance session](compilation-performance.md)
-before M09a. Earlier records below retain their checkpoint-specific states.
+Current checkout: `codex/compilation-performance`, based on published main
+`7069f39`. The intermediate performance session is complete locally: 4.5-5.3%
+gains on repeated diagram batches, 1.9% on the atlas median, and no loading-time
+gain claimed. All 55 maintained documents / 928 endpoint contacts and registered
+PDF checks pass, with 69 pixel-identical page comparisons. Merge/push is pending;
+M09a follows integration. See [verification](compilation-performance/verification.md).
+
+Published baseline: crossed-vertex checkpoint `8b41ca1` was fast-forward merged
+and published with handoff `7069f39` on 2026-11-13; its feature branch is retained.
+See [publication](crossed-vertex/publication.json). The 150-recipe / 36-page atlas
+and saved recipes are unchanged by the performance session. Earlier records
+below retain their checkpoint-specific publication states.
 
 Previous publication: Verified M08b checkpoint `e57499e`, including the
 Overleaf array fix, was fast-forward merged from `35c7959` and pushed to GitHub

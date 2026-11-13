@@ -1772,7 +1772,30 @@
   \def\corr@currentlistitem{}%
   \edef\corr@topologylisttmp{#1}%
   \ifdefempty{\corr@topologylisttmp}{}{%
-    \readlist*\corr@topologylistitems{#1}%
+    % Index lookups alternate between the same left/right lists on every edge.
+    % Keep two local parses, keyed by the expanded contents, not the input macro
+    % name (the index caller deliberately reuses one scratch macro for both).
+    \ifx\corr@topologylisttmp\corr@cachedlistkeyone
+      \let\corr@topologylistitems\corr@cachedlistone
+      \let\corr@topologylistitemslen\corr@cachedlistonelen
+    \else\ifx\corr@topologylisttmp\corr@cachedlistkeytwo
+      \let\corr@topologylistitems\corr@cachedlisttwo
+      \let\corr@topologylistitemslen\corr@cachedlisttwolen
+    \else
+      \ifnum\corr@cachedlistnext=1
+        \readlist*\corr@cachedlistone{#1}%
+        \let\corr@cachedlistkeyone\corr@topologylisttmp
+        \let\corr@topologylistitems\corr@cachedlistone
+        \let\corr@topologylistitemslen\corr@cachedlistonelen
+        \def\corr@cachedlistnext{2}%
+      \else
+        \readlist*\corr@cachedlisttwo{#1}%
+        \let\corr@cachedlistkeytwo\corr@topologylisttmp
+        \let\corr@topologylistitems\corr@cachedlisttwo
+        \let\corr@topologylistitemslen\corr@cachedlisttwolen
+        \def\corr@cachedlistnext{1}%
+      \fi
+    \fi\fi
     \ifnum\corr@topologylistitemslen<#2\relax
     \else
       \edef\corr@currentlistitem{\corr@topologylistitems[#2]}%
@@ -2614,32 +2637,31 @@
   \corr@sunsetindexlayoutbalanced
 }
 
+% Define styles through PGF's direct API: the same .@cmd/.@body as .style,
+% without reparsing the entire style declaration table for every diagram.
+\newcommand{\corr@defstyle}[2]{%
+  \pgfkeysdef{/tikzfeynhand/#1}{\pgfkeysalso{#2}}%
+}
+
 \newcommand{\corr@configurestyles}{%
   \corr@ifstringeq{\corr@scalararrowdirection}{out}{%
-    \tikzfeynhandset{
-      every scalar polarized@@/.style={
+    \corr@defstyle{every scalar polarized@@}{
         /tikzfeynhand/every scalar polarized base@@,
         /tikz/postaction={/tikzfeynhand/with reversed white open arrow=\corr@scalararrowposition},
-      },
-    }%
+      }%
   }{%
     \corr@ifstringeq{\corr@scalararrowdirection}{none}{%
-      \tikzfeynhandset{
-        every scalar polarized@@/.style={
+      \corr@defstyle{every scalar polarized@@}{
           /tikzfeynhand/every scalar polarized base@@,
-        },
-      }%
+        }%
     }{%
-      \tikzfeynhandset{
-        every scalar polarized@@/.style={
+      \corr@defstyle{every scalar polarized@@}{
           /tikzfeynhand/every scalar polarized base@@,
           /tikz/postaction={/tikzfeynhand/with white open arrow=\corr@scalararrowposition},
-        },
-      }%
+        }%
     }%
   }%
-  \tikzfeynhandset{
-    every ewboson@@/.style={
+  \corr@defstyle{every ewboson@@}{
       /tikz/draw=none,
       /tikz/decoration={name=none},
       /tikz/postaction={
@@ -2652,79 +2674,78 @@
         },
         /tikz/decorate=true,
       },
-    },
-    every ewboson/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
-    ewboson/.style={
+    }%
+  \corr@defstyle{every ewboson}{/tikzfeynhand/every ewboson@@/.append style={##1}}%
+  \corr@defstyle{ewboson}{
       /tikzfeynhand/every ewboson@@,
-    },
-    EWboson/.style={/tikzfeynhand/ewboson},
-    ew boson/.style={/tikzfeynhand/ewboson},
-    every photon/.style={/tikzfeynhand/every ewboson@@/.append style={##1}},
-    photon/.style={/tikzfeynhand/ewboson},
-    pho/.style={/tikzfeynhand/photon},
-    every proca@@/.style={
+    }%
+  \corr@defstyle{EWboson}{/tikzfeynhand/ewboson}%
+  \corr@defstyle{ew boson}{/tikzfeynhand/ewboson}%
+  \corr@defstyle{every photon}{/tikzfeynhand/every ewboson@@/.append style={##1}}%
+  \corr@defstyle{photon}{/tikzfeynhand/ewboson}%
+  \corr@defstyle{pho}{/tikzfeynhand/photon}%
+  \corr@defstyle{every proca@@}{
       /tikzfeynhand/scalar,
-    },
-    every proca/.style={/tikzfeynhand/every proca@@/.append style={##1}},
-    proca line/.style={
+    }%
+  \corr@defstyle{every proca}{/tikzfeynhand/every proca@@/.append style={##1}}%
+  \corr@defstyle{proca line}{
       /tikzfeynhand/every proca@@,
-    },
-    proca base/.style={
+    }%
+  \corr@defstyle{proca base}{
       /tikzfeynhand/proca line,
       /tikzfeynhand/proca endpoint scale,
       /tikz/postaction={/tikzfeynhand/with proca endpoint={1}{180}},
       /tikz/postaction={/tikzfeynhand/with proca endpoint={-1}{0}},
-    },
-    proca start/.style={
+    }%
+  \corr@defstyle{proca start}{
       /tikzfeynhand/proca line,
       /tikzfeynhand/proca endpoint scale,
       /tikz/postaction={/tikzfeynhand/with proca endpoint={1}{180}},
-    },
-    proca end/.style={
+    }%
+  \corr@defstyle{proca end}{
       /tikzfeynhand/proca line,
       /tikzfeynhand/proca endpoint scale,
       /tikz/postaction={/tikzfeynhand/with proca endpoint={-1}{0}},
-    },
-    proca/.style={
+    }%
+  \corr@defstyle{proca}{
       /tikzfeynhand/proca base,
-    },
-    Proca/.style={/tikzfeynhand/proca},
-    every scalar polarized/.style={/tikzfeynhand/every scalar polarized@@/.append style={##1}},
-    scalar polarized/.style={
+    }%
+  \corr@defstyle{Proca}{/tikzfeynhand/proca}%
+  \corr@defstyle{every scalar polarized}{/tikzfeynhand/every scalar polarized@@/.append style={##1}}%
+  \corr@defstyle{scalar polarized}{
       /tikzfeynhand/scalar,
       /tikzfeynhand/every scalar polarized@@,
-    },
-    scalarpolarized/.style={/tikzfeynhand/scalar polarized},
-    scalar polarized inward/.style={
+    }%
+  \corr@defstyle{scalarpolarized}{/tikzfeynhand/scalar polarized}%
+  \corr@defstyle{scalar polarized inward}{
       /tikzfeynhand/scalar,
       /tikzfeynhand/every scalar polarized base@@,
       /tikz/postaction={/tikzfeynhand/with white open arrow=\corr@scalararrowposition},
-    },
-    scalar polarized outward/.style={
+    }%
+  \corr@defstyle{scalar polarized outward}{
       /tikzfeynhand/scalar,
       /tikzfeynhand/every scalar polarized base@@,
       /tikz/postaction={/tikzfeynhand/with reversed white open arrow=\corr@scalararrowposition},
-    },
-    scalarpolarizedin/.style={/tikzfeynhand/scalar polarized inward},
-    scalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
-    spolin/.style={/tikzfeynhand/scalar polarized inward},
-    spolout/.style={/tikzfeynhand/scalar polarized outward},
-    spol/.style={/tikzfeynhand/scalar polarized},
-    epspol/.style={
+    }%
+  \corr@defstyle{scalarpolarizedin}{/tikzfeynhand/scalar polarized inward}%
+  \corr@defstyle{scalarpolarizedout}{/tikzfeynhand/scalar polarized outward}%
+  \corr@defstyle{spolin}{/tikzfeynhand/scalar polarized inward}%
+  \corr@defstyle{spolout}{/tikzfeynhand/scalar polarized outward}%
+  \corr@defstyle{spol}{/tikzfeynhand/scalar polarized}%
+  \corr@defstyle{epspol}{
       /tikzfeynhand/scalar polarized,
       /tikzfeynhand/endcapp,
-    },
-    every anti scalar polarized/.style={/tikzfeynhand/every scalar polarized/.append style={##1}},
-    anti scalar polarized/.style={/tikzfeynhand/scalar polarized},
-    antiscalarpolarized/.style={/tikzfeynhand/scalar polarized},
-    anti scalar polarized inward/.style={/tikzfeynhand/scalar polarized inward},
-    anti scalar polarized outward/.style={/tikzfeynhand/scalar polarized outward},
-    antiscalarpolarizedin/.style={/tikzfeynhand/scalar polarized inward},
-    antiscalarpolarizedout/.style={/tikzfeynhand/scalar polarized outward},
-    antspol/.style={/tikzfeynhand/scalar polarized},
-    antspolin/.style={/tikzfeynhand/scalar polarized inward},
-    antspolout/.style={/tikzfeynhand/scalar polarized outward},
-  }%
+    }%
+  \corr@defstyle{every anti scalar polarized}{/tikzfeynhand/every scalar polarized/.append style={##1}}%
+  \corr@defstyle{anti scalar polarized}{/tikzfeynhand/scalar polarized}%
+  \corr@defstyle{antiscalarpolarized}{/tikzfeynhand/scalar polarized}%
+  \corr@defstyle{anti scalar polarized inward}{/tikzfeynhand/scalar polarized inward}%
+  \corr@defstyle{anti scalar polarized outward}{/tikzfeynhand/scalar polarized outward}%
+  \corr@defstyle{antiscalarpolarizedin}{/tikzfeynhand/scalar polarized inward}%
+  \corr@defstyle{antiscalarpolarizedout}{/tikzfeynhand/scalar polarized outward}%
+  \corr@defstyle{antspol}{/tikzfeynhand/scalar polarized}%
+  \corr@defstyle{antspolin}{/tikzfeynhand/scalar polarized inward}%
+  \corr@defstyle{antspolout}{/tikzfeynhand/scalar polarized outward}%
 }
 
 \pgfkeys{
@@ -4235,6 +4256,10 @@
 \corr@configurestyles
 
 \newcommand{\corr@preparelists}{%
+  % Never retain parsed topology lists across calls or list-parser settings.
+  \let\corr@cachedlistkeyone\relax
+  \let\corr@cachedlistkeytwo\relax
+  \def\corr@cachedlistnext{1}%
   \def\corr@legstyleitemslen{0}%
   \def\corr@momitemslen{0}%
   \def\corr@momarrowsizeitemslen{0}%
@@ -4395,10 +4420,11 @@
 \newcommand{\corr@drawsemanticendpointmarker}[5]{%
   \corr@resolvesemanticmarkerdimensions{#1}%
   \corr@resolvesemanticmarkertipdistance
-  \coordinate (corrSemanticMarkerTip) at ($(#2)!\corr@semanticmarkertipdistance!(#3)$);
-  \coordinate (corrSemanticMarkerBack) at ($(corrSemanticMarkerTip)!\corr@semanticmarkerheight!(#3)$);
-  \coordinate (corrSemanticMarkerSideA) at ($(corrSemanticMarkerBack)!\corr@semanticmarkerhalfwidth!90:(corrSemanticMarkerTip)$);
-  \coordinate (corrSemanticMarkerSideB) at ($(corrSemanticMarkerBack)!\corr@semanticmarkerhalfwidth!-90:(corrSemanticMarkerTip)$);
+  \path
+    coordinate (corrSemanticMarkerTip) at ($(#2)!\corr@semanticmarkertipdistance!(#3)$)
+    coordinate (corrSemanticMarkerBack) at ($(corrSemanticMarkerTip)!\corr@semanticmarkerheight!(#3)$)
+    coordinate (corrSemanticMarkerSideA) at ($(corrSemanticMarkerBack)!\corr@semanticmarkerhalfwidth!90:(corrSemanticMarkerTip)$)
+    coordinate (corrSemanticMarkerSideB) at ($(corrSemanticMarkerBack)!\corr@semanticmarkerhalfwidth!-90:(corrSemanticMarkerTip)$);
   \corr@ifstringeq{#4}{filled}{%
     \draw[
       line width=0.7\feynhandlinesize,
@@ -4468,11 +4494,12 @@
 % legacy axis guide so existing private callers keep the same signature.
 \newcommand{\corr@queuesemanticopenendpointmarkerfromcurvetangent}[9]{%
   \corr@resolvesemanticmarkerdimensions{#1}%
-  \coordinate (#2Tip) at ($(#4)!#3!(#5)$);
-  \coordinate (#2TangentTarget) at ($(#2Tip)+(#8)-(#7)$);
-  \coordinate (#2BaseCenter) at ($(#2Tip)!\corr@semanticmarkerheight!(#2TangentTarget)$);
-  \coordinate (#2SideA) at ($(#2BaseCenter)!\corr@semanticmarkerhalfwidth!90:(#2Tip)$);
-  \coordinate (#2SideB) at ($(#2BaseCenter)!\corr@semanticmarkerhalfwidth!-90:(#2Tip)$);
+  \path
+    coordinate (#2Tip) at ($(#4)!#3!(#5)$)
+    coordinate (#2TangentTarget) at ($(#2Tip)+(#8)-(#7)$)
+    coordinate (#2BaseCenter) at ($(#2Tip)!\corr@semanticmarkerheight!(#2TangentTarget)$)
+    coordinate (#2SideA) at ($(#2BaseCenter)!\corr@semanticmarkerhalfwidth!90:(#2Tip)$)
+    coordinate (#2SideB) at ($(#2BaseCenter)!\corr@semanticmarkerhalfwidth!-90:(#2Tip)$);
   \corr@queuesemanticopenendpointmarkerfromsidecoords{#1}{#2Tip}{#2SideA}{#2SideB}{#9}%
 }
 
@@ -4655,8 +4682,9 @@
 
 \newcommand{\corr@propagwithexternalendcaps}[2]{%
   \expandafter\corr@stripendcapstyles\expandafter{\corr@propoptions}%
-  \coordinate (correndcapdrawstart) at (#1);
-  \coordinate (correndcapdrawend) at (#2);
+  \path
+    coordinate (correndcapdrawstart) at (#1)
+    coordinate (correndcapdrawend) at (#2);
   \ifcorr@endcappatstart
     \coordinate (correndcapdrawstart) at ($(#1)!\pgfkeysvalueof{/tikzfeynhand/endpoint double cap gap}!(#2)$);
   \fi
@@ -4736,6 +4764,8 @@
   ] at #1 {\hbox{\corr@momentumlabelsize $#6$}};
 }
 
+% Gapped guides use two disconnected subpaths in one draw command. PGF places
+% the arrowhead only at the final endpoint; the first subpath stays unheaded.
 \newcommand{\corr@drawmomentumrangein}[7]{%
   \corr@ifexternalmomentumvisible{#1}{%
   \corr@ifemptymomentumlabel{#1}{%
@@ -4752,10 +4782,9 @@
   \path
     ($(#2)!#7!(#3)!9pt!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=\corr@momentumlinewidth]
-    ($(#2)!#5!(#3)!9pt!#4:(#3)$) --
-    ($(#2)!\corr@externalmomgapstart!(#3)!9pt!#4:(#3)$);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+    ($(#2)!#5!(#3)!9pt!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapstart!(#3)!9pt!#4:(#3)$)
     ($(#2)!\corr@externalmomgapend!(#3)!9pt!#4:(#3)$) --
     ($(#2)!#6!(#3)!9pt!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -4784,10 +4813,9 @@
   \path
     ($(#2)!#7!(#3)!9pt!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=\corr@momentumlinewidth]
-    ($(#2)!#6!(#3)!9pt!#4:(#3)$) --
-    ($(#2)!\corr@externalmomgapend!(#3)!9pt!#4:(#3)$);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+    ($(#2)!#6!(#3)!9pt!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapend!(#3)!9pt!#4:(#3)$)
     ($(#2)!\corr@externalmomgapstart!(#3)!9pt!#4:(#3)$) --
     ($(#2)!#5!(#3)!9pt!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -4825,10 +4853,9 @@
   \path
     ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=\corr@momentumlinewidth]
-    ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
-    ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+    ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$)
     ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$) --
     ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -4857,10 +4884,9 @@
   \path
     ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
-  \draw[line width=\corr@momentumlinewidth]
-    ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
-    ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
+    ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+    ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$)
     ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$) --
     ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$);
   \corr@putmomentumlabelat
@@ -4881,18 +4907,16 @@
     ($(#2)!#7!(#3)!\corr@externalmomoffset!#4:(#3)$)
     coordinate (corrmomentumlabelcoord);
   \corr@ifstringeq{\corr@custommomentumdirection}{reverse}{%
-    \draw[line width=\corr@momentumlinewidth]
-      ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
-      ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$);
     \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
-      ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$)
+    ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$) --
       ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$);
   }{%
-    \draw[line width=\corr@momentumlinewidth]
-      ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
-      ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$);
     \draw[-{Stealth[length=\corr@thismomarrowsize]},line width=\corr@momentumlinewidth]
-      ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!#5!(#3)!\corr@externalmomoffset!#4:(#3)$) --
+      ($(#2)!\corr@externalmomgapstart!(#3)!\corr@externalmomoffset!#4:(#3)$)
+    ($(#2)!\corr@externalmomgapend!(#3)!\corr@externalmomoffset!#4:(#3)$) --
       ($(#2)!#6!(#3)!\corr@externalmomoffset!#4:(#3)$);
   }%
   \corr@putmomentumlabelat
@@ -6046,15 +6070,17 @@
       \pgfmathsetmacro{\corr@tclabelanchor}{\pgfmathresult+\corr@tcangle+180}%
     }{}%
   }{}%
-  \coordinate (corrTCArrowStart) at ($(#2)!\corr@tcstart!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
-  \coordinate (corrTCArrowEnd) at ($(#2)!\corr@tcend!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
-  \coordinate (corrTCArrowLabel) at ($(#2)!\corr@tcfrac!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
+  \path
+    coordinate (corrTCArrowStart) at ($(#2)!\corr@tcstart!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$)
+    coordinate (corrTCArrowEnd) at ($(#2)!\corr@tcend!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$)
+    coordinate (corrTCArrowLabel) at ($(#2)!\corr@tcfrac!(#3)!\corr@tcoffset!\corr@tcangle:(#3)$);
   \pgfmathsetlengthmacro{\corr@tclabeldistance}{\corr@tcoffset+\corr@tclabeloffset}%
   \coordinate (corrTCLabel) at ($(#2)!\corr@tcfrac!(#3)!\corr@tclabeldistance!\corr@tcangle:(#3)$);
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{#1}}%
   % Define these even in continuous mode for diagnostics; they are not strokes.
-  \coordinate (corrTCGapStart) at (corrTCArrowLabel);
-  \coordinate (corrTCGapEnd) at (corrTCArrowLabel);
+  \path
+    coordinate (corrTCGapStart) at (corrTCArrowLabel)
+    coordinate (corrTCGapEnd) at (corrTCArrowLabel);
   \ifdefempty{\corr@tclabel}{%
     \corr@trianglecontactdrawarrow{corrTCArrowStart}{corrTCArrowEnd}%
   }{%
@@ -6093,8 +6119,9 @@
   \else
     \pgfmathsetmacro{\corr@tcgapstart}{min(\corr@tcend,max(\corr@tcstart,\corr@tcgapcenter-\corr@tcgap))}%
     \pgfmathsetmacro{\corr@tcgapend}{max(\corr@tcstart,min(\corr@tcend,\corr@tcgapcenter+\corr@tcgap))}%
-    \coordinate (corrTCGapStart) at ($(#1)!\corr@tcgapstart!(#2)!\corr@tcoffset!\corr@tcangle:(#2)$);
-    \coordinate (corrTCGapEnd) at ($(#1)!\corr@tcgapend!(#2)!\corr@tcoffset!\corr@tcangle:(#2)$);
+    \path
+      coordinate (corrTCGapStart) at ($(#1)!\corr@tcgapstart!(#2)!\corr@tcoffset!\corr@tcangle:(#2)$)
+      coordinate (corrTCGapEnd) at ($(#1)!\corr@tcgapend!(#2)!\corr@tcoffset!\corr@tcangle:(#2)$);
     \corr@ifstringeq{\corr@tcdirection}{reverse}{%
       \draw[line width=\corr@momentumlinewidth] (corrTCArrowEnd) -- (corrTCGapEnd);
       \corr@trianglecontactdrawarrow{corrTCArrowStart}{corrTCGapStart}%
@@ -7032,8 +7059,9 @@
   \xdef\corr@insertiontopangle{\corr@insertiontopangle}%
   \pgfmathsetmacro{\corr@insertionbottomangle}{\corr@insertionangle-90}%
   \xdef\corr@insertionbottomangle{\corr@insertionbottomangle}%
-  \coordinate (corrInsertionA) at ([shift=({\corr@insertionangle+180}:\corr@insertionhalflength)]corrInsertionC);
-  \coordinate (corrInsertionB) at ([shift=({\corr@insertionangle}:\corr@insertionhalflength)]corrInsertionC);
+  \path
+    coordinate (corrInsertionA) at ([shift=({\corr@insertionangle+180}:\corr@insertionhalflength)]corrInsertionC)
+    coordinate (corrInsertionB) at ([shift=({\corr@insertionangle}:\corr@insertionhalflength)]corrInsertionC);
 }
 
 % A segment appearance override does not replace the logical leg's cap.
@@ -7165,9 +7193,10 @@
 }
 
 \newcommand{\corr@setttreeslotoneseagullcoords}{%
-  \coordinate (corrInsertionV) at ($(corrInsertionOuter)!\corr@insertionposition!(corrInsertionHost)$);
-  \coordinate (corrInsertionA) at (corrInsertionV);
-  \coordinate (corrInsertionB) at (corrInsertionV);
+  \path
+    coordinate (corrInsertionV) at ($(corrInsertionOuter)!\corr@insertionposition!(corrInsertionHost)$)
+    coordinate (corrInsertionA) at (corrInsertionV)
+    coordinate (corrInsertionB) at (corrInsertionV);
   \pgfmathanglebetweenpoints{\pgfpointanchor{corrInsertionOuter}{center}}{\pgfpointanchor{corrInsertionHost}{center}}%
   \xdef\corr@insertionangle{\pgfmathresult}%
   \pgfmathsetmacro{\corr@insertiontopangle}{\corr@insertionangle+90}%
@@ -7396,9 +7425,10 @@
 
 \newcommand{\corr@drawseagullloop}{%
   \corr@prepareseagullloopstyle
-  \coordinate (corrSeagullLoopFar) at ([shift=(\corr@seagullloopangle:\corr@seagullloopdiameter)]corrInsertionV);
-  \coordinate (corrSeagullLoopLeft) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooplefttangent:\corr@seagullloopradius)]corrInsertionV);
-  \coordinate (corrSeagullLoopRight) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooprighttangent:\corr@seagullloopradius)]corrInsertionV);
+  \path
+    coordinate (corrSeagullLoopFar) at ([shift=(\corr@seagullloopangle:\corr@seagullloopdiameter)]corrInsertionV)
+    coordinate (corrSeagullLoopLeft) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooplefttangent:\corr@seagullloopradius)]corrInsertionV)
+    coordinate (corrSeagullLoopRight) at ([shift=(\corr@seagullloopangle:\corr@seagullloopradius),shift=(\corr@seagulllooprighttangent:\corr@seagullloopradius)]corrInsertionV);
   \expandafter\propag\expandafter[\corr@propoptions] (corrInsertionV)
     .. controls +(\corr@seagulllooplefttangent:\corr@seagullloopcontrol)
       and +(\corr@seagullloopbackangle:\corr@seagullloopcontrol) .. (corrSeagullLoopLeft)
@@ -7486,10 +7516,11 @@
       \pgfmathsetmacro{\corr@seagullmompfivefraction}{\corr@seagullloopmomentumstart+5*\corr@seagullmomstep}%
       \pgfmathsetmacro{\corr@seagullmompsixfraction}{\corr@seagullloopmomentumstart+6*\corr@seagullmomstep}%
       \pgfmathsetmacro{\corr@seagullmompsevenfraction}{\corr@seagullloopmomentumstart+7*\corr@seagullmomstep}%
-      \coordinate (corrSeagullMomentumV) at ([shift=(\corr@seagullloopbackangle:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
-      \coordinate (corrSeagullMomentumFar) at ([shift=(\corr@seagullloopangle:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
-      \coordinate (corrSeagullMomentumLeft) at ([shift=(\corr@seagulllooplefttangent:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
-      \coordinate (corrSeagullMomentumRight) at ([shift=(\corr@seagulllooprighttangent:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
+      \path
+        coordinate (corrSeagullMomentumV) at ([shift=(\corr@seagullloopbackangle:\corr@seagullmomentumradius)]corrSeagullLoopCenter)
+        coordinate (corrSeagullMomentumFar) at ([shift=(\corr@seagullloopangle:\corr@seagullmomentumradius)]corrSeagullLoopCenter)
+        coordinate (corrSeagullMomentumLeft) at ([shift=(\corr@seagulllooplefttangent:\corr@seagullmomentumradius)]corrSeagullLoopCenter)
+        coordinate (corrSeagullMomentumRight) at ([shift=(\corr@seagulllooprighttangent:\corr@seagullmomentumradius)]corrSeagullLoopCenter);
       \corr@setseagullmomentumcoord{\corr@seagullloopmomentumstart}{corrseagullmomstart}%
       \corr@setseagullmomentumcoord{\corr@seagullmomponefraction}{corrseagullmompone}%
       \corr@setseagullmomentumcoord{\corr@seagullmomptwofraction}{corrseagullmomptwo}%
@@ -7572,9 +7603,10 @@
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{\corr@insertionhostslot}}%
   \coordinate (corrttreeinsertionoutermomguideorigin) at ($(corrInsertionOuter)!-\corr@insertionpremomentumguideextension!(corrInsertionA)$);
   \corr@resolveinsertionmomentumrange{pre}{corrttreeinsertionoutermomguideorigin}{corrInsertionA}%
-  \coordinate (corrttreeinsertionoutermomstart) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumstart!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
-  \coordinate (corrttreeinsertionoutermomend) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumend!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
-  \coordinate (corrttreeinsertionoutermomlabel) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumlabelfraction!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
+  \path
+    coordinate (corrttreeinsertionoutermomstart) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumstart!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$)
+    coordinate (corrttreeinsertionoutermomend) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumend!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$)
+    coordinate (corrttreeinsertionoutermomlabel) at ($(corrttreeinsertionoutermomguideorigin)!\corr@insertionpremomentumlabelfraction!(corrInsertionA)!\corr@insertionpremomentumoffset!\corr@insertionmomentumangle:(corrInsertionA)$);
   \corr@ifstringeq{\corr@insertionhostmomentumdirection}{out}{%
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertionoutermomend) -- (corrttreeinsertionoutermomstart);
@@ -7600,9 +7632,10 @@
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{\corr@insertionhostslot}}%
   \corr@resolveinsertionmomentumrange{post}{corrInsertionB}{corrInsertionHost}%
-  \coordinate (corrttreeinsertioninnermomstart) at ($(corrInsertionB)!\corr@insertionpostmomentumstart!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
-  \coordinate (corrttreeinsertioninnermomend) at ($(corrInsertionB)!\corr@insertionpostmomentumend!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
-  \coordinate (corrttreeinsertioninnermomlabel) at ($(corrInsertionB)!\corr@insertionpostmomentumlabelfraction!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
+  \path
+    coordinate (corrttreeinsertioninnermomstart) at ($(corrInsertionB)!\corr@insertionpostmomentumstart!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$)
+    coordinate (corrttreeinsertioninnermomend) at ($(corrInsertionB)!\corr@insertionpostmomentumend!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$)
+    coordinate (corrttreeinsertioninnermomlabel) at ($(corrInsertionB)!\corr@insertionpostmomentumlabelfraction!(corrInsertionHost)!\corr@insertionpostmomentumoffset!\corr@insertionmomentumangle:(corrInsertionHost)$);
   \corr@ifstringeq{\corr@insertionhostmomentumdirection}{out}{%
     \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
       (corrttreeinsertioninnermomend) -- (corrttreeinsertioninnermomstart);
@@ -7627,9 +7660,10 @@
   \ifcorr@showchannelmomentum
   \begingroup
   \edef\corr@thismomarrowsize{\corr@momentumarrowsizefor{5}}%
-  \coordinate (corrttreeinsertionmiddlemomstart) at ([xshift=\corr@insertionmiddlemomentumxshift,yshift=\corr@insertionmiddlemomentumstartyshift]corrC);
-  \coordinate (corrttreeinsertionmiddlemomend) at ([xshift=\corr@insertionmiddlemomentumxshift,yshift=\corr@insertionmiddlemomentumendyshift]corrC);
-  \coordinate (corrttreeinsertionmiddlemomlabel) at ([xshift=\corr@insertionmiddlemomentumlabelxshift,yshift=\corr@insertionmiddlemomentumlabelyshift]corrC);
+  \path
+    coordinate (corrttreeinsertionmiddlemomstart) at ([xshift=\corr@insertionmiddlemomentumxshift,yshift=\corr@insertionmiddlemomentumstartyshift]corrC)
+    coordinate (corrttreeinsertionmiddlemomend) at ([xshift=\corr@insertionmiddlemomentumxshift,yshift=\corr@insertionmiddlemomentumendyshift]corrC)
+    coordinate (corrttreeinsertionmiddlemomlabel) at ([xshift=\corr@insertionmiddlemomentumlabelxshift,yshift=\corr@insertionmiddlemomentumlabelyshift]corrC);
   \draw[-{Stealth[length=\corr@thismomarrowsize]},black,line width=\corr@momentumlinewidth]
     (corrttreeinsertionmiddlemomstart) -- (corrttreeinsertionmiddlemomend);
   \corr@putmomentumlabelwithdistance
@@ -7952,16 +7986,17 @@
         coordinate[pos=\corr@bubblemomlabelfraction] (corrmomentumlabelrawcoord)
         coordinate[pos=\corr@bubblemomend] (corrbubblemomrawend)
         (#4);
-      \coordinate (corrbubblemomstart) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawstart);
-      \coordinate (corrbubblemompone) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpone);
-      \coordinate (corrbubblemomptwo) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawptwo);
-      \coordinate (corrbubblemompthree) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpthree);
-      \coordinate (corrbubblemompfour) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpfour);
-      \coordinate (corrbubblemompfive) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpfive);
-      \coordinate (corrbubblemompsix) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpsix);
-      \coordinate (corrbubblemompseven) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpseven);
-      \coordinate (corrmomentumlabelcoord) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrmomentumlabelrawcoord);
-      \coordinate (corrbubblemomend) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawend);
+      \path
+        coordinate (corrbubblemomstart) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawstart)
+        coordinate (corrbubblemompone) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpone)
+        coordinate (corrbubblemomptwo) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawptwo)
+        coordinate (corrbubblemompthree) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpthree)
+        coordinate (corrbubblemompfour) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpfour)
+        coordinate (corrbubblemompfive) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpfive)
+        coordinate (corrbubblemompsix) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpsix)
+        coordinate (corrbubblemompseven) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawpseven)
+        coordinate (corrmomentumlabelcoord) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrmomentumlabelrawcoord)
+        coordinate (corrbubblemomend) at ([shift={(#6:\corr@bubblemomeffectiveoffset)}]corrbubblemomrawend);
     }{%
       \path
         ([shift={(#6:\corr@bubblemomoffset)}]#3)
@@ -8446,8 +8481,9 @@
     \ifnum\corr@bevalid=0
       \PackageError{feynman-fun}{Invalid box external crossing gap}{Use a positive half-width smaller than both endpoint fractions.}%
     \fi
-    \coordinate (corrBEGapA) at ($(corrExtUL)!{\corr@becrossfraction-\corr@boxexternalcrossinggap}!(corrBoxTR)$);
-    \coordinate (corrBEGapB) at ($(corrExtUL)!{\corr@becrossfraction+\corr@boxexternalcrossinggap}!(corrBoxTR)$);
+    \path
+      coordinate (corrBEGapA) at ($(corrExtUL)!{\corr@becrossfraction-\corr@boxexternalcrossinggap}!(corrBoxTR)$)
+      coordinate (corrBEGapB) at ($(corrExtUL)!{\corr@becrossfraction+\corr@boxexternalcrossinggap}!(corrBoxTR)$);
   }{}%
 }
 \newcommand{\corr@boxexternalresolveannotation}[1]{%
@@ -8675,8 +8711,9 @@
 
 \newcommand{\corr@drawcontactinsertionleg}[2]{%
   \ifnum#1=\corr@insertionslot\relax
-    \coordinate (corrInsertionOuter) at (#2);
-    \coordinate (corrInsertionHost) at (corrC);
+    \path
+      coordinate (corrInsertionOuter) at (#2)
+      coordinate (corrInsertionHost) at (corrC);
     \corr@ifcontactseagullinsertion{%
       \corr@validatecontactseagullgeometry
       \corr@drawttreeslotoneseagullinsertion
@@ -9040,10 +9077,11 @@
     \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
-    \coordinate (corrTriSlotOne) at (corrTriA);
-    \coordinate (corrTriSlotTwo) at (corrTriContact);
-    \coordinate (corrTriSlotThree) at (corrTriB);
-    \coordinate (corrTriSlotFour) at (corrTriContact);
+    \path
+      coordinate (corrTriSlotOne) at (corrTriA)
+      coordinate (corrTriSlotTwo) at (corrTriContact)
+      coordinate (corrTriSlotThree) at (corrTriB)
+      coordinate (corrTriSlotFour) at (corrTriContact);
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriA}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriContact}%
@@ -9053,12 +9091,13 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriContact}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriContact}{corrTriB}%
-    \coordinate (corrTriEdgeFiveStart) at (corrTriA);
-    \coordinate (corrTriEdgeFiveEnd) at (corrTriB);
-    \coordinate (corrTriEdgeSixStart) at (corrTriA);
-    \coordinate (corrTriEdgeSixEnd) at (corrTriContact);
-    \coordinate (corrTriEdgeSevenStart) at (corrTriContact);
-    \coordinate (corrTriEdgeSevenEnd) at (corrTriB);
+    \path
+      coordinate (corrTriEdgeFiveStart) at (corrTriA)
+      coordinate (corrTriEdgeFiveEnd) at (corrTriB)
+      coordinate (corrTriEdgeSixStart) at (corrTriA)
+      coordinate (corrTriEdgeSixEnd) at (corrTriContact)
+      coordinate (corrTriEdgeSevenStart) at (corrTriContact)
+      coordinate (corrTriEdgeSevenEnd) at (corrTriB);
   \end{feynhand}
   \def\corr@trianglecontactinternalfiveangle{90}%
   \def\corr@trianglecontactinternalsixangle{-90}%
@@ -9076,10 +9115,11 @@
     \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
-    \coordinate (corrTriSlotOne) at (corrTriContact);
-    \coordinate (corrTriSlotTwo) at (corrTriA);
-    \coordinate (corrTriSlotThree) at (corrTriContact);
-    \coordinate (corrTriSlotFour) at (corrTriB);
+    \path
+      coordinate (corrTriSlotOne) at (corrTriContact)
+      coordinate (corrTriSlotTwo) at (corrTriA)
+      coordinate (corrTriSlotThree) at (corrTriContact)
+      coordinate (corrTriSlotFour) at (corrTriB);
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriContact}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriA}%
@@ -9089,12 +9129,13 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriB}{corrTriContact}%
-    \coordinate (corrTriEdgeFiveStart) at (corrTriContact);
-    \coordinate (corrTriEdgeFiveEnd) at (corrTriA);
-    \coordinate (corrTriEdgeSixStart) at (corrTriA);
-    \coordinate (corrTriEdgeSixEnd) at (corrTriB);
-    \coordinate (corrTriEdgeSevenStart) at (corrTriB);
-    \coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
+    \path
+      coordinate (corrTriEdgeFiveStart) at (corrTriContact)
+      coordinate (corrTriEdgeFiveEnd) at (corrTriA)
+      coordinate (corrTriEdgeSixStart) at (corrTriA)
+      coordinate (corrTriEdgeSixEnd) at (corrTriB)
+      coordinate (corrTriEdgeSevenStart) at (corrTriB)
+      coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
   \end{feynhand}
   \def\corr@trianglecontactinternalfiveangle{90}%
   \def\corr@trianglecontactinternalsixangle{-90}%
@@ -9112,10 +9153,11 @@
     \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
-    \coordinate (corrTriSlotOne) at (corrTriContact);
-    \coordinate (corrTriSlotTwo) at (corrTriContact);
-    \coordinate (corrTriSlotThree) at (corrTriA);
-    \coordinate (corrTriSlotFour) at (corrTriB);
+    \path
+      coordinate (corrTriSlotOne) at (corrTriContact)
+      coordinate (corrTriSlotTwo) at (corrTriContact)
+      coordinate (corrTriSlotThree) at (corrTriA)
+      coordinate (corrTriSlotFour) at (corrTriB);
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriContact}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriContact}%
@@ -9125,12 +9167,13 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriContact}{corrTriA}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriB}{corrTriContact}%
-    \coordinate (corrTriEdgeFiveStart) at (corrTriContact);
-    \coordinate (corrTriEdgeFiveEnd) at (corrTriA);
-    \coordinate (corrTriEdgeSixStart) at (corrTriA);
-    \coordinate (corrTriEdgeSixEnd) at (corrTriB);
-    \coordinate (corrTriEdgeSevenStart) at (corrTriB);
-    \coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
+    \path
+      coordinate (corrTriEdgeFiveStart) at (corrTriContact)
+      coordinate (corrTriEdgeFiveEnd) at (corrTriA)
+      coordinate (corrTriEdgeSixStart) at (corrTriA)
+      coordinate (corrTriEdgeSixEnd) at (corrTriB)
+      coordinate (corrTriEdgeSevenStart) at (corrTriB)
+      coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
   \end{feynhand}
   \def\corr@trianglecontactinternalfiveangle{90}%
   \def\corr@trianglecontactinternalsixangle{90}%
@@ -9148,10 +9191,11 @@
     \vertex (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
     \vertex (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
-    \coordinate (corrTriSlotOne) at (corrTriA);
-    \coordinate (corrTriSlotTwo) at (corrTriB);
-    \coordinate (corrTriSlotThree) at (corrTriContact);
-    \coordinate (corrTriSlotFour) at (corrTriContact);
+    \path
+      coordinate (corrTriSlotOne) at (corrTriA)
+      coordinate (corrTriSlotTwo) at (corrTriB)
+      coordinate (corrTriSlotThree) at (corrTriContact)
+      coordinate (corrTriSlotFour) at (corrTriContact);
     \corr@ifexternallegs{%
       \corr@drawtrianglecontactexternalprop{1}{corrExtUL}{corrTriA}%
       \corr@drawtrianglecontactexternalprop{2}{corrExtLL}{corrTriB}%
@@ -9161,12 +9205,13 @@
     \corr@drawtrianglecontactinternalprop{5}{corrTriA}{corrTriB}%
     \corr@drawtrianglecontactinternalprop{6}{corrTriB}{corrTriContact}%
     \corr@drawtrianglecontactinternalprop{7}{corrTriContact}{corrTriA}%
-    \coordinate (corrTriEdgeFiveStart) at (corrTriA);
-    \coordinate (corrTriEdgeFiveEnd) at (corrTriB);
-    \coordinate (corrTriEdgeSixStart) at (corrTriB);
-    \coordinate (corrTriEdgeSixEnd) at (corrTriContact);
-    \coordinate (corrTriEdgeSevenStart) at (corrTriContact);
-    \coordinate (corrTriEdgeSevenEnd) at (corrTriA);
+    \path
+      coordinate (corrTriEdgeFiveStart) at (corrTriA)
+      coordinate (corrTriEdgeFiveEnd) at (corrTriB)
+      coordinate (corrTriEdgeSixStart) at (corrTriB)
+      coordinate (corrTriEdgeSixEnd) at (corrTriContact)
+      coordinate (corrTriEdgeSevenStart) at (corrTriContact)
+      coordinate (corrTriEdgeSevenEnd) at (corrTriA);
   \end{feynhand}
   \def\corr@trianglecontactinternalfiveangle{-90}%
   \def\corr@trianglecontactinternalsixangle{-90}%
@@ -9193,33 +9238,36 @@
   \pgfmathsetmacro{\corr@cvinternalx}{\corr@cvradius*\corr@trianglecontactexternalxspan/\corr@cvouterradius}%
   \pgfmathsetmacro{\corr@cvinternaly}{\corr@cvradius*\corr@trianglecontactexternalyspan/\corr@cvouterradius}%
   \pgfmathsetmacro{\corr@cvstartangle}{atan2(\corr@cvysign*\corr@cvinternaly,-\corr@cvinternalx)}%
-  \coordinate (corrC) at (0,0);
-  \coordinate (corrTriContact) at (corrC);
-  \coordinate (corrTriA) at (-\corr@cvinternalx,\corr@cvysign*\corr@cvinternaly);
-  \coordinate (corrTriB) at (\corr@cvinternalx,-\corr@cvysign*\corr@cvinternaly);
-  \coordinate (corrExtUL) at (-\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
-  \coordinate (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
-  \coordinate (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan);
-  \coordinate (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan);
-  \coordinate (corrTriSlotOne) at (corrTriA);
-  \coordinate (corrTriSlotTwo) at (corrTriContact);
-  \coordinate (corrTriSlotThree) at (corrTriContact);
-  \coordinate (corrTriSlotFour) at (corrTriB);
+  \path
+    coordinate (corrC) at (0,0)
+    coordinate (corrTriContact) at (corrC)
+    coordinate (corrTriA) at (-\corr@cvinternalx,\corr@cvysign*\corr@cvinternaly)
+    coordinate (corrTriB) at (\corr@cvinternalx,-\corr@cvysign*\corr@cvinternaly)
+    coordinate (corrExtUL) at (-\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan)
+    coordinate (corrExtLL) at (-\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan)
+    coordinate (corrExtUR) at (\corr@trianglecontactexternalxspan,\corr@trianglecontactexternalyspan)
+    coordinate (corrExtLR) at (\corr@trianglecontactexternalxspan,-\corr@trianglecontactexternalyspan)
+    coordinate (corrTriSlotOne) at (corrTriA)
+    coordinate (corrTriSlotTwo) at (corrTriContact)
+    coordinate (corrTriSlotThree) at (corrTriContact)
+    coordinate (corrTriSlotFour) at (corrTriB);
   \def\corr@cvcrossouter{corrExtUR}%
   \corr@ifstringeq{\corr@trianglecontactorientation}{crossed-left}{%
-    \coordinate (corrTriSlotOne) at (corrTriContact);
-    \coordinate (corrTriSlotTwo) at (corrTriA);
-    \coordinate (corrTriSlotThree) at (corrTriB);
-    \coordinate (corrTriSlotFour) at (corrTriContact);
+    \path
+      coordinate (corrTriSlotOne) at (corrTriContact)
+      coordinate (corrTriSlotTwo) at (corrTriA)
+      coordinate (corrTriSlotThree) at (corrTriB)
+      coordinate (corrTriSlotFour) at (corrTriContact);
     \def\corr@cvcrossouter{corrExtUL}}{}%
-  \coordinate (corrBEGapA) at ($(\corr@cvcrossouter)!{\corr@cvcrossfraction-\corr@crossedvertexgap}!(corrTriContact)$);
-  \coordinate (corrBEGapB) at ($(\corr@cvcrossouter)!{\corr@cvcrossfraction+\corr@crossedvertexgap}!(corrTriContact)$);
-  \coordinate (corrTriEdgeFiveStart) at (corrTriContact);
-  \coordinate (corrTriEdgeFiveEnd) at (corrTriA);
-  \coordinate (corrTriEdgeSixStart) at (corrTriA);
-  \coordinate (corrTriEdgeSixEnd) at (corrTriB);
-  \coordinate (corrTriEdgeSevenStart) at (corrTriB);
-  \coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
+  \path
+    coordinate (corrBEGapA) at ($(\corr@cvcrossouter)!{\corr@cvcrossfraction-\corr@crossedvertexgap}!(corrTriContact)$)
+    coordinate (corrBEGapB) at ($(\corr@cvcrossouter)!{\corr@cvcrossfraction+\corr@crossedvertexgap}!(corrTriContact)$)
+    coordinate (corrTriEdgeFiveStart) at (corrTriContact)
+    coordinate (corrTriEdgeFiveEnd) at (corrTriA)
+    coordinate (corrTriEdgeSixStart) at (corrTriA)
+    coordinate (corrTriEdgeSixEnd) at (corrTriB)
+    coordinate (corrTriEdgeSevenStart) at (corrTriB)
+    coordinate (corrTriEdgeSevenEnd) at (corrTriContact);
   % An interior point of the half-disc supplies a meaningful outside normal
   % even though its three interaction vertices themselves are collinear.
   \coordinate (corrTriCentroid) at ({.4*\corr@cvradius*cos(\corr@cvstartangle-90)},{.4*\corr@cvradius*sin(\corr@cvstartangle-90)});
@@ -9246,8 +9294,9 @@
     arc[start angle=\corr@cvstartangle,delta angle=-180,radius=\corr@cvradius cm];
   % Exact endpoint tangents; marker contact and size use the shared semantic
   % pipeline. The diameter is not the tangent of the half-moon.
-  \coordinate (corrCVArcStartGuide) at ($(corrTriA)+({cos(\corr@cvstartangle-90)},{sin(\corr@cvstartangle-90)})$);
-  \coordinate (corrCVArcEndGuide) at ($(corrTriB)+({cos(\corr@cvstartangle-90)},{sin(\corr@cvstartangle-90)})$);
+  \path
+    coordinate (corrCVArcStartGuide) at ($(corrTriA)+({cos(\corr@cvstartangle-90)},{sin(\corr@cvstartangle-90)})$)
+    coordinate (corrCVArcEndGuide) at ($(corrTriB)+({cos(\corr@cvstartangle-90)},{sin(\corr@cvstartangle-90)})$);
   \corr@crossedvertexarcmarkers
 }
 % Queue the arc's two ends independently: both outward tangents point toward

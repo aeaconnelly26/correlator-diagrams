@@ -1,0 +1,1012 @@
+{
+  "engine": "pdfTeX 3.141592653-2.6-1.40.27 (TeX Live 2025)",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "revision": "7069f394e458df0bcfcfdfe059b3ac529373a96d",
+  "packages": {
+    "baseline": {
+      "directory": "/private/tmp/feynmanfun-perf-baseline",
+      "sha256": "ca9e9875fc7015e2bab882aa8fbeb17b72745401f6f8797f3de70608281dd361"
+    },
+    "candidate": {
+      "directory": "/Users/aeaconnelly/Documents/FeynmanFun",
+      "sha256": "5e1eeedd9c159d9c3677bb6cbe1dd92b69de108edbeda72aaf5ed12624828dc9"
+    }
+  },
+  "warmups": 1,
+  "repeats": 7,
+  "cases": {
+    "empty": {
+      "diagrams": 0,
+      "source_sha256": "adc8ea36ca622d90db0e2615deab42272dcf5c3e41bb4cf55e89752ba1311a53",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 0.2537870419982937,
+              "user_seconds": 0.24080499999999996,
+              "system_seconds": 0.01018,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 0.24061245899792993,
+              "user_seconds": 0.22955199999999998,
+              "system_seconds": 0.009073000000000005,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.2524036670001806,
+              "user_seconds": 0.23923400000000006,
+              "system_seconds": 0.011127999999999999,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.23439525000139838,
+              "user_seconds": 0.22270600000000007,
+              "system_seconds": 0.009594000000000005,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.2355815420014551,
+              "user_seconds": 0.22385900000000003,
+              "system_seconds": 0.009763999999999995,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.2327607910046936,
+              "user_seconds": 0.2214710000000002,
+              "system_seconds": 0.009590999999999988,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.2321396669940441,
+              "user_seconds": 0.22106499999999984,
+              "system_seconds": 0.009327000000000002,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.23229641700163484,
+              "user_seconds": 0.22099199999999986,
+              "system_seconds": 0.009753999999999985,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 0.23439525000139838,
+          "min_wall_seconds": 0.2321396669940441,
+          "max_wall_seconds": 0.2524036670001806,
+          "median_user_seconds": 0.22270600000000007
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 0.2401721659989562,
+              "user_seconds": 0.228552,
+              "system_seconds": 0.009694999999999999,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 0.23513979199924506,
+              "user_seconds": 0.22349000000000002,
+              "system_seconds": 0.009969999999999996,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.23691520799911814,
+              "user_seconds": 0.22519699999999987,
+              "system_seconds": 0.009699999999999993,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.238656000001356,
+              "user_seconds": 0.22698700000000005,
+              "system_seconds": 0.009744000000000003,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.2335020419995999,
+              "user_seconds": 0.22242799999999985,
+              "system_seconds": 0.009329000000000004,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.23219391699967673,
+              "user_seconds": 0.22084700000000002,
+              "system_seconds": 0.009317999999999993,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.2338228749940754,
+              "user_seconds": 0.22270099999999982,
+              "system_seconds": 0.009447000000000011,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.24930687499727355,
+              "user_seconds": 0.23553000000000024,
+              "system_seconds": 0.010857000000000006,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 0.23513979199924506,
+          "min_wall_seconds": 0.23219391699967673,
+          "max_wall_seconds": 0.24930687499727355,
+          "median_user_seconds": 0.22349000000000002
+        }
+      }
+    },
+    "load": {
+      "diagrams": 0,
+      "source_sha256": "38d813c515c05ee117bb8e152dacc11dc720177fd89e3ded4ddbc0215baaba77",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 0.4802555830028723,
+              "user_seconds": 0.45653299999999986,
+              "system_seconds": 0.02201700000000001,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 0.4976689590039314,
+              "user_seconds": 0.47310300000000005,
+              "system_seconds": 0.022852999999999984,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.4904834580011084,
+              "user_seconds": 0.46658199999999983,
+              "system_seconds": 0.021845000000000003,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.48847137499979,
+              "user_seconds": 0.46458200000000005,
+              "system_seconds": 0.021735000000000004,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.4974562080024043,
+              "user_seconds": 0.47137600000000024,
+              "system_seconds": 0.023646999999999974,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.4901055410009576,
+              "user_seconds": 0.4656450000000003,
+              "system_seconds": 0.02243299999999998,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.48306891600077506,
+              "user_seconds": 0.4589350000000003,
+              "system_seconds": 0.022114999999999996,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.49247566700069,
+              "user_seconds": 0.46785999999999994,
+              "system_seconds": 0.022383000000000042,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 0.4904834580011084,
+          "min_wall_seconds": 0.48306891600077506,
+          "max_wall_seconds": 0.4976689590039314,
+          "median_user_seconds": 0.46658199999999983
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 0.48246191600628663,
+              "user_seconds": 0.45898200000000067,
+              "system_seconds": 0.02177000000000001,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 0.4905349999971804,
+              "user_seconds": 0.46709899999999926,
+              "system_seconds": 0.021410999999999986,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5155314579969854,
+              "user_seconds": 0.4905190000000008,
+              "system_seconds": 0.023465999999999987,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5118788329928066,
+              "user_seconds": 0.4864739999999994,
+              "system_seconds": 0.022995000000000043,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.4848400830014725,
+              "user_seconds": 0.4602770000000005,
+              "system_seconds": 0.02276499999999998,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.4845722919999389,
+              "user_seconds": 0.4605979999999992,
+              "system_seconds": 0.022104000000000013,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.4953587919953861,
+              "user_seconds": 0.47051899999999947,
+              "system_seconds": 0.023343000000000003,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5013559170038207,
+              "user_seconds": 0.47593700000000005,
+              "system_seconds": 0.023894000000000026,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 0.4953587919953861,
+          "min_wall_seconds": 0.4845722919999389,
+          "max_wall_seconds": 0.5155314579969854,
+          "median_user_seconds": 0.47051899999999947
+        }
+      }
+    },
+    "single": {
+      "diagrams": 1,
+      "source_sha256": "57d423e3462b6a65c713a49081bac729be344fbb5aa2aed10aa2174a21278984",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 0.5108155420020921,
+              "user_seconds": 0.48586300000000016,
+              "system_seconds": 0.0228799999999999,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 0.5146319579944247,
+              "user_seconds": 0.4896370000000001,
+              "system_seconds": 0.023017999999999983,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.506324540998321,
+              "user_seconds": 0.4821390000000001,
+              "system_seconds": 0.022048999999999985,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.513408332997642,
+              "user_seconds": 0.48875400000000013,
+              "system_seconds": 0.02262200000000003,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.511170541998581,
+              "user_seconds": 0.4852539999999994,
+              "system_seconds": 0.02338499999999999,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5120101669963333,
+              "user_seconds": 0.48777899999999974,
+              "system_seconds": 0.022240000000000038,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5058562909980537,
+              "user_seconds": 0.4815769999999979,
+              "system_seconds": 0.022293999999999925,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5071664580027573,
+              "user_seconds": 0.4819910000000007,
+              "system_seconds": 0.023030999999999913,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 0.511170541998581,
+          "min_wall_seconds": 0.5058562909980537,
+          "max_wall_seconds": 0.5146319579944247,
+          "median_user_seconds": 0.4852539999999994
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 0.5028491660050349,
+              "user_seconds": 0.4786780000000004,
+              "system_seconds": 0.022189000000000014,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 0.504809625002963,
+              "user_seconds": 0.4798039999999997,
+              "system_seconds": 0.022843000000000058,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5036587499998859,
+              "user_seconds": 0.47888799999999954,
+              "system_seconds": 0.022413000000000016,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5004907080001431,
+              "user_seconds": 0.47644400000000076,
+              "system_seconds": 0.021908999999999956,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5091992500019842,
+              "user_seconds": 0.4838919999999991,
+              "system_seconds": 0.023287000000000058,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5083352919973549,
+              "user_seconds": 0.483309000000002,
+              "system_seconds": 0.02290099999999995,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5138208330026828,
+              "user_seconds": 0.48937500000000256,
+              "system_seconds": 0.022286000000000028,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 0.5010825839999598,
+              "user_seconds": 0.4770089999999989,
+              "system_seconds": 0.02199300000000004,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 0.504809625002963,
+          "min_wall_seconds": 0.5004907080001431,
+          "max_wall_seconds": 0.5138208330026828,
+          "median_user_seconds": 0.4798039999999997
+        }
+      }
+    },
+    "simple": {
+      "diagrams": 40,
+      "source_sha256": "f07518f250fd6b5f65b93d245d5b619407df8c552c67efd9b5acea3213b718f2",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 1.2158808750027674,
+              "user_seconds": 1.1879209999999993,
+              "system_seconds": 0.025999000000000105,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 1.2456220000021858,
+              "user_seconds": 1.2148660000000007,
+              "system_seconds": 0.02757299999999996,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.2690310000034515,
+              "user_seconds": 1.2325419999999987,
+              "system_seconds": 0.03389300000000006,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.2197520000045188,
+              "user_seconds": 1.1914490000000022,
+              "system_seconds": 0.025984000000000007,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.2164819999961765,
+              "user_seconds": 1.1890579999999993,
+              "system_seconds": 0.02527400000000002,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.2157770420017187,
+              "user_seconds": 1.1869469999999964,
+              "system_seconds": 0.02665099999999998,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.2234232919945498,
+              "user_seconds": 1.1981880000000018,
+              "system_seconds": 0.023215999999999903,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.2104470420017606,
+              "user_seconds": 1.1840040000000016,
+              "system_seconds": 0.024170000000000025,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 1.2197520000045188,
+          "min_wall_seconds": 1.2104470420017606,
+          "max_wall_seconds": 1.2690310000034515,
+          "median_user_seconds": 1.1914490000000022
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 1.1639505830025882,
+              "user_seconds": 1.1352919999999997,
+              "system_seconds": 0.026673999999999976,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 1.1739265409996733,
+              "user_seconds": 1.1451379999999993,
+              "system_seconds": 0.026204000000000005,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1765578339982312,
+              "user_seconds": 1.1462230000000027,
+              "system_seconds": 0.027773999999999965,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1613763330024085,
+              "user_seconds": 1.1333299999999973,
+              "system_seconds": 0.025787000000000004,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.163635292003164,
+              "user_seconds": 1.1352130000000002,
+              "system_seconds": 0.02625999999999995,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1561919999949168,
+              "user_seconds": 1.1274650000000008,
+              "system_seconds": 0.027305000000000135,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1967880420052097,
+              "user_seconds": 1.1654710000000037,
+              "system_seconds": 0.028164999999999996,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1578694170020754,
+              "user_seconds": 1.1308429999999987,
+              "system_seconds": 0.02492899999999998,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 1.163635292003164,
+          "min_wall_seconds": 1.1561919999949168,
+          "max_wall_seconds": 1.1967880420052097,
+          "median_user_seconds": 1.1352130000000002
+        }
+      }
+    },
+    "three-point": {
+      "diagrams": 20,
+      "source_sha256": "f29aa2add838d4400129a9732192ee5e36864ccb1cc33290db3a0e4dec55342c",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 1.0967525840023882,
+              "user_seconds": 1.070295999999999,
+              "system_seconds": 0.02441800000000005,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 1.093689916000585,
+              "user_seconds": 1.0668229999999994,
+              "system_seconds": 0.02432600000000007,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.092261125006189,
+              "user_seconds": 1.065642000000004,
+              "system_seconds": 0.02447099999999991,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1077152919970104,
+              "user_seconds": 1.0795280000000034,
+              "system_seconds": 0.025825999999999905,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1185828749948996,
+              "user_seconds": 1.0894789999999972,
+              "system_seconds": 0.02570399999999995,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.1322156249952968,
+              "user_seconds": 1.0968810000000033,
+              "system_seconds": 0.033107,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.090317458001664,
+              "user_seconds": 1.061789999999995,
+              "system_seconds": 0.026555000000000106,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.112580250002793,
+              "user_seconds": 1.0846820000000008,
+              "system_seconds": 0.02559800000000001,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 1.1077152919970104,
+          "min_wall_seconds": 1.090317458001664,
+          "max_wall_seconds": 1.1322156249952968,
+          "median_user_seconds": 1.0795280000000034
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 1.0656825830010348,
+              "user_seconds": 1.0386239999999987,
+              "system_seconds": 0.02492800000000006,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 1.065935291997448,
+              "user_seconds": 1.0375609999999966,
+              "system_seconds": 0.02600199999999986,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.056386083997495,
+              "user_seconds": 1.029800999999999,
+              "system_seconds": 0.024197999999999942,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.069679708998592,
+              "user_seconds": 1.0417389999999997,
+              "system_seconds": 0.02561200000000019,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.0562480829976266,
+              "user_seconds": 1.0295890000000014,
+              "system_seconds": 0.02412800000000015,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.0902371250049328,
+              "user_seconds": 1.0562029999999965,
+              "system_seconds": 0.031880999999999826,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.0541018750009243,
+              "user_seconds": 1.0278390000000002,
+              "system_seconds": 0.024119,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 1.0504565419978462,
+              "user_seconds": 1.0243350000000007,
+              "system_seconds": 0.02398699999999998,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 1.056386083997495,
+          "min_wall_seconds": 1.0504565419978462,
+          "max_wall_seconds": 1.0902371250049328,
+          "median_user_seconds": 1.029800999999999
+        }
+      }
+    },
+    "mixed": {
+      "diagrams": 20,
+      "source_sha256": "6649da5bf130766b4b48baa5635f442d178829eace418a95cd52376bd6f9fce9",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 3.217685707997589,
+              "user_seconds": 3.178346000000005,
+              "system_seconds": 0.035646000000000067,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 3.3194728340022266,
+              "user_seconds": 3.2600510000000043,
+              "system_seconds": 0.048354999999999926,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.290216708999651,
+              "user_seconds": 3.2330909999999875,
+              "system_seconds": 0.04800800000000005,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.294679291997454,
+              "user_seconds": 3.242041999999998,
+              "system_seconds": 0.04908299999999999,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.3228766250031185,
+              "user_seconds": 3.2621929999999963,
+              "system_seconds": 0.051337999999999884,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.1925779580051312,
+              "user_seconds": 3.1605930000000058,
+              "system_seconds": 0.029736999999999902,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.214517041997169,
+              "user_seconds": 3.1807560000000024,
+              "system_seconds": 0.03122299999999978,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.1820997499962687,
+              "user_seconds": 3.148978999999997,
+              "system_seconds": 0.031097000000000374,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 3.290216708999651,
+          "min_wall_seconds": 3.1820997499962687,
+          "max_wall_seconds": 3.3228766250031185,
+          "median_user_seconds": 3.2330909999999875
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 3.1566131669969764,
+              "user_seconds": 3.1209599999999966,
+              "system_seconds": 0.033286999999999844,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 3.134282249993703,
+              "user_seconds": 3.098232000000003,
+              "system_seconds": 0.03341300000000014,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.269798499997705,
+              "user_seconds": 3.213581000000005,
+              "system_seconds": 0.04757900000000004,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.2335754160012584,
+              "user_seconds": 3.1811620000000005,
+              "system_seconds": 0.048997999999999875,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.1252602500026114,
+              "user_seconds": 3.0908430000000067,
+              "system_seconds": 0.031970000000000276,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.142513582999527,
+              "user_seconds": 3.1056059999999945,
+              "system_seconds": 0.03198100000000004,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.1533940829976927,
+              "user_seconds": 3.1141920000000027,
+              "system_seconds": 0.03488400000000036,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 3.1321689160031383,
+              "user_seconds": 3.0983659999999986,
+              "system_seconds": 0.031682999999999684,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 3.142513582999527,
+          "min_wall_seconds": 3.1252602500026114,
+          "max_wall_seconds": 3.269798499997705,
+          "median_user_seconds": 3.1056059999999945
+        }
+      }
+    },
+    "indexed": {
+      "diagrams": 20,
+      "source_sha256": "bfd3c6731acd5c6decd848b44169ab62d29dade2310db3262f46db42bdf1aa51",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 2.2867235419980716,
+              "user_seconds": 2.2564689999999956,
+              "system_seconds": 0.028256999999999977,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 2.298773665999761,
+              "user_seconds": 2.267649999999989,
+              "system_seconds": 0.028971999999999998,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.290079957994749,
+              "user_seconds": 2.26253100000001,
+              "system_seconds": 0.025163000000000046,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.315983500004222,
+              "user_seconds": 2.284998999999999,
+              "system_seconds": 0.028515000000000068,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.3175902500006487,
+              "user_seconds": 2.283528000000004,
+              "system_seconds": 0.031247000000000025,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.3124385420014733,
+              "user_seconds": 2.2795890000000156,
+              "system_seconds": 0.029706999999999706,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.324453875000472,
+              "user_seconds": 2.291442999999987,
+              "system_seconds": 0.030378000000000238,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.289286292005272,
+              "user_seconds": 2.2592730000000074,
+              "system_seconds": 0.027867999999999782,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 2.3124385420014733,
+          "min_wall_seconds": 2.289286292005272,
+          "max_wall_seconds": 2.324453875000472,
+          "median_user_seconds": 2.2795890000000156
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 2.20713799999794,
+              "user_seconds": 2.174108000000004,
+              "system_seconds": 0.030893999999999977,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 2.1758426250016782,
+              "user_seconds": 2.146894000000003,
+              "system_seconds": 0.02685599999999999,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.214288332994329,
+              "user_seconds": 2.1818540000000013,
+              "system_seconds": 0.030364999999999753,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.2151097080059117,
+              "user_seconds": 2.182654999999997,
+              "system_seconds": 0.029243999999999826,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.1810449580007116,
+              "user_seconds": 2.1498209999999887,
+              "system_seconds": 0.028270000000000017,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.1891942910006037,
+              "user_seconds": 2.1613669999999985,
+              "system_seconds": 0.0257780000000003,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.189095209003426,
+              "user_seconds": 2.1580179999999984,
+              "system_seconds": 0.028468999999999856,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 2.1886142090006615,
+              "user_seconds": 2.159278999999998,
+              "system_seconds": 0.026781000000000166,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 2.189095209003426,
+          "min_wall_seconds": 2.1758426250016782,
+          "max_wall_seconds": 2.2151097080059117,
+          "median_user_seconds": 2.159278999999998
+        }
+      }
+    },
+    "atlas": {
+      "diagrams": 150,
+      "source_sha256": "23e832207471a9cc1c801d4e17b6dee4585aace2439f71ae2627d9fdbd395221",
+      "command": [
+        "pdflatex",
+        "-interaction=batchmode",
+        "-halt-on-error",
+        "benchmark.tex"
+      ],
+      "variants": {
+        "baseline": {
+          "samples": [
+            {
+              "wall_seconds": 9.849179584001831,
+              "user_seconds": 9.790930000000003,
+              "system_seconds": 0.050046000000000035,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 9.891564833997109,
+              "user_seconds": 9.830449999999985,
+              "system_seconds": 0.05732399999999993,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 10.094648166996194,
+              "user_seconds": 9.983671000000015,
+              "system_seconds": 0.09420900000000021,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 10.195536209001148,
+              "user_seconds": 10.04616999999999,
+              "system_seconds": 0.08910799999999997,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.980276041002071,
+              "user_seconds": 9.889900000000011,
+              "system_seconds": 0.06551299999999971,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.93338379200577,
+              "user_seconds": 9.874202999999966,
+              "system_seconds": 0.05648199999999992,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.831218457999057,
+              "user_seconds": 9.776069000000007,
+              "system_seconds": 0.052576999999999874,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.862898207997205,
+              "user_seconds": 9.803954000000033,
+              "system_seconds": 0.05570900000000023,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 9.93338379200577,
+          "min_wall_seconds": 9.831218457999057,
+          "max_wall_seconds": 10.195536209001148,
+          "median_user_seconds": 9.874202999999966
+        },
+        "candidate": {
+          "samples": [
+            {
+              "wall_seconds": 9.50101016699773,
+              "user_seconds": 9.444875999999994,
+              "system_seconds": 0.05404300000000006,
+              "warmup": true
+            },
+            {
+              "wall_seconds": 9.527600875000644,
+              "user_seconds": 9.474349000000018,
+              "system_seconds": 0.05098899999999995,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 10.59143391699763,
+              "user_seconds": 10.296494999999993,
+              "system_seconds": 0.12191899999999967,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.740694416999759,
+              "user_seconds": 9.66694799999999,
+              "system_seconds": 0.06369700000000034,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.671123916996294,
+              "user_seconds": 9.607966000000005,
+              "system_seconds": 0.059085000000000054,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.720575583000027,
+              "user_seconds": 9.64916500000001,
+              "system_seconds": 0.06287100000000034,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.873955374998332,
+              "user_seconds": 9.781252999999992,
+              "system_seconds": 0.07265100000000002,
+              "warmup": false
+            },
+            {
+              "wall_seconds": 9.910486125001626,
+              "user_seconds": 9.811013000000003,
+              "system_seconds": 0.07222399999999984,
+              "warmup": false
+            }
+          ],
+          "median_wall_seconds": 9.740694416999759,
+          "min_wall_seconds": 9.527600875000644,
+          "max_wall_seconds": 10.59143391699763,
+          "median_user_seconds": 9.66694799999999
+        }
+      }
+    }
+  },
+  "method": "Serial fresh-output-directory runs; warmups excluded; one pdflatex pass per run; alternate variant order each repetition."
+}

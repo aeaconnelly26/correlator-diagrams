@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,array,feynman-fun}
+\pagestyle{empty}
+\makeatletter
+\newcount\perfassertions
+\newcommand{\PerfAssert}[3]{%
+  \corr@getlistitemorblank{#1}{#2}%
+  \edef\perfexpected{#3}%
+  \ifx\corr@currentlistitem\perfexpected\else
+    \PackageError{performance-regression}{List lookup changed at slot #2}
+      {Expected \meaning\perfexpected; got \meaning\corr@currentlistitem}%
+  \fi
+  \global\advance\perfassertions by 1
+}
+\newcommand{\PerfListChecks}{%
+  \begingroup
+  \corr@preparelists
+  \def\PerfLeft{ a,,x_{1,2},d }%
+  \def\PerfRight{i,j,k,l}%
+  \PerfAssert{\PerfLeft}{1}{a}%
+  \PerfAssert{\PerfRight}{1}{i}%
+  \PerfAssert{\PerfLeft}{2}{}%
+  \PerfAssert{\PerfRight}{2}{j}%
+  \PerfAssert{\PerfLeft}{3}{x_{1,2}}%
+  \PerfAssert{\PerfRight}{3}{k}%
+  \PerfAssert{\PerfLeft}{4}{d}%
+  \PerfAssert{\PerfLeft}{8}{}%
+  \PerfAssert{}{1}{}%
+  \def\PerfLeft{u,v,w}% % Same input macro, different contents.
+  \PerfAssert{\PerfLeft}{2}{v}%
+  \PerfAssert{r,s,t}{3}{t}% % Evict either previous parse.
+  \PerfAssert{\PerfRight}{4}{l}%
+  \begingroup
+    \def\PerfRight{nested,scope}%
+    \PerfAssert{\PerfRight}{2}{scope}%
+  \endgroup
+  \PerfAssert{\PerfRight}{2}{j}%
+  \def\PerfValue{A}\def\PerfLeft{\PerfValue,B}%
+  \PerfAssert{\PerfLeft}{1}{A}%
+  \def\PerfValue{C}%
+  \PerfAssert{\PerfLeft}{1}{C}%
+  \ignoreemptyitems\corr@preparelists
+  \PerfAssert{a,,b}{2}{b}%
+  \reademptyitems\corr@preparelists
+  \PerfAssert{a,,b}{2}{}%
+  \PerfAssert{a,,b}{3}{b}%
+  \endgroup
+  \typeout{PASS performance compatibility: \the\perfassertions\space list assertions}%
+}
+\makeatother
+\newcommand{\PerfBox}[1]{\BoxLoopCorr[
+  scale=.68,show-momenta=false,
+  box-propagator-left-indices={a,b,c,d,e,f,g,h},
+  box-propagator-right-indices={i,j,k,l,m,n,o,p},#1]}
+\begin{document}
+\PerfListChecks
+% Exercise style definitions whose bodies themselves accept an argument.
+\begin{tikzpicture}\begin{feynhand}
+\vertex (A) at (0,0);\vertex (B) at (1.5,0);\vertex (C) at (3,0);
+\propag[every photon={/tikz/draw=pink},photon] (A) to (B);
+\propag[every proca={/tikz/draw=blue},proca] (B) to (C);
+\end{feynhand}\end{tikzpicture}
+\begin{center}
+\begin{tabular}{cc}
+\PerfBox{box-line=plain} & \PerfBox{box-line={ewboson,circ=W}}\\[12pt]
+\BoxLoopCorr[scale=.68,show-momenta=false] &
+\FourPtCorr[box-top-line={proca,pink},topology=box,scale=.68,show-momenta=false]\\[12pt]
+\FourPointCorr[scale=.68,topology=box,box-top-line={proca,pink},show-momenta=false] &
+\CrossedVertexCorr[scale=.68,crossed-vertex-orientation=left,
+ triangle-contact-internal-momenta={k,q-k,q},
+ triangle-contact-propagator-left-indices={a,b,c,d,e,f,g},
+ triangle-contact-propagator-right-indices={h,i,j,k,l,m,n}]
+\end{tabular}
+\end{center}
+\newpage
+\begingroup
+\corrset{scalar-arrow-direction=out,color=purple,momentum-labels={k_1,k_2,k_3}}
+\[\ThreePtCorr[scale=.72,line=spol]\qquad
+  \ThreePointCorr[scale=.72,line=spol,scalar-arrow-direction=in]\]
+\endgroup
+\[\ThreePointCorr[scale=.72,line=spol]\qquad
+  \ThreePointCorr[scale=.72,line=proca,momentum-labels={,,}]\]
+\[\begin{array}{cc}
+\TTreeChannelCorr[scale=.68,insertion=bubble,insertion-slot=2] &
+\STreeChannelCorr[scale=.68,insertion=triangle]
+\end{array}\]
+\[\begin{aligned}
+ &\FourPointCorr[scale=.68,insertion=seagull,insertion-slot=3]
+ \qquad\FourPointCorr[scale=.68,show-momenta=false]
+\end{aligned}\]
+\end{document}

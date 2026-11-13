@@ -6,7 +6,13 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 ## Current state
 
 - Audited baseline: `main` at `0dbf733` (merge of PR #27, `codex/bubble-on-leg`).
-- Current branch: `main`. Crossed-vertex checkpoint `8b41ca1` is merged and
+- Current branch: `codex/compilation-performance`, based on published main
+  `7069f39`. The intermediate performance session is complete locally: repeated
+  diagram batches improve by 4.5-5.3%, the atlas median by 1.9%, with no claimed
+  loading-time gain. All 55 documents / 928 endpoint contacts and registered PDF
+  checks pass; 69 rendered page comparisons are identical. Merge/push is pending.
+  See [verification](planning/compilation-performance/verification.md).
+- Published main: crossed-vertex checkpoint `8b41ca1` is merged and
   published on GitHub (2026-11-13); the feature branch is retained. Exactly two
   half-moon layouts preserve collinear W propagators on opposite diagonals.
   All 54 documents / 928 endpoint checks pass; the atlas has 150 recipes /
@@ -17,10 +23,9 @@ is preserved in [the history archive](planning/history/development-plan-before-2
   The feature branch is retained. All 53 documents / 894 contacts pass;
   the atlas remains 146 recipes / 34 pages. See
   [publication record](planning/m08b-publication.json). No M08b merge/push remains.
-- Next is the user-requested intermediate session on package structure and
-  compilation performance, before M09a. See the
-  [performance handoff](planning/compilation-performance.md). M09a remains the
-  next numbered diagram-roadmap milestone. Thesis sources/PDFs under
+- After integrating the verified performance branch when requested, M09a is
+  the next numbered diagram-roadmap milestone. See the
+  [performance handoff](planning/compilation-performance.md). Thesis sources/PDFs under
   ignored `output/` are local artifacts and were not included in this publication.
 - M08a checkpoint `d855152` is merged and published to GitHub; the publication
   handoff is `35c7959` (2026-11-08). The feature branch is retained. No M08a
@@ -137,20 +142,19 @@ is preserved in [the history archive](planning/history/development-plan-before-2
 | M07b | Crossed external layouts | Upper slice published on main; R04 right pair deferred by user |
 | M07c | R14/R22 reference-routing audit | Audit and both user-selected half-moon routings published on main |
 | M08a / M08b | Contact external self-energy / seagull | M08a and M08b published on main; M08b includes the array fix |
-| Intermediate | Package structure and compilation performance | Next user-selected session; benchmark before optimizing |
+| Intermediate | Package structure and compilation performance | Complete locally; measured gains and compatibility verified; merge/push pending |
 | M09a / M09b / M09c | Internal exchange self-energy / seagull / shared inner-vertex bubbles | Planned |
 | M10 | Stemmed tadpoles; any separately established residual graph | Planned |
 | M11 | Full API/example/reference and GitHub visual reconciliation | Planned; docs updated incrementally throughout |
 
 ## Next coding session
 
-**Next: compilation performance and package structure**, requested 2026-11-13.
-Crossed vertex and M08b are merged and published. Follow the
-[performance handoff](planning/compilation-performance.md): establish repeated
-loading/drawing benchmarks, optimize measured costs in small slices, and preserve
-public behavior and rendered output. No performance implementation has started.
+**First integrate the verified compilation-performance branch when requested.**
+The intermediate session is complete locally; the package and public behavior
+are verified against published main. See the
+[results and reproduction commands](planning/compilation-performance/verification.md).
 
-After that session, the next numbered diagram-roadmap milestone is
+After publication, the next numbered diagram-roadmap milestone is
 **M09a internal-exchange self-energy bubbles**. Begin with one tree channel's internal slot 5, verify its
 two inserted cubic vertices and exchange segments, then expand to the other
 channel. M09b internal seagulls and M09c shared inner-vertex bubbles are separate
@@ -611,3 +615,18 @@ and published with this documentation handoff. Package, regressions, atlas and
 gallery are unchanged from the verified checkpoint. The user selected an
 intermediate compilation-performance session before M09a; its benchmark and
 compatibility requirements are recorded in [the handoff](planning/compilation-performance.md).
+
+
+## Compilation-performance closeout - 2026-11-13
+
+Started from published main `7069f39` on `codex/compilation-performance`.
+Measured loading separately from drawing, then replaced repeated style-table
+parsing with direct PGF definitions, cached alternating topology/index lists,
+and batched coordinate/guide paths without changing their geometry. Retained
+all topology resets because their measured cost was small. Seven alternating
+runs per workload show 4.5-5.3% gains on repeated diagram batches and 1.9% on the
+150-recipe atlas; loading remains effectively unchanged. All 55 maintained
+documents / 928 endpoint contacts and registered PDF checks pass; all 69 page
+comparisons are pixel-identical. Existing atlas/recipes and D01 appearance are
+unchanged. Local checkpoint only; no merge/push. M09a follows integration.
+See [verification](planning/compilation-performance/verification.md).

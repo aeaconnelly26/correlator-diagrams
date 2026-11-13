@@ -2,12 +2,17 @@
 
 Requested 2026-11-13, after publishing the crossed-vertex checkpoint and before
 M09a. This session optimizes package structure to reduce document compilation
-time. It has not started; no speedup is claimed by this handoff.
+time. Complete locally on `codex/compilation-performance`; merge/push is pending.
+Repeated diagram batches improve by about 4.5-5.3%, and the atlas median by 1.9%
+in local paired measurements; loading is effectively unchanged. All 55 maintained
+documents / 928 endpoint contacts and registered PDF checks pass, with 69
+pixel-identical page comparisons. See [verification and reproduction commands](compilation-performance/verification.md).
+M09a follows integration; no next feature implementation has started.
 
 ## Baseline and measurements
 
-Start from published main containing crossed-vertex feature `8b41ca1`. Create
-`codex/compilation-performance` for implementation. Preserve the existing public
+Started from published main `7069f39`, containing crossed-vertex feature
+`8b41ca1`, on `codex/compilation-performance`. Preserve the existing public
 macros, keys, aliases, default geometry, option precedence, and per-call reset.
 Keep the single-package Overleaf installation workflow working.
 

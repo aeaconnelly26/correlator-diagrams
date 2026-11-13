@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-13",
+  "branch": "codex/compilation-performance",
+  "base_main": "7069f394e458df0bcfcfdfe059b3ac529373a96d",
+  "state": "verified local; merge/push pending",
+  "maintained_documents": 55,
+  "endpoint_contacts": 928,
+  "atlas_recipes": 150,
+  "atlas_pages": 36,
+  "pixel_identical_page_comparisons": 69,
+  "benchmark_repeats": 7,
+  "warmups_per_variant": 1,
+  "compatibility_list_assertions": 19,
+  "sha256": {
+    "docs/planning/compilation-performance/benchmarks.json": "1fe9481cd3694d36b1e87e97bb18fc0f53e1e531563d32e02ca32b6440e69298",
+    "docs/planning/compilation-performance/profile-after.json": "c7a0839935e6a571290ed31d1034211125e05ecff6dc2f6ea98fa9ad3e3c1792",
+    "docs/planning/compilation-performance/profile-before.json": "e60e6224ca7efecf00fabf3a1d7f66958758164b7214bd1c8577d4b787825b93",
+    "docs/planning/compilation-performance/regressions.txt": "37106a319edb2c865723c47198e1507fa1136e06d208bb449c908895e87af220",
+    "docs/planning/compilation-performance/verification.md": "035ba103afed2ed201faa9c82e44bc75e380a2fad5a3b201387590e66b7d1ac1",
+    "docs/planning/compilation-performance/visual-checks.json": "e0ae9441caf8158cd613b77283d3801a5cdd1ee53493638ecccf9feb46e4fee7",
+    "feynman-fun.sty": "5e1eeedd9c159d9c3677bb6cbe1dd92b69de108edbeda72aaf5ed12624828dc9",
+    "regressions/momenta/external-momentum-visibility.tex": "2a91c82ef920c80742f74d6d10d68d0fafea0564aa4037bc6ed4d6923be28ca9",
+    "regressions/performance/compilation-compatibility.pdf": "8e76c3290619c14d7b23899b76d0f46768160d20ac0e574ef32f8b49dc1b2e14",
+    "regressions/performance/compilation-compatibility.tex": "39228164623d87c79e657ac942345093f8f59fd38f02bbe704ac52d1c800fb68",
+    "scripts/benchmark-compilation.py": "9f0b7bd4b1b138dc3b1f171e902f7b231c298a449512f448836141955c0623bd",
+    "scripts/check-compilation-output.py": "4ed2423c6b7576056b8fdc9aeb488dd4013233b4fd4056d488f8a88c7694110e",
+    "scripts/check-regressions.sh": "bfedf04bf68a42a26ab9381a0583d3e2bc5d6ff1d4dc6f9ae7e51dfb7e2ce91b",
+    "scripts/profile-compilation.py": "9faa96326fddee34de7e79bb632d6a074b1c35bb2fc9b83727667eefe7b624e6"
+  },
+  "next": "Integrate verified performance branch when requested; M09a follows publication"
+}

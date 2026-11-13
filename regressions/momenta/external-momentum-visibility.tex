@@ -3,8 +3,8 @@
 \usepackage{amsmath}
 \usepackage{feynman-fun}
 
-% Count actual emitted draw commands and momentum label nodes in complete
-% diagrams. Compare public behavior rather than testing the visibility helper.
+% Count disconnected stroked subpaths and momentum label nodes in complete
+% diagrams. Two parts of a gapped arrow may share one draw command.
 \newcount\momentumdrawcount
 \newcount\momentumlabelcount
 \newcount\baselinedrawcount
@@ -15,8 +15,19 @@
 \renewcommand{\corr@putmomentumlabelwithdistance}[6]{%
   \global\advance\momentumlabelcount by 1
   \originalmomentumlabel{#1}{#2}{#3}{#4}{#5}{#6}}
+\newcommand{\countdrawsubpaths}{%
+  \begingroup
+  \pgfsyssoftpath@getcurrentpath\countedpath
+  \def\pgfsyssoftpath@movetotoken##1##2{\global\advance\momentumdrawcount by 1}%
+  \let\pgfsyssoftpath@linetotoken\@gobbletwo
+  \def\pgfsyssoftpath@curvetosupportatoken##1##2##3##4##5##6##7##8{}%
+  \def\pgfsyssoftpath@rectcornertoken##1##2##3##4##5{\global\advance\momentumdrawcount by 1}%
+  \let\pgfsyssoftpath@closepathtoken\@gobbletwo
+  \countedpath
+  \endgroup
+}
 \apptocmd{\tikz@installcommands}{%
-  \def\draw{\global\advance\momentumdrawcount by 1\path[draw]}%
+  \def\draw{\path[draw,/utils/exec={\tikz@addmode{\countdrawsubpaths}}]}%
 }{}{\PackageError{external-momentum-visibility}{Cannot instrument TikZ draws}{}}
 \makeatother
 \newcommand{\measurediagram}[1]{%
@@ -46,10 +57,10 @@
 \measurediagram{\FlatContactCorr[field={},momentum-labels={q_1,q_2,p,q_3}]}
 \baselinedrawcount=\momentumdrawcount \baselinelabelcount=\momentumlabelcount
 \measurediagram{\FlatContactCorr[field={},momentum-labels={q_1,,p,q_3}]}
-\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-1\relax}{Unlabeled arrow must be one continuous draw}
+\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-1\relax}{Unlabeled arrow must be one continuous subpath}
 \assertcount\momentumlabelcount{3}{Empty label must not emit a node}
 \measurediagram{\FlatContactCorr[field={},momentum-labels={q_1,,p,q_3},external-momentum-hide={2}]}
-\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-2\relax}{Hidden arrow must emit no draws}
+\assertcount\momentumdrawcount{\numexpr\baselinedrawcount-2\relax}{Hidden arrow must emit no subpaths}
 \assertcount\momentumlabelcount{3}{Hidden slot must not emit a node}
 \assertlabels{3}{\FlatContactCorr[external-momentum-hide={2},flat-contact-momentum-slots={1,2,3,4},momentum-labels={q_1,q_2,p,q_3}]}
 \assertlabels{3}{\FlatContactCorr[momentum-labels={q_1,q_2,p,q_3},flat-contact-momentum-slots={1,2,3,4},external-momentum-hide={2,2,99}]}
